@@ -2,7 +2,6 @@ import * as blessed from 'blessed'
 import { isBlessedElement } from './blessed'
 import { Element, Style } from './blessedTypes'
 
-
 const focusStyle: Style = {
   border: {
     type: 'line',

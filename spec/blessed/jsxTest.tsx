@@ -1,7 +1,8 @@
 import * as blessed from 'blessed'
-import { findDescendantNode, installExitKeys } from '../../src/blessed'
+import { installExitKeys } from '../../src/blessed'
 import { BoxOptions, Textarea } from '../../src/blessedTypes'
 import { React } from '../../src/jsx/createElement'
+import { findDescendant } from '../../src/node'
 
 const screen = blessed.screen({ smartCSR: true })
 installExitKeys(screen)
@@ -41,7 +42,7 @@ React.render(
       key={[
         'f',
         (ch, key) => {
-          const textArea = findDescendantNode<Textarea>(screen, n => n.options.name === 'input2')!
+          const textArea = findDescendant<Textarea>(screen, n => n.options.name === 'input2')!
 
           textArea.setText(textArea.getText() + ' --- key: ' + key.name)
           screen.render()
@@ -63,13 +64,13 @@ React.render(
       on={[
         'click',
         () => {
-          const textArea = findDescendantNode<Textarea>(screen, n => n.options.name === 'input1')!
+          const textArea = findDescendant<Textarea>(screen, n => n.options.name === 'input1')!
           textArea.setText(textArea.getText() + ' --- click')
           screen.render()
         }
       ]}
       onClick={e => {
-        const textArea = findDescendantNode<Textarea>(screen, n => n.options.name === 'input1')!
+        const textArea = findDescendant<Textarea>(screen, n => n.options.name === 'input1')!
 
         textArea.setText(textArea.getText() + ' --- onClick')
         e.currentTarget.screen.render()
@@ -89,7 +90,7 @@ React.render(
       input={true}
       inputOnFocus={true}
       onKeyPress={e => {
-        const textArea = findDescendantNode<Textarea>(screen, n => n.options.name === 'input1')!
+        const textArea = findDescendant<Textarea>(screen, n => n.options.name === 'input1')!
 
         textArea.setText(textArea.getText() + ' --- key: ' + e.currentTarget.options.name + ' - ' + e.key.name)
         e.currentTarget.screen.render()

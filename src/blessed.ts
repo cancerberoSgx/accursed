@@ -1,44 +1,44 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { getObjectProperty, setObjectProperty } from './util/misc'
-import { Checkbox, Element, Node } from './blessedTypes'
+import { Checkbox, Element } from './blessedTypes'
 import { closeModal, isModalVisible } from './modal'
+import { getObjectProperty, setObjectProperty } from './util/misc'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
 }
 
-export function visitDescendantNodes(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
-  let stop: boolean = false
-  node.children.forEach(c => {
-    if (stop) {
-      return
-    }
-    if (fn(c)) {
-      stop = true
-      return
-    }
-    if (isBlessedElement(c)) {
-      visitDescendantNodes(c, fn)
-    }
-  })
-}
+// export function visitDescendantNodes(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
+//   let stop: boolean = false
+//   node.children.forEach(c => {
+//     if (stop) {
+//       return
+//     }
+//     if (fn(c)) {
+//       stop = true
+//       return
+//     }
+//     if (isBlessedElement(c)) {
+//       visitDescendantNodes(c, fn)
+//     }
+//   })
+// }
 
-export function visitDescendantElements(node: Node, fn: (l: Element) => boolean) {
-  return visitDescendantNodes(node, n => (isBlessedElement(n) ? fn(n) : false))
-}
+// export function visitDescendantElements(node: Node, fn: (l: Element) => boolean) {
+//   return visitDescendantNodes(node, n => (isBlessedElement(n) ? fn(n) : false))
+// }
 
-export function findDescendantNode<T extends Node = Node>(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
-  var found: T | undefined
-  visitDescendantNodes(node, c => {
-    if (fn(c)) {
-      found = c as any
-      return true
-    }
-    return false
-  })
-  return found
-}
+// export function findDescendantNode<T extends Node = Node>(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
+//   var found: T | undefined
+//   visitDescendantNodes(node, c => {
+//     if (fn(c)) {
+//       found = c as any
+//       return true
+//     }
+//     return false
+//   })
+//   return found
+// }
 
 /**
  * Besides reacting for click, also will react for pressed, enter and space keys.

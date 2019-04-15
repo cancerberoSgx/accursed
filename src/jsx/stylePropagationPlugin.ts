@@ -1,5 +1,5 @@
-import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { BlessedElementOptionsIntersection, Element, isElement } from '../blessedTypes'
+import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { React } from './createElement'
 
 // TODO: what about properties that propagates from children to parents ?

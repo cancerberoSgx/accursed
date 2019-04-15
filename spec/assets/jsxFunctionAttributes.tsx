@@ -1,7 +1,8 @@
 import * as blessed from 'blessed'
-import { findDescendantNode, installExitKeys } from '../../src/blessed'
+import { installExitKeys } from '../../src/blessed'
 import { BoxOptions, Textarea } from '../../src/blessedTypes'
 import { React } from '../../src/jsx/createElement'
+import { findDescendant } from '../../src/node'
 
 const screen = blessed.screen({ smartCSR: true })
 installExitKeys(screen)
@@ -60,7 +61,7 @@ React.render(
       on={[
         'click',
         () => {
-          const textArea = findDescendantNode<Textarea>(screen, n => n.type === 'textarea')
+          const textArea = findDescendant<Textarea>(screen, n => n.type === 'textarea')
           if (textArea) {
             textArea.setText(textArea.getText() + ' --- click')
             screen.render()
@@ -68,7 +69,7 @@ React.render(
         }
       ]}
       onClick={e => {
-        const textArea = findDescendantNode<Textarea>(e.currentTarget.screen, n => n.type === 'textarea')
+        const textArea = findDescendant<Textarea>(e.currentTarget.screen, n => n.type === 'textarea')
         if (textArea) {
           textArea.setText(textArea.getText() + ' --- onClick')
           e.currentTarget.screen.render()

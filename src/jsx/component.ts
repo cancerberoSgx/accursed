@@ -1,4 +1,3 @@
-import { RemoveProperties } from '../util/misc'
 import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
 import {
   ElementPredicate,
@@ -10,6 +9,7 @@ import {
   Visitor,
   VisitorOptions
 } from '../node'
+import { RemoveProperties } from '../util/misc'
 
 /**
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a dummy state that will update the blessed element if changed by default
