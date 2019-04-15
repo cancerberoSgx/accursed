@@ -1,0 +1,7 @@
+dist/spec
+src
+scripts
+tmp
+spec
+*.tgz
+package*

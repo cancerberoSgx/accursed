@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "9.10.0"
+scripts:
+  - npm install codecov -g
+  - node -v
+  - npm -v
+script: 
+  - npm install && npm test
+after_success:
+  - npm run coverage-report && codecov 
+os:
+  - linux
+  - osx
+cache:
+  directories:
+    - "node_modules"
+    - $HOME/.npm 
