@@ -1,4 +1,4 @@
-import { blessed, Screen } from '../src/blessed/blessedTypes'
+import { blessed, Screen } from '../src/blessedTypes'
 
 describe('blessedTestUtil', () => {
   //   it('should provide testJsx function', async done => {

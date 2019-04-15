@@ -22,15 +22,6 @@ export function showInModal(
       height,
       border: 'line',
       label: title
-      // draggable: true,
-      // border: {
-      //   type: 'line',
-      //   left: true,
-      //   top: true,
-      //   right: true,
-      //   bottom: true
-      // },
-      // content: 'Drag Me'
     })
     ;[modalInstance, ...modalInstance.children].forEach(c => c.on('click', data => modalInstance!.hide()))
   }

@@ -1,5 +1,5 @@
 import { randomIntBetween } from 'misc-utils-of-mine-generic'
-import { Style } from '../../../src/blessed/blessedTypes'
+import { Style } from '../../../src/blessedTypes'
 
 export const commonOptions: () => { style: Style } = () => ({
   style: {

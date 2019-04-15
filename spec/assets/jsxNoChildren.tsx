@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
-import { installExitKeys } from '../../src/blessed/blessed'
-import { React } from '../../src/blessed/jsx/createElement'
+import { installExitKeys } from '../../src/blessed'
+import { React } from '../../src/jsx/createElement'
 
 const screen = blessed.screen({ smartCSR: true })
 installExitKeys(screen)

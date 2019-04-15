@@ -1,7 +1,7 @@
 import * as blessed from 'blessed'
-import { installExitKeys } from '../src/blessed/blessed'
-import { Element, Screen } from '../src/blessed/blessedTypes'
-import { React } from '../src/blessed/jsx/createElement'
+import { installExitKeys } from '../src/blessed'
+import { Element, Screen } from '../src/blessedTypes'
+import { React } from '../src/jsx/createElement'
 
 export function testJsx({
   creator,

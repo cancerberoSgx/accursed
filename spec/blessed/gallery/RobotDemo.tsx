@@ -1,8 +1,8 @@
-import { colors, Screen } from '../../../src/blessed/blessedTypes'
-import { Button } from '../../../src/blessed/jsx-components/Button'
-import { Br, Div } from '../../../src/blessed/jsx-components/jsxUtil'
-import { Component } from '../../../src/blessed/jsx/component'
-import { React } from '../../../src/blessed/jsx/createElement'
+import { colors, Screen } from '../../../src/blessedTypes'
+import { Button } from '../../../src/jsx-components/Button'
+import { Br, Div } from '../../../src/jsx-components/jsxUtil'
+import { Component } from '../../../src/jsx/component'
+import { React } from '../../../src/jsx/createElement'
 
 export class RobotDemo extends Component<{ screen: Screen }> {
   render() {

@@ -1,5 +1,5 @@
 import * as blessed from 'blessed'
-import { Element, isElement } from '../../../src/blessed/blessedTypes'
+import { Element, isElement } from '../../../src/blessedTypes'
 const screen = blessed.screen({ smartCSR: true })
 
 var layout = blessed.layout({

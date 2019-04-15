@@ -1,6 +1,6 @@
-import { blessed, Screen, Textarea } from '../src/blessed/blessedTypes'
-import { React } from '../src/blessed/jsx/createElement'
-import { findDescendant } from '../src/blessed/node'
+import { blessed, Screen, Textarea } from '../src/blessedTypes'
+import { React } from '../src/jsx/createElement'
+import { findDescendant } from '../src/node'
 import { testJsx } from './blessedTestUtil'
 
 describe('blessed node', () => {

@@ -1,6 +1,6 @@
 import { format } from 'ansi-escape-sequences'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { notUndefined } from '../../util/misc'
+import { notUndefined } from '../util/misc'
 import { LayoutOptions } from '../blessedTypes'
 import { React } from '../jsx/createElement'
 import { renderer } from '../layoutRenderer'

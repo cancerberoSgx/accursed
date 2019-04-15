@@ -107,5 +107,3 @@ export function objectFilter<O extends { [k in keyof O]: O[keyof O] } = any>(
 }
 
 export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
-// type o = {a: number, b: boolean}
-// type o1 = RemoveProperties<o, 'a'>

@@ -1,8 +1,8 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { BoxOptions, Markdown, Screen } from '../src/blessed/blessedTypes'
-import { installCollapsible } from '../src/blessed/collapsible'
-import { findDescendant } from '../src/blessed/node'
+import { BoxOptions, Markdown, Screen } from '../src/blessedTypes'
+import { installCollapsible } from '../src/collapsible'
+import { findDescendant } from '../src/node'
 import { strip } from '../src/util/misc'
 import { testElement } from './blessedTestUtil'
 

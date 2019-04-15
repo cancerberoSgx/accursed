@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { getObjectProperty, setObjectProperty } from '../util/misc'
+import { getObjectProperty, setObjectProperty } from './util/misc'
 import { Checkbox, Element, Node } from './blessedTypes'
 import { closeModal, isModalVisible } from './modal'
 

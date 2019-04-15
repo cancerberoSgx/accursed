@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { RemoveProperties } from '../util/misc'
+import { RemoveProperties } from './util/misc'
 
 export type Node = blessed.Widgets.Node
 export type Box = blessed.Widgets.BoxElement

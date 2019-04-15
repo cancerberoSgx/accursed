@@ -1,4 +1,4 @@
-import { getObjectProperty, setObjectProperty } from '../../util/misc'
+import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { BlessedElementOptionsIntersection, Element, isElement } from '../blessedTypes'
 import { React } from './createElement'
 

@@ -1,4 +1,4 @@
-import { getObjectProperty } from '../util/misc'
+import { getObjectProperty } from './util/misc'
 import { isElement, Layout, LayoutIterator } from './blessedTypes'
 
 /**

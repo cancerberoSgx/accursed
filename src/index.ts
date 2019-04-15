@@ -1,1 +1,1 @@
-export * from './blessed/jsx'
+export * from './jsx'
