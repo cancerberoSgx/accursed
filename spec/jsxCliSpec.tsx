@@ -3,7 +3,7 @@ import { Helper } from './interactionHelper'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000
 
-describe('jsx cli', () => {
+describe('jsxCli', () => {
   let client: Driver
   let helper: Helper
 

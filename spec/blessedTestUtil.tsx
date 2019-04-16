@@ -2,23 +2,55 @@ import * as blessed from 'blessed'
 import { installExitKeys } from '../src/blessed'
 import { Element, Screen } from '../src/blessedTypes'
 import { React } from '../src/jsx/createElement'
+// import { sleep } from 'misc-utils-of-mine-generic';
 
-export function testJsx({
+type doneFunction = (...arg: any[]) => any
+export async function testJsx({
   creator,
   assert
 }: {
   creator: (screen: Screen) => JSX.Element
-  assert: (e: Element) => Promise<void> | void
+  assert: (e: Element) => void // doneFunction
 }) {
-  const screen = blessed.screen({ smartCSR: true })
-  installExitKeys(screen)
-  const el = creator(screen)
-  const a = React.render(el)
-  a.on('render', async () => {
-    await assert(a)
+  const screen = blessed.screen({ smartCSR: true, log: 'log.txt' })
+  let a: Element
+  // screen.log('helelejkljkle')
+  try {
+    installExitKeys(screen)
+    const el = creator(screen)
+    a = React.render(el)
+    screen.render()
+    // a.abottom
+
+    //  try {
+
+    //  } catch (error) {
+    // screen.log('jsxTest assert() Error', error)
+
+    //  }
+    // }, 500);
+    // a.on('render', async () => {
+    //   await assert(a)
+    //   screen!.destroy()
+    // })
+  } catch (error) {
+    screen.log('jsxTest creator() ', error)
+    throw error
+  }
+
+  await sleep(200)
+  try {
+    //TODO: await waitFor(()=>a.attached && a.visible)
+    // setTimeout(async () => {
+    // const done =
+    assert(a!)
+
+    await sleep(50)
     screen!.destroy()
-  })
-  screen.render()
+  } catch (error) {
+    screen.log('jsxTest assert() ', error)
+    throw error
+  }
 }
 
 export function testElement({
@@ -125,4 +157,12 @@ interface Options {
 
   // /** users can provide their own Screen instance at any time */
   // screen?: Screen
+}
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, ms)
+  })
 }

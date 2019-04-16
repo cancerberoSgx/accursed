@@ -1,5 +1,7 @@
 import * as Blessed from 'blessed'
+
 export = BlessedContrib
+
 declare namespace BlessedContrib {
   export type Optionals<T, K extends keyof T> = { [P in keyof K]?: T[K] }
   export type Picker<T, K extends keyof T> = { [P in K]: T[P] }
@@ -63,12 +65,12 @@ declare namespace BlessedContrib {
     export class GridElement extends BoxElement implements IHasOptions<GridOptions> {
       constructor(opts: GridOptions)
 
-      set<T extends TreeNode>(
+      set<T extends TreeElementNode>(
         row: number,
         col: number,
         rowSpan: number,
         colSpan: number,
-        obj: (options?: TreeOptions<N>) => TreeElement<T>,
+        obj: (options?: TreeOptions) => TreeElement<T>,
         opt: TreeOptions<T>
       ): TreeElement<T>
       set<T extends (options?: TableOptions) => S, S extends TableElement>(
@@ -236,7 +238,7 @@ declare namespace BlessedContrib {
 
     export interface LineOptions extends CanvasOptions<LineData[]> {
       showNthLabel?: boolean
-      style?: {
+      style?: Blessed.Widgets.Types.TStyle & {
         line?: string
         text?: string
         baseline?: string
@@ -282,7 +284,7 @@ declare namespace BlessedContrib {
       addLegend(bars: any, x: number): void
     }
 
-    export interface CanvasOptions<D extends any = string> extends BoxOptions {
+    export interface CanvasOptions<D extends any = any> extends BoxOptions {
       canvasSize?: {
         width?: number
         height?: number
@@ -297,7 +299,7 @@ declare namespace BlessedContrib {
 
       calcSize(): void
 
-      setData(data: TableData<D>): void
+      setData(data: D): void
 
       canvasSize: { width: number; height: number }
     }
@@ -333,7 +335,7 @@ declare namespace BlessedContrib {
       options: GaugeListOptions
     }
 
-    export interface GaugeOptions extends CanvasOptions {
+    export interface GaugeOptions extends CanvasOptions<number[] | number> {
       percent: number[]
       stroke?: string
       fill?: string
@@ -342,7 +344,7 @@ declare namespace BlessedContrib {
       showLabel?: boolean
     }
 
-    export class GaugeElement extends CanvasElement implements IHasOptions<GaugeOptions> {
+    export class GaugeElement extends CanvasElement<number[] | number> implements IHasOptions<GaugeOptions> {
       constructor(opts: GaugeOptions)
 
       options: GaugeOptions
@@ -390,7 +392,7 @@ declare namespace BlessedContrib {
     }
 
     export interface LogOptions extends ListOptions<ListElementStyle> {
-      border: Blessed.Widgets.Border
+      border: Blessed.Widgets.Types.TBorder
       bufferLength?: number
       logLines?: string[]
       interactive?: boolean
@@ -454,13 +456,13 @@ declare namespace BlessedContrib {
       options: PictureOptions
     }
 
-    export interface TableData<T extends any = string> {
+    export interface TableData<T extends any = any> {
       headers?: string[]
       data?: T[][]
     }
 
-    export interface TableOptions<T extends any = string> extends CanvasOptions<T> {
-      bold?: string
+    export interface TableOptions<T extends any = any> extends CanvasOptions<T> {
+      // bold?: string
       columnSpacing?: number
       columnWidth?: number[]
       rows?: ListOptions<ListElementStyle>
@@ -471,10 +473,10 @@ declare namespace BlessedContrib {
       interactive?: boolean
     }
 
-    export class TableElement extends CanvasElement<TableData> implements IHasOptions<TableOptions> {
-      constructor(opts: TableOptions)
+    export class TableElement extends CanvasElement<TableData> implements IHasOptions<TableOptions<TableData>> {
+      constructor(opts: TableOptions<TableData>)
 
-      options: TableOptions
+      options: TableOptions<TableData>
       rows: Blessed.Widgets.ListElement & { selected?: number }
     }
 
@@ -512,7 +514,7 @@ Example :
 Hash : {'Fruit':{ name: 'Fruit', children:{ 'Banana': {}, 'Cherry': {}}}}
 Function : see examples/explorer.js
        */
-      children: { [name: string]: TreeNodeElement } | ((name: string) => TreeNodeElement)
+      children?: { [name: string]: TreeElementNode } | ((name: string) => TreeElementNode)
       /**
  * Type : hash
 Desc : Children content for internal usage DO NOT MODIFY
@@ -530,12 +532,12 @@ Usually this will be used to check if(node.childrenContent) in your node.childre
       rows: Blessed.Widgets.ListElement & { selected?: Blessed.Widgets.BlessedElement }
       nodeLines?: Node[]
       lineNbr?: number
-      data: Data
+      data: TreeElementNode
 
       options: TreeOptions
 
       /** set new data in the Tree, i.e dynamic data. call screen.render() after so UI is updated. */
-      setData(data: Data): void
+      setData(data: Node): void
     }
   }
 
@@ -583,9 +585,11 @@ Usually this will be used to check if(node.childrenContent) in your node.childre
 
   export function canvas(options?: Widgets.CanvasOptions): Widgets.CanvasElement
 
-  export function tree<T extends TreeNode = TreeNode>(options?: Widgets.TreeOptions<T>): Widgets.TreeElement<T>
+  export function tree<T extends Widgets.TreeElementNode = Widgets.TreeElementNode>(
+    options?: Widgets.TreeOptions<T>
+  ): Widgets.TreeElement<T>
 
-  export function table<T extends any = string>(options?: Widgets.TableOptions<T>): Widgets.TableElement<T>
+  export function table<T extends any = string>(options?: Widgets.TableOptions<T>): Widgets.TableElement
 
   export function picture(options?: Widgets.PictureOptions): Widgets.PictureElement
 
