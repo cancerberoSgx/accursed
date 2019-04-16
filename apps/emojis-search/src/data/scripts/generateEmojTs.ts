@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs'
+import { printUnicodeCharacter } from './printUnicodeCharacter';
 
 export interface EmojiDefinition {
   name?: string | null
@@ -63,13 +64,7 @@ export enum Emoji {
   ${data
     .map(e =>
       `
-    '${`${(e.non_qualified || e.unified || e.google || '')
-      .split('-')
-      .map(s => String.fromCodePoint(parseInt('0x' + s, 16)))
-      .join('')}`}' = '${`${(e.non_qualified || e.unified || e.google || '')
-        .split('-')
-        .map(s => String.fromCodePoint(parseInt('0x' + s, 16)))
-        .join('')}`}'
+    ${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)} = ${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)}
   `.trim()
     )
     .join(', ')} 
@@ -79,10 +74,7 @@ export const emojiDescriptions: {[e in Emoji]: EmojiDefinition} = {
   ${data
     .map(e =>
       `
-    [Emoji['${`${(e.non_qualified || e.unified || e.google || '')
-      .split('-')
-      .map(s => String.fromCodePoint(parseInt('0x' + s, 16)))
-      .join('')}`}']]: ${JSON.stringify(e)}
+    [Emoji[${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)}]]: ${JSON.stringify(e)}
   `.trim()
     )
     .join(', \n')} 
@@ -90,3 +82,6 @@ export const emojiDescriptions: {[e in Emoji]: EmojiDefinition} = {
 `.trim()
 
 writeFileSync('./src/data/emojis.ts', out)
+
+
+

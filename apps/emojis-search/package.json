@@ -1,6 +1,6 @@
 {
   "name": "emojis-search",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "command line interactive tool to explorer Unicode emojis",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -21,10 +21,12 @@
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
+    "json-ts": "^1.6.4",
     "prettier": "^1.16.4",
     "ts-node": "^7.0.1",
     "ts-refactor": "0.0.2",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.1",
+    "xml-js": "^1.6.11"
   },
   "keywords": [
     "unicode",

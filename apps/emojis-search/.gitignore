@@ -6,3 +6,5 @@ tmp
 *.log
 log.txt
 /package/
+/test/
+/data/*.xml
