@@ -2,8 +2,7 @@ import { Component, Div, Element, isElement, React, Screen } from 'accursed'
 import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
-import { getCategoryEmojis, List } from './list'
-import { Search } from './search';
+import { Search } from './search'
 
 interface P {
   screen: Screen
@@ -64,7 +63,7 @@ export class App extends Component<P, {}> {
 const Main = (props: { selected: MenuOptions }) => (
   <Div name="main" height="100%">
     {props.selected === 'help' && <Home />}
-    {props.selected === 'search' && <Search/>}
+    {props.selected === 'search' && <Search />}
     {props.selected === 'categories' && <Categories />}
   </Div>
 )

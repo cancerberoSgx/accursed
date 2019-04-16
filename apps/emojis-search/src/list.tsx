@@ -4,8 +4,7 @@ import { listTableOptions } from './elementOptions'
 
 export class List extends Component<{
   category?: string
-  emojis?: (EmojiDefinition&{emoji: string})[]
-
+  emojis?: (EmojiDefinition & { emoji: string })[]
 }> {
   render() {
     return (
@@ -23,14 +22,27 @@ export class List extends Component<{
               const text = `
 (Copied to clipboard as JSON data. Press [q] to dismiss this modal.)
 
-${Object.keys(emoji).filter(k=>emoji[k]).map(k=>` * {bold}${k}{/bold}: ${typeof emoji[k]==='object' ? JSON.stringify(emoji[k]): emoji[k]}`).join('\n')}
+${Object.keys(emoji)
+  .filter(k => emoji[k])
+  .map(k => ` * {bold}${k}{/bold}: ${typeof emoji[k] === 'object' ? JSON.stringify(emoji[k]) : emoji[k]}`)
+  .join('\n')}
 `.trim()
-              const box = React.render(<box scrollable={true} tags={true} mouse={true} keys={true} focused={true} focusable={true} content={text} label={`Details for "${c}"`} border="line" padding={1}/>)
-
-              showInModal(  
-                this.blessedElement.screen,
-                box, undefined, '70%', '90%'
+              const box = React.render(
+                <box
+                  scrollable={true}
+                  tags={true}
+                  mouse={true}
+                  keys={true}
+                  focused={true}
+                  focusable={true}
+                  content={text}
+                  label={`Details for "${c}"`}
+                  border="line"
+                  padding={1}
+                />
               )
+
+              showInModal(this.blessedElement.screen, box, undefined, '70%', '90%')
               box.focus()
             }
           }}
@@ -39,13 +51,13 @@ ${Object.keys(emoji).filter(k=>emoji[k]).map(k=>` * {bold}${k}{/bold}: ${typeof 
     )
   }
   data() {
-    const arr = this.props.category ? getCategoryEmojis()[this.props.category] :  this.props.emojis || []
+    const arr = this.props.category ? getCategoryEmojis()[this.props.category] : this.props.emojis || []
     // if(this.props.category){
-      // const arr = getCategoryEmojis()[this.props.category]
-      return [
-        ['Character', 'Code Points', 'Name'],
-        ...arr.map(d => [d.emoji, d.unified || d.non_qualified || '', d.name || d.short_name || ''])
-      ]
+    // const arr = getCategoryEmojis()[this.props.category]
+    return [
+      ['Character', 'Code Points', 'Name'],
+      ...arr.map(d => [d.emoji, d.unified || d.non_qualified || '', d.name || d.short_name || ''])
+    ]
     // }
     // else if(this.props.emojis){
     //   return this.props.emojis
