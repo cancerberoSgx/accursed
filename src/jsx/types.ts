@@ -253,7 +253,7 @@ type On<T> =
   | Parameters<(event: 'warning', callback: (text: string) => void) => T>
   | Parameters<(event: NodeGenericEventType, callback: () => void) => T>
 
-interface EventOptions<T extends Element> extends BlessedEventOptions, ArtificialEventOptions<T> {
+export interface EventOptions<T extends Element> extends BlessedEventOptions, ArtificialEventOptions<T> {
   children?: JSX.BlessedJsxNode
 }
 

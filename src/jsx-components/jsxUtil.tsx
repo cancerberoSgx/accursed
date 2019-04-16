@@ -1,8 +1,9 @@
 import { asArray } from 'misc-utils-of-mine-generic'
-import { LayoutOptions } from '../blessedTypes'
+import { LayoutOptions, Layout } from '../blessedTypes'
 import { React } from '../jsx/createElement'
 import { renderer } from '../layoutRenderer'
 import { notUndefined } from '../util/misc'
+import { EventOptions } from '../jsx/types';
 
 /** to be used inside layout renderer like [[Div]] */
 export function Br(props: {}) {
@@ -35,27 +36,12 @@ export function Strong(props: { children?: string | string[]; color?: string }) 
 export function Div(
   props: {
     children?: any
-  } & Partial<LayoutOptions>
+  } & Partial<LayoutOptions> & Partial<EventOptions<Layout>>
 ) {
   return (
     <layout
-      {...{ ...props, children: undefined, height: props.height || '99%', width: props.width || '95%' }}
-      renderer={renderer}>
+      {...{ ...props, children: undefined, height: props.height || '99%', width: props.width || '95%' , renderer: props.renderer || renderer}}>
       {props.children}
     </layout>
   )
 }
-
-// import * as contrib from 'blessed-contrib'
-// export function Markdown(
-//   props: {
-//   } & Partial<contrib.Widgets.MarkdownOptions>
-// ) {
-//   return (
-//     <Mark
-//       {...{ ...props, children: undefined, height: props.height || '99%', width: props.width || '95%' }}
-//       renderer={renderer}>
-//       {props.children}
-//     </layout>
-//   )
-// }

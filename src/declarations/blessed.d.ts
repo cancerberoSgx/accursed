@@ -2913,7 +2913,12 @@ export namespace Widgets {
     on(event: 'cancel' | 'reset', callback: (this: FormElement) => void): this
   }
 
-  interface InputOptions extends BoxOptions {}
+  interface InputOptions extends BoxOptions {
+    /**
+     * Initial value.
+     */
+    value?: string
+  }
 
   abstract class InputElement extends BoxElement {
     constructor(opts: InputOptions)
@@ -3014,7 +3019,12 @@ export namespace Widgets {
     setValue(text: string): void
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: TextareaElementEventType, callback: (err: any) => void): this
+    on(event: 'error', callback: (err: any) => void): this
+    on(event: 'submit', callback: (value: string) => void): this
+    on(event: 'action', callback: (value: string) => void): this
+
+    on(event: 'cancel', callback: (value: string) => void): this
+
   }
 
   interface TextboxOptions extends TextareaOptions {

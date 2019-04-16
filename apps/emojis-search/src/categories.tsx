@@ -8,7 +8,7 @@ export class Categories extends Component<{
   render() {
     return (
       <Div>
-        Choose a category. Press enter on an emoji for details.
+        Choose a category, select and emoji and press [ENTER] for details.
         <Br />
         <list
           padding={1}
@@ -18,7 +18,7 @@ export class Categories extends Component<{
           onSelect={e => this.selected(e)}
         />
         <Br />
-        <Div name="list-container">{this.props.category && <List list={this.props.category} />}</Div>
+        <Div name="list-container">{this.props.category && <List category={this.props.category} />}</Div>
       </Div>
     )
   }
@@ -35,7 +35,7 @@ export class Categories extends Component<{
     container.children.forEach(c => c.destroy())
     container.screen.render()
     setTimeout(() => {
-      container.append(React.render(<List list={sel} />))
+      container.append(React.render(<List category={sel} />))
       container.screen.render()
     }, 10)
   }

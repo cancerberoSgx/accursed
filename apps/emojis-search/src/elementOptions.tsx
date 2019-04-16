@@ -17,6 +17,7 @@ export const inputOptions = () =>
       },
       focus: {
         bg: 'lightgray',
+        fg: 'black',
         border: {
           type: 'line',
           fg: 'red'
