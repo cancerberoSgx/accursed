@@ -1,9 +1,10 @@
 {
   "name": "emojis-search",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "display unicode emojis characters, categorized, searchable",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "bin": ".bin/emojis-search.js",
   "scripts": {
     "watch": "tsc --watch",
     "build": "tsc",
@@ -12,13 +13,13 @@
     "prepare": "tsc",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "doc": "npx typedoc 'src/index.ts' --theme markdown --out api",
     "all": "npm run clean && npm run prettier && npm run build && npm test"
   },
   "author": "Sebastian Gurin",
   "license": "MIT",
   "dependencies": {
     "accursed": "file:../..",
+    "ansi-escapes": "^4.1.0",
     "yargs-parser": "^10.1.0"
   },
   "devDependencies": {

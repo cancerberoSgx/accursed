@@ -1,3 +1,12 @@
+## Usage
+
+```
+npm i -g emojis-search
+
+emojis-search
+```
+
+## Demo
 
 ## TODO
 

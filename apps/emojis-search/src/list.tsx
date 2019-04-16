@@ -1,10 +1,6 @@
 import { Component, React, Div, Prompt, listtable, showInModal, ListTable, isElement } from 'accursed'
 import { EmojiDefinition, emojiDescriptions, Emoji } from './data/emojis'
-import { countryFlagsDescriptions } from './data/countryFlags'
-import { symbolsDescriptions } from './data/symbols'
 import { listTableOptions, inputOptions } from './elementOptions'
-import { charCodeHexString, getDescriptions } from './util'
-import { buttonsDescriptions } from './data/buttons';
 
 export class List extends Component<{
   list: string

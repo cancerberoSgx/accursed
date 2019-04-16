@@ -1,4 +1,3 @@
-import { format } from 'ansi-escape-sequences'
 import { asArray } from 'misc-utils-of-mine-generic'
 import { LayoutOptions } from '../blessedTypes'
 import { React } from '../jsx/createElement'
@@ -24,8 +23,8 @@ export function NbrSpc(props: {}) {
 
 export function Strong(props: { children?: string | string[]; color?: string }) {
   return (
-    <text
-      content={format(asArray(props.children || []).join(' '), ['bold', props.color].filter(notUndefined) as any)}
+    <text tags={true}
+      content={`{bold}${(asArray(props.children || []).join(' '), ['bold', props.color].filter(notUndefined) as any)}{/bold}`}
     />
   )
 }

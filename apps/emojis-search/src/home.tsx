@@ -1,18 +1,21 @@
 import { Br, Div, React } from 'accursed';
 
-export const Home = () => <Div tags={true}>
-  {'{bold}Welcome{/bold}'} Welcome<Br />
+//@ts-ignore
+const user = typeof WHO_AM_I==='undefined' ? 'user' : WHO_AM_I
 
-  Select one of the categories below or search some words.<Br />
+export const Home = () => <Div tags={true} content={`
+{bold}{underline}Welcome ${user}!{/}
 
-  Tips: <Br />
+Select one of the categories below or search some words.
 
-  * you can use the **mouse**<Br />
-  * **focus** between elements using *TAB* and arrow keys<Br />
-  * **ENTER** or **SPACE** to click
-* for **enter text in input boxes** you need to **ENTER** first and ESC to return focusing the other elements.<Br />
+Tips: 
 
-  Good luck, enjoy. <Br />
+ * you can use the {bold}mouse{/bold}
+ * {bold}focus{/bold} between elements using *TAB{/bold} and arrow keys
+ * {bold}ENTER{/bold} or {bold}SPACE{/bold} to click
+ * for enter text in {bold}input boxes{/bold} you need to {bold}ENTER{/bold} before. To restore focus navigation you need to press [ESC]to return focusing the other elements.
 
-  [Project Home Page](https://github.com/cancerberoSgx/accursed)<Br />
-</Div>;
+Good luck, enjoy. 
+
+Project Home Page: https://github.com/cancerberoSgx/accursed
+`}/>

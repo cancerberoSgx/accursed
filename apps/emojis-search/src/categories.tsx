@@ -1,7 +1,6 @@
 import { Box, Br, Component, Div, Element, isElement, List as ListElement, React, ArtificialEvent } from 'accursed'
 import { inputOptions } from './elementOptions'
 import { List, getCategoryEmojis } from './list'
-import { emojiDescriptions } from './data/emojis';
  
 
 export class Categories extends Component<{
