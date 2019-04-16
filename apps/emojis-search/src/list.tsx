@@ -55,11 +55,11 @@ ${Object.keys(emoji)
 
   compact(): any {
     return <D height="100%" width="100%">
-    <button {...inputOptions()} content="hello"/>  <button content="hel🇦🇨lo"/> //<button>helloel🇦🇨l world</button>
-      {/* {this.getData().map(d=><button height={1} width={5} content={`A${d.char}A`}/>)} */}
-      {[1,2,3,4,4,3,3,3,3].map(d=><button content="hel🇦🇨lo"/>)}
+    {/* <button {...inputOptions()} content="hello"/>  <button content="hel🇦🇨lo"/> //<button>helloel🇦🇨l world</button> */}
+      {this.getData().map(d=><button height={1} width={5} content={`A${d.char}A`}/>)}
+      {/* {[1,2,3,4,4,3,3,3,3].map(d=><button content="hel🇦🇨lo"/>)} */}
 
-      {this.getData().map(d=>d.char).join(' ')}
+      {/* {this.getData().map(d=>d.char).join(' ')} */}
     </D>
   }
 }

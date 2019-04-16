@@ -187,13 +187,12 @@ class BlessedJsxImpl implements BlessedJsx {
       } else if (isElement(c)) {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
-        }
-        else {
+        } else {
           // this.createTextNode('SEBABABAB', el)
           // this.appendChild(el, c)
         }
       } else if (Array.isArray(c)) {
-        this._addChildrenArray(c, el);
+        this._addChildrenArray(c, el)
       } else {
         this.createTextNode(c, el)
       }
@@ -203,19 +202,17 @@ class BlessedJsxImpl implements BlessedJsx {
   private _addChildrenArray(c: any[], el: blessed.Widgets.BlessedElement) {
     c.forEach(c2 => {
       if (!c2 || is__Virtual(c2)) {
-        return;
-      }
-      else if (isElement(c2)) {
+        return
+      } else if (isElement(c2)) {
         if (!c2.options || !c2.options.parent) {
-          this.appendChild(el, c2);
+          this.appendChild(el, c2)
         }
-      }else if (Array.isArray(c2)) {
-        this._addChildrenArray(c2, el);
-      } 
-      else {
-        this.createTextNode(c2, el);
+      } else if (Array.isArray(c2)) {
+        this._addChildrenArray(c2, el)
+      } else {
+        this.createTextNode(c2, el)
       }
-    });
+    })
   }
 
   /**
@@ -238,9 +235,9 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: Element) {
-    if(typeof c!=='string'){
+    if (typeof c !== 'string') {
       throw new Error()
-      const t = blessed.text({ content: c + 'jajajajaja '+typeof c+' - '+Array.isArray(c) })
+      const t = blessed.text({ content: c + 'jajajajaja ' + typeof c + ' - ' + Array.isArray(c) })
       this.appendChild(el, t)
       return t
     } else {
@@ -249,7 +246,6 @@ class BlessedJsxImpl implements BlessedJsx {
       return t
     }
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)
-
   }
 
   private afterElementCreatedListeners: AfterElementCreatedListener[] = []

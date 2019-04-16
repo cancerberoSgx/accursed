@@ -1,5 +1,5 @@
-import { Node, Element, isElement } from './blessedTypes'
-import { strip } from './util/misc';
+import { Element, isElement, Node } from './blessedTypes'
+import { strip } from './util/misc'
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */
@@ -19,13 +19,12 @@ export function visitDescendants(n: Node, v: Visitor, o: VisitorOptions = {}): b
   let r = false
   if (o.childrenFirst) {
     r = n.children.some(c => visitDescendants(c, v, o))
-    if ( r) {
-      if(!o.breakOnDescendantSignal){
+    if (r) {
+      if (!o.breakOnDescendantSignal) {
         v(n)
       }
       return true
-    }
-    else {
+    } else {
       return v(n)
     }
   } else {
@@ -77,24 +76,27 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
 //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
 
 /** Returns the text content of given node and all its children, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
-export function getContent(e: Element, options: {dontTrim?: boolean, dontStrip?: boolean, childrenLast?: boolean} = {}) {
+export function getContent(
+  e: Element,
+  options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}
+) {
   let text: string[] = []
   visitDescendants(
     e,
     d => {
-      if(isElement(d)){
-        let s = d.getContent()||''
-        if(!options.dontStrip){
+      if (isElement(d)) {
+        let s = d.getContent() || ''
+        if (!options.dontStrip) {
           s = strip(s)
         }
-        if(!options.dontTrim){
+        if (!options.dontTrim) {
           s = s.trim()
         }
-        text.push( s)
+        text.push(s)
       }
       return false
-    }
-    ,    {childrenFirst: !options.childrenLast}
+    },
+    { childrenFirst: !options.childrenLast }
   )
   return text.join(' ')
 }

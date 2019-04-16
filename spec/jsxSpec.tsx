@@ -1,6 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { Element, installExitKeys, isElement, React, Screen, screen, visitDescendants, getContent } from '../src'
-import { strip } from '../src/util/misc'
+import { getContent, installExitKeys, React, Screen, screen } from '../src'
 import { color } from './blessed/gallery/util'
 
 describe('jsxBasic', () => {
@@ -25,19 +24,19 @@ describe('jsxBasic', () => {
             <text content="after2" width={6} height={5} />
           </layout>
         )
-      } 
+      }
       // log  before1 hello22   button123  bye22 after2
-      // before1 hello22   button123  bye22 after2 
+      // before1 hello22   button123  bye22 after2
       const e = React.render(
         <C parent={s}>
           hello22 <textbox secret={true} content="secret" width={20} height={4} />
           <button content="button123" width={20} height={4} /> bye22
         </C>
       )
-      
+
       s.render()
       const c = getContent(e)
-      // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
+        // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
       ;['before1', 'after2', 'button123', 'bye22', 'hello22'].forEach(s => {
         expect(c).toContain(s)
       })
@@ -68,14 +67,12 @@ describe('jsxBasic', () => {
       )
       s.render()
       const c = getContent(e)
-      // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
-
-      ;['before1', 'after2', 'test2', 'test4', 'test6','bye22', 'hello22'].forEach(s => {
+        // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
+      ;['before1', 'after2', 'test2', 'test4', 'test6', 'bye22', 'hello22'].forEach(s => {
         expect(c).toContain(s)
       })
       expect(c).not.toContain('secret')
       done()
     })
-
   })
 })
