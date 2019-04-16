@@ -1,4 +1,4 @@
-import { ButtonOptions, colors, IMouseEventArg } from '../blessedTypes'
+import { ButtonOptions, IMouseEventArg } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
 
@@ -22,7 +22,7 @@ export class Button extends Component<P, {}> {
       style: {
         selected: {
           border: {
-            fg: colors.lightgreen
+            // fg: colorsTerminal.lightgreen
           },
           bg: 'magenta'
         },

@@ -1,5 +1,5 @@
 // import { colors as c } from 'blessed'
-import { BoxOptions, colors, InputOptions } from '../../../src/blessedTypes'
+import { BoxOptions,  InputOptions } from '../../../src/blessedTypes'
 import { installCollapsible, toggleCollapsed } from '../../../src/collapsible'
 import { Br, Div, NbrSpc, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
@@ -20,7 +20,7 @@ export class CollapsibleDemo extends Component {
         // ...commonOptions(),
         selected: {
           border: {
-            fg: colors.lightgreen
+            fg: 'lightgreen'
           },
           bg: 'magenta'
         },
@@ -52,7 +52,7 @@ export class CollapsibleDemo extends Component {
         border: {
           fg: 'cyan'
         },
-        bg: colors.lightyellow
+        bg: 'lightyellow'
       }
     })
     const el = (

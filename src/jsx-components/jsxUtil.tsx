@@ -5,6 +5,7 @@ import { React } from '../jsx/createElement'
 import { renderer } from '../layoutRenderer'
 import { notUndefined } from '../util/misc'
 
+/** to be used inside layout renderer like [[Div]] */
 export function Br(props: {}) {
   return (
     <text
@@ -29,10 +30,11 @@ export function Strong(props: { children?: string | string[]; color?: string }) 
   )
 }
 
+/** will use layout with [[renderer]] */
 export function Div(
   props: {
     children?: any
-  } & LayoutOptions
+  } & Partial<LayoutOptions>
 ) {
   return (
     <layout
@@ -42,3 +44,18 @@ export function Div(
     </layout>
   )
 }
+
+
+// import * as contrib from 'blessed-contrib'
+// export function Markdown(
+//   props: {
+//   } & Partial<contrib.Widgets.MarkdownOptions>
+// ) {
+//   return (
+//     <Mark
+//       {...{ ...props, children: undefined, height: props.height || '99%', width: props.width || '95%' }}
+//       renderer={renderer}>
+//       {props.children}
+//     </layout>
+//   )
+// }

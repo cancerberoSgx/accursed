@@ -51,6 +51,7 @@ export abstract class Component<P = {}, S = {}> {
   protected findDescendant(p: ElementPredicate) {
     return findDescendant(this.blessedElement, p)
   }
+
   protected filterDescendants(p: ElementPredicate) {
     return filterDescendants(this.blessedElement, p)
   }
@@ -58,6 +59,7 @@ export abstract class Component<P = {}, S = {}> {
   protected findChildren(p: ElementPredicate) {
     return findChildren(this.blessedElement, p)
   }
+  
   protected filterChildren(p: ElementPredicate) {
     return filterChildren(this.blessedElement, p)
   }

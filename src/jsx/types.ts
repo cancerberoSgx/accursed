@@ -38,9 +38,12 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions
+  TextOptions,
+  MarkdownOptions,
+  Markdown
 } from '../blessedTypes'
 import { Component } from './component'
+import { markdown } from '../declarations/blessed-contrib';
 
 export enum EventOptionNames {
   key = 'key',
@@ -102,6 +105,7 @@ declare global {
       textbox: TextboxOptions & EventOptions<Textbox>
       radioset: RadioSetOptions & EventOptions<RadioSet>
       radiobutton: RadioButtonOptions & EventOptions<RadioButton>
+      // markdown: MarkdownOptions&{markdown:string} & EventOptions<Markdown>
       __virtual: __Virtual
     }
 

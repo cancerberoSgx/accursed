@@ -1,4 +1,4 @@
-import { colors, Screen } from '../../../src/blessedTypes'
+import { Screen } from '../../../src/blessedTypes'
 import { Button } from '../../../src/jsx-components/Button'
 import { Br, Div } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
@@ -16,7 +16,7 @@ export class RobotDemo extends Component<{ screen: Screen }> {
             width: '40%',
             height: '100%',
             label: 'Robot Performances',
-            style: { fg: colors.brightcyan, bg: colors.lightgreen }
+            // style: { fg: colorsTerminal.brightcyan, bg: colorsTerminal.lightgreen }
           }}>
           <Br />
           CHOSE a PERFORMANCE please
@@ -50,7 +50,7 @@ export class RobotDemo extends Component<{ screen: Screen }> {
             width: '55%',
             height: '100%',
             label: 'here!',
-            style: { fg: colors.brightblack, bg: colors.lightblue }
+            // style: { fg: colorsTerminal.brightblack, bg: colorsTerminal.lightblue }
           }}>
           Playing with Low level API to automate the terminal, will I be able to do it?, me ? , being so so high level
           JSX / React / Web light developer ? Ho no the PC has broken, call the IT guy!!

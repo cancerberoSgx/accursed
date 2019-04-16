@@ -1,112 +1,20 @@
-import * as blessed from 'accursed'
-// import * as pu from 'punycode'
-/**  codePointHexString('🇦🇨') === '\ud83c\udde6\ud83c\udde8'  . Result is escaped is just for show the value to the user. */
+// import * as blessed from 'accursed'
+import { Element, Screen , screen, prompt, listtable, Node} from 'accursed';
+
 function charCodeHexString(s: string){
   return  s.split('').map(s=>s.charCodeAt(0).toString(16)).map(n=>`\\u${n}`).join('')
 }
-// function codePointHexString(s: string){
-//   return  s.split('').map(s=>s.codePointAt(0)!.toString(16)).map(n=>`\\u${n}`).join('')
-// }
 
-// console.log('🇦🇨 \u{1F1E6}\u{1F1E8}', '🇦🇨'.codePointAt(0)!.toString(16), '🇦🇨'.charCodeAt(0)!.toString(16), charCodeHexString('🇦🇨'), codePointHexString('🇦🇨'), '\ud83c\udde6\ud83c\udde8 \ud83c\udde6\ud83c\udde8')
-
-// console.log('🇦🇨'.split('').map(s=>s.charCodeAt(0).toString(16)))
-
-// process.exit(0)
-
-var screen = blessed.screen({
+var screen2 = screen({
   autoPadding: false,
   // smartCSR: true, forceUnicode: true,
    fullUnicode: true
 })
-// [0xF1E6, 0xf1e6, 0xF1E8].map(c=>blessed.unicode.fromCodePoint(c)).join(',')
-// var main = blessed.box({
-//   parent: screen,
-//   left: 'center',
-//   top: 'center',
-//   width: '90%',
-//   height: '90%',
-//   border: 'line',
-//   // draggable: true,
-//   tags: true,
-//   content: `{light-blue-fg} Some icons ${countryFlags()
-//     .map(s => `${s[0]}: ${charCodeHexString(s[0])} (${s[1]})`)
-//     .join(', ')} {/}`,
-//   scrollable: true,
-//   alwaysScroll: true,
-//   keys: true,
-//   vi: true,
-//   mouse: true
-// })
 
+var table = getIconsTable(screen2);
 
-var stringData = [
-  ['{red-fg}Character{/red-fg}', '{red-fg}Code Points{/red-fg}', '{red-fg}Description{/red-fg}'],
-  // ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],  ['2','3','4'],
-...  countryFlags().map(d=>[d[0], charCodeHexString(d[0]), d[1]])
-]
-
-
-var table = blessed.listtable({
-  parent: screen,
-  // top: 'center',
-  // left: 'center',
-  data: stringData,
-  border: 'line',
-  align: 'left',
-
-  search: (callback) => {
-    prompt.input('Search:', '', function(err, value) {
-      if (err) return;
-      return callback(null, value);
-    });
-  },
-  tags: true,
-  keys: true,
-  // width: '80%',
-  // width: 'shrink',
-  height: '90%',
-  vi: true,
-  mouse: true,
-  scrollable: true,
-  scrollbar: {
-    ch: ' ',
-    track: {
-      bg: 'cyan'
-    },
-    style: {
-      inverse: true
-    }
-  },
-  style: {
-    //@ts-ignore
-    border: {
-      fg: 'red'
-    },
-    scrollbar: {
-      ch: ' ',
-      track: {
-        bg: 'cyan'
-      },
-      style: {
-        inverse: true
-      }
-    },
-    header: {
-      fg: 'blue',
-      bold: true
-    },
-    cell: {
-      fg: 'magenta',
-      selected: {
-        bg: 'blue'
-      }
-    }
-  }
-} )
-
-var prompt = blessed.prompt({
-  parent: screen,
+var prompt2 = prompt({
+  parent: screen2,
   top: 'center',
   left: 'center',
   height: 'shrink',
@@ -121,14 +29,77 @@ var prompt = blessed.prompt({
 
 table.focus()
 
-screen.key('q', function() {
-  return screen.destroy()
+screen2.key('q', function() {
+  return screen2.destroy()
 })
 
-screen.render()
+screen2.render()
 
-function countryFlags() {
-  
+
+
+
+export function getIconsTable(parent: Node) {
+  var stringData = [
+    ['{red-fg}Character{/red-fg}', '{red-fg}Code Points{/red-fg}', '{red-fg}Description{/red-fg}'],
+    ...countryFlagsArray().map(d => [d[0], charCodeHexString(d[0]), d[1]])
+  ];
+  var table = listtable({
+    parent: parent,
+    data: stringData,
+    border: 'line',
+    align: 'left',
+    search: (callback) => {
+      prompt2.input('Search:', '', function (err, value) {
+        if (err)
+          return;
+        return callback(null, value);
+      });
+    },
+    tags: true,
+    keys: true,
+    height: '90%',
+    vi: true,
+    mouse: true,
+    scrollable: true,
+    scrollbar: {
+      ch: ' ',
+      track: {
+        bg: 'cyan'
+      },
+      style: {
+        inverse: true
+      }
+    },
+    style: {
+      //@ts-ignore
+      border: {
+        fg: 'red'
+      },
+      scrollbar: {
+        ch: ' ',
+        track: {
+          bg: 'cyan'
+        },
+        style: {
+          inverse: true
+        }
+      },
+      header: {
+        fg: 'blue',
+        bold: true
+      },
+      cell: {
+        fg: 'magenta',
+        selected: {
+          bg: 'blue'
+        }
+      }
+    }
+  });
+  return table;
+}
+
+export function countryFlagsArray() {
   return [
     ['🇦🇨', 'Ascension Island Flag'],
     ['🇦🇩', 'Andorra Flag'],
@@ -156,7 +127,6 @@ function countryFlags() {
     ['🇧🇭', 'Bahrain Flag'],
     ['🇧🇮', 'Burundi Flag'],
     ['🇧🇯', 'Benin Flag'],
-
     ['🇧🇱', 'St. Barthélemy Flag'],
     ['🇧🇲', 'Bermuda Flag'],
     ['🇧🇳', 'Brunei Flag'],
@@ -389,5 +359,13 @@ function countryFlags() {
     ['🇿🇦', 'South Africa Flag'],
     ['🇿🇲', 'Zambia Flag'],
     ['🇿🇼', 'Zimbabwe Flag'],
-    ]
+    ['🏁', 'chequered flag'],
+    ['🚩', 'triangular flag'],
+    ['🎌', 'crossed flags'],
+    ['🏴', 'black flag'],
+    ['🏳️', 'white flag'],
+    ['🏳', 'white flag'],
+    ['🏳‍🌈', 'rainbow flag'],
+    ['🏴‍☠️', 'pirate flag'],
+  ];
 }

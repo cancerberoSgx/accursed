@@ -1,6 +1,7 @@
-import * as blessed from 'blessed'
+// import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
 import { RemoveProperties } from './util/misc'
+import * as blessed from './declarations/blessed'
 
 export type Node = blessed.Widgets.Node
 export type Box = blessed.Widgets.BoxElement
@@ -65,7 +66,10 @@ export type ListElementStyle = blessed.Widgets.ListElementStyle
 export type Program = blessed.BlessedProgram
 
 export type Markdown = contrib.Widgets.MarkdownElement
-export const colors = blessed.colors.colorNames
+export type MarkdownOptions = contrib.Widgets.MarkdownOptions
+
+
+// export const colorsTerminal = blessed.colors.colorNames
 export type BlessedElementOptionsUnion = BoxOptions | TextOptions | TextareaOptions | ListTableOptions | ListOptions
 export type BlessedElementOptionsIntersection = BoxOptions &
   TextOptions &
@@ -73,12 +77,12 @@ export type BlessedElementOptionsIntersection = BoxOptions &
   ListTableOptions &
   ListOptions
 
-export { blessed }
 
 /** isElement type guard without type parameters */
 export function isElement(n: any): n is Element {
   return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
 }
+
 /** isElement type guard that cast to a concrete type by without really asserting on the concrete type - use only if sure */
 export function isElementUnSafe<E extends Element = Element>(n: any): n is E {
   return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
@@ -88,10 +92,12 @@ export function isElementUnSafe<E extends Element = Element>(n: any): n is E {
 export function isNodeByType<E extends Element = Element>(n: any, type: WidgetTypeNames): n is E {
   return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
 }
+
 export function isScreen(n: any): n is Screen {
   return isNodeByType(n, WidgetTypesEnum.screen)
   // return n && isNode(n) && n.type === 'screen'
 }
+
 /** isNode type guard without type parameters */
 export function isNode(n: any): n is Node {
   return n && n.insertBefore && n.forDescendants
@@ -118,6 +124,7 @@ export enum WidgetTypesEnum { // TODO: finish
   'radioset' = 'radioset',
   'radiobutton' = 'radiobutton'
 }
+
 export interface WidgetTypes {
   // TODO: finish
   [WidgetTypesEnum.element]: Element
