@@ -5,3 +5,4 @@ tmp
 spec
 *.tgz
 /data
+/docs

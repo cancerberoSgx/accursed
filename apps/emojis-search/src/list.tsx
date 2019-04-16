@@ -17,6 +17,7 @@ export class List extends Component<{
             if (e.key.name === 'enter' || e.key.name === 'space') {
               const c = this.data()[e.currentTarget.selected || 0][0]
               const emoji = (emojiDescriptions as any)[c]
+              this.blessedElement.screen.copyToClipboard(JSON.stringify(emoji))
               const text = `
 {bold}{underline}{blue-fg}Details for emoji ${c}.{/}
 
@@ -25,6 +26,7 @@ Copied to clipboard as JSON data. Press [q] to dismiss this modal.
 ${Object.keys(emoji).filter(k=>emoji[k]).map(k=>` * {bold}${k}{/bold}: ${typeof emoji[k]==='object' ? JSON.stringify(emoji[k]): emoji[k]}`).join('\n')}
 `.trim()
               const box = React.render(<box scrollable={true} tags={true} mouse={true} keys={true} focused={true} focusable={true} content={text} label={`${c} details`} border="line" padding={1}/>)
+
               showInModal(  
                 this.blessedElement.screen,
                 box, undefined, '70%', '90%'

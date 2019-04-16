@@ -1,4 +1,3 @@
-let util
 export function charCodeHexString(s: string) {
   return s
     .split('')
@@ -6,6 +5,7 @@ export function charCodeHexString(s: string) {
     .map(n => `\\u${n}`)
     .join('')
 }
+
 /** List given enum keys as array */
 export function enumKeys(anEnum: any): string[] {
   const a = []
