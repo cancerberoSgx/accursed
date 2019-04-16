@@ -8,10 +8,13 @@ interface P {
   screen: Screen
 }
 enum MenuOptions  {
-  'search' = 'search', 'categories' = 'categories', 'list' = 'list', 'home'='home'
+  'categories' = 'categories',
+  'search' = 'search', 
+  'help'='help'
 }
+
 export class App extends Component<P, {}> {
-  main: MenuOptions = MenuOptions.home
+  main: MenuOptions = MenuOptions.categories
   render() {
     return (
       <Div parent={this.props.screen}>

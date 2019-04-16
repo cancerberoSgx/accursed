@@ -1,15 +1,8 @@
-import { Box, Br, Component, Div, Element, isElement, List as ListElement, React } from 'accursed'
-import { ArtificialEvent } from '../../../dist/src/jsx/types'
+import { Box, Br, Component, Div, Element, isElement, List as ListElement, React, ArtificialEvent } from 'accursed'
 import { inputOptions } from './elementOptions'
 import { List, getCategoryEmojis } from './list'
-import { enumKeys } from './util'
 import { emojiDescriptions } from './data/emojis';
-
-// export enum categories {
-//   'Country Flags' = 'Country Flags',
-//   'symbols' = 'symbols',
-//   'buttons' = 'buttons'
-// }
+ 
 
 export class Categories extends Component<{
   category?: string

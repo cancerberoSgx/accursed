@@ -39,8 +39,6 @@ import {
   Textbox,
   TextboxOptions,
   TextOptions,
-  MarkdownOptions,
-  Markdown
 } from '../blessedTypes'
 import { Component } from './component'
 import { markdown } from '../declarations/blessed-contrib';
@@ -245,6 +243,7 @@ export type AfterRenderListener = (event: AfterRenderEvent) => void
 
 interface RenderOptions {}
 
+/** @internal */
 export type BlessedJsxAttrs = { [a: string]: any } | undefined
 
 type On<T> =

@@ -1,6 +1,5 @@
 export * from 'blessed'
 
-// export {} from 'blessed-contrib'
 export * from './declarations/blessed'
 export * from './declarations/blessedTermCap'
 
@@ -14,4 +13,4 @@ export * from './modal'
 export * from './node'
 
 export *  from './jsx-components/jsxUtil'
-// export * from 'blessed'
+export * from './jsx/types'

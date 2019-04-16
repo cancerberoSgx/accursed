@@ -9,7 +9,6 @@ export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen = 
   if (!getElementData<boolean>(el, 'collapsible.installed')) {
     return
   }
-  // el.screen.log('setCollapsed', el.options, collapsed)
   const auto = getElementData(el, 'collapsible.auto')
   const internalLabel = getElementLabel(el)
   setElementData(el, 'collapsible.collapsed', collapsed)
