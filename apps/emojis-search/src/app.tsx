@@ -1,19 +1,21 @@
 import { Component, Div, Element, isElement, React, Screen } from 'accursed'
-import { categories, Categories } from './categories'
+import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
-import { List } from './list'
+import { List, getCategoryEmojis } from './list'
 
 interface P {
   screen: Screen
 }
-
+enum MenuOptions  {
+  'search' = 'search', 'categories' = 'categories', 'list' = 'list', 'home'='home'
+}
 export class App extends Component<P, {}> {
-  main: 'search' | 'categories' | 'list' | 'home' = 'home'
+  main: MenuOptions = MenuOptions.home
   render() {
     return (
       <Div parent={this.props.screen}>
-        <Div height="20%">
+        <Div height={5}>
           <listbar
             {...inputOptions}
             autoCommandKeys={true}
@@ -25,7 +27,6 @@ export class App extends Component<P, {}> {
             height="100%"
           />
         </Div>
-
         <Div name="main-container" height="80%">
           <Main selected={this.main} />
         </Div>
@@ -59,7 +60,7 @@ export class App extends Component<P, {}> {
 const Main = (props: { selected: string }) => (
   <Div name="main" height="100%">
     {props.selected === 'home' && <Home />}
-    {props.selected === 'search' && <List list={categories.flags} />}
+    {props.selected === 'search' && <List list={Object.keys(getCategoryEmojis())[0]} />}
     {props.selected === 'categories' && <Categories />}
   </Div>
 )
