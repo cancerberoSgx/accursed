@@ -2658,9 +2658,20 @@ export namespace Widgets {
     fuzzyFind(arg: string | RegExp | (() => void)): void
 
     on(event: string, listener: (...args: any[]) => void): this
-    /** Received when an item is selected. */
+    /** 
+     * Emitted when the user presses `enter` on the current select item or clicks an item. 
+     * 
+     * If you need react when the user select the items just moving the arrows use `on('select item')`. 
+     */
     on(event: 'select', callback: (item: BoxElement, index: number) => void): this
-    on(event: ListElementEventType, callback: () => void): this
+    on(event: ListElementEventType, callback: () => void): this // TODO: callback
+    /** 
+     * Emitted when the user moves the arrows to scroll the list items.
+     * 
+     * This will executes a lots of times in small intervals of time so make sure your call backs are fast. 
+     * 
+     * If you need to do some havy processing probably is better touse `on('select')` event instead (since is triggered only when the user presses `enter`) 
+     */
     on(event: 'select item', callback: (item: BlessedElement, index: number) => void): this
   }
 

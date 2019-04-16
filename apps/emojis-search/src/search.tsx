@@ -8,9 +8,13 @@ import {
   isElement,
   List as ListElement,
   React,
-  Strong
+  Strong,
+  LayoutOptions,
+  Layout,
+  EventOptions,
+  renderer
 } from 'accursed'
-import { EmojiDefinition, emojiDescriptions } from './data/emojis'
+import { EmojiDefinition, getEmojiDefinitions } from './data/data'
 import { inputOptions } from './elementOptions'
 import { getCategoryEmojis, List } from './list'
 
@@ -18,6 +22,7 @@ export class Search extends Component<{
   category?: string
 }> {
   render() {
+    const emojiDescriptions = getEmojiDefinitions()
     return (
       <Div width="100%" height="100%">
         To search, focus the textbox below and press [enter] to start writing. [enter] for search. [esc] to restore
@@ -36,24 +41,28 @@ export class Search extends Component<{
             (value: string) => {
               if (this.blessedElement && this.blessedElement.screen) {
                 const v = value.toLowerCase().trim()
-                const emojis = Object.keys(emojiDescriptions)
-                  .filter(k => {
-                    const e = (emojiDescriptions as any)[k] as EmojiDefinition
-                    return JSON.stringify(
-                      [
-                        e.name,
-                        e.short_name,
-                        e.text,
-                        e.texts && e.texts.join(' '),
-                        e.short_names && e.short_names.join(' '),
-                        e.au
-                      ]
-                        .filter(T => T)
-                        .join(' ')
-                    ).includes(v) // TODO: do this better
+                this.log('search', v)
+                const emojis =
+                //  Object.keys(emojiDescriptions)
+                emojiDescriptions
+                  .filter(c => {
+                    // const e = (emojiDescriptions as any)[k] as EmojiDefinition
+                    // return JSON.stringify(e
+                      // [
+                      //   e.name,
+                      //   // e.short_name,
+                      //   e.text,
+                      //   e.texts && e.texts.join(' '),
+                      //   e.short_names && e.short_names.join(' '),
+                      //   e.au
+                      // ]
+                      //   .filter(T => T)
+                        // .join(' ')
+                    // ).includes(v) // TODO: do this better
+                    return JSON.stringify(c).toLowerCase().includes(v)
                   })
-                  .map(k => ({ ...(emojiDescriptions as any)[k], emoji: k }))
-                const container = this.findDescendant(d => isElement(d) && d.name === 'list-container')! as Element
+                  // .map(k => ({ ...(emojiDescriptions as any)[k], emoji: k }))
+                const container = this.findDescendant(d => isElement(d) && d.name === 'search-list-container')! as Element
                 container.children.forEach(c => c.destroy())
                 container.screen.render()
                 setTimeout(() => {
@@ -77,7 +86,7 @@ export class Search extends Component<{
         <Br />
         <Br />
         <Br />
-        <Div name="list-container">{this.props.category && <List category={this.props.category} />}</Div>
+        <Div name="search-list-container">{this.props.category && <List category={this.props.category} />}</Div>
       </Div>
     )
   }
@@ -90,7 +99,7 @@ export class Search extends Component<{
   ): void {
     const index = e.currentTarget.selected || 0
     const sel = this.getCategoryNames()[index]
-    const container = this.findDescendant(d => isElement(d) && d.name === 'list-container')! as Element
+    const container = this.findDescendant(d => isElement(d) && d.name === 'search-list-container')! as Element
     container.children.forEach(c => c.destroy())
     container.screen.render()
     setTimeout(() => {
@@ -103,3 +112,4 @@ export class Search extends Component<{
     return Object.keys(getCategoryEmojis())
   }
 }
+

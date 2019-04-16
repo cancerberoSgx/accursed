@@ -1,0 +1,9410 @@
+[
+  {
+    "name": "HASH KEY",
+    "cp": "0023-20E3",
+    "char": "'#⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "keycap_star",
+    "cp": "002A-20E3",
+    "char": "'*⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 0",
+    "cp": "0030-20E3",
+    "char": "'0⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 1",
+    "cp": "0031-20E3",
+    "char": "'1⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 2",
+    "cp": "0032-20E3",
+    "char": "'2⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 3",
+    "cp": "0033-20E3",
+    "char": "'3⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 4",
+    "cp": "0034-20E3",
+    "char": "'4⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 5",
+    "cp": "0035-20E3",
+    "char": "'5⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 6",
+    "cp": "0036-20E3",
+    "char": "'6⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 7",
+    "cp": "0037-20E3",
+    "char": "'7⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 8",
+    "cp": "0038-20E3",
+    "char": "'8⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP 9",
+    "cp": "0039-20E3",
+    "char": "'9⃣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "COPYRIGHT SIGN",
+    "cp": "00A9",
+    "char": "'©'",
+    "category": "Symbols"
+  },
+  {
+    "name": "REGISTERED SIGN",
+    "cp": "00AE",
+    "char": "'®'",
+    "category": "Symbols"
+  },
+  {
+    "name": "MAHJONG TILE RED DRAGON",
+    "cp": "1F004",
+    "char": "'🀄'",
+    "category": "Activities"
+  },
+  {
+    "name": "PLAYING CARD BLACK JOKER",
+    "cp": "1F0CF",
+    "char": "'🃏'",
+    "category": "Activities"
+  },
+  {
+    "name": "NEGATIVE SQUARED LATIN CAPITAL LETTER A",
+    "cp": "1F170",
+    "char": "'🅰'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NEGATIVE SQUARED LATIN CAPITAL LETTER B",
+    "cp": "1F171",
+    "char": "'🅱'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NEGATIVE SQUARED LATIN CAPITAL LETTER O",
+    "cp": "1F17E",
+    "char": "'🅾'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NEGATIVE SQUARED LATIN CAPITAL LETTER P",
+    "cp": "1F17F",
+    "char": "'🅿'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NEGATIVE SQUARED AB",
+    "cp": "1F18E",
+    "char": "'🆎'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CL",
+    "cp": "1F191",
+    "char": "'🆑'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED COOL",
+    "cp": "1F192",
+    "char": "'🆒'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED FREE",
+    "cp": "1F193",
+    "char": "'🆓'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED ID",
+    "cp": "1F194",
+    "char": "'🆔'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED NEW",
+    "cp": "1F195",
+    "char": "'🆕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED NG",
+    "cp": "1F196",
+    "char": "'🆖'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED OK",
+    "cp": "1F197",
+    "char": "'🆗'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED SOS",
+    "cp": "1F198",
+    "char": "'🆘'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED UP WITH EXCLAMATION MARK",
+    "cp": "1F199",
+    "char": "'🆙'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED VS",
+    "cp": "1F19A",
+    "char": "'🆚'",
+    "category": "Symbols"
+  },
+  {
+    "name": "Ascension Island Flag",
+    "cp": "1F1E6-1F1E8",
+    "char": "'🇦🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Andorra Flag",
+    "cp": "1F1E6-1F1E9",
+    "char": "'🇦🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "United Arab Emirates Flag",
+    "cp": "1F1E6-1F1EA",
+    "char": "'🇦🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Afghanistan Flag",
+    "cp": "1F1E6-1F1EB",
+    "char": "'🇦🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Antigua & Barbuda Flag",
+    "cp": "1F1E6-1F1EC",
+    "char": "'🇦🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Anguilla Flag",
+    "cp": "1F1E6-1F1EE",
+    "char": "'🇦🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Albania Flag",
+    "cp": "1F1E6-1F1F1",
+    "char": "'🇦🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Armenia Flag",
+    "cp": "1F1E6-1F1F2",
+    "char": "'🇦🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Angola Flag",
+    "cp": "1F1E6-1F1F4",
+    "char": "'🇦🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Antarctica Flag",
+    "cp": "1F1E6-1F1F6",
+    "char": "'🇦🇶'",
+    "category": "Flags"
+  },
+  {
+    "name": "Argentina Flag",
+    "cp": "1F1E6-1F1F7",
+    "char": "'🇦🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "American Samoa Flag",
+    "cp": "1F1E6-1F1F8",
+    "char": "'🇦🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Austria Flag",
+    "cp": "1F1E6-1F1F9",
+    "char": "'🇦🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Australia Flag",
+    "cp": "1F1E6-1F1FA",
+    "char": "'🇦🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Aruba Flag",
+    "cp": "1F1E6-1F1FC",
+    "char": "'🇦🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Åland Islands Flag",
+    "cp": "1F1E6-1F1FD",
+    "char": "'🇦🇽'",
+    "category": "Flags"
+  },
+  {
+    "name": "Azerbaijan Flag",
+    "cp": "1F1E6-1F1FF",
+    "char": "'🇦🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bosnia & Herzegovina Flag",
+    "cp": "1F1E7-1F1E6",
+    "char": "'🇧🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Barbados Flag",
+    "cp": "1F1E7-1F1E7",
+    "char": "'🇧🇧'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bangladesh Flag",
+    "cp": "1F1E7-1F1E9",
+    "char": "'🇧🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Belgium Flag",
+    "cp": "1F1E7-1F1EA",
+    "char": "'🇧🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Burkina Faso Flag",
+    "cp": "1F1E7-1F1EB",
+    "char": "'🇧🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bulgaria Flag",
+    "cp": "1F1E7-1F1EC",
+    "char": "'🇧🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bahrain Flag",
+    "cp": "1F1E7-1F1ED",
+    "char": "'🇧🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Burundi Flag",
+    "cp": "1F1E7-1F1EE",
+    "char": "'🇧🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Benin Flag",
+    "cp": "1F1E7-1F1EF",
+    "char": "'🇧🇯'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Barthélemy Flag",
+    "cp": "1F1E7-1F1F1",
+    "char": "'🇧🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bermuda Flag",
+    "cp": "1F1E7-1F1F2",
+    "char": "'🇧🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Brunei Flag",
+    "cp": "1F1E7-1F1F3",
+    "char": "'🇧🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bolivia Flag",
+    "cp": "1F1E7-1F1F4",
+    "char": "'🇧🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Caribbean Netherlands Flag",
+    "cp": "1F1E7-1F1F6",
+    "char": "'🇧🇶'",
+    "category": "Flags"
+  },
+  {
+    "name": "Brazil Flag",
+    "cp": "1F1E7-1F1F7",
+    "char": "'🇧🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bahamas Flag",
+    "cp": "1F1E7-1F1F8",
+    "char": "'🇧🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bhutan Flag",
+    "cp": "1F1E7-1F1F9",
+    "char": "'🇧🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Bouvet Island Flag",
+    "cp": "1F1E7-1F1FB",
+    "char": "'🇧🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Botswana Flag",
+    "cp": "1F1E7-1F1FC",
+    "char": "'🇧🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Belarus Flag",
+    "cp": "1F1E7-1F1FE",
+    "char": "'🇧🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Belize Flag",
+    "cp": "1F1E7-1F1FF",
+    "char": "'🇧🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Canada Flag",
+    "cp": "1F1E8-1F1E6",
+    "char": "'🇨🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cocos (Keeling) Islands Flag",
+    "cp": "1F1E8-1F1E8",
+    "char": "'🇨🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Congo - Kinshasa Flag",
+    "cp": "1F1E8-1F1E9",
+    "char": "'🇨🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Central African Republic Flag",
+    "cp": "1F1E8-1F1EB",
+    "char": "'🇨🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Congo - Brazzaville Flag",
+    "cp": "1F1E8-1F1EC",
+    "char": "'🇨🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Switzerland Flag",
+    "cp": "1F1E8-1F1ED",
+    "char": "'🇨🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Côte d’Ivoire Flag",
+    "cp": "1F1E8-1F1EE",
+    "char": "'🇨🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cook Islands Flag",
+    "cp": "1F1E8-1F1F0",
+    "char": "'🇨🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Chile Flag",
+    "cp": "1F1E8-1F1F1",
+    "char": "'🇨🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cameroon Flag",
+    "cp": "1F1E8-1F1F2",
+    "char": "'🇨🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "China Flag",
+    "cp": "1F1E8-1F1F3",
+    "char": "'🇨🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Colombia Flag",
+    "cp": "1F1E8-1F1F4",
+    "char": "'🇨🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Clipperton Island Flag",
+    "cp": "1F1E8-1F1F5",
+    "char": "'🇨🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "Costa Rica Flag",
+    "cp": "1F1E8-1F1F7",
+    "char": "'🇨🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cuba Flag",
+    "cp": "1F1E8-1F1FA",
+    "char": "'🇨🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cape Verde Flag",
+    "cp": "1F1E8-1F1FB",
+    "char": "'🇨🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Curaçao Flag",
+    "cp": "1F1E8-1F1FC",
+    "char": "'🇨🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Christmas Island Flag",
+    "cp": "1F1E8-1F1FD",
+    "char": "'🇨🇽'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cyprus Flag",
+    "cp": "1F1E8-1F1FE",
+    "char": "'🇨🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Czechia Flag",
+    "cp": "1F1E8-1F1FF",
+    "char": "'🇨🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Germany Flag",
+    "cp": "1F1E9-1F1EA",
+    "char": "'🇩🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Diego Garcia Flag",
+    "cp": "1F1E9-1F1EC",
+    "char": "'🇩🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Djibouti Flag",
+    "cp": "1F1E9-1F1EF",
+    "char": "'🇩🇯'",
+    "category": "Flags"
+  },
+  {
+    "name": "Denmark Flag",
+    "cp": "1F1E9-1F1F0",
+    "char": "'🇩🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Dominica Flag",
+    "cp": "1F1E9-1F1F2",
+    "char": "'🇩🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Dominican Republic Flag",
+    "cp": "1F1E9-1F1F4",
+    "char": "'🇩🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Algeria Flag",
+    "cp": "1F1E9-1F1FF",
+    "char": "'🇩🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ceuta & Melilla Flag",
+    "cp": "1F1EA-1F1E6",
+    "char": "'🇪🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ecuador Flag",
+    "cp": "1F1EA-1F1E8",
+    "char": "'🇪🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Estonia Flag",
+    "cp": "1F1EA-1F1EA",
+    "char": "'🇪🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Egypt Flag",
+    "cp": "1F1EA-1F1EC",
+    "char": "'🇪🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Western Sahara Flag",
+    "cp": "1F1EA-1F1ED",
+    "char": "'🇪🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Eritrea Flag",
+    "cp": "1F1EA-1F1F7",
+    "char": "'🇪🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Spain Flag",
+    "cp": "1F1EA-1F1F8",
+    "char": "'🇪🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ethiopia Flag",
+    "cp": "1F1EA-1F1F9",
+    "char": "'🇪🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "European Union Flag",
+    "cp": "1F1EA-1F1FA",
+    "char": "'🇪🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Finland Flag",
+    "cp": "1F1EB-1F1EE",
+    "char": "'🇫🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Fiji Flag",
+    "cp": "1F1EB-1F1EF",
+    "char": "'🇫🇯'",
+    "category": "Flags"
+  },
+  {
+    "name": "Falkland Islands Flag",
+    "cp": "1F1EB-1F1F0",
+    "char": "'🇫🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Micronesia Flag",
+    "cp": "1F1EB-1F1F2",
+    "char": "'🇫🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Faroe Islands Flag",
+    "cp": "1F1EB-1F1F4",
+    "char": "'🇫🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "France Flag",
+    "cp": "1F1EB-1F1F7",
+    "char": "'🇫🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Gabon Flag",
+    "cp": "1F1EC-1F1E6",
+    "char": "'🇬🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "United Kingdom Flag",
+    "cp": "1F1EC-1F1E7",
+    "char": "'🇬🇧'",
+    "category": "Flags"
+  },
+  {
+    "name": "Grenada Flag",
+    "cp": "1F1EC-1F1E9",
+    "char": "'🇬🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Georgia Flag",
+    "cp": "1F1EC-1F1EA",
+    "char": "'🇬🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "French Guiana Flag",
+    "cp": "1F1EC-1F1EB",
+    "char": "'🇬🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guernsey Flag",
+    "cp": "1F1EC-1F1EC",
+    "char": "'🇬🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ghana Flag",
+    "cp": "1F1EC-1F1ED",
+    "char": "'🇬🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Gibraltar Flag",
+    "cp": "1F1EC-1F1EE",
+    "char": "'🇬🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Greenland Flag",
+    "cp": "1F1EC-1F1F1",
+    "char": "'🇬🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Gambia Flag",
+    "cp": "1F1EC-1F1F2",
+    "char": "'🇬🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guinea Flag",
+    "cp": "1F1EC-1F1F3",
+    "char": "'🇬🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guadeloupe Flag",
+    "cp": "1F1EC-1F1F5",
+    "char": "'🇬🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "Equatorial Guinea Flag",
+    "cp": "1F1EC-1F1F6",
+    "char": "'🇬🇶'",
+    "category": "Flags"
+  },
+  {
+    "name": "Greece Flag",
+    "cp": "1F1EC-1F1F7",
+    "char": "'🇬🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "South Georgia & South Sandwich Islands Flag",
+    "cp": "1F1EC-1F1F8",
+    "char": "'🇬🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guatemala Flag",
+    "cp": "1F1EC-1F1F9",
+    "char": "'🇬🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guam Flag",
+    "cp": "1F1EC-1F1FA",
+    "char": "'🇬🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guinea-Bissau Flag",
+    "cp": "1F1EC-1F1FC",
+    "char": "'🇬🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Guyana Flag",
+    "cp": "1F1EC-1F1FE",
+    "char": "'🇬🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Hong Kong SAR China Flag",
+    "cp": "1F1ED-1F1F0",
+    "char": "'🇭🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Heard & McDonald Islands Flag",
+    "cp": "1F1ED-1F1F2",
+    "char": "'🇭🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Honduras Flag",
+    "cp": "1F1ED-1F1F3",
+    "char": "'🇭🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Croatia Flag",
+    "cp": "1F1ED-1F1F7",
+    "char": "'🇭🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Haiti Flag",
+    "cp": "1F1ED-1F1F9",
+    "char": "'🇭🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Hungary Flag",
+    "cp": "1F1ED-1F1FA",
+    "char": "'🇭🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Canary Islands Flag",
+    "cp": "1F1EE-1F1E8",
+    "char": "'🇮🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Indonesia Flag",
+    "cp": "1F1EE-1F1E9",
+    "char": "'🇮🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ireland Flag",
+    "cp": "1F1EE-1F1EA",
+    "char": "'🇮🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Israel Flag",
+    "cp": "1F1EE-1F1F1",
+    "char": "'🇮🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Isle of Man Flag",
+    "cp": "1F1EE-1F1F2",
+    "char": "'🇮🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "India Flag",
+    "cp": "1F1EE-1F1F3",
+    "char": "'🇮🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "British Indian Ocean Territory Flag",
+    "cp": "1F1EE-1F1F4",
+    "char": "'🇮🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Iraq Flag",
+    "cp": "1F1EE-1F1F6",
+    "char": "'🇮🇶'",
+    "category": "Flags"
+  },
+  {
+    "name": "Iran Flag",
+    "cp": "1F1EE-1F1F7",
+    "char": "'🇮🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Iceland Flag",
+    "cp": "1F1EE-1F1F8",
+    "char": "'🇮🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Italy Flag",
+    "cp": "1F1EE-1F1F9",
+    "char": "'🇮🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Jersey Flag",
+    "cp": "1F1EF-1F1EA",
+    "char": "'🇯🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Jamaica Flag",
+    "cp": "1F1EF-1F1F2",
+    "char": "'🇯🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Jordan Flag",
+    "cp": "1F1EF-1F1F4",
+    "char": "'🇯🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Japan Flag",
+    "cp": "1F1EF-1F1F5",
+    "char": "'🇯🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kenya Flag",
+    "cp": "1F1F0-1F1EA",
+    "char": "'🇰🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kyrgyzstan Flag",
+    "cp": "1F1F0-1F1EC",
+    "char": "'🇰🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cambodia Flag",
+    "cp": "1F1F0-1F1ED",
+    "char": "'🇰🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kiribati Flag",
+    "cp": "1F1F0-1F1EE",
+    "char": "'🇰🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Comoros Flag",
+    "cp": "1F1F0-1F1F2",
+    "char": "'🇰🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Kitts & Nevis Flag",
+    "cp": "1F1F0-1F1F3",
+    "char": "'🇰🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "North Korea Flag",
+    "cp": "1F1F0-1F1F5",
+    "char": "'🇰🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "South Korea Flag",
+    "cp": "1F1F0-1F1F7",
+    "char": "'🇰🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kuwait Flag",
+    "cp": "1F1F0-1F1FC",
+    "char": "'🇰🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Cayman Islands Flag",
+    "cp": "1F1F0-1F1FE",
+    "char": "'🇰🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kazakhstan Flag",
+    "cp": "1F1F0-1F1FF",
+    "char": "'🇰🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Laos Flag",
+    "cp": "1F1F1-1F1E6",
+    "char": "'🇱🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Lebanon Flag",
+    "cp": "1F1F1-1F1E7",
+    "char": "'🇱🇧'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Lucia Flag",
+    "cp": "1F1F1-1F1E8",
+    "char": "'🇱🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Liechtenstein Flag",
+    "cp": "1F1F1-1F1EE",
+    "char": "'🇱🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Sri Lanka Flag",
+    "cp": "1F1F1-1F1F0",
+    "char": "'🇱🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Liberia Flag",
+    "cp": "1F1F1-1F1F7",
+    "char": "'🇱🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Lesotho Flag",
+    "cp": "1F1F1-1F1F8",
+    "char": "'🇱🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Lithuania Flag",
+    "cp": "1F1F1-1F1F9",
+    "char": "'🇱🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Luxembourg Flag",
+    "cp": "1F1F1-1F1FA",
+    "char": "'🇱🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Latvia Flag",
+    "cp": "1F1F1-1F1FB",
+    "char": "'🇱🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Libya Flag",
+    "cp": "1F1F1-1F1FE",
+    "char": "'🇱🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Morocco Flag",
+    "cp": "1F1F2-1F1E6",
+    "char": "'🇲🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Monaco Flag",
+    "cp": "1F1F2-1F1E8",
+    "char": "'🇲🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Moldova Flag",
+    "cp": "1F1F2-1F1E9",
+    "char": "'🇲🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Montenegro Flag",
+    "cp": "1F1F2-1F1EA",
+    "char": "'🇲🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Martin Flag",
+    "cp": "1F1F2-1F1EB",
+    "char": "'🇲🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Madagascar Flag",
+    "cp": "1F1F2-1F1EC",
+    "char": "'🇲🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Marshall Islands Flag",
+    "cp": "1F1F2-1F1ED",
+    "char": "'🇲🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Macedonia Flag",
+    "cp": "1F1F2-1F1F0",
+    "char": "'🇲🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mali Flag",
+    "cp": "1F1F2-1F1F1",
+    "char": "'🇲🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Myanmar (Burma) Flag",
+    "cp": "1F1F2-1F1F2",
+    "char": "'🇲🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mongolia Flag",
+    "cp": "1F1F2-1F1F3",
+    "char": "'🇲🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Macau SAR China Flag",
+    "cp": "1F1F2-1F1F4",
+    "char": "'🇲🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Northern Mariana Islands Flag",
+    "cp": "1F1F2-1F1F5",
+    "char": "'🇲🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "Martinique Flag",
+    "cp": "1F1F2-1F1F6",
+    "char": "'🇲🇶'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mauritania Flag",
+    "cp": "1F1F2-1F1F7",
+    "char": "'🇲🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Montserrat Flag",
+    "cp": "1F1F2-1F1F8",
+    "char": "'🇲🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Malta Flag",
+    "cp": "1F1F2-1F1F9",
+    "char": "'🇲🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mauritius Flag",
+    "cp": "1F1F2-1F1FA",
+    "char": "'🇲🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Maldives Flag",
+    "cp": "1F1F2-1F1FB",
+    "char": "'🇲🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Malawi Flag",
+    "cp": "1F1F2-1F1FC",
+    "char": "'🇲🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mexico Flag",
+    "cp": "1F1F2-1F1FD",
+    "char": "'🇲🇽'",
+    "category": "Flags"
+  },
+  {
+    "name": "Malaysia Flag",
+    "cp": "1F1F2-1F1FE",
+    "char": "'🇲🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mozambique Flag",
+    "cp": "1F1F2-1F1FF",
+    "char": "'🇲🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Namibia Flag",
+    "cp": "1F1F3-1F1E6",
+    "char": "'🇳🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "New Caledonia Flag",
+    "cp": "1F1F3-1F1E8",
+    "char": "'🇳🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Niger Flag",
+    "cp": "1F1F3-1F1EA",
+    "char": "'🇳🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Norfolk Island Flag",
+    "cp": "1F1F3-1F1EB",
+    "char": "'🇳🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Nigeria Flag",
+    "cp": "1F1F3-1F1EC",
+    "char": "'🇳🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Nicaragua Flag",
+    "cp": "1F1F3-1F1EE",
+    "char": "'🇳🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Netherlands Flag",
+    "cp": "1F1F3-1F1F1",
+    "char": "'🇳🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Norway Flag",
+    "cp": "1F1F3-1F1F4",
+    "char": "'🇳🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Nepal Flag",
+    "cp": "1F1F3-1F1F5",
+    "char": "'🇳🇵'",
+    "category": "Flags"
+  },
+  {
+    "name": "Nauru Flag",
+    "cp": "1F1F3-1F1F7",
+    "char": "'🇳🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Niue Flag",
+    "cp": "1F1F3-1F1FA",
+    "char": "'🇳🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "New Zealand Flag",
+    "cp": "1F1F3-1F1FF",
+    "char": "'🇳🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Oman Flag",
+    "cp": "1F1F4-1F1F2",
+    "char": "'🇴🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Panama Flag",
+    "cp": "1F1F5-1F1E6",
+    "char": "'🇵🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Peru Flag",
+    "cp": "1F1F5-1F1EA",
+    "char": "'🇵🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "French Polynesia Flag",
+    "cp": "1F1F5-1F1EB",
+    "char": "'🇵🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Papua New Guinea Flag",
+    "cp": "1F1F5-1F1EC",
+    "char": "'🇵🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Philippines Flag",
+    "cp": "1F1F5-1F1ED",
+    "char": "'🇵🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Pakistan Flag",
+    "cp": "1F1F5-1F1F0",
+    "char": "'🇵🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Poland Flag",
+    "cp": "1F1F5-1F1F1",
+    "char": "'🇵🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Pierre & Miquelon Flag",
+    "cp": "1F1F5-1F1F2",
+    "char": "'🇵🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Pitcairn Islands Flag",
+    "cp": "1F1F5-1F1F3",
+    "char": "'🇵🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Puerto Rico Flag",
+    "cp": "1F1F5-1F1F7",
+    "char": "'🇵🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Palestinian Territories Flag",
+    "cp": "1F1F5-1F1F8",
+    "char": "'🇵🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Portugal Flag",
+    "cp": "1F1F5-1F1F9",
+    "char": "'🇵🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Palau Flag",
+    "cp": "1F1F5-1F1FC",
+    "char": "'🇵🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Paraguay Flag",
+    "cp": "1F1F5-1F1FE",
+    "char": "'🇵🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Qatar Flag",
+    "cp": "1F1F6-1F1E6",
+    "char": "'🇶🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Réunion Flag",
+    "cp": "1F1F7-1F1EA",
+    "char": "'🇷🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Romania Flag",
+    "cp": "1F1F7-1F1F4",
+    "char": "'🇷🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Serbia Flag",
+    "cp": "1F1F7-1F1F8",
+    "char": "'🇷🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Russia Flag",
+    "cp": "1F1F7-1F1FA",
+    "char": "'🇷🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Rwanda Flag",
+    "cp": "1F1F7-1F1FC",
+    "char": "'🇷🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Saudi Arabia Flag",
+    "cp": "1F1F8-1F1E6",
+    "char": "'🇸🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Solomon Islands Flag",
+    "cp": "1F1F8-1F1E7",
+    "char": "'🇸🇧'",
+    "category": "Flags"
+  },
+  {
+    "name": "Seychelles Flag",
+    "cp": "1F1F8-1F1E8",
+    "char": "'🇸🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Sudan Flag",
+    "cp": "1F1F8-1F1E9",
+    "char": "'🇸🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "Sweden Flag",
+    "cp": "1F1F8-1F1EA",
+    "char": "'🇸🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Singapore Flag",
+    "cp": "1F1F8-1F1EC",
+    "char": "'🇸🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Helena Flag",
+    "cp": "1F1F8-1F1ED",
+    "char": "'🇸🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Slovenia Flag",
+    "cp": "1F1F8-1F1EE",
+    "char": "'🇸🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Svalbard & Jan Mayen Flag",
+    "cp": "1F1F8-1F1EF",
+    "char": "'🇸🇯'",
+    "category": "Flags"
+  },
+  {
+    "name": "Slovakia Flag",
+    "cp": "1F1F8-1F1F0",
+    "char": "'🇸🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Sierra Leone Flag",
+    "cp": "1F1F8-1F1F1",
+    "char": "'🇸🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "San Marino Flag",
+    "cp": "1F1F8-1F1F2",
+    "char": "'🇸🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Senegal Flag",
+    "cp": "1F1F8-1F1F3",
+    "char": "'🇸🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Somalia Flag",
+    "cp": "1F1F8-1F1F4",
+    "char": "'🇸🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Suriname Flag",
+    "cp": "1F1F8-1F1F7",
+    "char": "'🇸🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "South Sudan Flag",
+    "cp": "1F1F8-1F1F8",
+    "char": "'🇸🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "São Tomé & Príncipe Flag",
+    "cp": "1F1F8-1F1F9",
+    "char": "'🇸🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "El Salvador Flag",
+    "cp": "1F1F8-1F1FB",
+    "char": "'🇸🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Sint Maarten Flag",
+    "cp": "1F1F8-1F1FD",
+    "char": "'🇸🇽'",
+    "category": "Flags"
+  },
+  {
+    "name": "Syria Flag",
+    "cp": "1F1F8-1F1FE",
+    "char": "'🇸🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Swaziland Flag",
+    "cp": "1F1F8-1F1FF",
+    "char": "'🇸🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tristan da Cunha Flag",
+    "cp": "1F1F9-1F1E6",
+    "char": "'🇹🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Turks & Caicos Islands Flag",
+    "cp": "1F1F9-1F1E8",
+    "char": "'🇹🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Chad Flag",
+    "cp": "1F1F9-1F1E9",
+    "char": "'🇹🇩'",
+    "category": "Flags"
+  },
+  {
+    "name": "French Southern Territories Flag",
+    "cp": "1F1F9-1F1EB",
+    "char": "'🇹🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Togo Flag",
+    "cp": "1F1F9-1F1EC",
+    "char": "'🇹🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "Thailand Flag",
+    "cp": "1F1F9-1F1ED",
+    "char": "'🇹🇭'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tajikistan Flag",
+    "cp": "1F1F9-1F1EF",
+    "char": "'🇹🇯'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tokelau Flag",
+    "cp": "1F1F9-1F1F0",
+    "char": "'🇹🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Timor-Leste Flag",
+    "cp": "1F1F9-1F1F1",
+    "char": "'🇹🇱'",
+    "category": "Flags"
+  },
+  {
+    "name": "Turkmenistan Flag",
+    "cp": "1F1F9-1F1F2",
+    "char": "'🇹🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tunisia Flag",
+    "cp": "1F1F9-1F1F3",
+    "char": "'🇹🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tonga Flag",
+    "cp": "1F1F9-1F1F4",
+    "char": "'🇹🇴'",
+    "category": "Flags"
+  },
+  {
+    "name": "Turkey Flag",
+    "cp": "1F1F9-1F1F7",
+    "char": "'🇹🇷'",
+    "category": "Flags"
+  },
+  {
+    "name": "Trinidad & Tobago Flag",
+    "cp": "1F1F9-1F1F9",
+    "char": "'🇹🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tuvalu Flag",
+    "cp": "1F1F9-1F1FB",
+    "char": "'🇹🇻'",
+    "category": "Flags"
+  },
+  {
+    "name": "Taiwan Flag",
+    "cp": "1F1F9-1F1FC",
+    "char": "'🇹🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "Tanzania Flag",
+    "cp": "1F1F9-1F1FF",
+    "char": "'🇹🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Ukraine Flag",
+    "cp": "1F1FA-1F1E6",
+    "char": "'🇺🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Uganda Flag",
+    "cp": "1F1FA-1F1EC",
+    "char": "'🇺🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "U.S. Outlying Islands Flag",
+    "cp": "1F1FA-1F1F2",
+    "char": "'🇺🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "United Nations Flag",
+    "cp": "1F1FA-1F1F3",
+    "char": "'🇺🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "United States Flag",
+    "cp": "1F1FA-1F1F8",
+    "char": "'🇺🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Uruguay Flag",
+    "cp": "1F1FA-1F1FE",
+    "char": "'🇺🇾'",
+    "category": "Flags"
+  },
+  {
+    "name": "Uzbekistan Flag",
+    "cp": "1F1FA-1F1FF",
+    "char": "'🇺🇿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Vatican City Flag",
+    "cp": "1F1FB-1F1E6",
+    "char": "'🇻🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "St. Vincent & Grenadines Flag",
+    "cp": "1F1FB-1F1E8",
+    "char": "'🇻🇨'",
+    "category": "Flags"
+  },
+  {
+    "name": "Venezuela Flag",
+    "cp": "1F1FB-1F1EA",
+    "char": "'🇻🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "British Virgin Islands Flag",
+    "cp": "1F1FB-1F1EC",
+    "char": "'🇻🇬'",
+    "category": "Flags"
+  },
+  {
+    "name": "U.S. Virgin Islands Flag",
+    "cp": "1F1FB-1F1EE",
+    "char": "'🇻🇮'",
+    "category": "Flags"
+  },
+  {
+    "name": "Vietnam Flag",
+    "cp": "1F1FB-1F1F3",
+    "char": "'🇻🇳'",
+    "category": "Flags"
+  },
+  {
+    "name": "Vanuatu Flag",
+    "cp": "1F1FB-1F1FA",
+    "char": "'🇻🇺'",
+    "category": "Flags"
+  },
+  {
+    "name": "Wallis & Futuna Flag",
+    "cp": "1F1FC-1F1EB",
+    "char": "'🇼🇫'",
+    "category": "Flags"
+  },
+  {
+    "name": "Samoa Flag",
+    "cp": "1F1FC-1F1F8",
+    "char": "'🇼🇸'",
+    "category": "Flags"
+  },
+  {
+    "name": "Kosovo Flag",
+    "cp": "1F1FD-1F1F0",
+    "char": "'🇽🇰'",
+    "category": "Flags"
+  },
+  {
+    "name": "Yemen Flag",
+    "cp": "1F1FE-1F1EA",
+    "char": "'🇾🇪'",
+    "category": "Flags"
+  },
+  {
+    "name": "Mayotte Flag",
+    "cp": "1F1FE-1F1F9",
+    "char": "'🇾🇹'",
+    "category": "Flags"
+  },
+  {
+    "name": "South Africa Flag",
+    "cp": "1F1FF-1F1E6",
+    "char": "'🇿🇦'",
+    "category": "Flags"
+  },
+  {
+    "name": "Zambia Flag",
+    "cp": "1F1FF-1F1F2",
+    "char": "'🇿🇲'",
+    "category": "Flags"
+  },
+  {
+    "name": "Zimbabwe Flag",
+    "cp": "1F1FF-1F1FC",
+    "char": "'🇿🇼'",
+    "category": "Flags"
+  },
+  {
+    "name": "SQUARED KATAKANA KOKO",
+    "cp": "1F201",
+    "char": "'🈁'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED KATAKANA SA",
+    "cp": "1F202",
+    "char": "'🈂'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-7121",
+    "cp": "1F21A",
+    "char": "'🈚'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-6307",
+    "cp": "1F22F",
+    "char": "'🈯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-7981",
+    "cp": "1F232",
+    "char": "'🈲'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-7A7A",
+    "cp": "1F233",
+    "char": "'🈳'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-5408",
+    "cp": "1F234",
+    "char": "'🈴'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-6E80",
+    "cp": "1F235",
+    "char": "'🈵'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-6709",
+    "cp": "1F236",
+    "char": "'🈶'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-6708",
+    "cp": "1F237",
+    "char": "'🈷'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-7533",
+    "cp": "1F238",
+    "char": "'🈸'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-5272",
+    "cp": "1F239",
+    "char": "'🈹'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SQUARED CJK UNIFIED IDEOGRAPH-55B6",
+    "cp": "1F23A",
+    "char": "'🈺'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CIRCLED IDEOGRAPH ADVANTAGE",
+    "cp": "1F250",
+    "char": "'🉐'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CIRCLED IDEOGRAPH ACCEPT",
+    "cp": "1F251",
+    "char": "'🉑'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CYCLONE",
+    "cp": "1F300",
+    "char": "'🌀'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FOGGY",
+    "cp": "1F301",
+    "char": "'🌁'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOSED UMBRELLA",
+    "cp": "1F302",
+    "char": "'🌂'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "NIGHT WITH STARS",
+    "cp": "1F303",
+    "char": "'🌃'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUNRISE OVER MOUNTAINS",
+    "cp": "1F304",
+    "char": "'🌄'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUNRISE",
+    "cp": "1F305",
+    "char": "'🌅'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CITYSCAPE AT DUSK",
+    "cp": "1F306",
+    "char": "'🌆'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUNSET OVER BUILDINGS",
+    "cp": "1F307",
+    "char": "'🌇'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "RAINBOW",
+    "cp": "1F308",
+    "char": "'🌈'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BRIDGE AT NIGHT",
+    "cp": "1F309",
+    "char": "'🌉'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WATER WAVE",
+    "cp": "1F30A",
+    "char": "'🌊'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "VOLCANO",
+    "cp": "1F30B",
+    "char": "'🌋'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MILKY WAY",
+    "cp": "1F30C",
+    "char": "'🌌'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "EARTH GLOBE EUROPE-AFRICA",
+    "cp": "1F30D",
+    "char": "'🌍'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "EARTH GLOBE AMERICAS",
+    "cp": "1F30E",
+    "char": "'🌎'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "EARTH GLOBE ASIA-AUSTRALIA",
+    "cp": "1F30F",
+    "char": "'🌏'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "GLOBE WITH MERIDIANS",
+    "cp": "1F310",
+    "char": "'🌐'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "NEW MOON SYMBOL",
+    "cp": "1F311",
+    "char": "'🌑'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WAXING CRESCENT MOON SYMBOL",
+    "cp": "1F312",
+    "char": "'🌒'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FIRST QUARTER MOON SYMBOL",
+    "cp": "1F313",
+    "char": "'🌓'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WAXING GIBBOUS MOON SYMBOL",
+    "cp": "1F314",
+    "char": "'🌔'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FULL MOON SYMBOL",
+    "cp": "1F315",
+    "char": "'🌕'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WANING GIBBOUS MOON SYMBOL",
+    "cp": "1F316",
+    "char": "'🌖'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "LAST QUARTER MOON SYMBOL",
+    "cp": "1F317",
+    "char": "'🌗'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WANING CRESCENT MOON SYMBOL",
+    "cp": "1F318",
+    "char": "'🌘'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CRESCENT MOON",
+    "cp": "1F319",
+    "char": "'🌙'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "NEW MOON WITH FACE",
+    "cp": "1F31A",
+    "char": "'🌚'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FIRST QUARTER MOON WITH FACE",
+    "cp": "1F31B",
+    "char": "'🌛'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "LAST QUARTER MOON WITH FACE",
+    "cp": "1F31C",
+    "char": "'🌜'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FULL MOON WITH FACE",
+    "cp": "1F31D",
+    "char": "'🌝'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUN WITH FACE",
+    "cp": "1F31E",
+    "char": "'🌞'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "GLOWING STAR",
+    "cp": "1F31F",
+    "char": "'🌟'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SHOOTING STAR",
+    "cp": "1F320",
+    "char": "'🌠'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "thermometer",
+    "cp": "1F321",
+    "char": "'🌡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "mostly_sunny",
+    "cp": "1F324",
+    "char": "'🌤'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "barely_sunny",
+    "cp": "1F325",
+    "char": "'🌥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "partly_sunny_rain",
+    "cp": "1F326",
+    "char": "'🌦'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "rain_cloud",
+    "cp": "1F327",
+    "char": "'🌧'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "snow_cloud",
+    "cp": "1F328",
+    "char": "'🌨'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "lightning",
+    "cp": "1F329",
+    "char": "'🌩'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "tornado",
+    "cp": "1F32A",
+    "char": "'🌪'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "fog",
+    "cp": "1F32B",
+    "char": "'🌫'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "wind_blowing_face",
+    "cp": "1F32C",
+    "char": "'🌬'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOT DOG",
+    "cp": "1F32D",
+    "char": "'🌭'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TACO",
+    "cp": "1F32E",
+    "char": "'🌮'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BURRITO",
+    "cp": "1F32F",
+    "char": "'🌯'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CHESTNUT",
+    "cp": "1F330",
+    "char": "'🌰'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SEEDLING",
+    "cp": "1F331",
+    "char": "'🌱'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "EVERGREEN TREE",
+    "cp": "1F332",
+    "char": "'🌲'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DECIDUOUS TREE",
+    "cp": "1F333",
+    "char": "'🌳'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PALM TREE",
+    "cp": "1F334",
+    "char": "'🌴'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CACTUS",
+    "cp": "1F335",
+    "char": "'🌵'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "hot_pepper",
+    "cp": "1F336",
+    "char": "'🌶'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TULIP",
+    "cp": "1F337",
+    "char": "'🌷'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CHERRY BLOSSOM",
+    "cp": "1F338",
+    "char": "'🌸'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "ROSE",
+    "cp": "1F339",
+    "char": "'🌹'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HIBISCUS",
+    "cp": "1F33A",
+    "char": "'🌺'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SUNFLOWER",
+    "cp": "1F33B",
+    "char": "'🌻'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BLOSSOM",
+    "cp": "1F33C",
+    "char": "'🌼'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "EAR OF MAIZE",
+    "cp": "1F33D",
+    "char": "'🌽'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "EAR OF RICE",
+    "cp": "1F33E",
+    "char": "'🌾'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HERB",
+    "cp": "1F33F",
+    "char": "'🌿'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FOUR LEAF CLOVER",
+    "cp": "1F340",
+    "char": "'🍀'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MAPLE LEAF",
+    "cp": "1F341",
+    "char": "'🍁'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FALLEN LEAF",
+    "cp": "1F342",
+    "char": "'🍂'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "LEAF FLUTTERING IN WIND",
+    "cp": "1F343",
+    "char": "'🍃'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MUSHROOM",
+    "cp": "1F344",
+    "char": "'🍄'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TOMATO",
+    "cp": "1F345",
+    "char": "'🍅'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "AUBERGINE",
+    "cp": "1F346",
+    "char": "'🍆'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "GRAPES",
+    "cp": "1F347",
+    "char": "'🍇'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "MELON",
+    "cp": "1F348",
+    "char": "'🍈'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "WATERMELON",
+    "cp": "1F349",
+    "char": "'🍉'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TANGERINE",
+    "cp": "1F34A",
+    "char": "'🍊'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "LEMON",
+    "cp": "1F34B",
+    "char": "'🍋'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BANANA",
+    "cp": "1F34C",
+    "char": "'🍌'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PINEAPPLE",
+    "cp": "1F34D",
+    "char": "'🍍'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "RED APPLE",
+    "cp": "1F34E",
+    "char": "'🍎'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "GREEN APPLE",
+    "cp": "1F34F",
+    "char": "'🍏'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PEAR",
+    "cp": "1F350",
+    "char": "'🍐'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PEACH",
+    "cp": "1F351",
+    "char": "'🍑'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CHERRIES",
+    "cp": "1F352",
+    "char": "'🍒'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "STRAWBERRY",
+    "cp": "1F353",
+    "char": "'🍓'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "HAMBURGER",
+    "cp": "1F354",
+    "char": "'🍔'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SLICE OF PIZZA",
+    "cp": "1F355",
+    "char": "'🍕'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "MEAT ON BONE",
+    "cp": "1F356",
+    "char": "'🍖'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "POULTRY LEG",
+    "cp": "1F357",
+    "char": "'🍗'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "RICE CRACKER",
+    "cp": "1F358",
+    "char": "'🍘'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "RICE BALL",
+    "cp": "1F359",
+    "char": "'🍙'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "COOKED RICE",
+    "cp": "1F35A",
+    "char": "'🍚'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CURRY AND RICE",
+    "cp": "1F35B",
+    "char": "'🍛'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "STEAMING BOWL",
+    "cp": "1F35C",
+    "char": "'🍜'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SPAGHETTI",
+    "cp": "1F35D",
+    "char": "'🍝'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BREAD",
+    "cp": "1F35E",
+    "char": "'🍞'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FRENCH FRIES",
+    "cp": "1F35F",
+    "char": "'🍟'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "ROASTED SWEET POTATO",
+    "cp": "1F360",
+    "char": "'🍠'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "DANGO",
+    "cp": "1F361",
+    "char": "'🍡'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "ODEN",
+    "cp": "1F362",
+    "char": "'🍢'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SUSHI",
+    "cp": "1F363",
+    "char": "'🍣'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FRIED SHRIMP",
+    "cp": "1F364",
+    "char": "'🍤'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FISH CAKE WITH SWIRL DESIGN",
+    "cp": "1F365",
+    "char": "'🍥'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SOFT ICE CREAM",
+    "cp": "1F366",
+    "char": "'🍦'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SHAVED ICE",
+    "cp": "1F367",
+    "char": "'🍧'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "ICE CREAM",
+    "cp": "1F368",
+    "char": "'🍨'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "DOUGHNUT",
+    "cp": "1F369",
+    "char": "'🍩'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "COOKIE",
+    "cp": "1F36A",
+    "char": "'🍪'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CHOCOLATE BAR",
+    "cp": "1F36B",
+    "char": "'🍫'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CANDY",
+    "cp": "1F36C",
+    "char": "'🍬'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "LOLLIPOP",
+    "cp": "1F36D",
+    "char": "'🍭'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CUSTARD",
+    "cp": "1F36E",
+    "char": "'🍮'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "HONEY POT",
+    "cp": "1F36F",
+    "char": "'🍯'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SHORTCAKE",
+    "cp": "1F370",
+    "char": "'🍰'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BENTO BOX",
+    "cp": "1F371",
+    "char": "'🍱'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "POT OF FOOD",
+    "cp": "1F372",
+    "char": "'🍲'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "COOKING",
+    "cp": "1F373",
+    "char": "'🍳'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FORK AND KNIFE",
+    "cp": "1F374",
+    "char": "'🍴'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TEACUP WITHOUT HANDLE",
+    "cp": "1F375",
+    "char": "'🍵'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SAKE BOTTLE AND CUP",
+    "cp": "1F376",
+    "char": "'🍶'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "WINE GLASS",
+    "cp": "1F377",
+    "char": "'🍷'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "COCKTAIL GLASS",
+    "cp": "1F378",
+    "char": "'🍸'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TROPICAL DRINK",
+    "cp": "1F379",
+    "char": "'🍹'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BEER MUG",
+    "cp": "1F37A",
+    "char": "'🍺'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CLINKING BEER MUGS",
+    "cp": "1F37B",
+    "char": "'🍻'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BABY BOTTLE",
+    "cp": "1F37C",
+    "char": "'🍼'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "knife_fork_plate",
+    "cp": "1F37D",
+    "char": "'🍽'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BOTTLE WITH POPPING CORK",
+    "cp": "1F37E",
+    "char": "'🍾'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "POPCORN",
+    "cp": "1F37F",
+    "char": "'🍿'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "RIBBON",
+    "cp": "1F380",
+    "char": "'🎀'",
+    "category": "Activities"
+  },
+  {
+    "name": "WRAPPED PRESENT",
+    "cp": "1F381",
+    "char": "'🎁'",
+    "category": "Activities"
+  },
+  {
+    "name": "BIRTHDAY CAKE",
+    "cp": "1F382",
+    "char": "'🎂'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "JACK-O-LANTERN",
+    "cp": "1F383",
+    "char": "'🎃'",
+    "category": "Activities"
+  },
+  {
+    "name": "CHRISTMAS TREE",
+    "cp": "1F384",
+    "char": "'🎄'",
+    "category": "Activities"
+  },
+  {
+    "name": "FATHER CHRISTMAS",
+    "cp": "1F385",
+    "char": "'🎅'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FIREWORKS",
+    "cp": "1F386",
+    "char": "'🎆'",
+    "category": "Activities"
+  },
+  {
+    "name": "FIREWORK SPARKLER",
+    "cp": "1F387",
+    "char": "'🎇'",
+    "category": "Activities"
+  },
+  {
+    "name": "BALLOON",
+    "cp": "1F388",
+    "char": "'🎈'",
+    "category": "Activities"
+  },
+  {
+    "name": "PARTY POPPER",
+    "cp": "1F389",
+    "char": "'🎉'",
+    "category": "Activities"
+  },
+  {
+    "name": "CONFETTI BALL",
+    "cp": "1F38A",
+    "char": "'🎊'",
+    "category": "Activities"
+  },
+  {
+    "name": "TANABATA TREE",
+    "cp": "1F38B",
+    "char": "'🎋'",
+    "category": "Activities"
+  },
+  {
+    "name": "CROSSED FLAGS",
+    "cp": "1F38C",
+    "char": "'🎌'",
+    "category": "Flags"
+  },
+  {
+    "name": "PINE DECORATION",
+    "cp": "1F38D",
+    "char": "'🎍'",
+    "category": "Activities"
+  },
+  {
+    "name": "JAPANESE DOLLS",
+    "cp": "1F38E",
+    "char": "'🎎'",
+    "category": "Activities"
+  },
+  {
+    "name": "CARP STREAMER",
+    "cp": "1F38F",
+    "char": "'🎏'",
+    "category": "Activities"
+  },
+  {
+    "name": "WIND CHIME",
+    "cp": "1F390",
+    "char": "'🎐'",
+    "category": "Activities"
+  },
+  {
+    "name": "MOON VIEWING CEREMONY",
+    "cp": "1F391",
+    "char": "'🎑'",
+    "category": "Activities"
+  },
+  {
+    "name": "SCHOOL SATCHEL",
+    "cp": "1F392",
+    "char": "'🎒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRADUATION CAP",
+    "cp": "1F393",
+    "char": "'🎓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "medal",
+    "cp": "1F396",
+    "char": "'🎖'",
+    "category": "Activities"
+  },
+  {
+    "name": "reminder_ribbon",
+    "cp": "1F397",
+    "char": "'🎗'",
+    "category": "Activities"
+  },
+  {
+    "name": "studio_microphone",
+    "cp": "1F399",
+    "char": "'🎙'",
+    "category": "Objects"
+  },
+  {
+    "name": "level_slider",
+    "cp": "1F39A",
+    "char": "'🎚'",
+    "category": "Objects"
+  },
+  {
+    "name": "control_knobs",
+    "cp": "1F39B",
+    "char": "'🎛'",
+    "category": "Objects"
+  },
+  {
+    "name": "film_frames",
+    "cp": "1F39E",
+    "char": "'🎞'",
+    "category": "Objects"
+  },
+  {
+    "name": "admission_tickets",
+    "cp": "1F39F",
+    "char": "'🎟'",
+    "category": "Activities"
+  },
+  {
+    "name": "CAROUSEL HORSE",
+    "cp": "1F3A0",
+    "char": "'🎠'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FERRIS WHEEL",
+    "cp": "1F3A1",
+    "char": "'🎡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ROLLER COASTER",
+    "cp": "1F3A2",
+    "char": "'🎢'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FISHING POLE AND FISH",
+    "cp": "1F3A3",
+    "char": "'🎣'",
+    "category": "Activities"
+  },
+  {
+    "name": "MICROPHONE",
+    "cp": "1F3A4",
+    "char": "'🎤'",
+    "category": "Objects"
+  },
+  {
+    "name": "MOVIE CAMERA",
+    "cp": "1F3A5",
+    "char": "'🎥'",
+    "category": "Objects"
+  },
+  {
+    "name": "CINEMA",
+    "cp": "1F3A6",
+    "char": "'🎦'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HEADPHONE",
+    "cp": "1F3A7",
+    "char": "'🎧'",
+    "category": "Objects"
+  },
+  {
+    "name": "ARTIST PALETTE",
+    "cp": "1F3A8",
+    "char": "'🎨'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TOP HAT",
+    "cp": "1F3A9",
+    "char": "'🎩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CIRCUS TENT",
+    "cp": "1F3AA",
+    "char": "'🎪'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TICKET",
+    "cp": "1F3AB",
+    "char": "'🎫'",
+    "category": "Activities"
+  },
+  {
+    "name": "CLAPPER BOARD",
+    "cp": "1F3AC",
+    "char": "'🎬'",
+    "category": "Objects"
+  },
+  {
+    "name": "PERFORMING ARTS",
+    "cp": "1F3AD",
+    "char": "'🎭'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "VIDEO GAME",
+    "cp": "1F3AE",
+    "char": "'🎮'",
+    "category": "Activities"
+  },
+  {
+    "name": "DIRECT HIT",
+    "cp": "1F3AF",
+    "char": "'🎯'",
+    "category": "Activities"
+  },
+  {
+    "name": "SLOT MACHINE",
+    "cp": "1F3B0",
+    "char": "'🎰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BILLIARDS",
+    "cp": "1F3B1",
+    "char": "'🎱'",
+    "category": "Activities"
+  },
+  {
+    "name": "GAME DIE",
+    "cp": "1F3B2",
+    "char": "'🎲'",
+    "category": "Activities"
+  },
+  {
+    "name": "BOWLING",
+    "cp": "1F3B3",
+    "char": "'🎳'",
+    "category": "Activities"
+  },
+  {
+    "name": "FLOWER PLAYING CARDS",
+    "cp": "1F3B4",
+    "char": "'🎴'",
+    "category": "Activities"
+  },
+  {
+    "name": "MUSICAL NOTE",
+    "cp": "1F3B5",
+    "char": "'🎵'",
+    "category": "Objects"
+  },
+  {
+    "name": "MULTIPLE MUSICAL NOTES",
+    "cp": "1F3B6",
+    "char": "'🎶'",
+    "category": "Objects"
+  },
+  {
+    "name": "SAXOPHONE",
+    "cp": "1F3B7",
+    "char": "'🎷'",
+    "category": "Objects"
+  },
+  {
+    "name": "GUITAR",
+    "cp": "1F3B8",
+    "char": "'🎸'",
+    "category": "Objects"
+  },
+  {
+    "name": "MUSICAL KEYBOARD",
+    "cp": "1F3B9",
+    "char": "'🎹'",
+    "category": "Objects"
+  },
+  {
+    "name": "TRUMPET",
+    "cp": "1F3BA",
+    "char": "'🎺'",
+    "category": "Objects"
+  },
+  {
+    "name": "VIOLIN",
+    "cp": "1F3BB",
+    "char": "'🎻'",
+    "category": "Objects"
+  },
+  {
+    "name": "MUSICAL SCORE",
+    "cp": "1F3BC",
+    "char": "'🎼'",
+    "category": "Objects"
+  },
+  {
+    "name": "RUNNING SHIRT WITH SASH",
+    "cp": "1F3BD",
+    "char": "'🎽'",
+    "category": "Activities"
+  },
+  {
+    "name": "TENNIS RACQUET AND BALL",
+    "cp": "1F3BE",
+    "char": "'🎾'",
+    "category": "Activities"
+  },
+  {
+    "name": "SKI AND SKI BOOT",
+    "cp": "1F3BF",
+    "char": "'🎿'",
+    "category": "Activities"
+  },
+  {
+    "name": "BASKETBALL AND HOOP",
+    "cp": "1F3C0",
+    "char": "'🏀'",
+    "category": "Activities"
+  },
+  {
+    "name": "CHEQUERED FLAG",
+    "cp": "1F3C1",
+    "char": "'🏁'",
+    "category": "Flags"
+  },
+  {
+    "name": "SNOWBOARDER",
+    "cp": "1F3C2",
+    "char": "'🏂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-running",
+    "cp": "1F3C3-200D-2640",
+    "char": "'🏃‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-running",
+    "cp": "1F3C3-200D-2642",
+    "char": "'🏃‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RUNNER",
+    "cp": "1F3C3",
+    "char": "'🏃'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-surfing",
+    "cp": "1F3C4-200D-2640",
+    "char": "'🏄‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-surfing",
+    "cp": "1F3C4-200D-2642",
+    "char": "'🏄‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SURFER",
+    "cp": "1F3C4",
+    "char": "'🏄'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPORTS MEDAL",
+    "cp": "1F3C5",
+    "char": "'🏅'",
+    "category": "Activities"
+  },
+  {
+    "name": "TROPHY",
+    "cp": "1F3C6",
+    "char": "'🏆'",
+    "category": "Activities"
+  },
+  {
+    "name": "HORSE RACING",
+    "cp": "1F3C7",
+    "char": "'🏇'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "AMERICAN FOOTBALL",
+    "cp": "1F3C8",
+    "char": "'🏈'",
+    "category": "Activities"
+  },
+  {
+    "name": "RUGBY FOOTBALL",
+    "cp": "1F3C9",
+    "char": "'🏉'",
+    "category": "Activities"
+  },
+  {
+    "name": "woman-swimming",
+    "cp": "1F3CA-200D-2640",
+    "char": "'🏊‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-swimming",
+    "cp": "1F3CA-200D-2642",
+    "char": "'🏊‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SWIMMER",
+    "cp": "1F3CA",
+    "char": "'🏊'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-lifting-weights",
+    "cp": "1F3CB-FE0F-200D-2640-FE0F",
+    "char": "'🏋️‍♀️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-lifting-weights",
+    "cp": "1F3CB-FE0F-200D-2642-FE0F",
+    "char": "'🏋️‍♂️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "weight_lifter",
+    "cp": "1F3CB",
+    "char": "'🏋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-golfing",
+    "cp": "1F3CC-FE0F-200D-2640-FE0F",
+    "char": "'🏌️‍♀️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-golfing",
+    "cp": "1F3CC-FE0F-200D-2642-FE0F",
+    "char": "'🏌️‍♂️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "golfer",
+    "cp": "1F3CC",
+    "char": "'🏌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "racing_motorcycle",
+    "cp": "1F3CD",
+    "char": "'🏍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "racing_car",
+    "cp": "1F3CE",
+    "char": "'🏎'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CRICKET BAT AND BALL",
+    "cp": "1F3CF",
+    "char": "'🏏'",
+    "category": "Activities"
+  },
+  {
+    "name": "VOLLEYBALL",
+    "cp": "1F3D0",
+    "char": "'🏐'",
+    "category": "Activities"
+  },
+  {
+    "name": "FIELD HOCKEY STICK AND BALL",
+    "cp": "1F3D1",
+    "char": "'🏑'",
+    "category": "Activities"
+  },
+  {
+    "name": "ICE HOCKEY STICK AND PUCK",
+    "cp": "1F3D2",
+    "char": "'🏒'",
+    "category": "Activities"
+  },
+  {
+    "name": "TABLE TENNIS PADDLE AND BALL",
+    "cp": "1F3D3",
+    "char": "'🏓'",
+    "category": "Activities"
+  },
+  {
+    "name": "snow_capped_mountain",
+    "cp": "1F3D4",
+    "char": "'🏔'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "camping",
+    "cp": "1F3D5",
+    "char": "'🏕'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "beach_with_umbrella",
+    "cp": "1F3D6",
+    "char": "'🏖'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "building_construction",
+    "cp": "1F3D7",
+    "char": "'🏗'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "house_buildings",
+    "cp": "1F3D8",
+    "char": "'🏘'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "cityscape",
+    "cp": "1F3D9",
+    "char": "'🏙'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "derelict_house_building",
+    "cp": "1F3DA",
+    "char": "'🏚'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "classical_building",
+    "cp": "1F3DB",
+    "char": "'🏛'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "desert",
+    "cp": "1F3DC",
+    "char": "'🏜'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "desert_island",
+    "cp": "1F3DD",
+    "char": "'🏝'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "national_park",
+    "cp": "1F3DE",
+    "char": "'🏞'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "stadium",
+    "cp": "1F3DF",
+    "char": "'🏟'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOUSE BUILDING",
+    "cp": "1F3E0",
+    "char": "'🏠'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOUSE WITH GARDEN",
+    "cp": "1F3E1",
+    "char": "'🏡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "OFFICE BUILDING",
+    "cp": "1F3E2",
+    "char": "'🏢'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "JAPANESE POST OFFICE",
+    "cp": "1F3E3",
+    "char": "'🏣'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "EUROPEAN POST OFFICE",
+    "cp": "1F3E4",
+    "char": "'🏤'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOSPITAL",
+    "cp": "1F3E5",
+    "char": "'🏥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BANK",
+    "cp": "1F3E6",
+    "char": "'🏦'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AUTOMATED TELLER MACHINE",
+    "cp": "1F3E7",
+    "char": "'🏧'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HOTEL",
+    "cp": "1F3E8",
+    "char": "'🏨'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "LOVE HOTEL",
+    "cp": "1F3E9",
+    "char": "'🏩'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CONVENIENCE STORE",
+    "cp": "1F3EA",
+    "char": "'🏪'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SCHOOL",
+    "cp": "1F3EB",
+    "char": "'🏫'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "DEPARTMENT STORE",
+    "cp": "1F3EC",
+    "char": "'🏬'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FACTORY",
+    "cp": "1F3ED",
+    "char": "'🏭'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "IZAKAYA LANTERN",
+    "cp": "1F3EE",
+    "char": "'🏮'",
+    "category": "Objects"
+  },
+  {
+    "name": "JAPANESE CASTLE",
+    "cp": "1F3EF",
+    "char": "'🏯'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "EUROPEAN CASTLE",
+    "cp": "1F3F0",
+    "char": "'🏰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "rainbow-flag",
+    "cp": "1F3F3-200D-1F308",
+    "char": "'🏳‍🌈'",
+    "category": "Flags"
+  },
+  {
+    "name": "waving_white_flag",
+    "cp": "1F3F3",
+    "char": "'🏳'",
+    "category": "Flags"
+  },
+  {
+    "name": "England Flag",
+    "cp": "1F3F4-E0067-E0062-E0065-E006E-E0067-E007F",
+    "char": "'🏴󠁧󠁢󠁥󠁮󠁧󠁿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Scotland Flag",
+    "cp": "1F3F4-E0067-E0062-E0073-E0063-E0074-E007F",
+    "char": "'🏴󠁧󠁢󠁳󠁣󠁴󠁿'",
+    "category": "Flags"
+  },
+  {
+    "name": "Wales Flag",
+    "cp": "1F3F4-E0067-E0062-E0077-E006C-E0073-E007F",
+    "char": "'🏴󠁧󠁢󠁷󠁬󠁳󠁿'",
+    "category": "Flags"
+  },
+  {
+    "name": "WAVING BLACK FLAG",
+    "cp": "1F3F4",
+    "char": "'🏴'",
+    "category": "Flags"
+  },
+  {
+    "name": "rosette",
+    "cp": "1F3F5",
+    "char": "'🏵'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "label",
+    "cp": "1F3F7",
+    "char": "'🏷'",
+    "category": "Objects"
+  },
+  {
+    "name": "BADMINTON RACQUET AND SHUTTLECOCK",
+    "cp": "1F3F8",
+    "char": "'🏸'",
+    "category": "Activities"
+  },
+  {
+    "name": "BOW AND ARROW",
+    "cp": "1F3F9",
+    "char": "'🏹'",
+    "category": "Objects"
+  },
+  {
+    "name": "AMPHORA",
+    "cp": "1F3FA",
+    "char": "'🏺'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "EMOJI MODIFIER FITZPATRICK TYPE-1-2",
+    "cp": "1F3FB",
+    "char": "'🏻'",
+    "category": "Skin Tones"
+  },
+  {
+    "name": "EMOJI MODIFIER FITZPATRICK TYPE-3",
+    "cp": "1F3FC",
+    "char": "'🏼'",
+    "category": "Skin Tones"
+  },
+  {
+    "name": "EMOJI MODIFIER FITZPATRICK TYPE-4",
+    "cp": "1F3FD",
+    "char": "'🏽'",
+    "category": "Skin Tones"
+  },
+  {
+    "name": "EMOJI MODIFIER FITZPATRICK TYPE-5",
+    "cp": "1F3FE",
+    "char": "'🏾'",
+    "category": "Skin Tones"
+  },
+  {
+    "name": "EMOJI MODIFIER FITZPATRICK TYPE-6",
+    "cp": "1F3FF",
+    "char": "'🏿'",
+    "category": "Skin Tones"
+  },
+  {
+    "name": "RAT",
+    "cp": "1F400",
+    "char": "'🐀'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MOUSE",
+    "cp": "1F401",
+    "char": "'🐁'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "OX",
+    "cp": "1F402",
+    "char": "'🐂'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "WATER BUFFALO",
+    "cp": "1F403",
+    "char": "'🐃'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "COW",
+    "cp": "1F404",
+    "char": "'🐄'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "TIGER",
+    "cp": "1F405",
+    "char": "'🐅'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "LEOPARD",
+    "cp": "1F406",
+    "char": "'🐆'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "RABBIT",
+    "cp": "1F407",
+    "char": "'🐇'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CAT",
+    "cp": "1F408",
+    "char": "'🐈'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DRAGON",
+    "cp": "1F409",
+    "char": "'🐉'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CROCODILE",
+    "cp": "1F40A",
+    "char": "'🐊'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "WHALE",
+    "cp": "1F40B",
+    "char": "'🐋'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SNAIL",
+    "cp": "1F40C",
+    "char": "'🐌'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SNAKE",
+    "cp": "1F40D",
+    "char": "'🐍'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HORSE",
+    "cp": "1F40E",
+    "char": "'🐎'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "RAM",
+    "cp": "1F40F",
+    "char": "'🐏'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "GOAT",
+    "cp": "1F410",
+    "char": "'🐐'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SHEEP",
+    "cp": "1F411",
+    "char": "'🐑'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MONKEY",
+    "cp": "1F412",
+    "char": "'🐒'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "ROOSTER",
+    "cp": "1F413",
+    "char": "'🐓'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CHICKEN",
+    "cp": "1F414",
+    "char": "'🐔'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DOG",
+    "cp": "1F415",
+    "char": "'🐕'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PIG",
+    "cp": "1F416",
+    "char": "'🐖'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BOAR",
+    "cp": "1F417",
+    "char": "'🐗'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "ELEPHANT",
+    "cp": "1F418",
+    "char": "'🐘'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "OCTOPUS",
+    "cp": "1F419",
+    "char": "'🐙'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SPIRAL SHELL",
+    "cp": "1F41A",
+    "char": "'🐚'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BUG",
+    "cp": "1F41B",
+    "char": "'🐛'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "ANT",
+    "cp": "1F41C",
+    "char": "'🐜'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HONEYBEE",
+    "cp": "1F41D",
+    "char": "'🐝'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "LADY BEETLE",
+    "cp": "1F41E",
+    "char": "'🐞'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FISH",
+    "cp": "1F41F",
+    "char": "'🐟'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "TROPICAL FISH",
+    "cp": "1F420",
+    "char": "'🐠'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BLOWFISH",
+    "cp": "1F421",
+    "char": "'🐡'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "TURTLE",
+    "cp": "1F422",
+    "char": "'🐢'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HATCHING CHICK",
+    "cp": "1F423",
+    "char": "'🐣'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BABY CHICK",
+    "cp": "1F424",
+    "char": "'🐤'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FRONT-FACING BABY CHICK",
+    "cp": "1F425",
+    "char": "'🐥'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BIRD",
+    "cp": "1F426",
+    "char": "'🐦'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PENGUIN",
+    "cp": "1F427",
+    "char": "'🐧'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "KOALA",
+    "cp": "1F428",
+    "char": "'🐨'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "POODLE",
+    "cp": "1F429",
+    "char": "'🐩'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DROMEDARY CAMEL",
+    "cp": "1F42A",
+    "char": "'🐪'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BACTRIAN CAMEL",
+    "cp": "1F42B",
+    "char": "'🐫'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DOLPHIN",
+    "cp": "1F42C",
+    "char": "'🐬'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MOUSE FACE",
+    "cp": "1F42D",
+    "char": "'🐭'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "COW FACE",
+    "cp": "1F42E",
+    "char": "'🐮'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "TIGER FACE",
+    "cp": "1F42F",
+    "char": "'🐯'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "RABBIT FACE",
+    "cp": "1F430",
+    "char": "'🐰'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CAT FACE",
+    "cp": "1F431",
+    "char": "'🐱'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DRAGON FACE",
+    "cp": "1F432",
+    "char": "'🐲'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SPOUTING WHALE",
+    "cp": "1F433",
+    "char": "'🐳'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HORSE FACE",
+    "cp": "1F434",
+    "char": "'🐴'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "MONKEY FACE",
+    "cp": "1F435",
+    "char": "'🐵'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DOG FACE",
+    "cp": "1F436",
+    "char": "'🐶'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PIG FACE",
+    "cp": "1F437",
+    "char": "'🐷'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FROG FACE",
+    "cp": "1F438",
+    "char": "'🐸'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HAMSTER FACE",
+    "cp": "1F439",
+    "char": "'🐹'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "WOLF FACE",
+    "cp": "1F43A",
+    "char": "'🐺'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BEAR FACE",
+    "cp": "1F43B",
+    "char": "'🐻'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PANDA FACE",
+    "cp": "1F43C",
+    "char": "'🐼'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PIG NOSE",
+    "cp": "1F43D",
+    "char": "'🐽'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "PAW PRINTS",
+    "cp": "1F43E",
+    "char": "'🐾'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "chipmunk",
+    "cp": "1F43F",
+    "char": "'🐿'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "EYES",
+    "cp": "1F440",
+    "char": "'👀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "eye-in-speech-bubble",
+    "cp": "1F441-FE0F-200D-1F5E8-FE0F",
+    "char": "'👁️‍🗨️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "eye",
+    "cp": "1F441",
+    "char": "'👁'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "EAR",
+    "cp": "1F442",
+    "char": "'👂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NOSE",
+    "cp": "1F443",
+    "char": "'👃'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MOUTH",
+    "cp": "1F444",
+    "char": "'👄'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TONGUE",
+    "cp": "1F445",
+    "char": "'👅'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE UP POINTING BACKHAND INDEX",
+    "cp": "1F446",
+    "char": "'👆'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE DOWN POINTING BACKHAND INDEX",
+    "cp": "1F447",
+    "char": "'👇'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE LEFT POINTING BACKHAND INDEX",
+    "cp": "1F448",
+    "char": "'👈'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE RIGHT POINTING BACKHAND INDEX",
+    "cp": "1F449",
+    "char": "'👉'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FISTED HAND SIGN",
+    "cp": "1F44A",
+    "char": "'👊'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WAVING HAND SIGN",
+    "cp": "1F44B",
+    "char": "'👋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "OK HAND SIGN",
+    "cp": "1F44C",
+    "char": "'👌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "THUMBS UP SIGN",
+    "cp": "1F44D",
+    "char": "'👍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "THUMBS DOWN SIGN",
+    "cp": "1F44E",
+    "char": "'👎'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CLAPPING HANDS SIGN",
+    "cp": "1F44F",
+    "char": "'👏'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "OPEN HANDS SIGN",
+    "cp": "1F450",
+    "char": "'👐'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CROWN",
+    "cp": "1F451",
+    "char": "'👑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMANS HAT",
+    "cp": "1F452",
+    "char": "'👒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "EYEGLASSES",
+    "cp": "1F453",
+    "char": "'👓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NECKTIE",
+    "cp": "1F454",
+    "char": "'👔'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "T-SHIRT",
+    "cp": "1F455",
+    "char": "'👕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "JEANS",
+    "cp": "1F456",
+    "char": "'👖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DRESS",
+    "cp": "1F457",
+    "char": "'👗'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KIMONO",
+    "cp": "1F458",
+    "char": "'👘'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BIKINI",
+    "cp": "1F459",
+    "char": "'👙'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMANS CLOTHES",
+    "cp": "1F45A",
+    "char": "'👚'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PURSE",
+    "cp": "1F45B",
+    "char": "'👛'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HANDBAG",
+    "cp": "1F45C",
+    "char": "'👜'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "POUCH",
+    "cp": "1F45D",
+    "char": "'👝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MANS SHOE",
+    "cp": "1F45E",
+    "char": "'👞'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ATHLETIC SHOE",
+    "cp": "1F45F",
+    "char": "'👟'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HIGH-HEELED SHOE",
+    "cp": "1F460",
+    "char": "'👠'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMANS SANDAL",
+    "cp": "1F461",
+    "char": "'👡'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMANS BOOTS",
+    "cp": "1F462",
+    "char": "'👢'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FOOTPRINTS",
+    "cp": "1F463",
+    "char": "'👣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BUST IN SILHOUETTE",
+    "cp": "1F464",
+    "char": "'👤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BUSTS IN SILHOUETTE",
+    "cp": "1F465",
+    "char": "'👥'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BOY",
+    "cp": "1F466",
+    "char": "'👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GIRL",
+    "cp": "1F467",
+    "char": "'👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-farmer",
+    "cp": "1F468-200D-1F33E",
+    "char": "'👨‍🌾'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-cook",
+    "cp": "1F468-200D-1F373",
+    "char": "'👨‍🍳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-student",
+    "cp": "1F468-200D-1F393",
+    "char": "'👨‍🎓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-singer",
+    "cp": "1F468-200D-1F3A4",
+    "char": "'👨‍🎤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-artist",
+    "cp": "1F468-200D-1F3A8",
+    "char": "'👨‍🎨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-teacher",
+    "cp": "1F468-200D-1F3EB",
+    "char": "'👨‍🏫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-factory-worker",
+    "cp": "1F468-200D-1F3ED",
+    "char": "'👨‍🏭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-boy-boy",
+    "cp": "1F468-200D-1F466-200D-1F466",
+    "char": "'👨‍👦‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-boy",
+    "cp": "1F468-200D-1F466",
+    "char": "'👨‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-girl-boy",
+    "cp": "1F468-200D-1F467-200D-1F466",
+    "char": "'👨‍👧‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-girl-girl",
+    "cp": "1F468-200D-1F467-200D-1F467",
+    "char": "'👨‍👧‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-girl",
+    "cp": "1F468-200D-1F467",
+    "char": "'👨‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-man-boy",
+    "cp": "1F468-200D-1F468-200D-1F466",
+    "char": "'👨‍👨‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-man-boy-boy",
+    "cp": "1F468-200D-1F468-200D-1F466-200D-1F466",
+    "char": "'👨‍👨‍👦‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-man-girl",
+    "cp": "1F468-200D-1F468-200D-1F467",
+    "char": "'👨‍👨‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-man-girl-boy",
+    "cp": "1F468-200D-1F468-200D-1F467-200D-1F466",
+    "char": "'👨‍👨‍👧‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-man-girl-girl",
+    "cp": "1F468-200D-1F468-200D-1F467-200D-1F467",
+    "char": "'👨‍👨‍👧‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-woman-boy",
+    "cp": "1F468-200D-1F469-200D-1F466",
+    "char": "'👨‍👩‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-woman-boy-boy",
+    "cp": "1F468-200D-1F469-200D-1F466-200D-1F466",
+    "char": "'👨‍👩‍👦‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-woman-girl",
+    "cp": "1F468-200D-1F469-200D-1F467",
+    "char": "'👨‍👩‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-woman-girl-boy",
+    "cp": "1F468-200D-1F469-200D-1F467-200D-1F466",
+    "char": "'👨‍👩‍👧‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-woman-girl-girl",
+    "cp": "1F468-200D-1F469-200D-1F467-200D-1F467",
+    "char": "'👨‍👩‍👧‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-technologist",
+    "cp": "1F468-200D-1F4BB",
+    "char": "'👨‍💻'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-office-worker",
+    "cp": "1F468-200D-1F4BC",
+    "char": "'👨‍💼'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-mechanic",
+    "cp": "1F468-200D-1F527",
+    "char": "'👨‍🔧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-scientist",
+    "cp": "1F468-200D-1F52C",
+    "char": "'👨‍🔬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-astronaut",
+    "cp": "1F468-200D-1F680",
+    "char": "'👨‍🚀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-firefighter",
+    "cp": "1F468-200D-1F692",
+    "char": "'👨‍🚒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-doctor",
+    "cp": "1F468-200D-2695",
+    "char": "'👨‍⚕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-judge",
+    "cp": "1F468-200D-2696",
+    "char": "'👨‍⚖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-pilot",
+    "cp": "1F468-200D-2708",
+    "char": "'👨‍✈'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-heart-man",
+    "cp": "1F468-200D-2764-200D-1F468",
+    "char": "'👨‍❤‍👨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-kiss-man",
+    "cp": "1F468-200D-2764-200D-1F48B-200D-1F468",
+    "char": "'👨‍❤‍💋‍👨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAN",
+    "cp": "1F468",
+    "char": "'👨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-farmer",
+    "cp": "1F469-200D-1F33E",
+    "char": "'👩‍🌾'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-cook",
+    "cp": "1F469-200D-1F373",
+    "char": "'👩‍🍳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-student",
+    "cp": "1F469-200D-1F393",
+    "char": "'👩‍🎓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-singer",
+    "cp": "1F469-200D-1F3A4",
+    "char": "'👩‍🎤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-artist",
+    "cp": "1F469-200D-1F3A8",
+    "char": "'👩‍🎨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-teacher",
+    "cp": "1F469-200D-1F3EB",
+    "char": "'👩‍🏫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-factory-worker",
+    "cp": "1F469-200D-1F3ED",
+    "char": "'👩‍🏭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-boy-boy",
+    "cp": "1F469-200D-1F466-200D-1F466",
+    "char": "'👩‍👦‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-boy",
+    "cp": "1F469-200D-1F466",
+    "char": "'👩‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-girl-boy",
+    "cp": "1F469-200D-1F467-200D-1F466",
+    "char": "'👩‍👧‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-girl-girl",
+    "cp": "1F469-200D-1F467-200D-1F467",
+    "char": "'👩‍👧‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-girl",
+    "cp": "1F469-200D-1F467",
+    "char": "'👩‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-woman-boy",
+    "cp": "1F469-200D-1F469-200D-1F466",
+    "char": "'👩‍👩‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-woman-boy-boy",
+    "cp": "1F469-200D-1F469-200D-1F466-200D-1F466",
+    "char": "'👩‍👩‍👦‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-woman-girl",
+    "cp": "1F469-200D-1F469-200D-1F467",
+    "char": "'👩‍👩‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-woman-girl-boy",
+    "cp": "1F469-200D-1F469-200D-1F467-200D-1F466",
+    "char": "'👩‍👩‍👧‍👦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-woman-girl-girl",
+    "cp": "1F469-200D-1F469-200D-1F467-200D-1F467",
+    "char": "'👩‍👩‍👧‍👧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-technologist",
+    "cp": "1F469-200D-1F4BB",
+    "char": "'👩‍💻'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-office-worker",
+    "cp": "1F469-200D-1F4BC",
+    "char": "'👩‍💼'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-mechanic",
+    "cp": "1F469-200D-1F527",
+    "char": "'👩‍🔧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-scientist",
+    "cp": "1F469-200D-1F52C",
+    "char": "'👩‍🔬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-astronaut",
+    "cp": "1F469-200D-1F680",
+    "char": "'👩‍🚀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-firefighter",
+    "cp": "1F469-200D-1F692",
+    "char": "'👩‍🚒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-doctor",
+    "cp": "1F469-200D-2695",
+    "char": "'👩‍⚕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-judge",
+    "cp": "1F469-200D-2696",
+    "char": "'👩‍⚖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-pilot",
+    "cp": "1F469-200D-2708",
+    "char": "'👩‍✈'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-heart-man",
+    "cp": "1F469-200D-2764-200D-1F468",
+    "char": "'👩‍❤‍👨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-heart-woman",
+    "cp": "1F469-200D-2764-200D-1F469",
+    "char": "'👩‍❤‍👩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-kiss-man",
+    "cp": "1F469-200D-2764-200D-1F48B-200D-1F468",
+    "char": "'👩‍❤‍💋‍👨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-kiss-woman",
+    "cp": "1F469-200D-2764-200D-1F48B-200D-1F469",
+    "char": "'👩‍❤‍💋‍👩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMAN",
+    "cp": "1F469",
+    "char": "'👩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FAMILY",
+    "cp": "1F46A",
+    "char": "'👪'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAN AND WOMAN HOLDING HANDS",
+    "cp": "1F46B",
+    "char": "'👫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TWO MEN HOLDING HANDS",
+    "cp": "1F46C",
+    "char": "'👬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TWO WOMEN HOLDING HANDS",
+    "cp": "1F46D",
+    "char": "'👭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-police-officer",
+    "cp": "1F46E-200D-2640",
+    "char": "'👮‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-police-officer",
+    "cp": "1F46E-200D-2642",
+    "char": "'👮‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "POLICE OFFICER",
+    "cp": "1F46E",
+    "char": "'👮'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-with-bunny-ears-partying",
+    "cp": "1F46F-200D-2640",
+    "char": "'👯‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-with-bunny-ears-partying",
+    "cp": "1F46F-200D-2642",
+    "char": "'👯‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WOMAN WITH BUNNY EARS",
+    "cp": "1F46F",
+    "char": "'👯'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BRIDE WITH VEIL",
+    "cp": "1F470",
+    "char": "'👰'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "blond-haired-woman",
+    "cp": "1F471-200D-2640",
+    "char": "'👱‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "blond-haired-man",
+    "cp": "1F471-200D-2642",
+    "char": "'👱‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON WITH BLOND HAIR",
+    "cp": "1F471",
+    "char": "'👱'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAN WITH GUA PI MAO",
+    "cp": "1F472",
+    "char": "'👲'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-wearing-turban",
+    "cp": "1F473-200D-2640",
+    "char": "'👳‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-wearing-turban",
+    "cp": "1F473-200D-2642",
+    "char": "'👳‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAN WITH TURBAN",
+    "cp": "1F473",
+    "char": "'👳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "OLDER MAN",
+    "cp": "1F474",
+    "char": "'👴'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "OLDER WOMAN",
+    "cp": "1F475",
+    "char": "'👵'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BABY",
+    "cp": "1F476",
+    "char": "'👶'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-construction-worker",
+    "cp": "1F477-200D-2640",
+    "char": "'👷‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-construction-worker",
+    "cp": "1F477-200D-2642",
+    "char": "'👷‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CONSTRUCTION WORKER",
+    "cp": "1F477",
+    "char": "'👷'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PRINCESS",
+    "cp": "1F478",
+    "char": "'👸'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "JAPANESE OGRE",
+    "cp": "1F479",
+    "char": "'👹'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "JAPANESE GOBLIN",
+    "cp": "1F47A",
+    "char": "'👺'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GHOST",
+    "cp": "1F47B",
+    "char": "'👻'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BABY ANGEL",
+    "cp": "1F47C",
+    "char": "'👼'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "EXTRATERRESTRIAL ALIEN",
+    "cp": "1F47D",
+    "char": "'👽'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ALIEN MONSTER",
+    "cp": "1F47E",
+    "char": "'👾'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "IMP",
+    "cp": "1F47F",
+    "char": "'👿'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SKULL",
+    "cp": "1F480",
+    "char": "'💀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-tipping-hand",
+    "cp": "1F481-200D-2640",
+    "char": "'💁‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-tipping-hand",
+    "cp": "1F481-200D-2642",
+    "char": "'💁‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "INFORMATION DESK PERSON",
+    "cp": "1F481",
+    "char": "'💁'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-guard",
+    "cp": "1F482-200D-2640",
+    "char": "'💂‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-guard",
+    "cp": "1F482-200D-2642",
+    "char": "'💂‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GUARDSMAN",
+    "cp": "1F482",
+    "char": "'💂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DANCER",
+    "cp": "1F483",
+    "char": "'💃'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "LIPSTICK",
+    "cp": "1F484",
+    "char": "'💄'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NAIL POLISH",
+    "cp": "1F485",
+    "char": "'💅'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-getting-massage",
+    "cp": "1F486-200D-2640",
+    "char": "'💆‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-getting-massage",
+    "cp": "1F486-200D-2642",
+    "char": "'💆‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE MASSAGE",
+    "cp": "1F486",
+    "char": "'💆'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-getting-haircut",
+    "cp": "1F487-200D-2640",
+    "char": "'💇‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-getting-haircut",
+    "cp": "1F487-200D-2642",
+    "char": "'💇‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HAIRCUT",
+    "cp": "1F487",
+    "char": "'💇'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BARBER POLE",
+    "cp": "1F488",
+    "char": "'💈'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SYRINGE",
+    "cp": "1F489",
+    "char": "'💉'",
+    "category": "Objects"
+  },
+  {
+    "name": "PILL",
+    "cp": "1F48A",
+    "char": "'💊'",
+    "category": "Objects"
+  },
+  {
+    "name": "KISS MARK",
+    "cp": "1F48B",
+    "char": "'💋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "LOVE LETTER",
+    "cp": "1F48C",
+    "char": "'💌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RING",
+    "cp": "1F48D",
+    "char": "'💍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GEM STONE",
+    "cp": "1F48E",
+    "char": "'💎'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KISS",
+    "cp": "1F48F",
+    "char": "'💏'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BOUQUET",
+    "cp": "1F490",
+    "char": "'💐'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "COUPLE WITH HEART",
+    "cp": "1F491",
+    "char": "'💑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WEDDING",
+    "cp": "1F492",
+    "char": "'💒'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BEATING HEART",
+    "cp": "1F493",
+    "char": "'💓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BROKEN HEART",
+    "cp": "1F494",
+    "char": "'💔'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TWO HEARTS",
+    "cp": "1F495",
+    "char": "'💕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPARKLING HEART",
+    "cp": "1F496",
+    "char": "'💖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GROWING HEART",
+    "cp": "1F497",
+    "char": "'💗'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEART WITH ARROW",
+    "cp": "1F498",
+    "char": "'💘'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BLUE HEART",
+    "cp": "1F499",
+    "char": "'💙'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GREEN HEART",
+    "cp": "1F49A",
+    "char": "'💚'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "YELLOW HEART",
+    "cp": "1F49B",
+    "char": "'💛'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PURPLE HEART",
+    "cp": "1F49C",
+    "char": "'💜'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEART WITH RIBBON",
+    "cp": "1F49D",
+    "char": "'💝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "REVOLVING HEARTS",
+    "cp": "1F49E",
+    "char": "'💞'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEART DECORATION",
+    "cp": "1F49F",
+    "char": "'💟'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DIAMOND SHAPE WITH A DOT INSIDE",
+    "cp": "1F4A0",
+    "char": "'💠'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ELECTRIC LIGHT BULB",
+    "cp": "1F4A1",
+    "char": "'💡'",
+    "category": "Objects"
+  },
+  {
+    "name": "ANGER SYMBOL",
+    "cp": "1F4A2",
+    "char": "'💢'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BOMB",
+    "cp": "1F4A3",
+    "char": "'💣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SLEEPING SYMBOL",
+    "cp": "1F4A4",
+    "char": "'💤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "COLLISION SYMBOL",
+    "cp": "1F4A5",
+    "char": "'💥'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPLASHING SWEAT SYMBOL",
+    "cp": "1F4A6",
+    "char": "'💦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DROPLET",
+    "cp": "1F4A7",
+    "char": "'💧'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "DASH SYMBOL",
+    "cp": "1F4A8",
+    "char": "'💨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PILE OF POO",
+    "cp": "1F4A9",
+    "char": "'💩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FLEXED BICEPS",
+    "cp": "1F4AA",
+    "char": "'💪'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DIZZY SYMBOL",
+    "cp": "1F4AB",
+    "char": "'💫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPEECH BALLOON",
+    "cp": "1F4AC",
+    "char": "'💬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "THOUGHT BALLOON",
+    "cp": "1F4AD",
+    "char": "'💭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE FLOWER",
+    "cp": "1F4AE",
+    "char": "'💮'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HUNDRED POINTS SYMBOL",
+    "cp": "1F4AF",
+    "char": "'💯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "MONEY BAG",
+    "cp": "1F4B0",
+    "char": "'💰'",
+    "category": "Objects"
+  },
+  {
+    "name": "CURRENCY EXCHANGE",
+    "cp": "1F4B1",
+    "char": "'💱'",
+    "category": "Objects"
+  },
+  {
+    "name": "HEAVY DOLLAR SIGN",
+    "cp": "1F4B2",
+    "char": "'💲'",
+    "category": "Objects"
+  },
+  {
+    "name": "CREDIT CARD",
+    "cp": "1F4B3",
+    "char": "'💳'",
+    "category": "Objects"
+  },
+  {
+    "name": "BANKNOTE WITH YEN SIGN",
+    "cp": "1F4B4",
+    "char": "'💴'",
+    "category": "Objects"
+  },
+  {
+    "name": "BANKNOTE WITH DOLLAR SIGN",
+    "cp": "1F4B5",
+    "char": "'💵'",
+    "category": "Objects"
+  },
+  {
+    "name": "BANKNOTE WITH EURO SIGN",
+    "cp": "1F4B6",
+    "char": "'💶'",
+    "category": "Objects"
+  },
+  {
+    "name": "BANKNOTE WITH POUND SIGN",
+    "cp": "1F4B7",
+    "char": "'💷'",
+    "category": "Objects"
+  },
+  {
+    "name": "MONEY WITH WINGS",
+    "cp": "1F4B8",
+    "char": "'💸'",
+    "category": "Objects"
+  },
+  {
+    "name": "CHART WITH UPWARDS TREND AND YEN SIGN",
+    "cp": "1F4B9",
+    "char": "'💹'",
+    "category": "Objects"
+  },
+  {
+    "name": "SEAT",
+    "cp": "1F4BA",
+    "char": "'💺'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "PERSONAL COMPUTER",
+    "cp": "1F4BB",
+    "char": "'💻'",
+    "category": "Objects"
+  },
+  {
+    "name": "BRIEFCASE",
+    "cp": "1F4BC",
+    "char": "'💼'",
+    "category": "Objects"
+  },
+  {
+    "name": "MINIDISC",
+    "cp": "1F4BD",
+    "char": "'💽'",
+    "category": "Objects"
+  },
+  {
+    "name": "FLOPPY DISK",
+    "cp": "1F4BE",
+    "char": "'💾'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPTICAL DISC",
+    "cp": "1F4BF",
+    "char": "'💿'",
+    "category": "Objects"
+  },
+  {
+    "name": "DVD",
+    "cp": "1F4C0",
+    "char": "'📀'",
+    "category": "Objects"
+  },
+  {
+    "name": "FILE FOLDER",
+    "cp": "1F4C1",
+    "char": "'📁'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPEN FILE FOLDER",
+    "cp": "1F4C2",
+    "char": "'📂'",
+    "category": "Objects"
+  },
+  {
+    "name": "PAGE WITH CURL",
+    "cp": "1F4C3",
+    "char": "'📃'",
+    "category": "Objects"
+  },
+  {
+    "name": "PAGE FACING UP",
+    "cp": "1F4C4",
+    "char": "'📄'",
+    "category": "Objects"
+  },
+  {
+    "name": "CALENDAR",
+    "cp": "1F4C5",
+    "char": "'📅'",
+    "category": "Objects"
+  },
+  {
+    "name": "TEAR-OFF CALENDAR",
+    "cp": "1F4C6",
+    "char": "'📆'",
+    "category": "Objects"
+  },
+  {
+    "name": "CARD INDEX",
+    "cp": "1F4C7",
+    "char": "'📇'",
+    "category": "Objects"
+  },
+  {
+    "name": "CHART WITH UPWARDS TREND",
+    "cp": "1F4C8",
+    "char": "'📈'",
+    "category": "Objects"
+  },
+  {
+    "name": "CHART WITH DOWNWARDS TREND",
+    "cp": "1F4C9",
+    "char": "'📉'",
+    "category": "Objects"
+  },
+  {
+    "name": "BAR CHART",
+    "cp": "1F4CA",
+    "char": "'📊'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLIPBOARD",
+    "cp": "1F4CB",
+    "char": "'📋'",
+    "category": "Objects"
+  },
+  {
+    "name": "PUSHPIN",
+    "cp": "1F4CC",
+    "char": "'📌'",
+    "category": "Objects"
+  },
+  {
+    "name": "ROUND PUSHPIN",
+    "cp": "1F4CD",
+    "char": "'📍'",
+    "category": "Objects"
+  },
+  {
+    "name": "PAPERCLIP",
+    "cp": "1F4CE",
+    "char": "'📎'",
+    "category": "Objects"
+  },
+  {
+    "name": "STRAIGHT RULER",
+    "cp": "1F4CF",
+    "char": "'📏'",
+    "category": "Objects"
+  },
+  {
+    "name": "TRIANGULAR RULER",
+    "cp": "1F4D0",
+    "char": "'📐'",
+    "category": "Objects"
+  },
+  {
+    "name": "BOOKMARK TABS",
+    "cp": "1F4D1",
+    "char": "'📑'",
+    "category": "Objects"
+  },
+  {
+    "name": "LEDGER",
+    "cp": "1F4D2",
+    "char": "'📒'",
+    "category": "Objects"
+  },
+  {
+    "name": "NOTEBOOK",
+    "cp": "1F4D3",
+    "char": "'📓'",
+    "category": "Objects"
+  },
+  {
+    "name": "NOTEBOOK WITH DECORATIVE COVER",
+    "cp": "1F4D4",
+    "char": "'📔'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLOSED BOOK",
+    "cp": "1F4D5",
+    "char": "'📕'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPEN BOOK",
+    "cp": "1F4D6",
+    "char": "'📖'",
+    "category": "Objects"
+  },
+  {
+    "name": "GREEN BOOK",
+    "cp": "1F4D7",
+    "char": "'📗'",
+    "category": "Objects"
+  },
+  {
+    "name": "BLUE BOOK",
+    "cp": "1F4D8",
+    "char": "'📘'",
+    "category": "Objects"
+  },
+  {
+    "name": "ORANGE BOOK",
+    "cp": "1F4D9",
+    "char": "'📙'",
+    "category": "Objects"
+  },
+  {
+    "name": "BOOKS",
+    "cp": "1F4DA",
+    "char": "'📚'",
+    "category": "Objects"
+  },
+  {
+    "name": "NAME BADGE",
+    "cp": "1F4DB",
+    "char": "'📛'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SCROLL",
+    "cp": "1F4DC",
+    "char": "'📜'",
+    "category": "Objects"
+  },
+  {
+    "name": "MEMO",
+    "cp": "1F4DD",
+    "char": "'📝'",
+    "category": "Objects"
+  },
+  {
+    "name": "TELEPHONE RECEIVER",
+    "cp": "1F4DE",
+    "char": "'📞'",
+    "category": "Objects"
+  },
+  {
+    "name": "PAGER",
+    "cp": "1F4DF",
+    "char": "'📟'",
+    "category": "Objects"
+  },
+  {
+    "name": "FAX MACHINE",
+    "cp": "1F4E0",
+    "char": "'📠'",
+    "category": "Objects"
+  },
+  {
+    "name": "SATELLITE ANTENNA",
+    "cp": "1F4E1",
+    "char": "'📡'",
+    "category": "Objects"
+  },
+  {
+    "name": "PUBLIC ADDRESS LOUDSPEAKER",
+    "cp": "1F4E2",
+    "char": "'📢'",
+    "category": "Objects"
+  },
+  {
+    "name": "CHEERING MEGAPHONE",
+    "cp": "1F4E3",
+    "char": "'📣'",
+    "category": "Objects"
+  },
+  {
+    "name": "OUTBOX TRAY",
+    "cp": "1F4E4",
+    "char": "'📤'",
+    "category": "Objects"
+  },
+  {
+    "name": "INBOX TRAY",
+    "cp": "1F4E5",
+    "char": "'📥'",
+    "category": "Objects"
+  },
+  {
+    "name": "PACKAGE",
+    "cp": "1F4E6",
+    "char": "'📦'",
+    "category": "Objects"
+  },
+  {
+    "name": "E-MAIL SYMBOL",
+    "cp": "1F4E7",
+    "char": "'📧'",
+    "category": "Objects"
+  },
+  {
+    "name": "INCOMING ENVELOPE",
+    "cp": "1F4E8",
+    "char": "'📨'",
+    "category": "Objects"
+  },
+  {
+    "name": "ENVELOPE WITH DOWNWARDS ARROW ABOVE",
+    "cp": "1F4E9",
+    "char": "'📩'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLOSED MAILBOX WITH LOWERED FLAG",
+    "cp": "1F4EA",
+    "char": "'📪'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLOSED MAILBOX WITH RAISED FLAG",
+    "cp": "1F4EB",
+    "char": "'📫'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPEN MAILBOX WITH RAISED FLAG",
+    "cp": "1F4EC",
+    "char": "'📬'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPEN MAILBOX WITH LOWERED FLAG",
+    "cp": "1F4ED",
+    "char": "'📭'",
+    "category": "Objects"
+  },
+  {
+    "name": "POSTBOX",
+    "cp": "1F4EE",
+    "char": "'📮'",
+    "category": "Objects"
+  },
+  {
+    "name": "POSTAL HORN",
+    "cp": "1F4EF",
+    "char": "'📯'",
+    "category": "Objects"
+  },
+  {
+    "name": "NEWSPAPER",
+    "cp": "1F4F0",
+    "char": "'📰'",
+    "category": "Objects"
+  },
+  {
+    "name": "MOBILE PHONE",
+    "cp": "1F4F1",
+    "char": "'📱'",
+    "category": "Objects"
+  },
+  {
+    "name": "MOBILE PHONE WITH RIGHTWARDS ARROW AT LEFT",
+    "cp": "1F4F2",
+    "char": "'📲'",
+    "category": "Objects"
+  },
+  {
+    "name": "VIBRATION MODE",
+    "cp": "1F4F3",
+    "char": "'📳'",
+    "category": "Symbols"
+  },
+  {
+    "name": "MOBILE PHONE OFF",
+    "cp": "1F4F4",
+    "char": "'📴'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NO MOBILE PHONES",
+    "cp": "1F4F5",
+    "char": "'📵'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ANTENNA WITH BARS",
+    "cp": "1F4F6",
+    "char": "'📶'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CAMERA",
+    "cp": "1F4F7",
+    "char": "'📷'",
+    "category": "Objects"
+  },
+  {
+    "name": "CAMERA WITH FLASH",
+    "cp": "1F4F8",
+    "char": "'📸'",
+    "category": "Objects"
+  },
+  {
+    "name": "VIDEO CAMERA",
+    "cp": "1F4F9",
+    "char": "'📹'",
+    "category": "Objects"
+  },
+  {
+    "name": "TELEVISION",
+    "cp": "1F4FA",
+    "char": "'📺'",
+    "category": "Objects"
+  },
+  {
+    "name": "RADIO",
+    "cp": "1F4FB",
+    "char": "'📻'",
+    "category": "Objects"
+  },
+  {
+    "name": "VIDEOCASSETTE",
+    "cp": "1F4FC",
+    "char": "'📼'",
+    "category": "Objects"
+  },
+  {
+    "name": "film_projector",
+    "cp": "1F4FD",
+    "char": "'📽'",
+    "category": "Objects"
+  },
+  {
+    "name": "PRAYER BEADS",
+    "cp": "1F4FF",
+    "char": "'📿'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TWISTED RIGHTWARDS ARROWS",
+    "cp": "1F500",
+    "char": "'🔀'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS",
+    "cp": "1F501",
+    "char": "'🔁'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CLOCKWISE RIGHTWARDS AND LEFTWARDS OPEN CIRCLE ARROWS WITH CIRCLED ONE OVERLAY",
+    "cp": "1F502",
+    "char": "'🔂'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS",
+    "cp": "1F503",
+    "char": "'🔃'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS",
+    "cp": "1F504",
+    "char": "'🔄'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LOW BRIGHTNESS SYMBOL",
+    "cp": "1F505",
+    "char": "'🔅'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HIGH BRIGHTNESS SYMBOL",
+    "cp": "1F506",
+    "char": "'🔆'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SPEAKER WITH CANCELLATION STROKE",
+    "cp": "1F507",
+    "char": "'🔇'",
+    "category": "Objects"
+  },
+  {
+    "name": "SPEAKER",
+    "cp": "1F508",
+    "char": "'🔈'",
+    "category": "Objects"
+  },
+  {
+    "name": "SPEAKER WITH ONE SOUND WAVE",
+    "cp": "1F509",
+    "char": "'🔉'",
+    "category": "Objects"
+  },
+  {
+    "name": "SPEAKER WITH THREE SOUND WAVES",
+    "cp": "1F50A",
+    "char": "'🔊'",
+    "category": "Objects"
+  },
+  {
+    "name": "BATTERY",
+    "cp": "1F50B",
+    "char": "'🔋'",
+    "category": "Objects"
+  },
+  {
+    "name": "ELECTRIC PLUG",
+    "cp": "1F50C",
+    "char": "'🔌'",
+    "category": "Objects"
+  },
+  {
+    "name": "LEFT-POINTING MAGNIFYING GLASS",
+    "cp": "1F50D",
+    "char": "'🔍'",
+    "category": "Objects"
+  },
+  {
+    "name": "RIGHT-POINTING MAGNIFYING GLASS",
+    "cp": "1F50E",
+    "char": "'🔎'",
+    "category": "Objects"
+  },
+  {
+    "name": "LOCK WITH INK PEN",
+    "cp": "1F50F",
+    "char": "'🔏'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLOSED LOCK WITH KEY",
+    "cp": "1F510",
+    "char": "'🔐'",
+    "category": "Objects"
+  },
+  {
+    "name": "KEY",
+    "cp": "1F511",
+    "char": "'🔑'",
+    "category": "Objects"
+  },
+  {
+    "name": "LOCK",
+    "cp": "1F512",
+    "char": "'🔒'",
+    "category": "Objects"
+  },
+  {
+    "name": "OPEN LOCK",
+    "cp": "1F513",
+    "char": "'🔓'",
+    "category": "Objects"
+  },
+  {
+    "name": "BELL",
+    "cp": "1F514",
+    "char": "'🔔'",
+    "category": "Objects"
+  },
+  {
+    "name": "BELL WITH CANCELLATION STROKE",
+    "cp": "1F515",
+    "char": "'🔕'",
+    "category": "Objects"
+  },
+  {
+    "name": "BOOKMARK",
+    "cp": "1F516",
+    "char": "'🔖'",
+    "category": "Objects"
+  },
+  {
+    "name": "LINK SYMBOL",
+    "cp": "1F517",
+    "char": "'🔗'",
+    "category": "Objects"
+  },
+  {
+    "name": "RADIO BUTTON",
+    "cp": "1F518",
+    "char": "'🔘'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BACK WITH LEFTWARDS ARROW ABOVE",
+    "cp": "1F519",
+    "char": "'🔙'",
+    "category": "Symbols"
+  },
+  {
+    "name": "END WITH LEFTWARDS ARROW ABOVE",
+    "cp": "1F51A",
+    "char": "'🔚'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ON WITH EXCLAMATION MARK WITH LEFT RIGHT ARROW ABOVE",
+    "cp": "1F51B",
+    "char": "'🔛'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SOON WITH RIGHTWARDS ARROW ABOVE",
+    "cp": "1F51C",
+    "char": "'🔜'",
+    "category": "Symbols"
+  },
+  {
+    "name": "TOP WITH UPWARDS ARROW ABOVE",
+    "cp": "1F51D",
+    "char": "'🔝'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NO ONE UNDER EIGHTEEN SYMBOL",
+    "cp": "1F51E",
+    "char": "'🔞'",
+    "category": "Symbols"
+  },
+  {
+    "name": "KEYCAP TEN",
+    "cp": "1F51F",
+    "char": "'🔟'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INPUT SYMBOL FOR LATIN CAPITAL LETTERS",
+    "cp": "1F520",
+    "char": "'🔠'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INPUT SYMBOL FOR LATIN SMALL LETTERS",
+    "cp": "1F521",
+    "char": "'🔡'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INPUT SYMBOL FOR NUMBERS",
+    "cp": "1F522",
+    "char": "'🔢'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INPUT SYMBOL FOR SYMBOLS",
+    "cp": "1F523",
+    "char": "'🔣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INPUT SYMBOL FOR LATIN LETTERS",
+    "cp": "1F524",
+    "char": "'🔤'",
+    "category": "Symbols"
+  },
+  {
+    "name": "FIRE",
+    "cp": "1F525",
+    "char": "'🔥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ELECTRIC TORCH",
+    "cp": "1F526",
+    "char": "'🔦'",
+    "category": "Objects"
+  },
+  {
+    "name": "WRENCH",
+    "cp": "1F527",
+    "char": "'🔧'",
+    "category": "Objects"
+  },
+  {
+    "name": "HAMMER",
+    "cp": "1F528",
+    "char": "'🔨'",
+    "category": "Objects"
+  },
+  {
+    "name": "NUT AND BOLT",
+    "cp": "1F529",
+    "char": "'🔩'",
+    "category": "Objects"
+  },
+  {
+    "name": "HOCHO",
+    "cp": "1F52A",
+    "char": "'🔪'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PISTOL",
+    "cp": "1F52B",
+    "char": "'🔫'",
+    "category": "Objects"
+  },
+  {
+    "name": "MICROSCOPE",
+    "cp": "1F52C",
+    "char": "'🔬'",
+    "category": "Objects"
+  },
+  {
+    "name": "TELESCOPE",
+    "cp": "1F52D",
+    "char": "'🔭'",
+    "category": "Objects"
+  },
+  {
+    "name": "CRYSTAL BALL",
+    "cp": "1F52E",
+    "char": "'🔮'",
+    "category": "Objects"
+  },
+  {
+    "name": "SIX POINTED STAR WITH MIDDLE DOT",
+    "cp": "1F52F",
+    "char": "'🔯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "JAPANESE SYMBOL FOR BEGINNER",
+    "cp": "1F530",
+    "char": "'🔰'",
+    "category": "Symbols"
+  },
+  {
+    "name": "TRIDENT EMBLEM",
+    "cp": "1F531",
+    "char": "'🔱'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK SQUARE BUTTON",
+    "cp": "1F532",
+    "char": "'🔲'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE SQUARE BUTTON",
+    "cp": "1F533",
+    "char": "'🔳'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LARGE RED CIRCLE",
+    "cp": "1F534",
+    "char": "'🔴'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LARGE BLUE CIRCLE",
+    "cp": "1F535",
+    "char": "'🔵'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LARGE ORANGE DIAMOND",
+    "cp": "1F536",
+    "char": "'🔶'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LARGE BLUE DIAMOND",
+    "cp": "1F537",
+    "char": "'🔷'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SMALL ORANGE DIAMOND",
+    "cp": "1F538",
+    "char": "'🔸'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SMALL BLUE DIAMOND",
+    "cp": "1F539",
+    "char": "'🔹'",
+    "category": "Symbols"
+  },
+  {
+    "name": "UP-POINTING RED TRIANGLE",
+    "cp": "1F53A",
+    "char": "'🔺'",
+    "category": "Symbols"
+  },
+  {
+    "name": "DOWN-POINTING RED TRIANGLE",
+    "cp": "1F53B",
+    "char": "'🔻'",
+    "category": "Symbols"
+  },
+  {
+    "name": "UP-POINTING SMALL RED TRIANGLE",
+    "cp": "1F53C",
+    "char": "'🔼'",
+    "category": "Symbols"
+  },
+  {
+    "name": "DOWN-POINTING SMALL RED TRIANGLE",
+    "cp": "1F53D",
+    "char": "'🔽'",
+    "category": "Symbols"
+  },
+  {
+    "name": "om_symbol",
+    "cp": "1F549",
+    "char": "'🕉'",
+    "category": "Symbols"
+  },
+  {
+    "name": "dove_of_peace",
+    "cp": "1F54A",
+    "char": "'🕊'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "KAABA",
+    "cp": "1F54B",
+    "char": "'🕋'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOSQUE",
+    "cp": "1F54C",
+    "char": "'🕌'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SYNAGOGUE",
+    "cp": "1F54D",
+    "char": "'🕍'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MENORAH WITH NINE BRANCHES",
+    "cp": "1F54E",
+    "char": "'🕎'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CLOCK FACE ONE OCLOCK",
+    "cp": "1F550",
+    "char": "'🕐'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TWO OCLOCK",
+    "cp": "1F551",
+    "char": "'🕑'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE THREE OCLOCK",
+    "cp": "1F552",
+    "char": "'🕒'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE FOUR OCLOCK",
+    "cp": "1F553",
+    "char": "'🕓'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE FIVE OCLOCK",
+    "cp": "1F554",
+    "char": "'🕔'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE SIX OCLOCK",
+    "cp": "1F555",
+    "char": "'🕕'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE SEVEN OCLOCK",
+    "cp": "1F556",
+    "char": "'🕖'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE EIGHT OCLOCK",
+    "cp": "1F557",
+    "char": "'🕗'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE NINE OCLOCK",
+    "cp": "1F558",
+    "char": "'🕘'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TEN OCLOCK",
+    "cp": "1F559",
+    "char": "'🕙'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE ELEVEN OCLOCK",
+    "cp": "1F55A",
+    "char": "'🕚'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TWELVE OCLOCK",
+    "cp": "1F55B",
+    "char": "'🕛'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE ONE-THIRTY",
+    "cp": "1F55C",
+    "char": "'🕜'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TWO-THIRTY",
+    "cp": "1F55D",
+    "char": "'🕝'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE THREE-THIRTY",
+    "cp": "1F55E",
+    "char": "'🕞'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE FOUR-THIRTY",
+    "cp": "1F55F",
+    "char": "'🕟'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE FIVE-THIRTY",
+    "cp": "1F560",
+    "char": "'🕠'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE SIX-THIRTY",
+    "cp": "1F561",
+    "char": "'🕡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE SEVEN-THIRTY",
+    "cp": "1F562",
+    "char": "'🕢'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE EIGHT-THIRTY",
+    "cp": "1F563",
+    "char": "'🕣'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE NINE-THIRTY",
+    "cp": "1F564",
+    "char": "'🕤'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TEN-THIRTY",
+    "cp": "1F565",
+    "char": "'🕥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE ELEVEN-THIRTY",
+    "cp": "1F566",
+    "char": "'🕦'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOCK FACE TWELVE-THIRTY",
+    "cp": "1F567",
+    "char": "'🕧'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "candle",
+    "cp": "1F56F",
+    "char": "'🕯'",
+    "category": "Objects"
+  },
+  {
+    "name": "mantelpiece_clock",
+    "cp": "1F570",
+    "char": "'🕰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "hole",
+    "cp": "1F573",
+    "char": "'🕳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man_in_business_suit_levitating",
+    "cp": "1F574",
+    "char": "'🕴'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female-detective",
+    "cp": "1F575-FE0F-200D-2640-FE0F",
+    "char": "'🕵️‍♀️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male-detective",
+    "cp": "1F575-FE0F-200D-2642-FE0F",
+    "char": "'🕵️‍♂️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "sleuth_or_spy",
+    "cp": "1F575",
+    "char": "'🕵'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "dark_sunglasses",
+    "cp": "1F576",
+    "char": "'🕶'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "spider",
+    "cp": "1F577",
+    "char": "'🕷'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "spider_web",
+    "cp": "1F578",
+    "char": "'🕸'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "joystick",
+    "cp": "1F579",
+    "char": "'🕹'",
+    "category": "Activities"
+  },
+  {
+    "name": "MAN DANCING",
+    "cp": "1F57A",
+    "char": "'🕺'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "linked_paperclips",
+    "cp": "1F587",
+    "char": "'🖇'",
+    "category": "Objects"
+  },
+  {
+    "name": "lower_left_ballpoint_pen",
+    "cp": "1F58A",
+    "char": "'🖊'",
+    "category": "Objects"
+  },
+  {
+    "name": "lower_left_fountain_pen",
+    "cp": "1F58B",
+    "char": "'🖋'",
+    "category": "Objects"
+  },
+  {
+    "name": "lower_left_paintbrush",
+    "cp": "1F58C",
+    "char": "'🖌'",
+    "category": "Objects"
+  },
+  {
+    "name": "lower_left_crayon",
+    "cp": "1F58D",
+    "char": "'🖍'",
+    "category": "Objects"
+  },
+  {
+    "name": "raised_hand_with_fingers_splayed",
+    "cp": "1F590",
+    "char": "'🖐'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "REVERSED HAND WITH MIDDLE FINGER EXTENDED",
+    "cp": "1F595",
+    "char": "'🖕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RAISED HAND WITH PART BETWEEN MIDDLE AND RING FINGERS",
+    "cp": "1F596",
+    "char": "'🖖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BLACK HEART",
+    "cp": "1F5A4",
+    "char": "'🖤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "desktop_computer",
+    "cp": "1F5A5",
+    "char": "'🖥'",
+    "category": "Objects"
+  },
+  {
+    "name": "printer",
+    "cp": "1F5A8",
+    "char": "'🖨'",
+    "category": "Objects"
+  },
+  {
+    "name": "three_button_mouse",
+    "cp": "1F5B1",
+    "char": "'🖱'",
+    "category": "Objects"
+  },
+  {
+    "name": "trackball",
+    "cp": "1F5B2",
+    "char": "'🖲'",
+    "category": "Objects"
+  },
+  {
+    "name": "frame_with_picture",
+    "cp": "1F5BC",
+    "char": "'🖼'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "card_index_dividers",
+    "cp": "1F5C2",
+    "char": "'🗂'",
+    "category": "Objects"
+  },
+  {
+    "name": "card_file_box",
+    "cp": "1F5C3",
+    "char": "'🗃'",
+    "category": "Objects"
+  },
+  {
+    "name": "file_cabinet",
+    "cp": "1F5C4",
+    "char": "'🗄'",
+    "category": "Objects"
+  },
+  {
+    "name": "wastebasket",
+    "cp": "1F5D1",
+    "char": "'🗑'",
+    "category": "Objects"
+  },
+  {
+    "name": "spiral_note_pad",
+    "cp": "1F5D2",
+    "char": "'🗒'",
+    "category": "Objects"
+  },
+  {
+    "name": "spiral_calendar_pad",
+    "cp": "1F5D3",
+    "char": "'🗓'",
+    "category": "Objects"
+  },
+  {
+    "name": "compression",
+    "cp": "1F5DC",
+    "char": "'🗜'",
+    "category": "Objects"
+  },
+  {
+    "name": "old_key",
+    "cp": "1F5DD",
+    "char": "'🗝'",
+    "category": "Objects"
+  },
+  {
+    "name": "rolled_up_newspaper",
+    "cp": "1F5DE",
+    "char": "'🗞'",
+    "category": "Objects"
+  },
+  {
+    "name": "dagger_knife",
+    "cp": "1F5E1",
+    "char": "'🗡'",
+    "category": "Objects"
+  },
+  {
+    "name": "speaking_head_in_silhouette",
+    "cp": "1F5E3",
+    "char": "'🗣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "left_speech_bubble",
+    "cp": "1F5E8",
+    "char": "'🗨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "right_anger_bubble",
+    "cp": "1F5EF",
+    "char": "'🗯'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ballot_box_with_ballot",
+    "cp": "1F5F3",
+    "char": "'🗳'",
+    "category": "Objects"
+  },
+  {
+    "name": "world_map",
+    "cp": "1F5FA",
+    "char": "'🗺'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOUNT FUJI",
+    "cp": "1F5FB",
+    "char": "'🗻'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TOKYO TOWER",
+    "cp": "1F5FC",
+    "char": "'🗼'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "STATUE OF LIBERTY",
+    "cp": "1F5FD",
+    "char": "'🗽'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SILHOUETTE OF JAPAN",
+    "cp": "1F5FE",
+    "char": "'🗾'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOYAI",
+    "cp": "1F5FF",
+    "char": "'🗿'",
+    "category": "Objects"
+  },
+  {
+    "name": "GRINNING FACE",
+    "cp": "1F600",
+    "char": "'😀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRINNING FACE WITH SMILING EYES",
+    "cp": "1F601",
+    "char": "'😁'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH TEARS OF JOY",
+    "cp": "1F602",
+    "char": "'😂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH OPEN MOUTH",
+    "cp": "1F603",
+    "char": "'😃'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH OPEN MOUTH AND SMILING EYES",
+    "cp": "1F604",
+    "char": "'😄'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH OPEN MOUTH AND COLD SWEAT",
+    "cp": "1F605",
+    "char": "'😅'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES",
+    "cp": "1F606",
+    "char": "'😆'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH HALO",
+    "cp": "1F607",
+    "char": "'😇'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH HORNS",
+    "cp": "1F608",
+    "char": "'😈'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WINKING FACE",
+    "cp": "1F609",
+    "char": "'😉'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH SMILING EYES",
+    "cp": "1F60A",
+    "char": "'😊'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE SAVOURING DELICIOUS FOOD",
+    "cp": "1F60B",
+    "char": "'😋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RELIEVED FACE",
+    "cp": "1F60C",
+    "char": "'😌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH HEART-SHAPED EYES",
+    "cp": "1F60D",
+    "char": "'😍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH SUNGLASSES",
+    "cp": "1F60E",
+    "char": "'😎'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMIRKING FACE",
+    "cp": "1F60F",
+    "char": "'😏'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NEUTRAL FACE",
+    "cp": "1F610",
+    "char": "'😐'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "EXPRESSIONLESS FACE",
+    "cp": "1F611",
+    "char": "'😑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "UNAMUSED FACE",
+    "cp": "1F612",
+    "char": "'😒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH COLD SWEAT",
+    "cp": "1F613",
+    "char": "'😓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PENSIVE FACE",
+    "cp": "1F614",
+    "char": "'😔'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CONFUSED FACE",
+    "cp": "1F615",
+    "char": "'😕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CONFOUNDED FACE",
+    "cp": "1F616",
+    "char": "'😖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KISSING FACE",
+    "cp": "1F617",
+    "char": "'😗'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE THROWING A KISS",
+    "cp": "1F618",
+    "char": "'😘'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KISSING FACE WITH SMILING EYES",
+    "cp": "1F619",
+    "char": "'😙'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KISSING FACE WITH CLOSED EYES",
+    "cp": "1F61A",
+    "char": "'😚'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH STUCK-OUT TONGUE",
+    "cp": "1F61B",
+    "char": "'😛'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH STUCK-OUT TONGUE AND WINKING EYE",
+    "cp": "1F61C",
+    "char": "'😜'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH STUCK-OUT TONGUE AND TIGHTLY-CLOSED EYES",
+    "cp": "1F61D",
+    "char": "'😝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DISAPPOINTED FACE",
+    "cp": "1F61E",
+    "char": "'😞'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WORRIED FACE",
+    "cp": "1F61F",
+    "char": "'😟'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ANGRY FACE",
+    "cp": "1F620",
+    "char": "'😠'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "POUTING FACE",
+    "cp": "1F621",
+    "char": "'😡'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CRYING FACE",
+    "cp": "1F622",
+    "char": "'😢'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSEVERING FACE",
+    "cp": "1F623",
+    "char": "'😣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH LOOK OF TRIUMPH",
+    "cp": "1F624",
+    "char": "'😤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DISAPPOINTED BUT RELIEVED FACE",
+    "cp": "1F625",
+    "char": "'😥'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FROWNING FACE WITH OPEN MOUTH",
+    "cp": "1F626",
+    "char": "'😦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ANGUISHED FACE",
+    "cp": "1F627",
+    "char": "'😧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FEARFUL FACE",
+    "cp": "1F628",
+    "char": "'😨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WEARY FACE",
+    "cp": "1F629",
+    "char": "'😩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SLEEPY FACE",
+    "cp": "1F62A",
+    "char": "'😪'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TIRED FACE",
+    "cp": "1F62B",
+    "char": "'😫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRIMACING FACE",
+    "cp": "1F62C",
+    "char": "'😬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "LOUDLY CRYING FACE",
+    "cp": "1F62D",
+    "char": "'😭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH OPEN MOUTH",
+    "cp": "1F62E",
+    "char": "'😮'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HUSHED FACE",
+    "cp": "1F62F",
+    "char": "'😯'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH OPEN MOUTH AND COLD SWEAT",
+    "cp": "1F630",
+    "char": "'😰'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE SCREAMING IN FEAR",
+    "cp": "1F631",
+    "char": "'😱'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ASTONISHED FACE",
+    "cp": "1F632",
+    "char": "'😲'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FLUSHED FACE",
+    "cp": "1F633",
+    "char": "'😳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SLEEPING FACE",
+    "cp": "1F634",
+    "char": "'😴'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DIZZY FACE",
+    "cp": "1F635",
+    "char": "'😵'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITHOUT MOUTH",
+    "cp": "1F636",
+    "char": "'😶'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH MEDICAL MASK",
+    "cp": "1F637",
+    "char": "'😷'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRINNING CAT FACE WITH SMILING EYES",
+    "cp": "1F638",
+    "char": "'😸'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CAT FACE WITH TEARS OF JOY",
+    "cp": "1F639",
+    "char": "'😹'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING CAT FACE WITH OPEN MOUTH",
+    "cp": "1F63A",
+    "char": "'😺'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING CAT FACE WITH HEART-SHAPED EYES",
+    "cp": "1F63B",
+    "char": "'😻'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CAT FACE WITH WRY SMILE",
+    "cp": "1F63C",
+    "char": "'😼'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "KISSING CAT FACE WITH CLOSED EYES",
+    "cp": "1F63D",
+    "char": "'😽'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "POUTING CAT FACE",
+    "cp": "1F63E",
+    "char": "'😾'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CRYING CAT FACE",
+    "cp": "1F63F",
+    "char": "'😿'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WEARY CAT FACE",
+    "cp": "1F640",
+    "char": "'🙀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SLIGHTLY FROWNING FACE",
+    "cp": "1F641",
+    "char": "'🙁'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SLIGHTLY SMILING FACE",
+    "cp": "1F642",
+    "char": "'🙂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "UPSIDE-DOWN FACE",
+    "cp": "1F643",
+    "char": "'🙃'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH ROLLING EYES",
+    "cp": "1F644",
+    "char": "'🙄'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-gesturing-no",
+    "cp": "1F645-200D-2640",
+    "char": "'🙅‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-gesturing-no",
+    "cp": "1F645-200D-2642",
+    "char": "'🙅‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH NO GOOD GESTURE",
+    "cp": "1F645",
+    "char": "'🙅'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-gesturing-ok",
+    "cp": "1F646-200D-2640",
+    "char": "'🙆‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-gesturing-ok",
+    "cp": "1F646-200D-2642",
+    "char": "'🙆‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH OK GESTURE",
+    "cp": "1F646",
+    "char": "'🙆'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-bowing",
+    "cp": "1F647-200D-2640",
+    "char": "'🙇‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-bowing",
+    "cp": "1F647-200D-2642",
+    "char": "'🙇‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON BOWING DEEPLY",
+    "cp": "1F647",
+    "char": "'🙇'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SEE-NO-EVIL MONKEY",
+    "cp": "1F648",
+    "char": "'🙈'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEAR-NO-EVIL MONKEY",
+    "cp": "1F649",
+    "char": "'🙉'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPEAK-NO-EVIL MONKEY",
+    "cp": "1F64A",
+    "char": "'🙊'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-raising-hand",
+    "cp": "1F64B-200D-2640",
+    "char": "'🙋‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-raising-hand",
+    "cp": "1F64B-200D-2642",
+    "char": "'🙋‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HAPPY PERSON RAISING ONE HAND",
+    "cp": "1F64B",
+    "char": "'🙋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON RAISING BOTH HANDS IN CELEBRATION",
+    "cp": "1F64C",
+    "char": "'🙌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-frowning",
+    "cp": "1F64D-200D-2640",
+    "char": "'🙍‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-frowning",
+    "cp": "1F64D-200D-2642",
+    "char": "'🙍‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON FROWNING",
+    "cp": "1F64D",
+    "char": "'🙍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-pouting",
+    "cp": "1F64E-200D-2640",
+    "char": "'🙎‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-pouting",
+    "cp": "1F64E-200D-2642",
+    "char": "'🙎‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON WITH POUTING FACE",
+    "cp": "1F64E",
+    "char": "'🙎'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON WITH FOLDED HANDS",
+    "cp": "1F64F",
+    "char": "'🙏'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ROCKET",
+    "cp": "1F680",
+    "char": "'🚀'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HELICOPTER",
+    "cp": "1F681",
+    "char": "'🚁'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "STEAM LOCOMOTIVE",
+    "cp": "1F682",
+    "char": "'🚂'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "RAILWAY CAR",
+    "cp": "1F683",
+    "char": "'🚃'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HIGH-SPEED TRAIN",
+    "cp": "1F684",
+    "char": "'🚄'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HIGH-SPEED TRAIN WITH BULLET NOSE",
+    "cp": "1F685",
+    "char": "'🚅'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TRAIN",
+    "cp": "1F686",
+    "char": "'🚆'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "METRO",
+    "cp": "1F687",
+    "char": "'🚇'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "LIGHT RAIL",
+    "cp": "1F688",
+    "char": "'🚈'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "STATION",
+    "cp": "1F689",
+    "char": "'🚉'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TRAM",
+    "cp": "1F68A",
+    "char": "'🚊'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TRAM CAR",
+    "cp": "1F68B",
+    "char": "'🚋'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BUS",
+    "cp": "1F68C",
+    "char": "'🚌'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ONCOMING BUS",
+    "cp": "1F68D",
+    "char": "'🚍'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TROLLEYBUS",
+    "cp": "1F68E",
+    "char": "'🚎'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BUS STOP",
+    "cp": "1F68F",
+    "char": "'🚏'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MINIBUS",
+    "cp": "1F690",
+    "char": "'🚐'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AMBULANCE",
+    "cp": "1F691",
+    "char": "'🚑'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FIRE ENGINE",
+    "cp": "1F692",
+    "char": "'🚒'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "POLICE CAR",
+    "cp": "1F693",
+    "char": "'🚓'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ONCOMING POLICE CAR",
+    "cp": "1F694",
+    "char": "'🚔'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TAXI",
+    "cp": "1F695",
+    "char": "'🚕'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ONCOMING TAXI",
+    "cp": "1F696",
+    "char": "'🚖'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AUTOMOBILE",
+    "cp": "1F697",
+    "char": "'🚗'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ONCOMING AUTOMOBILE",
+    "cp": "1F698",
+    "char": "'🚘'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "RECREATIONAL VEHICLE",
+    "cp": "1F699",
+    "char": "'🚙'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "DELIVERY TRUCK",
+    "cp": "1F69A",
+    "char": "'🚚'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ARTICULATED LORRY",
+    "cp": "1F69B",
+    "char": "'🚛'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TRACTOR",
+    "cp": "1F69C",
+    "char": "'🚜'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MONORAIL",
+    "cp": "1F69D",
+    "char": "'🚝'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOUNTAIN RAILWAY",
+    "cp": "1F69E",
+    "char": "'🚞'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUSPENSION RAILWAY",
+    "cp": "1F69F",
+    "char": "'🚟'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOUNTAIN CABLEWAY",
+    "cp": "1F6A0",
+    "char": "'🚠'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AERIAL TRAMWAY",
+    "cp": "1F6A1",
+    "char": "'🚡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SHIP",
+    "cp": "1F6A2",
+    "char": "'🚢'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "woman-rowing-boat",
+    "cp": "1F6A3-200D-2640",
+    "char": "'🚣‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-rowing-boat",
+    "cp": "1F6A3-200D-2642",
+    "char": "'🚣‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ROWBOAT",
+    "cp": "1F6A3",
+    "char": "'🚣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SPEEDBOAT",
+    "cp": "1F6A4",
+    "char": "'🚤'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HORIZONTAL TRAFFIC LIGHT",
+    "cp": "1F6A5",
+    "char": "'🚥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "VERTICAL TRAFFIC LIGHT",
+    "cp": "1F6A6",
+    "char": "'🚦'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CONSTRUCTION SIGN",
+    "cp": "1F6A7",
+    "char": "'🚧'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "POLICE CARS REVOLVING LIGHT",
+    "cp": "1F6A8",
+    "char": "'🚨'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "TRIANGULAR FLAG ON POST",
+    "cp": "1F6A9",
+    "char": "'🚩'",
+    "category": "Flags"
+  },
+  {
+    "name": "DOOR",
+    "cp": "1F6AA",
+    "char": "'🚪'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "NO ENTRY SIGN",
+    "cp": "1F6AB",
+    "char": "'🚫'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SMOKING SYMBOL",
+    "cp": "1F6AC",
+    "char": "'🚬'",
+    "category": "Objects"
+  },
+  {
+    "name": "NO SMOKING SYMBOL",
+    "cp": "1F6AD",
+    "char": "'🚭'",
+    "category": "Symbols"
+  },
+  {
+    "name": "PUT LITTER IN ITS PLACE SYMBOL",
+    "cp": "1F6AE",
+    "char": "'🚮'",
+    "category": "Symbols"
+  },
+  {
+    "name": "DO NOT LITTER SYMBOL",
+    "cp": "1F6AF",
+    "char": "'🚯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "POTABLE WATER SYMBOL",
+    "cp": "1F6B0",
+    "char": "'🚰'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NON-POTABLE WATER SYMBOL",
+    "cp": "1F6B1",
+    "char": "'🚱'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BICYCLE",
+    "cp": "1F6B2",
+    "char": "'🚲'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "NO BICYCLES",
+    "cp": "1F6B3",
+    "char": "'🚳'",
+    "category": "Symbols"
+  },
+  {
+    "name": "woman-biking",
+    "cp": "1F6B4-200D-2640",
+    "char": "'🚴‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-biking",
+    "cp": "1F6B4-200D-2642",
+    "char": "'🚴‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BICYCLIST",
+    "cp": "1F6B4",
+    "char": "'🚴'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-mountain-biking",
+    "cp": "1F6B5-200D-2640",
+    "char": "'🚵‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-mountain-biking",
+    "cp": "1F6B5-200D-2642",
+    "char": "'🚵‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MOUNTAIN BICYCLIST",
+    "cp": "1F6B5",
+    "char": "'🚵'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-walking",
+    "cp": "1F6B6-200D-2640",
+    "char": "'🚶‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-walking",
+    "cp": "1F6B6-200D-2642",
+    "char": "'🚶‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PEDESTRIAN",
+    "cp": "1F6B6",
+    "char": "'🚶'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NO PEDESTRIANS",
+    "cp": "1F6B7",
+    "char": "'🚷'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CHILDREN CROSSING",
+    "cp": "1F6B8",
+    "char": "'🚸'",
+    "category": "Symbols"
+  },
+  {
+    "name": "MENS SYMBOL",
+    "cp": "1F6B9",
+    "char": "'🚹'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WOMENS SYMBOL",
+    "cp": "1F6BA",
+    "char": "'🚺'",
+    "category": "Symbols"
+  },
+  {
+    "name": "RESTROOM",
+    "cp": "1F6BB",
+    "char": "'🚻'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BABY SYMBOL",
+    "cp": "1F6BC",
+    "char": "'🚼'",
+    "category": "Symbols"
+  },
+  {
+    "name": "TOILET",
+    "cp": "1F6BD",
+    "char": "'🚽'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "WATER CLOSET",
+    "cp": "1F6BE",
+    "char": "'🚾'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SHOWER",
+    "cp": "1F6BF",
+    "char": "'🚿'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BATH",
+    "cp": "1F6C0",
+    "char": "'🛀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BATHTUB",
+    "cp": "1F6C1",
+    "char": "'🛁'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "PASSPORT CONTROL",
+    "cp": "1F6C2",
+    "char": "'🛂'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CUSTOMS",
+    "cp": "1F6C3",
+    "char": "'🛃'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BAGGAGE CLAIM",
+    "cp": "1F6C4",
+    "char": "'🛄'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LEFT LUGGAGE",
+    "cp": "1F6C5",
+    "char": "'🛅'",
+    "category": "Symbols"
+  },
+  {
+    "name": "couch_and_lamp",
+    "cp": "1F6CB",
+    "char": "'🛋'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SLEEPING ACCOMMODATION",
+    "cp": "1F6CC",
+    "char": "'🛌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "shopping_bags",
+    "cp": "1F6CD",
+    "char": "'🛍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "bellhop_bell",
+    "cp": "1F6CE",
+    "char": "'🛎'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "bed",
+    "cp": "1F6CF",
+    "char": "'🛏'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "PLACE OF WORSHIP",
+    "cp": "1F6D0",
+    "char": "'🛐'",
+    "category": "Symbols"
+  },
+  {
+    "name": "OCTAGONAL SIGN",
+    "cp": "1F6D1",
+    "char": "'🛑'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SHOPPING TROLLEY",
+    "cp": "1F6D2",
+    "char": "'🛒'",
+    "category": "Objects"
+  },
+  {
+    "name": "hammer_and_wrench",
+    "cp": "1F6E0",
+    "char": "'🛠'",
+    "category": "Objects"
+  },
+  {
+    "name": "shield",
+    "cp": "1F6E1",
+    "char": "'🛡'",
+    "category": "Objects"
+  },
+  {
+    "name": "oil_drum",
+    "cp": "1F6E2",
+    "char": "'🛢'",
+    "category": "Objects"
+  },
+  {
+    "name": "motorway",
+    "cp": "1F6E3",
+    "char": "'🛣'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "railway_track",
+    "cp": "1F6E4",
+    "char": "'🛤'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "motor_boat",
+    "cp": "1F6E5",
+    "char": "'🛥'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "small_airplane",
+    "cp": "1F6E9",
+    "char": "'🛩'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AIRPLANE DEPARTURE",
+    "cp": "1F6EB",
+    "char": "'🛫'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "AIRPLANE ARRIVING",
+    "cp": "1F6EC",
+    "char": "'🛬'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "satellite",
+    "cp": "1F6F0",
+    "char": "'🛰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "passenger_ship",
+    "cp": "1F6F3",
+    "char": "'🛳'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SCOOTER",
+    "cp": "1F6F4",
+    "char": "'🛴'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MOTOR SCOOTER",
+    "cp": "1F6F5",
+    "char": "'🛵'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CANOE",
+    "cp": "1F6F6",
+    "char": "'🛶'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SLED",
+    "cp": "1F6F7",
+    "char": "'🛷'",
+    "category": "Activities"
+  },
+  {
+    "name": "FLYING SAUCER",
+    "cp": "1F6F8",
+    "char": "'🛸'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ZIPPER-MOUTH FACE",
+    "cp": "1F910",
+    "char": "'🤐'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MONEY-MOUTH FACE",
+    "cp": "1F911",
+    "char": "'🤑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH THERMOMETER",
+    "cp": "1F912",
+    "char": "'🤒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NERD FACE",
+    "cp": "1F913",
+    "char": "'🤓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "THINKING FACE",
+    "cp": "1F914",
+    "char": "'🤔'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH HEAD-BANDAGE",
+    "cp": "1F915",
+    "char": "'🤕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ROBOT FACE",
+    "cp": "1F916",
+    "char": "'🤖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HUGGING FACE",
+    "cp": "1F917",
+    "char": "'🤗'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SIGN OF THE HORNS",
+    "cp": "1F918",
+    "char": "'🤘'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CALL ME HAND",
+    "cp": "1F919",
+    "char": "'🤙'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RAISED BACK OF HAND",
+    "cp": "1F91A",
+    "char": "'🤚'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "LEFT-FACING FIST",
+    "cp": "1F91B",
+    "char": "'🤛'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RIGHT-FACING FIST",
+    "cp": "1F91C",
+    "char": "'🤜'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HANDSHAKE",
+    "cp": "1F91D",
+    "char": "'🤝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HAND WITH INDEX AND MIDDLE FINGERS CROSSED",
+    "cp": "1F91E",
+    "char": "'🤞'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "I LOVE YOU HAND SIGN",
+    "cp": "1F91F",
+    "char": "'🤟'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH COWBOY HAT",
+    "cp": "1F920",
+    "char": "'🤠'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CLOWN FACE",
+    "cp": "1F921",
+    "char": "'🤡'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "NAUSEATED FACE",
+    "cp": "1F922",
+    "char": "'🤢'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ROLLING ON THE FLOOR LAUGHING",
+    "cp": "1F923",
+    "char": "'🤣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DROOLING FACE",
+    "cp": "1F924",
+    "char": "'🤤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "LYING FACE",
+    "cp": "1F925",
+    "char": "'🤥'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-facepalming",
+    "cp": "1F926-200D-2640",
+    "char": "'🤦‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-facepalming",
+    "cp": "1F926-200D-2642",
+    "char": "'🤦‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE PALM",
+    "cp": "1F926",
+    "char": "'🤦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SNEEZING FACE",
+    "cp": "1F927",
+    "char": "'🤧'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH ONE EYEBROW RAISED",
+    "cp": "1F928",
+    "char": "'🤨'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRINNING FACE WITH STAR EYES",
+    "cp": "1F929",
+    "char": "'🤩'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GRINNING FACE WITH ONE LARGE AND ONE SMALL EYE",
+    "cp": "1F92A",
+    "char": "'🤪'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH FINGER COVERING CLOSED LIPS",
+    "cp": "1F92B",
+    "char": "'🤫'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SERIOUS FACE WITH SYMBOLS COVERING MOUTH",
+    "cp": "1F92C",
+    "char": "'🤬'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SMILING FACE WITH SMILING EYES AND HAND COVERING MOUTH",
+    "cp": "1F92D",
+    "char": "'🤭'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FACE WITH OPEN MOUTH VOMITING",
+    "cp": "1F92E",
+    "char": "'🤮'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SHOCKED FACE WITH EXPLODING HEAD",
+    "cp": "1F92F",
+    "char": "'🤯'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PREGNANT WOMAN",
+    "cp": "1F930",
+    "char": "'🤰'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BREAST-FEEDING",
+    "cp": "1F931",
+    "char": "'🤱'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PALMS UP TOGETHER",
+    "cp": "1F932",
+    "char": "'🤲'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SELFIE",
+    "cp": "1F933",
+    "char": "'🤳'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PRINCE",
+    "cp": "1F934",
+    "char": "'🤴'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAN IN TUXEDO",
+    "cp": "1F935",
+    "char": "'🤵'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MOTHER CHRISTMAS",
+    "cp": "1F936",
+    "char": "'🤶'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-shrugging",
+    "cp": "1F937-200D-2640",
+    "char": "'🤷‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-shrugging",
+    "cp": "1F937-200D-2642",
+    "char": "'🤷‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SHRUG",
+    "cp": "1F937",
+    "char": "'🤷'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-cartwheeling",
+    "cp": "1F938-200D-2640",
+    "char": "'🤸‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-cartwheeling",
+    "cp": "1F938-200D-2642",
+    "char": "'🤸‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON DOING CARTWHEEL",
+    "cp": "1F938",
+    "char": "'🤸'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-juggling",
+    "cp": "1F939-200D-2640",
+    "char": "'🤹‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-juggling",
+    "cp": "1F939-200D-2642",
+    "char": "'🤹‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "JUGGLING",
+    "cp": "1F939",
+    "char": "'🤹'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FENCER",
+    "cp": "1F93A",
+    "char": "'🤺'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-wrestling",
+    "cp": "1F93C-200D-2640",
+    "char": "'🤼‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-wrestling",
+    "cp": "1F93C-200D-2642",
+    "char": "'🤼‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WRESTLERS",
+    "cp": "1F93C",
+    "char": "'🤼'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-playing-water-polo",
+    "cp": "1F93D-200D-2640",
+    "char": "'🤽‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-playing-water-polo",
+    "cp": "1F93D-200D-2642",
+    "char": "'🤽‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WATER POLO",
+    "cp": "1F93D",
+    "char": "'🤽'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman-playing-handball",
+    "cp": "1F93E-200D-2640",
+    "char": "'🤾‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-playing-handball",
+    "cp": "1F93E-200D-2642",
+    "char": "'🤾‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HANDBALL",
+    "cp": "1F93E",
+    "char": "'🤾'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WILTED FLOWER",
+    "cp": "1F940",
+    "char": "'🥀'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DRUM WITH DRUMSTICKS",
+    "cp": "1F941",
+    "char": "'🥁'",
+    "category": "Objects"
+  },
+  {
+    "name": "CLINKING GLASSES",
+    "cp": "1F942",
+    "char": "'🥂'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TUMBLER GLASS",
+    "cp": "1F943",
+    "char": "'🥃'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SPOON",
+    "cp": "1F944",
+    "char": "'🥄'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "GOAL NET",
+    "cp": "1F945",
+    "char": "'🥅'",
+    "category": "Activities"
+  },
+  {
+    "name": "FIRST PLACE MEDAL",
+    "cp": "1F947",
+    "char": "'🥇'",
+    "category": "Activities"
+  },
+  {
+    "name": "SECOND PLACE MEDAL",
+    "cp": "1F948",
+    "char": "'🥈'",
+    "category": "Activities"
+  },
+  {
+    "name": "THIRD PLACE MEDAL",
+    "cp": "1F949",
+    "char": "'🥉'",
+    "category": "Activities"
+  },
+  {
+    "name": "BOXING GLOVE",
+    "cp": "1F94A",
+    "char": "'🥊'",
+    "category": "Activities"
+  },
+  {
+    "name": "MARTIAL ARTS UNIFORM",
+    "cp": "1F94B",
+    "char": "'🥋'",
+    "category": "Activities"
+  },
+  {
+    "name": "CURLING STONE",
+    "cp": "1F94C",
+    "char": "'🥌'",
+    "category": "Activities"
+  },
+  {
+    "name": "CROISSANT",
+    "cp": "1F950",
+    "char": "'🥐'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "AVOCADO",
+    "cp": "1F951",
+    "char": "'🥑'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CUCUMBER",
+    "cp": "1F952",
+    "char": "'🥒'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BACON",
+    "cp": "1F953",
+    "char": "'🥓'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "POTATO",
+    "cp": "1F954",
+    "char": "'🥔'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CARROT",
+    "cp": "1F955",
+    "char": "'🥕'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BAGUETTE BREAD",
+    "cp": "1F956",
+    "char": "'🥖'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "GREEN SALAD",
+    "cp": "1F957",
+    "char": "'🥗'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SHALLOW PAN OF FOOD",
+    "cp": "1F958",
+    "char": "'🥘'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "STUFFED FLATBREAD",
+    "cp": "1F959",
+    "char": "'🥙'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "EGG",
+    "cp": "1F95A",
+    "char": "'🥚'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "GLASS OF MILK",
+    "cp": "1F95B",
+    "char": "'🥛'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PEANUTS",
+    "cp": "1F95C",
+    "char": "'🥜'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "KIWIFRUIT",
+    "cp": "1F95D",
+    "char": "'🥝'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PANCAKES",
+    "cp": "1F95E",
+    "char": "'🥞'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "DUMPLING",
+    "cp": "1F95F",
+    "char": "'🥟'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FORTUNE COOKIE",
+    "cp": "1F960",
+    "char": "'🥠'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "TAKEOUT BOX",
+    "cp": "1F961",
+    "char": "'🥡'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CHOPSTICKS",
+    "cp": "1F962",
+    "char": "'🥢'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BOWL WITH SPOON",
+    "cp": "1F963",
+    "char": "'🥣'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CUP WITH STRAW",
+    "cp": "1F964",
+    "char": "'🥤'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "COCONUT",
+    "cp": "1F965",
+    "char": "'🥥'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "BROCCOLI",
+    "cp": "1F966",
+    "char": "'🥦'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PIE",
+    "cp": "1F967",
+    "char": "'🥧'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "PRETZEL",
+    "cp": "1F968",
+    "char": "'🥨'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CUT OF MEAT",
+    "cp": "1F969",
+    "char": "'🥩'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "SANDWICH",
+    "cp": "1F96A",
+    "char": "'🥪'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CANNED FOOD",
+    "cp": "1F96B",
+    "char": "'🥫'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "CRAB",
+    "cp": "1F980",
+    "char": "'🦀'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "LION FACE",
+    "cp": "1F981",
+    "char": "'🦁'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SCORPION",
+    "cp": "1F982",
+    "char": "'🦂'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "TURKEY",
+    "cp": "1F983",
+    "char": "'🦃'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "UNICORN FACE",
+    "cp": "1F984",
+    "char": "'🦄'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "EAGLE",
+    "cp": "1F985",
+    "char": "'🦅'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DUCK",
+    "cp": "1F986",
+    "char": "'🦆'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BAT",
+    "cp": "1F987",
+    "char": "'🦇'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SHARK",
+    "cp": "1F988",
+    "char": "'🦈'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "OWL",
+    "cp": "1F989",
+    "char": "'🦉'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "FOX FACE",
+    "cp": "1F98A",
+    "char": "'🦊'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "BUTTERFLY",
+    "cp": "1F98B",
+    "char": "'🦋'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "DEER",
+    "cp": "1F98C",
+    "char": "'🦌'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "GORILLA",
+    "cp": "1F98D",
+    "char": "'🦍'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "LIZARD",
+    "cp": "1F98E",
+    "char": "'🦎'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "RHINOCEROS",
+    "cp": "1F98F",
+    "char": "'🦏'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SHRIMP",
+    "cp": "1F990",
+    "char": "'🦐'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SQUID",
+    "cp": "1F991",
+    "char": "'🦑'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "GIRAFFE FACE",
+    "cp": "1F992",
+    "char": "'🦒'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "ZEBRA FACE",
+    "cp": "1F993",
+    "char": "'🦓'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "HEDGEHOG",
+    "cp": "1F994",
+    "char": "'🦔'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "SAUROPOD",
+    "cp": "1F995",
+    "char": "'🦕'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "T-REX",
+    "cp": "1F996",
+    "char": "'🦖'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CRICKET",
+    "cp": "1F997",
+    "char": "'🦗'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "CHEESE WEDGE",
+    "cp": "1F9C0",
+    "char": "'🧀'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "FACE WITH MONOCLE",
+    "cp": "1F9D0",
+    "char": "'🧐'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ADULT",
+    "cp": "1F9D1",
+    "char": "'🧑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "CHILD",
+    "cp": "1F9D2",
+    "char": "'🧒'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "OLDER ADULT",
+    "cp": "1F9D3",
+    "char": "'🧓'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BEARDED PERSON",
+    "cp": "1F9D4",
+    "char": "'🧔'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON WITH HEADSCARF",
+    "cp": "1F9D5",
+    "char": "'🧕'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman_in_steamy_room",
+    "cp": "1F9D6-200D-2640",
+    "char": "'🧖‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man_in_steamy_room",
+    "cp": "1F9D6-200D-2642",
+    "char": "'🧖‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON IN STEAMY ROOM",
+    "cp": "1F9D6",
+    "char": "'🧖'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman_climbing",
+    "cp": "1F9D7-200D-2640",
+    "char": "'🧗‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man_climbing",
+    "cp": "1F9D7-200D-2642",
+    "char": "'🧗‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON CLIMBING",
+    "cp": "1F9D7",
+    "char": "'🧗'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "woman_in_lotus_position",
+    "cp": "1F9D8-200D-2640",
+    "char": "'🧘‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man_in_lotus_position",
+    "cp": "1F9D8-200D-2642",
+    "char": "'🧘‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PERSON IN LOTUS POSITION",
+    "cp": "1F9D8",
+    "char": "'🧘'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_mage",
+    "cp": "1F9D9-200D-2640",
+    "char": "'🧙‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_mage",
+    "cp": "1F9D9-200D-2642",
+    "char": "'🧙‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MAGE",
+    "cp": "1F9D9",
+    "char": "'🧙'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_fairy",
+    "cp": "1F9DA-200D-2640",
+    "char": "'🧚‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_fairy",
+    "cp": "1F9DA-200D-2642",
+    "char": "'🧚‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "FAIRY",
+    "cp": "1F9DA",
+    "char": "'🧚'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_vampire",
+    "cp": "1F9DB-200D-2640",
+    "char": "'🧛‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_vampire",
+    "cp": "1F9DB-200D-2642",
+    "char": "'🧛‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "VAMPIRE",
+    "cp": "1F9DB",
+    "char": "'🧛'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "mermaid",
+    "cp": "1F9DC-200D-2640",
+    "char": "'🧜‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "merman",
+    "cp": "1F9DC-200D-2642",
+    "char": "'🧜‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "MERPERSON",
+    "cp": "1F9DC",
+    "char": "'🧜'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_elf",
+    "cp": "1F9DD-200D-2640",
+    "char": "'🧝‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_elf",
+    "cp": "1F9DD-200D-2642",
+    "char": "'🧝‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ELF",
+    "cp": "1F9DD",
+    "char": "'🧝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_genie",
+    "cp": "1F9DE-200D-2640",
+    "char": "'🧞‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_genie",
+    "cp": "1F9DE-200D-2642",
+    "char": "'🧞‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GENIE",
+    "cp": "1F9DE",
+    "char": "'🧞'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_zombie",
+    "cp": "1F9DF-200D-2640",
+    "char": "'🧟‍♀'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "male_zombie",
+    "cp": "1F9DF-200D-2642",
+    "char": "'🧟‍♂'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ZOMBIE",
+    "cp": "1F9DF",
+    "char": "'🧟'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BRAIN",
+    "cp": "1F9E0",
+    "char": "'🧠'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ORANGE HEART",
+    "cp": "1F9E1",
+    "char": "'🧡'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "BILLED CAP",
+    "cp": "1F9E2",
+    "char": "'🧢'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SCARF",
+    "cp": "1F9E3",
+    "char": "'🧣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "GLOVES",
+    "cp": "1F9E4",
+    "char": "'🧤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "COAT",
+    "cp": "1F9E5",
+    "char": "'🧥'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "SOCKS",
+    "cp": "1F9E6",
+    "char": "'🧦'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "DOUBLE EXCLAMATION MARK",
+    "cp": "203C",
+    "char": "'‼'",
+    "category": "Symbols"
+  },
+  {
+    "name": "EXCLAMATION QUESTION MARK",
+    "cp": "2049",
+    "char": "'⁉'",
+    "category": "Symbols"
+  },
+  {
+    "name": "TRADE MARK SIGN",
+    "cp": "2122",
+    "char": "'™'",
+    "category": "Symbols"
+  },
+  {
+    "name": "INFORMATION SOURCE",
+    "cp": "2139",
+    "char": "'ℹ'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LEFT RIGHT ARROW",
+    "cp": "2194",
+    "char": "'↔'",
+    "category": "Symbols"
+  },
+  {
+    "name": "UP DOWN ARROW",
+    "cp": "2195",
+    "char": "'↕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NORTH WEST ARROW",
+    "cp": "2196",
+    "char": "'↖'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NORTH EAST ARROW",
+    "cp": "2197",
+    "char": "'↗'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SOUTH EAST ARROW",
+    "cp": "2198",
+    "char": "'↘'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SOUTH WEST ARROW",
+    "cp": "2199",
+    "char": "'↙'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LEFTWARDS ARROW WITH HOOK",
+    "cp": "21A9",
+    "char": "'↩'",
+    "category": "Symbols"
+  },
+  {
+    "name": "RIGHTWARDS ARROW WITH HOOK",
+    "cp": "21AA",
+    "char": "'↪'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WATCH",
+    "cp": "231A",
+    "char": "'⌚'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOURGLASS",
+    "cp": "231B",
+    "char": "'⌛'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "keyboard",
+    "cp": "2328",
+    "char": "'⌨'",
+    "category": "Objects"
+  },
+  {
+    "name": "eject",
+    "cp": "23CF",
+    "char": "'⏏'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK RIGHT-POINTING DOUBLE TRIANGLE",
+    "cp": "23E9",
+    "char": "'⏩'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK LEFT-POINTING DOUBLE TRIANGLE",
+    "cp": "23EA",
+    "char": "'⏪'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK UP-POINTING DOUBLE TRIANGLE",
+    "cp": "23EB",
+    "char": "'⏫'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK DOWN-POINTING DOUBLE TRIANGLE",
+    "cp": "23EC",
+    "char": "'⏬'",
+    "category": "Symbols"
+  },
+  {
+    "name": "black_right_pointing_double_triangle_with_vertical_bar",
+    "cp": "23ED",
+    "char": "'⏭'",
+    "category": "Symbols"
+  },
+  {
+    "name": "black_left_pointing_double_triangle_with_vertical_bar",
+    "cp": "23EE",
+    "char": "'⏮'",
+    "category": "Symbols"
+  },
+  {
+    "name": "black_right_pointing_triangle_with_double_vertical_bar",
+    "cp": "23EF",
+    "char": "'⏯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ALARM CLOCK",
+    "cp": "23F0",
+    "char": "'⏰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "stopwatch",
+    "cp": "23F1",
+    "char": "'⏱'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "timer_clock",
+    "cp": "23F2",
+    "char": "'⏲'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOURGLASS WITH FLOWING SAND",
+    "cp": "23F3",
+    "char": "'⏳'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "double_vertical_bar",
+    "cp": "23F8",
+    "char": "'⏸'",
+    "category": "Symbols"
+  },
+  {
+    "name": "black_square_for_stop",
+    "cp": "23F9",
+    "char": "'⏹'",
+    "category": "Symbols"
+  },
+  {
+    "name": "black_circle_for_record",
+    "cp": "23FA",
+    "char": "'⏺'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CIRCLED LATIN CAPITAL LETTER M",
+    "cp": "24C2",
+    "char": "'Ⓜ'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK SMALL SQUARE",
+    "cp": "25AA",
+    "char": "'▪'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE SMALL SQUARE",
+    "cp": "25AB",
+    "char": "'▫'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK RIGHT-POINTING TRIANGLE",
+    "cp": "25B6",
+    "char": "'▶'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK LEFT-POINTING TRIANGLE",
+    "cp": "25C0",
+    "char": "'◀'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE MEDIUM SQUARE",
+    "cp": "25FB",
+    "char": "'◻'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK MEDIUM SQUARE",
+    "cp": "25FC",
+    "char": "'◼'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE MEDIUM SMALL SQUARE",
+    "cp": "25FD",
+    "char": "'◽'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK MEDIUM SMALL SQUARE",
+    "cp": "25FE",
+    "char": "'◾'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK SUN WITH RAYS",
+    "cp": "2600",
+    "char": "'☀'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CLOUD",
+    "cp": "2601",
+    "char": "'☁'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "umbrella",
+    "cp": "2602",
+    "char": "'☂'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "snowman",
+    "cp": "2603",
+    "char": "'☃'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "comet",
+    "cp": "2604",
+    "char": "'☄'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BLACK TELEPHONE",
+    "cp": "260E",
+    "char": "'☎'",
+    "category": "Objects"
+  },
+  {
+    "name": "BALLOT BOX WITH CHECK",
+    "cp": "2611",
+    "char": "'☑'",
+    "category": "Symbols"
+  },
+  {
+    "name": "UMBRELLA WITH RAIN DROPS",
+    "cp": "2614",
+    "char": "'☔'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HOT BEVERAGE",
+    "cp": "2615",
+    "char": "'☕'",
+    "category": "Food & Drink"
+  },
+  {
+    "name": "shamrock",
+    "cp": "2618",
+    "char": "'☘'",
+    "category": "Animals & Nature"
+  },
+  {
+    "name": "WHITE UP POINTING INDEX",
+    "cp": "261D",
+    "char": "'☝'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "skull_and_crossbones",
+    "cp": "2620",
+    "char": "'☠'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "radioactive_sign",
+    "cp": "2622",
+    "char": "'☢'",
+    "category": "Symbols"
+  },
+  {
+    "name": "biohazard_sign",
+    "cp": "2623",
+    "char": "'☣'",
+    "category": "Symbols"
+  },
+  {
+    "name": "orthodox_cross",
+    "cp": "2626",
+    "char": "'☦'",
+    "category": "Symbols"
+  },
+  {
+    "name": "star_and_crescent",
+    "cp": "262A",
+    "char": "'☪'",
+    "category": "Symbols"
+  },
+  {
+    "name": "peace_symbol",
+    "cp": "262E",
+    "char": "'☮'",
+    "category": "Symbols"
+  },
+  {
+    "name": "yin_yang",
+    "cp": "262F",
+    "char": "'☯'",
+    "category": "Symbols"
+  },
+  {
+    "name": "wheel_of_dharma",
+    "cp": "2638",
+    "char": "'☸'",
+    "category": "Symbols"
+  },
+  {
+    "name": "white_frowning_face",
+    "cp": "2639",
+    "char": "'☹'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "WHITE SMILING FACE",
+    "cp": "263A",
+    "char": "'☺'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "female_sign",
+    "cp": "2640",
+    "char": "'♀'",
+    "category": "Symbols"
+  },
+  {
+    "name": "male_sign",
+    "cp": "2642",
+    "char": "'♂'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ARIES",
+    "cp": "2648",
+    "char": "'♈'",
+    "category": "Symbols"
+  },
+  {
+    "name": "TAURUS",
+    "cp": "2649",
+    "char": "'♉'",
+    "category": "Symbols"
+  },
+  {
+    "name": "GEMINI",
+    "cp": "264A",
+    "char": "'♊'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CANCER",
+    "cp": "264B",
+    "char": "'♋'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LEO",
+    "cp": "264C",
+    "char": "'♌'",
+    "category": "Symbols"
+  },
+  {
+    "name": "VIRGO",
+    "cp": "264D",
+    "char": "'♍'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LIBRA",
+    "cp": "264E",
+    "char": "'♎'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SCORPIUS",
+    "cp": "264F",
+    "char": "'♏'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SAGITTARIUS",
+    "cp": "2650",
+    "char": "'♐'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CAPRICORN",
+    "cp": "2651",
+    "char": "'♑'",
+    "category": "Symbols"
+  },
+  {
+    "name": "AQUARIUS",
+    "cp": "2652",
+    "char": "'♒'",
+    "category": "Symbols"
+  },
+  {
+    "name": "PISCES",
+    "cp": "2653",
+    "char": "'♓'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK SPADE SUIT",
+    "cp": "2660",
+    "char": "'♠'",
+    "category": "Activities"
+  },
+  {
+    "name": "BLACK CLUB SUIT",
+    "cp": "2663",
+    "char": "'♣'",
+    "category": "Activities"
+  },
+  {
+    "name": "BLACK HEART SUIT",
+    "cp": "2665",
+    "char": "'♥'",
+    "category": "Activities"
+  },
+  {
+    "name": "BLACK DIAMOND SUIT",
+    "cp": "2666",
+    "char": "'♦'",
+    "category": "Activities"
+  },
+  {
+    "name": "HOT SPRINGS",
+    "cp": "2668",
+    "char": "'♨'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BLACK UNIVERSAL RECYCLING SYMBOL",
+    "cp": "267B",
+    "char": "'♻'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHEELCHAIR SYMBOL",
+    "cp": "267F",
+    "char": "'♿'",
+    "category": "Symbols"
+  },
+  {
+    "name": "hammer_and_pick",
+    "cp": "2692",
+    "char": "'⚒'",
+    "category": "Objects"
+  },
+  {
+    "name": "ANCHOR",
+    "cp": "2693",
+    "char": "'⚓'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "crossed_swords",
+    "cp": "2694",
+    "char": "'⚔'",
+    "category": "Objects"
+  },
+  {
+    "name": "medical_symbol",
+    "cp": "2695",
+    "char": "'⚕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "scales",
+    "cp": "2696",
+    "char": "'⚖'",
+    "category": "Objects"
+  },
+  {
+    "name": "alembic",
+    "cp": "2697",
+    "char": "'⚗'",
+    "category": "Objects"
+  },
+  {
+    "name": "gear",
+    "cp": "2699",
+    "char": "'⚙'",
+    "category": "Objects"
+  },
+  {
+    "name": "atom_symbol",
+    "cp": "269B",
+    "char": "'⚛'",
+    "category": "Symbols"
+  },
+  {
+    "name": "fleur_de_lis",
+    "cp": "269C",
+    "char": "'⚜'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WARNING SIGN",
+    "cp": "26A0",
+    "char": "'⚠'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HIGH VOLTAGE SIGN",
+    "cp": "26A1",
+    "char": "'⚡'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "MEDIUM WHITE CIRCLE",
+    "cp": "26AA",
+    "char": "'⚪'",
+    "category": "Symbols"
+  },
+  {
+    "name": "MEDIUM BLACK CIRCLE",
+    "cp": "26AB",
+    "char": "'⚫'",
+    "category": "Symbols"
+  },
+  {
+    "name": "coffin",
+    "cp": "26B0",
+    "char": "'⚰'",
+    "category": "Objects"
+  },
+  {
+    "name": "funeral_urn",
+    "cp": "26B1",
+    "char": "'⚱'",
+    "category": "Objects"
+  },
+  {
+    "name": "SOCCER BALL",
+    "cp": "26BD",
+    "char": "'⚽'",
+    "category": "Activities"
+  },
+  {
+    "name": "BASEBALL",
+    "cp": "26BE",
+    "char": "'⚾'",
+    "category": "Activities"
+  },
+  {
+    "name": "SNOWMAN WITHOUT SNOW",
+    "cp": "26C4",
+    "char": "'⛄'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SUN BEHIND CLOUD",
+    "cp": "26C5",
+    "char": "'⛅'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "thunder_cloud_and_rain",
+    "cp": "26C8",
+    "char": "'⛈'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "OPHIUCHUS",
+    "cp": "26CE",
+    "char": "'⛎'",
+    "category": "Symbols"
+  },
+  {
+    "name": "pick",
+    "cp": "26CF",
+    "char": "'⛏'",
+    "category": "Objects"
+  },
+  {
+    "name": "helmet_with_white_cross",
+    "cp": "26D1",
+    "char": "'⛑'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "chains",
+    "cp": "26D3",
+    "char": "'⛓'",
+    "category": "Objects"
+  },
+  {
+    "name": "NO ENTRY",
+    "cp": "26D4",
+    "char": "'⛔'",
+    "category": "Symbols"
+  },
+  {
+    "name": "shinto_shrine",
+    "cp": "26E9",
+    "char": "'⛩'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "CHURCH",
+    "cp": "26EA",
+    "char": "'⛪'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "mountain",
+    "cp": "26F0",
+    "char": "'⛰'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "umbrella_on_ground",
+    "cp": "26F1",
+    "char": "'⛱'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FOUNTAIN",
+    "cp": "26F2",
+    "char": "'⛲'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FLAG IN HOLE",
+    "cp": "26F3",
+    "char": "'⛳'",
+    "category": "Activities"
+  },
+  {
+    "name": "ferry",
+    "cp": "26F4",
+    "char": "'⛴'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SAILBOAT",
+    "cp": "26F5",
+    "char": "'⛵'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "skier",
+    "cp": "26F7",
+    "char": "'⛷'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "ice_skate",
+    "cp": "26F8",
+    "char": "'⛸'",
+    "category": "Activities"
+  },
+  {
+    "name": "woman-bouncing-ball",
+    "cp": "26F9-FE0F-200D-2640-FE0F",
+    "char": "'⛹️‍♀️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "man-bouncing-ball",
+    "cp": "26F9-FE0F-200D-2642-FE0F",
+    "char": "'⛹️‍♂️'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "person_with_ball",
+    "cp": "26F9",
+    "char": "'⛹'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "TENT",
+    "cp": "26FA",
+    "char": "'⛺'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "FUEL PUMP",
+    "cp": "26FD",
+    "char": "'⛽'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "BLACK SCISSORS",
+    "cp": "2702",
+    "char": "'✂'",
+    "category": "Objects"
+  },
+  {
+    "name": "WHITE HEAVY CHECK MARK",
+    "cp": "2705",
+    "char": "'✅'",
+    "category": "Symbols"
+  },
+  {
+    "name": "AIRPLANE",
+    "cp": "2708",
+    "char": "'✈'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "ENVELOPE",
+    "cp": "2709",
+    "char": "'✉'",
+    "category": "Objects"
+  },
+  {
+    "name": "RAISED FIST",
+    "cp": "270A",
+    "char": "'✊'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "RAISED HAND",
+    "cp": "270B",
+    "char": "'✋'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "VICTORY HAND",
+    "cp": "270C",
+    "char": "'✌'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "writing_hand",
+    "cp": "270D",
+    "char": "'✍'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "PENCIL",
+    "cp": "270F",
+    "char": "'✏'",
+    "category": "Objects"
+  },
+  {
+    "name": "BLACK NIB",
+    "cp": "2712",
+    "char": "'✒'",
+    "category": "Objects"
+  },
+  {
+    "name": "HEAVY CHECK MARK",
+    "cp": "2714",
+    "char": "'✔'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HEAVY MULTIPLICATION X",
+    "cp": "2716",
+    "char": "'✖'",
+    "category": "Symbols"
+  },
+  {
+    "name": "latin_cross",
+    "cp": "271D",
+    "char": "'✝'",
+    "category": "Symbols"
+  },
+  {
+    "name": "star_of_david",
+    "cp": "2721",
+    "char": "'✡'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SPARKLES",
+    "cp": "2728",
+    "char": "'✨'",
+    "category": "Activities"
+  },
+  {
+    "name": "EIGHT SPOKED ASTERISK",
+    "cp": "2733",
+    "char": "'✳'",
+    "category": "Symbols"
+  },
+  {
+    "name": "EIGHT POINTED BLACK STAR",
+    "cp": "2734",
+    "char": "'✴'",
+    "category": "Symbols"
+  },
+  {
+    "name": "SNOWFLAKE",
+    "cp": "2744",
+    "char": "'❄'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "SPARKLE",
+    "cp": "2747",
+    "char": "'❇'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CROSS MARK",
+    "cp": "274C",
+    "char": "'❌'",
+    "category": "Symbols"
+  },
+  {
+    "name": "NEGATIVE SQUARED CROSS MARK",
+    "cp": "274E",
+    "char": "'❎'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK QUESTION MARK ORNAMENT",
+    "cp": "2753",
+    "char": "'❓'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE QUESTION MARK ORNAMENT",
+    "cp": "2754",
+    "char": "'❔'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE EXCLAMATION MARK ORNAMENT",
+    "cp": "2755",
+    "char": "'❕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HEAVY EXCLAMATION MARK SYMBOL",
+    "cp": "2757",
+    "char": "'❗'",
+    "category": "Symbols"
+  },
+  {
+    "name": "heavy_heart_exclamation_mark_ornament",
+    "cp": "2763",
+    "char": "'❣'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEAVY BLACK HEART",
+    "cp": "2764",
+    "char": "'❤'",
+    "category": "Smileys & People"
+  },
+  {
+    "name": "HEAVY PLUS SIGN",
+    "cp": "2795",
+    "char": "'➕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HEAVY MINUS SIGN",
+    "cp": "2796",
+    "char": "'➖'",
+    "category": "Symbols"
+  },
+  {
+    "name": "HEAVY DIVISION SIGN",
+    "cp": "2797",
+    "char": "'➗'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK RIGHTWARDS ARROW",
+    "cp": "27A1",
+    "char": "'➡'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CURLY LOOP",
+    "cp": "27B0",
+    "char": "'➰'",
+    "category": "Symbols"
+  },
+  {
+    "name": "DOUBLE CURLY LOOP",
+    "cp": "27BF",
+    "char": "'➿'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ARROW POINTING RIGHTWARDS THEN CURVING UPWARDS",
+    "cp": "2934",
+    "char": "'⤴'",
+    "category": "Symbols"
+  },
+  {
+    "name": "ARROW POINTING RIGHTWARDS THEN CURVING DOWNWARDS",
+    "cp": "2935",
+    "char": "'⤵'",
+    "category": "Symbols"
+  },
+  {
+    "name": "LEFTWARDS BLACK ARROW",
+    "cp": "2B05",
+    "char": "'⬅'",
+    "category": "Symbols"
+  },
+  {
+    "name": "UPWARDS BLACK ARROW",
+    "cp": "2B06",
+    "char": "'⬆'",
+    "category": "Symbols"
+  },
+  {
+    "name": "DOWNWARDS BLACK ARROW",
+    "cp": "2B07",
+    "char": "'⬇'",
+    "category": "Symbols"
+  },
+  {
+    "name": "BLACK LARGE SQUARE",
+    "cp": "2B1B",
+    "char": "'⬛'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE LARGE SQUARE",
+    "cp": "2B1C",
+    "char": "'⬜'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WHITE MEDIUM STAR",
+    "cp": "2B50",
+    "char": "'⭐'",
+    "category": "Travel & Places"
+  },
+  {
+    "name": "HEAVY LARGE CIRCLE",
+    "cp": "2B55",
+    "char": "'⭕'",
+    "category": "Symbols"
+  },
+  {
+    "name": "WAVY DASH",
+    "cp": "3030",
+    "char": "'〰'",
+    "category": "Symbols"
+  },
+  {
+    "name": "PART ALTERNATION MARK",
+    "cp": "303D",
+    "char": "'〽'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CIRCLED IDEOGRAPH CONGRATULATION",
+    "cp": "3297",
+    "char": "'㊗'",
+    "category": "Symbols"
+  },
+  {
+    "name": "CIRCLED IDEOGRAPH SECRET",
+    "cp": "3299",
+    "char": "'㊙'",
+    "category": "Symbols"
+  }
+]

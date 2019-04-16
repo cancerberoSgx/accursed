@@ -10,9 +10,15 @@ var s = screen({
   // forceUnicode: true,
   fullUnicode: true
 })
+installExitKeys(s)
+try {
+  
 const app = React.render(<App screen={s} />)
 s.append(app)
-installExitKeys(s)
 s.key('tab', k => s.focusNext())
 s.key('S-tab', k => s.focusPrevious())
 s.render()
+
+} catch (error) {
+  s && s.log(error)
+}

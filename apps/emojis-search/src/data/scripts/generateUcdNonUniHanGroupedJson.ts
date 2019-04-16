@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { xml2js, Element } from 'xml-js';
-import { Group, Block, CharWithGroup, getCharsWithBlockAndGroupIndexDocument } from './parseUcdGroupedXml';
+import { Group, Block, CharWithGroup, getCharsWithBlockAndGroupIndexDocument, getCharsDefinitions } from './parseUcdGroupedXml';
 
 function generateUcdNonUniHanGroupedJson() {
   const s = readFileSync('./data/ucd.nounihan.grouped.xml').toString();
@@ -10,8 +10,8 @@ function generateUcdNonUniHanGroupedJson() {
   const blocks = obj.elements!.find(e => e.name === 'ucd')!.elements!.find(e => e.name === 'blocks')!.elements!.filter(e => e.name === 'block').map(b => b.attributes as Block);
   const chars = groupElements.map(g => (g.elements || []).filter(e => e.name === 'char').map(char => ({ ...char.attributes, group: g.attributes as Group } as CharWithGroup))).flat();
 
-  const result = getCharsWithBlockAndGroupIndexDocument(chars, blocks, groups);
-  writeFileSync('data/generated/ucd.nonunihan.grouped.json', JSON.stringify(result ))
+  const result = getCharsDefinitions(chars, blocks, groups);
+  writeFileSync('src/data/generated/ucd.nonunihan.grouped.json', JSON.stringify(result ))
   
   // console.log(blocks.map(b=>b.name).join('\n'));
   // toTsTest(chars, blocks, groups);

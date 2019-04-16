@@ -26,8 +26,7 @@ export function Strong(props: { children?: string | string[]; color?: string }) 
   return (
     <text
       tags={true}
-      content={`{bold}${(asArray(props.children || []).join(' '),
-      ['bold', props.color].filter(notUndefined) as any)}{/bold}`}
+      content={`{bold}${(asArray(props.children || [])).join(' ')}{/bold}`}
     />
   )
 }

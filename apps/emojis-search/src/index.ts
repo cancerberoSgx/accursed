@@ -1,1 +1,1 @@
-export * from './data/emojis'
+export * from './data/data'

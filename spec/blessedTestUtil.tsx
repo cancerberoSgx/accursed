@@ -8,14 +8,14 @@ export function testJsx({
   assert
 }: {
   creator: (screen: Screen) => JSX.Element
-  assert: (e: Element) => void
+  assert: (e: Element) => Promise<void> | void
 }) {
   const screen = blessed.screen({ smartCSR: true })
   installExitKeys(screen)
   const el = creator(screen)
   const a = React.render(el)
-  a.on('render', () => {
-    assert(a)
+  a.on('render', async () => {
+    await assert(a)
     screen!.destroy()
   })
   screen.render()

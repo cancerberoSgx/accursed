@@ -43,22 +43,36 @@ export const inputOptions = () =>
     }
   } as BoxOptions)
 
-export const listTableOptions = () =>
+export const scrollableOptions = () =>
   ({
     ...inputOptions(),
     border: 'line',
     align: 'center',
     scrollable: true,
+    input: true,
+  alwaysScroll: true,
+  // scrollable: true,
     scrollbar: {
       ch: ' ',
       track: {
         bg: 'cyan'
       },
+      
       style: {
         inverse: true
       }
     },
     style: {
+      scrollbar: {
+        ch: ' ',
+        track: {
+          bg: 'cyan'
+        },
+        
+        style: {
+          inverse: true
+        }
+      },
       ...inputOptions().style,
       header: {
         fg: 'blue',

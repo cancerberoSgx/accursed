@@ -87,6 +87,19 @@ TODO: performance? use another thing ? use content? join several JSXText in one 
 
 # TODO / questions / ideas / issues
 
+## Ideas
+
+ * app for change font family ?  Unicode has various fonts : mathematical script, franktur, double struc, sans serif, italic, monospace, and other strange : lisu letter  ... and we can use similars from cherokee. mathematical alphanumeric symbols
+
+     * similar to previous : vertical text ? vertical forms, compatibilty forms
+     * phonetic extensions  , also has
+     * latin extended aditional - adds symbols below, on top of letters - could taken as effects ?
+     * number forms : has formats for numbers... romans... 
+     * enclosed alphnumerics
+     enclosed ideographic
+     * latin extended c
+     * half width and full width forms
+
  * the same way we plan to implement ListTab or Tab using virtual to declare data in the markup - implement Markdown so it declare the markdown content as children and not as attribute.
 
  * since components are associatged to blessed elements, would it be useful to also associate elements to componetns ?
@@ -106,11 +119,15 @@ RESEARCH PROBLEM -
 
 ## Issues
 
- * jsx screen
- * a provider for common props so style is propagated and mixed in childern
- * refs ?   
+ * this is failing :   return <Div height="100%" width="100%">
+      {[1,2,3,4,4,3,3,3,3].map(d=><button content="helo"/>)}
+    </Div>
+ * feature: jsx screen
+ * feature: a provider for common props so style is propagated and mixed in childern
+ * feature: refs ?   
 
 ## TODO 
+ 
 
- * jsx render implementations are "forced" to consume the ast frmo the children to the parent (becase mostly of how the getberated fnuction call expressions are evaluated). But in gereal the mediums support first creating the parent and THEN creating and appending the children so this is the crazy idea. Instead of genrerating function expressoin calls generate a similar structure, and before rendering (React.render()) REVERSE the TREE. then render it upside down, level by level in order.  And It should be mandatory to generate an intermediate representation. The function calls can bewrapped in other function calls (instead of `h('div',{}, [h()])` generate  `(()=>h('div',{}, [()=>h())]))`  (similar how behavior JSX tahs like <If> are implemented... so they dont hget evaluated.
+ * IDEA: jsx render implementations are "forced" to consume the ast frmo the children to the parent (becase mostly of how the getberated fnuction call expressions are evaluated). But in gereal the mediums support first creating the parent and THEN creating and appending the children so this is the crazy idea. Instead of genrerating function expressoin calls generate a similar structure, and before rendering (React.render()) REVERSE the TREE. then render it upside down, level by level in order.  And It should be mandatory to generate an intermediate representation. The function calls can bewrapped in other function calls (instead of `h('div',{}, [h()])` generate  `(()=>h('div',{}, [()=>h())]))`  (similar how behavior JSX tahs like <If> are implemented... so they dont hget evaluated.
   * try to implement this in a second implementation or "mode" for blessed to see if this  easy the poroblem of plugins.

@@ -252,6 +252,8 @@ type On<T> =
   | Parameters<(event: string, listener: (...args: any[]) => void) => T>
   | Parameters<(event: 'warning', callback: (text: string) => void) => T>
   | Parameters<(event: NodeGenericEventType, callback: () => void) => T>
+  | Parameters<(event: 'select', callback: (item: BlessedElement, index: number) => void) => T>
+  | Parameters<(event: 'select item', callback: (item: BlessedElement, index: number) => void) => T>
 
 export interface EventOptions<T extends Element> extends BlessedEventOptions, ArtificialEventOptions<T> {
   children?: JSX.BlessedJsxNode

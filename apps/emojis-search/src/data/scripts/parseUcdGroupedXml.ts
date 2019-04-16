@@ -6,6 +6,20 @@ import { printUnicodeCharacter } from "./printUnicodeCharacter";
 
 export type CharWithGroup = Char&{group: Group}
 
+export function getCharsDefinitions(chars: CharWithGroup[], blocks: Partial<Block_>[], groups: Partial<Group_>[]) {
+  const charsWithBlockAndGroupIndex = chars.map(c => {
+    const block = getCharBlock(c, blocks);
+    if (!block) {
+      console.log('block not found for char ', {...c, group: null});
+      return undefined;
+    }
+    else {
+      return { name: c.na||c.na1, category: block.name, cp: c.cp, char: printUnicodeCharacter(c.cp!, true) }
+    }
+  }).filter(notFalsy)
+  return charsWithBlockAndGroupIndex
+}
+
 
 function toTsTest(chars: CharWithGroup[], blocks: Partial<Block_>[], groups: Partial<Group_>[]) {
   const code = toTs(chars, blocks, groups, blocks.map(b=>b.name!)

@@ -1,41 +1,36 @@
-import { Driver } from 'cli-driver'
-import { Helper } from './interactionHelper'
-
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000
+import { Div } from '../src';
+import { Screen } from '../src/blessedTypes';
+import { React } from '../src/jsx/createElement';
+import { testJsx } from './blessedTestUtil';
 
 describe('jsx', () => {
-  let client: Driver
-  let helper: Helper
+  fdescribe('custom elements', () => {
+    it('should print function element children', async done => {
 
-  beforeAll(async done => {
-    client = new Driver()
-    helper = new Helper(client)
-    await client.start({
-      notSilent: true
+      function C(props: {children?: any, parent: Screen}) {
+        return (
+          <layout layout="grid" width="100%" height="100%">
+            <text content="Custom component: "/>{props.children}
+          </layout>
+        )
+      }
+      
+      testJsx({
+        creator: screen => (
+          <Div parent={screen}> hello world</Div>
+          // <C parent={screen}>
+          //   hello <textbox secret={true} content="helelele" />
+          //   <button content="button123" />
+          // </C>
+        ),
+        assert: async e => {
+          await waits(3000)
+          // expect(findDescendant<Textarea>(e, c => c.type === 'button')!.getContent()).toContain('button123')
+          // console.log(find<Textbox>(e, c => isElement<Textbox>(c) && c.secret)!.getContent());
+          // expect(find<Textbox>(e, c => isElement<Textbox>(c) && c.secret)!.getContent()).toContain('helelele')
+          done()
+        }
+      })
     })
-    done()
   })
-
-  afterAll(async done => {
-    await helper.clear()
-    await client.destroy().catch()
-    helper = null as any
-    done()
   })
-
-  it('should render box with content and no children', async done => {
-    await client.enter('npx ts-node spec/assets/jsxNoChildren.tsx')
-    expect(await helper.waitForStrippedDataToInclude('hehehehehe'))
-    await client.enter('q')
-    await helper.expectLastExitCode(true)
-    done()
-  })
-
-  it('should render box with one button children', async done => {
-    await client.enter('npx ts-node spec/assets/jsxOneChild.tsx')
-    const s = await helper.waitForStrippedDataToInclude('click')
-    ;['hello', 'click', 'box', 'content'].forEach(w => expect(s).toContain(w))
-    await client.enter('q')
-    done()
-  })
-})

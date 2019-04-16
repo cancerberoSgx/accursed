@@ -16,7 +16,7 @@
   "author": "Sebastian Gurin",
   "license": "MIT",
   "dependencies": {
-    "accursed": "^0.0.2",
+    "accursed": "file:../..",
     "yargs-parser": "^10.1.0"
   },
   "devDependencies": {

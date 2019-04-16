@@ -168,7 +168,7 @@ class BlessedJsxImpl implements BlessedJsx {
         })
       } else if (attributeName === ArtificialEventOptionNames.onSelect) {
         const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onSelect']
-        el.on('select item', e => {
+        el.on('select', e => {
           fn!.bind(el)({ ...e, currentTarget: el })
         })
       } else {

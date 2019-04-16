@@ -1,3 +1,6 @@
+import { join } from 'path';
+import { readFileSync } from 'fs';
+
 export function charCodeHexString(s: string) {
   return s
     .split('')
@@ -15,13 +18,13 @@ export function enumKeys(anEnum: any): string[] {
   return a
 }
 
-export function getDescriptions(descriptions: any): string[][] {
-  const o: [any, string][] = []
-  Object.keys(descriptions).forEach(s => {
-    o.push([s, descriptions[s]])
-  })
-  return o
-}
+// export function getDescriptions(descriptions: any): string[][] {
+//   const o: [any, string][] = []
+//   Object.keys(descriptions).forEach(s => {
+//     o.push([s, descriptions[s]])
+//   })
+//   return o
+// }
 
 
 
@@ -53,3 +56,4 @@ export function notFalsy<T>(n: T): n is NotFalsy<T> {
 
 export function unique<T>(t: T, i: number, a: T[]){return a.indexOf(t)===i}
 export function uniqueNotFalsy<T>(t: T, i: number, a: T[]): t is NotFalsy<T> {return a.indexOf(t)===i}
+
