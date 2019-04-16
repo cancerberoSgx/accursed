@@ -188,22 +188,34 @@ class BlessedJsxImpl implements BlessedJsx {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
         }
+        else {
+          // this.createTextNode('SEBABABAB', el)
+          // this.appendChild(el, c)
+        }
       } else if (Array.isArray(c)) {
-        c.forEach(c => {
-          if (!c || is__Virtual(c)) {
-            return
-          } else if (isElement(c)) {
-            if (!c.options || !c.options.parent) {
-              this.appendChild(el, c)
-            }
-          } else {
-            this.createTextNode(c, el)
-          }
-        })
+        this._addChildrenArray(c, el);
       } else {
         this.createTextNode(c, el)
       }
     })
+  }
+
+  private _addChildrenArray(c: any[], el: blessed.Widgets.BlessedElement) {
+    c.forEach(c2 => {
+      if (!c2 || is__Virtual(c2)) {
+        return;
+      }
+      else if (isElement(c2)) {
+        if (!c2.options || !c2.options.parent) {
+          this.appendChild(el, c2);
+        }
+      }else if (Array.isArray(c2)) {
+        this._addChildrenArray(c2, el);
+      } 
+      else {
+        this.createTextNode(c2, el);
+      }
+    });
   }
 
   /**
@@ -226,10 +238,18 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: Element) {
+    if(typeof c!=='string'){
+      throw new Error()
+      const t = blessed.text({ content: c + 'jajajajaja '+typeof c+' - '+Array.isArray(c) })
+      this.appendChild(el, t)
+      return t
+    } else {
+      const t = blessed.text({ content: c + '' })
+      this.appendChild(el, t)
+      return t
+    }
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)
-    const t = blessed.text({ content: c + '' })
-    this.appendChild(el, t)
-    return t
+
   }
 
   private afterElementCreatedListeners: AfterElementCreatedListener[] = []

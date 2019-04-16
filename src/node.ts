@@ -1,4 +1,5 @@
-import { Node } from './blessedTypes'
+import { Node, Element, isElement } from './blessedTypes'
+import { strip } from './util/misc';
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */
@@ -11,17 +12,21 @@ export interface VisitorOptions {
 }
 
 /**
- * Visit node's descendants until the visitor function return true or there are no more. In the first different modes on which visiting the rest of descendants or
+ * Visit node's descendants until the visitor function return true or there are no more. In the first different modes on which visiting the rest of descenda|nts or
  * ancestors are configurable through the options. By default, first the parent is evaluated which is configurable configurable with [[[VisitorOptions.childrenFirst]]
  * */
 export function visitDescendants(n: Node, v: Visitor, o: VisitorOptions = {}): boolean {
   let r = false
   if (o.childrenFirst) {
     r = n.children.some(c => visitDescendants(c, v, o))
-    if (!o.breakOnDescendantSignal && r) {
-      return v(n)
-    } else {
+    if ( r) {
+      if(!o.breakOnDescendantSignal){
+        v(n)
+      }
       return true
+    }
+    else {
+      return v(n)
     }
   } else {
     r = v(n)
@@ -70,3 +75,26 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
   return n.children.filter(c => p(c))
 }
 //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
+
+/** Returns the text content of given node and all its children, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
+export function getContent(e: Element, options: {dontTrim?: boolean, dontStrip?: boolean, childrenLast?: boolean} = {}) {
+  let text: string[] = []
+  visitDescendants(
+    e,
+    d => {
+      if(isElement(d)){
+        let s = d.getContent()||''
+        if(!options.dontStrip){
+          s = strip(s)
+        }
+        if(!options.dontTrim){
+          s = s.trim()
+        }
+        text.push( s)
+      }
+      return false
+    }
+    ,    {childrenFirst: !options.childrenLast}
+  )
+  return text.join(' ')
+}
