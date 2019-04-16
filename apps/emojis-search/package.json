@@ -1,25 +1,22 @@
 {
   "name": "emojis-search",
   "version": "0.0.2",
-  "description": "display unicode emojis characters, categorized, searchable",
+  "description": "command line interactive tool to explorer Unicode emojis",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "bin": ".bin/emojis-search.js",
   "scripts": {
     "watch": "tsc --watch",
     "build": "tsc",
-    "test": "ts-node node_modules/jasmine/bin/jasmine",
-    "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
-    "prepare": "tsc",
+    "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "all": "npm run clean && npm run prettier && npm run build && npm test"
+    "all": "npm run clean && npm run prettier && npm run build"
   },
   "author": "Sebastian Gurin",
   "license": "MIT",
   "dependencies": {
-    "accursed": "file:../..",
-    "ansi-escapes": "^4.1.0",
+    "accursed": "^0.0.2",
     "yargs-parser": "^10.1.0"
   },
   "devDependencies": {

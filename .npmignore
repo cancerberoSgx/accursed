@@ -4,4 +4,7 @@ scripts
 tmp
 spec
 *.tgz
-package*
+apps
+log.txt
+tsconfig.json
+.travis.yml

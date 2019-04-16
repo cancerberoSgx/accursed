@@ -1,7 +1,6 @@
-import { Box, Br, Component, Div, Element, isElement, List as ListElement, React, ArtificialEvent } from 'accursed'
+import { ArtificialEvent, Box, Br, Component, Div, Element, isElement, List as ListElement, React } from 'accursed'
 import { inputOptions } from './elementOptions'
-import { List, getCategoryEmojis } from './list'
- 
+import { getCategoryEmojis, List } from './list'
 
 export class Categories extends Component<{
   category?: string
@@ -31,14 +30,14 @@ export class Categories extends Component<{
     }
   ): void {
     const index = e.currentTarget.selected || 0
-    const sel = this.getCategoryNames()[index] 
+    const sel = this.getCategoryNames()[index]
     const container = this.findDescendant(d => isElement(d) && d.name === 'list-container')! as Element
     container.children.forEach(c => c.destroy())
     container.screen.render()
     setTimeout(() => {
       container.append(React.render(<List list={sel} />))
       container.screen.render()
-    }, 10);
+    }, 10)
   }
 
   getCategoryNames(): string[] {

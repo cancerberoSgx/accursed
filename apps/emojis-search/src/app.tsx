@@ -2,15 +2,15 @@ import { Component, Div, Element, isElement, React, Screen } from 'accursed'
 import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
-import { List, getCategoryEmojis } from './list'
+import { getCategoryEmojis, List } from './list'
 
 interface P {
   screen: Screen
 }
-enum MenuOptions  {
+enum MenuOptions {
   'categories' = 'categories',
-  'search' = 'search', 
-  'help'='help'
+  'search' = 'search',
+  'help' = 'help'
 }
 
 export class App extends Component<P, {}> {
@@ -55,7 +55,7 @@ export class App extends Component<P, {}> {
       },
       Help: () => {
         this.updateMain(MenuOptions.help)
-      },
+      }
     }
   }
 }

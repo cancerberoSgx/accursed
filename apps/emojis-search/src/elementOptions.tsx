@@ -1,72 +1,74 @@
 import { BoxOptions, ListTableOptions } from 'accursed'
-export const inputOptions = () => ({
-  keys: true,
-  mouse: true,
-  clickable: true,
-  tags: true,
-  focusable: true,
-  vi: true,
-  border: 'line',
-  style: {
-    bg: 'gray',
-    fg: 'white',
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
-    focus: {
-      bg: 'lightgray',
+export const inputOptions = () =>
+  ({
+    keys: true,
+    mouse: true,
+    clickable: true,
+    tags: true,
+    focusable: true,
+    vi: true,
+    border: 'line',
+    style: {
+      bg: 'gray',
+      fg: 'white',
       border: {
         type: 'line',
-        fg: 'red'
+        fg: 'cyan'
+      },
+      focus: {
+        bg: 'lightgray',
+        border: {
+          type: 'line',
+          fg: 'red'
+        }
+      },
+      selected: {
+        border: {
+          type: 'line',
+          fg: 'blue'
+        },
+        fg: 'black',
+        bg: 'magenta'
+      },
+      item: {
+        border: {
+          fg: 'gray'
+        },
+        bg: 'green'
+      },
+      hover: {
+        bg: 'lightgray'
       }
-    },
-    selected: {
-      border: {
-        type: 'line',
-        fg: 'blue'
-      },
-      fg: 'black',
-      bg: 'magenta'
-    },
-    item: {
-      border: {
-        fg: 'gray'
-      },
-      bg: 'green'
-    },
-    hover: {
-      bg: 'lightgray'
     }
-  }
-} as BoxOptions)
+  } as BoxOptions)
 
-  export const listTableOptions = ()=>({
+export const listTableOptions = () =>
+  ({
     ...inputOptions(),
-  border: 'line',
-  align: 'center',
-  scrollable: true,
-  scrollbar: {
-    ch: ' ',
-    track: {
-      bg: 'cyan'
+    border: 'line',
+    align: 'center',
+    scrollable: true,
+    scrollbar: {
+      ch: ' ',
+      track: {
+        bg: 'cyan'
+      },
+      style: {
+        inverse: true
+      }
     },
     style: {
-      inverse: true
-    }
-  },
-  style: {
-    ...inputOptions().style,
-    header: {
-      fg: 'blue',
-      bold: true,
-      underline: true
-    },
-    cell: {
-      bg: 'gray',
-      selected: {
-        bg: 'blue'
+      ...inputOptions().style,
+      header: {
+        fg: 'blue',
+        bold: true,
+        underline: true
+      },
+      cell: {
+        bg: 'gray',
+        selected: {
+          bg: 'blue'
+        }
       }
     }
-  }
-} as ListTableOptions)
+  } as ListTableOptions)

@@ -15,7 +15,6 @@
       "blessed-contrib": ["src/declarations/blessed-contrib"],      
       "blessed": ["src/declarations/blessed"]
     },
-    // ""
     "jsx": "React",
     "skipLibCheck": true
   },
