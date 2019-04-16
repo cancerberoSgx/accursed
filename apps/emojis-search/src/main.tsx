@@ -1,6 +1,5 @@
-import { React, screen, installExitKeys } from 'accursed';
-import { App } from './index';
-
+import { installExitKeys, React, screen } from 'accursed'
+import { App } from './app'
 
 var s = screen({
   autoPadding: false,
@@ -10,10 +9,10 @@ var s = screen({
   smartCSR: true,
   // forceUnicode: true,
   fullUnicode: true
-});
-const app = React.render(<App screen={s} />);
-s.append(app);
-installExitKeys(s);
-s.key('tab', k => s.focusNext());
-s.key('S-tab', k => s.focusPrevious());
-s.render();
+})
+const app = React.render(<App screen={s} />)
+s.append(app)
+installExitKeys(s)
+s.key('tab', k => s.focusNext())
+s.key('S-tab', k => s.focusPrevious())
+s.render()

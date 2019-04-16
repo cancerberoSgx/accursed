@@ -1,18 +1,22 @@
 // import * as blessed from 'accursed'
-import { Element, Screen , screen, prompt, listtable, Node} from 'accursed';
-import { countryFlagsArray } from './countryFlagsArray';
+import { listtable, Node, prompt, screen } from 'accursed'
+import { countryFlagsArray } from './countryFlagsArray'
 
-function charCodeHexString(s: string){
-  return  s.split('').map(s=>s.charCodeAt(0).toString(16)).map(n=>`\\u${n}`).join('')
+function charCodeHexString(s: string) {
+  return s
+    .split('')
+    .map(s => s.charCodeAt(0).toString(16))
+    .map(n => `\\u${n}`)
+    .join('')
 }
 
 var screen2 = screen({
   autoPadding: false,
   // smartCSR: true, forceUnicode: true,
-   fullUnicode: true
+  fullUnicode: true
 })
 
-var table = getIconsTable(screen2);
+var table = getIconsTable(screen2)
 
 var prompt2 = prompt({
   parent: screen2,
@@ -26,7 +30,7 @@ var prompt2 = prompt({
   tags: true,
   border: 'line',
   hidden: true
-});
+})
 
 table.focus()
 
@@ -36,23 +40,19 @@ screen2.key('q', function() {
 
 screen2.render()
 
-
-
-
 export function getIconsTable(parent: Node) {
   var stringData = [
     ['{red-fg}Character{/red-fg}', '{red-fg}Code Points{/red-fg}', '{red-fg}Description{/red-fg}'],
     ...countryFlagsArray().map(d => [d[0], charCodeHexString(d[0]), d[1]])
-  ];
+  ]
   var table = listtable({
     parent: parent,
     data: stringData,
-    search: (callback) => {
-      prompt2.input('Search:', '', function (err, value) {
-        if (err)
-          return;
-        return callback(null, value);
-      });
+    search: callback => {
+      prompt2.input('Search:', '', function(err, value) {
+        if (err) return
+        return callback(null, value)
+      })
     },
     border: 'line',
     align: 'left',
@@ -96,7 +96,6 @@ export function getIconsTable(parent: Node) {
         }
       }
     }
-  });
-  return table;
+  })
+  return table
 }
-

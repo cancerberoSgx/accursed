@@ -265,6 +265,6 @@ export function countryFlagsArray() {
     ['🏳️', 'white flag'],
     ['🏳', 'white flag'],
     ['🏳‍🌈', 'rainbow flag'],
-    ['🏴‍☠️', 'pirate flag'],
-  ];
+    ['🏴‍☠️', 'pirate flag']
+  ]
 }

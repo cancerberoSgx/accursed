@@ -1,5 +1,4 @@
-import { BoxOptions, ListTableOptions } from 'accursed';
-let elementOptions;
+import { BoxOptions, ListTableOptions } from 'accursed'
 export const inputOptions: BoxOptions = {
   keys: true,
   mouse: true,
@@ -8,16 +7,6 @@ export const inputOptions: BoxOptions = {
   focusable: true,
   vi: true,
   border: 'line',
-  // scrollable: true,
-  // scrollbar: {
-  //   ch: ' ',
-  //   track: {
-  //     bg: 'cyan'
-  //   },
-  //   style: {
-  //     inverse: true
-  //   }
-  // },
   style: {
     bg: 'gray',
     fg: 'white',
@@ -30,7 +19,7 @@ export const inputOptions: BoxOptions = {
       border: {
         type: 'line',
         fg: 'red'
-      },
+      }
     },
     selected: {
       border: {
@@ -48,17 +37,13 @@ export const inputOptions: BoxOptions = {
     },
     hover: {
       bg: 'lightgray'
-    },
+    }
   }
-};
-
-
+}
 
 export const listTableOptions: ListTableOptions = {
   ...inputOptions,
   border: 'line',
-  // height: '100%',
-  // width: '100%',
   align: 'center',
   scrollable: true,
   scrollbar: {
@@ -84,4 +69,4 @@ export const listTableOptions: ListTableOptions = {
       }
     }
   }
-};
+}
