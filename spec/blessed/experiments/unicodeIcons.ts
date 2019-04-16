@@ -1,7 +1,7 @@
 import * as blessed from 'blessed'
 
 var screen = blessed.screen({
-  smartCSR: true
+  smartCSR: true, forceUnicode: true, fullUnicode: true
 })
 
 var main = blessed.box({
@@ -13,7 +13,7 @@ var main = blessed.box({
   border: 'line',
   draggable: true,
   tags: true,
-  content: `black-bg}{light-blue-fg} Some icons ${getIcons()
+  content: `🇦🇨 ${blessed.unicode.fromCodePoint(0x1F1FD)} {light-blue-fg} Some icons ${getIcons()
     .map(s => blessed.unicode.fromCodePoint(Number(s)) + ': ' + s)
     .join(', ')} {/}`,
   scrollable: true,

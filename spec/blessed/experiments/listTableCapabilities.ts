@@ -3,20 +3,21 @@ import { enumKeys } from 'misc-utils-of-mine-typescript'
 import { BlessedTerminalCapabilitiesBooleans } from '../../../src/declarations/blessedTermCap'
 
 const screen = blessed.screen({
-  // autoPadding: false,
-  // fullUnicode: true
+  autoPadding: false,
+  fullUnicode: true,
   log: 'log.txt'
 })
-
-const TRUE = 0x0b70
-const FALSE = 0x02591
+// blessed.unicode.fromCodePoint(0x0b70)
+const TRUE = blessed.unicode.fromCodePoint(0x0b70)//'0x0b70'
+const FALSE = blessed.unicode.fromCodePoint(0x02573)//'0x0b70'
+// const FALSE = '0x02591'
 const capabilities = enumKeys(BlessedTerminalCapabilitiesBooleans)
 // console.log(capabilities.length , capabilities[0], );
 // screen.log(capabilities.map(c=>screen.program.has(c)))
 
 var stringData = [
   ['{red-fg}Capability{/red-fg}', '{red-fg}Supported?{/red-fg}'],
-  ...capabilities.map(c => [c, screen.program.has(c) ? 'yes' : 'no'])
+  ...capabilities.map(c => [c, screen.program.has(c) ? TRUE : FALSE ])
 ]
 
 var table = blessed.listtable({
