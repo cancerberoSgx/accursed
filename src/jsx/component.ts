@@ -1,4 +1,4 @@
-import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum, Node } from '../blessedTypes'
+import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
 import {
   ElementPredicate,
   filterChildren,
@@ -44,11 +44,9 @@ export abstract class Component<P = {}, S = {}> {
     }
   }
 
-
-  log(...args: any[]){
-    if(this.blessedElement && this.blessedElement.screen){
+  log(...args: any[]) {
+    if (this.blessedElement && this.blessedElement.screen) {
       this.blessedElement.screen.log(...args)
-
     }
   }
 
@@ -56,19 +54,19 @@ export abstract class Component<P = {}, S = {}> {
     return visitDescendants(this.blessedElement, v)
   }
 
-  protected findDescendant<T extends Element = Element>(p: ElementPredicate): T|undefined {
+  protected findDescendant<T extends Element = Element>(p: ElementPredicate): T | undefined {
     return findDescendant(this.blessedElement, p)
   }
 
-  protected filterDescendants<T extends Element = Element>(p: ElementPredicate) : T[] {
+  protected filterDescendants<T extends Element = Element>(p: ElementPredicate): T[] {
     return filterDescendants(this.blessedElement, p)
   }
 
-  protected findChildren<T extends Element = Element>(p: ElementPredicate) :  T|undefined{
+  protected findChildren<T extends Element = Element>(p: ElementPredicate): T | undefined {
     return findChildren(this.blessedElement, p)
   }
-  
-  protected filterChildren<T extends Element = Element>(p: ElementPredicate) : T[]{
+
+  protected filterChildren<T extends Element = Element>(p: ElementPredicate): T[] {
     return filterChildren(this.blessedElement, p) as any
   }
   //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc

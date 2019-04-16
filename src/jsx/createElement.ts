@@ -24,7 +24,7 @@ interface Options {
 }
 
 interface ComponentConstructor<P = {}, S = {}> {
-  new(p: P, s: S): Component
+  new (p: P, s: S): Component
 }
 
 function isComponentConstructor(tag: any): tag is ComponentConstructor {
@@ -34,7 +34,7 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
 /** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
  */
 class BlessedJsxImpl implements BlessedJsx {
-  constructor(protected options: Options = {}) { }
+  constructor(protected options: Options = {}) {}
 
   private defaultPluginsInstalled = false
   render(e: JSX.Element) {
@@ -136,49 +136,46 @@ class BlessedJsxImpl implements BlessedJsx {
     const el = jsxNode as Element
       // EVENT HANDLER ATTRIBUTES
       // native event handlers like on(), key() etc are exactly matched agains a blessed method. Exactly same signature.
-      ; (Object.keys(blessedEventMethodAttributes) as EventOptionNames[]).forEach(methodName => {
-        const args = blessedEventMethodAttributes[methodName] as any[]
-          ; (el as any)[methodName](...args.map(a => (typeof a === 'function' ? a.bind(el) : a)))
-      })
-      // artificial event handlers like onClick, onChange (these doesn't exist on blessed - we need to map/install them manually)
-      ; (Object.keys(artificialEventAttributes) as ArtificialEventOptionNames[]).forEach(attributeName => {
-        if (attributeName === ArtificialEventOptionNames.onClick) {
-          const fn = artificialEventAttributes[attributeName]!
-          el.on('click', e => {
-            fn.bind(el)({ ...e, currentTarget: el })
-          })
-        } else if (attributeName === ArtificialEventOptionNames.onKeyPress) {
-          const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onKeyPress']
-          el.on('keypress', (ch, key) => {
-            fn!.bind(el)({ ch, key, currentTarget: el })
-          })
-        } else if (attributeName === ArtificialEventOptionNames.onRender) {
-          const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onRender']
-          el.on('render', e => {
-            fn!.bind(el)({ ...e, currentTarget: el })
-          })
-        } else if (attributeName === ArtificialEventOptionNames.onChange) {
-          const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onChange']
-          // TODO: verify that element type supports the value change semantic (i.e is a checkbox )?
-          el.on('check', e => {
-            fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
-          })
-          el.on('uncheck', e => {
-            fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
-          })
-
-        }
-        else if (attributeName === ArtificialEventOptionNames.onSelect) {
-          const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onSelect']
-          el.on('select item', e => {
-            fn!.bind(el)({ ...e, currentTarget: el })
-          })
-        }
-        else {
-          console.log('Unrecognized artificialEventAttribute ' + attributeName)
-          throw new Error('Unrecognized artificialEventAttribute ' + attributeName)
-        }
-      })
+    ;(Object.keys(blessedEventMethodAttributes) as EventOptionNames[]).forEach(methodName => {
+      const args = blessedEventMethodAttributes[methodName] as any[]
+      ;(el as any)[methodName](...args.map(a => (typeof a === 'function' ? a.bind(el) : a)))
+    })
+    // artificial event handlers like onClick, onChange (these doesn't exist on blessed - we need to map/install them manually)
+    ;(Object.keys(artificialEventAttributes) as ArtificialEventOptionNames[]).forEach(attributeName => {
+      if (attributeName === ArtificialEventOptionNames.onClick) {
+        const fn = artificialEventAttributes[attributeName]!
+        el.on('click', e => {
+          fn.bind(el)({ ...e, currentTarget: el })
+        })
+      } else if (attributeName === ArtificialEventOptionNames.onKeyPress) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onKeyPress']
+        el.on('keypress', (ch, key) => {
+          fn!.bind(el)({ ch, key, currentTarget: el })
+        })
+      } else if (attributeName === ArtificialEventOptionNames.onRender) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onRender']
+        el.on('render', e => {
+          fn!.bind(el)({ ...e, currentTarget: el })
+        })
+      } else if (attributeName === ArtificialEventOptionNames.onChange) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onChange']
+        // TODO: verify that element type supports the value change semantic (i.e is a checkbox )?
+        el.on('check', e => {
+          fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+        })
+        el.on('uncheck', e => {
+          fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+        })
+      } else if (attributeName === ArtificialEventOptionNames.onSelect) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onSelect']
+        el.on('select item', e => {
+          fn!.bind(el)({ ...e, currentTarget: el })
+        })
+      } else {
+        console.log('Unrecognized artificialEventAttribute ' + attributeName)
+        throw new Error('Unrecognized artificialEventAttribute ' + attributeName)
+      }
+    })
 
     // TODO: afterAttributesInstalledListeners
 

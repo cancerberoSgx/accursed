@@ -9,7 +9,7 @@
     "build": "tsc && npm run copy",
     "test": "ts-node node_modules/jasmine/bin/jasmine",
     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
-    "prepare": "tsc",
+    "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist", 
     "copy": "cp src/declarations/*.d.ts dist/src/declarations",
@@ -21,7 +21,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.12",
-    "misc-utils-of-mine-generic": "0.0.14",
+    "misc-utils-of-mine-generic": "0.0.14"
   },
   "devDependencies": {
     "@types/blessed": "^0.1.11",

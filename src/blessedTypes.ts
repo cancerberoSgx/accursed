@@ -1,7 +1,7 @@
 // import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { RemoveProperties } from './util/misc'
 import * as blessed from './declarations/blessed'
+import { RemoveProperties } from './util/misc'
 
 export type Node = blessed.Widgets.Node
 export type Box = blessed.Widgets.BoxElement
@@ -69,7 +69,6 @@ export type Program = blessed.BlessedProgram
 export type Markdown = contrib.Widgets.MarkdownElement
 export type MarkdownOptions = contrib.Widgets.MarkdownOptions
 
-
 // export const colorsTerminal = blessed.colors.colorNames
 export type BlessedElementOptionsUnion = BoxOptions | TextOptions | TextareaOptions | ListTableOptions | ListOptions
 export type BlessedElementOptionsIntersection = BoxOptions &
@@ -77,7 +76,6 @@ export type BlessedElementOptionsIntersection = BoxOptions &
   TextareaOptions &
   ListTableOptions &
   ListOptions
-
 
 /** isElement type guard without type parameters */
 export function isElement(n: any): n is Element {

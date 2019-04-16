@@ -8,8 +8,8 @@ const screen = blessed.screen({
   log: 'log.txt'
 })
 // blessed.unicode.fromCodePoint(0x0b70)
-const TRUE = blessed.unicode.fromCodePoint(0x0b70)//'0x0b70'
-const FALSE = blessed.unicode.fromCodePoint(0x02573)//'0x0b70'
+const TRUE = blessed.unicode.fromCodePoint(0x0b70) //'0x0b70'
+const FALSE = blessed.unicode.fromCodePoint(0x02573) //'0x0b70'
 // const FALSE = '0x02591'
 const capabilities = enumKeys(BlessedTerminalCapabilitiesBooleans)
 // console.log(capabilities.length , capabilities[0], );
@@ -17,7 +17,7 @@ const capabilities = enumKeys(BlessedTerminalCapabilitiesBooleans)
 
 var stringData = [
   ['{red-fg}Capability{/red-fg}', '{red-fg}Supported?{/red-fg}'],
-  ...capabilities.map(c => [c, screen.program.has(c) ? TRUE : FALSE ])
+  ...capabilities.map(c => [c, screen.program.has(c) ? TRUE : FALSE])
 ]
 
 var table = blessed.listtable({

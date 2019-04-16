@@ -1,5 +1,5 @@
 // import { colors as c } from 'blessed'
-import { BoxOptions,  InputOptions } from '../../../src/blessedTypes'
+import { BoxOptions, InputOptions } from '../../../src/blessedTypes'
 import { installCollapsible, toggleCollapsed } from '../../../src/collapsible'
 import { Br, Div, NbrSpc, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'

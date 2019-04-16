@@ -29,6 +29,8 @@ import {
   NodeGenericEventType,
   NodeMouseEventType,
   NodeWithEvents,
+  Prompt,
+  PromptOptions,
   RadioButton,
   RadioButtonOptions,
   RadioSet,
@@ -38,12 +40,9 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions,
-  PromptOptions,
-  Prompt,
+  TextOptions
 } from '../blessedTypes'
 import { Component } from './component'
-import { markdown } from '../declarations/blessed-contrib';
 
 export enum EventOptionNames {
   key = 'key',
@@ -57,7 +56,7 @@ export enum ArtificialEventOptionNames {
   onKeyPress = 'onKeyPress',
   onRender = 'onRender',
   onChange = 'onChange',
-  onSelect = "onSelect"
+  onSelect = 'onSelect'
 }
 
 /** represents event handlers directly supported by blessed element methods (exactly same signature) */
@@ -92,7 +91,6 @@ export interface ArtificialEventOptions<T extends Element> {
       element: Box
     }
   ) => void
-
 }
 
 declare global {

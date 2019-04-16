@@ -1,5 +1,5 @@
-import * as contrib from 'blessed-contrib'
 import * as blessed from 'blessed'
+import * as contrib from 'blessed-contrib'
 import { BoxOptions, Markdown, Screen, Textarea } from '../src/blessedTypes'
 import { React } from '../src/jsx/createElement'
 import { findDescendant } from '../src/node'

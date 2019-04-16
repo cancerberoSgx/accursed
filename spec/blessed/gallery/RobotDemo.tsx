@@ -15,7 +15,7 @@ export class RobotDemo extends Component<{ screen: Screen }> {
             left: 0,
             width: '40%',
             height: '100%',
-            label: 'Robot Performances',
+            label: 'Robot Performances'
             // style: { fg: colorsTerminal.brightcyan, bg: colorsTerminal.lightgreen }
           }}>
           <Br />
@@ -49,7 +49,7 @@ export class RobotDemo extends Component<{ screen: Screen }> {
             left: '40%',
             width: '55%',
             height: '100%',
-            label: 'here!',
+            label: 'here!'
             // style: { fg: colorsTerminal.brightblack, bg: colorsTerminal.lightblue }
           }}>
           Playing with Low level API to automate the terminal, will I be able to do it?, me ? , being so so high level
