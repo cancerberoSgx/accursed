@@ -641,7 +641,7 @@ export namespace Widgets {
       border?: TBorder | BorderType
       label?: string
       track?: TStyle
-      scrollbar?: TStyle&{style: Style} | true
+      scrollbar?: TStyle & { style: Style } | true
       focus?: TStyle
       item?: TStyle
       selected?: TStyle
@@ -2537,6 +2537,21 @@ export namespace Widgets {
   class ListElement extends BoxElement implements IHasOptions<ListOptions<ListElementStyle>> {
     constructor(opts: ListOptions<ListElementStyle>)
 
+    /** 
+     * The current selected index. @internal 
+     */
+    selected?: number
+
+    /** 
+     * The current value. @internal 
+      */
+    value?: string
+
+    /** 
+     * Current item elements in the list. @internal   
+     */
+    ritems?: BlessedElement[]
+
     /**
      * Original options object.
      */
@@ -2585,7 +2600,7 @@ export namespace Widgets {
     /**
      * Returns the item element. Child can be an element, index, or string.
      */
-    getItem(child: BlessedElement): BlessedElement
+    getItem(child: BlessedElement | number | string): BlessedElement
 
     /**
      * Set item to content.

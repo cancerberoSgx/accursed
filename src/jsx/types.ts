@@ -56,7 +56,8 @@ export enum ArtificialEventOptionNames {
   onClick = 'onClick',
   onKeyPress = 'onKeyPress',
   onRender = 'onRender',
-  onChange = 'onChange'
+  onChange = 'onChange',
+  onSelect = "onSelect"
 }
 
 /** represents event handlers directly supported by blessed element methods (exactly same signature) */
@@ -84,6 +85,14 @@ export interface ArtificialEventOptions<T extends Element> {
       value: V
     }
   ) => void
+  [ArtificialEventOptionNames.onSelect]?: <V = any>(
+    this: T,
+    e: ArtificialEvent<T> & {
+      index: number
+      element: Box
+    }
+  ) => void
+
 }
 
 declare global {

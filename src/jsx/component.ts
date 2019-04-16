@@ -44,6 +44,14 @@ export abstract class Component<P = {}, S = {}> {
     }
   }
 
+
+  log(...args: any[]){
+    if(this.blessedElement && this.blessedElement.screen){
+      this.blessedElement.screen.log(...args)
+
+    }
+  }
+
   protected visitDescendants(v: Visitor, o: VisitorOptions = {}): boolean {
     return visitDescendants(this.blessedElement, v)
   }
