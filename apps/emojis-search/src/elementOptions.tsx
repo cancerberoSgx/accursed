@@ -1,5 +1,5 @@
 import { BoxOptions, ListTableOptions } from 'accursed'
-export const inputOptions: BoxOptions = {
+export const inputOptions = () => ({
   keys: true,
   mouse: true,
   clickable: true,
@@ -39,10 +39,10 @@ export const inputOptions: BoxOptions = {
       bg: 'lightgray'
     }
   }
-}
+} as BoxOptions)
 
-export const listTableOptions: ListTableOptions = {
-  ...inputOptions,
+  export const listTableOptions = ()=>({
+    ...inputOptions(),
   border: 'line',
   align: 'center',
   scrollable: true,
@@ -56,7 +56,7 @@ export const listTableOptions: ListTableOptions = {
     }
   },
   style: {
-    ...inputOptions.style,
+    ...inputOptions().style,
     header: {
       fg: 'blue',
       bold: true,
@@ -69,4 +69,4 @@ export const listTableOptions: ListTableOptions = {
       }
     }
   }
-}
+} as ListTableOptions)

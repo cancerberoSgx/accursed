@@ -1,8 +1,8 @@
-import { Component, React } from 'accursed'
+import { Component, React, Div, Prompt, listtable, showInModal, ListTable, isElement } from 'accursed'
 import { EmojiDefinition, emojiDescriptions, Emoji } from './data/emojis'
 import { countryFlagsDescriptions } from './data/countryFlags'
 import { symbolsDescriptions } from './data/symbols'
-import { listTableOptions } from './elementOptions'
+import { listTableOptions, inputOptions } from './elementOptions'
 import { charCodeHexString, getDescriptions } from './util'
 import { buttonsDescriptions } from './data/buttons';
 
@@ -10,7 +10,15 @@ export class List extends Component<{
   list: string
 }> {
   render() {
-    return <listtable height="100%" width="100%" {...listTableOptions} data={this.data()} />
+    return <Div>
+      <listtable height="100%" width="100%" {...listTableOptions()} data={this.data()} 
+      onKeyPress={e=>{
+        if(e.key.name==='enter'||e.key.name==='space'){
+          const c = this.data()[e.currentTarget.selected||0][0] 
+          const emoji = (emojiDescriptions as any)[c]
+          showInModal(this.blessedElement.screen, JSON.stringify(emoji, null, 2), `${c} Details. Copied to clipboard. [ESC] to close`)
+        }
+    }}  /></Div>
   }
   data() {
     const arr = getCategoryEmojis()[this.props.list]
@@ -33,7 +41,6 @@ export function getCategoryEmojis() {
         categoryEmojis[name] = []
       }
       const c = categoryEmojis[name]
-      // , emoji: k.length+' seee'}
       c.push({...e, emoji: k})
     })
   }

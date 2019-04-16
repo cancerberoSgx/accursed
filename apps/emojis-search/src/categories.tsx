@@ -10,12 +10,11 @@ export class Categories extends Component<{
   render() {
     return (
       <Div>
-        Choose a category:
-        {Object.values(emojiDescriptions).map(e=>e.category).filter((c,i,a)=>a.indexOf(c)===i).join(' ')}
+        Choose a category. Press enter on an emoji for details.
         <Br />
         <list
           padding={1}
-          {...inputOptions}
+          {...inputOptions()}
           height={6}
           items={this.getCategoryNames()}
           onSelect={e => this.selected(e)}
@@ -36,8 +35,11 @@ export class Categories extends Component<{
     const sel = this.getCategoryNames()[index] 
     const container = this.findDescendant(d => isElement(d) && d.name === 'list-container')! as Element
     container.children.forEach(c => c.destroy())
-    container.append(React.render(<List list={sel} />))
     container.screen.render()
+    setTimeout(() => {
+      container.append(React.render(<List list={sel} />))
+      container.screen.render()
+    }, 10);
   }
 
   getCategoryNames(): string[] {

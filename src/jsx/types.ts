@@ -39,6 +39,8 @@ import {
   Textbox,
   TextboxOptions,
   TextOptions,
+  PromptOptions,
+  Prompt,
 } from '../blessedTypes'
 import { Component } from './component'
 import { markdown } from '../declarations/blessed-contrib';
@@ -112,7 +114,7 @@ declare global {
       textbox: TextboxOptions & EventOptions<Textbox>
       radioset: RadioSetOptions & EventOptions<RadioSet>
       radiobutton: RadioButtonOptions & EventOptions<RadioButton>
-      // markdown: MarkdownOptions&{markdown:string} & EventOptions<Markdown>
+      prompt: PromptOptions & EventOptions<Prompt>
       __virtual: __Virtual
     }
 

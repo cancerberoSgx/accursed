@@ -22,13 +22,14 @@ export type List = blessed.Widgets.ListElement
 export type FileManager = blessed.Widgets.FileManagerElement
 export type ListTable = blessed.Widgets.ListTableElement
 export type ListBar = blessed.Widgets.ListbarElement
-
 export type Form = blessed.Widgets.FormElement
+export type Prompt = blessed.Widgets.PromptElement
 export type Textbox = blessed.Widgets.TextboxElement
 export type RadioSet = blessed.Widgets.RadioSetElement
 export type RadioButton = blessed.Widgets.RadioButtonElement
 
 // Heads up - The users need need to reference blessed element options removing children property
+export type PromptOptions = RemoveProperties<blessed.Widgets.PromptOptions, 'children'>
 export type BoxOptions = RemoveProperties<blessed.Widgets.BoxOptions, 'children'>
 export type ListTableOptions = RemoveProperties<blessed.Widgets.ListTableOptions, 'children'>
 export type ListbarOptions = RemoveProperties<blessed.Widgets.ListbarOptions, 'children'>

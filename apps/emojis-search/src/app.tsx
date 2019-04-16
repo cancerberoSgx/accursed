@@ -20,7 +20,7 @@ export class App extends Component<P, {}> {
       <Div parent={this.props.screen}>
         <Div height={5}>
           <listbar
-            {...inputOptions}
+            {...inputOptions()}
             autoCommandKeys={true}
             commands={this.commands()}
             label="Menu"
@@ -37,7 +37,7 @@ export class App extends Component<P, {}> {
     )
   }
 
-  protected updateMain(s: string) {
+  protected updateMain(s: MenuOptions) {
     const mainContainer = this.findDescendant(d => isElement(d) && d.name === 'main-container')! as Element
     const main = this.findDescendant(d => isElement(d) && d.name === 'main')! as Element
     main.destroy()
@@ -47,22 +47,22 @@ export class App extends Component<P, {}> {
 
   protected commands() {
     return {
-      home: () => {
-        this.updateMain('home')
+      Categories: () => {
+        this.updateMain(MenuOptions.categories)
       },
-      search: () => {
-        this.updateMain('search')
+      Search: () => {
+        this.updateMain(MenuOptions.search)
       },
-      categories: () => {
-        this.updateMain('categories')
-      }
+      Help: () => {
+        this.updateMain(MenuOptions.help)
+      },
     }
   }
 }
 
-const Main = (props: { selected: string }) => (
+const Main = (props: { selected: MenuOptions }) => (
   <Div name="main" height="100%">
-    {props.selected === 'home' && <Home />}
+    {props.selected === 'help' && <Home />}
     {props.selected === 'search' && <List list={Object.keys(getCategoryEmojis())[0]} />}
     {props.selected === 'categories' && <Categories />}
   </Div>
