@@ -5,15 +5,15 @@ import { color } from './blessed/gallery/util'
 
 describe('blessed', () => {
   describe('blessed new Element type', () => {
-    let s: Screen
+    let screen1: Screen
 
     beforeEach(() => {
-      tryTo(() => s.destroy())
-      s = screen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
-      installExitKeys(s)
+      tryTo(() => screen1.destroy())
+      screen1 = screen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
+      installExitKeys(screen1)
     })
     afterEach(() => {
-      tryTo(() => s.destroy())
+      tryTo(() => screen1.destroy())
     })
 
     it('should allow to implement a new element type', async done => {
@@ -64,13 +64,13 @@ describe('blessed', () => {
           })
         }
       }
-      
+
       // test our new element:
       const clock = new SpinningClock({
-        parent: s,
+        parent: screen1,
         clockLabel: ' flag2 '
       })
-      s.render()
+      screen1.render()
       setTimeout(() => { // TODO: waitForContent(c) helper
         expect(getContent(clock)).toContain('flag2')
         done()
@@ -89,7 +89,7 @@ describe('blessed', () => {
         )
       }
       const e = React.render(
-        <C parent={s}>
+        <C parent={screen1}>
           hello22{' '}
           {[1, 2, 3].map(i => (
             <text content={`test${i * 2}`} width={5} height={2} />
@@ -97,7 +97,7 @@ describe('blessed', () => {
           bye22
         </C>
       )
-      s.render()
+      screen1.render()
       const c = getContent(e)
         // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
       ;['before1', 'after2', 'test2', 'test4', 'test6', 'bye22', 'hello22'].forEach(s => {

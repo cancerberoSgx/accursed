@@ -2,18 +2,14 @@ Blessing contributions of mine.
 
 Summary: I discovered blessed, an awesome library for developing command line UI, but unformtunately is a discontinued project a dn has poor documentation. 
 
-Instead of cloning the project, here I try to develope missing parts, learn, document, type and find issues, but on top of it.
+Instead of cloning the project, here I try to develope missing parts, learn, document, type and find issues, but on top of it. 
 
-Some things included:
-
- * JSX/TSX support for all blessed components plus some of mine
- * focus manager
- * collapsible element
- * 
+So I'm learning, documenting prototypings and researching. The following is a summary of work done. 
 
 
 # JSX
 
+ * JSX/TSX support for all blessed components plus some of mine
 
  Simple, implementation of React.createElement to render JSX to blessed elements. 
  
@@ -117,6 +113,41 @@ RESEARCH PROBLEM -
 
    * don't ise blessed effects amd implement it from scrach
 
+# specs
+
+ * blessed has no specs - seems they (did) run them manually. I'm writing specs with my new feaytures. Some I use cli-driver to test the tire flow from the real command line automation, and other, I just render the widgets and assert against the screen content. 
+
+ * testing blessing APIs alone , even create custom elements: spec/blessedSpec.tsx
+  * jsx related: spec/jsxSpec.tsx
+  * using cli-driver to spawn a program and automate it spec/jsxSpec.tsx
+
+# My blessed contrib widgets and utilities: 
+
+ * focus manager
+ * collapsible element
+ * node operations
+ * modal
+ * layout rendererand html like semantics
+
+
+# Apps
+ 
+ * apps/emojis-search  : a unicode data table explorer. Test blessed performance by letting ht user interactively navigate/search, etc the FULL unicode charset . 
+
+ * accursed gallery, spec/blessed/gallery/LayoutDemo.tsx I tried to use these tools to build a interactive playground with examplesWIP
+
+  * https://github.com/cancerberoSgx/demos/tree/master/docs/typescript-ast-explorer - explore a TypeScripty project AST , visualliszetogether with sources code and even apply refactors. 
+
+
+# Typings:
+
+Also I think I've enhanced a lot the blessed.d.ts (TypeScript type declarations). ALthough the work from Definetely Typed  I started from was very good,  I did some refactoring so option types doesn't get too restrictive, I added lots of jsdoc comments and snippts to classes and methods and **declared lots of internal methods**. I want this types to be used by users extending the library (class MyElement extends blessing.widget.Box {}) and they need visibility to important methods, no matter if those are not meant to be published. I marked those with @internal tab. Also included typings for blessed-contrib but those I didn't modify so much.
+
+# Documentation: 
+
+the typings already existing in DefinitelyTypes had more or less all the descriptions in blessed README. I added a lot from program.js, snippets and make sure it all blessed/tests.js compile OK with the types (which didn't). Also using typedoc I'm truing to generate html and markdown output of this so I can share with others. TODO: links
+
+
 
 
 ## Issues
@@ -133,3 +164,4 @@ RESEARCH PROBLEM -
 
  * IDEA: jsx render implementations are "forced" to consume the ast frmo the children to the parent (becase mostly of how the getberated fnuction call expressions are evaluated). But in gereal the mediums support first creating the parent and THEN creating and appending the children so this is the crazy idea. Instead of genrerating function expressoin calls generate a similar structure, and before rendering (React.render()) REVERSE the TREE. then render it upside down, level by level in order.  And It should be mandatory to generate an intermediate representation. The function calls can bewrapped in other function calls (instead of `h('div',{}, [h()])` generate  `(()=>h('div',{}, [()=>h())]))`  (similar how behavior JSX tahs like <If> are implemented... so they dont hget evaluated.
   * try to implement this in a second implementation or "mode" for blessed to see if this  easy the poroblem of plugins.
+
