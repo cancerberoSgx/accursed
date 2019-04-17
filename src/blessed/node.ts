@@ -40,7 +40,33 @@ export function visitDescendants(n: Node, v: Visitor, o: VisitorOptions = {}): b
     }
   }
 }
-
+// TODO: parent first option
+export function visitAscendants(n: Node, v: Visitor, o = {}): boolean {
+  // let r = false
+  return !n ||  v(n) || !n.parent || visitAscendants(n.parent, v, o)
+  // if (o.childrenFirst) {
+    // r = n.children.some(c => visitDescendants(c, v, o))
+    // if (r) {
+      // if (!o.breakOnDescendantSignal) {
+        // v(n)
+      // }
+      // return true
+    // } else {
+      // return v(n)
+    // }
+  // } else {
+    // r = v(n)
+    // if (r) {
+      // if (!o.visitDescendantsOnSelfSignalAnyway) {
+        // return true
+      // } else {
+        // return n.children.some(c => visitDescendants(c, v, o)) || true // true because self was signaled
+      // }
+    // } else {
+      // return n.children.some(c => visitDescendants(c, v, o))
+    // }
+  // }
+}
 export type ElementPredicate<T extends Node = Node> = (n: T) => boolean
 
 export function filterDescendants<T extends Node = Node>(n: Node, p: ElementPredicate, o: VisitorOptions = {}): T[] {

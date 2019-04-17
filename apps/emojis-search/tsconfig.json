@@ -15,8 +15,9 @@
   },
   "include": [
     "src", "spec"
-  ],
+  ], 
   "exclude": [
-    "node_modules", "test"
+    // "node_modules", "test", 
+    "src/data/generated", "src/data/scripts"
   ]
 }

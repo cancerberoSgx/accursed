@@ -3,21 +3,35 @@ import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
 import { Search } from './search'
+import { setOnlyEmojis } from './data/data';
+import { MainView, changeViewAction } from './store/uiActions';
+import { Store, ActionListenerType, Action } from './store/store';
+import { ActionListener, ActionType, ACTION_LISTENER } from './store/actions';
 
 interface P {
-  screen: Screen
+  // screen: Screen,
+  store: Store
 }
-enum MenuOptions {
-  'categories' = 'categories',
-  'search' = 'search',
-  'help' = 'help'
-}
+// enum MainView {
+//   'categories' = 'categories',
+//   'search' = 'search',
+//   'help' = 'help'
+// }
 
-export class App extends Component<P, {}> {
-  main: MenuOptions = MenuOptions.categories
+export class App extends Component<P, {}> implements ActionListener<ActionType.CHANGE_CURRENT_VIEW>{
+  actionType= ActionType.CHANGE_CURRENT_VIEW
+id=ACTION_LISTENER.changeMainView
+handle(a: changeViewAction){
+ this.updateMain(a.view)
+}
+  constructor(p:P, s:{}){
+    super(p,s)
+    this.props.store.addActionListener(this)
+  }
+  main: MainView = MainView.Emojis
   render() {
     return (
-      <Div parent={this.props.screen}>
+      <Div parent={this.props.store.state.screen}>
         {/* <Div height={5}> */}
         <listbar
           {...inputOptions()}
@@ -38,7 +52,7 @@ export class App extends Component<P, {}> {
     )
   }
 
-  protected updateMain(s: MenuOptions) {
+  protected updateMain(s: MainView) {
     const mainContainer = this.findDescendant(d => isElement(d) && d.name === 'main-container')! as Element
     replaceChildren(mainContainer, React.render(<Main selected={s} />))
     // const main = this.findDescendant(d => isElement(d) && d.name === 'main')! as Element
@@ -49,26 +63,29 @@ export class App extends Component<P, {}> {
 
   protected commands() {
     return {
-      Emojis: () => {
-        this.updateMain(MenuOptions.categories)
+      'Only Emojis': () => {
+        setOnlyEmojis(true)
+        this.updateMain(MainView.Emojis)
       },
       'All Unicode': () => {
-        this.updateMain(MenuOptions.categories)
+        setOnlyEmojis(false)
+        this.updateMain(MainView.AllUnicode)
       },
       Search: () => {
-        this.updateMain(MenuOptions.search)
+        this.updateMain(MainView.Search)
       },
       Help: () => {
-        this.updateMain(MenuOptions.help)
+        this.updateMain(MainView.Help)
       }
     }
   }
 }
 
-const Main = (props: { selected: MenuOptions }) => (
+const Main = (props: { selected: MainView }) => (
   <Div name="main" height="100%">
-    {props.selected === 'help' && <Home />}
-    {props.selected === 'search' && <Search />}
-    {props.selected === 'categories' && <Categories />}
+    {props.selected === MainView.Help && <Home />}
+    {props.selected === MainView.Search && <Search />}
+    {props.selected === MainView.AllUnicode && <Categories />}
+    {props.selected === MainView.Emojis && <Categories />}
   </Div>
 )

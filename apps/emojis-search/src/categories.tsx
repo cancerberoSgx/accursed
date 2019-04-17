@@ -8,9 +8,10 @@ import {
   isElement,
   List as ListElement,
   React,
-  replaceChildren
+  replaceChildren,
+  Strong
 } from 'accursed'
-import { getCategoryNames } from './data/data'
+import { getCategoryNames, getOnlyEmojis } from './data/data'
 import { scrollableOptions } from './elementOptions'
 import { List } from './list'
 
@@ -20,15 +21,16 @@ export class Categories extends Component<{
   render() {
     return (
       <Div>
-        Choose a category, select and emoji and press [ENTER] for details.
-        <Br />
+        {/* {getOnlyEmojis() ? <Div>Showing only Emojis, a small category inside the whole <Strong>UniCode</Strong> set. </Div> : <Div>Showing the whole <Strong>UniCode</Strong> set. this is a lot of data, more tools to come for better experience to come</Div>}
+        <Br/>
+        Choose a category, use the mouse, or mouse wheel to scroll, and press enter or double click to select an icon for for details.
+        <Br /> */}
         <list
-          // padding={1}
           {...scrollableOptions()}
           height={'20%'}
           items={getCategoryNames()}
-          // on={['select item', (e:Element, index:number)=>this.selected(e)]}
           onSelect={e => this.selected(e)}
+          width="100%"
         />
         <Br />
         <Div name="list-container" height="70%">

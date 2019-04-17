@@ -1,8 +1,9 @@
 import * as blessed from 'blessed'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { Checkbox, Element } from '../blessedTypes'
+import { Checkbox, Element, isElement } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
+import { visitAscendants, visitDescendants } from './node';
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -99,15 +100,22 @@ export function replaceChildren(
   options: { mode: 'quickly' | 'careful' | 'dontRender' } = { mode: 'careful' }
 ) {
   if (options.mode === 'careful') {
-    container.children.forEach(c => {
+    container.children.filter(isElement).forEach(c => {
+      container.screen.cleanSides(c)
       container.remove(c)
       c.destroy()
     })
+    container.screen.cleanSides(container)
+    visitDescendants(container.screen, c=>isElement(c) && container.screen.cleanSides(c))
     container.screen.once('render', () => {
       setTimeout(() => {
         asArray(newChildren).forEach(c => {
           container.append(c)
         })
+        // visitAscendants(container, n=>{
+          // if(isElement(n)) {
+            // n.screen.cleanSides(n); n.children.forEach(c=>isElement(c) // )})
+        // container.screen.cleanSides(container)
         container.screen.render()
       }, 10)
     })
