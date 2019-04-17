@@ -29,7 +29,7 @@ function getInitialState(): State {
     onlyEmojis: true,
     categoriesView: {
       compact: false,
-      categoryIndex: 0
+      // selectedCategory?:string
     },
     searchView: {
       compact: false,

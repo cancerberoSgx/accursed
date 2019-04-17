@@ -2,12 +2,16 @@ import { ActionListenerType , ActionListener as AL, Action, StoreImpl} from './s
 import { State } from './state';
 import { changeViewAction } from './uiActions';
 
+export interface Props {
+  store: UnicodeStore
+}
 
 
 /** analog to redux actions */
-export interface UnicodeAction<T extends ActionType> extends Action<T> {
-  // type: T
-}
+// export interface UnicodeAction<T extends ActionType> extends Action<T> {
+//   // type: T
+// }
+export type UnicodeAction = changeViewAction
 
 export interface UnicodeStore {
   /** this is similar to store.dispatch in the sense that anybody from user facing dispatch simple action objects against the store hen user performs something.  */

@@ -1,6 +1,9 @@
 import { Component } from 'accursed';
 import { ActionType, UnicodeStore, UnicodeAction } from './store/actions';
+import { getCategoryEmojis, getEmojiDefinitions, getCategoryNames } from './data/data';
+import { MainView } from './store/uiActions';
 
+// TODO : this should be more abstract
 export abstract class StoreComponent<P extends {store: UnicodeStore}, S={}> extends Component<P, S> {
 
   render(): JSX.BlessedJsxNode{
@@ -15,20 +18,37 @@ export abstract class StoreComponent<P extends {store: UnicodeStore}, S={}> exte
 
   abstract  _render(): JSX.BlessedJsxNode
 
-  get el(){
+  protected get el(){
     return this.blessedElement
   }
-  get state(){
+  protected get state(){
     return this.props.store.state
   }
-  get store(){
+  protected get store(){
     return this.props.store
   }
-  get screen(){
+  protected get screen(){
     return this.state.screen
   }
-  dispatch<T extends ActionType>(a: UnicodeAction<T>){
-    // this.store.dispatch(a)
+  protected dispatch<T extends ActionType>(a: UnicodeAction){
+    this.store.dispatch(a)
   }
 
+  protected getUnicodeCategories(){
+    return getCategoryEmojis(this.state.currentView===MainView.Emojis)// TODO: wrong - we could be in search view - need a prop that indicate the last "catalog" source"
+  }
+
+  protected getCategoryNames(){
+    return getCategoryNames(this.state.currentView===MainView.Emojis) // TODO: wrong - we could be in search view - need a prop that indicate the last "catalog" source"
+  }
+
+  protected getUnicodeDefinitions(){
+    return getEmojiDefinitions(this.state.currentView===MainView.Emojis)// TODO: wrong - we could be in search view - need a prop that indicate the last "catalog" source"
+  }
+
+  protected debugError(e: Error){
+    this.blessedElement.screen.log('Store component error: '+e)
+    throw e
+  }
+  
 }

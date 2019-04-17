@@ -2,12 +2,19 @@ import { Component, Div, React, showInModal, Element, isElement, replaceChildren
 import { EmojiDefinition, getCategoryEmojis, getEmojiDefinitions } from './data/data'
 import { inputOptions, scrollableOptions } from './elementOptions'
 import {asArray} from 'misc-utils-of-mine-generic'
+import { Props } from './store/actions';
+import { StoreComponent } from './storeComponent';
+import { MainView } from './store/uiActions';
 
-export class List extends Component<{
-  category?: string
-  emojis?: (EmojiDefinition)[]
-}> {
-  render() {
+export class List extends StoreComponent<Props>
+// {
+
+//   category?: string
+//   emojis?: (EmojiDefinition)[]
+// }
+// > 
+{
+  _render() {
     return (
       <Div height="100%">
         <checkbox {...inputOptions()} checked={false} content="Compact View" onChange={e => {
@@ -47,7 +54,10 @@ export class List extends Component<{
   }
 
   private selectEmoji(char: string) {
-    const emoji = getEmojiDefinitions().find(c => c.char === char)!
+    const emoji = this.getUnicodeDefinitions().find(c => c.char === char)!
+    if(!emoji){
+      this.debugError(new Error('selectEmoji cannot find char for '+char))
+    }
 
     this.blessedElement.screen.copyToClipboard(JSON.stringify(emoji))
     const text = `
@@ -78,17 +88,20 @@ ${Object.keys(emoji)
 
   getListTableData() {
     const arr = this.getData()
-    return [['Character', 'Code Points', 'Name'], ...arr.map(d => [d.char, d.cp, d.name])]
+    return [['Character', 'Code Points', 'Name'], ...this.getUnicodeDefinitions().map(d => [d.char, d.cp, d.name])]
   }
 
   private getData() {
-    return this.props.category ? getCategoryEmojis()[this.props.category] : this.props.emojis || []
+    return this.state.currentView===MainView.Search ? this.state.searchView.results||[] : this.state.currentView===MainView.AllUnicode && this.state.categoriesView.selectedCategory ?  this.getUnicodeCategories()[this.state.categoriesView.selectedCategory] : []
+    
+    
+    // this.props.category ? getCategoryEmojis()[this.props.category] : this.props.emojis || []
+
   }
 
   compact(): any {
     return (
       <Div {...inputOptions()} border={undefined} height="100%" width="100%" focusable={true}>
-        {/* <button {...inputOptions()} content="hello"/>  <button content="hel🇦🇨lo"/> //<button>helloel🇦🇨l world</button> */}
         {this.getData().map(d => (
           <button
             {...inputOptions()}

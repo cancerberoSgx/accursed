@@ -14,12 +14,13 @@ import {
 import { getCategoryNames, getEmojiDefinitions } from './data/data'
 import { inputOptions } from './elementOptions'
 import { List } from './list'
+import { Props } from './store/actions';
+import { StoreComponent } from './storeComponent';
+import { MainView } from './store/uiActions';
 
-export class Search extends Component<{
-  category?: string
-}> {
-  render() {
-    const emojiDescriptions = getEmojiDefinitions()
+export class Search extends StoreComponent<Props> {
+  _render() {
+    const emojiDescriptions = getEmojiDefinitions(this.state.currentView===MainView.Emojis)
     return (
       <Div width="100%" height="100%">
         To search, focus the textbox below and press [enter] to start writing. [enter] for search. [esc] to restore
@@ -52,7 +53,7 @@ export class Search extends Component<{
                   React.render(
                     <Div>
                       Results for <Strong>"{v}"</Strong>
-                      <List emojis={emojis} />
+                      <List {...this.props}/>
                     </Div>
                   )
                 )
@@ -79,7 +80,7 @@ export class Search extends Component<{
         <Br />
         <Br />
         <Br />
-        <Div name="search-list-container">{this.props.category && <List category={this.props.category} />}</Div>
+        <Div name="search-list-container">{this.state.categoriesView.selectedCategory&& <List{...this.props} />}</Div>
       </Div>
     )
   }
@@ -91,9 +92,9 @@ export class Search extends Component<{
     }
   ): void {
     const index = e.currentTarget.selected || 0
-    const sel = getCategoryNames()[index]
+    const sel = getCategoryNames(this.state.currentView===MainView.Emojis)[index]
     const container = this.findDescendant(d => isElement(d) && d.name === 'search-list-container')! as Element
-    replaceChildren(container, React.render(<List category={sel} />))
+    replaceChildren(container, React.render(<List {...this.props}/>))
     // container.children.forEach(c => c.destroy())
     // container.screen.render()
     // setTimeout(() => {
