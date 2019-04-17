@@ -1,5 +1,5 @@
-import { getElementData, getElementLabel, setElementData } from './blessed'
-import { Element, IMouseEventArg, isElement } from './blessedTypes'
+import { Element, IMouseEventArg, isElement } from '../blessedTypes'
+import { getElementData, getElementLabel, setElementData } from './util'
 
 export function isCollapsed(el: Element) {
   return el.$.collapsible && el.$.collapsible.collapsed

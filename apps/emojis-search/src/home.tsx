@@ -1,8 +1,5 @@
 import { Div, React } from 'accursed'
 
-// //@ts-ignore
-// const user = typeof WHO_AM_I === 'undefined' ? 'user' : WHO_AM_I
-
 export const Home = () => (
   <Div
     tags={true}

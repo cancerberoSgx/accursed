@@ -1,4 +1,4 @@
-import { Component, Div, React, showInModal } from 'accursed'
+import { Component, Div, React, showInModal, Element, isElement } from 'accursed'
 import { EmojiDefinition, getCategoryEmojis, getEmojiDefinitions } from './data/data'
 // import { EmojiDefinition, emojiDescriptions } from './data/emojis'
 import { inputOptions, scrollableOptions } from './elementOptions'
@@ -7,17 +7,29 @@ export class List extends Component<{
   category?: string
   emojis?: (EmojiDefinition)[]
 }> {
-  mode: 'listtable' | 'compact' = 'compact'
+  // mode: 'listtable' | 'compact' = 'compact'
   render() {
     return (
       <Div height="100%">
-        <checkbox {...inputOptions()} checked={false} content="Compact View" onChange={e => {}} />
+        <checkbox {...inputOptions()} checked={false} content="Compact View" onChange={e => {
+          // this.mode = 
+          if(e.value){
+            this.replaceElement("list-container", e.value ? this.compact() : this.listtable())
+          }
+        }} />
 
         {/* <Div name="list-container">
       {this.props.category && <List category={this.props.category} />} */}
-        <Div name="list-container">{this.mode === 'listtable' ? this.listtable() : this.compact()}</Div>
+        <Div name="list-container">{this.listtable() }
+        {/* this.mode === 'listtable' ? this.listtable() : this.compact()} */}
+        </Div>
       </Div>
     )
+  }
+  replaceElement(oldChildNameOrElemtn: string|Element, newChild: Element|JSX.Element): any {
+    const c = isElement(newChild) ? newChild :  React.render(newChild)
+    const oldNode = isElement(oldChildNameOrElemtn) ? oldChildNameOrElemtn : this.findDescendant(d=>isElement(d) && d.name===oldChildNameOrElemtn)
+    throw new Error('Method not implemented.');
   }
   private listtable() {
     return (

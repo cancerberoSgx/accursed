@@ -1,45 +1,12 @@
 import * as blessed from 'blessed'
-import * as contrib from 'blessed-contrib'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { Checkbox, Element } from './blessedTypes'
+import { Checkbox, Element } from '../blessedTypes'
+import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
-import { getObjectProperty, setObjectProperty } from './util/misc'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
 }
-
-// export function visitDescendantNodes(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
-//   let stop: boolean = false
-//   node.children.forEach(c => {
-//     if (stop) {
-//       return
-//     }
-//     if (fn(c)) {
-//       stop = true
-//       return
-//     }
-//     if (isBlessedElement(c)) {
-//       visitDescendantNodes(c, fn)
-//     }
-//   })
-// }
-
-// export function visitDescendantElements(node: Node, fn: (l: Element) => boolean) {
-//   return visitDescendantNodes(node, n => (isBlessedElement(n) ? fn(n) : false))
-// }
-
-// export function findDescendantNode<T extends Node = Node>(node: Node, fn: (l: blessed.Widgets.Node) => boolean) {
-//   var found: T | undefined
-//   visitDescendantNodes(node, c => {
-//     if (fn(c)) {
-//       found = c as any
-//       return true
-//     }
-//     return false
-//   })
-//   return found
-// }
 
 /**
  * Besides reacting for click, also will react for pressed, enter and space keys.
@@ -65,22 +32,6 @@ export function installExitKeys(screen: blessed.Widgets.Screen) {
       closeModal(screen)
     } else {
       return process.exit(0)
-    }
-  })
-}
-
-/**
- * notifies when used "hovers" a tree node (not enter, just overs the node when navigating with arrow keys.)
- */
-export function onTreeNodeFocus<T extends contrib.Widgets.TreeElementNode>(
-  tree: contrib.Widgets.TreeElement<T>,
-  fn: (selectedNode: T) => void
-) {
-  tree.rows.key(['down', 'up'], k => {
-    const selectedNode =
-      tree.nodeLines && tree.rows && tree.rows.selected && tree.nodeLines[tree.rows.getItemIndex(tree.rows.selected)]
-    if (selectedNode) {
-      fn(selectedNode)
     }
   })
 }
@@ -127,7 +78,9 @@ export function getElementLabel(el: Element): Element | undefined {
 }
 
 /**
- * Hot replace of given container element children's with given array of nodes. This can be used in dynamic views that need to
+ * Hot replace all children of given container element with given [[newChildren]] array elements.
+ *
+ * This can be used in dynamic views that need to
  * replace a whole element subtree because they radically changed. For example, a Panel could offer different modalities for
  * represent some data, that the user can demonically and each uses different element types. (for example one is a Tree, other
  * is a Table and other is a listtab).
@@ -142,7 +95,7 @@ export function getElementLabel(el: Element): Element | undefined {
  */
 export function replaceChildren(
   container: Element,
-  children: Element | Element[],
+  newChildren: Element | Element[],
   options: { mode: 'quickly' | 'careful' | 'dontRender' } = { mode: 'careful' }
 ) {
   if (options.mode === 'careful') {
@@ -152,7 +105,7 @@ export function replaceChildren(
     })
     container.screen.once('render', () => {
       setTimeout(() => {
-        asArray(children).forEach(c => {
+        asArray(newChildren).forEach(c => {
           container.append(c)
         })
         container.screen.render()
@@ -164,7 +117,7 @@ export function replaceChildren(
       // container.remove(c);
       c.destroy()
     })
-    asArray(children).forEach(c => {
+    asArray(newChildren).forEach(c => {
       container.append(c)
     })
     options.mode !== 'dontRender' && container.screen.render()

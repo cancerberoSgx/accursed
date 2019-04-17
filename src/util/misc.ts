@@ -3,6 +3,7 @@ import { objectKeys } from 'misc-utils-of-mine-generic'
 export function notUndefined<T>(a: T): a is Exclude<T, undefined> {
   return typeof a !== 'undefined'
 }
+
 /**
  * Returns a nested property of given object and given path. For example path could be 'foo.bar' and it will return `object['foo']['bar']`
  */
@@ -26,6 +27,9 @@ export function getObjectProperty<T>(
   }
   return defaultValue
 }
+/**
+ * sets a nested property on given path. For example path could be 'foo.bar' and it will set `object.foo.bar = value`
+ */
 export function setObjectProperty<T>(object: any, path: string, value: T) {
   if (!path) {
     return
@@ -45,6 +49,7 @@ export function setObjectProperty<T>(object: any, path: string, value: T) {
     prev[tokens[tokens.length - 1]] = value
   }
 }
+
 /**
  * strips ANSI codes from a string. From https://github.com/xpl/ansicolor/blob/master/ansicolor.js
  * @param {string} s a string containing ANSI escape codes.
@@ -74,6 +79,7 @@ export function arrayToObject<T = any>(a: string[], fn: (a: string) => T | undef
   })
   return o
 }
+
 /**
  * return the Enum type from given string enum key obtained with key [[enumNoValueKeys]]
  */

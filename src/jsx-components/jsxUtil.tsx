@@ -1,8 +1,8 @@
 import { asArray } from 'misc-utils-of-mine-generic'
+import { renderer } from '../blessed/layoutRenderer'
 import { Layout, LayoutOptions } from '../blessedTypes'
 import { React } from '../jsx/createElement'
 import { EventOptions } from '../jsx/types'
-import { renderer } from '../layoutRenderer'
 
 /** to be used inside layout renderer like [[Div]] */
 export function Br(props: {}) {

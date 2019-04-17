@@ -18,18 +18,19 @@ export class App extends Component<P, {}> {
   render() {
     return (
       <Div parent={this.props.screen}>
-        <Div height={5}>
-          <listbar
-            {...inputOptions()}
-            autoCommandKeys={true}
-            commands={this.commands()}
-            label="Menu"
-            padding={1}
-            focused={true}
-            width="100%"
-            height="100%"
-          />
-        </Div>
+        {/* <Div height={5}> */}
+        <listbar
+          {...inputOptions()}
+          autoCommandKeys={true}
+          commands={this.commands()}
+          label="Menu"
+          padding={1}
+          height={5}
+          focused={true}
+          width="100%"
+          // height="100%"
+        />
+        {/* </Div> */}
         <Div name="main-container" height="100%">
           <Main selected={this.main} />
         </Div>
@@ -49,6 +50,9 @@ export class App extends Component<P, {}> {
   protected commands() {
     return {
       Categories: () => {
+        this.updateMain(MenuOptions.categories)
+      },
+      All: () => {
         this.updateMain(MenuOptions.categories)
       },
       Search: () => {

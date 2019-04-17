@@ -1,5 +1,5 @@
 import * as blessed from 'blessed'
-import { installExitKeys } from '../src/blessed'
+import { installExitKeys } from '../src/blessed/util'
 import { Element, Screen } from '../src/blessedTypes'
 import { React } from '../src/jsx/createElement'
 // import { sleep } from 'misc-utils-of-mine-generic';

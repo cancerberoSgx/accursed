@@ -1,5 +1,5 @@
-import { Element, isElement, Node } from './blessedTypes'
-import { strip } from './util/misc'
+import { Element, isElement, Node } from '../blessedTypes'
+import { strip } from '../util/misc'
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */

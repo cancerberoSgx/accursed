@@ -1,5 +1,5 @@
-import { isElement, Layout, LayoutIterator } from './blessedTypes'
-import { getObjectProperty } from './util/misc'
+import { isElement, Layout, LayoutIterator } from '../blessedTypes'
+import { getObjectProperty } from '../util/misc'
 
 /**
  * The same blessed Layout renderer function with a few modifications and adapted to TypeScript. Modifications:

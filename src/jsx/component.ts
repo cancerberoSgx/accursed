@@ -1,14 +1,16 @@
-import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
+import { replaceChildren } from '../blessed'
 import {
   ElementPredicate,
   filterChildren,
   filterDescendants,
   findChildren,
   findDescendant,
+  getContent,
   visitDescendants,
   Visitor,
   VisitorOptions
-} from '../node'
+} from '../blessed/node'
+import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
 import { RemoveProperties } from '../util/misc'
 
 /**
@@ -70,6 +72,21 @@ export abstract class Component<P = {}, S = {}> {
     return filterChildren(this.blessedElement, p) as any
   }
   //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
+
+  /**
+   *  Hot replace all children on this node with given [[newChildren]] array elements. This is a visual operation, and only should eb performed when the component need to implement a radicals different view dynamically since it couldnt costly.
+   */
+  replaceChildren(
+    newChildren: Element[],
+    options: { mode: 'quickly' | 'careful' | 'dontRender' } = { mode: 'careful' }
+  ) {
+    replaceChildren(this.blessedElement, newChildren, options)
+  }
+
+  /** Returns the text content of given node and all its children, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
+  getContent(options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}) {
+    return getContent(this.blessedElement, options)
+  }
 }
 
 /** esthetic options like color font styles that doesn't change the postiion dimention at all ! (so they can me safely applied in a general manner (declared in a theme)) safely*/

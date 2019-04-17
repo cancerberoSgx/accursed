@@ -1,9 +1,9 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
-import { installExitKeys, onValueChange } from '../../src/blessed'
+import { installCollapsible, toggleCollapsed } from '../../src/blessed/collapsible'
+import { renderer } from '../../src/blessed/layoutRenderer'
+import { installExitKeys, onValueChange } from '../../src/blessed/util'
 import { BoxOptions } from '../../src/blessedTypes'
-import { installCollapsible, toggleCollapsed } from '../../src/collapsible'
-import { renderer } from '../../src/layoutRenderer'
 
 const screen = blessed.screen({ smartCSR: true, log: './log.txt' })
 
