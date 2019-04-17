@@ -14,12 +14,12 @@ let emojiDefinitions: EmojiDefinition[]
 let ucdNonUniHanDefinitions: EmojiDefinition[]
 
 let dataOnlyEmojis = true
-export function setOnlyEmojis(b: boolean){
-  dataOnlyEmojis = b
-}
-export function getOnlyEmojis(){
-  return dataOnlyEmojis
-}
+// export function setOnlyEmojis(b: boolean){
+//   dataOnlyEmojis = b
+// }
+// export function getOnlyEmojis(){
+//   return dataOnlyEmojis
+// }
 export function getEmojiDefinitions() {
   if (!emojiDefinitions) {
     emojiDefinitions = JSON.parse(readFileSync(join(__dirname, 'generated', 'emoji.json')).toString()) //as EmojiDefinition[]

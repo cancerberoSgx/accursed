@@ -19,6 +19,7 @@ import {
   EventOptionNames,
   is__Virtual
 } from './types'
+import { setElementData } from '../blessed';
 interface Options {
   dontInheritStyle?: boolean
 }
@@ -67,6 +68,9 @@ class BlessedJsxImpl implements BlessedJsx {
       component = new tag({ ...attrs, children }, {})
       // TODO: beforeElementRenderListeners
       el = component.render()
+      if(isElement(el)){
+        setElementData(el , ACCURSED_COMPONENT_PROPERTY_NAME, component)
+      }
       //@ts-ignore
       component.blessedElement = el
     } else if (typeof tag === 'function') {
@@ -278,6 +282,7 @@ class BlessedJsxImpl implements BlessedJsx {
 
 export const React: BlessedJsx = new BlessedJsxImpl()
 
+export const ACCURSED_COMPONENT_PROPERTY_NAME = 'accursed.component'
 // export function create__Virtual<Data=any>(data: Data): __Virtual<Data>{//TODO should we publish this in React object or better implementors  create this hack manually if they want...
 //   return {
 //   __virtual: '__virtual', data

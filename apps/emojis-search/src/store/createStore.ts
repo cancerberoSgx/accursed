@@ -1,10 +1,23 @@
 import { installExitKeys, screen } from 'accursed';
-import { MainView, changeMainViewDispatcher } from './uiActions';
+import { MainView } from './uiActions';
 import { StoreImpl } from './store';
 import { State } from './state';
+import { App } from '../app';
+import { ActionType, ActionTypeMap, ACTION_LISTENER, UnicodeStore } from './actions';
+
+
+export class UnicodeStoreImpl extends StoreImpl<State, ActionType, ActionTypeMap, ACTION_LISTENER> implements UnicodeStore {
+  dispatch<T extends ActionType>(a: ActionTypeMap[T]){
+    super.dispatch(a)
+    this.state.screen.render()
+  
+  }
+  }
+
+  
 export function createStore() {
-  const allReducers = [changeMainViewDispatcher];
-  const store = new StoreImpl(getInitialState());
+  const store = new UnicodeStoreImpl(getInitialState());
+  const allReducers = [App.instance(store)];
   allReducers.forEach(r => {
     store.addActionListener(r);
   });

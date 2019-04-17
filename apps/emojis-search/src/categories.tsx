@@ -11,7 +11,7 @@ import {
   replaceChildren,
   Strong
 } from 'accursed'
-import { getCategoryNames, getOnlyEmojis } from './data/data'
+import { getCategoryNames } from './data/data'
 import { scrollableOptions } from './elementOptions'
 import { List } from './list'
 

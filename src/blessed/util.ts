@@ -53,6 +53,7 @@ export function setElementData<T>(e: Element, path: string, value: T) {
   setObjectProperty(e.$, path, value)
 }
 
+
 export function onValueChange(el: Checkbox, cb: (this: Checkbox, value: boolean) => void) {
   function listener(this: Checkbox) {
     cb.apply(this, [this.checked])

@@ -1,4 +1,4 @@
-import { replaceChildren } from '../blessed'
+import { replaceChildren, getElementData } from '../blessed'
 import {
   ElementPredicate,
   filterChildren,
@@ -12,12 +12,13 @@ import {
 } from '../blessed/node'
 import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
 import { RemoveProperties } from '../util/misc'
+import { ACCURSED_COMPONENT_PROPERTY_NAME } from './createElement';
 
 /**
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a dummy state that will update the blessed element if changed by default
  */
 export abstract class Component<P = {}, S = {}> {
-  constructor(protected props: P, protected state: S) {}
+  constructor(protected props: P, protected componentState: S) {}
 
   abstract render(): JSX.BlessedJsxNode
 
@@ -40,7 +41,7 @@ export abstract class Component<P = {}, S = {}> {
    * Dummy state, by default calls element's render() unless [[dontRenderOnStateChange]]
    */
   protected setState(s: Partial<S>) {
-    this.state = { ...this.state, ...s }
+    this.componentState = { ...this.componentState, ...s }
     if (!this.dontRenderOnStateChange) {
       this.blessedElement.render()
     }
@@ -87,6 +88,10 @@ export abstract class Component<P = {}, S = {}> {
   getContent(options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}) {
     return getContent(this.blessedElement, options)
   }
+}
+
+export function getElementComponent(el: Element): Component|undefined {
+  return getElementData(el, ACCURSED_COMPONENT_PROPERTY_NAME )
 }
 
 /** esthetic options like color font styles that doesn't change the postiion dimention at all ! (so they can me safely applied in a general manner (declared in a theme)) safely*/

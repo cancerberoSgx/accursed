@@ -1,0 +1,71 @@
+NEVERMIND
+for updating state - if components are associated bwteeen them (as blessed elements are) - we can then : 
+do the bad practice - mutate! - render() is specialized not in rendering new stuff but also in update the state of the UI 
+
+class C extends Component {
+  render() {
+    // if there is already a element dont re-render - update it!
+    if(this.blessedElement){ 
+      this.forEachSubComponents(c=>c.render()) 
+      return this.blessedElement
+    }
+    else {
+        return (    <Div>...
+    }
+  }
+}
+
+
+
+class Form extends Component {
+  render() {
+    else {
+     return (  <Input onChange={e=>dispatch(.. query: e.value))}> <List onChange={dispatch(.. query: e.value)}>{state.options.filter(state.query).map(<Option>)}
+    }
+  }
+}
+
+IMPORTANT: on render() while set
+
+
+
+
+
+    <!-- // if there is already a element dont re-render - update it! -->
+    // layout view switching between sub views:
+class AppLayout extends Component {
+  render() {
+    if(this.blessedElement){ 
+      this.forEachSubComponents(c=>this.props.currentView===c.name ? c.render().show() : c.hide()
+    }
+    else {
+     return (    <Div>...
+    }
+  }
+}
+
+class Form extends Component {
+  render() {
+    else {
+     return (  <Input onChange={e=>dispatch(.. query: e.value))}> <List onChange={dispatch(.. query: e.value)}>{state.options.filter(state.query).map(<Option>)}
+    }
+  }
+
+// view with input box and list filtering
+<!-- we realize is better to separate render and have update() that will pass only the props that change -->
+class Form extends Component {
+  render() {
+    else {
+     return (  <Input onChange={e=>dispatch(.. query: e.value))}> <List onChange={dispatch(.. query: e.value)}>{state.options.filter(state.query).map(<Option>)}
+    }
+  }
+  <!-- update(changed){
+     <!-- if(this.blessedElement){  -->
+      <!-- return this.forEachSubComponents(c=>this.props.currentView===c.name ? c.render().show() : c.hide() -->
+    }
+  } -->
+}
+
+IMPORTANT: 
+//the form do nothing - it will call automaticall update() on its children (this input and the list).
+the props are the same {store} - both will update - hopefully the List is smart enough to realize it didn't chage (was change by the user)

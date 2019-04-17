@@ -3,14 +3,14 @@ import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
 import { Search } from './search'
-import { setOnlyEmojis } from './data/data';
+// import { setOnlyEmojis } from './data/data';
 import { MainView, changeViewAction } from './store/uiActions';
-import { Store, ActionListenerType, Action } from './store/store';
-import { ActionListener, ActionType, ACTION_LISTENER } from './store/actions';
+import {  ActionListenerType } from './store/store';
+import { ActionListener, ActionType, ACTION_LISTENER, UnicodeStore } from './store/actions';
 
 interface P {
   // screen: Screen,
-  store: Store
+  store: UnicodeStore
 }
 // enum MainView {
 //   'categories' = 'categories',
@@ -18,15 +18,18 @@ interface P {
 //   'help' = 'help'
 // }
 
+
 export class App extends Component<P, {}> implements ActionListener<ActionType.CHANGE_CURRENT_VIEW>{
+  
   actionType= ActionType.CHANGE_CURRENT_VIEW
-id=ACTION_LISTENER.changeMainView
-handle(a: changeViewAction){
- this.updateMain(a.view)
-}
-  constructor(p:P, s:{}){
+  id=ACTION_LISTENER.changeMainView
+
+  private constructor(p:P, s:{}){
     super(p,s)
     this.props.store.addActionListener(this)
+  }
+  static instance(store: UnicodeStore){
+    return new App({store} ,{})
   }
   main: MainView = MainView.Emojis
   render() {
@@ -51,7 +54,9 @@ handle(a: changeViewAction){
       </Div>
     )
   }
-
+handle(a: changeViewAction){
+  this.updateMain(a.view)
+ }
   protected updateMain(s: MainView) {
     const mainContainer = this.findDescendant(d => isElement(d) && d.name === 'main-container')! as Element
     replaceChildren(mainContainer, React.render(<Main selected={s} />))
@@ -64,11 +69,12 @@ handle(a: changeViewAction){
   protected commands() {
     return {
       'Only Emojis': () => {
-        setOnlyEmojis(true)
+        // this.
+        // setOnlyEmojis(true)
         this.updateMain(MainView.Emojis)
       },
       'All Unicode': () => {
-        setOnlyEmojis(false)
+        // setOnlyEmojis(false)
         this.updateMain(MainView.AllUnicode)
       },
       Search: () => {
