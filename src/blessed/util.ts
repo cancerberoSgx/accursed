@@ -4,6 +4,7 @@ import { Checkbox, Element, isElement } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
 import { visitDescendants } from './node'
+import { Component } from '../jsx';
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -180,6 +181,28 @@ export function replaceChildren(
 }
 
 export const createScreen = blessed.screen
+
+
+/** simulates to be a lessed node until the next iteration of createElement so the parent can recognize it abd extract its info, and discard it. */
+export  abstract class VirtualComponent<P = {}, S={}> extends Component<P, S> {
+  private static __isVirtualComponent=123
+  static isVirtualComponent(c: any): c is typeof VirtualComponent { // TODO. as static member of vc
+    return c &&   c.__isVirtualComponent === VirtualComponent.__isVirtualComponent
+  }
+  static iVirtualElement(c: any){ // TODO. as static member of vc
+    return VirtualComponent.isVirtualComponent(c)
+  }
+  static createVirtualElement(c: any) {
+    return c as VirtualElement
+  }
+  }
+interface VirtualElement {
+
+}
+// export class VirtualElement{
+
+// }
+// export function 
 
 // export {blessed.screen}C
 // blessed.screen

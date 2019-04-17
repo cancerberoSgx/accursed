@@ -20,6 +20,7 @@ import {
   is__Virtual,
   RefObject
 } from './types'
+import { VirtualComponent } from '../blessed';
 interface Options {
   dontInheritStyle?: boolean
 }
@@ -65,12 +66,21 @@ class BlessedJsxImpl implements BlessedJsx {
     let component: Component | undefined
     if (isComponentConstructor(tag)) {
       // TODO: beforeComponentCreated
-      component = new tag({ ...attrs, children }, {})
-      // TODO: beforeElementRenderListeners
-      el = component.render()
+      if(VirtualComponent.isVirtualComponent(tag)){
+        // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information. 
+        el = VirtualComponent.createVirtualElement(component)
+      }
+      else {
+        component = new tag({ ...attrs, children }, {})
+        // TODO: beforeElementRenderListeners
+       
+        el = component.render()
       //@ts-ignore
       component.blessedElement = el
-      //TODO: associate otherwhise ?  good idea?
+        //TODO: associate otherwhise ?  good idea?
+      }
+      
+      
     } else if (typeof tag === 'function') {
       el = tag({ ...attrs, children })
       // TODO: add beforeElementRenderListeners
@@ -289,6 +299,10 @@ class BlessedJsxImpl implements BlessedJsx {
       current: undefined
     } as any) as RefObject<T>
   }
+}
+
+function isElementLike(e:any): e is Element{
+  return isElement(e) || VirtualComponent.iVirtualElement(e)
 }
 
 export const React: BlessedJsx = new BlessedJsxImpl()
