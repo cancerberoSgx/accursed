@@ -31,8 +31,12 @@ interface ProgramResponseData {
   width?: number,
   status?: { x?: number, y: number, page?: number }
   page?: any
+  x?: number, y?: number
   cursor?: { x: 1, y: 1, page: undefined }
   textAreaSizeCharacters?: { height: number, width: number }
+
+  // TODO leave the object open since it has lots of combinations
+  [k: string]:any
 }
 
 type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any
@@ -54,7 +58,7 @@ interface ProgramOutput extends Writable {
 interface GpmEvent {
   name: 'mouse' | '',
   type: 'GPM',
-  action: 'mousedown' | 'mouseup' | 'connect' | 'mousewheel' | 'data' | 'move' | 'dragbtndown' | 'dblclick' | 'btnup' | 'click' | 'error',
+  action: Widgets.Types.TMouseAction| 'mousedown' | 'mouseup' | 'connect' | 'mousewheel' | 'data' | 'move' | 'dragbtndown' | 'dblclick' | 'btnup' | 'click' | 'error',
   button: 'left' | 'middle' | 'right'
   raw: [number, number, number, number],
   x: number,
@@ -1765,6 +1769,12 @@ export namespace Widgets {
     | 'element mouseover'
     | 'element mouseout'
     | 'element mouseup'
+    | 'element mouse'
+    | 'element mousedown'
+    | 'element mousewheel'
+    | 'element wheeldown'
+    | 'element wheelup'
+    | 'element mousemove'
 
   type NodeMouseEventType =
     | 'mouse'
@@ -2279,6 +2289,9 @@ export namespace Widgets {
      */
     title: string
 
+    /** Internal Screen buffer of current lines. Exposed for debug purpuses. @internal */
+    lines: string[]
+
     /**
      * Write string to the log file if one was created.
      */
@@ -2658,14 +2671,14 @@ export namespace Widgets {
    * * The lines parameter can be a string or an array of strings. The line parameter must
    * be a string.
    */
-  abstract class BlessedElement extends NodeWithEvents implements IHasOptions<ElementOptions> {
+  abstract class BlessedElement<Options extends ElementOptions = ElementOptions >  extends NodeWithEvents implements IHasOptions<ElementOptions> {
     shrink: boolean
-    constructor(opts: ElementOptions)
+    constructor(opts: Options)
 
     /**
      * Original options object.
      */
-    options: ElementOptions
+    options: Options
 
     /**
      * Name of the element. Useful for form submission.
@@ -2914,13 +2927,25 @@ export namespace Widgets {
      */
     screenshot(): void
 
+    /** Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . @internal. Could  be overriden by element subclasses. */
+   protected  _parseTags(s: string):string
+/** @internal  . Could  be overriden by element subclasses. */
+   protected _parseAttr(ines: string[]): string[]
+/** @internal . Could  be overriden by element subclasses. */
+protected _align(line:string, width:number, align:string):void
+/** @internal . Could  be overriden by element subclasses. */
+protected _wrapContent(content:string, width: number):void
+/** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
+protected sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors 
+/** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
+protected clearPos():void
+
     /**
      * Set the content. Note: When text is input, it will be stripped of all non-SGR
      * escape codes, tabs will be replaced with 8 spaces, and tags will be replaced
      * with SGR codes (if enabled).
      */
-    setContent(text: string): void
-
+    setContent(text: string, noClear?: boolean, noTags?: boolean): void
     /**
      * Return content, slightly different from el.content. Assume the above formatting.
      */
@@ -2929,7 +2954,7 @@ export namespace Widgets {
     /**
      * Similar to setContent, but ignore tags and remove escape codes.
      */
-    setText(text: string): void
+    setText(text: string, noClear?: boolean,): void
 
     /**
      * Similar to getContent, but return content with tags and escape codes removed.
@@ -3171,13 +3196,13 @@ export namespace Widgets {
   /**
    * An element similar to Box, but geared towards rendering simple text elements.
    */
-  class TextElement extends BlessedElement implements IHasOptions<TextOptions> {
+  class TextElement<Options extends Widgets.TextOptions =  Widgets.TextOptions >  extends BlessedElement<Options> implements IHasOptions<Options> {
     constructor(opts: TextOptions)
 
-    /**
-     * Original options object.
-     */
-    options: TextOptions
+    // /**
+    //  * Original options object.
+    //  */
+    // options: TextOptions
   }
 
   /**
@@ -4447,39 +4472,43 @@ export namespace Widgets {
   }
 }
 
+
+// todo verify : LOG: [ 'classes',  'node',  'Node',  'screen',  'Screen',  'element',  'Element',  'box',  'Box',  'text',  'Text',  'line',  'Line',  'scrollablebox',  'ScrollableBox',  'scrollabletext',  'ScrollableText',  'bigtext',  'BigText',  'list',  'List',  'form',  'Form',  'input',  'Input',  'textarea',  'Textarea',  'textbox',  'Textbox',  'button',  'Button',  'progressbar',  'ProgressBar',  'filemanager',  'FileManager',  'checkbox',  'Checkbox',  'radioset',  'RadioSet',  'radiobutton',  'RadioButton',  'prompt',  'Prompt',  'question',  'Question',  'message',  'Message',  'loading',  'Loading',  'listbar',  'Listbar',  'log',  'Log',  'table',  'Table',  'listtable',  'ListTable',  'terminal',  'Terminal',  'image',  'Image',  'ansiimage',  'ANSIImage',  'overlayimage',  'OverlayImage',  'video',  'Video',  'layout',  'Layout',  'aliases',  'ListBar',  'PNG',  'png' ]
+
+
 // publish classes on existin gpaths so users can reference the real values for extending
 export namespace widget {
   class Node extends Widgets.Node { }
-  class Element extends Widgets.BlessedElement { }
+  class Element<Options extends Widgets.ElementOptions =  Widgets.ElementOptions >  extends Widgets.BlessedElement<Options> { }
   class Box extends Widgets.BoxElement { }
   class List extends Widgets.ListElement { }
   class Screen extends Widgets.Screen { }
-  class BoxElement extends Widgets.BoxElement { }
-  class TextElement extends Widgets.TextElement { }
-  class LineElement extends Widgets.LineElement { }
-  class BigTextElement extends Widgets.BigTextElement { }
-  class ListElement extends Widgets.ListElement { }
-  class FileManagerElement extends Widgets.FileManagerElement { }
-  class ListTableElement extends Widgets.ListTableElement { }
-  class ListbarElement extends Widgets.ListbarElement { }
-  class FormElement extends Widgets.FormElement { }
-  class InputElement extends Widgets.InputElement { }
-  class TextareaElement extends Widgets.TextareaElement { }
-  class TextboxElement extends Widgets.TextboxElement { }
-  class ButtonElement extends Widgets.ButtonElement { }
-  class CheckboxElement extends Widgets.CheckboxElement { }
-  class RadioSetElement extends Widgets.RadioSetElement { }
-  class RadioButtonElement extends Widgets.RadioButtonElement { }
-  class TableElement extends Widgets.TableElement { }
-  class PromptElement extends Widgets.PromptElement { }
-  class QuestionElement extends Widgets.QuestionElement { }
-  class MessageElement extends Widgets.MessageElement { }
-  class LoadingElement extends Widgets.LoadingElement { }
+  // class BoxElement extends Widgets.BoxElement { }
+  class Text<Options extends Widgets.TextOptions =  Widgets.TextOptions >  extends Widgets.TextElement<Options> { }
+  class Line extends Widgets.LineElement { }
+  class BigText extends Widgets.BigTextElement { }
+  // class List extends Widgets.ListElement { }
+  class FileManager extends Widgets.FileManagerElement { }
+  class ListTable extends Widgets.ListTableElement { }
+  class Listbar extends Widgets.ListbarElement { }
+  class Form extends Widgets.FormElement { }
+  class Input extends Widgets.InputElement { }
+  class Textarea extends Widgets.TextareaElement { }
+  class Textbox extends Widgets.TextboxElement { }
+  class Button extends Widgets.ButtonElement { }
+  class Checkbox extends Widgets.CheckboxElement { }
+  class RadioSet extends Widgets.RadioSetElement { }
+  class RadioButton extends Widgets.RadioButtonElement { }
+  class Table extends Widgets.TableElement { }
+  class Prompt extends Widgets.PromptElement { }
+  class Question extends Widgets.QuestionElement { }
+  class Message extends Widgets.MessageElement { }
+  class Loading extends Widgets.LoadingElement { }
   class Log extends Widgets.Log { }
-  class ProgressBarElement extends Widgets.ProgressBarElement { }
-  class TerminalElement extends Widgets.TerminalElement { }
-  class LayoutElement extends Widgets.LayoutElement { }
+  class ProgressBar extends Widgets.ProgressBarElement { }
   class Terminal extends Widgets.TerminalElement { }
+  class Layout extends Widgets.LayoutElement { }
+  // class Terminal extends Widgets.TerminalElement { }
 }
 
 // TODO: verify that all these are real classes :   'Node',  'Screen',  'Element',  'Box',  'Text',  'Line',  'ScrollableBox',  'ScrollableText',  'BigText',  'List',  'Form',  'Input',  'Textarea',  'Textbox',  'Button',  'ProgressBar',  'FileManager',  'Checkbox',  'RadioSet',  'RadioButton',  'Prompt',  'Question',  'Message',  'Loading',  'Listbar',  'Log',  'Table',  'ListTable',  'Terminal',  'Image',  'ANSIImage',  'OverlayImage',  'Video',  'Layout'

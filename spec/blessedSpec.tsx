@@ -1,7 +1,9 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { getContent, installExitKeys, React, Screen, screen, box } from '../src'
+import { getContent, installExitKeys, React, Screen, screen, box, Div } from '../src'
 import { color } from './blessed/gallery/util'
 import * as blessed from 'blessed'
+import { strip } from '../src/util/misc';
+import { notFalsy } from 'misc-utils-of-mine-typescript';
 
 describe('blessed', () => {
   describe('blessed new Element type', () => {
@@ -9,7 +11,8 @@ describe('blessed', () => {
 
     beforeEach(() => {
       tryTo(() => s.destroy())
-      s = screen({ smartCSR: true, log: 'log.txt' })
+      s = screen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
+      s.log(Object.keys(blessed.widget))
       s.program.output.on
       installExitKeys(s)
     })
@@ -17,43 +20,85 @@ describe('blessed', () => {
       tryTo(() => s.destroy())
     })
 
-    it('should allow to implement a new element type', async done => {
-      interface CollapsibleBoxOptions extends blessed.Widgets.BoxOptions{
-
+    fit('should allow to implement a new element type', async done => {
+      interface SpinningClockOptions extends blessed.Widgets.TextOptions {
+        // clockwise?: boolean // TODO
+        frames?: string[]
+        interval?: number 
+        clockLabel?: string // for testing
       }
-      class CollapsibleBox extends blessed.widget.Box {
-        constructor(options:CollapsibleBoxOptions){
-          super(options)
-          // this.onScreenEvent()
+      
+      class SpinningClock extends blessed.widget.Text< SpinningClockOptions > {
+        // protected static defaultFrames: string[]  = 
+        protected intervalHandler() {
+          this.counter = this.counter >= this.options.frames!.length -1 ? 0 : this.counter + 1
+          const c = ` . ${this.options.clockLabel} ${this.options.frames![this.counter]} . `
+          // this.screen.log('intervalHandler', c)
+          this.setContent(c)
+          
+          this.screen.render()
         }
-        // render()
-      }
-      function C(props: { children?: any; parent: Screen }) {
-        return (
-          <layout parent={props.parent} layout="grid" width="100%" height="100%">
-            <text content="before1" width={20} height={3} style={{ bg: color() }} border="line" />
-            {props.children}
-            <text content="after2" width={6} height={5} />
-          </layout>
-        )
-      }
-      // log  before1 hello22   button123  bye22 after2
-      // before1 hello22   button123  bye22 after2
-      const e = React.render(
-        <C parent={s}>
-          hello22 <textbox secret={true} content="secret" width={20} height={4} />
-          <button content="button123" width={20} height={4} /> bye22
-        </C>
-      )
+      // protected   frames: string[];
+      // protected   interval: number;
+      // protected   clockwise: boolean;
+      protected counter = 0
+      // protected clockLabel : string
+        protected static defaultOptions = {width: 34, height: 6, clockLabel: 'Spinning', interval: 500,
+         frames:  ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'], 
+        //  content:  `${'shhshshs'} ... '🕐', jsjs'` 
+        }
 
-      s.render()
-      const c = getContent(e)
-        // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
-      ;['before1', 'after2', 'button123', 'bye22', 'hello22'].forEach(s => {
-        expect(c).toContain(s)
+        protected timer: NodeJS.Timeout|undefined
+        
+        type = 'spinningclock'
+        constructor(options:SpinningClockOptions=SpinningClock.defaultOptions){
+          super({...SpinningClock.defaultOptions , ...options||{}})
+          this.options = {...SpinningClock.defaultOptions , ...options||{}}  
+          // this.frames = options.frames||SpinningClock.defaultFrames
+          // this.interval = options.interval||500
+          // this.clockwise = options.clockwise||true
+          this.intervalHandler = this.intervalHandler.bind(this)
+
+          // setTimeout(()=>{
+          //   this.setContent(`'🕑', '🕒'`)
+          //   this.screen.render()
+          // }, 2000)
+          // this.on('attach', ()=>{
+            // this.screen.log('attach', this.options)
+            // this.intervalHandler
+           this.timer = setInterval(this.intervalHandler, this.options.interval!)
+          // })
+          this.on('detach', ()=>{
+            if(this.timer){
+              //TODO: test that is called when we remove the element
+              clearInterval(this.timer)
+            }
+           })
+          // this.getLine()[0
+          // this.onAttach
+        }
+      //   render() {
+      //     this.setContent(this.frames[0])
+      // return super.render()
+  // var coords = this._render();
+  // if (!coords) return;
+
+          // this.clearPos()
+
+        // }
+      }
+
+      const clock = new SpinningClock({parent: s
+          , clockLabel: ' flag2 '
       })
-      expect(c).not.toContain('secret')
-      done()
+      s.render()
+      // const c = getContent(clock)
+        s.log('first', clock.content, clock.getContent(), s.lines)
+        // expect(c).toContain(s)
+      // })
+      // expect(c).not.toContain('secret')
+      // await 
+      // done()
     })
 
     it('should print function element children generated with map', async done => {
