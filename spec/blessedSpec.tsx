@@ -17,29 +17,38 @@ describe('blessed', () => {
     })
 
     it('should allow to implement a new element type', async done => {
+
       interface SpinningClockOptions extends blessed.Widgets.TextOptions {
-        // clockwise?: boolean // TODO
+        clockwise?: boolean 
         frames?: string[]
         interval?: number
-        clockLabel?: string // for testing
+        clockLabel?: string // a label for assert content
       }
+
       class SpinningClock extends blessed.widget.Text<SpinningClockOptions> {
+        private static nextTick = global.setImmediate || process.nextTick.bind(process)
         type = 'spinningclock'
-        protected intervalHandler() {
-          this.counter = this.counter >= this.options.frames!.length - 1 ? 0 : this.counter + 1
+        private intervalHandler() {
+          if(this.options.clockwise){
+            this.counter = this.counter >= this.options.frames!.length - 1 ? 0 : this.counter + 1
+          }
+          else {
+            this.counter = this.counter <=0  ? this.options.frames!.length -1 : this.counter - 1
+          }
           const c = ` . ${this.options.clockLabel} ${this.options.frames![this.counter]} . `
           this.setContent(c)
-          this.screen.render() // TODO: could be improved ?
+          SpinningClock.nextTick(()=>this.screen.render())
+          // this.screen.render() // TODO: could be improved ?
         }
-        protected counter = 0
-        protected static defaultOptions = {
+        private counter = 0
+        private static defaultOptions = {
           width: 34,
           height: 6,
           clockLabel: 'Spinning',
           interval: 500,
           frames: ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚']
         }
-        protected timer: NodeJS.Timeout | undefined
+        private timer: NodeJS.Timeout | undefined
         constructor(options: SpinningClockOptions = SpinningClock.defaultOptions) {
           super({ ...SpinningClock.defaultOptions, ...(options || {}) })
           this.options = { ...SpinningClock.defaultOptions, ...(options || {}) }
@@ -55,15 +64,17 @@ describe('blessed', () => {
           })
         }
       }
+      
+      // test our new element:
       const clock = new SpinningClock({
         parent: s,
         clockLabel: ' flag2 '
       })
       s.render()
-      setTimeout(() => { // TODO: wait for contant helper
+      setTimeout(() => { // TODO: waitForContent(c) helper
         expect(getContent(clock)).toContain('flag2')
         done()
-      }, 500);
+      }, 200);
     })
 
     it('should print function element children generated with map', async done => {
