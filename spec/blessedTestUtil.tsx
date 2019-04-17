@@ -107,7 +107,7 @@ export class TestDriver {
     // }
     // return this._screen!;
   }
-  constructor(protected options: Options = {}) { }
+  constructor(protected options: Options = {}) {}
 
   private getScreen(mode: 'nothing' | 'reset' | 'createNew' | 'destroy' = 'nothing') {
     if (this._screen && ((!this._screen.destroyed && mode === 'createNew') || mode === 'destroy')) {
@@ -166,4 +166,3 @@ export function sleep(ms: number): Promise<void> {
     }, ms)
   })
 }
-

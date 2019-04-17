@@ -1,4 +1,4 @@
-import { notFalsy, NotFalsy } from 'misc-utils-of-mine-typescript';
+import { notFalsy, NotFalsy } from 'misc-utils-of-mine-typescript'
 
 /** if as statement. children need to be in a function and the function accepts a parameter which value is given condition `c` but casted to NotFalsy<C> so there's no need of type guards in the body. Example:
 ```
@@ -47,13 +47,11 @@ export class ErrorComponent extends React.Component<ErrorOptions> {
 
 ```
 */
-export function If<T extends any = any
->(props: { c: any, p?: T, children: (...args: NotFalsy<T>[]) => JSX.Element }) {
+export function If<T extends any = any>(props: { c: any; p?: T; children: (...args: NotFalsy<T>[]) => JSX.Element }) {
   // TODO: issue in dom implementation, children is an array
   const f = Array.isArray(props.children) ? props.children[0] : props.children
   const { c, p } = props
-  if (notFalsy(c))
-    return f.apply(null, [...(p ? [p] : []), c])
+  if (notFalsy(c)) return f.apply(null, [...(p ? [p] : []), c])
   else {
     return null
   }
@@ -69,7 +67,6 @@ export function If<T extends any = any
 // export function installJSXAloneAsGlobal(i: typeof JSXAlone) {
 //   getGlobal()['JSXAlone'] = i
 // }
-
 
 // export function Js(props: { children: (...args: any[]) => any }) {
 //   const r = props.children()

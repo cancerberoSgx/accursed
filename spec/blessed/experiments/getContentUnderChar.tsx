@@ -1,5 +1,5 @@
-import { React, screen, Div, filterDescendants, isElement } from '../../../src'
 import * as util from 'util'
+import { Div, filterDescendants, isElement, React, screen } from '../../../src'
 
 // function charCodeHexString(s: string) {
 //   return s
@@ -11,47 +11,32 @@ import * as util from 'util'
 
 var s = screen({
   log: 'log.txt',
-  
+
   // autoPadding: false,
   warnings: true,
-  smartCSR: true, 
+  smartCSR: true,
   forceUnicode: true,
   fullUnicode: true
 })
 
-
 const t1 = React.render(<text parent={s} content=" " width={1} height={1} top={0} left={0} />)
 const t2 = React.render(<text parent={s} content=" " width={1} height={1} top={1} left={3} />)
-React.render(<Div height="88%" width="77%" parent={s} >
-
-const frames = ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚']
-const frames2 = ['🕛', '🕜', '🕝', '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥'] //,'🕦','🕧']
-
-
-const frames = ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚']
-const frames2 = ['🕛', '🕜', '🕝', '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥'] //,'🕦','🕧']
-let counter = 0
-setInterval(() => 
-  t1.setContent(frames[counter])
-  t2.setContent(frames2[counter])
-  counter = counter >= frames.length - 1 ? 0 : counter + 1
-  screen2.render()
-}, 100)
-
-screen2.key('q', function()
-  return screen2.destroy()
-
-sensdn
-
-
-</Div>)
+React.render(
+  <Div height="88%" width="77%" parent={s}>
+    const frames = ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'] const frames2 = ['🕛', '🕜', '🕝',
+    '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥'] //,'🕦','🕧'] const frames = ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕',
+    '🕖', '🕗', '🕘', '🕙', '🕚'] const frames2 = ['🕛', '🕜', '🕝', '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥']
+    //,'🕦','🕧'] let counter = 0 setInterval(() => t1.setContent(frames[counter]) t2.setContent(frames2[counter])
+    counter = counter >= frames.length - 1 ? 0 : counter + 1 screen2.render() }, 100) screen2.key('q', function() return
+    screen2.destroy() sensdn
+  </Div>
+)
 s.render()
 
 setInterval(() => {
-  s.program.write(filterDescendants(screen as any, isElement).map(e=>e.type).length+'')
-  s.program.write(Math.random()+'')
-
-}, 2222);
+  s.program.write(filterDescendants(screen as any, isElement).map(e => e.type).length + '')
+  s.program.write(Math.random() + '')
+}, 2222)
 
 // screen2.getScreenLines()
 
@@ -62,24 +47,20 @@ s.key('q', function() {
 // const p = screen2.program
 // p.write(util.inspect(filterDescendants(screen as any, isElement).map(e=>e.type)))
 
-s.log(util.inspect(filterDescendants(screen as any, isElement).map(e=>e.type)))
-s.log(filterDescendants(screen as any, isElement).map(e=>e.type).length)
-console.log(s.lines);
-
-
+s.log(util.inspect(filterDescendants(screen as any, isElement).map(e => e.type)))
+s.log(filterDescendants(screen as any, isElement).map(e => e.type).length)
+console.log(s.lines)
 
 // screen2.on('mousemove', (data, o)=>{
 //   if(data.action==='click'){
 
 //   }
 //   p.write('mouse', util.inspect({data, a: 2312, g: '12'}))
-  
+
 //   p.write(util.inspect({data, a: 2312, g: '12'}))
 //   p.cup(0, 0)
-  
+
 // })
-
-
 
 // function windowManipuationDemo() {
 //   p.getCursor(function(err, data) {
@@ -91,7 +72,6 @@ console.log(s.lines);
 //   })
 // }
 
-
 // setInterval(()=>{
 //   p.getCursor((err, data)=>{
 //     // p.write('getCursor', util.inspect({data, a: 2312, g: '12'}))
@@ -99,7 +79,6 @@ console.log(s.lines);
 //     // p.cup(0, 0)
 //   })
 // },1500)
-
 
 // const program = p
 
@@ -111,7 +90,6 @@ console.log(s.lines);
 //   },
 //   true
 // )
-
 
 // program.alternateBuffer()
 // program.enableMouse()
@@ -140,7 +118,3 @@ console.log(s.lines);
 //   })
 // }
 // mouseDemo()
-
-
-
-

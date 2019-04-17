@@ -1,30 +1,39 @@
-import { tryTo } from 'misc-utils-of-mine-generic';
-import { BoxOptions, Button, Div, React, Screen, createScreen, installExitKeys, } from '../src';
-import { waitFor } from '../src/blessed/waitFor';
+import { tryTo } from 'misc-utils-of-mine-generic'
+import { Button, createScreen, Div, installExitKeys, React, Screen } from '../src'
+import { waitFor } from '../src/blessed/waitFor'
 
 describe('jsxRefs', () => {
-describe('should associate a element with vriable at render time ', () => {
-  let screen: Screen
+  describe('should associate a element with vriable at render time ', () => {
+    let screen: Screen
     afterEach(() => {
       tryTo(() => screen.destroy())
-  })
-  fit('should create references to elements for markup at render time', async done => {
+    })
+    it('should create references to elements for markup at render time', async done => {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
       installExitKeys(screen)
-    const ref1 = React.createRef<Button>()
-  React.render(<Div width="100%" border="line" height="100%"  style={{ bg: 'red' }} parent={screen}>
-      <button ref={ref1}      
-      top="80%" left="80%" content="button11" onPress={e => { e.currentTarget.content = "clicked!"; e.currentTarget.screen.render() }}></button>
-    </Div>)
-  screen.render()
-       ref1.current!.content = "'changed3"
-       ref1.current!.screen.render()
-         await waitFor(()=>ref1.current! && ref1.current!.getContent().includes('changed3'))
-         done()
-      })
+      const ref1 = React.createRef<Button>()
+      React.render(
+        <Div width="100%" border="line" height="100%" style={{ bg: 'red' }} parent={screen}>
+          <button
+            ref={ref1}
+            top="80%"
+            left="80%"
+            content="button11"
+            onPress={e => {
+              e.currentTarget.content = 'clicked!'
+              e.currentTarget.screen.render()
+            }}
+          />
+        </Div>
+      )
+      screen.render()
+      ref1.current!.content = "'changed3"
+      ref1.current!.screen.render()
+      await waitFor(() => ref1.current! && ref1.current!.getContent().includes('changed3'))
+      done()
     })
   })
-
+})
 
 // describe('waitFor green full of comments', () => {
 //   let screen: Screen
@@ -36,13 +45,13 @@ describe('should associate a element with vriable at render time ', () => {
 //     afterEach(() => {
 //       tryTo(() => screen.destroy())
 //   })
-  
+
 //   fit('should create references to elements for markup at render time', async done => {
 //     // (() => screen.destroy())
 //     try{
 //       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
 //       installExitKeys(screen)
-      
+
 //       function logTrue(s:string){
 //         screen.log(s)
 //         return true
@@ -64,23 +73,23 @@ describe('should associate a element with vriable at render time ', () => {
 // // try {
 //   // screen.append(React.render(app))
 //   screen.render()
-      
+
 //        ref1.current!.content = "'changed3"
 //        ref1.current!.screen.render()
 //          await waitFor(()=>ref1.current! && ref1.current!.getContent().includes('changed3'))
-   
+
 //          console.log(ref1.current!.getContent());
-         
+
 //          done()
-//         //  ref1.current!.press() 
+//         //  ref1.current!.press()
 //         //  ref1.current!.screen.render()
 //         //    await waitFor(()=>ref1.current! && ref1.current!.getContent().includes('clicked'))
-  
+
 // } catch (error) {
 //   screen && screen.log(error)
 //   tryTo(() => screen.destroy())
 //   console.log(error);
-  
+
 //   throw error
 // }
 //       })
@@ -95,9 +104,4 @@ describe('should associate a element with vriable at render time ', () => {
 // //   // }
 // // } as BoxOptions)
 
-
-
-
-
 // })
-

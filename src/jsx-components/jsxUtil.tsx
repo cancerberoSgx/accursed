@@ -46,13 +46,13 @@ export function Div(
   )
 }
 
-
-interface PPP<T> {ffj: T, ref: string[][]}
-type PropsWithRef<P> = P & {ref?: P extends { ref?: infer R }  ? R  : undefined }
-let t : PropsWithRef<PPP<number>>
+interface PPP<T> {
+  ffj: T
+  ref: string[][]
+}
+type PropsWithRef<P> = P & { ref?: P extends { ref?: infer R } ? R : undefined }
+let t: PropsWithRef<PPP<number>>
 // t.ref
-
-
 
 // /** Ensures that the props do not include ref at all */
 // type PropsWithoutRef<P> =

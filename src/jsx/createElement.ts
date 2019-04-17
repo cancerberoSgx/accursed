@@ -119,23 +119,21 @@ class BlessedJsxImpl implements BlessedJsx {
       l(afterElementCreatedEvent)
     })
 
-
     // console.log('crearteELement', !!(el! as any),  (el! as any).type, blessed.BlessedProgram.instances[0].write('kajhsbdkajhsdkjahskdhaskd '+!!(el! as any)+'+ +'+(el! as any).type));
-    
+
     // .log("setTimeout",!ref1.current)
 
     // install refs for all kind of elements (TODO: in a listener)
     // maybe a getter is better to avoid object cycles ?
-    // TODO: if not found look at attrs arg just in case ? 
-    if((el! as any).options.ref && !(el! as any).options.ref.current){  
-      (el! as any).options.ref.current = (el! as any)
-   }
+    // TODO: if not found look at attrs arg just in case ?
+    if ((el! as any).options.ref && !(el! as any).options.ref.current) {
+      ;(el! as any).options.ref.current = el! as any
+    }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for intrinsic elements
     if (typeof tag === 'string') {
       this.installAttributesAndChildren(el!, blessedEventMethodAttributes, artificialEventAttributes, children)
     }
-
 
     // TODO: finishElementCreateListeners
     return el!
@@ -289,11 +287,11 @@ class BlessedJsxImpl implements BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void {
     this.afterRenderListeners.push(l)
   }
- // createRef<T>(): RefObject<T>;
-  createRef<T extends Element>(): RefObject<T>{
-    return {
+  // createRef<T>(): RefObject<T>;
+  createRef<T extends Element>(): RefObject<T> {
+    return ({
       current: undefined
-    } as any as RefObject<T>
+    } as any) as RefObject<T>
   }
 }
 

@@ -101,7 +101,7 @@ export interface ArtificialEventOptions<T extends Element> {
   ) => void
 }
 
-type PropsWithRef<P> = P & {ref?: P extends { ref?: infer R }  ? R  : undefined }
+type PropsWithRef<P> = P & { ref?: P extends { ref?: infer R } ? R : undefined }
 
 declare global {
   export namespace JSX {
@@ -127,7 +127,7 @@ declare global {
     }
     /** adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>
-    
+
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
       type: ElementType
       props: P
@@ -141,9 +141,6 @@ declare global {
       | Component<PropsWithRef<P>, any>
       | FunctionComponent<PropsWithRef<P>>
 
-      
-
-    
     export interface FunctionComponent<P extends { children?: BlessedJsxNode } = {}> {
       (props: P & { children?: BlessedJsxNode }, context?: any): Element<any> | null
     }
@@ -223,7 +220,7 @@ export interface BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void
 
   /**
-   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See https://reactjs.org/docs/refs-and-the-dom.html. 
+   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See https://reactjs.org/docs/refs-and-the-dom.html.
    */
   createRef<T extends Element>(): RefObject<T>
 }
@@ -286,11 +283,10 @@ export interface ArtificialEvent<T extends Element> {
 
 export type OnClickHandler<T extends Element> = (this: T, e: IMouseEventArg & ArtificialEvent<T>) => void
 
-
 // export interface  RefAttribute<T> {
 //   ref?: RefObject<T>
 // }
 
-export interface RefObject<T = any>{
-  current: T|undefined
+export interface RefObject<T = any> {
+  current: T | undefined
 }
