@@ -2,11 +2,13 @@ import { installExitKeys, React, screen } from 'accursed'
 import { App } from './app'
 
 var s = screen({
-  autoPadding: false,
+  useBCE: true,
+  warnings: true,
+  // autoPadding: false,
   log: 'log.txt',
-  focusable: true,
-  sendFocus: true,
-  smartCSR: true,
+  // focusable: true,
+  // sendFocus: true,
+  // smartCSR: true,
   // forceUnicode: true,
   fullUnicode: true
 })
