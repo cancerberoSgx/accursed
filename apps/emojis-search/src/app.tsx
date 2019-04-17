@@ -1,4 +1,4 @@
-import { Component, Div, Element, isElement, React, Screen } from 'accursed'
+import { Component, Div, Element, isElement, React, replaceChildren, Screen } from 'accursed'
 import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
@@ -30,7 +30,7 @@ export class App extends Component<P, {}> {
             height="100%"
           />
         </Div>
-        <Div name="main-container" height="80%">
+        <Div name="main-container" height="100%">
           <Main selected={this.main} />
         </Div>
       </Div>
@@ -39,10 +39,11 @@ export class App extends Component<P, {}> {
 
   protected updateMain(s: MenuOptions) {
     const mainContainer = this.findDescendant(d => isElement(d) && d.name === 'main-container')! as Element
-    const main = this.findDescendant(d => isElement(d) && d.name === 'main')! as Element
-    main.destroy()
-    mainContainer.append(React.render(<Main selected={s} />))
-    this.blessedElement.screen.render()
+    replaceChildren(mainContainer, React.render(<Main selected={s} />))
+    // const main = this.findDescendant(d => isElement(d) && d.name === 'main')! as Element
+    // main.destroy()
+    // mainContainer.append(React.render(<Main selected={s} />))
+    // this.blessedElement.screen.render()
   }
 
   protected commands() {

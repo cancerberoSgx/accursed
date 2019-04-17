@@ -1,6 +1,3 @@
-import { join } from 'path';
-import { readFileSync } from 'fs';
-
 export function charCodeHexString(s: string) {
   return s
     .split('')
@@ -25,9 +22,6 @@ export function enumKeys(anEnum: any): string[] {
 //   })
 //   return o
 // }
-
-
-
 
 /** Removes undefined from type */
 export type NotUndefined<T> = Exclude<T, undefined>
@@ -54,6 +48,9 @@ export function notFalsy<T>(n: T): n is NotFalsy<T> {
   return !!n
 }
 
-export function unique<T>(t: T, i: number, a: T[]){return a.indexOf(t)===i}
-export function uniqueNotFalsy<T>(t: T, i: number, a: T[]): t is NotFalsy<T> {return a.indexOf(t)===i}
-
+export function unique<T>(t: T, i: number, a: T[]) {
+  return a.indexOf(t) === i
+}
+export function uniqueNotFalsy<T>(t: T, i: number, a: T[]): t is NotFalsy<T> {
+  return a.indexOf(t) === i
+}

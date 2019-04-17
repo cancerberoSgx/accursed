@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs'
-import { printUnicodeCharacter } from './printUnicodeCharacter';
-import { EmojiDefinition } from '../data';
+import { EmojiDefinition } from '../data'
+import { printUnicodeCharacter } from './printUnicodeCharacter'
 
 export interface EmojiLongDefinition {
   name?: string | null
@@ -33,9 +33,11 @@ export interface EmojiLongDefinition {
 const s = readFileSync('./data/emoji.json').toString()
 const data = JSON.parse(s) as EmojiLongDefinition[]
 const processed = data
-.filter(e=>e&& e.non_qualified || e.unified || e.google)
-.map(e=>({name: e.name||e.short_name, cp: e.non_qualified || e.unified || e.google || '', char: printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true), category: e.category})) as EmojiDefinition[]
+  .filter(e => (e && e.non_qualified) || e.unified || e.google)
+  .map(e => ({
+    name: e.name || e.short_name,
+    cp: e.non_qualified || e.unified || e.google || '',
+    char: printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true),
+    category: e.category
+  })) as EmojiDefinition[]
 writeFileSync('./src/data/generated/emoji.json', JSON.stringify(processed, null, 2))
-
-
-

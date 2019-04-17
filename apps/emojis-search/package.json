@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "accursed": "file:../..",
+    "misc-utils-of-mine-generic": "0.0.15",
     "yargs-parser": "^10.1.0"
   },
   "devDependencies": {

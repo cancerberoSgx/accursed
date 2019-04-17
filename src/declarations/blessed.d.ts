@@ -2037,6 +2037,12 @@ export namespace Widgets {
     rbottom: Types.TPosition
 
     /**
+     * Get's the child element implementing the current label of this node.
+     * @internal
+     */
+    _label?: BlessedElement | undefined
+
+    /**
      * Write content and children to the screen buffer.
      */
     render(): Coords

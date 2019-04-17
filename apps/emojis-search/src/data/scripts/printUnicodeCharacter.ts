@@ -14,13 +14,13 @@ export function printUnicodeCharacter(s: string, quote = false) {
     '000D': `'\\r'`,
     '0027': `'\\''`,
     '005C': `'\\\\'`,
-    '2028': `'2028-TODO'`,
-  };
-  return quote ? (quoteCharMap[s] || `'${_printUnicodeCharacter(s)}'`) : _printUnicodeCharacter(s);
+    '2028': `'2028-TODO'`
+  }
+  return quote ? quoteCharMap[s] || `'${_printUnicodeCharacter(s)}'` : _printUnicodeCharacter(s)
 }
 function _printUnicodeCharacter(s: string) {
   return `${s
     .split('-')
     .map(s => String.fromCodePoint(parseInt('0x' + s, 16)))
-    .join('')}`;
+    .join('')}`
 }

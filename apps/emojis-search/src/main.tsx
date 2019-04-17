@@ -12,13 +12,11 @@ var s = screen({
 })
 installExitKeys(s)
 try {
-  
-const app = React.render(<App screen={s} />)
-s.append(app)
-s.key('tab', k => s.focusNext())
-s.key('S-tab', k => s.focusPrevious())
-s.render()
-
+  const app = React.render(<App screen={s} />)
+  s.append(app)
+  s.key('tab', k => s.focusNext())
+  s.key('S-tab', k => s.focusPrevious())
+  s.render()
 } catch (error) {
   s && s.log(error)
 }

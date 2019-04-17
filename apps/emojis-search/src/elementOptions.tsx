@@ -50,14 +50,14 @@ export const scrollableOptions = () =>
     align: 'center',
     scrollable: true,
     input: true,
-  alwaysScroll: true,
-  // scrollable: true,
+    alwaysScroll: true,
+    // scrollable: true,
     scrollbar: {
       ch: ' ',
       track: {
         bg: 'cyan'
       },
-      
+
       style: {
         inverse: true
       }
@@ -68,7 +68,7 @@ export const scrollableOptions = () =>
         track: {
           bg: 'cyan'
         },
-        
+
         style: {
           inverse: true
         }

@@ -142,6 +142,7 @@ class BlessedJsxImpl implements BlessedJsx {
     })
     // artificial event handlers like onClick, onChange (these doesn't exist on blessed - we need to map/install them manually)
     ;(Object.keys(artificialEventAttributes) as ArtificialEventOptionNames[]).forEach(attributeName => {
+      // TODO: we should type guard against element type so we only install event on correct element types (only on elements that support that)
       if (attributeName === ArtificialEventOptionNames.onClick) {
         const fn = artificialEventAttributes[attributeName]!
         el.on('click', e => {
@@ -171,6 +172,11 @@ class BlessedJsxImpl implements BlessedJsx {
         el.on('select', e => {
           fn!.bind(el)({ ...e, currentTarget: el })
         })
+      } else if (attributeName === ArtificialEventOptionNames.onPress) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onPress']
+        el.on('press', e => {
+          fn!.bind(el)({ ...e, currentTarget: el })
+        })
       } else {
         console.log('Unrecognized artificialEventAttribute ' + attributeName)
         throw new Error('Unrecognized artificialEventAttribute ' + attributeName)
@@ -187,10 +193,11 @@ class BlessedJsxImpl implements BlessedJsx {
       } else if (isElement(c)) {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
-        } else {
-          // this.createTextNode('SEBABABAB', el)
-          // this.appendChild(el, c)
         }
+        // else {
+        // this.createTextNode('SEBABABAB', el)
+        // this.appendChild(el, c)
+        // }
       } else if (Array.isArray(c)) {
         this._addChildrenArray(c, el)
       } else {
@@ -235,16 +242,16 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: Element) {
-    if (typeof c !== 'string') {
-      throw new Error()
-      const t = blessed.text({ content: c + 'jajajajaja ' + typeof c + ' - ' + Array.isArray(c) })
-      this.appendChild(el, t)
-      return t
-    } else {
-      const t = blessed.text({ content: c + '' })
-      this.appendChild(el, t)
-      return t
-    }
+    // if (typeof c !== 'string') {
+    //   throw new Error()
+    //   const t = blessed.text({ content: c + 'jajajajaja ' + typeof c + ' - ' + Array.isArray(c) })
+    //   this.appendChild(el, t)
+    //   return t
+    // } else {
+    const t = blessed.text({ content: c + '' })
+    this.appendChild(el, t)
+    return t
+    // }
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)
   }
 

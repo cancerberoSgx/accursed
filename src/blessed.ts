@@ -1,5 +1,6 @@
 import * as blessed from 'blessed'
 import * as contrib from 'blessed-contrib'
+import { asArray } from 'misc-utils-of-mine-generic'
 import { Checkbox, Element } from './blessedTypes'
 import { closeModal, isModalVisible } from './modal'
 import { getObjectProperty, setObjectProperty } from './util/misc'
@@ -123,6 +124,51 @@ export function offValueChange(el: Checkbox) {
  */
 export function getElementLabel(el: Element): Element | undefined {
   return (el as any)._label
+}
+
+/**
+ * Hot replace of given container element children's with given array of nodes. This can be used in dynamic views that need to
+ * replace a whole element subtree because they radically changed. For example, a Panel could offer different modalities for
+ * represent some data, that the user can demonically and each uses different element types. (for example one is a Tree, other
+ * is a Table and other is a listtab).
+ *
+ * This method try to do and support the following modes:
+ *
+ *  * quickly, just destroy current children and append new ones, and only after that call render.screen()
+ *  * dontRender: same as previous but without calling render.screen()
+ *  * careful: using previous, for complex data, seems to have flickering and the final screen looks dirty, with segments
+ * that are a mix from new UI and old .... this mode try to do several renders / hide/show so this doesn't happen, but it
+ * could be slower/costly.
+ */
+export function replaceChildren(
+  container: Element,
+  children: Element | Element[],
+  options: { mode: 'quickly' | 'careful' | 'dontRender' } = { mode: 'careful' }
+) {
+  if (options.mode === 'careful') {
+    container.children.forEach(c => {
+      container.remove(c)
+      c.destroy()
+    })
+    container.screen.once('render', () => {
+      setTimeout(() => {
+        asArray(children).forEach(c => {
+          container.append(c)
+        })
+        container.screen.render()
+      }, 10)
+    })
+    container.screen.render()
+  } else {
+    container.children.forEach(c => {
+      // container.remove(c);
+      c.destroy()
+    })
+    asArray(children).forEach(c => {
+      container.append(c)
+    })
+    options.mode !== 'dontRender' && container.screen.render()
+  }
 }
 
 let BlessedNodeTypeVirtualInstalled = false

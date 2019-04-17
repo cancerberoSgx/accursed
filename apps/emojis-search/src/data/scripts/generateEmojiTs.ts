@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs'
-import { printUnicodeCharacter } from './printUnicodeCharacter';
+import { printUnicodeCharacter } from './printUnicodeCharacter'
 
 export interface EmojiDefinition {
   name?: string | null
@@ -64,7 +64,10 @@ export enum Emoji {
   ${data
     .map(e =>
       `
-    ${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)} = ${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)}
+    ${printUnicodeCharacter(e.non_qualified || e.unified || e.google || '', true)} = ${printUnicodeCharacter(
+        e.non_qualified || e.unified || e.google || '',
+        true
+      )}
   `.trim()
     )
     .join(', ')} 
@@ -82,6 +85,3 @@ export const emojiDescriptions: {[e in Emoji]: EmojiDefinition} = {
 `.trim()
 
 writeFileSync('./src/data/emojis.ts', out)
-
-
-
