@@ -12,31 +12,31 @@ import * as child_process from 'child_process'
 import { EventEmitter } from 'events'
 import * as stream from 'stream'
 import { Readable, Writable } from 'stream'
-import { on } from 'cluster';
 
 /**
- * A general representation of the data object received callbacks  of program's write operation  on the output. 
- * 
+ * A general representation of the data object received callbacks  of program's write operation  on the output.
+ *
  *  In general, each event type will respond with a data object that is mixed into this data object properties, and also is available individually in some of its properties, For example a  'device-status' request will respond with a 'statis property with only that information but also the properties mixed in the object itself'
  */
 interface ProgramResponseData {
   /** The event type that was requested / write that caused this response. Example: 'window-manipulation',  'device-attributes', 'device-status',  */
-  event: string,
+  event: string
   /** example: '', 'DSR' */
-  code: string,
+  code: string
   /** Identifies the request type that caused this response. For example, if a  'window-manipulation' is written the response type could be 'textarea-size',  example: 'textarea-size',  'cursor-status', */
-  type: string,
-  size?: { height: number, width: number },
-  height?: number,
-  width?: number,
-  status?: { x?: number, y: number, page?: number }
+  type: string
+  size?: { height: number; width: number }
+  height?: number
+  width?: number
+  status?: { x?: number; y: number; page?: number }
   page?: any
-  x?: number, y?: number
-  cursor?: { x: 1, y: 1, page: undefined }
-  textAreaSizeCharacters?: { height: number, width: number }
+  x?: number
+  y?: number
+  cursor?: { x: 1; y: 1; page: undefined }
+  textAreaSizeCharacters?: { height: number; width: number }
 
   // TODO leave the object open since it has lots of combinations
-  [k: string]:any
+  [k: string]: any
 }
 
 type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any
@@ -48,36 +48,47 @@ interface ProgramOutput extends Writable {
   rows: number
   // on(e: 'resize', callback: () => void): this
   // /**
-  //  * Each time 
-  //  * @internal. 
+  //  * Each time
+  //  * @internal.
   //  */
   // on(e: 'response', callback: (e: { event?: string }) => void): this
   // on(e: string, callback: (...args: any[]) => void): this
-
 }
 interface GpmEvent {
-  name: 'mouse' | '',
-  type: 'GPM',
-  action: Widgets.Types.TMouseAction| 'mousedown' | 'mouseup' | 'connect' | 'mousewheel' | 'data' | 'move' | 'dragbtndown' | 'dblclick' | 'btnup' | 'click' | 'error',
+  name: 'mouse' | ''
+  type: 'GPM'
+  action:
+    | Widgets.Types.TMouseAction
+    | 'mousedown'
+    | 'mouseup'
+    | 'connect'
+    | 'mousewheel'
+    | 'data'
+    | 'move'
+    | 'dragbtndown'
+    | 'dblclick'
+    | 'btnup'
+    | 'click'
+    | 'error'
   button: 'left' | 'middle' | 'right'
-  raw: [number, number, number, number],
-  x: number,
-  y: number,
-  shift: boolean,
-  meta: boolean,
+  raw: [number, number, number, number]
+  x: number
+  y: number
+  shift: boolean
+  meta: boolean
   ctrl: boolean
 }
 
 interface GpmClient extends EventEmitter {
-  on(e:'move', c: (buttons: any, modifiers: any, x: any, y: any)=>void): this
-  // TODO: 
-// 'mousewheel',evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
-// 'drag', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-// 'mousewheel',               evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
-// 'btndown', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-// 'dblclick', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-// 'btnup', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-// self.emit('click', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
+  // TODO:
+  // 'mousewheel',evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
+  // 'drag', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  // 'mousewheel',               evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
+  // 'btndown', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  // 'dblclick', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  // 'btnup', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  // self.emit('click', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
 }
 
 export interface IBlessedProgramOptions {
@@ -95,7 +106,6 @@ export interface IBlessedProgramOptions {
   debug?: boolean
   resizeTimeout?: boolean
 }
-
 
 /**
  * The Program instance manages the low level interaction the the terminal. It emit the basi native events to the screens. It has associated an [[output]] writable stream attribute which ussually is stdout but could could be conigured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream from which the host terminal respond to the program requests. 
@@ -213,7 +223,6 @@ declare class BlessedProgram extends EventEmitter {
   static instances: BlessedProgram[]
   /** @internal */
   gpm?: GpmClient
-
 
   type: string
   options: IBlessedProgramOptions
@@ -725,7 +734,7 @@ same as CSI Ps B ?
   sm(...args: string[]): boolean
 
   decset(...args: string[]): boolean
-/**
+  /**
  * Uses [[setMode]] 2 5 to show the cursor:   
   NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor 
  */
@@ -734,7 +743,7 @@ same as CSI Ps B ?
   alternateBuffer(): boolean
   smcup(): boolean
   alternate(): boolean
-/**
+  /**
 ```
 
 CSI Pm l  Reset Mode (RM).
@@ -837,7 +846,25 @@ CSI ? Pm l
   enableMouse(): void
   disableMouse(): void
 
-  setMouse(opt?: {normalMouse?: boolean, x10Mouse?: boolean, hiliteTracking?: boolean, vt200Mouse?: boolean, allMotion?: boolean, sendFocus?: boolean, utfMode?: boolean, sgrMouse?: boolean, decMouse?: boolean, urxvtMouse?: boolean, ptermMouse?: boolean, jsbtermMouse?: boolean, gpmMouse?: boolean, [s: string]:any}, enable?: boolean): void
+  setMouse(
+    opt?: {
+      normalMouse?: boolean
+      x10Mouse?: boolean
+      hiliteTracking?: boolean
+      vt200Mouse?: boolean
+      allMotion?: boolean
+      sendFocus?: boolean
+      utfMode?: boolean
+      sgrMouse?: boolean
+      decMouse?: boolean
+      urxvtMouse?: boolean
+      ptermMouse?: boolean
+      jsbtermMouse?: boolean
+      gpmMouse?: boolean
+      [s: string]: any
+    },
+    enable?: boolean
+  ): void
 
   /**
  ```
@@ -852,12 +879,12 @@ CSI ? Pm l
   csr(top: number, bottom: number): boolean
   /** @see setScrollRegion*/
   decstbm(top: number, bottom: number): boolean
-/** CSI s
+  /** CSI s
   Save cursor (ANSI.SYS). */
   saveCursorA(): boolean
   /** @see saveCursorA*/
   scA(): boolean
-/**
+  /**
  ```
  CSI u
    Restore cursor (ANSI.SYS).
@@ -982,7 +1009,23 @@ Set cursor style (DECSCUSR, VT520).
  Ps = 4  -> steady underline.
  ```
    */
-  setCursorStyle(cursor: 0 | 1 | 2 | 3 | 4 | 'blinkingblock' | 'block' | 'steady block' | 'blinking underline' | 'underline' | 'steady underline' | 'blinking bar' | 'bar' | 'steady bar'): boolean
+  setCursorStyle(
+    cursor:
+      | 0
+      | 1
+      | 2
+      | 3
+      | 4
+      | 'blinkingblock'
+      | 'block'
+      | 'steady block'
+      | 'blinking underline'
+      | 'underline'
+      | 'steady underline'
+      | 'blinking bar'
+      | 'bar'
+      | 'steady bar'
+  ): boolean
   /** see [[setCursorStyle]] */
   decscursr(cursor: number): boolean
 
@@ -1189,7 +1232,7 @@ NOTE: xterm doesn't enable this code by default.
   /**  @see fillRectangle  */
 
   decfra(...args: string[]): boolean
-/**
+  /**
 ```
 
 CSI Ps ; Pu ' z
@@ -1305,7 +1348,7 @@ CSI Ps ; Pu ' z
   on(e: 'mouse', c: (e: GpmEvent) => void): this
   //  on(e: 'response', c: (e: any) => void): this
   /** triggered when the terminal window is resized. */
-  on(e: 'resize', c: (e: { winch: boolean, cols: number, rows: number }) => void): this
+  on(e: 'resize', c: (e: { winch: boolean; cols: number; rows: number }) => void): this
   /** triggered when the terminal window gains focus n the host window manager. For exmmple when the user switchst form another application to the terminal with ctrl-tab.  Notice that these are native events, ocurring outside the terminal application.*/
   on(e: 'focus', c: (e: any) => void): this
   /** triggered when the terminal window loose focus host window manager. For exmmple when the user switchs from the shell to another form another application . Notice that these are native events, ocurring outside the terminal application. */
@@ -1313,8 +1356,8 @@ CSI Ps ; Pu ' z
 
   on(e: 'keypress', c: Widgets.KeyEventListener): this
 
-    /** Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). */
-    on(event: 'warning', callback: (text: string) => void): this
+  /** Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). */
+  on(event: 'warning', callback: (text: string) => void): this
   on(e: string, c: (e: any) => void): this
 }
 
@@ -1517,7 +1560,7 @@ export namespace Widgets {
     destroy(): void
   }
 
-  interface IOptions { }
+  interface IOptions {}
 
   interface IHasOptions<T extends IOptions> {
     options: T
@@ -1663,7 +1706,7 @@ export namespace Widgets {
     screen: Screen
 
     /**
-     * Parent node.
+     * Parent node. If null it means the element is not attached to any screen or program, or the node is a Screen.
      */
     parent?: Node
 
@@ -1807,6 +1850,7 @@ export namespace Widgets {
     | 'parsed content'
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
+
   class NodeWithEvents extends Node {
     /**
      * Bind a keypress listener for a specific key.
@@ -2671,7 +2715,8 @@ export namespace Widgets {
    * * The lines parameter can be a string or an array of strings. The line parameter must
    * be a string.
    */
-  abstract class BlessedElement<Options extends ElementOptions = ElementOptions >  extends NodeWithEvents implements IHasOptions<ElementOptions> {
+  abstract class BlessedElement<Options extends ElementOptions = ElementOptions> extends NodeWithEvents
+    implements IHasOptions<ElementOptions> {
     shrink: boolean
     constructor(opts: Options)
 
@@ -2928,17 +2973,17 @@ export namespace Widgets {
     screenshot(): void
 
     /** Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . @internal. Could  be overriden by element subclasses. */
-   protected  _parseTags(s: string):string
-/** @internal  . Could  be overriden by element subclasses. */
-   protected _parseAttr(ines: string[]): string[]
-/** @internal . Could  be overriden by element subclasses. */
-protected _align(line:string, width:number, align:string):void
-/** @internal . Could  be overriden by element subclasses. */
-protected _wrapContent(content:string, width: number):void
-/** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
-protected sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors 
-/** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
-protected clearPos():void
+    protected _parseTags(s: string): string
+    /** @internal  . Could  be overriden by element subclasses. */
+    protected _parseAttr(ines: string[]): string[]
+    /** @internal . Could  be overriden by element subclasses. */
+    protected _align(line: string, width: number, align: string): void
+    /** @internal . Could  be overriden by element subclasses. */
+    protected _wrapContent(content: string, width: number): void
+    /** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
+    protected sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
+    /** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
+    protected clearPos(): void
 
     /**
      * Set the content. Note: When text is input, it will be stripped of all non-SGR
@@ -2954,7 +2999,7 @@ protected clearPos():void
     /**
      * Similar to setContent, but ignore tags and remove escape codes.
      */
-    setText(text: string, noClear?: boolean,): void
+    setText(text: string, noClear?: boolean): void
 
     /**
      * Similar to getContent, but return content with tags and escape codes removed.
@@ -3166,7 +3211,7 @@ protected clearPos():void
    * A scrollable text box which can display and scroll text, as well as handle
    * pre-existing newlines and escape codes.
    */
-  class ScrollableTextElement extends ScrollableBoxElement { }
+  class ScrollableTextElement extends ScrollableBoxElement {}
 
   /**
    * A box element which draws a simple box containing content or other elements.
@@ -3196,7 +3241,8 @@ protected clearPos():void
   /**
    * An element similar to Box, but geared towards rendering simple text elements.
    */
-  class TextElement<Options extends Widgets.TextOptions =  Widgets.TextOptions >  extends BlessedElement<Options> implements IHasOptions<Options> {
+  class TextElement<Options extends Widgets.TextOptions = Widgets.TextOptions> extends BlessedElement<Options>
+    implements IHasOptions<Options> {
     constructor(opts: TextOptions)
 
     // /**
@@ -3843,7 +3889,7 @@ protected clearPos():void
     censor: boolean
   }
 
-  interface ButtonOptions extends BoxOptions { }
+  interface ButtonOptions extends BoxOptions {}
 
   class ButtonElement extends InputElement implements IHasOptions<ButtonOptions> {
     constructor(opts: ButtonOptions)
@@ -3920,7 +3966,7 @@ protected clearPos():void
     on(event: 'uncheck', callback: (this: CheckboxElement) => void): this
   }
 
-  interface RadioSetOptions extends BoxOptions { }
+  interface RadioSetOptions extends BoxOptions {}
 
   /**
    * An element wrapping RadioButtons. RadioButtons within this element will be mutually exclusive
@@ -3930,7 +3976,7 @@ protected clearPos():void
     constructor(opts: RadioSetOptions)
   }
 
-  interface RadioButtonOptions extends CheckboxOptions { }
+  interface RadioButtonOptions extends CheckboxOptions {}
 
   /**
    * A radio button which can be used in a form element.
@@ -3939,7 +3985,7 @@ protected clearPos():void
     constructor(opts: RadioButtonOptions)
   }
 
-  interface PromptOptions extends BoxOptions { }
+  interface PromptOptions extends BoxOptions {}
 
   /**
    * A prompt box containing a text input, okay, and cancel buttons (automatically hidden).
@@ -3957,7 +4003,7 @@ protected clearPos():void
     readInput(text: string, value: string, callback: (err: any, value: string) => void): void
   }
 
-  interface QuestionOptions extends BoxOptions { }
+  interface QuestionOptions extends BoxOptions {}
 
   /**
    * A question box containing okay and cancel buttons (automatically hidden).
@@ -3973,7 +4019,7 @@ protected clearPos():void
     ask(question: string, callback: (err: any, value: string) => void): void
   }
 
-  interface MessageOptions extends BoxOptions { }
+  interface MessageOptions extends BoxOptions {}
 
   /**
    * A box containing a message to be displayed (automatically hidden).
@@ -3999,7 +4045,7 @@ protected clearPos():void
     error(text: string, callback: () => void): void
   }
 
-  interface LoadingOptions extends BoxOptions { }
+  interface LoadingOptions extends BoxOptions {}
 
   /**
    * A box with a spinning line to denote loading (automatically hidden).
@@ -4472,42 +4518,42 @@ protected clearPos():void
   }
 }
 
-
 // todo verify : LOG: [ 'classes',  'node',  'Node',  'screen',  'Screen',  'element',  'Element',  'box',  'Box',  'text',  'Text',  'line',  'Line',  'scrollablebox',  'ScrollableBox',  'scrollabletext',  'ScrollableText',  'bigtext',  'BigText',  'list',  'List',  'form',  'Form',  'input',  'Input',  'textarea',  'Textarea',  'textbox',  'Textbox',  'button',  'Button',  'progressbar',  'ProgressBar',  'filemanager',  'FileManager',  'checkbox',  'Checkbox',  'radioset',  'RadioSet',  'radiobutton',  'RadioButton',  'prompt',  'Prompt',  'question',  'Question',  'message',  'Message',  'loading',  'Loading',  'listbar',  'Listbar',  'log',  'Log',  'table',  'Table',  'listtable',  'ListTable',  'terminal',  'Terminal',  'image',  'Image',  'ansiimage',  'ANSIImage',  'overlayimage',  'OverlayImage',  'video',  'Video',  'layout',  'Layout',  'aliases',  'ListBar',  'PNG',  'png' ]
-
 
 // publish classes on existin gpaths so users can reference the real values for extending
 export namespace widget {
-  class Node extends Widgets.Node { }
-  class Element<Options extends Widgets.ElementOptions =  Widgets.ElementOptions >  extends Widgets.BlessedElement<Options> { }
-  class Box extends Widgets.BoxElement { }
-  class List extends Widgets.ListElement { }
-  class Screen extends Widgets.Screen { }
+  class Node extends Widgets.Node {}
+  class Element<Options extends Widgets.ElementOptions = Widgets.ElementOptions> extends Widgets.BlessedElement<
+    Options
+  > {}
+  class Box extends Widgets.BoxElement {}
+  class List extends Widgets.ListElement {}
+  class Screen extends Widgets.Screen {}
   // class BoxElement extends Widgets.BoxElement { }
-  class Text<Options extends Widgets.TextOptions =  Widgets.TextOptions >  extends Widgets.TextElement<Options> { }
-  class Line extends Widgets.LineElement { }
-  class BigText extends Widgets.BigTextElement { }
+  class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> {}
+  class Line extends Widgets.LineElement {}
+  class BigText extends Widgets.BigTextElement {}
   // class List extends Widgets.ListElement { }
-  class FileManager extends Widgets.FileManagerElement { }
-  class ListTable extends Widgets.ListTableElement { }
-  class Listbar extends Widgets.ListbarElement { }
-  class Form extends Widgets.FormElement { }
-  class Input extends Widgets.InputElement { }
-  class Textarea extends Widgets.TextareaElement { }
-  class Textbox extends Widgets.TextboxElement { }
-  class Button extends Widgets.ButtonElement { }
-  class Checkbox extends Widgets.CheckboxElement { }
-  class RadioSet extends Widgets.RadioSetElement { }
-  class RadioButton extends Widgets.RadioButtonElement { }
-  class Table extends Widgets.TableElement { }
-  class Prompt extends Widgets.PromptElement { }
-  class Question extends Widgets.QuestionElement { }
-  class Message extends Widgets.MessageElement { }
-  class Loading extends Widgets.LoadingElement { }
-  class Log extends Widgets.Log { }
-  class ProgressBar extends Widgets.ProgressBarElement { }
-  class Terminal extends Widgets.TerminalElement { }
-  class Layout extends Widgets.LayoutElement { }
+  class FileManager extends Widgets.FileManagerElement {}
+  class ListTable extends Widgets.ListTableElement {}
+  class Listbar extends Widgets.ListbarElement {}
+  class Form extends Widgets.FormElement {}
+  class Input extends Widgets.InputElement {}
+  class Textarea extends Widgets.TextareaElement {}
+  class Textbox extends Widgets.TextboxElement {}
+  class Button extends Widgets.ButtonElement {}
+  class Checkbox extends Widgets.CheckboxElement {}
+  class RadioSet extends Widgets.RadioSetElement {}
+  class RadioButton extends Widgets.RadioButtonElement {}
+  class Table extends Widgets.TableElement {}
+  class Prompt extends Widgets.PromptElement {}
+  class Question extends Widgets.QuestionElement {}
+  class Message extends Widgets.MessageElement {}
+  class Loading extends Widgets.LoadingElement {}
+  class Log extends Widgets.Log {}
+  class ProgressBar extends Widgets.ProgressBarElement {}
+  class Terminal extends Widgets.TerminalElement {}
+  class Layout extends Widgets.LayoutElement {}
   // class Terminal extends Widgets.TerminalElement { }
 }
 
