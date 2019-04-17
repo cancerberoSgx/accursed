@@ -3,7 +3,7 @@ import { asArray } from 'misc-utils-of-mine-generic'
 import { Checkbox, Element, isElement } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
-import { visitAscendants, visitDescendants } from './node';
+import { visitDescendants } from './node'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -52,7 +52,6 @@ export function setElementData<T>(e: Element, path: string, value: T) {
   e.$ = e.$ || {}
   setObjectProperty(e.$, path, value)
 }
-
 
 export function onValueChange(el: Checkbox, cb: (this: Checkbox, value: boolean) => void) {
   function listener(this: Checkbox) {
@@ -154,15 +153,15 @@ export function replaceChildren(
       c.destroy()
     })
     container.screen.cleanSides(container)
-    visitDescendants(container.screen, c=>isElement(c) && container.screen.cleanSides(c))
+    visitDescendants(container.screen, c => isElement(c) && container.screen.cleanSides(c))
     container.screen.once('render', () => {
       setTimeout(() => {
         asArray(newChildren).forEach(c => {
           container.append(c)
         })
         // visitAscendants(container, n=>{
-          // if(isElement(n)) {
-            // n.screen.cleanSides(n); n.children.forEach(c=>isElement(c) // )})
+        // if(isElement(n)) {
+        // n.screen.cleanSides(n); n.children.forEach(c=>isElement(c) // )})
         // container.screen.cleanSides(container)
         container.screen.render()
       }, 10)
