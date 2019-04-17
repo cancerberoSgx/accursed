@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { getContent, installExitKeys, isElement, React, Screen, screen } from '../src'
+import { getContent, installExitKeys, React, Screen, screen } from '../src'
 import { color } from './blessed/gallery/util'
 
 describe('blessed', () => {
@@ -17,9 +17,8 @@ describe('blessed', () => {
     })
 
     it('should allow to implement a new element type', async done => {
-
       interface SpinningClockOptions extends blessed.Widgets.TextOptions {
-        clockwise?: boolean 
+        clockwise?: boolean
         frames?: string[]
         interval?: number
         clockLabel?: string // a label for assert content
@@ -29,15 +28,14 @@ describe('blessed', () => {
         private static nextTick = global.setImmediate || process.nextTick.bind(process)
         type = 'spinningclock'
         private intervalHandler() {
-          if(this.options.clockwise){
+          if (!this.options.clockwise) {
             this.counter = this.counter >= this.options.frames!.length - 1 ? 0 : this.counter + 1
-          }
-          else {
-            this.counter = this.counter <=0  ? this.options.frames!.length -1 : this.counter - 1
+          } else {
+            this.counter = this.counter <= 0 ? this.options.frames!.length - 1 : this.counter - 1
           }
           const c = ` . ${this.options.clockLabel} ${this.options.frames![this.counter]} . `
           this.setContent(c)
-          SpinningClock.nextTick(()=>this.screen.render())
+          SpinningClock.nextTick(() => this.screen.render())
           // this.screen.render() // TODO: could be improved ?
         }
         private counter = 0
@@ -65,16 +63,21 @@ describe('blessed', () => {
         }
       }
 
+      // screen1.render()
       // test our new element:
       const clock = new SpinningClock({
         parent: screen1,
         clockLabel: ' flag2 '
       })
       screen1.render()
-      setTimeout(() => { // TODO: waitForContent(c) helper
+      setTimeout(() => {
+        // screen1.render()
+        // TODO: waitForContent(c) helper
         expect(getContent(clock)).toContain('flag2')
+        screen1.log(getContent(clock))
         done()
-      }, 200);
+      }, 800)
+      screen1.render()
     })
 
     it('should print function element children generated with map', async done => {

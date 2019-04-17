@@ -49,10 +49,10 @@ export class App extends Component<P, {}> {
 
   protected commands() {
     return {
-      Categories: () => {
+      Emojis: () => {
         this.updateMain(MenuOptions.categories)
       },
-      All: () => {
+      'All Unicode': () => {
         this.updateMain(MenuOptions.categories)
       },
       Search: () => {

@@ -80,7 +80,7 @@ export function getContent(
   e: Element,
   options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}
 ) {
-  let text: string[] = []
+  let text: string[] = [e.getContent()]
   visitDescendants(
     e,
     d => {

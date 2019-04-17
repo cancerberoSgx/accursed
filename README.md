@@ -6,9 +6,32 @@ Summary: I discovered blessed, an awesome library for developing command line UI
 
 Instead of cloning the project, here I try to develope missing parts, learn, document, type and find issues, but on top of it. 
 
-So I'm learning, documenting prototypings and researching. The following is a summary of work done. 
+So I'm learning, documenting prototypings and researching. The following is a summary of work done.
 
 <!-- toc -->
+
+- [JSX](#jsx)
+  * [IntrinsicElements](#intrinsicelements)
+  * [function elements](#function-elements)
+  * [Class Elements](#class-elements)
+- [Event handlers - function attributes](#event-handlers---function-attributes)
+  * [built-in event-related methods as attributes](#built-in-event-related-methods-as-attributes)
+  * [Hight level event handlers](#hight-level-event-handlers)
+    + [onRender](#onrender)
+    + [onChange](#onchange)
+  * [Expressions](#expressions)
+  * [children](#children)
+  * [JSXText](#jsxtext)
+- [TODO / questions / ideas / issues](#todo--questions--ideas--issues)
+  * [Ideas](#ideas)
+- [specs](#specs)
+- [My blessed contrib widgets and utilities:](#my-blessed-contrib-widgets-and-utilities)
+- [Apps](#apps)
+- [Typings:](#typings)
+- [Documentation:](#documentation)
+  * [Issues](#issues)
+  * [TODO](#todo)
+
 <!-- tocstop -->
 
 # JSX
