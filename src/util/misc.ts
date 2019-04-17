@@ -1,8 +1,8 @@
 import { objectKeys } from 'misc-utils-of-mine-generic'
 
-export function notUndefined<T>(a: T): a is Exclude<T, undefined> {
-  return typeof a !== 'undefined'
-}
+// export function notUndefined<T>(a: T): a is Exclude<T, undefined> {
+//   return typeof a !== 'undefined'
+// }
 
 /**
  * Returns a nested property of given object and given path. For example path could be 'foo.bar' and it will return `object['foo']['bar']`

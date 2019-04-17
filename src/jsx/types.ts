@@ -101,29 +101,33 @@ export interface ArtificialEventOptions<T extends Element> {
   ) => void
 }
 
+type PropsWithRef<P> = P & {ref?: P extends { ref?: infer R }  ? R  : undefined }
+
 declare global {
   export namespace JSX {
     export interface IntrinsicElements {
-      box: BoxOptions & EventOptions<Box>
-      text: TextOptions & EventOptions<Text>
-      line: LineOptions & EventOptions<Line>
-      textarea: TextareaOptions & EventOptions<Textarea>
-      layout: LayoutOptions & EventOptions<Layout>
-      button: ButtonOptions & EventOptions<Button>
-      checkbox: CheckboxOptions & EventOptions<Button>
-      bigtext: BigTextOptions & EventOptions<BigText>
-      list: ListOptions & EventOptions<List>
-      filemanager: FileManagerOptions & EventOptions<FileManager>
-      listtable: ListTableOptions & EventOptions<ListTable>
-      listbar: ListbarOptions & EventOptions<ListBar>
-      form: FormOptions & EventOptions<Form>
-      textbox: TextboxOptions & EventOptions<Textbox>
-      radioset: RadioSetOptions & EventOptions<RadioSet>
-      radiobutton: RadioButtonOptions & EventOptions<RadioButton>
-      prompt: PromptOptions & EventOptions<Prompt>
+      box: OptionsProps<BoxOptions> & EventOptions<Box>
+      text: OptionsProps<TextOptions> & EventOptions<Text>
+      line: OptionsProps<LineOptions> & EventOptions<Line>
+      textarea: OptionsProps<TextareaOptions> & EventOptions<Textarea>
+      layout: OptionsProps<LayoutOptions> & EventOptions<Layout>
+      button: OptionsProps<ButtonOptions> & EventOptions<Button>
+      checkbox: OptionsProps<CheckboxOptions> & EventOptions<Button>
+      bigtext: OptionsProps<BigTextOptions> & EventOptions<BigText>
+      list: OptionsProps<ListOptions> & EventOptions<List>
+      filemanager: OptionsProps<FileManagerOptions> & EventOptions<FileManager>
+      listtable: OptionsProps<ListTableOptions> & EventOptions<ListTable>
+      listbar: OptionsProps<ListbarOptions> & EventOptions<ListBar>
+      form: OptionsProps<FormOptions> & EventOptions<Form>
+      textbox: OptionsProps<TextboxOptions> & EventOptions<Textbox>
+      radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
+      radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
+      prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
       __virtual: __Virtual
     }
-
+    /** adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps unify the rest in one place (onClick, etc) */
+    type OptionsProps<T> = PropsWithRef<T>
+    
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
       type: ElementType
       props: P
@@ -134,9 +138,12 @@ declare global {
     export type ElementType<P extends { children?: BlessedJsxNode } = {}> =
       | undefined
       | string
-      | Component<P, any>
-      | FunctionComponent<P>
+      | Component<PropsWithRef<P>, any>
+      | FunctionComponent<PropsWithRef<P>>
 
+      
+
+    
     export interface FunctionComponent<P extends { children?: BlessedJsxNode } = {}> {
       (props: P & { children?: BlessedJsxNode }, context?: any): Element<any> | null
     }
@@ -214,6 +221,11 @@ export interface BlessedJsx {
    * Add listeners that will be called after React.render() call finished rendering a whole hierarchy of items
    */
   addAfterRenderListener(l: AfterRenderListener): void
+
+  /**
+   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See https://reactjs.org/docs/refs-and-the-dom.html. 
+   */
+  createRef<T extends Element>(): RefObject<T>
 }
 
 /** @internal */
@@ -273,3 +285,12 @@ export interface ArtificialEvent<T extends Element> {
 }
 
 export type OnClickHandler<T extends Element> = (this: T, e: IMouseEventArg & ArtificialEvent<T>) => void
+
+
+// export interface  RefAttribute<T> {
+//   ref?: RefObject<T>
+// }
+
+export interface RefObject<T = any>{
+  current: T|undefined
+}

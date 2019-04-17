@@ -8,7 +8,7 @@ import { ButtonDemo } from './ButtonDemo'
 import { CollapsibleDemo } from './CollapsibleDemo'
 import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
-import { RobotDemo } from './RobotDemo'
+// import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
 
 enum Demo {
@@ -37,7 +37,7 @@ export class App extends Component<P, S> {
       } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)
       } else if (demo === Demo.robot) {
-        return React.render(<RobotDemo screen={this.props.screen} />)
+        // return React.render(<RobotDemo screen={this.props.screen} />)
       } else {
         throw new Error('Demo unknown ' + d)
       }

@@ -2,9 +2,9 @@ import * as blessed from 'blessed'
 import { installExitKeys } from '../src/blessed/util'
 import { Element, Screen } from '../src/blessedTypes'
 import { React } from '../src/jsx/createElement'
-// import { sleep } from 'misc-utils-of-mine-generic';
 
 type doneFunction = (...arg: any[]) => any
+
 export async function testJsx({
   creator,
   assert
@@ -107,7 +107,7 @@ export class TestDriver {
     // }
     // return this._screen!;
   }
-  constructor(protected options: Options = {}) {}
+  constructor(protected options: Options = {}) { }
 
   private getScreen(mode: 'nothing' | 'reset' | 'createNew' | 'destroy' = 'nothing') {
     if (this._screen && ((!this._screen.destroyed && mode === 'createNew') || mode === 'destroy')) {
@@ -166,3 +166,4 @@ export function sleep(ms: number): Promise<void> {
     }, ms)
   })
 }
+

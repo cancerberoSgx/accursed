@@ -301,6 +301,7 @@ declare class BlessedProgram extends EventEmitter {
   rsetx(x: number): boolean
   rsety(y: number): boolean
   rmove(x: number, y: number): void
+  
   cursorCharAbsolute(x: number): number
 
   simpleInsert(ch: string, i?: number, attr?: boolean): boolean
@@ -2678,6 +2679,17 @@ export namespace Widgets {
      * Draw a translucent offset shadow behind the element.
      */
     shadow?: boolean
+
+    /** Miscelanus options. Currently JavaScript/Blessed allows to pass anything as option, 
+     * this is just a bucket for TypeScript and have impact */
+    _data?: {[name: string]: any}
+
+    /** `accursed` library custom support for React-like Refs. Declare the option here so it works out of the box. https://reactjs.org/docs/refs-and-the-dom.html. TODO: documentation */
+    ref?: RefObject
+  }
+
+  interface RefObject<T = any>{
+    current: T|undefined
   }
 
   interface Coords {
