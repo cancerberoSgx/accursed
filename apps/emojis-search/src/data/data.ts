@@ -13,14 +13,14 @@ let emojiDefinitions: EmojiDefinition[]
 
 let ucdNonUniHanDefinitions: EmojiDefinition[]
 
-let dataOnlyEmojis = true
-export function setOnlyEmojis(b: boolean){
-  dataOnlyEmojis = b
-}
-export function getOnlyEmojis(){
-  return dataOnlyEmojis
-}
-export function getEmojiDefinitions() {
+// let dataOnlyEmojis = true
+// export function setOnlyEmojis(b: boolean){
+//   dataOnlyEmojis = b
+// }
+// export function getOnlyEmojis(){
+//   return dataOnlyEmojis
+// }
+export function getEmojiDefinitions(dataOnlyEmojis: boolean) {
   if (!emojiDefinitions) {
     emojiDefinitions = JSON.parse(readFileSync(join(__dirname, 'generated', 'emoji.json')).toString()) //as EmojiDefinition[]
   }
@@ -35,12 +35,13 @@ return dataOnlyEmojis ? emojiDefinitions : ucdNonUniHanDefinitions
 
 let categoryEmojis: { [c: string]: (EmojiDefinition)[] } | undefined
 let categoryAllUnicode: { [c: string]: (EmojiDefinition)[] } | undefined
-export function getCategoryEmojis() {
+
+export function getCategoryEmojis(dataOnlyEmojis: boolean) {
   // we repeat code because we dont want to load all unicode at the beggining when applcation startup sonly when user requires it
   if(dataOnlyEmojis){
     if (!categoryEmojis) {
       categoryEmojis = {}
-      const defs = getEmojiDefinitions()
+      const defs = getEmojiDefinitions(dataOnlyEmojis)
       defs.forEach(e => {
         // const e = (defs as any)[k]
         const name = e.category || 'Unknown'
@@ -55,7 +56,7 @@ export function getCategoryEmojis() {
   }else {
     if (!categoryAllUnicode) {
       categoryAllUnicode = {}
-      const defs = getEmojiDefinitions()
+      const defs = getEmojiDefinitions(dataOnlyEmojis)
       defs.forEach(e => {
         // const e = (defs as any)[k]
         const name = e.category || 'Unknown'
@@ -70,6 +71,6 @@ export function getCategoryEmojis() {
   }
  
 }
-export function getCategoryNames() {
-  return Object.keys(getCategoryEmojis())
+export function getCategoryNames(dataOnlyEmojis: boolean) {
+  return Object.keys(getCategoryEmojis(dataOnlyEmojis))
 }
