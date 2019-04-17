@@ -179,6 +179,11 @@ export function replaceChildren(
   }
 }
 
+export const createScreen = blessed.screen
+
+// export {blessed.screen}C
+// blessed.screen
+// export {blessed.screen as screen}
 // let BlessedNodeTypeVirtualInstalled = false
 // export function installBlessedNodeTypeVirtual<Data = any>() {
 //   if (BlessedNodeTypeVirtualInstalled) {
