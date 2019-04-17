@@ -1,35 +1,33 @@
-import { Component, Div, React, showInModal, Element, isElement } from 'accursed'
+import { Component, Div, React, showInModal, Element, isElement, replaceChildren } from 'accursed'
 import { EmojiDefinition, getCategoryEmojis, getEmojiDefinitions } from './data/data'
-// import { EmojiDefinition, emojiDescriptions } from './data/emojis'
 import { inputOptions, scrollableOptions } from './elementOptions'
+import {asArray} from 'misc-utils-of-mine-generic'
 
 export class List extends Component<{
   category?: string
   emojis?: (EmojiDefinition)[]
 }> {
-  // mode: 'listtable' | 'compact' = 'compact'
   render() {
     return (
       <Div height="100%">
         <checkbox {...inputOptions()} checked={false} content="Compact View" onChange={e => {
-          // this.mode = 
-          if(e.value){
-            this.replaceElement("list-container", e.value ? this.compact() : this.listtable())
-          }
+          // if(e.value){
+            this.replaceDescendantChildren("list-container", e.value ? this.compact() : this.listtable())
+          // }
         }} />
-
-        {/* <Div name="list-container">
-      {this.props.category && <List category={this.props.category} />} */}
-        <Div name="list-container">{this.listtable() }
-        {/* this.mode === 'listtable' ? this.listtable() : this.compact()} */}
-        </Div>
+        <Div name="list-container">{this.listtable() }        </Div>
       </Div>
     )
   }
-  replaceElement(oldChildNameOrElemtn: string|Element, newChild: Element|JSX.Element): any {
-    const c = isElement(newChild) ? newChild :  React.render(newChild)
-    const oldNode = isElement(oldChildNameOrElemtn) ? oldChildNameOrElemtn : this.findDescendant(d=>isElement(d) && d.name===oldChildNameOrElemtn)
-    throw new Error('Method not implemented.');
+  // getDescendantNamed
+  replaceDescendantChildren(oldChildNameOrElement: string|Element, newChildren: (Element|JSX.Element)|(Element|JSX.Element)[]): any {
+    const newElements = asArray(newChildren).map(c=> isElement(c) ? c:  React.render(c))
+    const targetDescendant = isElement(oldChildNameOrElement) ? oldChildNameOrElement : this.findDescendant(d=>isElement(d) && d.name===oldChildNameOrElement)
+    if(newElements && targetDescendant){
+      replaceChildren(targetDescendant, newElements);
+      // targetDescendant.replaceChildren(targetDescendant)
+    }
+    // throw new Error('Method not implemented.');
   }
   private listtable() {
     return (

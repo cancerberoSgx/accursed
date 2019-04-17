@@ -8,3 +8,4 @@ apps
 log.txt
 tsconfig.json
 .travis.yml
+/docs

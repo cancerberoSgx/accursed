@@ -11,9 +11,11 @@
     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
-    "clean": "rm -rf dist", 
+    "clean": "rm -rf dist",
     "copy": "cp src/declarations/*.d.ts dist/src/declarations && rm -rf dist/src/index.d.ts && cp dist/src/index_publish.d.ts dist/src/index.d.ts",
-    "doc": "npx typedoc 'src/index.ts' --theme markdown --out api",
+    "doc-blessed-md": "rm -rf docs/blessed-md; mkdir -p docs/blessed-md ; npx typedoc --includeDeclarations --mdHideSources --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --theme markdown --out docs/blessed-md --excludeExternals --mdDocusaurus",
+    "doc-blessed": "rm -rf docs/blessed; mkdir -p docs/blessed ; npx typedoc --includeDeclarations --mdHideSources --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --out docs/blessed --excludeExternals",
+    "doc-md": "rm -rf docs/; mkdir docs/blessed ; npx typedoc --includeDeclarations --mdHideSources --name accursed --readme name --toc --hideGenerator --ignoreCompilerErrors 'src/index_publish.ts' --theme markdown --out docs/api --excludeExternals",
     "all": "npm run clean && npm run prettier && npm run build && npm test"
   },
   "author": "Sebastian Gurin",
@@ -32,6 +34,8 @@
     "prettier": "^1.16.4",
     "ts-node": "^7.0.1",
     "ts-refactor": "0.0.2",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.2.0",
     "typescript": "^3.4.1"
   },
   "keywords": [
