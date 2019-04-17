@@ -1,11 +1,15 @@
-Blessing contributions of mine.
+**Accursed: [blessed](https://github.com/chjj/blessed/)**
 
-Summary: I discovered blessed, an awesome library for developing command line UI, but unformtunately is a discontinued project a dn has poor documentation. 
+[blessed](https://github.com/chjj/blessed/) contributions, extensions, typings, documentation and apps of mine
+
+Summary: I discovered blessed, an awesome library for developing command line UI, but unfortunately is a discontinued project a dn has poor documentation. 
 
 Instead of cloning the project, here I try to develope missing parts, learn, document, type and find issues, but on top of it. 
 
 So I'm learning, documenting prototypings and researching. The following is a summary of work done. 
 
+<!-- toc -->
+<!-- tocstop -->
 
 # JSX
 

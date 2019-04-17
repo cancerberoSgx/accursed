@@ -1,7 +1,7 @@
 {
   "name": "accursed",
   "version": "0.0.2",
-  "description": "blessed contributions, extensions, typings and documentation",
+  "description": "blessed contributions, extensions, typings, documentation and apps",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
@@ -31,6 +31,7 @@
     "@types/node": "^10.5.2",
     "cli-driver": "0.2.0",
     "jasmine": "^3.3.1",
+    "markdown-toc": "^1.2.0",
     "prettier": "^1.16.4",
     "ts-node": "^7.0.1",
     "ts-refactor": "0.0.2",
