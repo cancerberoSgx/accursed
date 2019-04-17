@@ -36,8 +36,6 @@ So I'm learning, documenting prototypings and researching. The following is a su
     + [Virtual Nodes](#virtual-nodes)
 - [doubts, thouths, TOLD](#doubts-thouths-told)
     + [doubts / thougths about JSX Text implementation, ç](#doubts--thougths-about-jsx-text-implementation-c)
-- [TODO / questions / ideas / issues](#todo--questions--ideas--issues)
-- [Ideas](#ideas)
 - [specs](#specs)
 - [My blessed contrib widgets and utilities:](#my-blessed-contrib-widgets-and-utilities)
 - [Apps](#apps)
@@ -45,8 +43,7 @@ So I'm learning, documenting prototypings and researching. The following is a su
 - [Documentation:](#documentation)
 - [How-to bless documents](#how-to-bless-documents)
   * [Extending blessed Elements with TypeScript and accursed](#extending-blessed-elements-with-typescript-and-accursed)
-  * [Issues](#issues)
-  * [TODO](#todo)
+- [TODO & ISSUES & Ideas](#todo--issues--ideas)
 
 <!-- tocstop -->
 

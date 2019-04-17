@@ -119,12 +119,8 @@ class BlessedJsxImpl implements BlessedJsx {
       l(afterElementCreatedEvent)
     })
 
-    // console.log('crearteELement', !!(el! as any),  (el! as any).type, blessed.BlessedProgram.instances[0].write('kajhsbdkajhsdkjahskdhaskd '+!!(el! as any)+'+ +'+(el! as any).type));
-
-    // .log("setTimeout",!ref1.current)
-
     // install refs for all kind of elements (TODO: in a listener)
-    // maybe a getter is better to avoid object cycles ?
+    // TODO:  maybe a getter is better to avoid object cycles ?
     // TODO: if not found look at attrs arg just in case ?
     if ((el! as any).options.ref && !(el! as any).options.ref.current) {
       ;(el! as any).options.ref.current = el! as any

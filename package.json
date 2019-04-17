@@ -13,7 +13,7 @@
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
     "copy": "cp src/declarations/*.d.ts dist/src/declarations && rm -rf dist/src/index.d.ts && cp dist/src/index_publish.d.ts dist/src/index.d.ts",
-    "docs": "rm -rf docs && npm run docs-readme-toc && npm run docs-readme-toc && npm run docs-blessed-md && npm run docs-blessed && npm run docs-accursed-md && npm run docs-accursed",
+    "docs": "rm -rf docs && npm run docs-readme-toc && npm run docs-readme-toc && npm run docs-blessed-md && npm run docs-blessed && npm run docs-accursed-md && npm run docs-accursed && gzip -9r docs/*",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "docs-blessed-md": "D=docs/api/blessed-md && rm -rf $D; mkdir -p $D ; npx typedoc --includeDeclarations --mdHideSources --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --theme markdown --out $D --excludeExternals --mdDocusaurus",
     "docs-blessed": "D=docs/api/blessed &&  rm -rf $D; mkdir -p $D ; npx typedoc --includeDeclarations --mdHideSources --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --out $D --excludeExternals",
