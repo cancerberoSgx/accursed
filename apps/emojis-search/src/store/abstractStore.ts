@@ -52,7 +52,7 @@ export interface ActionListener<State, ActionType extends string, ActionTypeMap 
    * Since in this "agile" code we could be registering listeners / reducers/sagas in the middle of UI code, we want to 
    * ensure they are unique and well identified with names form a central dictionary
    */
-  id: ActionListenerId
+  id?: ActionListenerId
   /** declares the mode in which this listener is notified. Some listeners can be notified before or after the "dispatch" moment and can declare that they will "mutate" (write) the state. So ones could be more like redux reducers, and other could have a role more similar to redux sagas... */
   listenerType?: ActionListenerType
   /** the action type for which this listener will be notified (only) */

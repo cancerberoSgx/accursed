@@ -3,10 +3,10 @@ import { EmojiDefinition, getCategoryEmojis, getEmojiDefinitions } from './data/
 import { inputOptions, scrollableOptions } from './elementOptions'
 import {asArray} from 'misc-utils-of-mine-generic'
 import { Props } from './store/actions';
-import { StoreComponent } from './storeComponent';
+import { UnicodeStoreComponent } from './storeComponent';
 import { MainView } from './store/uiActions';
 
-export class List extends StoreComponent<Props>
+export class List extends UnicodeStoreComponent
 // {
 
 //   category?: string

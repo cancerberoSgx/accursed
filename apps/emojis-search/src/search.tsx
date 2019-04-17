@@ -14,11 +14,15 @@ import {
 import { getCategoryNames, getEmojiDefinitions } from './data/data'
 import { inputOptions } from './elementOptions'
 import { List } from './list'
-import { Props } from './store/actions';
-import { StoreComponent } from './storeComponent';
-import { MainView } from './store/uiActions';
+import { Props, ActionType, UnicodeActionListener, UnicodeAction, ACTION_LISTENER } from './store/actions';
+import { UnicodeStoreComponent } from './storeComponent';
+import { MainView, changeSearchResultView } from './store/uiActions';
+import { Action } from './store/abstractStore';
 
-export class Search extends StoreComponent<Props> {
+export class Search extends UnicodeStoreComponent  implements UnicodeActionListener<ActionType.CHANGE_SEARCH_RESULT_VIEW> {
+  actionType: ActionType.CHANGE_SEARCH_RESULT_VIEW= ActionType.CHANGE_SEARCH_RESULT_VIEW
+  // id=ACTION_LISTENER.changeMainView
+
   _render() {
     const emojiDescriptions = getEmojiDefinitions(this.state.currentView===MainView.Emojis)
     return (
@@ -28,7 +32,7 @@ export class Search extends StoreComponent<Props> {
         <Br />
         <textbox
           {...inputOptions()}
-          width="100%"
+          width="100%"  
           padding={1}
           label="Search Query"
           height={5}
@@ -83,6 +87,10 @@ export class Search extends StoreComponent<Props> {
         <Div name="search-list-container">{this.state.categoriesView.selectedCategory&& <List{...this.props} />}</Div>
       </Div>
     )
+  }
+
+  handle(a: UnicodeAction){
+    
   }
 
   selected(

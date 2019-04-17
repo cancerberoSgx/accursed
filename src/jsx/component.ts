@@ -12,7 +12,7 @@ import {
 } from '../blessed/node'
 import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
 import { RemoveProperties } from '../util/misc'
-import { ACCURSED_COMPONENT_PROPERTY_NAME } from './createElement';
+// import { ACCURSED_COMPONENT_PROPERTY_NAME } from './createElement';
 
 /**
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a dummy state that will update the blessed element if changed by default
@@ -90,9 +90,9 @@ export abstract class Component<P = {}, S = {}> {
   }
 }
 
-export function getElementComponent(el: Element): Component|undefined {
-  return getElementData(el, ACCURSED_COMPONENT_PROPERTY_NAME )
-}
+// export function getElementComponent(el: Element): Component|undefined {
+  // return getElementData(el, ACCURSED_COMPONENT_PROPERTY_NAME )
+// }
 
 /** esthetic options like color font styles that doesn't change the postiion dimention at all ! (so they can me safely applied in a general manner (declared in a theme)) safely*/
 // type VisualNoPositionImpactOptions =TextStyleOptions| 'ColorOptions' EventEStyleOptions ?

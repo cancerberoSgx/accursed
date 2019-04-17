@@ -15,11 +15,9 @@ import { getCategoryNames } from './data/data'
 import { scrollableOptions } from './elementOptions'
 import { List } from './list'
 import { Props } from './store/actions';
-import { StoreComponent } from './storeComponent';
+import { UnicodeStoreComponent } from './storeComponent';
 
-export class Categories extends StoreComponent<
-Props
-> {
+export class Categories extends UnicodeStoreComponent  {
   _render() {
     return (
       <Div>

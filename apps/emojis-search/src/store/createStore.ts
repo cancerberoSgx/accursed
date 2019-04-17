@@ -1,6 +1,6 @@
 import { installExitKeys, screen } from 'accursed';
 import { MainView } from './uiActions';
-import { StoreImpl } from './store';
+import { StoreImpl } from './abstractStore';
 import { State } from './state';
 import { App } from '../app';
 import { ActionType, ActionTypeMap, ACTION_LISTENER, UnicodeStore } from './actions';
@@ -9,7 +9,7 @@ import { ActionType, ActionTypeMap, ACTION_LISTENER, UnicodeStore } from './acti
 export class UnicodeStoreImpl extends StoreImpl<State, ActionType, ActionTypeMap, ACTION_LISTENER> implements UnicodeStore {
   dispatch<T extends ActionType>(a: ActionTypeMap[T]){
     super.dispatch(a)
-    this.state.screen.render()
+    // this.state.screen.render()
   
   }
   }
@@ -23,6 +23,7 @@ export function createStore() {
   });
   return store;
 }
+
 function getInitialState(): State {
   return {
     currentView: MainView.Emojis,

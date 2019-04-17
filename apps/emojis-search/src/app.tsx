@@ -4,12 +4,12 @@ import { inputOptions } from './elementOptions'
 import { Home } from './home'
 import { Search } from './search'
 import { MainView, changeViewAction } from './store/uiActions';
-import {  ActionListenerType } from './store/store';
-import { ActionListener, ActionType, ACTION_LISTENER, UnicodeStore, Props } from './store/actions';
-import { StoreComponent } from './storeComponent';
+import {  ActionListenerType } from './store/abstractStore';
+import { UnicodeActionListener, ActionType, ACTION_LISTENER, UnicodeStore, Props, UnicodeAction } from './store/actions';
+import { UnicodeStoreComponent } from './storeComponent';
 
 
-export class App extends StoreComponent<Props, {}> implements ActionListener<ActionType.CHANGE_CURRENT_VIEW>{
+export class App extends UnicodeStoreComponent  implements UnicodeActionListener<ActionType.CHANGE_MAIN_VIEW>{
   _render(): JSX.BlessedJsxNode {
    return  <Div parent={this.props.store.state.screen}>
     {/* <Div height={5}> */}
@@ -29,15 +29,20 @@ export class App extends StoreComponent<Props, {}> implements ActionListener<Act
   </Div>
   }
   
-  actionType= ActionType.CHANGE_CURRENT_VIEW
-  id=ACTION_LISTENER.changeMainView
+  actionType: ActionType.CHANGE_MAIN_VIEW= ActionType.CHANGE_MAIN_VIEW
+  // id=ACTION_LISTENER.changeMainView
 
-  private constructor(p:Props, s:{}){
-    super(p,s)
-    this.props.store.addActionListener(this)
-  }
+  // private constructor(p:Props, s:{}){
+  //   super(p,s)
+  //   // this.props.store.addActionListener(this)
+  // }
+private static _instance:App 
   static instance(store: UnicodeStore){
-    return new App({store} ,{})
+    if(!App._instance){
+      App._instance =new App({store} ,{})
+    }
+    return App._instance
+    // return new App({store} ,{})
   }
   // main: MainView = MainView.Emojis
   // render() {
@@ -62,7 +67,7 @@ export class App extends StoreComponent<Props, {}> implements ActionListener<Act
   //     </Div>
   //   )
   // }
-  handle(a: changeViewAction) {
+  handle(a: UnicodeAction) {
     const mainContainer = this.findDescendant(d => isElement(d) && d.name === 'main-container')! as Element
     replaceChildren(mainContainer, React.render(<Main  {...this.props}/>))
     // const main = this.findDescendant(d => isElement(d) && d.name === 'main')! as Element
@@ -74,24 +79,24 @@ export class App extends StoreComponent<Props, {}> implements ActionListener<Act
   protected commands() {
     return {
       'Only Emojis': () => {
-        this.dispatch({type: ActionType.CHANGE_CURRENT_VIEW, view: MainView.Emojis})
+        this.dispatch({type: ActionType.CHANGE_MAIN_VIEW, view: MainView.Emojis})
         // this.
         // setOnlyEmojis(true)
         // this.handle(MainView.Emojis)
       },
       'All Unicode': () => {
-        this.dispatch({type: ActionType.CHANGE_CURRENT_VIEW, view: MainView.AllUnicode})
+        this.dispatch({type: ActionType.CHANGE_MAIN_VIEW, view: MainView.AllUnicode})
 
         // setOnlyEmojis(false)
         // this.handle(MainView.AllUnicode)
       },
       Search: () => {
-        this.dispatch({type: ActionType.CHANGE_CURRENT_VIEW, view: MainView.Search})
+        this.dispatch({type: ActionType.CHANGE_MAIN_VIEW, view: MainView.Search})
 
         // this.handle(MainView.Search)
       },
       Help: () => {
-        this.dispatch({type: ActionType.CHANGE_CURRENT_VIEW, view: MainView.Help})
+        this.dispatch({type: ActionType.CHANGE_MAIN_VIEW, view: MainView.Help})
 
         // this.handle(MainView.Help)
       }
