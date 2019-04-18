@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
-import { Checkbox, Element, isElement } from '../blessedTypes'
+import { Checkbox, Element, isElement as isElementDontUseMe, } from '../blessedTypes'
 import { Component } from './component'
 import {
   AfterElementCreatedEvent,
@@ -16,11 +16,11 @@ import {
   BlessedEventOptions,
   BlessedJsx,
   BlessedJsxAttrs,
-  EventOptionNames,
-  is__Virtual,
+  EventOptionNames, 
   RefObject
 } from './types'
-import { VirtualComponent } from '../blessed';
+import { VirtualComponent } from '../blessed/virtualElement';
+// import { VirtualComponent } from '../blessed';
 interface Options {
   dontInheritStyle?: boolean
 }
@@ -206,10 +206,12 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // CHILDREN
     children.forEach(c => {
-      if (!c || is__Virtual(c)) {
-        // HEADS UP: don't print falsy values so we can write `{list.length && <div>}` or `{error && <p>}` etc
-        return
-      } else if (isElement(c)) {
+      // if (!c || is__Virtual(c)) {
+      //   // HEADS UP: don't print falsy values so we can write `{list.length && <div>}` or `{error && <p>}` etc
+      //   return
+      // } 
+      // else
+       if (isElementLike(c)) {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
         }
@@ -227,9 +229,11 @@ class BlessedJsxImpl implements BlessedJsx {
 
   private _addChildrenArray(c: any[], el: blessed.Widgets.BlessedElement) {
     c.forEach(c2 => {
-      if (!c2 || is__Virtual(c2)) {
-        return
-      } else if (isElement(c2)) {
+      // if (!c2 || is__Virtual(c2)) {
+      //   return
+      // } 
+      // else 
+      if (isElementLike(c2)) {
         if (!c2.options || !c2.options.parent) {
           this.appendChild(el, c2)
         }
@@ -247,6 +251,10 @@ class BlessedJsxImpl implements BlessedJsx {
    * return true the child won't be appended
    */
   protected appendChild(el: Element, child: Element): any {
+    if(VirtualComponent.iVirtualElement(child)){
+      child.loadVirtualData(el)
+      return // HEDAS UP - for safety & speed we dont call any listener for virtuals ?
+    }
     const event: BeforeAppendChildEvent = {
       el,
       child
@@ -302,7 +310,7 @@ class BlessedJsxImpl implements BlessedJsx {
 }
 
 function isElementLike(e:any): e is Element{
-  return isElement(e) || VirtualComponent.iVirtualElement(e)
+  return isElementDontUseMe(e) || VirtualComponent.iVirtualElement(e)
 }
 
 export const React: BlessedJsx = new BlessedJsxImpl()

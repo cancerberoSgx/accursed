@@ -1,10 +1,10 @@
 import * as blessed from 'blessed'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { Checkbox, Element, isElement } from '../blessedTypes'
+import { Checkbox, Element, isElement, Node } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
 import { visitDescendants } from './node'
-import { Component } from '../jsx';
+import { renderer } from './layoutRenderer';
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -38,21 +38,6 @@ export function installExitKeys(screen: blessed.Widgets.Screen) {
   })
 }
 
-/**
- * extract property stored on e.$ by path.
- */
-export function getElementData<T>(e: Element, path: string) {
-  e.$ = e.$ || {}
-  return getObjectProperty(e.$, path) as T | undefined
-}
-
-/**
- * set property stored on e.$ by path.
- */
-export function setElementData<T>(e: Element, path: string, value: T) {
-  e.$ = e.$ || {}
-  setObjectProperty(e.$, path, value)
-}
 
 export function onValueChange(el: Checkbox, cb: (this: Checkbox, value: boolean) => void) {
   function listener(this: Checkbox) {
@@ -78,6 +63,42 @@ export function offValueChange(el: Checkbox) {
 export function getElementLabel(el: Element): Element | undefined {
   return (el as any)._label
 }
+
+/**
+ * extract property stored on e.$ by path.
+ */
+export function getElementData<T>(e: Element, path: string) {
+  e.$ = e.$ || {}
+  return getObjectProperty(e.$, path) as T | undefined
+}
+
+/**
+ * set property stored on e.$ by path.
+ */
+export function setElementData<T>(e: Element, path: string, value: T) {
+  e.$ = e.$ || {}
+  setObjectProperty(e.$, path, value)
+}
+
+/**
+ * like setElementData but push the data in the propery value / creating an array if doesn exists. if st's not an array it throws
+ */
+export function appendElementData<T>(e: Element, path: string, value: T) {
+  let v: T[]|undefined = getObjectProperty<T[]>(e, path) 
+  if(typeof v === 'undefined'){
+    // v = [value] 
+    setObjectProperty(e.$, path, [value] )
+  }
+  if(Array.isArray(v)){
+    v.push(value)
+  }
+  else {
+    throw new Error ('Refuse push in non Array element data object')
+  }
+  // return (el as any)._label
+}
+
+
 
 // /**
 //  * Hot replace all children of given container element with given [[newChildren]] array elements.
@@ -180,94 +201,5 @@ export function replaceChildren(
   }
 }
 
-export const createScreen = blessed.screen
+export const createScreen = blessed.screen;
 
-
-/** simulates to be a lessed node until the next iteration of createElement so the parent can recognize it abd extract its info, and discard it. */
-export  abstract class VirtualComponent<P = {}, S={}> extends Component<P, S> {
-  private static __isVirtualComponent=123
-  static isVirtualComponent(c: any): c is typeof VirtualComponent { // TODO. as static member of vc
-    return c &&   c.__isVirtualComponent === VirtualComponent.__isVirtualComponent
-  }
-  static iVirtualElement(c: any){ // TODO. as static member of vc
-    return VirtualComponent.isVirtualComponent(c)
-  }
-  static createVirtualElement(c: any) {
-    return c as VirtualElement
-  }
-  }
-interface VirtualElement {
-
-}
-// export class VirtualElement{
-
-// }
-// export function 
-
-// export {blessed.screen}C
-// blessed.screen
-// export {blessed.screen as screen}
-// let BlessedNodeTypeVirtualInstalled = false
-// export function installBlessedNodeTypeVirtual<Data = any>() {
-//   if (BlessedNodeTypeVirtualInstalled) {
-//     return
-//   }
-//   // const Node = blessed.
-//   // require('blessed').
-//   return null
-// }
-
-// // import  * as  from 'blessed'
-// export class VirtualNode extends blessed.widget.Node {
-//   // constructor(options){
-//   //   super()
-//   // }
-// }
-
-// // var blessed = require('blessed')
-// //   , Node = blessed.Node
-// // function Canvas(options, canvasType) {
-
-// //   var self = this
-
-// //   if (!(this instanceof Node)) {
-// //     return new Canvas(options);
-// //   }
-
-// //   options = options || {};
-// //   this.options = options
-// //   Box.call(this, options);
-
-// //   this.on("attach", function() {
-// //     self.calcSize()
-
-// //     self._canvas = new InnerCanvas(this.canvasSize.width, this.canvasSize.height, canvasType)
-// //     self.ctx = self._canvas.getContext()
-
-// //     if (self.options.data) {
-// //       self.setData(self.options.data)
-// //     }
-// //   })
-// // }
-
-// // Canvas.prototype = Object.create(Box.prototype);
-
-// // Canvas.prototype.type = 'canvas';
-
-// // Canvas.prototype.calcSize = function() {
-// //   this.canvasSize = {width: this.width*2-12, height: this.height*4}
-// // }
-
-// // Canvas.prototype.clear = function() {
-// //   this.ctx.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
-// // }
-
-// // Canvas.prototype.render = function() {
-
-// //   this.clearPos(true);
-// //   var inner = this.ctx._canvas.frame()
-// //   this.setContent(inner)
-// //   return this._render();
-// // };
-
-// // module.exports = Canvas

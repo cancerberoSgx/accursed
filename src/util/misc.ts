@@ -27,6 +27,7 @@ export function getObjectProperty<T>(
   }
   return defaultValue
 }
+
 /**
  * sets a nested property on given path. For example path could be 'foo.bar' and it will set `object.foo.bar = value`
  */

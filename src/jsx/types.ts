@@ -123,7 +123,7 @@ declare global {
       radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
-      __virtual: __Virtual
+      // __virtual: __Virtual
     }
     /** adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>
@@ -174,12 +174,12 @@ declare global {
   }
 }
 
-/** an intrinsic element wihtout children, that won't be renderd. Can be used by JSXElements that need to declare data markwup that is not supported by blessed optoins . Examplle: listbar buttons are declaren in the same list optoins but I want to declared them as JSX children, . So I do it by returning __Virtual with the informatio in the markup that the parent can consume., */
-export type __Virtual<Data = any> = { __virtual: '__virtual'; data: Data }
+// /** an intrinsic element wihtout children, that won't be renderd. Can be used by JSXElements that need to declare data markwup that is not supported by blessed optoins . Examplle: listbar buttons are declaren in the same list optoins but I want to declared them as JSX children, . So I do it by returning __Virtual with the informatio in the markup that the parent can consume., */
+// export type __Virtual<Data = any> = { __virtual: '__virtual'; data: Data }
 
-export function is__Virtual(a: any): a is __Virtual {
-  return a && a.__virtual === '__virtual' // TODO: use symbol
-}
+// export function is__Virtual(a: any): a is __Virtual {
+//   return a && a.__virtual === '__virtual' // TODO: use symbol
+// }
 
 /**
  * Type of the `React` object as in `React.createElement`.
