@@ -6,9 +6,9 @@ import {
   Div,
   getContent,
   installExitKeys,
-  ListTable as BlessedListTable,
   React,
-  Screen
+  Screen,
+  Style
 } from '../src'
 import { getJSXChildrenProps, VirtualComponent } from '../src/blessed/virtualElement'
 import { waitFor } from '../src/blessed/waitFor'
@@ -16,11 +16,11 @@ import { log } from '../src/util/logger'
 
 /** see guides/virtual-elements.md  */
 describe('virtualElementsRendering', () => {
-  let screen: Screen  
+  let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
   })
-  
+
   it('should allow authors define semantics with arbitrary markup and validate children and attributes', async done => {
 
     let screen: Screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
@@ -31,7 +31,7 @@ describe('virtualElementsRendering', () => {
       children: [JSX.BlessedJsxNode, Thead, TBody, JSX.BlessedJsxNode] | any
     }
     interface TheadProps {
-      id?: string
+      style?: Style
       children: (JSX.BlessedJsxNode | Tr)[]
     }
     interface TrProps {
@@ -55,7 +55,7 @@ describe('virtualElementsRendering', () => {
     try {
 
       class ListTable extends Component<ListTableProps> {
-      // we override this property so JSX children props data is available
+        // we override this property so JSX children props data is available
         _saveJSXChildrenProps = true
 
         render() {
@@ -67,13 +67,13 @@ describe('virtualElementsRendering', () => {
             .find(e => e.tagName === 'TBody')!
             .children.filter(c => (c as any).tagName === 'Tr')
             .map(c => (c as any).children.map((c: any) => c.children.join('')))
-
-          return ( <listtable
-                width="100%"
-                height="80%"
-                border="line"
-                data={[ths, ...tds]}
-              />
+          log(JSON.stringify(getJSXChildrenProps(this)))
+          return (<listtable
+            width="100%"
+            height="80%"
+            border="line"
+            data={[ths, ...tds]}
+          />
           )
         }
       }
@@ -83,7 +83,7 @@ describe('virtualElementsRendering', () => {
           And this is the data:
               <Br />
           <ListTable>
-            <Thead>
+            <Thead style={{bg: 'sdf'}}>
               <Th>Name</Th>
               <Th>Number code</Th>
               <Th>Description</Th>
@@ -95,12 +95,12 @@ describe('virtualElementsRendering', () => {
                 <Td>ehredd</Td>
               </Tr>
               {data.map(t => (
-            <Tr>
-              {t.map(d => (
-                <Td>{d}</Td>
+                <Tr>
+                  {t.map(d => (
+                    <Td>{d}</Td>
+                  ))}
+                </Tr>
               ))}
-            </Tr>
-           ))}
             </TBody>
           </ListTable>
         </Div>

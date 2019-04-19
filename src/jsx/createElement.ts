@@ -89,6 +89,7 @@ class BlessedJsxImpl implements BlessedJsx {
         el = VirtualComponent.createVirtualElement(component, tag.name)
       } else {
         if (component._saveJSXChildrenProps) {
+        //   log(JSON.stringify(children))
           component._jsxChildrenProps = [...children] //.filter(VirtualComponent.isVirtualComponent)
         }
         // TODO: beforeElementRenderListeners
