@@ -1,4 +1,3 @@
-
 import { getElementData, replaceChildren } from '../blessed'
 import {
   ElementPredicate,
@@ -127,6 +126,5 @@ export abstract class ComponentWithEffects<
   S = {}
 > extends ComponentWithOptions<P, S> {}
 
-
-export {BlessedEventOptions} from './types'
+export { BlessedEventOptions } from './types'
 // const __dummy:BlessedEventOptions = undefined
