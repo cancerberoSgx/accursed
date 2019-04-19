@@ -13,29 +13,29 @@ So I'm learning, documenting prototypings and researching. The following is a su
 - [JSX](#jsx)
   * [Attributes](#attributes)
   * [IntrinsicElements](#intrinsicelements)
-  * [function elements](#function-elements)
-  * [Class Elements (and function elements)](#class-elements-and-function-elements)
-- [Event handlers - function attributes](#event-handlers---function-attributes)
-  * [built-in event-related methods as attributes](#built-in-event-related-methods-as-attributes)
+  * [Class Elements and Function elements](#class-elements-and-function-elements)
+    + [Class Elements](#class-elements)
+    + [Function Elements](#function-elements)
+  * [Event handlers (function attributes)](#event-handlers-function-attributes)
+  * [blessed events supported 100% as JSXAttribtues](#blessed-events-supported-100%25-as-jsxattribtues)
   * [Hight level event handlers](#hight-level-event-handlers)
     + [**event.currentTarget**](#eventcurrenttarget)
     + [onClick Example](#onclick-example)
     + [onRender example](#onrender-example)
-    + [onChange](#onchange)
+    + [onChange example](#onchange-example)
     + [onSelect (for list-like elements)](#onselect-for-list-like-elements)
   * [JSX Expressions](#jsx-expressions)
     + [conditions with AND operator](#conditions-with-and-operator)
     + [array render with map()](#array-render-with-map)
     + [conditions with ternary condition](#conditions-with-ternary-condition)
-  * [React-like Ref objects](#react-like-ref-objects)
+  * [Refs](#refs)
+  * [Virtual Elements](#virtual-elements)
   * [JSX Text](#jsx-text)
   * [blessed-contrib](#blessed-contrib)
   * [Rendering Component own children](#rendering-component-own-children)
   * [Fragments](#fragments)
     + [Hooks into React.crateElement](#hooks-into-reactcrateelement)
     + [Virtual Nodes](#virtual-nodes)
-- [doubts, thouths, TOLD](#doubts-thouths-told)
-    + [doubts / thougths about JSX Text implementation, ç](#doubts--thougths-about-jsx-text-implementation-c)
 - [specs](#specs)
 - [My blessed contrib widgets and utilities:](#my-blessed-contrib-widgets-and-utilities)
 - [Apps](#apps)
@@ -85,11 +85,32 @@ Intrinsic elements are the building blocks os a JSX implementation and in thi ca
 **Mostly all blessed element types are supported by this library**
 
 
+## Class Elements and Function elements
 
-## function elements
+Class elements and function elments for creating custom tags is fully supported. Do it as you would normaly do:
+
+### Class Elements
+
+In the following example we extend Component to create a new Class Element, but you don't have to, just make sure its constructor accepts a props object parameter and it has a render() method that returns the JSX.Element: 
 
 ```jsx
-function Strong(props={{ children}  string | string[]; color?: string }) {
+interface Props {name, colors: string[]}
+class ListTable extends Component<Props> {
+  render() {
+    return <Div>
+      Hello {this.props.name}, so this are the colors: {this.props.colors.map(c=><Color color={c}/>)}
+    </Div>
+}
+}
+```
+
+### Function Elements
+
+In the following example, we create a new Element that will print children text with bold and optionally color styles. 
+
+```jsx
+interface Props = { children:  string | string[]; color?: string }
+function Strong(props: Props) {
   return (
     <text content={format(asArray(props.children || []).join(' '), ['bold', props.color].filter(notUndefined))}
     />
@@ -97,14 +118,13 @@ function Strong(props={{ children}  string | string[]; color?: string }) {
 }
 ```
 
-## Class Elements (and function elements)
 
-# Event handlers - function attributes
+## Event handlers (function attributes)
 
  * work 100%
  * are bind() to the element reference
 
-## built-in event-related methods as attributes
+## blessed events supported 100% as JSXAttribtues
 
 JSX syntax, in event-related methods like like on() or key(), etc are supported via attributes. There is no syntax mapping at all, just straight forward method call, for example: 
 
@@ -125,7 +145,7 @@ If you notice some differences here, is ony because typings are insufficient, bu
 
 Although these are typed are kind of ugly because must be arrays. this is why also there are supported nicer "artificial" event handlers:. JSX-HTML event handler syntax more practical in the markup:
 
-onClick, onChange, onRender, onKeyPressed so attributes are easy to write (just a function). 
+`onClick, onChange, onRender, onKeyPressed` so attributes are easy to write (just a function). 
 
 ### **event.currentTarget**
 
@@ -148,9 +168,10 @@ Like with HTML - React - the event object of these hight level handlers have `cu
 <layout onRender={e => this.installCollapsible(e.currentTarget, { collapsedHeight: 4 })}
 ```
 
-### onChange
+### onChange example
 
-(currently only supported for Checkbox and subclasses)  -WIP define chance semantic and support it on all input elements
+(currently only supported for Checkbox and subclasses)  - WIP 
+
 ```jsx
 <checkbox content="Collapsed" checked={false}
   onChange={e => toggleCollapsed(e.currentTarget.parent as any, true)}
@@ -180,7 +201,6 @@ Any expression often used to declare conditions aor iterate inside JSX Expressio
 { condition && <box...}
 ```
 
-
 ### array render with map()
 ```
 { arr.map(a => <box...)}
@@ -193,7 +213,8 @@ Any expression often used to declare conditions aor iterate inside JSX Expressio
 ```
 
 
-## React-like Ref objects
+## Refs
+
 https://reactjs.org/docs/refs-and-the-dom.html
 
 ```jsx
@@ -216,6 +237,13 @@ ref1.press()
 
  * it can be also used without JSX - remember is all the same... 
 
+## Virtual Elements
+
+ * Unique feature - not even existent in React
+ * Let component authors declare element's children props that won't be rendered at all. 
+ * Useful to define complex component API as markup and then render another thing that implements it. 
+ * See [spec](spec/virtualElementRenderingSpec.tsx)
+ * See  [guides/virtual-elements.md](guides/virtual-elements.md)
 
 ## JSX Text
 
@@ -243,18 +271,16 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
 **blessed-contrib widgets  should be very easy to suuport, but right now I?m focusing on the framework and my own widgets tools and documentation, and hadent much time. They will be in time, probably in a separate project project. 
 
 
-
 ## Rendering Component own children
 
- * In custom components you dorender its childs using an expresion like `<MyComp {...this.props.hildren} other="options"/> ` as expected
- * Custom comeponents andJSX function elementss are responsible of rendering their children and attributes - unlike intrinsic elements which their children and attributes are rendering automatically
+ * In custom components with children must render them using an expression like  `<MyComp {this.props.children} other="options"/> `
 
 ## Fragments
 
  Not supported yet :()
 
-
 ### Hooks into React.crateElement
+
  * WIP : api to extend the rendering process
  * React object oprovide with some addLikstener in interesting moments of the rendering tha tusers can use to modify the render process and even interrupt / modify the flow but right now only sketches... working on that... 
 
@@ -263,31 +289,6 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * WIP 
  * Currently for each JSX Element a blessed elemtn is created. In many ocations I jsut want to declare information/semantics with the markup that a omponent can interpret at render time without all those blessed elemnts created ..  A special COmponent / tag exist that will provide that feature (WIP)
 
-
-
-# doubts, thouths, TOLD
-
-
-### doubts / thougths about JSX Text implementation, ç
-....blessing, performance, design ...  need feedback ... 
-
-Observations on the actual implementation
-
- * behaves well  with layout="inline" 
- * respect the JSX code AST structure text is a child node, not an attribtue)
- * more natural to format using tags (<H1>hello <strong>ksksks</strong>asdasd<i>ajlshd</i>
- * I think is a limiation that a button dont have children. many children  are hardcoded internally as nodes (border, hover, 
-  * label. Maybe that's good for perfoamnce.. but is a limiatation... 
- 
-It can be easily changed, but I'n not sure since that will change the structure....
-
- * The implementation is isolated in React.[[createTextNode]] method so is easily customizable.  
- 
-* Probably will be configurable* because of performance TODO: performance? use another thing ? use content? join several JSXText in one ?  
-
-**TO DECIDE WHILE IM PLAYING WITH IT** *right now it behaves well with layouts.. perhaps content='' is better. or text?
-
- * styles could be adapted from blessed like its options and modeled with classhierarchies, but also try to create a new feature and see how it plays there. For example a new option in ComponentWithOptions called cursor (since all elements should support it and don't)
 
 
 

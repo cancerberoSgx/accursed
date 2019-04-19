@@ -2,8 +2,7 @@ This is a concept that is not in react...It makes much sencse sence with typescr
 
 Besides react fragments all JSX.Elements declared render a DOM / blessed element. From bottom to the top. 
 
-Virtual element let authors declare elements that 
-authors define  complex data semantics usin gthe markup (with typescript and properties  you ccan validate and define a lot)
+Virtual element let component authors declare element's children props that won't be rendered at all. Useful to define complex component API as markup and then render another thing that implements it. 
     
 
 Example: A Tab Panel (types definitions as JSX ELement Props)

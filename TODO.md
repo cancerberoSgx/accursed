@@ -52,3 +52,31 @@ RESEARCH PROBLEM -
   * try to implement this in a second implementation or "mode" for blessed to see if this  easy the poroblem of plugins.
 
  * screen this.tput.bools.back_color_eraseπ - from screen - add to API?
+
+
+
+
+
+
+
+
+# doubts / thoughts about JSX Text implementation,
+....blessing, performance, design ...  need feedback ... 
+
+Observations on the actual implementation
+
+ * behaves well  with layout="inline" 
+ * respect the JSX code AST structure text is a child node, not an attribtue)
+ * more natural to format using tags (<H1>hello <strong>ksksks</strong>asdasd<i>ajlshd</i>
+ * I think is a limiation that a button dont have children. many children  are hardcoded internally as nodes (border, hover, 
+  * label. Maybe that's good for perfoamnce.. but is a limiatation... 
+ 
+It can be easily changed, but I'n not sure since that will change the structure....
+
+ * The implementation is isolated in React.[[createTextNode]] method so is easily customizable.  
+ 
+* Probably will be configurable* because of performance TODO: performance? use another thing ? use content? join several JSXText in one ?  
+
+**TO DECIDE WHILE IM PLAYING WITH IT** *right now it behaves well with layouts.. perhaps content='' is better. or text?
+
+ * styles could be adapted from blessed like its options and modeled with classhierarchies, but also try to create a new feature and see how it plays there. For example a new option in ComponentWithOptions called cursor (since all elements should support it and don't)
