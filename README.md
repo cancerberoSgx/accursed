@@ -1,4 +1,4 @@
-**Accursed: [blessed](https://github.com/chjj/blessed/)**
+**Accursed**
 
 [blessed](https://github.com/chjj/blessed/) contributions, extensions, typings, documentation and apps of mine
 
@@ -6,7 +6,7 @@ Summary: I discovered blessed, an awesome library for developing command line UI
 
 Instead of cloning the project, here I try to develope missing parts, learn, document, type and find issues, but on top of it. 
 
-So I'm learning, documenting prototypings and researching. The following is a summary of work done.
+So I'm learning, documenting prototyping and researching. The following is a summary of work done.
 
 <!-- toc -->
 
@@ -279,16 +279,10 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
 
  Not supported yet :()
 
-### Hooks into React.crateElement
+## Hooks into React.crateElement
 
  * WIP : api to extend the rendering process
  * React object oprovide with some addLikstener in interesting moments of the rendering tha tusers can use to modify the render process and even interrupt / modify the flow but right now only sketches... working on that... 
-
-### Virtual Nodes
-
- * WIP 
- * Currently for each JSX Element a blessed elemtn is created. In many ocations I jsut want to declare information/semantics with the markup that a omponent can interpret at render time without all those blessed elemnts created ..  A special COmponent / tag exist that will provide that feature (WIP)
-
 
 
 

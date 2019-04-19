@@ -55,10 +55,8 @@ describe('virtualElementsRendering', () => {
     try {
 
       class ListTable extends Component<ListTableProps> {
-        /** components with virtual component children need to override this property so the information of original JSX children is available (will will obtain it with [[getJSXChildrenProps]])  */
+      // we override this property so JSX children props data is available
         _saveJSXChildrenProps = true
-
-        // protected listTableRef = React.createRef<BlessedListTable>()
 
         render() {
           const ths = getJSXChildrenProps(this)!
@@ -70,22 +68,16 @@ describe('virtualElementsRendering', () => {
             .children.filter(c => (c as any).tagName === 'Tr')
             .map(c => (c as any).children.map((c: any) => c.children.join('')))
 
-          return (
-            <Div>
-              THs; {ths.join(' - ')}
-              asd Welcome to the soper heroe store, use the tabs below to focus on special super powers.
-                  <listtable
-                // ref={this.listTableRef}
+          return ( <listtable
                 width="100%"
                 height="80%"
                 border="line"
-                data={[ths, ['asd', 'sdf', 'dfg']].concat(tds)}
+                data={[ths, ...tds]}
               />
-            </Div>
           )
         }
       }
-      // const data: string[][] = [['seba', '12312312', 'jssjsjp fofof'], ['laura', '72727272', 'fhffhfh 123123']]
+      const data: string[][] = [['seba', '12312312', 'jssjsjp fofof'], ['laura', '72727272', 'fhffhfh 123123']]
       const userApp4 = (
         <Div>
           And this is the data:
@@ -102,29 +94,17 @@ describe('virtualElementsRendering', () => {
                 <Td>sample123</Td>
                 <Td>ehredd</Td>
               </Tr>
-              <Tr>
-                <Td>asd</Td>
-                <Td>dfg</Td>
-                <Td>Foooasd</Td>
-              </Tr>
-              <Tr>
-                <Td>helasaalo</Td>
-                <Td>ssss</Td>
-                <Td>asdf</Td>
-              </Tr>
-              {/* {data.map(t => (
+              {data.map(t => (
             <Tr>
               {t.map(d => (
                 <Td>{d}</Td>
               ))}
-            </Tr> */}
-              {/* ))} */}
+            </Tr>
+           ))}
             </TBody>
           </ListTable>
         </Div>
       )
-
-      //TODO: issue - elements in data array are not rendered
       const el = React.render(userApp4)
       screen.append(el)
       screen.render()
@@ -132,9 +112,10 @@ describe('virtualElementsRendering', () => {
       await waitFor(() => getContent(el).includes('Description'))
       expect(getContent(el).includes('Number code'))
       expect(getContent(el).includes('sample123'))
+      expect(getContent(el).includes('seba'))
+      expect(getContent(el).includes('laura'))
       done()
     } catch (error) {
-      // screen.log(error)
       log('ERROR', error)
     }
   })

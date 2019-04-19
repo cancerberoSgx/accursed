@@ -58,8 +58,11 @@ interface VirtualComponentParent {
   __virtualProps: {}
 }
 /**
-example: 
-for a virtual parent component like : 
+ *  will return children data stored in _jsxChildrenProps, flatting children that are arrays.
+ * 
+Example: 
+
+For a virtual parent component like : 
 
 ```
 <ListTable>
@@ -173,7 +176,6 @@ It will return a JSON Like this:
  */
 export function getJSXChildrenProps(component: Component): VirtualChildrenData[] {
   return (component._jsxChildrenProps || []).map(process)
-  //  return r ? r.filter(notUndefined) :
 }
 interface VirtualChildrenData {
   children: (VirtualChildrenData | string | number)[]
@@ -186,21 +188,23 @@ function process(p: JSXChildrenProps | undefined): VirtualChildrenData | string 
   if (!p.props || !p.__virtualTagName) {
     return p as any
   }
+  const children: any[] = [];
+  (p.props.children || [])
+  .forEach(c => {
+    if (Array.isArray(c)){
+      c.filter(notUndefined).forEach(cc=>children.push(process(cc)))
+    } 
+    else if (typeof c !== 'object') {
+      return children.push(c)
+    }
+    else {
+      children.push( process(c))
+    }
+  })
   return {
-    children: (p.props.children || [])
-      .map(c => {
-        if (typeof c !== 'object') {
-          return c
-        } else {
-          return process(c)
-        }
-      })
-      .filter(notUndefined),
+    children: children.filter(notUndefined),
     tagName: p.__virtualTagName
   }
-  // if(c.props.children){
-  //   object
-  // }
 }
 
 interface JSXChildrenProps {
