@@ -1,12 +1,16 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { Component, createScreen, Div, installExitKeys, React, Screen } from '../src'
-import { VirtualComponent } from '../src/blessed/virtualElement'
-
-// declare module 'ansi-escape-sequences'
+import { Component, createScreen, Div, installExitKeys, React, Screen,
+  ListTable as BlessedListTable,
+  Br,
+  getContent, } from '../src'
+import { VirtualComponent, getJSXChildrenProps } from '../src/blessed/virtualElement'
+import { log } from '../src/util/logger';
+import { waitFor } from '../src/blessed/waitFor';
 
 /** see guides/virtual-elements.md  */
 describe('virtualElements', () => {
-  describe('Format, syntax and validation', () => {
+
+  xdescribe('Format, syntax and validation', () => {
     let screen: Screen
     afterEach(() => {
       tryTo(() => screen.destroy())
@@ -76,317 +80,145 @@ describe('virtualElements', () => {
             </TabBlocks>
             >
             {/* There cannot be text between TabBlocks and TabPanel asd123 123 
-            uncommenting this text vigeserror*/}
+            un commenting this text gives error*/}
           </TabPanel>
         </Div>
       )
+      done()
     })
 
     describe('rendering', () => {
-      let screen: Screen
-      afterEach(() => {
-        tryTo(() => screen.destroy())
-      })
-      /**
 
-Let's build now a nicer declaration for  current blessing ListTable implementationmore similar to html syntax:
-const userCode = <ListTable {...opts}>
-  <THead style={{ border: {}, backgroud: '', } > < --- Thead user can declare head styles
-    {headers.map(h => <THeadLabel>{h}></THeadLabel>)}  <--THeadLabel for header labels
-  </THead>
-        <tTBody stile, border, color, selected, foucus, hover, etyles...>                             < ----style for cels, spanm etc
-    ´data.map(row => <TBodyRpow>{row.map(td => <TBodyCell>{cell}</TBodyCell)}</TBodyRpow>)
-  } < --- the actual data declared in the markwyp ? performacne
-  </TBody >
-  </listTable >
+      it('should allow authors define semantics with arbitrary markup and validate children and attributes', async done => {
 
-*/
+        // Let's build now a nicer declaration for  current blessing ListTable , more similar to html
+        
+interface ListTableProps {
+  children: [JSX.BlessedJsxNode, Thead, TBody, JSX.BlessedJsxNode] | any
+}
+interface TheadProps {
+  id?: string
+  children: (JSX.BlessedJsxNode | Tr)[]
+}
+interface TrProps {
+  children: (JSX.BlessedJsxNode | Th | Td)[] | any
+}
+interface TBodyProps {
+  children: (JSX.BlessedJsxNode | Th | Td)[] | any
+}
+interface ThProps {
+  children: JSX.BlessedJsxText | JSX.BlessedJsxNode[] | undefined
+}
+interface TdProps {
+  children: JSX.BlessedJsxText | JSX.BlessedJsxText[] | undefined
+}
+class Thead extends VirtualComponent<TheadProps> {}
+class Tr extends VirtualComponent<TrProps> {}
+class TBody extends VirtualComponent<TBodyProps> {}
+class Th extends VirtualComponent<ThProps> {}
+class Td extends VirtualComponent<TdProps> {}
 
-      interface ListTableProps {
-        children: [JSX.BlessedJsxNode, Thead, TBody, JSX.BlessedJsxNode] | any
-        // | [JSX.BlessedJsxNode, Thead,JSX.BlessedJsxNode, TBody, JSX.BlessedJsxNode]
-        //... to the all combinations - we dont care if there are other nodes we do  care that THead is fist than Tbody and ther eis only one of each
-      }
-      interface TheadProps {
-        id?: string
-        children: (JSX.BlessedJsxNode | Tr)[]
-      }
-      interface TrProps {
-        // ts parent of both th tr
-        children: (JSX.BlessedJsxNode | Th | Td)[] | any
-      }
-      interface TBodyProps {
-        // ts parent of both th tr
-        children: (JSX.BlessedJsxNode | Th | Td)[] | any
-      }
-      interface ThProps {
-        children: JSX.BlessedJsxText | JSX.BlessedJsxNode[] | undefined
-      }
-      interface TdProps {
-        children: JSX.BlessedJsxText | JSX.BlessedJsxText[] | undefined
-      }
+try {
+  let screen: Screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
 
-      class ListTable extends VirtualComponent<ListTableProps> {}
-      class Thead extends VirtualComponent<TheadProps> {}
-      class Tr extends VirtualComponent<TrProps> {}
-      class TBody extends VirtualComponent<TBodyProps> {}
-      class Th extends VirtualComponent<ThProps> {}
-      class Td extends VirtualComponent<TdProps> {}
+  class ListTable extends Component<ListTableProps> {
+    
+    /** components with virtual component children need to override this property so the information of original JSX children is available (will will obtain it with [[getJSXChildrenProps]])  */
+    _saveJSXChildrenProps = true
+    
+    protected listTableRef = React.createRef<BlessedListTable>()
 
-      fit('should allow authors define semantics with arbitrary markup and validate children and attributes', async done => {
-        const data: any[] = [['seba', 12312312, 'jssjsjp fofof'], ['laura', 72727272, 'fhffhfh 123123']]
-        const userApp4 = (
-          <Div>
-            I ill try to use my own Shhhh
-            <ListTable>
-              <Thead>
-                <Th>Name</Th>
-                <Th>Number code</Th>
-                <Th>description</Th>
-              </Thead>
-              <TBody>
-                <Tr>
-                  <Td>hello</Td>
-                  <Td>ehredd</Td>
-                </Tr>
-                <Tr>
-                  <Td>asd</Td>
-                  <Td>dfg</Td>
-                </Tr>
-                <Tr>
-                  <Td>helasaalo</Td>
-                  <Td>ssss</Td>
-                </Tr>
-                {/* {data=>map(t=><Tr>
-          {t.map(d=><Td>{d}</Td>)}
-        </Tr>)} */}
-              </TBody>
-            </ListTable>
-          </Div>
-        )
+    render() {
+      const ths = getJSXChildrenProps(this)!
+        .find(e => e.tagName === 'Thead')!
+        .children.filter(c => (c as any).tagName === 'Th')
+        .map(c => (c as any).children.join(' '))
+      const tds = getJSXChildrenProps(this)!
+        .find(e => e.tagName === 'TBody')!
+        .children.filter(c => (c as any).tagName === 'Tr')
+        .map(c => (c as any).children.map((c: any) => c.children.join('')))
 
-        screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
-        installExitKeys(screen)
-        screen.append(React.render(userApp4))
-        screen.render()
+      // const tds2 = getJSXChildrenProps(this)!
+      // .find(e => e.tagName === 'TBody')!
+      // .children.filter(c => (c as any).tagName === 'Tr')
+      // .map(c => (c as any).children.map((c: any) => c.children.join('')))
+      // log('ListTable: ', tds, ths, tds2)
+      // const d = this.getElementData<any[]>(VirtualComponent.VIRTUAL_DATA_OPTION) || 'none'
+      // this.log(d)
+
+      return (
+        <Div>
+          THs; {ths.join(' - ')}
+          asd Welcome to the soper heroe store, use the tabs below to focus on special super powers.
+          <listtable
+            ref={this.listTableRef}
+            width="100%"
+            height="80%"
+            border="line"
+            data={[ths, ['asd', 'sdf', 'dfg']].concat(tds)}
+          />
+        </Div>
+      )
+    }
+  }
+  // const data: string[][] = [['seba', '12312312', 'jssjsjp fofof'], ['laura', '72727272', 'fhffhfh 123123']]
+  installExitKeys(screen)
+  const userApp4 = (
+    <Div>
+      And this is the data: 
+      <Br />
+      <ListTable>
+        <Thead>
+          <Th>Name</Th>
+          <Th>Number code</Th>
+          <Th>Description</Th>
+        </Thead>
+        <TBody>          
+          <Tr>
+            <Td>hello</Td>
+            <Td>sample123</Td>
+            <Td>ehredd</Td>
+          </Tr>
+          <Tr>
+            <Td>asd</Td>
+            <Td>dfg</Td>
+            <Td>Foooasd</Td>
+          </Tr>
+          <Tr>
+            <Td>helasaalo</Td>
+            <Td>ssss</Td>
+            <Td>asdf</Td>
+          </Tr>
+          {/* {data.map(t => (
+            <Tr>
+              {t.map(d => (
+                <Td>{d}</Td>
+              ))}
+            </Tr> */}
+          {/* ))} */}
+        </TBody>
+      </ListTable>
+    </Div>
+  )
+
+  //TODO: issue - elements in data array are not rendered
+  const el = React.render(userApp4)
+  screen.append(el)
+  screen.render()
+  log(el.getContent(), getContent(el))
+  await waitFor(() => getContent(el).includes('Description'))
+  expect(getContent(el).includes('Number code'))
+  expect(getContent(el).includes('sample123'))
+  done()
+} catch (error) {
+  // screen.log(error)
+  log('ERROR', error)
+}
       })
 
       xit('should not render virtual elements or text inside them', () => {})
 
       xit('what anpit on virtual elemetnrs inside girtual elemnts ?', () => {})
     })
-
-    {
-      /* 
-})
-
-
-    // // user code
-    // class ListTable extends Componen
-    t<ListTablPprops>{ */
-    }
-
-    //   render  ) {
-
-    //     return <Div>
-    //     </Div>
-    //   }
-    // }
-    // // betweem represetation of styles
-
-    // type WithOtherElementsInBetween<T> = JSX.BlessedJsxNode | string | (JSX.BlessedJsxNode | string)
-    // type NormalEl =JSX.BlessedJsxNode|string|(JSX.BlessedJsxNode|string)
-    // the structure: definition
-    // const UserApp = <Div>
-    //   <TabPanel>
-    // <TabHeadings>
-    //   <TabHeading label="t1" id="t1" active></TabHeading>
-    //   <TabHeading label="t1" id="t1"></TabHeading>
-    //   </TabHeadings>
-    //   <TabBlocks>
-    //     <TabBlock id="12">    dsf sdf </TabBlock>
-    //     <TabBlock id="2"> required text</TabBlock>
-    //     </TabBlocks>>
-    //   </TabPanel>
-    // </Div>
-
-    // class Tab extends VirtualComponent<TabHeadingsProC>
-
-    // now the virtual defininitions
-    // createVir
-    // Now user code:
-
-    // class A = V<{}>({})
-    //       function V<P>(props: P) {
-    //         return class Virtual extends VirtualComponent<P> {
-    //         }
-    //         // return VirtualComponent.createVirtualComponent(props)
-    //       }
-    // class V extends VirtualComponent{}
-
-    // class VirtualParent<T> extends Component<P>{
-    //   render(){
-    //     return <V></V>
-    //   }
-    // }
-
-    // class C{
-    //   m(){}
-    // }
-
-    // Object.exC.prototype
-    // function F(){
-    // this.a=1
-    // }
-
-    // let proto = new Proxy({}, {
-    //   get(target, propertyKey, receiver) {
-    //       console.log('GET '+propertyKey);
-    //       return target[propertyKey];
-    //   }
-    // });
-
-    // let obj = Object.create(proto);
-    // obj.bla;
-
-    // interface Blocks
-    // interface  Tagb{
-    //   id: string
-    //   title: string
-    //   children?: [IconProps]
-    // }
-    // interface TabProps {
-    //   name: string
-    //   active?: boolean
-    //   // children
-    // }
-    // class TabComponent extends VirtualComponent<TabProps> {
-    //   getVirtualData(){
-    //     return this.props
-    //   }
-    // }
-    //   screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
-    //   installExitKeys(screen)
-    //   const ref1 = React.createRef<Button>()
-    //   React.render(
-    //     <Div width="100%" border="line" height="100%" style={{ bg: 'red' }} parent={screen}>
-    //       <button
-    //         ref={ref1}
-    //         top="80%"
-    //         left="80%"
-    //         content="button11"
-    //         onPress={e => {
-    //           e.currentTarget.content = 'clicked!'
-    //           e.currentTarget.screen.render()
-    //         }}
-    //       />
-    //     </Div>
-    //   )
-    //   screen.render()
-    //   ref1.current!.content = "'changed3"
-    //   ref1.current!.screen.render()
-    //   await waitFor(() => ref1.current! && ref1.current!.getContent().includes('changed3'))
-    //   done()
-    // })
   })
-
-  //     xit('should allow an eelmetn to decalre virual childs just using props.children', async done => {
-  //       interface P {
-  //         children: (TabProps | BlockProps)[]
-  //       }
-  //       interface TabProps {
-  //         id: string
-  //         title: string
-  //         children?: [IconProps]
-  //       }
-  //       interface IconProps { url: string }
-  //       interface BlockProps {
-  //         id?: string
-  //         paras: string[]
-  //       }
-  //       class TabPanel extends Component<P>{
-  //         render() {
-  //           return <Virtual {...this.props} />
-  //         }
-  //       }
-  //       type TabPropsUnion = P | TabProps | IconProps | BlockProps
-  //       class Virtual extends VirtualComponent<TabPropsUnion> {
-
-  //       }
-
-  //     })
-
-  //   })
-  // })
-
-  // describe('waitFor green full of comments', () => {
-  //   let screen: Screen
-  //   // beforeEach(() => {
-  //     //   tryTo(() => screen.destroy())
-  //     //   screen = blessed.screen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
-  //     //   installExitKeys(screen)
-  //     // })
-  //     afterEach(() => {
-  //       tryTo(() => screen.destroy())
-  //   })
-
-  //   fit('should create references to elements for markup at render time', async done => {
-  //     // (() => screen.destroy())
-  //     try{
-  //       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
-  //       installExitKeys(screen)
-
-  //       function logTrue(s:string){
-  //         screen.log(s)
-  //         return true
-  //       }
-  //       // } catch (error) {
-  //         // screen && screen.log(error)
-  //         // throw error
-  //   // }
-  //     const ref1 = React.createRef<Button>()
-
-  //   React.render(<Div width="100%" border="line" height="100%"  style={{ bg: 'red' }} parent={screen}>
-  //       <button ref={ref1} top="80%" left="80%" content="button11" onPress={e => { e.currentTarget.content = "clicked!"; e.currentTarget.screen.render() }}></button>
-  //     </Div>)
-
-  // screen.render()
-  // //  await waitFor(()=>ref1.current! && ref1.current!.getContent()&& logTrue(ref1.current!.getContent()) && ref1.current!.getContent().includes('button11'))
-  //  expect(ref1.current!.getContent().includes('button11')).not.toContain('changed3')
-
-  // // try {
-  //   // screen.append(React.render(app))
-  //   screen.render()
-
-  //        ref1.current!.content = "'changed3"
-  //        ref1.current!.screen.render()
-  //          await waitFor(()=>ref1.current! && ref1.current!.getContent().includes('changed3'))
-
-  //          console.log(ref1.current!.getContent());
-
-  //          done()
-  //         //  ref1.current!.press()
-  //         //  ref1.current!.screen.render()
-  //         //    await waitFor(()=>ref1.current! && ref1.current!.getContent().includes('clicked'))
-
-  // } catch (error) {
-  //   screen && screen.log(error)
-  //   tryTo(() => screen.destroy())
-  //   console.log(error);
-
-  //   throw error
-  // }
-  //       })
-  // })
-  // })
-
-  // // const opts = () => ({
-  // //   // keys: true, mouse: true, clickable: true, tags: true, focusable: true, draggable: true, input: true, inputOnFocus: true, keyable: true, vi: true, border: 'line',
-  // //   // style: {
-  // //   //   bg: 'gray',
-  // //   //   fg: 'white'
-  // //   // }
-  // // } as BoxOptions)
-
-  // })
 })

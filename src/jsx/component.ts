@@ -1,5 +1,5 @@
+
 import { getElementData, replaceChildren } from '../blessed'
-import { React } from './createElement'
 import {
   ElementPredicate,
   filterChildren,
@@ -18,10 +18,7 @@ import { RemoveProperties } from '../util/misc'
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a dummy state that will update the blessed element if changed by default
  */
 export abstract class Component<P = {}, S = {}> {
-
-  constructor(protected props: P, protected state: S) {
-    
-  }
+  constructor(protected props: P, protected state: S) {}
 
   /** if true then JSX children props will be save on property [[jsxChildrenProps]]. Component subclasses needing this information (like Virtual component parent) can override it. */
   _saveJSXChildrenProps = false
@@ -131,3 +128,5 @@ export abstract class ComponentWithEffects<
 > extends ComponentWithOptions<P, S> {}
 
 
+export {BlessedEventOptions} from './types'
+// const __dummy:BlessedEventOptions = undefined

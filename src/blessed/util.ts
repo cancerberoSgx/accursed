@@ -93,7 +93,7 @@ export function appendElementData<T>(e: Element, path: string, value: T) {
   if (Array.isArray(v)) {
     v.push(value)
   } else {
-    throw new Error('Refuse push in non Array element data object, type: '+typeof v + ' '+ v)
+    throw new Error('Refuse push in non Array element data object, type: ' + typeof v + ' ' + v)
   }
   // return (el as any)._label
 }

@@ -75,7 +75,7 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
 }
 //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
 
-/** Returns the text content of given node and all its children, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
+/** Returns the text content of given node and all its descendants, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
 export function getContent(
   e: Element,
   options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}

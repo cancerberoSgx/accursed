@@ -21,7 +21,6 @@ import {
   EventOptionNames,
   RefObject
 } from './types'
-// import { VirtualComponent } from '../blessed';
 interface Options {
   dontInheritStyle?: boolean
 }
@@ -57,7 +56,6 @@ class BlessedJsxImpl implements BlessedJsx {
     return e as any
   }
 
-
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]) {
     // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything happens)
 
@@ -70,17 +68,16 @@ class BlessedJsxImpl implements BlessedJsx {
     let component: Component | undefined
     if (isComponentConstructor(tag)) {
       // log('TAG', tag, tag.name, JSON.stringify(children))
-      component = new tag({ ...attrs, children }, {});
-      
+      component = new tag({ ...attrs, children }, {})
+
       // .map((c: any)=>{
       //   const result =  {
-      //     tagName: c.__virtualTagName, 
+      //     tagName: c.__virtualTagName,
       //     props: c.props
       //   }
       //   delete c.__virtualTagName
       //   return result
       // })
-
 
       //   c
       // })
@@ -91,8 +88,8 @@ class BlessedJsxImpl implements BlessedJsx {
         // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information.
         el = VirtualComponent.createVirtualElement(component, tag.name)
       } else {
-        if(component._saveJSXChildrenProps){
-          component._jsxChildrenProps = [...children]//.filter(VirtualComponent.isVirtualComponent)
+        if (component._saveJSXChildrenProps) {
+          component._jsxChildrenProps = [...children] //.filter(VirtualComponent.isVirtualComponent)
         }
         // TODO: beforeElementRenderListeners
         el = component.render()
@@ -141,7 +138,7 @@ class BlessedJsxImpl implements BlessedJsx {
         el = fn(attrs) as Element
         // log('create ell', (el as any).type)
       } else {
-         log('Element ' + tag + ' created by listener')
+        log('Element ' + tag + ' created by listener')
         return listenerInstance
       }
     }
@@ -159,7 +156,7 @@ class BlessedJsxImpl implements BlessedJsx {
     }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for intrinsic elements
-    if (typeof tag === 'string'||VirtualComponent.isVirtualComponent(component)) {
+    if (typeof tag === 'string' || VirtualComponent.isVirtualComponent(component)) {
       this.installAttributesAndChildren(el!, blessedEventMethodAttributes, artificialEventAttributes, children)
     }
 
