@@ -1,6 +1,8 @@
 import * as blessed from 'blessed'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
-import { Checkbox, Element, isElement as isElementDontUseMe, } from '../blessedTypes'
+import { VirtualComponent } from '../blessed/virtualElement'
+import { Checkbox, Element, isElement as isElementDontUseMe } from '../blessedTypes'
+import { log } from '../util/logger'
 import { Component } from './component'
 import {
   AfterElementCreatedEvent,
@@ -16,10 +18,9 @@ import {
   BlessedEventOptions,
   BlessedJsx,
   BlessedJsxAttrs,
-  EventOptionNames, 
+  EventOptionNames,
   RefObject
 } from './types'
-import { VirtualComponent } from '../blessed/virtualElement';
 // import { VirtualComponent } from '../blessed';
 interface Options {
   dontInheritStyle?: boolean
@@ -32,6 +33,8 @@ interface ComponentConstructor<P = {}, S = {}> {
 function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
+
+// let _lastComponent : any = undefined
 
 /** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
  */
@@ -54,6 +57,7 @@ class BlessedJsxImpl implements BlessedJsx {
     return e as any
   }
 
+
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]) {
     // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything happens)
 
@@ -65,24 +69,41 @@ class BlessedJsxImpl implements BlessedJsx {
     const artificialEventAttributes = {} as ArtificialEventOptions<Element>
     let component: Component | undefined
     if (isComponentConstructor(tag)) {
+      // log('TAG', tag, tag.name, JSON.stringify(children))
+      component = new tag({ ...attrs, children }, {});
+      
+      // .map((c: any)=>{
+      //   const result =  {
+      //     tagName: c.__virtualTagName, 
+      //     props: c.props
+      //   }
+      //   delete c.__virtualTagName
+      //   return result
+      // })
+
+
+      //   c
+      // })
+      // log('create comp', (tag as any).name, VirtualComponent.isVirtualComponent(component))
+      // _lastComponent = component
       // TODO: beforeComponentCreated
-      if(VirtualComponent.isVirtualComponent(tag)){
-        // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information. 
-        el = VirtualComponent.createVirtualElement(component)
-      }
-      else {
-        component = new tag({ ...attrs, children }, {})
+      if (VirtualComponent.isVirtualComponent(component)) {
+        // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information.
+        el = VirtualComponent.createVirtualElement(component, tag.name)
+      } else {
+        if(component._saveJSXChildrenProps){
+          component._jsxChildrenProps = [...children]//.filter(VirtualComponent.isVirtualComponent)
+        }
         // TODO: beforeElementRenderListeners
-       
         el = component.render()
-      //@ts-ignore
-      component.blessedElement = el
-        //TODO: associate otherwhise ?  good idea?
+        //@ts-ignore
+        component.blessedElement = el
+        //TODO: associate otherwise ?  good idea?
       }
-      
-      
     } else if (typeof tag === 'function') {
       el = tag({ ...attrs, children })
+      // log('create fn', (el as any).type)
+
       // TODO: add beforeElementRenderListeners
     } else if (typeof tag === 'string') {
       // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and FunctionElement
@@ -93,7 +114,7 @@ class BlessedJsxImpl implements BlessedJsx {
 
       if (!fn) {
         const s = 'blessed.' + tag + ' function not found'
-        console.log(s)
+        log(s)
         throw new Error(s)
       }
       // ATTRIBUTE NORMALIZATION (remove attributes that are not valid blessed options)
@@ -118,8 +139,9 @@ class BlessedJsxImpl implements BlessedJsx {
       })
       if (!listenerInstance) {
         el = fn(attrs) as Element
+        // log('create ell', (el as any).type)
       } else {
-        console.log('Element ' + tag + ' created by listener')
+         log('Element ' + tag + ' created by listener')
         return listenerInstance
       }
     }
@@ -132,12 +154,12 @@ class BlessedJsxImpl implements BlessedJsx {
     // install refs for all kind of elements (TODO: in a listener)
     // TODO:  maybe a getter is better to avoid object cycles ?
     // TODO: if not found look at attrs arg just in case ?
-    if ((el! as any).options.ref && !(el! as any).options.ref.current) {
+    if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
       ;(el! as any).options.ref.current = el! as any
     }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for intrinsic elements
-    if (typeof tag === 'string') {
+    if (typeof tag === 'string'||VirtualComponent.isVirtualComponent(component)) {
       this.installAttributesAndChildren(el!, blessedEventMethodAttributes, artificialEventAttributes, children)
     }
 
@@ -197,7 +219,7 @@ class BlessedJsxImpl implements BlessedJsx {
           fn!.bind(el)({ ...e, currentTarget: el })
         })
       } else {
-        console.log('Unrecognized artificialEventAttribute ' + attributeName)
+        log('Unrecognized artificialEventAttribute ' + attributeName)
         throw new Error('Unrecognized artificialEventAttribute ' + attributeName)
       }
     })
@@ -206,12 +228,13 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // CHILDREN
     children.forEach(c => {
+      // log('children-forEach', jsxNode, c)
       // if (!c || is__Virtual(c)) {
       //   // HEADS UP: don't print falsy values so we can write `{list.length && <div>}` or `{error && <p>}` etc
       //   return
-      // } 
+      // }
       // else
-       if (isElementLike(c)) {
+      if (isElementLike(c)) {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
         }
@@ -231,8 +254,8 @@ class BlessedJsxImpl implements BlessedJsx {
     c.forEach(c2 => {
       // if (!c2 || is__Virtual(c2)) {
       //   return
-      // } 
-      // else 
+      // }
+      // else
       if (isElementLike(c2)) {
         if (!c2.options || !c2.options.parent) {
           this.appendChild(el, c2)
@@ -251,16 +274,22 @@ class BlessedJsxImpl implements BlessedJsx {
    * return true the child won't be appended
    */
   protected appendChild(el: Element, child: Element): any {
-    if(VirtualComponent.iVirtualElement(child)){
-      child.loadVirtualData(el)
-      return // HEDAS UP - for safety & speed we dont call any listener for virtuals ?
+    if (VirtualComponent.isVirtualElement(child)) {
+      // log('appendChild', 'start', el, child||'CHILDUNDEF', '_lastComponent', _lastComponent, 'end')
+      // if(child.saveVirtualData){
+      //   child.saveVirtualData(el)
+      // }
+      // else {
+      //   //TODO
+      // }
+      return // HEADS UP - for safety & speed we dont call any listener for virtuals ?
     }
     const event: BeforeAppendChildEvent = {
       el,
       child
     }
     let dontAppend = this.beforeAppendChildListeners.some(l => l(event))
-    if (!dontAppend) {
+    if (el && el.append && !dontAppend) {
       el.append(child)
     }
   }
@@ -309,8 +338,8 @@ class BlessedJsxImpl implements BlessedJsx {
   }
 }
 
-function isElementLike(e:any): e is Element{
-  return isElementDontUseMe(e) || VirtualComponent.iVirtualElement(e)
+function isElementLike(e: any): e is Element {
+  return isElementDontUseMe(e) || VirtualComponent.isVirtualElement(e)
 }
 
 export const React: BlessedJsx = new BlessedJsxImpl()

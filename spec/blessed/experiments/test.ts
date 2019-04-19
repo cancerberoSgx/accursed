@@ -1,7 +1,6 @@
 // import { prototype } from 'events';
 // import { connect } from 'http2';
 
-
 // type Membered = {[name in PropertyKey]: any}
 // function setFinalMember<T extends Membered>(t: T, member: PropertyKey) {
 //   console.log(arguments);
@@ -17,7 +16,7 @@
 //   )
 // }
 
-// function setFinal2<T extends Function>(t: T, member: PropertyKey) { 
+// function setFinal2<T extends Function>(t: T, member: PropertyKey) {
 //   console.log(arguments);
 //   let proto = new Proxy<T>(t, {
 //     set(target: T, prop: keyof T, receiver: any){
@@ -48,7 +47,6 @@
 //   public dispose(): void { } // Compiler error: "Property 'dispose' in type 'MyClass' is not assignable to the same property in base type 'BaseClass'"
 // }
 
-
 // abstract class Abstract {
 //   abstract render(): void
 // }
@@ -61,7 +59,6 @@
 //   }
 // }
 
-
 // class ExtendsionOK extends Tool {
 // render(){
 //   super.render();
@@ -71,11 +68,10 @@
 // setFinalMember(VeryConcrete.prototype, 'render')
 // setFinalMember(VeryConcrete.prototype, 'render')
 
-
 // class CannotHappen extends VeryConcrete {
 //   render(){
 //     console.log('CannotHappen');
-    
+
 //   }
 // }
 

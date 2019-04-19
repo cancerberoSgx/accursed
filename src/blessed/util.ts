@@ -1,10 +1,9 @@
 import * as blessed from 'blessed'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { Checkbox, Element, isElement, Node } from '../blessedTypes'
+import { Checkbox, Element, isElement } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
 import { closeModal, isModalVisible } from './modal'
 import { visitDescendants } from './node'
-import { renderer } from './layoutRenderer';
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -38,7 +37,6 @@ export function installExitKeys(screen: blessed.Widgets.Screen) {
   })
 }
 
-
 export function onValueChange(el: Checkbox, cb: (this: Checkbox, value: boolean) => void) {
   function listener(this: Checkbox) {
     cb.apply(this, [this.checked])
@@ -68,6 +66,9 @@ export function getElementLabel(el: Element): Element | undefined {
  * extract property stored on e.$ by path.
  */
 export function getElementData<T>(e: Element, path: string) {
+  if (!e) {
+    return
+  }
   e.$ = e.$ || {}
   return getObjectProperty(e.$, path) as T | undefined
 }
@@ -84,21 +85,18 @@ export function setElementData<T>(e: Element, path: string, value: T) {
  * like setElementData but push the data in the propery value / creating an array if doesn exists. if st's not an array it throws
  */
 export function appendElementData<T>(e: Element, path: string, value: T) {
-  let v: T[]|undefined = getObjectProperty<T[]>(e, path) 
-  if(typeof v === 'undefined'){
-    // v = [value] 
-    setObjectProperty(e.$, path, [value] )
+  let v: T[] | undefined = getObjectProperty<T[]>(e, path)
+  if (typeof v === 'undefined') {
+    v = [value]
+    setObjectProperty(e.$, path, v)
   }
-  if(Array.isArray(v)){
+  if (Array.isArray(v)) {
     v.push(value)
-  }
-  else {
-    throw new Error ('Refuse push in non Array element data object')
+  } else {
+    throw new Error('Refuse push in non Array element data object, type: '+typeof v + ' '+ v)
   }
   // return (el as any)._label
 }
-
-
 
 // /**
 //  * Hot replace all children of given container element with given [[newChildren]] array elements.
@@ -201,5 +199,4 @@ export function replaceChildren(
   }
 }
 
-export const createScreen = blessed.screen;
-
+export const createScreen = blessed.screen

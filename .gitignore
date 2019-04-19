@@ -4,5 +4,5 @@ tmp
 *.tgz
 .DS_Store
 *.log
-log.*
+log*.txt
 /docs
