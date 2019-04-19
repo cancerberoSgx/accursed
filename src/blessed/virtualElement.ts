@@ -179,7 +179,7 @@ export function getJSXChildrenProps(component: Component): VirtualChildrenData[]
 }
 interface VirtualChildrenData {
   children: (VirtualChildrenData | string | number)[]
-  attrs: {[name:string]:any}
+  attrs: { [name: string]: any }
   tagName: string
 }
 function process(p: JSXChildrenProps | undefined): VirtualChildrenData | string | number | undefined {
@@ -189,20 +189,17 @@ function process(p: JSXChildrenProps | undefined): VirtualChildrenData | string 
   if (!p.props || !p.__virtualTagName) {
     return p as any
   }
-  const children: any[] = [];
-  (p.props.children || [])
-  .forEach(c => {
-    if (Array.isArray(c)){
-      c.filter(notUndefined).forEach(cc=>children.push(process(cc)))
-    } 
-    else if (typeof c !== 'object') {
+  const children: any[] = []
+  ;(p.props.children || []).forEach(c => {
+    if (Array.isArray(c)) {
+      c.filter(notUndefined).forEach(cc => children.push(process(cc)))
+    } else if (typeof c !== 'object') {
       return children.push(c)
-    }
-    else {
-      children.push( process(c))
+    } else {
+      children.push(process(c))
     }
   })
-  const attrs = {...p.props}
+  const attrs = { ...p.props }
   delete attrs.children
   return {
     children: children.filter(notUndefined),
