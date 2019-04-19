@@ -182,6 +182,9 @@ interface VirtualChildrenData {
   attrs: { [name: string]: any }
   tagName: string
 }
+export function isElementData(c: any): c is VirtualChildrenData {
+  return c && c.tagName
+}
 function process(p: JSXChildrenProps | undefined): VirtualChildrenData | string | number | undefined {
   if (!p) {
     return undefined

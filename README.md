@@ -320,7 +320,9 @@ Also I think I've enhanced a lot the blessed.d.ts (TypeScript type declarations)
 
 # Documentation: 
 
-the typings already existing in DefinitelyTypes had more or less all the descriptions in blessed README. I added a lot from program.js, snippets and make sure it all blessed/tests.js compile OK with the types (which didn't). Also using typedoc I'm truing to generate html and markdown output of this so I can share with others. TODO: links
+the typings already existing in DefinitelyTypes had more or less all the descriptions in blessed README. I added a lot from program.js, snippets and make sure it all blessed/tests.js compile OK with the types (which didn't). Also using typedoc I'm truing to generate html and markdown output of this so I can share with others. 
+
+ * [Blessed API](https://cancerberosgx.github.io/demos/accursed/api/blessed/modules/_blessed_d_.html)
 
 # How-to bless documents
 

@@ -3,7 +3,11 @@ import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement
 import { ListTableOptions, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
 
-export namespace accursed {
+// namespace accursed  {
+
+// export namespace accursed {
+// namespace  accursed  {
+
   interface ListTableProps extends ListTableOptions {
     // children: [Head, Body]
     children: (ListTableHead | ListTableBody)[]
@@ -27,7 +31,41 @@ export namespace accursed {
   export class ListTableBody extends VirtualComponent<ListTableBodyProps> {}
   export class ListTableCell extends VirtualComponent<ListTableCellProps> {}
 
-  export class ListTable extends Component<ListTableProps> {
+  /** 
+   * Example:
+```jsx
+<ListTable2>
+  <ListTableHead fg="red">
+    <ListTableCell>Name</ListTableCell>
+    <ListTableCell>Phone</ListTableCell>
+    {}
+  </ListTableHead>
+  <ListTableBody fg="green">
+    <ListTableRow>
+      <ListTableCell>hello</ListTableCell>
+      <ListTableCell>world</ListTableCell>
+      {}
+    </ListTableRow>
+    <ListTableRow>
+      <ListTableCell>hello2</ListTableCell>
+      <ListTableCell>world2</ListTableCell>
+      {}
+    </ListTableRow>
+    {data.map(d => (
+      <ListTableRow>
+        <ListTableCell>{d[0]}</ListTableCell>
+        <ListTableCell>{d[1]}</ListTableCell>
+        {}
+      </ListTableRow>
+    ))}
+    {}
+  </ListTableBody>
+  {}
+</ListTable2>
+
+```
+   */
+  export class ListTable2 extends Component<ListTableProps> {
     _saveJSXChildrenProps = true
     render() {
       const childProps = getJSXChildrenProps(this)!
@@ -54,4 +92,4 @@ export namespace accursed {
       )
     }
   }
-}
+// }

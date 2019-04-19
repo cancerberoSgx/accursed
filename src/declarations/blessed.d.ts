@@ -2754,7 +2754,7 @@ export namespace Widgets {
     position: Position
     content: string
     hidden: boolean
-    visible: boolean
+    // visible: boolean
     detached: boolean
 
     /**

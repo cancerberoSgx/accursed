@@ -1,11 +1,12 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { createScreen, Div, getContent, installExitKeys, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { accursed } from '../src/'
+// import { accursed } from '../src/'
 import { arr, number, string } from '../src/util/data'
 import { log } from '../src/util/logger'
+import { ListTableHead, ListTable2,ListTableCell, ListTableBody, ListTableRow } from '../src/jsx-components/listTable';
 
-const { ListTable, ListTableBody, ListTableCell, ListTableHead, ListTableRow } = accursed
+// const { ListTable, ListTableBody, ListTableCell, ListTableHead, ListTableRow } = accursed
 describe('listTableComponent', () => {
   let screen: Screen
   afterEach(() => {
@@ -20,7 +21,7 @@ describe('listTableComponent', () => {
       const data = [...arr(20).map(i => [string(), number()]), ['last3', 'lastNumber3']]
       const t1 = (
         <Div parent={screen}>
-          <ListTable>
+          <ListTable2>
             <ListTableHead fg="red">
               <ListTableCell>Name</ListTableCell>
               <ListTableCell>Phone</ListTableCell>
@@ -47,7 +48,7 @@ describe('listTableComponent', () => {
               {}
             </ListTableBody>
             {}
-          </ListTable>
+          </ListTable2>
         </Div>
       )
 
@@ -55,7 +56,7 @@ describe('listTableComponent', () => {
       screen.append(el)
       screen.render()
 
-      waitFor(() => getContent(el).includes('Name'))
+      await waitFor(() => getContent(el).includes('Name'))
       expect(getContent(el)).toContain('world2')
       expect(getContent(el)).toContain('lastNumber3')
       done()
