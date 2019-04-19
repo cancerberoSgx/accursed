@@ -69,5 +69,5 @@ export function resetModals() {
 }
 
 export function isModalVisible() {
-  return modalInstance && modalInstance.visible
+  return modalInstance && !modalInstance.hidden
 }

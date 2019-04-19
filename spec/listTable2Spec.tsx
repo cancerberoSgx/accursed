@@ -1,12 +1,10 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { createScreen, Div, getContent, installExitKeys, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-// import { accursed } from '../src/'
+import { ListTable2, ListTableBody, ListTableCell, ListTableHead, ListTableRow } from '../src/jsx-components/listTable'
 import { arr, number, string } from '../src/util/data'
 import { log } from '../src/util/logger'
-import { ListTableHead, ListTable2,ListTableCell, ListTableBody, ListTableRow } from '../src/jsx-components/listTable';
 
-// const { ListTable, ListTableBody, ListTableCell, ListTableHead, ListTableRow } = accursed
 describe('listTableComponent', () => {
   let screen: Screen
   afterEach(() => {
@@ -19,6 +17,7 @@ describe('listTableComponent', () => {
       installExitKeys(screen)
 
       const data = [...arr(20).map(i => [string(), number()]), ['last3', 'lastNumber3']]
+
       const t1 = (
         <Div parent={screen}>
           <ListTable2>

@@ -1,8 +1,3 @@
-import { React } from '..'
-import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
-import { Component } from '../jsx/component'
-import { Style } from '../blessedTypes';
-
 // // Columns
 // // <div class="columns">
 // //   <div class="column">
@@ -33,10 +28,10 @@ import { Style } from '../blessedTypes';
 //   }
 //   export class Column extends VirtualComponent<ColumnProps> {}
 
-//   /** 
+//   /**
 //    * Examples
 
-// Columns of same width: 
+// Columns of same width:
 
 // ```jsx
 // <Columns border="line">
@@ -45,7 +40,7 @@ import { Style } from '../blessedTypes';
 //   <Column style={fg: 'blue'}> column three <button content="asdas"></button> hello</Column>
 // </Columns>
 
-// Columns of custom width: 
+// Columns of custom width:
 
 // ```jsx
 // <Columns border="line">

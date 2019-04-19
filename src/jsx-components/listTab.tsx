@@ -25,7 +25,7 @@
 //   }
 //   export class ListTabCommand extends VirtualComponent<ListTabCommandProps> {}
 
-//   /** 
+//   /**
 //    * Example:
 // ```jsx
 // <ListTab>

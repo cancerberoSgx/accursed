@@ -78,13 +78,13 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
 /** Returns the text content of given node and all its descendants, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
 export function getContent(
   e: Element,
-  options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean, includeHidden?: boolean } = {}
+  options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean; includeHidden?: boolean } = {}
 ) {
   let text: string[] = [e.getContent()]
   visitDescendants(
     e,
     d => {
-      if (isElement(d ) && (!options.includeHidden && !d.hidden)) {
+      if (isElement(d) && (!options.includeHidden && !d.hidden)) {
         let s = d.getContent() || ''
         if (!options.dontStrip) {
           s = strip(s)

@@ -1,8 +1,3 @@
-import { ButtonOptions, ElementOptions } from '../blessedTypes'
-import { Component } from '../jsx/component'
-import { React } from '../jsx/createElement'
-import { Div } from './jsxUtil'
-
 // abstract class Base<T = {}, S = {}> extends Component<T, S> {
 //   protected optionsBase() {
 //     return {
@@ -36,7 +31,7 @@ import { Div } from './jsxUtil'
 // }
 
 // /**
-//  This is the idea: 
+//  This is the idea:
 //  ```
 // <TabPanel>
 // <Tab>
