@@ -1,6 +1,6 @@
 import { React } from '..'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
-import { BoxOptions, isElement } from '../blessedTypes'
+import { BoxOptions, isElement, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { log } from '../util/logger'
 import { Br, Div } from './jsxUtil'
@@ -15,6 +15,8 @@ interface ChangeEvent {
 interface TabPanelProps extends BoxOptions {
   children: (Tab)[]
   onChange?: (e: ChangeEvent) => void
+  activeStyle?: Style
+  inactiveStyle?: Style
 }
 interface TabLabelProps {
   children: JSX.BlessedJsxText
@@ -36,13 +38,15 @@ export class TabPanel extends Component<TabPanelProps> {
       const bodyData = tabData.children.filter(isElementData).find(c => c.tagName === 'TabBody')!
       const labelData = tabData.children.filter(isElementData).find(c => c.tagName === 'TabLabel')!
       const counter = i
+     const active = tabData.attrs && !tabData.attrs.active
       const body = (
-        <Div hidden={tabData.attrs && !tabData.attrs.active} name={'tab_body_' + counter}>
+        <Div hidden={!active} name={'tab_body_' + counter}>
           {...bodyData.children}
         </Div>
       )
       const label = (
         <button
+        style={{...labelData.attrs&&labelData.attrs.style||{}, ...(active ? this.props.activeStyle : this.props.inactiveStyle)||{} }}
           border="line"
           content={labelData.children.join(' ')}
           onClick={e => this.selectTabNamed(e.currentTarget.name)}
@@ -70,15 +74,23 @@ export class TabPanel extends Component<TabPanelProps> {
   }
 
   selectTab(tabIndex: number) {
+    // show hide bodies
     this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_body_')).forEach(body => {
       if (body.name !== 'tab_body_' + tabIndex) {
         body.hide()
-        log('body hide()', body.name)
       } else {
-        log('body show()', body.name)
         body.show()
       }
     })
+  // set label activeStyle inactiveStyle
+  this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_label_')).forEach(label => {
+    if (label.name !== 'tab_label_' + tabIndex) {
+      label.style = {...label.style||{}, ...this.props.inactiveStyle||{}}
+    } else {
+      label.style = {...label.style||{}, ...this.props.activeStyle||{}}
+      label.show()
+    }
+  })
     this.blessedElement.screen.render()
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
   }

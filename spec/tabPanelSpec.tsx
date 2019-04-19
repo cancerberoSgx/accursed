@@ -17,7 +17,7 @@ describe('tabPanelComponent', () => {
       installExitKeys(screen)
       const t1 = (
         <Div parent={screen}>
-          <TabPanel>
+          <TabPanel activeStyle={{fg: 'red', underline: true}} inactiveStyle={{fg: 'blue', underline: false}}>
             <Tab active={true}>
               <TabLabel>tab 1</TabLabel>
               <TabBody>body1
