@@ -67,29 +67,15 @@ class BlessedJsxImpl implements BlessedJsx {
     const artificialEventAttributes = {} as ArtificialEventOptions<Element>
     let component: Component | undefined
     if (isComponentConstructor(tag)) {
-      // log('TAG', tag, tag.name, JSON.stringify(children))
       component = new tag({ ...attrs, children }, {})
 
-      // .map((c: any)=>{
-      //   const result =  {
-      //     tagName: c.__virtualTagName,
-      //     props: c.props
-      //   }
-      //   delete c.__virtualTagName
-      //   return result
-      // })
-
-      //   c
-      // })
-      // log('create comp', (tag as any).name, VirtualComponent.isVirtualComponent(component))
-      // _lastComponent = component
       // TODO: beforeComponentCreated
+      
       if (VirtualComponent.isVirtualComponent(component)) {
         // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information.
         el = VirtualComponent.createVirtualElement(component, tag.name)
       } else {
         if (component._saveJSXChildrenProps) {
-          //   log(JSON.stringify(children))
           component._jsxChildrenProps = [...children] //.filter(VirtualComponent.isVirtualComponent)
         }
         // TODO: beforeElementRenderListeners
@@ -100,16 +86,12 @@ class BlessedJsxImpl implements BlessedJsx {
       }
     } else if (typeof tag === 'function') {
       el = tag({ ...attrs, children })
-      // log('create fn', (el as any).type)
-
       // TODO: add beforeElementRenderListeners
     } else if (typeof tag === 'string') {
       // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and FunctionElement
       // are responsible of implementing both its attrs and children on their own
       const fn = (blessed as any)[tag] as (options?: any) => Element
-
       // TODO: beforeBlessedOptionsCleanedListeners
-
       if (!fn) {
         const s = 'blessed.' + tag + ' function not found'
         log(s)
@@ -137,7 +119,6 @@ class BlessedJsxImpl implements BlessedJsx {
       })
       if (!listenerInstance) {
         el = fn(attrs) as Element
-        // log('create ell', (el as any).type)
       } else {
         log('Element ' + tag + ' created by listener')
         return listenerInstance
@@ -226,20 +207,10 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // CHILDREN
     children.forEach(c => {
-      // log('children-forEach', jsxNode, c)
-      // if (!c || is__Virtual(c)) {
-      //   // HEADS UP: don't print falsy values so we can write `{list.length && <div>}` or `{error && <p>}` etc
-      //   return
-      // }
-      // else
       if (isElementLike(c)) {
         if (!c.options || !c.options.parent) {
           this.appendChild(el, c)
         }
-        // else {
-        // this.createTextNode('SEBABABAB', el)
-        // this.appendChild(el, c)
-        // }
       } else if (Array.isArray(c)) {
         this._addChildrenArray(c, el)
       } else {
@@ -250,10 +221,6 @@ class BlessedJsxImpl implements BlessedJsx {
 
   private _addChildrenArray(c: any[], el: blessed.Widgets.BlessedElement) {
     c.forEach(c2 => {
-      // if (!c2 || is__Virtual(c2)) {
-      //   return
-      // }
-      // else
       if (isElementLike(c2)) {
         if (!c2.options || !c2.options.parent) {
           this.appendChild(el, c2)
@@ -273,13 +240,6 @@ class BlessedJsxImpl implements BlessedJsx {
    */
   protected appendChild(el: Element, child: Element): any {
     if (VirtualComponent.isVirtualElement(child)) {
-      // log('appendChild', 'start', el, child||'CHILDUNDEF', '_lastComponent', _lastComponent, 'end')
-      // if(child.saveVirtualData){
-      //   child.saveVirtualData(el)
-      // }
-      // else {
-      //   //TODO
-      // }
       return // HEADS UP - for safety & speed we dont call any listener for virtuals ?
     }
     const event: BeforeAppendChildEvent = {
@@ -296,16 +256,9 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: Element) {
-    // if (typeof c !== 'string') {
-    //   throw new Error()
-    //   const t = blessed.text({ content: c + 'jajajajaja ' + typeof c + ' - ' + Array.isArray(c) })
-    //   this.appendChild(el, t)
-    //   return t
-    // } else {
     const t = blessed.text({ content: c + '' })
     this.appendChild(el, t)
     return t
-    // }
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)
   }
 

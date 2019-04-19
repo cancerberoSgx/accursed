@@ -1,7 +1,7 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { createScreen, Div, getContent, installExitKeys, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { ListTable2, ListTableBody, ListTableCell, ListTableHead, ListTableRow } from '../src/jsx-components/listTable'
+import { ListTable2, ListTableBody, ListTableCell, ListTableHead, ListTableRow } from '../src/jsx-components'
 import { arr, number, string } from '../src/util/data'
 import { log } from '../src/util/logger'
 
