@@ -1,6 +1,6 @@
 export * from './button'
+export * from './collapsible'
 export * from './jsxUtil'
 export * from './listTable'
 export * from './showIf'
 export * from './tabPanel'
-export * from './collapsible'

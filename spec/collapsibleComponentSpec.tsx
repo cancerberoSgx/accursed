@@ -1,7 +1,6 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import {
   createScreen,
-  Div,
   filterDescendants,
   getContent,
   installExitKeys,
@@ -10,7 +9,7 @@ import {
   Screen
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, ShowIf, Collapsible } from '../src/jsx-components'
+import { Br, Collapsible } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
 import { log } from '../src/util/logger'
 
@@ -25,13 +24,10 @@ describe('collapsible', () => {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
       installExitKeys(screen)
       const t1 = (
-        <Collapsible> 
-        Hello I should collapse
-        <button
-          border="line"
-          content="click me"
-        />
-        <Br />
+        <Collapsible>
+          Hello I should collapse
+          <button border="line" content="click me" />
+          <Br />
           body1
           <Br />
           {words().join(' ')}
@@ -58,15 +54,3 @@ describe('collapsible', () => {
     }
   })
 })
-
-{
-  /* 
-          //TODO: e.currentTarget.content doesn't work with Button2 !!!
-          <Button2 onClick={e=>{
-            update(showContent)
-            e.currentTarget.content += showContent?'hide':'show'
-            log('Button2', showContent,   e.currentTarget.content)
-            screen.render()
-            showContent = !showContent
-          }}>{showContent?'hide':'show'}</Button2> */
-}

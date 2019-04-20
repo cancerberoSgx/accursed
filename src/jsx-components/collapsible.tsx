@@ -1,11 +1,8 @@
+import { installCollapsible } from '../blessed'
 import { BoxOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
-import { Div, Br } from './jsxUtil'
-import { test } from 'shelljs';
-import { waitFor, isAttached, waitForRender } from '../blessed/waitFor';
-import { installCollapsible } from '../blessed';
-import { log } from '../util/logger';
+import { Br, Div } from './jsxUtil'
 
 interface CollapsibleProps extends BoxOptions {
   collapsed?: boolean
@@ -22,16 +19,19 @@ Example:
 export class Collapsible extends Component<CollapsibleProps, {}> {
   render() {
     // this.test()
-    return <Div 
-    {...{...this.props, children: null}}
-    border="line" 
-    onRender={e => installCollapsible(e.currentTarget, { auto: true })}
-    label={this.props.label||' '}
-    // padding={1}
-    >
+    return (
+      <Div
+        {...{ ...this.props, children: null }}
+        border="line"
+        onRender={e => installCollapsible(e.currentTarget, { auto: true })}
+        label={this.props.label || ' '}
+        // padding={1}
+      >
         <Br />
 
-    {this.props.children}</Div>
+        {this.props.children}
+      </Div>
+    )
   }
   // async test(){
   //   log('jellos')
