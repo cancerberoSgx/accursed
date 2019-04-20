@@ -1,8 +1,7 @@
 import { React } from '..'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
-import { BoxOptions, isElement, Style } from '../blessedTypes'
+import { BoxOptions, isElement, Node, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
-import { log } from '../util/logger'
 import { Br, Div } from './jsxUtil'
 
 export class TabLabel extends VirtualComponent<TabLabelProps> {}
@@ -18,13 +17,13 @@ interface TabPanelProps extends BoxOptions {
   activeStyle?: Style
   inactiveStyle?: Style
 }
-interface TabLabelProps {
+interface TabLabelProps extends BoxOptions {
   children: JSX.BlessedJsxText
 }
-interface TabBodyProps {
+interface TabBodyProps extends BoxOptions {
   children: JSX.BlessedJsxNode
 }
-interface TabProps {
+interface TabProps extends BoxOptions {
   active?: boolean
   children: (TabBody | TabLabel)[]
 }
@@ -38,7 +37,7 @@ export class TabPanel extends Component<TabPanelProps> {
       const bodyData = tabData.children.filter(isElementData).find(c => c.tagName === 'TabBody')!
       const labelData = tabData.children.filter(isElementData).find(c => c.tagName === 'TabLabel')!
       const counter = i
-     const active = tabData.attrs && !tabData.attrs.active
+      const active = tabData.attrs && !tabData.attrs.active
       const body = (
         <Div hidden={!active} name={'tab_body_' + counter}>
           {...bodyData.children}
@@ -46,11 +45,17 @@ export class TabPanel extends Component<TabPanelProps> {
       )
       const label = (
         <button
-        style={{...labelData.attrs&&labelData.attrs.style||{}, ...(active ? this.props.activeStyle : this.props.inactiveStyle)||{} }}
+          style={{
+            ...((labelData.attrs && labelData.attrs.style) || {}),
+            ...((active ? this.props.activeStyle : this.props.inactiveStyle) || {})
+            // focused: {...labelStyle.focused ||{}}
+          }}
           border="line"
           content={labelData.children.join(' ')}
+          onPress={e => this.selectTabNamed(e.currentTarget.name)}
           onClick={e => this.selectTabNamed(e.currentTarget.name)}
           name={'tab_label_' + counter}
+          focusable={true}
         />
       )
       const tab = { body, label }
@@ -82,16 +87,19 @@ export class TabPanel extends Component<TabPanelProps> {
         body.show()
       }
     })
-  // set label activeStyle inactiveStyle
-  this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_label_')).forEach(label => {
-    if (label.name !== 'tab_label_' + tabIndex) {
-      label.style = {...label.style||{}, ...this.props.inactiveStyle||{}}
-    } else {
-      label.style = {...label.style||{}, ...this.props.activeStyle||{}}
-      label.show()
-    }
-  })
+    // set label activeStyle inactiveStyle
+    this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_label_')).forEach(label => {
+      if (label.name !== 'tab_label_' + tabIndex) {
+        label.style = { ...(label.style || {}), ...(this.props.inactiveStyle || {}) }
+      } else {
+        label.style = { ...(label.style || {}), ...(this.props.activeStyle || {}) }
+      }
+    })
     this.blessedElement.screen.render()
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
+  }
+
+  static isLabelButton(e: Node) {
+    return isElement(e) && !!e.name && e.name.startsWith('tab_label_')
   }
 }

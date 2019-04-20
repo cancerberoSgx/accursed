@@ -70,7 +70,7 @@ class BlessedJsxImpl implements BlessedJsx {
       component = new tag({ ...attrs, children }, {})
 
       // TODO: beforeComponentCreated
-      
+
       if (VirtualComponent.isVirtualComponent(component)) {
         // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information.
         el = VirtualComponent.createVirtualElement(component, tag.name)

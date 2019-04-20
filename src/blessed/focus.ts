@@ -3,10 +3,10 @@ import { Element, Style } from '../blessedTypes'
 import { isBlessedElement } from './util'
 
 const focusStyle: Style = {
-  border: {
-    type: 'line',
-    fg: 'red'
-  }
+  // border: {
+  //   type: 'line',
+  //   fg: 'red'
+  // }
 }
 
 /**
