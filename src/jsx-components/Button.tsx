@@ -1,13 +1,13 @@
-import { ButtonOptions, IMouseEventArg, Button } from '../blessedTypes'
+import { Button, ButtonOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
-import { ArtificialEvent } from '../jsx/types';
+import { ArtificialEvent } from '../jsx/types'
 
-interface P extends ButtonOptions  {
+interface P extends ButtonOptions {
   onClick: onClickHandler<Button2>
   children: string
 }
-export type onClickHandler<T extends JSX.ElementType> = (  e: ArtificialEvent<Button>) => void
+export type onClickHandler<T extends JSX.ElementType> = (e: ArtificialEvent<Button>) => void
 
 export class Button2 extends Component<P, {}> {
   // protected defaultOptions() {
@@ -29,13 +29,14 @@ export class Button2 extends Component<P, {}> {
     // const y : ObjectStringKeyValueUnion
     return (
       <button
-      {...{
-        // ...this.defaultOptions(), 
-        ...this.props, children: undefined}}
-      // {...this.props,}  
-      onClick={e => this.props.onClick(e)}
-      onPress={e => this.props.onClick(e)}
-
+        {...{
+          // ...this.defaultOptions(),
+          ...this.props,
+          children: undefined
+        }}
+        // {...this.props,}
+        onClick={e => this.props.onClick(e)}
+        onPress={e => this.props.onClick(e)}
         content={this.props.children + ''}
         // style={{...this.defaultOptions(), ...this.props.style||{}}}
         // {...{ style: this.props.style || {} }}
