@@ -44,7 +44,7 @@ export async function createScreenForBrowser(options: ScreenOptions = {}): Promi
       // process.listeners = function fakelisteners() {
       //   return []
       // }
-      term.resize(options.cols || 160, options.rows || 56)
+      term.resize(options.cols || 120, options.rows || 36)
       const screen = createScreen({ ...options, input: term,output: term, tput: undefined       })
       resolve(screen)
     }

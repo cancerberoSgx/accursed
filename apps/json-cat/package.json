@@ -1,0 +1,46 @@
+{
+  "name": "json-cat",
+  "version": "0.0.3",
+  "description": "command line interactive tool to explorer Unicode emojis",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": ".bin/json-cat.js",
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
+    "clean": "rm -rf dist",
+    "browserify": "rm -rf dist build && npm run build && mkdir -p dist/src/data/generated build && cp -r src/data/generated/* dist/src/data/generated &&  npx browserify dist/src/main.js -o build/bundle.js --ignore-missing -t brfs --no-debug && cp src/index.html build && npx terser build/bundle.js -o build/bundle.js",
+    "all": "npm run clean && npm run prettier && npm run build"
+  },
+  "author": "Sebastian Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "accursed": "file:../..",
+    "misc-utils-of-mine-generic": "file:../../../misc-utils-of-mine/misc-utils-of-mine-generic",
+    "misc-utils-of-mine-typescript": "0.0.12",
+    "oboe": "^2.1.4",
+    "yargs-parser": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.2",
+    "@types/oboe": "^2.0.28",
+    "brfs": "^2.0.2",
+    "browserify": "^16.2.3",
+    "json-ts": "^1.6.4",
+    "prettier": "^1.16.4",
+    "terser": "^3.17.0",
+    "ts-node": "^7.0.1",
+    "ts-refactor": "0.0.2",
+    "typescript": "^3.4.3",
+    "xml-js": "^1.6.11"
+  },
+  "keywords": [
+    "unicode",
+    "emoji",
+    "command line",
+    "emojis"
+  ],
+  "repository": "https://github.com/cancerberoSgx/accursed"
+}

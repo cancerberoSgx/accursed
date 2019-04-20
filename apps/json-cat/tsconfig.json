@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "declaration": true,
+    "strict": true,
+    "jsx": "React",
+    "skipLibCheck": true,    
+    "baseUrl": ".",
+    //    "paths": {
+    //   "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
+    //   "blessed": ["../../dist/src/declarations/blessed"]
+    // },
+    "paths": {
+      "blessed-contrib": ["node_modules/accursed/dist/src/declarations/blessed-contrib"],      
+      "blessed": ["node_modules/accursed/dist/src/declarations/blessed"]
+    },
+  },
+  "include": [
+    "src", "spec"
+  ], 
+  "exclude": [
+    // "node_modules", "test", 
+    "src/data/generated", "src/data/scripts"
+  ]
+}
