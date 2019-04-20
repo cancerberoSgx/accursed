@@ -63,11 +63,4 @@ describe('button2', () => {
     }
   })
 
-  xit('should show body when label clicked and hide the other bodies', () => {})
-
-  xit('should show body when calling selectTab() ', () => {})
-
-  xit('should notify tab activation with props.onChange) ', () => {})
-
-  xit('should support keyboard', () => {})
 })
