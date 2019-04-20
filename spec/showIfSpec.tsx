@@ -7,13 +7,12 @@ import {
   installExitKeys,
   installFocusHandler,
   React,
-  Screen,
-  showInModal
+  Screen
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Button2, ShowIf, Br } from '../src/jsx-components'
+import { Br, ShowIf } from '../src/jsx-components'
+import { string, words } from '../src/util/data'
 import { log } from '../src/util/logger'
-import { words, string } from '../src/util/data';
 
 describe('showIf', () => {
   let screen: Screen
@@ -29,19 +28,26 @@ describe('showIf', () => {
       let showContent = true
       const t1 = (
         <Div>
-          <button border="line" content={showContent ? 'hide' : 'show'} onClick={e => {
-            showContent = !showContent
-            update(showContent)
-            e.currentTarget.content = showContent ? 'hide' : 'show'
-            log('Button2', showContent, e.currentTarget.content)
-            screen.render()
-          }} />
+          <button
+            border="line"
+            content={showContent ? 'hide' : 'show'}
+            onClick={e => {
+              showContent = !showContent
+              update(showContent)
+              e.currentTarget.content = showContent ? 'hide' : 'show'
+              log('Button2', showContent, e.currentTarget.content)
+              screen.render()
+            }}
+          />
           <Br />
-          <ShowIf onUpdate={fn => update = fn}>
-            body1<Br />
-            {words().join(' ')}<Br />
+          <ShowIf onUpdate={fn => (update = fn)}>
+            body1
+            <Br />
+            {words().join(' ')}
+            <Br />
             <button content={string()} border="line" focusable={true} /> <Br />
-            {words().join(' ')}<Br />
+            {words().join(' ')}
+            <Br />
           </ShowIf>
         </Div>
       )
@@ -54,7 +60,7 @@ describe('showIf', () => {
 
       await waitFor(() => getContent(el).includes('hide'))
 
-      //TODO: click the button and assert content is hidden... 
+      //TODO: click the button and assert content is hidden...
       expect(getContent(el)).toContain('hide')
 
       done()
@@ -62,11 +68,10 @@ describe('showIf', () => {
       log('ERROR', error)
     }
   })
-
 })
 
-
-{/* 
+{
+  /* 
           //TODO: e.currentTarget.content doesn't work with Button2 !!!
           <Button2 onClick={e=>{
             update(showContent)
@@ -74,4 +79,5 @@ describe('showIf', () => {
             log('Button2', showContent,   e.currentTarget.content)
             screen.render()
             showContent = !showContent
-          }}>{showContent?'hide':'show'}</Button2> */}
+          }}>{showContent?'hide':'show'}</Button2> */
+}

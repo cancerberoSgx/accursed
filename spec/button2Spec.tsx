@@ -62,5 +62,4 @@ describe('button2', () => {
       log('ERROR', error)
     }
   })
-
 })

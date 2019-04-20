@@ -11,8 +11,10 @@ interface P extends ButtonOptions {
 export class Button2 extends Component<P, {}> {
   protected defaultOptions() {
     return {
-      mouse: true, clickable: true,
-      focusable: true, border: 'line'
+      mouse: true,
+      clickable: true,
+      focusable: true,
+      border: 'line'
     }
   }
   render() {
