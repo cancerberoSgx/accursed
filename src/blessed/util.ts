@@ -1,9 +1,8 @@
-import * as blessed from 'blessed'
+// import * as blessed from 'blessed'
 import { asArray } from 'misc-utils-of-mine-generic'
-import { Checkbox, Element, isElement } from '../blessedTypes'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
-import { closeModal, isModalVisible } from './modal'
-import { visitDescendants } from './node'
+import { closeModal, isModalVisible, Button ,visitDescendants, Checkbox, Element, isElement, Screen, screen  } from '..'
+// import { visitDescendants } from './node'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -12,7 +11,7 @@ export function isBlessedElement(n: any): n is Element {
 /**
  * Besides reacting for click, also will react for pressed, enter and space keys.
  */
-export function onButtonClicked(b: blessed.Widgets.ButtonElement, fn: () => void) {
+export function onButtonClicked(b: Button, fn: () => void) {
   b.on('pressed', e => {
     fn()
   })
@@ -27,7 +26,7 @@ export function onButtonClicked(b: blessed.Widgets.ButtonElement, fn: () => void
 /**
  * @param screen install common exit keys on screen taking into account modals and other widgets that could use the same.
  */
-export function installExitKeys(screen: blessed.Widgets.Screen) {
+export function installExitKeys(screen: Screen) {
   screen.key(['escape', 'q', 'Q', 'C-c'], function(ch, key) {
     if (isModalVisible()) {
       closeModal(screen)
@@ -199,4 +198,4 @@ export function replaceChildren(
   }
 }
 
-export const createScreen = blessed.screen
+export const createScreen =  screen

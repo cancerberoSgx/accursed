@@ -29,7 +29,6 @@
     "misc-utils-of-mine-generic": "0.0.14"
   },
   "devDependencies": {
-    "@types/blessed": "^0.1.11",
     "@types/jasmine": "^2.8.16",
     "@types/node": "^10.5.2",
     "cli-driver": "0.2.0",
@@ -41,7 +40,8 @@
     "ts-refactor": "0.0.2",
     "typedoc": "^0.14.2",
     "typedoc-plugin-markdown": "^1.2.0",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.1",
+    "xterm": "^3.12.2"
   },
   "keywords": [
     "Command line",

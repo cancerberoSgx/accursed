@@ -8,3 +8,5 @@ log.txt
 /package/
 /test/
 /data/*.xml
+.cache
+/build

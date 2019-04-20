@@ -1,4 +1,4 @@
-import { listtable, Node, prompt, screen } from 'accursed'
+import { listtable, Node, prompt, createScreen } from 'accursed'
 
 function charCodeHexString(s: string) {
   return s
@@ -8,7 +8,7 @@ function charCodeHexString(s: string) {
     .join('')
 }
 
-var screen2 = screen({
+var screen2 = createScreen({
   autoPadding: false,
   // smartCSR: true, forceUnicode: true,
   fullUnicode: true

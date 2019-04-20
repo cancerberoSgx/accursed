@@ -1,20 +1,23 @@
-import * as blessed from 'blessed'
+// import * as blessed from 'blessed'
 import { tryTo } from 'misc-utils-of-mine-generic'
+import { Screen, Element, box } from '..';
+import { Box } from '../blessedTypes';
+// import { box } from '..';
 
 /**
  * Easy to use modal: ``` showInModal(screen, anElement)``` or simply:  ``` showInModal(screen, 'some text')```
  *
  */
 export function showInModal(
-  screen: blessed.Widgets.Screen,
-  s: string | blessed.Widgets.BlessedElement,
+  screen: Screen,
+  s: string | Element,
   title = 'Modal',
   width = '50%',
   height = '50%'
 ) {
   closeModal(screen)
   if (!modalInstance) {
-    modalInstance = blessed.box({
+    modalInstance = box({
       parent: screen,
       left: 'center',
       top: 'center',
@@ -39,13 +42,13 @@ export function showInModal(
   modalInstance.show()
   screen.render()
 }
-let modalInstance: blessed.Widgets.BoxElement | undefined
-let lastModalContent: blessed.Widgets.BlessedElement | undefined
+let modalInstance: Box | undefined
+let lastModalContent: Element | undefined
 
 /**
  * Close current opened modal
  */
-export function closeModal(screen: blessed.Widgets.Screen) {
+export function closeModal(screen: Screen) {
   tryTo(() => {
     if (modalInstance) {
       modalInstance.hide()
