@@ -1,6 +1,8 @@
-import { Element, IMouseEventArg, isElement } from '../blessedTypes'
+import { Element, IMouseEventArg, isElement, Style } from '../blessedTypes'
 import { ArtificialEvent } from '../jsx'
 import { getElementData, getElementLabel, setElementData } from './util'
+import { inBrowser } from '../util/browser';
+import { colors } from '..';
 
 export function isCollapsed(el: Element) {
   return el.$.collapsible && el.$.collapsible.collapsed
@@ -25,7 +27,6 @@ export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen?: 
     }
   } else {
     el.height = getElementData(el, 'collapsible.originalHeight') || 3
-
     const label = getElementData<string>(el, 'collapsible.collapsedLabel')
     if (label) {
       el.setLabel({ side: 'left', text: label })
@@ -50,7 +51,7 @@ export function toggleCollapsed(el: Element, andRenderScreen = false) {
   setCollapsed(el, collapsed, andRenderScreen)
 }
 
-interface Options {
+export interface CollapsibleOptions {
   /** if provided, element will be collapsed to this height. by default it will be 3 to support auto: true, border and label */
   collapsedHeight?: number | string
   /**
@@ -69,10 +70,11 @@ interface Options {
   uncollapsedLabel?: string
   /** called when collapse/expand occurs */
   onCollapseChange?: onCollapseChange
+  labelStyle?: Style
 }
 export type onCollapseChange = (e: ArtificialEvent<Element> & { collapsed: boolean }) => void
 
-export function installCollapsible(el: Element, options: Options = {}) {
+export function installCollapsible(el: Element, options: CollapsibleOptions = {}) {
   if (getElementData<boolean>(el, 'collapsible.installed')) {
     return
   }
@@ -100,8 +102,14 @@ export function installCollapsible(el: Element, options: Options = {}) {
       toggleCollapsed(el)
     }
     // Heads up, in auto mode we install the listener on the label. in auto mode there should always be a label
-    const internalLabel = getElementLabel(el) //
+    const internalLabel = getElementLabel(el) 
     if (internalLabel) {
+     if(inBrowser()){
+      internalLabel.height=2
+      // el.screen.render()
+    }
+    internalLabel.focusable=true
+    internalLabel.style = {...internalLabel.style||{}, ...options.labelStyle||{}}
       internalLabel.on('click', listener)
     } else {
       throw new Error(

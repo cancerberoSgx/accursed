@@ -32,7 +32,7 @@ export function installExitKeys(screen: blessed.Widgets.Screen) {
     if (isModalVisible()) {
       closeModal(screen)
     } else {
-      return process.exit(0)
+      return screen.destroy()
     }
   })
 }

@@ -109,7 +109,8 @@ If you will have several pages using blessing, perhaps is better to build blesse
 ```sh
 browserify -r blessed --ignore-missing -o dist/blessed.js
 browserify -r term.js --ignore-missing -o dist/termjs.js
-browserify -x blessed -x term.js example.js --ignore-missing -o dist/example.js
+browserify -r blessed-contrib --ignore-missing -o dist/blessed-contrib.js
+browserify -x blessed  -x term.js -x blessed-contrib test2.js --ignore-missing -o dist/test2.js
 ```
 
 Then in you test.html file you just include the three scripts
@@ -118,6 +119,20 @@ Then in you test.html file you just include the three scripts
 <body>
   <script src="blessed.js"></script>
   <script src="termjs.js"></script>
+  <script src="blessed-contrib.js"></script>
   <script src="test2.js"></script>
 </body>
+```
+
+## tips
+
+### Fonts
+
+You might want to use the following style so borders are shown correctly: 
+
+```css
+div {
+  font-size: 12px;
+  line-height: 10px;
+}
 ```

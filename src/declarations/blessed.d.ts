@@ -4534,8 +4534,6 @@ export namespace Widgets {
   }
 }
 
-// todo verify : LOG: [ 'classes',  'node',  'Node',  'screen',  'Screen',  'element',  'Element',  'box',  'Box',  'text',  'Text',  'line',  'Line',  'scrollablebox',  'ScrollableBox',  'scrollabletext',  'ScrollableText',  'bigtext',  'BigText',  'list',  'List',  'form',  'Form',  'input',  'Input',  'textarea',  'Textarea',  'textbox',  'Textbox',  'button',  'Button',  'progressbar',  'ProgressBar',  'filemanager',  'FileManager',  'checkbox',  'Checkbox',  'radioset',  'RadioSet',  'radiobutton',  'RadioButton',  'prompt',  'Prompt',  'question',  'Question',  'message',  'Message',  'loading',  'Loading',  'listbar',  'Listbar',  'log',  'Log',  'table',  'Table',  'listtable',  'ListTable',  'terminal',  'Terminal',  'image',  'Image',  'ansiimage',  'ANSIImage',  'overlayimage',  'OverlayImage',  'video',  'Video',  'layout',  'Layout',  'aliases',  'ListBar',  'PNG',  'png' ]
-
 // publish classes on existin gpaths so users can reference the real values for extending
 export namespace widget {
   class Node extends Widgets.Node {}
@@ -4545,11 +4543,9 @@ export namespace widget {
   class Box extends Widgets.BoxElement {}
   class List extends Widgets.ListElement {}
   class Screen extends Widgets.Screen {}
-  // class BoxElement extends Widgets.BoxElement { }
   class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> {}
   class Line extends Widgets.LineElement {}
   class BigText extends Widgets.BigTextElement {}
-  // class List extends Widgets.ListElement { }
   class FileManager extends Widgets.FileManagerElement {}
   class ListTable extends Widgets.ListTableElement {}
   class Listbar extends Widgets.ListbarElement {}
@@ -4570,10 +4566,8 @@ export namespace widget {
   class ProgressBar extends Widgets.ProgressBarElement {}
   class Terminal extends Widgets.TerminalElement {}
   class Layout extends Widgets.LayoutElement {}
-  // class Terminal extends Widgets.TerminalElement { }
 }
 
-// TODO: verify that all these are real classes :   'Node',  'Screen',  'Element',  'Box',  'Text',  'Line',  'ScrollableBox',  'ScrollableText',  'BigText',  'List',  'Form',  'Input',  'Textarea',  'Textbox',  'Button',  'ProgressBar',  'FileManager',  'Checkbox',  'RadioSet',  'RadioButton',  'Prompt',  'Question',  'Message',  'Loading',  'Listbar',  'Log',  'Table',  'ListTable',  'Terminal',  'Image',  'ANSIImage',  'OverlayImage',  'Video',  'Layout'
 
 /** @inheritdoc */
 export function screen(options?: Widgets.IScreenOptions): Widgets.Screen

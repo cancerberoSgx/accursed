@@ -48,6 +48,8 @@ export type FormOptions = RemoveProperties<blessed.Widgets.FormOptions, 'childre
 export type TextboxOptions = RemoveProperties<blessed.Widgets.TextboxOptions, 'children'>
 export type RadioSetOptions = RemoveProperties<blessed.Widgets.RadioSetOptions, 'children'>
 export type RadioButtonOptions = RemoveProperties<blessed.Widgets.RadioButtonOptions, 'children'>
+export type ScreenOptions = RemoveProperties<blessed.Widgets.IScreenOptions, 'children'>
+
 
 export type PositionCoords = blessed.Widgets.PositionCoords
 

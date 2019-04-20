@@ -1,12 +1,12 @@
-import { installCollapsible, onCollapseChange, setCollapsed } from '../blessed'
+import { installCollapsible, onCollapseChange, setCollapsed, CollapsibleOptions } from '../blessed'
 import { BoxOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
 import { Br, Div } from './jsxUtil'
 
-export interface CollapsibleProps extends BoxOptions {
+export interface CollapsibleProps extends BoxOptions, CollapsibleOptions {
   collapsed?: boolean
-  /** called when collapse/expand occurs */
+  /**  called when collapse/expand occurs */
   onCollapseChange?: onCollapseChange
   children: JSX.BlessedJsxNode | JSX.BlessedJsxNode[]
 }
