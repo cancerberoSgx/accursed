@@ -178,6 +178,11 @@ class BlessedJsxImpl implements BlessedJsx {
         el.on('render', e => {
           fn!.bind(el)({ ...e, currentTarget: el })
         })
+      } else if (attributeName === ArtificialEventOptionNames.onceRender) {
+        const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onceRender']
+        el.once('render', e => {
+          fn!.bind(el)({ ...e, currentTarget: el })
+        })
       } else if (attributeName === ArtificialEventOptionNames.onChange) {
         const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onChange']
         // TODO: verify that element type supports the value change semantic (i.e is a checkbox )?

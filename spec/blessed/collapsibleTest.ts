@@ -27,7 +27,6 @@ const layout = blessed.layout({
   border: 'line',
   style: {
     ...checkboxOptions.style,
-    //@ts-ignore
     overflow: 'hidden'
   },
   renderer: renderer

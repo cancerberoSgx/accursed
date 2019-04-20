@@ -1417,6 +1417,7 @@ export namespace Widgets {
     export interface TStyle {
       /** artificial type for user custom data (it doesn't exists just a type) */
       custom?: { [name: string]: any }
+      overflow?: 'hidden'
 
       // leave it open for custom style properties
       // [name: string]: any

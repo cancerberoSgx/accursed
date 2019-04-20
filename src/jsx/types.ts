@@ -57,7 +57,8 @@ export enum ArtificialEventOptionNames {
   onRender = 'onRender',
   onChange = 'onChange',
   onSelect = 'onSelect',
-  onPress = 'onPress'
+  onPress = 'onPress',
+  onceRender = 'onceRender'
 }
 
 /** represents event handlers directly supported by blessed element methods (exactly same signature) */
@@ -79,6 +80,7 @@ export interface ArtificialEventOptions<T extends Element> {
     } & ArtificialEvent<T>
   ) => void
   [ArtificialEventOptionNames.onRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
+  [ArtificialEventOptionNames.onceRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
   [ArtificialEventOptionNames.onChange]?: <V = any>(
     this: T,
     e: ArtificialEvent<T> & {

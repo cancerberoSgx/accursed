@@ -5,7 +5,7 @@ export function isCollapsed(el: Element) {
   return el.$.collapsible && el.$.collapsible.collapsed
 }
 
-export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen = false) {
+export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen?: boolean) {
   if (!getElementData<boolean>(el, 'collapsible.installed')) {
     return
   }
@@ -33,7 +33,7 @@ export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen = 
       el.children.filter(isElement).forEach(c => c !== internalLabel && c.show())
     }
   }
-  if (auto || andRenderScreen) {
+  if ((auto && andRenderScreen !== false) || andRenderScreen === true) {
     el.screen.render()
   }
 }

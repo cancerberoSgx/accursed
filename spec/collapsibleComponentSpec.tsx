@@ -9,7 +9,7 @@ import {
   Screen
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, Collapsible } from '../src/jsx-components'
+import { Br, Collapsible, Div } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
 import { log } from '../src/util/logger'
 
@@ -24,18 +24,27 @@ describe('collapsible', () => {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
       installExitKeys(screen)
       const t1 = (
-        <Collapsible>
-          Hello I should collapse
-          <button border="line" content="click me" />
-          <Br />
-          body1
-          <Br />
-          {words().join(' ')}
-          <Br />
-          <button content={string()} border="line" focusable={true} /> <Br />
-          {words().join(' ')}
-          <Br />
-        </Collapsible>
+        <Div>
+          <Collapsible label="options" height="40%">
+            Hello I should collapse
+            <button border="line" content="click me" />
+            {words(60).join(' ')}
+            <Br />
+          </Collapsible>
+
+          <Collapsible collapsed={true} height="40%">
+            Hello I should collapse
+            <button border="line" content="click me" />
+            <Br />
+            body1
+            <Br />
+            {words().join(' ')}
+            <Br />
+            <button content={string()} border="line" focusable={true} /> <Br />
+            {words().join(' ')}
+            <Br />
+          </Collapsible>
+        </Div>
       )
 
       const el = React.render(t1)
