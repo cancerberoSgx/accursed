@@ -339,6 +339,12 @@ the typings already existing in DefinitelyTypes had more or less all the descrip
 
 ## Extending blessed Elements with TypeScript and accursed
 
+[guides/blessed-extending-element-typescript.md](guides/blessed-extending-element-typescript.md) explain how to extend blessed Element class to create a new Widget type, using TypeScript, in a type checked experience.
+
+## Browserify
+
+[guides/browserify.md](guides/browserify.md) explain how to run blessed programs in the browser using browserify. 
+
 [How to create a new blessed Element extending blessed classes, with descent type documented type checking and TypeScript using accursed:](guides/blessed-extending-element-typescript.md)
 
 # TODO & ISSUES & Ideas

@@ -1,0 +1,21 @@
+<!-- 
+  mkdir -p docs/browser
+browserify -r "term.js" --ignore-missing -o docs/browser/termjs.js
+browserify -r blessed --ignore-missing -o docs/browser/blessed.js 
+browserify -x blessed spec/blessed/experiments/browser/test2.js --ignore-missing -o docs/browser/test2.js
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script src="../../../../tmp/blessed.js"></script>
+    <script src="../../../../tmp/termjs.js"></script>
+    <script src="../../../../tmp/test2.js"></script>
+</body>
+</html>

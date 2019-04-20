@@ -4247,7 +4247,10 @@ export namespace Widgets {
     cursor?: 'line' | 'underline' | 'block'
 
     terminal?: string
+    
+    cursorBlink?: boolean
 
+    screenKeys?: boolean
     /**
      * Object for process env.
      */
