@@ -9,7 +9,7 @@ import {
   Screen
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, Columns, Column, Div, Collapsible } from '../src/jsx-components'
+import { Br, Collapsible, Column, Columns, Div } from '../src/jsx-components'
 import { words } from '../src/util/data'
 import { log } from '../src/util/logger'
 
@@ -25,59 +25,59 @@ describe('columns', () => {
       installExitKeys(screen)
       const t1 = (
         <Div>
-          <Collapsible
-          ><Br />
-          {words(10).join(' ')}
-          <Br />
-          <Columns>
-          <Column bg="red">
-          column1
-          <Br />
-          {words(250).join(' ')}
-          </Column>
-          <Column bg="blue">
-          column2
-          <Br />
-          {words(250).join(' ')}
-          </Column>
-          <Column bg="yellow">
-          column3
-          <Br />
-          {words(210).join(' ')}
-          </Column>
-          {}
-          </Columns>
-          <Br />
-          {words(10).join(' ')}
-          <Br />
-            </Collapsible>
+          <Collapsible>
+            <Br />
+            {words(10).join(' ')}
+            <Br />
+            <Columns>
+              <Column bg="red">
+                column1
+                <Br />
+                {words(250).join(' ')}
+              </Column>
+              <Column bg="blue">
+                column2
+                <Br />
+                {words(250).join(' ')}
+              </Column>
+              <Column bg="yellow">
+                column3
+                <Br />
+                {words(210).join(' ')}
+              </Column>
+              {}
+            </Columns>
+            <Br />
+            {words(10).join(' ')}
+            <Br />
+          </Collapsible>
 
-            <Collapsible collapsed={true}
-          ><Br />
-          {words(10).join(' ')}
-          <Br />          
-          <Columns>
-          <Column bg="red" width="30%">
-          column1
-          <Br />
-          {words(250).join(' ')}
-          </Column>
-          <Column bg="blue" width="70%" >
-          column2
-          <Br />
-          {words(250).join(' ')}
-          </Column>
-          <Column bg="yellow">
-          column3
-          <Br />
-          {words(210).join(' ')}
-          </Column>
-          {}
-          </Columns>
-          <Br />
-          {words(10).join(' ')}
-          <Br />
-            </Collapsible>
+          <Collapsible collapsed={true}>
+            <Br />
+            {words(10).join(' ')}
+            <Br />
+            <Columns>
+              <Column bg="red" width="30%">
+                column1
+                <Br />
+                {words(250).join(' ')}
+              </Column>
+              <Column bg="blue" width="70%">
+                column2
+                <Br />
+                {words(250).join(' ')}
+              </Column>
+              <Column bg="yellow">
+                column3
+                <Br />
+                {words(210).join(' ')}
+              </Column>
+              {}
+            </Columns>
+            <Br />
+            {words(10).join(' ')}
+            <Br />
+          </Collapsible>
         </Div>
       )
 

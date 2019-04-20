@@ -1,21 +1,18 @@
-import { BoxOptions, Style } from '../blessedTypes';
-import { VirtualComponent, getJSXChildrenProps, isElementData } from '../blessed/virtualElement';
-import { Component, React } from '..';
-import { Div } from './jsxUtil';
-import { log } from '../util/logger';
-import { map } from '../declarations/blessed-contrib';
+import { Component, React } from '..'
+import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
+import { BoxOptions } from '../blessedTypes'
+import { log } from '../util/logger'
+import { Div } from './jsxUtil'
 
+interface ColumnsProps extends BoxOptions {
+  children: Column[]
+}
+interface ColumnProps extends BoxOptions {
+  children: JSX.BlessedJsxNode
+}
+export class Column extends VirtualComponent<ColumnProps> {}
 
-
-  interface ColumnsProps extends BoxOptions {
-    children: Column[]
-  }
-  interface ColumnProps extends BoxOptions {
-    children: JSX.BlessedJsxNode
-  } 
-  export class Column extends VirtualComponent<ColumnProps> {}
-
-  /**
+/**
    * Examples
 
 Columns of same width:
@@ -38,19 +35,25 @@ Columns of custom width:
 
 ```
    */
-  export class Columns extends Component<ColumnsProps> {
-    _saveJSXChildrenProps = true
-    render() {
-      const childProps = getJSXChildrenProps(this)!
-      const columns= childProps.filter(e => e.tagName === 'Column')!.map((c, i, columns)=>({...c, width: c.attrs.width||`${Math.trunc(98/columns.length)}%`}))
-      log(columns.map(c=>c.width))
-      return (
-        <Div {...this.props}>
-        {columns.map(c=><box {...c.attrs} height={c.attrs.height||'100%'} width={c.width}>{c.children}</box>)}
-        </Div>
-      )
-    }
+export class Columns extends Component<ColumnsProps> {
+  _saveJSXChildrenProps = true
+  render() {
+    const childProps = getJSXChildrenProps(this)!
+    const columns = childProps
+      .filter(e => e.tagName === 'Column')!
+      .map((c, i, columns) => ({ ...c, width: c.attrs.width || `${Math.trunc(98 / columns.length)}%` }))
+    log(columns.map(c => c.width))
+    return (
+      <Div {...this.props}>
+        {columns.map(c => (
+          <box {...c.attrs} height={c.attrs.height || '100%'} width={c.width}>
+            {c.children}
+          </box>
+        ))}
+      </Div>
+    )
   }
+}
 // Columns
 // <div class="columns">
 //   <div class="column">
