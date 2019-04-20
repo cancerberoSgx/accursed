@@ -314,6 +314,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * Collapsible
  * Select
  * Columns
+ * Accordion
 
 # Apps
  

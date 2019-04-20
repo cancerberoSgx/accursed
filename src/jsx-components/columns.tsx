@@ -13,7 +13,8 @@ interface ColumnProps extends BoxOptions {
 export class Column extends VirtualComponent<ColumnProps> {}
 
 /**
-   * Examples
+
+Columns layout. Examples:
 
 Columns of same width:
 
@@ -38,8 +39,7 @@ Columns of custom width:
 export class Columns extends Component<ColumnsProps> {
   _saveJSXChildrenProps = true
   render() {
-    const childProps = getJSXChildrenProps(this)!
-    const columns = childProps
+    const columns = getJSXChildrenProps(this)!
       .filter(e => e.tagName === 'Column')!
       .map((c, i, columns) => ({ ...c, width: c.attrs.width || `${Math.trunc(98 / columns.length)}%` }))
     log(columns.map(c => c.width))
@@ -54,18 +54,3 @@ export class Columns extends Component<ColumnsProps> {
     )
   }
 }
-// Columns
-// <div class="columns">
-//   <div class="column">
-//     First column
-//   </div>
-//   <div class="column">
-//     Second column
-//   </div>
-//   <div class="column">
-//     Third column
-//   </div>
-//   <div class="column">
-//     Fourth column
-//   </div>
-// </div>

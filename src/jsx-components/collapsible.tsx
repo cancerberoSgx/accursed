@@ -1,14 +1,14 @@
-import { installCollapsible, setCollapsed } from '../blessed'
+import { installCollapsible, setCollapsed, onCollapseChange } from '../blessed'
 import { BoxOptions, Element } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
 import { ArtificialEvent } from '../jsx/types'
 import { Br, Div } from './jsxUtil'
 
-interface CollapsibleProps extends BoxOptions {
+export interface CollapsibleProps extends BoxOptions {
   collapsed?: boolean
-  /**TODO */
-  onCollapse?: (event: ArtificialEvent<Element> & { collapsed: boolean }) => void
+  /** called when collapse/expand occurs */
+  onCollapseChange?: onCollapseChange
   children: JSX.BlessedJsxNode | JSX.BlessedJsxNode[]
 }
 /** 
@@ -28,16 +28,15 @@ export class Collapsible extends Component<CollapsibleProps, {}> {
         {...{ ...this.props, children: null }}
         border="line"
         onceRender={e => {
-          installCollapsible(e.currentTarget, { auto: true })
+          installCollapsible(e.currentTarget, { auto: true, onCollapseChange: this.props.onCollapseChange })
           if (this.props.collapsed) {
             setTimeout(() => {
-              setCollapsed(e.currentTarget, true)
+              setCollapsed(e.currentTarget, true, true, false)
             }, 20)
           }
         }}
         label={this.props.label || ' '}>
         <Br />
-
         {this.props.children}
       </Div>
     )
