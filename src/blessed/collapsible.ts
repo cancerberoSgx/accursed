@@ -1,12 +1,12 @@
 import { Element, IMouseEventArg, isElement } from '../blessedTypes'
+import { ArtificialEvent } from '../jsx'
 import { getElementData, getElementLabel, setElementData } from './util'
-import { ArtificialEvent } from '../jsx';
 
 export function isCollapsed(el: Element) {
   return el.$.collapsible && el.$.collapsible.collapsed
 }
 
-export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen?: boolean, dontNotify=false) {
+export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen?: boolean, dontNotify = false) {
   if (!getElementData<boolean>(el, 'collapsible.installed')) {
     return
   }
@@ -34,11 +34,11 @@ export function setCollapsed(el: Element, collapsed: boolean, andRenderScreen?: 
       el.children.filter(isElement).forEach(c => c !== internalLabel && c.show())
     }
   }
- const onCollapseChange =  getElementData<onCollapseChange>(el, 'collapsible.onCollapseChange')
- if(onCollapseChange&& !dontNotify){
-   onCollapseChange({currentTarget: el, collapsed})
- }
- 
+  const onCollapseChange = getElementData<onCollapseChange>(el, 'collapsible.onCollapseChange')
+  if (onCollapseChange && !dontNotify) {
+    onCollapseChange({ currentTarget: el, collapsed })
+  }
+
   if ((auto && andRenderScreen !== false) || andRenderScreen === true) {
     el.screen.render()
   }
@@ -70,7 +70,7 @@ interface Options {
   /** called when collapse/expand occurs */
   onCollapseChange?: onCollapseChange
 }
-export type onCollapseChange = (e: ArtificialEvent<Element>&{collapsed: boolean})=>void
+export type onCollapseChange = (e: ArtificialEvent<Element> & { collapsed: boolean }) => void
 
 export function installCollapsible(el: Element, options: Options = {}) {
   if (getElementData<boolean>(el, 'collapsible.installed')) {

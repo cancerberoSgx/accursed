@@ -1,8 +1,7 @@
-import { installCollapsible, setCollapsed, onCollapseChange } from '../blessed'
-import { BoxOptions, Element } from '../blessedTypes'
+import { installCollapsible, onCollapseChange, setCollapsed } from '../blessed'
+import { BoxOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
-import { ArtificialEvent } from '../jsx/types'
 import { Br, Div } from './jsxUtil'
 
 export interface CollapsibleProps extends BoxOptions {

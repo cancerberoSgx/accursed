@@ -9,10 +9,10 @@ import {
   Screen
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, Collapsible, Column, Columns, Div } from '../src/jsx-components'
+import { Br, Div } from '../src/jsx-components'
+import { Accordion, AccordionBlock } from '../src/jsx-components/accordion'
 import { words } from '../src/util/data'
 import { log } from '../src/util/logger'
-import { Accordion, AccordionBlock } from '../src/jsx-components/accordion';
 
 describe('accordion', () => {
   let screen: Screen
@@ -26,30 +26,29 @@ describe('accordion', () => {
       installExitKeys(screen)
       const t1 = (
         <Div>
-           {words(100).join(' ')}
-            <Br />
+          {words(100).join(' ')}
+          <Br />
           <Accordion>
-              <AccordionBlock bg="red">
+            <AccordionBlock bg="red">
               AccordionBlock1
-                <Br />
-                {words(250).join(' ')}
-              </AccordionBlock>
-              <AccordionBlock bg="blue">
-                AccordionBlock2
-                <Br />
-                {words(250).join(' ')}
-              </AccordionBlock>
-              <AccordionBlock bg="yellow" collapsed={false}>
-                AccordionBlock3
-                <Br />
-                {words(210).join(' ')}
-              </AccordionBlock>
-              {}
-            </Accordion>
-            <Br />
-            {words(101).join(' ')}
-            <Br />
-
+              <Br />
+              {words(250).join(' ')}
+            </AccordionBlock>
+            <AccordionBlock bg="blue">
+              AccordionBlock2
+              <Br />
+              {words(250).join(' ')}
+            </AccordionBlock>
+            <AccordionBlock bg="yellow" collapsed={false}>
+              AccordionBlock3
+              <Br />
+              {words(210).join(' ')}
+            </AccordionBlock>
+            {}
+          </Accordion>
+          <Br />
+          {words(101).join(' ')}
+          <Br />
         </Div>
       )
 
