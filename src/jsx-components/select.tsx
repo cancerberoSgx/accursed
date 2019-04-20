@@ -37,10 +37,14 @@ export class Select extends Component<SelectProps> {
     return (
       <list
         focusable={true}
+        keys={true}
+        keyable={true}
+        interactive={true}
         clickable={true}
+        vi={true}
         mouse={true}
         input={true}
-        style={{ bg: 'blue', focus: { bg: 'yellow' }, selected: { bg: 'red' } }}
+        style={{ bg: 'blue', item: { bg: 'green' }, focus: { bg: 'yellow' }, selected: { bg: 'red' } }}
         {...this.props}
         children={undefined}
         items={items}
@@ -52,9 +56,41 @@ export class Select extends Component<SelectProps> {
               index: e.currentTarget.selected || 0,
               value: values[e.currentTarget.selected || 0]
             })
+          //           e.currentTarget.setLabel(' ' +items[e.currentTarget.selected || 0] + ' ');
+          // e.currentTarget.screen.render();
         }}
+        // onKeyPress={e=>{
+        //   if (e.key.name === 'up' || e.key.name === 'k') {
+        //     e.currentTarget.up();
+        //     e.currentTarget.screen.render();
+        //   } else if (e.key.name === 'down' || e.key.name === 'j') {
+        //     e.currentTarget.down();
+        //     e.currentTarget.screen.render();
+        //   }
+        //   else if(e.key.name==='enter'||e.key.name==='space'){
+        //     e.currentTarget.select(e.currentTarget.selected||0)
+        //     e.currentTarget.screen.render();
+        //   }
+        // }}
       />
     )
   }
 }
 // }
+
+// list.on('keypress', function(ch, key) {
+//   if (key.name === 'up' || key.name === 'k') {
+//     list.up();
+//     screen.render();
+//     return;
+//   } else if (key.name === 'down' || key.name === 'j') {
+//     list.down();
+//     screen.render();
+//     return;
+//   }
+// });
+
+// list.on('select', function(item, select) {
+//   list.setLabel(' ' + item.getText() + ' ');
+//   screen.render();
+// });

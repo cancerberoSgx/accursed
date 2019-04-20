@@ -3474,12 +3474,12 @@ export namespace Widgets {
     /**
      * Select item above selected.
      */
-    up(amount: number): void
+    up(amount?: number): void
 
     /**
      * Select item below selected.
      */
-    down(amount: number): void
+    down(amount?: number): void
 
     /**
      * Show/focus list and pick an item. The callback is executed with the result.

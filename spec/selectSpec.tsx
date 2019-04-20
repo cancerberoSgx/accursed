@@ -30,6 +30,7 @@ describe('select', () => {
           {words().join(' ')}
           <Br />
           <Select
+            border="line"
             onSelect={e => {
               log(e.value, e.index)
             }}>
