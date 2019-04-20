@@ -313,6 +313,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * ShowIf
  * Collapsible
  * Select
+ * Columns
 
 # Apps
  
