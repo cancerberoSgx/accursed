@@ -311,6 +311,8 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `<If>` conditions with markup - not so useful but interesting....
  * Button
  * ShowIf
+ * Collapsible
+ * Select
 
 # Apps
  

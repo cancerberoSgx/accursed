@@ -1,11 +1,14 @@
 import { installCollapsible, setCollapsed } from '../blessed'
-import { BoxOptions } from '../blessedTypes'
+import { BoxOptions, Element } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
+import { ArtificialEvent } from '../jsx/types'
 import { Br, Div } from './jsxUtil'
 
 interface CollapsibleProps extends BoxOptions {
   collapsed?: boolean
+  /**TODO */
+  onCollapse?: (event: ArtificialEvent<Element> & { collapsed: boolean }) => void
   children: JSX.BlessedJsxNode | JSX.BlessedJsxNode[]
 }
 /** 
