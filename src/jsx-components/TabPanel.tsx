@@ -28,6 +28,42 @@ interface TabProps extends BoxOptions {
   children: (TabBody | TabLabel)[]
 }
 
+/**
+ * Example: 
+```
+<TabPanel activeStyle={{ fg: 'red', underline: true }} inactiveStyle={{ fg: 'blue', underline: false }}>
+  <Tab active={true}>
+    <TabLabel style={{ focus: { bg: 'yellow' } }}>tab 1</TabLabel>
+    <TabBody>
+      body1
+      {words().join(' ')}
+      <Br />
+      <button content={string()} border="line" focusable={true} /> <Br />
+      {words().join(' ')}
+      <Br />
+      <button content="button1" border="line" focusable={true} /> <Br />
+      {words().join(' ')}
+    </TabBody>
+    {}
+  </Tab>
+  <Tab>
+    <TabLabel style={{ focus: { bg: 'yellow' } }}>tab 2</TabLabel>
+    <TabBody>
+      body2
+      {words().join(' ')}
+      <Br />
+      <button content={string()} border="line" /> <Br />
+      {words().join(' ')}
+      <Br />
+      <button content="button2" border="line" /> <Br />
+      {words().join(' ')}
+    </TabBody>
+    {}
+  </Tab>
+  {}
+</TabPanel>
+```
+ */
 export class TabPanel extends Component<TabPanelProps> {
   _saveJSXChildrenProps = true
   render() {
@@ -48,7 +84,6 @@ export class TabPanel extends Component<TabPanelProps> {
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),
             ...((active ? this.props.activeStyle : this.props.inactiveStyle) || {})
-            // focused: {...labelStyle.focused ||{}}
           }}
           border="line"
           content={labelData.children.join(' ')}

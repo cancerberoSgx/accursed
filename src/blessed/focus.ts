@@ -113,7 +113,7 @@ export function installFocusHandler(
   elements: Element[],
   screen: blessed.Widgets.Screen,
   keys: [string, string] = ['tab', 'S-tab'],
-  styleChildren = true,
+  styleChildren = false,
   focusFirst = false
 ) {
   if (lastFocus[focusId] === -Infinity && typeof lastFocus[focusId] !== 'undefined') {

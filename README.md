@@ -294,15 +294,21 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
   * jsx related: spec/jsxSpec.tsx
   * using cli-driver to spawn a program and automate it spec/jsxSpec.tsx
 
-# My blessed contrib widgets and utilities: 
+# My blessed contrib widgets, utilities and JSX Components: 
+
+## General tools 
 
  * focus manager
  * collapsible element
- * node operations
- * modal
- * layout rendererand html like semantics
+ * node operations (ascendants, descendants, siblings, etc)
+ * showInModal()
+ * layout renderer with html like semantics display: block, overflow: hidden
+
+## JSX components
+
+ * `ListTable`
+ * `TabPanel`
  * `<If>` conditions with markup - not so useful but interesting....
- * React like refs attribtues
 
 
 # Apps
@@ -311,7 +317,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
 
  * accursed gallery, spec/blessed/gallery/LayoutDemo.tsx I tried to use these tools to build a interactive playground with examplesWIP
 
-  * https://github.com/cancerberoSgx/demos/tree/master/docs/typescript-ast-explorer - explore a TypeScripty project AST , visualliszetogether with sources code and even apply refactors. 
+ * https://github.com/cancerberoSgx/demos/tree/master/docs/typescript-ast-explorer - explore a TypeScripty project AST , visualliszetogether with sources code and even apply refactors. 
 
 
 # Typings:
