@@ -2,8 +2,8 @@ import { React } from '..'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
 import { BoxOptions, isElement, Node, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
+import { CollapsibleProps } from './collapsible'
 import { Br, Div } from './jsxUtil'
-import { CollapsibleProps } from './collapsible';
 
 export class TabLabel extends VirtualComponent<TabLabelProps> {}
 export class Tab extends VirtualComponent<TabProps> {}
@@ -24,7 +24,7 @@ interface TabLabelProps extends BoxOptions {
 interface TabBodyProps extends BoxOptions {
   children: JSX.BlessedJsxNode
 }
-interface TabProps extends  CollapsibleProps {
+interface TabProps extends CollapsibleProps {
   active?: boolean
   children: (TabBody | TabLabel)[]
 }

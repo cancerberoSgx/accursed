@@ -1,4 +1,4 @@
-import { installCollapsible, onCollapseChange, setCollapsed, CollapsibleOptions } from '../blessed'
+import { CollapsibleOptions, installCollapsible, onCollapseChange, setCollapsed } from '../blessed'
 import { BoxOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'

@@ -1,15 +1,14 @@
 import { appendFileSync } from 'fs'
 import { inspect } from 'util'
-import { inBrowser } from './browser';
+import { inBrowser } from './browser'
 
 export function log(...args: any[]) {
   // if(existsSync('log2.txt')){
   //   writeFileSync('log2.txt', 'hello')
   // }
-  if(inBrowser()){
+  if (inBrowser()) {
     console.log(...args)
-  }
-  else {
+  } else {
     appendFileSync(
       'log2.txt',
       '\n' +
@@ -20,4 +19,3 @@ export function log(...args: any[]) {
     )
   }
 }
-

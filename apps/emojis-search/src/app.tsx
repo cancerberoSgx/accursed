@@ -3,6 +3,7 @@ import { Categories } from './categories'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
 import { Search } from './search'
+import { setDataOnlyEmojis } from './data/data';
 
 interface P {
   screen: Screen
@@ -50,9 +51,11 @@ export class App extends Component<P, {}> {
   protected commands() {
     return {
       Emojis: () => {
+        setDataOnlyEmojis(true)
         this.updateMain(MenuOptions.categories)
       },
       'All Unicode': () => {
+        setDataOnlyEmojis(false)
         this.updateMain(MenuOptions.categories)
       },
       Search: () => {

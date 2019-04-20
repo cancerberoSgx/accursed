@@ -20,7 +20,7 @@ let ucdNonUniHanDefinitions: EmojiDefinition[]
 // export function getOnlyEmojis(){
 //   return dataOnlyEmojis
 // }
-export function getEmojiDefinitions(dataOnlyEmojis: boolean) {
+export function getEmojiDefinitions(){
   if (!emojiDefinitions) {
     emojiDefinitions = JSON.parse(readFileSync(join(__dirname, 'generated', 'emoji.json')).toString()) //as EmojiDefinition[]
   }
@@ -35,13 +35,16 @@ return dataOnlyEmojis ? emojiDefinitions : ucdNonUniHanDefinitions
 
 let categoryEmojis: { [c: string]: (EmojiDefinition)[] } | undefined
 let categoryAllUnicode: { [c: string]: (EmojiDefinition)[] } | undefined
-
-export function getCategoryEmojis(dataOnlyEmojis: boolean) {
+let dataOnlyEmojis = true
+export function setDataOnlyEmojis(b: boolean){
+  dataOnlyEmojis = b
+}
+export function getCategoryEmojis() {
   // we repeat code because we dont want to load all unicode at the beggining when applcation startup sonly when user requires it
   if(dataOnlyEmojis){
     if (!categoryEmojis) {
       categoryEmojis = {}
-      const defs = getEmojiDefinitions(dataOnlyEmojis)
+      const defs = getEmojiDefinitions()
       defs.forEach(e => {
         // const e = (defs as any)[k]
         const name = e.category || 'Unknown'
@@ -56,7 +59,7 @@ export function getCategoryEmojis(dataOnlyEmojis: boolean) {
   }else {
     if (!categoryAllUnicode) {
       categoryAllUnicode = {}
-      const defs = getEmojiDefinitions(dataOnlyEmojis)
+      const defs = getEmojiDefinitions()
       defs.forEach(e => {
         // const e = (defs as any)[k]
         const name = e.category || 'Unknown'
@@ -71,6 +74,6 @@ export function getCategoryEmojis(dataOnlyEmojis: boolean) {
   }
  
 }
-export function getCategoryNames(dataOnlyEmojis: boolean) {
-  return Object.keys(getCategoryEmojis(dataOnlyEmojis))
+export function getCategoryNames() {
+  return Object.keys(getCategoryEmojis())
 }

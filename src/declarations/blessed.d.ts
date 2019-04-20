@@ -119,7 +119,7 @@ export interface IBlessedProgramOptions {
 ## Example 1
 
 Starting a program alone, and register 'q' to exist
- ```
+```
 const program = blessed.program({
 })
 program.setMouse({
@@ -133,7 +133,7 @@ program.key(['q', 'escape', 'C-c'], function () {
   program.normalBuffer()
   process.exit(0)
 })
- ```
+```
 
 ## Example 2: 
 
@@ -175,7 +175,7 @@ program.on('mouse', function (data) {
   program.write('as', 'red fg');
   program.cup(0, 0);
 });
-  ```
+```
 
 ## Example 4
 
@@ -317,7 +317,7 @@ declare class BlessedProgram extends EventEmitter {
   /**
    * example call: 
    * 
-   * ```
+```
 program.getCursor(function(err, data) {
   program.log('getCursor', data);
   program.write(util.inspect(data));
@@ -441,75 +441,77 @@ program.getCursor(function(err, data) {
   el(param?: string): boolean
 
   /**
+```
  CSI Pm m  Character Attributes (SGR).
-     Ps = 0  -> Normal (default).
-     Ps = 1  -> Bold.
-     Ps = 4  -> Underlined.
-     Ps = 5  -> Blink (appears as Bold).
-     Ps = 7  -> Inverse.
-     Ps = 8  -> Invisible, i.e., hidden (VT300).
-     Ps = 2 2  -> Normal (neither bold nor faint).
-     Ps = 2 4  -> Not underlined.
-     Ps = 2 5  -> Steady (not blinking).
-     Ps = 2 7  -> Positive (not inverse).
-     Ps = 2 8  -> Visible, i.e., not hidden (VT300).
-     Ps = 3 0  -> Set foreground color to Black.
-     Ps = 3 1  -> Set foreground color to Red.
-     Ps = 3 2  -> Set foreground color to Green.
-     Ps = 3 3  -> Set foreground color to Yellow.
-     Ps = 3 4  -> Set foreground color to Blue.
-     Ps = 3 5  -> Set foreground color to Magenta.
-     Ps = 3 6  -> Set foreground color to Cyan.
-     Ps = 3 7  -> Set foreground color to White.
-     Ps = 3 9  -> Set foreground color to default (original).
-     Ps = 4 0  -> Set background color to Black.
-     Ps = 4 1  -> Set background color to Red.
-     Ps = 4 2  -> Set background color to Green.
-     Ps = 4 3  -> Set background color to Yellow.
-     Ps = 4 4  -> Set background color to Blue.
-     Ps = 4 5  -> Set background color to Magenta.
-     Ps = 4 6  -> Set background color to Cyan.
-     Ps = 4 7  -> Set background color to White.
-     Ps = 4 9  -> Set background color to default (original).
+  Ps = 0  -> Normal (default).
+  Ps = 1  -> Bold.
+  Ps = 4  -> Underlined.
+  Ps = 5  -> Blink (appears as Bold).
+  Ps = 7  -> Inverse.
+  Ps = 8  -> Invisible, i.e., hidden (VT300).
+  Ps = 2 2  -> Normal (neither bold nor faint).
+  Ps = 2 4  -> Not underlined.
+  Ps = 2 5  -> Steady (not blinking).
+  Ps = 2 7  -> Positive (not inverse).
+  Ps = 2 8  -> Visible, i.e., not hidden (VT300).
+  Ps = 3 0  -> Set foreground color to Black.
+  Ps = 3 1  -> Set foreground color to Red.
+  Ps = 3 2  -> Set foreground color to Green.
+  Ps = 3 3  -> Set foreground color to Yellow.
+  Ps = 3 4  -> Set foreground color to Blue.
+  Ps = 3 5  -> Set foreground color to Magenta.
+  Ps = 3 6  -> Set foreground color to Cyan.
+  Ps = 3 7  -> Set foreground color to White.
+  Ps = 3 9  -> Set foreground color to default (original).
+  Ps = 4 0  -> Set background color to Black.
+  Ps = 4 1  -> Set background color to Red.
+  Ps = 4 2  -> Set background color to Green.
+  Ps = 4 3  -> Set background color to Yellow.
+  Ps = 4 4  -> Set background color to Blue.
+  Ps = 4 5  -> Set background color to Magenta.
+  Ps = 4 6  -> Set background color to Cyan.
+  Ps = 4 7  -> Set background color to White.
+  Ps = 4 9  -> Set background color to default (original).
 
-   If 16-color support is compiled, the following apply.  Assume
-   that xterm's resources are set so that the ISO color codes are
-   the first 8 of a set of 16.  Then the aixterm colors are the
-   bright versions of the ISO colors:
-     Ps = 9 0  -> Set foreground color to Black.
-     Ps = 9 1  -> Set foreground color to Red.
-     Ps = 9 2  -> Set foreground color to Green.
-     Ps = 9 3  -> Set foreground color to Yellow.
-     Ps = 9 4  -> Set foreground color to Blue.
-     Ps = 9 5  -> Set foreground color to Magenta.
-     Ps = 9 6  -> Set foreground color to Cyan.
-     Ps = 9 7  -> Set foreground color to White.
-     Ps = 1 0 0  -> Set background color to Black.
-     Ps = 1 0 1  -> Set background color to Red.
-     Ps = 1 0 2  -> Set background color to Green.
-     Ps = 1 0 3  -> Set background color to Yellow.
-     Ps = 1 0 4  -> Set background color to Blue.
-     Ps = 1 0 5  -> Set background color to Magenta.
-     Ps = 1 0 6  -> Set background color to Cyan.
-     Ps = 1 0 7  -> Set background color to White.
+If 16-color support is compiled, the following apply.  Assume
+that xterm's resources are set so that the ISO color codes are
+the first 8 of a set of 16.  Then the aixterm colors are the
+bright versions of the ISO colors:
+  Ps = 9 0  -> Set foreground color to Black.
+  Ps = 9 1  -> Set foreground color to Red.
+  Ps = 9 2  -> Set foreground color to Green.
+  Ps = 9 3  -> Set foreground color to Yellow.
+  Ps = 9 4  -> Set foreground color to Blue.
+  Ps = 9 5  -> Set foreground color to Magenta.
+  Ps = 9 6  -> Set foreground color to Cyan.
+  Ps = 9 7  -> Set foreground color to White.
+  Ps = 1 0 0  -> Set background color to Black.
+  Ps = 1 0 1  -> Set background color to Red.
+  Ps = 1 0 2  -> Set background color to Green.
+  Ps = 1 0 3  -> Set background color to Yellow.
+  Ps = 1 0 4  -> Set background color to Blue.
+  Ps = 1 0 5  -> Set background color to Magenta.
+  Ps = 1 0 6  -> Set background color to Cyan.
+  Ps = 1 0 7  -> Set background color to White.
 
-   If xterm is compiled with the 16-color support disabled, it
-   supports the following, from rxvt:
-     Ps = 1 0 0  -> Set foreground and background color to
-     default.
+If xterm is compiled with the 16-color support disabled, it
+supports the following, from rxvt:
+  Ps = 1 0 0  -> Set foreground and background color to
+  default.
 
-   If 88- or 256-color support is compiled, the following apply.
-     Ps = 3 8  ; 5  ; Ps -> Set foreground color to the second
-     Ps.
-     Ps = 4 8  ; 5  ; Ps -> Set background color to the second
-     Ps.
+If 88- or 256-color support is compiled, the following apply.
+  Ps = 3 8  ; 5  ; Ps -> Set foreground color to the second
+  Ps.
+  Ps = 4 8  ; 5  ; Ps -> Set background color to the second
+  Ps.
+```
    */
   charAttributes(param: string, val?: string): boolean
   charAttributes(param: string[], val?: string): boolean
 
   /**
    * set the foreground color and character for the following writings to the output buffer. Example: 
-  ```
+```
 program.setBackground('green', 'O')
 program.setForeground('red', 'i')
 program.on('mouse', function (data) {
@@ -518,15 +520,15 @@ program.on('mouse', function (data) {
   program.write('as', 'red fg');
   program.cup(0, 0);
 });
-  ```
+```
    */
   setForeground(color: string, val?: string): boolean
-  /** @see setForeground  */
+  /** @see [[setForeground]]  */
   fg(color: string, val?: boolean): string
 
   /**
    * set the background color and character for the following writings to the output buffer. Example:
-  ```
+```
 program.setBackground('green', 'O')
 program.setForeground('red', 'i')
 program.on('mouse', function (data) {
@@ -535,10 +537,10 @@ program.on('mouse', function (data) {
   program.write('as', 'red fg');
   program.cup(0, 0);
 });
-  ```
+```
    */
   setBackground(color: string, val?: string): boolean
-  /** @see setBackground  */
+  /** @see [[setBackground]]  */
   bg(color: string, val?: string): boolean
 
   /**
@@ -567,16 +569,16 @@ CSI ? Ps n
 ```
    */
   deviceStatus(param?: string, callback?: ProgramResponseCallback, dec?: boolean, noBypass?: boolean): boolean
-  /**@see deviceStatus */
+  /**@see [[deviceStatus]] */
   dsr(param?: string, callback?: Function, dec?: boolean, noBypass?: boolean): boolean
 
   /**
   Example Call:
-  ```
+```
   program.getCursor(function(err, data) {
     program.log('getCursor', data);
   });
-  ```
+```
    */
   getCursor(callback: ProgramResponseCallback): boolean
   saveReportedCursor(callback: ProgramResponseCallback): void
@@ -586,14 +588,15 @@ CSI ? Ps n
   /** CSI Ps @
   Insert Ps (Blank) Character(s) (default = 1) (ICH). */
   insertChars(param?: number): boolean
-  /** @see insertChars  */
+  /** @see [[insertChars]]  */
   ich(param?: number): boolean
 
   /**
-   * 
+```
 CSI Ps E
 Cursor Next Line Ps Times (default = 1) (CNL).
 same as CSI Ps B ?
+```
    */
   cursorNextLine(param?: number): boolean
   /** @cursorNextLine */
@@ -635,7 +638,7 @@ same as CSI Ps B ?
   hvp(row?: number, col?: number): boolean
 
   /**
-  ```
+```
  CSI Pm h  Set Mode (SM).
      Ps = 2  -> Keyboard Action Mode (AM).
      Ps = 4  -> Insert Mode (IRM).
@@ -720,10 +723,10 @@ same as CSI Ps B ?
      Ps = 2 0 0 4  -> Set bracketed paste mode.
  Modes:
    http://vt100.net/docs/vt220-rm/chapter4.html
-   ```
+```
 
    Example: Show cursor: 
-   ```
+```
 
   return this.setMode('?25', (error, data)=>{
 
@@ -731,7 +734,7 @@ same as CSI Ps B ?
 ```
    */
   setMode(args: string, callback: ProgramResponseCallback): boolean
-  /** @see setMode  */
+  /** @see [[setMode]]  */
   sm(...args: string[]): boolean
 
   decset(...args: string[]): boolean
@@ -744,9 +747,9 @@ same as CSI Ps B ?
   alternateBuffer(): boolean
   smcup(): boolean
   alternate(): boolean
+
   /**
 ```
-
 CSI Pm l  Reset Mode (RM).
     Ps = 2  -> Keyboard Action Mode (AM).
     Ps = 4  -> Replace Mode (IRM).
@@ -830,7 +833,7 @@ CSI ? Pm l
 ```
  */
   resetMode(...args: string[]): boolean
-  /** @see resetMode  */
+  /** @see [[resetMode]]  */
   rm(...args: string[]): boolean
 
   decrst(...args: string[]): boolean
@@ -868,57 +871,61 @@ CSI ? Pm l
   ): void
 
   /**
- ```
+```
  CSI Ps ; Ps r
    Set Scrolling Region [top;bottom] (default = full size of win-
    dow) (DECSTBM).
  CSI ? Pm r
- ```
+```
    */
   setScrollRegion(top: number, bottom: number): boolean
-  /** @see setScrollRegion*/
+  /** @see [[setScrollRegion]]*/
   csr(top: number, bottom: number): boolean
-  /** @see setScrollRegion*/
+  /** @see [[setScrollRegion]]*/
   decstbm(top: number, bottom: number): boolean
-  /** CSI s
-  Save cursor (ANSI.SYS). */
+  /** 
+```
+CSI s
+  Save cursor (ANSI.SYS). 
+```
+  */
   saveCursorA(): boolean
-  /** @see saveCursorA*/
+  /** @see [[saveCursorA]]*/
   scA(): boolean
   /**
- ```
+```
  CSI u
    Restore cursor (ANSI.SYS).
- ```
+```
 
  */
   restoreCursorA(): boolean
-  /** @see restoreCursorA*/
+  /** @see [[restoreCursorA]]*/
   rcA(): boolean
 
   /**  Cursor Forward Tabulation Ps tab stops (default = 1) (CHT). */
   cursorForwardTab(param?: number): boolean
-  /** @see cursorForwardTab*/
+  /** @see [[cursorForwardTab]]*/
   cht(param?: number): boolean
   /**CSI Ps S  Scroll up Ps lines (default = 1) (SU). */
   scrollUp(param?: number): boolean
-  /** @see scrollUp*/
+  /** @see [[scrollUp]]*/
   su(param?: number): boolean
   /**  CSI Ps T  Scroll down Ps lines (default = 1) (SD). */
   scrollDown(param?: number): boolean
-  /** @see scrollDown*/
+  /** @see [[scrollDown]]*/
   sd(param?: number): boolean
   /** 
- ```
+```
    CSI Ps ; Ps ; Ps ; Ps ; Ps T
    Initiate highlight mouse tracking.  Parameters are
    [func;startx;starty;firstrow;lastrow].  See the section Mouse
    Tracking. 
- ```
+```
    */
   initMouseTracking(...args: string[]): boolean
   /**
-   ``` 
+``` 
    CSI > Ps; Ps T
     Reset one or more features of the title modes to the default
     value.  Normally, "reset" disables the feature.  It is possi-
@@ -929,7 +936,8 @@ CSI ? Pm l
       mal.
       Ps = 2  -> Do not set window/icon labels using UTF-8.
       Ps = 3  -> Do not query window/icon labels using UTF-8.
-    (See discussion of "Title Modes").```
+    (See discussion of "Title Modes").
+```
    */
   resetTitleModes(...args: string[]): boolean
 
@@ -969,7 +977,7 @@ CSI ? Pm l
 
   /**
    * 
- ```
+```
   CSI > Ps p
 Set resource value pointerMode.  This is used by xterm to
 decide whether to hide the pointer cursor as the user types.
@@ -978,8 +986,8 @@ Valid values for the parameter:
   Ps = 1  -> hide if the mouse tracking mode is not enabled.
   Ps = 2  -> always hide the pointer.  If no parameter is
   given, xterm uses the default, which is 1 . 
-  
- ```
+
+```
   */
   setPointerMode(...args: string[]): boolean
 
@@ -1000,7 +1008,7 @@ Valid values for the parameter:
   decll(param?: number): boolean
 
   /** 
- ```
+```
 CSI Ps SP q
 Set cursor style (DECSCUSR, VT520).
  Ps = 0  -> blinking block.
@@ -1008,7 +1016,7 @@ Set cursor style (DECSCUSR, VT520).
  Ps = 2  -> steady block.
  Ps = 3  -> blinking underline.
  Ps = 4  -> steady underline.
- ```
+```
    */
   setCursorStyle(
     cursor:
@@ -1031,35 +1039,35 @@ Set cursor style (DECSCUSR, VT520).
   decscursr(cursor: number): boolean
 
   /**
- ```
+```
    CSI Ps " q
   Select character protection attribute (DECSCA).  Valid values
   for the parameter:
     Ps = 0  -> DECSED and DECSEL can erase (default).
     Ps = 1  -> DECSED and DECSEL cannot erase.
     Ps = 2  -> DECSED and DECSEL can erase.
- ```
+```
    */
   setCharProtectionAttr(param?: number): boolean
   /** @see [[setCharProtectionAttr]] */
   decsca(param?: number): boolean
   /**
- ```
+```
   CSI ? Pm r
     Restore DEC Private Mode Values.  The value of Ps previously
     saved is restored.  Ps values are the same as for DECSET. 
- ```
+```
     */
   restorePrivateValues(...args: string[]): boolean
 
   /**
- ```
+```
    * CSI Pt; Pl; Pb; Pr; Ps$ r
   Change Attributes in Rectangular Area (DECCARA), VT400 and up.
     Pt; Pl; Pb; Pr denotes the rectangle.
     Ps denotes the SGR attributes to change: 0, 1, 4, 5, 7.
 NOTE: xterm doesn't enable this code by default.
- ```
+```
    */
   setAttrInRectangle(Pt: number, Pl: number, Pb: number, Pr: number, Ps$: number): boolean
   /** @see [[setAttrInRectangle]] */
@@ -1070,13 +1078,13 @@ NOTE: xterm doesn't enable this code by default.
 
   /**
    * 
- ```
+```
     CSI Ps ; Ps ; Ps t
    Window manipulation (from dtterm, as well as extensions).
    These controls may be disabled using the allowWindowOps
    resource.  Valid values for the first (and any additional
    parameters) are:
-      ```
+  ```
      Ps = 1  -> De-iconify window.
      Ps = 2  -> Iconify window.
      Ps = 3  ;  x ;  y -> Move window to [x, y].
@@ -1119,10 +1127,10 @@ NOTE: xterm doesn't enable this code by default.
      Ps = 2 3  ;  2  -> Restore xterm window title from stack.
      Ps >= 2 4  -> Resize to Ps lines (DECSLPP).
      Ps >= 2 4  -> Resize to Ps lines (DECSLPP).
-   ```
-   ```
+```
+```
     Example call: 
-   ```
+```
 program.manipulateWindow(18, function(err:any, data:any) {
   program.log('manipulateWindow', data);
 });
@@ -1139,7 +1147,7 @@ program.manipulateWindow(18, function(err:any, data:any) {
   reverseAttrInRectangle(...args: string[]): boolean
   decrara(...args: string[]): boolean
 
-  /** ```CSI > Ps; Ps t
+  /**```CSI > Ps; Ps t
   Set one or more features of the title modes.  Each parameter
   enables a single feature.
     Ps = 0  -> Set window/icon labels using hexadecimal.
@@ -1147,7 +1155,8 @@ program.manipulateWindow(18, function(err:any, data:any) {
     Ps = 2  -> Set window/icon labels using UTF-8.
     Ps = 3  -> Query window/icon labels using UTF-8.  (See dis-
     cussion of "Title Modes")
-XXX VTE bizarelly echos this: ```
+XXX VTE bizarelly echos this:
+```
 */
   setTitleModeFeature(...args: string[]): boolean
 
@@ -1156,7 +1165,7 @@ XXX VTE bizarelly echos this: ```
 
   setMarginBellVolume(param?: number): boolean
   /**
-   * ```
+   *```
    CSI Pt; Pl; Pb; Pr; Pp; Pt; Pl; Pp$ v
      Copy Rectangular Area (DECCRA, VT400 and up).
        Pt; Pl; Pb; Pr denotes the rectangle.
@@ -1164,14 +1173,14 @@ XXX VTE bizarelly echos this: ```
        Pt; Pl denotes the target location.
        Pp denotes the target page.
    NOTE: xterm doesn't enable this code by default.
-   ```
+```
    */
   copyRectangle(...args: string[]): boolean
-  /**  @see copyRectangle  */
+  /**  @see [[copyRectangle]]  */
   deccra(...args: string[]): boolean
 
   /** 
-   *    ```
+   * ```
  CSI Pt ; Pl ; Pb ; Pr ' w
    Enable Filter Rectangle (DECEFR), VT420 and up.
    Parameters are [top;left;bottom;right].
@@ -1183,10 +1192,10 @@ XXX VTE bizarelly echos this: ```
    to the current locator position.  If all parameters are omit-
    ted, any locator motion will be reported.  DECELR always can-
    cels any prevous rectangle definition.
-   ```
+```
    */
   enableFilterRectangle(...args: string[]): boolean
-  /**  @see enableFilterRectangle  */
+  /**  @see [[enableFilterRectangle]]  */
   decefr(...args: string[]): boolean
 
   /**
@@ -1205,7 +1214,7 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
 ```
    */
   requestParameters(param?: number): boolean
-  /**  @see requestParameters  */
+  /**  @see [[requestParameters]]  */
   decreqtparm(param: number): boolean
   /**
 ```
@@ -1217,7 +1226,7 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
 ```
    */
   selectChangeExtent(param?: number): boolean
-  /**  @see selectChangeExtent  */
+  /**  @see [[selectChangeExtent]]  */
   decsace(param?: number): boolean
 
   /**
@@ -1230,7 +1239,7 @@ NOTE: xterm doesn't enable this code by default.
 ```
    */
   fillRectangle(Pc: string, Pt: number, pl: number, pb: number, pr: number): boolean
-  /**  @see fillRectangle  */
+  /**  @see [[fillRectangle]]  */
 
   decfra(...args: string[]): boolean
   /**
@@ -1292,27 +1301,27 @@ CSI Ps ; Pu ' z
        Pe = 8  -> M4 button down.
        Pe = 9  -> M4 button up.
        Pe = 1 0  -> locator outside filter rectangle.
-     ``button'' parameter is a bitmask indicating which buttons are
+  ``button'' parameter is a bitmask indicating which buttons are
        pressed:
        Pb = 0  <- no buttons down.
        Pb & 1  <- right button down.
        Pb & 2  <- middle button down.
        Pb & 4  <- left button down.
        Pb & 8  <- M4 button down.
-     ``row'' and ``column'' parameters are the coordinates of the
+  ``row'' and``column'' parameters are the coordinates of the
        locator position in the xterm window, encoded as ASCII deci-
        mal.
-     The ``page'' parameter is not used by xterm, and will be omit-
+     The``page'' parameter is not used by xterm, and will be omit-
      ted.
 ```
   
    */
   requestLocatorPosition(param?: string, callback?: ProgramResponseCallback): boolean
-  /** @see requestLocatorPosition */
+  /** @see [[requestLocatorPosition]] */
   reqmp(param?: string, callback?: ProgramResponseCallback): boolean
-  /** @see requestLocatorPosition */
+  /** @see [[requestLocatorPosition]] */
   req_mouse_pos(param?: string, callback?: ProgramResponseCallback): boolean
-  /** @see requestLocatorPosition */
+  /** @see [[requestLocatorPosition]] */
   decrqlp(param?: string, callback?: ProgramResponseCallback): boolean
 
   /** 
@@ -1323,7 +1332,7 @@ CSI Ps ; Pu ' z
 ```
 */
   insertColumns(...args: string[]): boolean
-  /** @see insertColumns */
+  /** @see [[insertColumns]] */
   decic(...args: string[]): boolean
 
   /**
@@ -1334,7 +1343,7 @@ CSI Ps ; Pu ' z
 ```
    */
   deleteColumns(...args: string[]): boolean
-  /** @see deleteColumns */
+  /** @see [[deleteColumns]] */
   decdc(...args: string[]): boolean
 
   out(param: string, ...args: any[]): boolean
@@ -3429,7 +3438,7 @@ export namespace Widgets {
     /**
      * Inserts an item to the list. Child can be an element, index, or string.
      */
-    insertItem(i: number, child: BlessedElement): void
+    insertItem(i: number, child: BlessedElement|string): void
 
     /**
      * Returns the item element. Child can be an element, index, or string.
@@ -3454,7 +3463,7 @@ export namespace Widgets {
     /**
      * Sets the list items to multiple strings.
      */
-    setItems(items: BlessedElement[]): void
+    setItems(items: BlessedElement[]|string[]): void
 
     /**
      * Returns the item index from the list. Child can be an element, index, or string.
@@ -4247,7 +4256,7 @@ export namespace Widgets {
     cursor?: 'line' | 'underline' | 'block'
 
     terminal?: string
-    
+
     cursorBlink?: boolean
 
     screenKeys?: boolean
@@ -4567,7 +4576,6 @@ export namespace widget {
   class Terminal extends Widgets.TerminalElement {}
   class Layout extends Widgets.LayoutElement {}
 }
-
 
 /** @inheritdoc */
 export function screen(options?: Widgets.IScreenOptions): Widgets.Screen

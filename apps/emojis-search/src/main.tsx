@@ -1,24 +1,23 @@
-import { installExitKeys, React, screen } from 'accursed'
+import { installExitKeys, React, screen, createScreen2 } from 'accursed'
 import { App } from './app'
 
-var s = screen({
-  useBCE: true,
-  warnings: true,
-  // autoPadding: false,
-  log: 'log.txt',
-  // focusable: true,
-  // sendFocus: true,
-  // smartCSR: true,
-  // forceUnicode: true,
-  fullUnicode: true
-})
-installExitKeys(s)
-try {
-  const app = React.render(<App screen={s} />)
-  s.append(app)
-  s.key('tab', k => s.focusNext())
-  s.key('S-tab', k => s.focusPrevious())
-  s.render()
-} catch (error) {
-  s && s.log(error)
-}
+(async ()=>{
+
+  var s = await createScreen2({
+    useBCE: true,
+    warnings: true,
+    log: 'log.txt',
+    fullUnicode: true
+  })
+  installExitKeys(s)
+  try {
+    const app = React.render(<App screen={s} />)
+    s.append(app)
+    s.key('tab', k => s.focusNext())
+    s.key('S-tab', k => s.focusPrevious())
+    s.render()
+  } catch (error) {
+    s && s.log(error)
+  }
+  
+})()

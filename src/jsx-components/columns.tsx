@@ -1,7 +1,6 @@
 import { Component, React } from '..'
 import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
 import { BoxOptions } from '../blessedTypes'
-import { log } from '../util/logger'
 import { Div } from './jsxUtil'
 
 interface ColumnsProps extends BoxOptions {

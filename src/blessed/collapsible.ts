@@ -1,8 +1,7 @@
 import { Element, IMouseEventArg, isElement, Style } from '../blessedTypes'
 import { ArtificialEvent } from '../jsx'
+import { inBrowser } from '../util/browser'
 import { getElementData, getElementLabel, setElementData } from './util'
-import { inBrowser } from '../util/browser';
-import { colors } from '..';
 
 export function isCollapsed(el: Element) {
   return el.$.collapsible && el.$.collapsible.collapsed
@@ -102,14 +101,14 @@ export function installCollapsible(el: Element, options: CollapsibleOptions = {}
       toggleCollapsed(el)
     }
     // Heads up, in auto mode we install the listener on the label. in auto mode there should always be a label
-    const internalLabel = getElementLabel(el) 
+    const internalLabel = getElementLabel(el)
     if (internalLabel) {
-     if(inBrowser()){
-      internalLabel.height=2
-      // el.screen.render()
-    }
-    internalLabel.focusable=true
-    internalLabel.style = {...internalLabel.style||{}, ...options.labelStyle||{}}
+      if (inBrowser()) {
+        internalLabel.height = 2
+        // el.screen.render()
+      }
+      internalLabel.focusable = true
+      internalLabel.style = { ...(internalLabel.style || {}), ...(options.labelStyle || {}) }
       internalLabel.on('click', listener)
     } else {
       throw new Error(

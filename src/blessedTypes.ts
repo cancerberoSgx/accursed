@@ -50,7 +50,6 @@ export type RadioSetOptions = RemoveProperties<blessed.Widgets.RadioSetOptions, 
 export type RadioButtonOptions = RemoveProperties<blessed.Widgets.RadioButtonOptions, 'children'>
 export type ScreenOptions = RemoveProperties<blessed.Widgets.IScreenOptions, 'children'>
 
-
 export type PositionCoords = blessed.Widgets.PositionCoords
 
 export type IMouseEventArg = blessed.Widgets.Events.IMouseEventArg

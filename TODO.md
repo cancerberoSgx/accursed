@@ -10,16 +10,6 @@ JSX important: blessed elements (and custom subclasses)comply with Component (re
    * wmoji-search app : each tool and selection / option is represented with a url : `all/arabian/compact` or json like path ``{mainView: unicode, category: arabien, listType: compact, ect}`. This would simplify the app state a lot!!! that is missing in CLI apps development... 
 
 
- * app for change font family ?  Unicode has various fonts : mathematical script, franktur, double struc, sans serif, italic, monospace, and other strange : lisu letter  ... and we can use similars from cherokee. mathematical alphanumeric symbols
-     * similar to previous : vertical text ? vertical forms, compatibilty forms
-     * phonetic extensions  , also has
-     * latin extended aditional - adds symbols below, on top of letters - could taken as effects ?
-     * number forms : has formats for numbers... romans... 
-     * enclosed alphnumerics
-     enclosed ideographic
-     * latin extended c
-     * half width and full width forms
-
  * the same way we plan to implement ListTab or Tab using virtual to declare data in the markup - implement Markdown so it declare the markdown content as children and not as attribute.
 
  * since components are associatged to blessed elements, would it be useful to also associate elements to componetns ?
