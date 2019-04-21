@@ -1,7 +1,7 @@
 import * as blessed from 'blessed'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
 import { VirtualComponent } from '../blessed/virtualElement'
-import { Checkbox, Element, isElement as isElementDontUseMe } from '../blessedTypes'
+import { Checkbox, Element, isElement as isElementDontUseMe, ElementOptions } from '../blessedTypes'
 import { log } from '../util/logger'
 import { Component } from './component'
 import {
@@ -19,7 +19,8 @@ import {
   BlessedJsx,
   BlessedJsxAttrs,
   EventOptionNames,
-  RefObject
+  RefObject,
+  blessedElementConstructor
 } from './types'
 interface Options {
   dontInheritStyle?: boolean
@@ -33,11 +34,25 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
-// let _lastComponent : any = undefined
 
-/** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
+/** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for
+ *intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
  */
 class BlessedJsxImpl implements BlessedJsx {
+  
+  private _intrinsicElementFactory = {...blessed as any}
+  protected intrinsicElementFactory<O extends ElementOptions, T extends Element<O>> (type: string): blessedElementConstructor<O, T>|undefined{
+    return this._intrinsicElementFactory[type]
+  }
+
+  addIntrinsicElementConstructors(blessedElementConstructors: {[type: string]:blessedElementConstructor} ): void{
+    const existing = Object.keys(blessedElementConstructors).find(newType=>Object.keys(this._intrinsicElementFactory).includes(newType))
+    if(existing){
+      throw new Error('Cannot add blessedElementConstructors because there is already a constructor called '+existing)
+    }
+    this._intrinsicElementFactory ={...  this._intrinsicElementFactory,...blessedElementConstructors} 
+  }
+
   constructor(protected options: Options = {}) {}
 
   private defaultPluginsInstalled = false
@@ -50,9 +65,7 @@ class BlessedJsxImpl implements BlessedJsx {
     const event: AfterRenderEvent = { el: (e as any) as Element }
     this.afterRenderListeners.forEach(l => l(event))
 
-    // setTimeout(() => {
-    //   screen.render()
-    // }, 1000);
+    // setTimeout(() => {screen.render()}, 1000);
     return e as any
   }
 
@@ -88,9 +101,9 @@ class BlessedJsxImpl implements BlessedJsx {
       el = tag({ ...attrs, children })
       // TODO: add beforeElementRenderListeners
     } else if (typeof tag === 'string') {
-      // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and FunctionElement
-      // are responsible of implementing both its attrs and children on their own
-      const fn = (blessed as any)[tag] as (options?: any) => Element
+      // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and FunctionElement are responsible of implementing both its
+      // attrs and children on their own
+      const fn = this.intrinsicElementFactory(tag) //as (options?: any) => Element
       // TODO: beforeBlessedOptionsCleanedListeners
       if (!fn) {
         const s = 'blessed.' + tag + ' function not found'
@@ -130,14 +143,14 @@ class BlessedJsxImpl implements BlessedJsx {
       l(afterElementCreatedEvent)
     })
 
-    // install refs for all kind of elements (TODO: in a listener)
-    // TODO:  maybe a getter is better to avoid object cycles ?
-    // TODO: if not found look at attrs arg just in case ?
+    // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid object cycles ? TODO: if not found look at attrs arg
+    // just in case ?
     if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
       ;(el! as any).options.ref.current = el! as any
     }
 
-    // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for intrinsic elements
+    // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for
+    // intrinsic elements
     if (typeof tag === 'string' || VirtualComponent.isVirtualComponent(component)) {
       this.installAttributesAndChildren(el!, blessedEventMethodAttributes, artificialEventAttributes, children)
     }
@@ -154,8 +167,7 @@ class BlessedJsxImpl implements BlessedJsx {
   ): any {
     // HEADS UP : casting JSX.Element to concrete blessing Element
     const el = jsxNode as Element
-      // EVENT HANDLER ATTRIBUTES
-      // native event handlers like on(), key() etc are exactly matched agains a blessed method. Exactly same signature.
+      // EVENT HANDLER ATTRIBUTES native event handlers like on(), key() etc are exactly matched agains a blessed method. Exactly same signature.
     ;(Object.keys(blessedEventMethodAttributes) as EventOptionNames[]).forEach(methodName => {
       const args = blessedEventMethodAttributes[methodName] as any[]
       ;(el as any)[methodName](...args.map(a => (typeof a === 'function' ? a.bind(el) : a)))
@@ -239,9 +251,8 @@ class BlessedJsxImpl implements BlessedJsx {
   }
 
   /**
-   * all children blessed nodes, even from text  are appended to the blessed element using this method,
-   * so subclasses can override to do something about it. will notify beforeAppendChildListeners and if any
-   * return true the child won't be appended
+   * all children blessed nodes, even from text  are appended to the blessed element using this method, so subclasses can override to do something about it.
+   * will notify beforeAppendChildListeners and if any return true the child won't be appended
    */
   protected appendChild(el: Element, child: Element): any {
     if (VirtualComponent.isVirtualElement(child)) {
@@ -300,12 +311,9 @@ function isElementLike(e: any): e is Element {
 
 export const React: BlessedJsx = new BlessedJsxImpl()
 
-// export function create__Virtual<Data=any>(data: Data): __Virtual<Data>{//TODO should we publish this in React object or better implementors  create this hack manually if they want...
-//   return {
-//   __virtual: '__virtual', data
+// export function create__Virtual<Data=any>(data: Data): __Virtual<Data>{//TODO should we publish this in React object or better implementors  create this hack
+//   manually if they want... return {__virtual: '__virtual', data
 // }
 // }
-// function __virtu
-// export class __VirtualImpl implements  {
-//   tag
+// function __virtu export class __VirtualImpl implements  {tag
 // }

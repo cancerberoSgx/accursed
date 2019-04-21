@@ -1,11 +1,11 @@
-import { appendFileSync, existsSync, createReadStream } from 'fs'
-import { Options } from './types'
+import { debug } from 'accursed'
+import { createReadStream, existsSync } from 'fs'
 import * as oboe from 'oboe'
-import { Tree } from './tree';
-import {debug} from 'accursed'
-
+import { Manager } from './manager'
+import { Options } from './types'
 
 export function main(args: Options) {
+  
   if (args.help) {
     help()
     return process.exit(0)
@@ -13,55 +13,47 @@ export function main(args: Options) {
   const filter = args.filter || '*'
   let json: oboe.Oboe
 
-  let tree: Tree = null as any
+  let tree: Manager = null as any
   // const tree = new Tree()
-  if(!args.testInput){
+  if (!args.testInput) {
     try {
-      debug('before')
-    tree = new Tree()
-    tree.render()
-    debug('after')
-
+      tree = new Manager()
+      tree.render()
     } catch (error) {
       debug('before', error)
-
-      tree.screen.log('ERRR', error)
+     debug('ERRR', error)
     }
   }
 
   if (args.input && existsSync(args.input)) {
     json = oboe(createReadStream(args.input))
-  }
-  else if (args.input) {
+  } else if (args.input) {
     json = oboe(createReadStream(args.input))
-  }
-  else {
+  } else {
     process.stdin.resume()
     process.stdin.setEncoding('utf8')
     json = oboe(process.stdin)
   }
-  
-  args.testInput&&  console.log('Listening for nodes matching filter: '+filter);
-  
+
+  args.testInput && console.log('Listening for nodes matching filter: ' + filter)
+
   json.node({
     [filter]: (value, path, partials) => {
- tree &&      tree.handle(value, path, partials)
- args.testInput&&console.log('json node', path);
- 
+      tree && tree.handle(value, path, partials)
+      args.testInput && console.log('json node', path)
     }
   })
   json.done(() => {
-  if(tree){
-    tree.loaded=true
-  }
-  args.testInput&&  console.log('done reading json');
-
+    if (tree) {
+      tree.loaded = true
+    }
+    args.testInput && console.log('done reading json')
   })
   json.fail(err => {
-    tree.loaded=true
-   tree &&  tree.failed(err)
+    tree.loaded = true
+    tree && tree.failed(err)
     //TODO
-    args.testInput&&    console.log('FAIL', err);
+    args.testInput && console.log('FAIL', err)
   })
   return tree
 }

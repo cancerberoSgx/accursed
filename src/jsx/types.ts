@@ -69,7 +69,8 @@ export interface BlessedEventOptions {
   [EventOptionNames.once]?: On<this>
 }
 
-/** represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This imply some manual event registration and mapping to blessed supported ones. */
+/** represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This imply some manual event registration and mapping
+ * to blessed supported ones. */
 export interface ArtificialEventOptions<T extends Element> {
   [ArtificialEventOptionNames.onClick]?: OnClickHandler<T>
   [ArtificialEventOptionNames.onKeyPress]?: (
@@ -97,8 +98,7 @@ export interface ArtificialEventOptions<T extends Element> {
   [ArtificialEventOptionNames.onPress]?: <V = any>(
     this: T,
     e: ArtificialEvent<T> & {
-      // index: number
-      // element: Box
+      // index: number element: Box
     }
   ) => void
 }
@@ -176,18 +176,10 @@ declare global {
   }
 }
 
-// /** an intrinsic element wihtout children, that won't be renderd. Can be used by JSXElements that need to declare data markwup that is not supported by blessed optoins . Examplle: listbar buttons are declaren in the same list optoins but I want to declared them as JSX children, . So I do it by returning __Virtual with the informatio in the markup that the parent can consume., */
-// export type __Virtual<Data = any> = { __virtual: '__virtual'; data: Data }
-
-// export function is__Virtual(a: any): a is __Virtual {
-//   return a && a.__virtual === '__virtual' // TODO: use symbol
-// }
-
 /**
  * Type of the `React` object as in `React.createElement`.
  *
- * Note: it could have another name than React, but if so tsconfig needs to be configured (JSXFactory) so for
- * simplicity we name the instance `React`
+ * Note: it could have another name than React, but if so tsconfig needs to be configured (JSXFactory) so for simplicity we name the instance `React`
  */
 export interface BlessedJsx {
   /**
@@ -202,17 +194,18 @@ export interface BlessedJsx {
    */
   render(e: JSX.Element, options?: RenderOptions): Element
 
-  /** add listeners that will be notifies just after the Blessed Element instance is created. Attributes and children have not yet been set, besides blessed options native ones.*/
+  /** add listeners that will be notifies just after the Blessed Element instance is created. Attributes and children have not yet been set, besides blessed
+   * options native ones.*/
   addAfterElementCreatedListener(l: AfterElementCreatedListener): void
 
-  /** add listeners that will be notified just before a child is appended to its parent blessed element even for notes created from JSXText. If any listener return true the notification chain will stop, the children won't be appended to the element. */
+  /** add listeners that will be notified just before a child is appended to its parent blessed element even for notes created from JSXText. If any listener
+   * return true the notification chain will stop, the children won't be appended to the element. */
   addBeforeAppendChildListener(l: BeforeAppendChildListener): void
 
   /**
-   * add listeners that will be notified just before the blessed.foo() function is call with all the options as they
-   *  are (normalized and valid).Children are blessed elements unless the TextNodes that are still literals so be careful!.
-   * If any of the listeners returns a blessed element, it will interrupt the listener chain and that instance will be
-   * used instead of calling the blessed function.
+   * add listeners that will be notified just before the blessed.foo() function is call with all the options as they are (normalized and valid).Children are
+   *  blessed elements unless the TextNodes that are still literals so be careful!. If any of the listeners returns a blessed element, it will interrupt the
+   *  listener chain and that instance will be used instead of calling the blessed function.
    * */
   addBeforeElementCreatedListener(l: BeforeElementCreatedListener): void
 
@@ -222,9 +215,17 @@ export interface BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void
 
   /**
-   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See https://reactjs.org/docs/refs-and-the-dom.html.
+   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See
+   * https://reactjs.org/docs/refs-and-the-dom.html.
    */
   createRef<T extends Element>(): RefObject<T>
+
+  /**
+   * By default, accursed supports only blessed element intrinsic elements, and the creator functions for a gigen tag name is taken from the blessed namespace
+   * as in `require('blessed').button({...})`. With this method, users users can mix third party blessed object creators, like  blessed--contrib for creating
+   * more intrinsic elements. If so they should also augment the global JSX namespace if they want to support TypeScript.  
+   */
+  addIntrinsicElementConstructors(blessedElementConstructors: {[type: string]:blessedElementConstructor} ): void
 }
 
 /** @internal */
@@ -279,16 +280,15 @@ export interface EventOptions<T extends Element> extends BlessedEventOptions, Ar
 }
 
 export interface ArtificialEvent<T extends Element> {
-  // TODO : shouldbe JSX.ElementType not ELent cause targets can be also components, etc
+  // TODO : should be JSX.ElementType not ELent cause targets can be also components, etc
   currentTarget: T
 }
 
 export type OnClickHandler<T extends Element> = (this: T, e: IMouseEventArg & ArtificialEvent<T>) => void
 
-// export interface  RefAttribute<T> {
-//   ref?: RefObject<T>
-// }
 
 export interface RefObject<T = any> {
   current: T | undefined
 }
+/** @internal */
+export type  blessedElementConstructor<O extends ElementOptions=ElementOptions, T extends Element=Element>= (options?: O)=> T

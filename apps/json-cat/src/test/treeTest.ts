@@ -1,6 +1,5 @@
-import { createScreen, tree as createTree} from 'accursed';
+import { createScreen } from 'accursed'
 import * as contrib from 'blessed-contrib'
-
 
 const screen = createScreen({ smartCSR: true })
 
@@ -28,7 +27,7 @@ screen.key(['escape', 'q', 'C-c'], function(ch, key) {
 tree.on('click', (data: any) => {
   console.log(data)
 })
-tree.on('select', function(node:any ) {
+tree.on('select', function(node: any) {
   console.log('select', node.name)
   screen.render()
 })

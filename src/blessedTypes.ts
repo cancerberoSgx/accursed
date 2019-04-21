@@ -6,7 +6,7 @@ export type Node = blessed.Widgets.Node
 export type Box = blessed.Widgets.BoxElement
 export type Line = blessed.Widgets.LineElement
 
-export type Element = blessed.Widgets.BlessedElement
+export type Element<Options extends ElementOptions = ElementOptions> = blessed.Widgets.BlessedElement<Options>
 export type LayoutIterator = blessed.Widgets.LayoutIterator
 export type Padding = blessed.Widgets.Padding
 export type NodeWithEvents = blessed.Widgets.NodeWithEvents

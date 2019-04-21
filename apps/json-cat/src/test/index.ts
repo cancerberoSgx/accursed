@@ -1,7 +1,6 @@
 // import { createScreen, tree as createTree} from 'accursed';
 // import * as contrib from 'blessed-contrib'
 
-
 // const screen = createScreen({ smartCSR: true })
 
 // //    , line = contrib.line(
