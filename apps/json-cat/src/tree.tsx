@@ -1,4 +1,4 @@
-import { createScreen, installExitKeys, tree as createTree, visitTreeNodes, onTreeNodeFocus, showInModal, Screen } from 'accursed';
+import { createScreen, installExitKeys, tree as createTree, visitTreeNodes, onTreeNodeFocus, showInModal, Screen, debug } from 'accursed';
 import * as contrib from 'blessed-contrib';
 import { arrayToObject, objectKeys, setObjectProperty } from 'misc-utils-of-mine-generic';
 import { isJSONObject } from './util';
@@ -19,7 +19,6 @@ interface Options {
 }
 export class Tree {
   
-
   protected tree: contrib.Widgets.TreeElement<TNode> = null as any
   protected _loaded = false
   
@@ -66,7 +65,7 @@ export class Tree {
       v = 'null'
     } else {
       f = ['gray']
-      v = '[VAL]'//inspect(value, { breakLength: 30 })
+      v = inspect(value, { breakLength: 30, compact: true, maxArrayLength: 2 })
     }
     return this.options.noColors ? v : format(v, f)
   }
@@ -76,12 +75,14 @@ export class Tree {
   }
 
   log(...args: any[]) {
-    this.tree && this.tree.screen.log(...args)
+    // this.tree && this.tree.screen.log(...args)
+    debug(...args)
   }
 
   handle(value: any, path: string[], partials: any[]): any {
     const node = this.buildTNodeWithVisualFeedback(path, value);
     setObjectProperty(this.data.children, path, {...node.children})
+    // debug('handle', path)
     this.dirty = true
   }
 
@@ -116,8 +117,6 @@ export class Tree {
     }
     return node
   }
-
-
   get screen() {
     return this.tree && this.tree.screen
   }
@@ -178,7 +177,7 @@ export class Tree {
 
   failed(err: FailReason): any {
     this.log('An error occurred processing JSON input: ' + err)
-    showInModal(this.screen as any, 'An error occurred processing JSON input: ' + err)
+    // showInModal(this.screen as any, 'An error occurred processing JSON input: ' + err)
   }
 
   set loaded(l: boolean){
@@ -220,19 +219,21 @@ export class Tree {
         if (!this.dirty&& !this.loaded) {
           return;
         }
-        if (this.loaded && !this.options.noLoadingFeedback) {
+        if (this.loaded) {
+          if( !this.options.noLoadingFeedback){
+          }
           visitTreeNodes(this.data, node => {
             node && delete (node as any)[this.LOADING_MSG];
             node && (node as any).children && delete (node as any).children[this.LOADING_MSG];
-          });
+          });            
           clearInterval(this.updateTimer);
-          // screen.lockKeys = false;
         }
+        // screen.lockKeys = false;
         // this.log('hshshshs');
-        let t0 = performance.now();
+        // let t0 = performance.now();
         this.tree.setData({ ...this.data });
         // this.log('setData', performance.now() - t0);
-        t0 = performance.now();
+        // t0 = performance.now();
         this.tree.screen.render(); //TODO: check if its dirty
         // this.log('render', performance.now() - t0);
         this.dirty=false

@@ -1,7 +1,7 @@
 import { createScreen } from '../blessed'
 import { Screen, ScreenOptions } from '../blessedTypes'
 
-declare var window:any
+declare var window: any
 declare var document: any
 // import { Terminal } from 'xterm';
 // import { fit } from 'xterm/lib/addons/fit/fit';
@@ -16,18 +16,18 @@ export async function createScreenForBrowser(options: ScreenOptions = {}): Promi
       // const term = new Terminal({
       // });
       // term.open(container)
-      
+
       const termJs = require('term.js')
       var term = new termJs.Terminal({
-          cols: 80,
-          rows: 24,
-          useStyle: true,
-          screenKeys: true
-        })
-        // @ts-i gnore
-        // term.open(document.body)
-        term.open(container)
-        // fit(term);  // Fit the terminal when necessary
+        cols: 80,
+        rows: 24,
+        useStyle: true,
+        screenKeys: true
+      })
+      // @ts-i gnore
+      // term.open(document.body)
+      term.open(container)
+      // fit(term);  // Fit the terminal when necessary
       term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n')
 
       // term.get
@@ -38,14 +38,14 @@ export async function createScreenForBrowser(options: ScreenOptions = {}): Promi
       // // debugger
       term.isRaw = true
       // console.log(typeof term.setRawMode , term.setRawMode);
-      
+
       // // term.setRawMode && term.setRawModel(true)
       // require('readline').emitKeypressEvents = function() {} // Can I side-affect a module this way? Apparently.
       // process.listeners = function fakelisteners() {
       //   return []
       // }
       term.resize(options.cols || 120, options.rows || 36)
-      const screen = createScreen({ ...options, input: term,output: term, tput: undefined       })
+      const screen = createScreen({ ...options, input: term, output: term, tput: undefined })
       resolve(screen)
     }
   })

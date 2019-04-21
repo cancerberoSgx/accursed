@@ -7,4 +7,6 @@ export interface Options {
   filter?:string
 
   help?: boolean
+  /** if true it wont render any UI and just consume the json input and verify it's OK */
+  testInput?: boolean
 }

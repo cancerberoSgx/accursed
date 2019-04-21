@@ -9,13 +9,13 @@ import { objectKeys } from 'misc-utils-of-mine-generic'
  */
 export function getObjectProperty<T>(
   object: any,
-  path: string|string[],
+  path: string | string[],
   defaultValue: T | undefined = undefined
 ): T | undefined {
   if (!path) {
     return object
   } else if (object) {
-    var tokens = typeof path==='string'?path.split('.'):path,
+    var tokens = typeof path === 'string' ? path.split('.') : path,
       prev = object,
       n = 0
     while (typeof prev !== 'undefined' && n < tokens.length) {
@@ -31,13 +31,13 @@ export function getObjectProperty<T>(
 /**
  * sets a nested property on given path. For example path could be 'foo.bar' and it will set `object.foo.bar = value`
  */
-export function setObjectProperty<T>(object: any, path: string|string[], value: T) {
+export function setObjectProperty<T>(object: any, path: string | string[], value: T) {
   if (!path) {
     return
   } else if (!object) {
     return
   }
-  var tokens = typeof path==='string'?path.split('.'):path,
+  var tokens = typeof path === 'string' ? path.split('.') : path,
     prev = object
   for (var i = 0; i < tokens.length - 1; ++i) {
     var currentToken = tokens[i]

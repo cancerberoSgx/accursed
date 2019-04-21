@@ -1,20 +1,14 @@
 // import * as blessed from 'blessed'
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { Screen, Element, box } from '..';
-import { Box } from '../blessedTypes';
+import { box, Element, Screen } from '..'
+import { Box } from '../blessedTypes'
 // import { box } from '..';
 
 /**
  * Easy to use modal: ``` showInModal(screen, anElement)``` or simply:  ``` showInModal(screen, 'some text')```
  *
  */
-export function showInModal(
-  screen: Screen,
-  s: string | Element,
-  title = 'Modal',
-  width = '50%',
-  height = '50%'
-) {
+export function showInModal(screen: Screen, s: string | Element, title = 'Modal', width = '50%', height = '50%') {
   closeModal(screen)
   if (!modalInstance) {
     modalInstance = box({

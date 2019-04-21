@@ -16,7 +16,6 @@ import {
 } from '../../../../src'
 import { createScreenForBrowser } from '../../../../src/util/browser'
 import { words } from '../../../../src/util/data'
-
 ;(async () => {
   const screen = await createScreenForBrowser({ focusable: true, sendFocus: true })
 

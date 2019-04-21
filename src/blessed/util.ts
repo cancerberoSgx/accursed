@@ -1,7 +1,7 @@
 // import * as blessed from 'blessed'
 import { asArray } from 'misc-utils-of-mine-generic'
+import { Button, Checkbox, closeModal, Element, isElement, isModalVisible, Screen, screen, visitDescendants } from '..'
 import { getObjectProperty, setObjectProperty } from '../util/misc'
-import { closeModal, isModalVisible, Button ,visitDescendants, Checkbox, Element, isElement, Screen, screen  } from '..'
 // import { visitDescendants } from './node'
 
 export function isBlessedElement(n: any): n is Element {
@@ -198,4 +198,4 @@ export function replaceChildren(
   }
 }
 
-export const createScreen =  screen
+export const createScreen = screen

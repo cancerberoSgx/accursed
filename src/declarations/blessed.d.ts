@@ -3438,7 +3438,7 @@ export namespace Widgets {
     /**
      * Inserts an item to the list. Child can be an element, index, or string.
      */
-    insertItem(i: number, child: BlessedElement|string): void
+    insertItem(i: number, child: BlessedElement | string): void
 
     /**
      * Returns the item element. Child can be an element, index, or string.
@@ -3463,7 +3463,7 @@ export namespace Widgets {
     /**
      * Sets the list items to multiple strings.
      */
-    setItems(items: BlessedElement[]|string[]): void
+    setItems(items: BlessedElement[] | string[]): void
 
     /**
      * Returns the item index from the list. Child can be an element, index, or string.
