@@ -1,22 +1,11 @@
-import {
-  createScreen,
-  debug,
-  installExitKeys,
-  onTreeNodeFocus,
-  Screen,
-  tree as createTree,
-  visitTreeNodes,
-  React
-} from 'accursed'
-import * as contrib from 'blessed-contrib'
+import { createScreen, debug, installExitKeys, Screen, visitTreeNodes } from 'accursed'
 import { arrayToObject, objectKeys, setObjectProperty } from 'misc-utils-of-mine-generic'
 import { FailReason } from 'oboe'
 import { inspect } from 'util'
+import { App } from './app'
+import { managerOptions, TNode } from './types'
 import { isJSONObject } from './util'
-import { App } from './app';
-import { TNode, managerOptions } from './types';
 const { format } = require('ansi-escape-sequences')
-
 
 export class Manager {
   // protected tree: contrib.Widgets.TreeElement<TNode> = null as any
@@ -34,10 +23,7 @@ export class Manager {
   }
   app: App = null as any
 
-  constructor(protected options: Required<managerOptions> = Manager.defaultOptions) {
-React.addIntrinsicElementConstructors({contribTree: createTree})
-
-  }
+  constructor(protected options: Required<managerOptions> = Manager.defaultOptions) {}
 
   protected data: TNode = {
     name: 'Root',
@@ -133,7 +119,7 @@ React.addIntrinsicElementConstructors({contribTree: createTree})
   //   return this.app.tree && this.app.tree.screen
   // }
 
-  render() {
+  async render() {
     const screen = createScreen({
       useBCE: true,
       smartCSR: true,
@@ -149,58 +135,80 @@ React.addIntrinsicElementConstructors({contribTree: createTree})
 
     // this.createUI(screen);
     // React.render(<A)
-    // this.app = new App({screen, 
+    // this.app = new App({screen,
     //   log: this.log.bind(this),//},//, {})
     //   ready: ()=>{
-    
+
     //     this.log('ready')
 
     // // if (this.options.renderMode === 'progressively') {
     //   //   this.buildTreeProgressively(screen)
     //   // }
     //   // screen.append(this.app.tree)
-     
-    // // this.log('asdasd')
 
+    // // this.log('asdasd')
 
     // }}, {})
     // screen.render()
-    
-    // const appEl = 
-    
 
-    const appEl = React.render(<App></App>)
+    // const appEl =
+
+    // const app = <App></App>
+    // const appEl = React.render(app)
+
+    this.app = new App({
+      ready: ()=>{
+         this.log('ready');
+        
+        this.start()
+        
+      }
+    }, {})
+    const appEl = this.app.render()
     screen.append(appEl)
     screen.render()
-    
+    // await this.app.waitForRender()
+
+    // appEl.fin
+    // afterAllel
+    // waitForRender()
+
     // this.app.render()
     // setTimeout(() => {
-     
+
     // }, 1000);
-    this.app.tree.focus()
-    this.log('asdasd')
-
-if (this.options.renderMode === 'progressively') {
-  this.buildTreeProgressively(screen)
-}
-// screen.append(this.app.tree)
-// this.app.tree.focus()
-screen.render()
-
-// })
-// screen.render()
-
-if (this.options.renderMode === 'progressively') {
-  this.buildTreeProgressively(screen)
-}
-// screen.append(this.app.tree)
-// this.app.tree.focus()
-screen.render()
+    
 
     // this.app
     // appEl.once('render', ()=>{
+  }
+  start(): any {
+   try {
+      this.log('start');
+     
+    this.log('asdasd', !!this.app, this.app)
+    this.app.tree.focus()
 
+    if (this.options.renderMode === 'progressively') {
+      this.buildTreeProgressively(this.app.tree.screen)
+    }
+    // this.app.tree.screen.append(this.app.tree)
+    // this.app.tree.focus()
+    this.app.tree.screen.render()
 
+    // })
+    // this.app.tree.screen.render()
+
+    if (this.options.renderMode === 'progressively') {
+      this.buildTreeProgressively(this.app.tree.screen)
+    }
+    // this.app.tree.screen.append(this.app.tree)
+    // this.app.tree.focus()
+    this.app.tree.screen.render()
+   } catch (error) {
+     this.log(error)
+     throw error
+   }
   }
 
   failed(err: FailReason): any {
@@ -294,12 +302,11 @@ screen.render()
   //     // }
   //   });
   //   this.tree.on('click', (data: any) => {
-  //     console.log(data);
+  //      this.log(data);
   //   });
   //   onTreeNodeFocus(this.tree, node => { });
   //   this.tree.on('select', function (node: any) {
   //     screen.render();
   //   });
   // }
-
 }

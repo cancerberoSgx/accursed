@@ -1,11 +1,11 @@
-import { debug } from 'accursed'
+import { debug, React, tree } from 'accursed'
 import { createReadStream, existsSync } from 'fs'
 import * as oboe from 'oboe'
 import { Manager } from './manager'
 import { Options } from './types'
 
-export function main(args: Options) {
-  
+
+export async function main(args: Options) {
   if (args.help) {
     help()
     return process.exit(0)
@@ -18,10 +18,10 @@ export function main(args: Options) {
   if (!args.testInput) {
     try {
       tree = new Manager()
-      tree.render()
+      await tree.render()
     } catch (error) {
       debug('before', error)
-     debug('ERRR', error)
+      debug('ERRR', error)
     }
   }
 

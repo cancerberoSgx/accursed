@@ -1,135 +1,88 @@
+import { Button2, Component, Div, EventOptions, onTreeNodeFocus, React, RefObject, tree as createTree, Br } from 'accursed'
 
-import {React, Component, Div, RefObject, Layout, Button2, Element, Screen, onTreeNodeFocus,   tree as createTree,  findDescendant, EventOptions} from 'accursed'
-import { Manager } from './manager';
-import { TNode } from './types';
+let setup
 import * as contrib from 'blessed-contrib'
-import { readSync } from 'fs';
-
 
 export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
+
+React.addIntrinsicElementConstructors({ contribTree: createTree})
 
 declare global {
   export namespace JSX {
     export interface IntrinsicElements {
-      tree: OptionsProps<contrib.Widgets.TreeOptions> & EventOptions<contrib.Widgets.TreeElement<RemoveProperties<contrib.Widgets.TreeOptions, 'children'>> >
-      // markdown: OptionsProps<contrib.Widgets.TreeOptions> & EventOptions<contrib.Widgets.TreeElement<RemoveProperties<contrib.Widgets.TreeOptions, 'children'>> >
+      contribTree: OptionsProps<contrib.Widgets.TreeOptions> &
+        EventOptions<contrib.Widgets.TreeElement<RemoveProperties<contrib.Widgets.TreeOptions, 'children'>>>
     }
   }
 }
 
-// function TreeComponent() {
-class TreeComponent extends Component<{}, {}> {
-  // treeElement : RefObject<contrib.Widgets.TreeElement> = React.createRef<contrib.Widgets.TreeElement>()
+interface P {
+  ready():void
+}
 
-  render(){
+export class App extends Component<P, {}> {
+  treeElement: RefObject<contrib.Widgets.TreeElement> = React.createRef<contrib.Widgets.TreeElement>(current=>this.props.ready())
+  render() {
+    return (
+      <Div      >
+        helllo
+        {/* <Div height="25%" top="0%"> */}
+          <Br/>
+          <Button2 onClick={e => {}}>click</Button2>
+          Search
+          <textbox value="search" /> Filter
+          <textbox value="people.$*.email" />
+          
+          <textbox value="search" /> Filter
 
-var tree = createTree({
-    // parent: this.props.
-    // parent: p.parent,
-    width: '70%',
-    border: 'line',
-    height: '80%',
-    mouse: true,
-    clickable: true
-    // scrollable: true,
-    // bg: 'green',
-    // // draggable: true,
-    // style: {
-    //   scrollbar: {
-    //     ch: ' ',
-    //     track: {
-    //       bg: 'cyan'
-    //     },
-    //     style: {
-    //       inverse: true
-    //     }
-    //   }
-    // }
-  });
-  tree.on('click', (data: any) => {
-    console.log(data);
-  });
-  onTreeNodeFocus(tree, node => { 
+          asdas dasd asd as d
+          <Br/>
+          alsj khdjlakjs dlkajsdlkajsldka jsl dk
+          <Br/>
+          asdasd asd asd asd asd 
+ña skdñla ksñldk añlsd
+          <contribTree 
+          ref={this.treeElement} 
+          // draggable={true} 
+          bg="magenta"
+          top="30%" label="'json" 
+           style={{border: {fg: 'green'}, bg: 'green'}}
+          width="70%" border="line'" height="80%" mouse={true} clickable={true}
+           />
+           lj aslkdalksj dlka sd
+           <Br/>
+           asdasd asd asd asd 
+          <Button2 onClick={e => {}}>click</Button2>
+          asdasd asd asd asd 
+          asldkjls kdjflkas df
+          </Div> 
+          //  </Div> 
 
-  });
-  tree.on('select', function (node: any) {
-    tree.screen.render();
-  });
-  return tree
-  //@ts-ignore
-// this.tree =
-// const tree =  React.render(tree)
+        // </Div>
+        //   <Br/>
+        // <Div
+        // top="33%"
+        //   height="70%"
+        //   name="treeContainer"
+        //   style={{
+        //     bg: 'red'
+        //   }}>
+        //   <Br/>
+        //   hello
+         
+        //    by by
 
+        //    <Br/>
+        //    asdasd
+        // </Div>
+    //  }
+    )
   }
-  // this.tree = tree
-  // this.props.ready()
-
-// return tree
-
-  // return (
-  //   <layout parent={props.parent} layout="grid" width="100%" height="100%">
-  //     <text content="before1" width={20} height={3} style={{ bg: color() }} border="line" />
-  //     {props.children}
-  //     <text content="after2" width={6} height={5} />
-  //   </layout>
-
-    
-  // )
+    // }
+  get tree() {
+    return this.treeElement.current!
+  }
 }
-
-interface P{
-  // screen: Screen
-  // ready():void
-  // log: typeof Manager.prototype.log
-}
-export class App extends Component<P, {}>{
-//@ts-ignore
-  // treeElement : RefObject<contrib.Widgets.TreeElement> = React.createRef<contrib.Widgets.TreeElement>()
-  // tree: <TNode> = null as any
-  tree: contrib.Widgets.TreeElement<TNode> = null as any
-
-render(){
-  return <Div name="root" 
-  // parent={this.props.screen}
-    >   helllo
-    <Div height="25%"><Button2 onClick={e=>{}}>click</Button2>
-    Search<textbox value="search"></textbox>   Filter<textbox value="people.$*.email"></textbox> 
-    </Div>
-    <Div height="70%" name="treeContainer"
-
-// onRender={e=>{
-//   setTimeout(()=>{
-//     this.tree = findDescendant(this.blessedElement.parent!.parent!, e=>e.type==='type') as any
-//   //  this.props.ready()
-//   }, 500)
-// }}
-
-    //  ref={this.treeContainer} 
-    style={{
-      bg: 'red'
-    }}>
-       <TreeComponent 
-
-      //  ef={this.treeElement}
-        // onceRender={(e : any)=>{this.tree = e.currentTarget; this.props.ready()}}
-         >
-        </TreeComponent>
-       <text onceRender={e=>{
-        //  setTimeout(()=>{
-        //    this.tree = findDescendant(this.blessedElement.parent!.parent!, e=>e.type==='type') as any
-        //   this.props.ready()
-        //  }, 500)
-       }}>aksjd lkajskldjkalsjdklajklsdj</text>
-    </Div>
-  </Div>
-}
-
-// get tree(){
-//   return this.treeElement.current!
-// }
-
-}
-
 
 // // interface TP {parent: Element}
 // function Tree(props: { children?: any; }){
@@ -161,7 +114,7 @@ render(){
 //     tree.on('click', (data: any) => {
 //       console.log(data);
 //     });
-//     onTreeNodeFocus(tree, node => { 
+//     onTreeNodeFocus(tree, node => {
 
 //     });
 //     tree.on('select', function (node: any) {
@@ -170,6 +123,61 @@ render(){
 //     //@ts-ignore
 //     this.tree = tree
 //     // this.props.ready()
-  
+
 //   return tree
+// }
+
+// // function TreeComponent() {
+// class TreeComponent extends Component<{}, {}> {
+//   // treeElement : RefObject<contrib.Widgets.TreeElement> = React.createRef<contrib.Widgets.TreeElement>()
+
+//   render() {
+//     var tree = createTree({
+//       // parent: this.props.
+//       // parent: p.parent,
+//       width: '70%',
+//       border: 'line',
+//       height: '80%',
+//       mouse: true,
+//       clickable: true
+//       // scrollable: true,
+//       // bg: 'green',
+//       // // draggable: true,
+//       // style: {
+//       //   scrollbar: {
+//       //     ch: ' ',
+//       //     track: {
+//       //       bg: 'cyan'
+//       //     },
+//       //     style: {
+//       //       inverse: true
+//       //     }
+//       //   }
+//       // }
+//     })
+//     tree.on('click', (data: any) => {
+//       console.log(data)
+//     })
+//     onTreeNodeFocus(tree, node => {})
+//     tree.on('select', function(node: any) {
+//       tree.screen.render()
+//     })
+//     return tree
+//     //@ts-ignore
+//     // this.tree =
+//     // const tree =  React.render(tree)
+//   }
+//   // this.tree = tree
+//   // this.props.ready()
+
+//   // return tree
+
+//   // return (
+//   //   <layout parent={props.parent} layout="grid" width="100%" height="100%">
+//   //     <text content="before1" width={20} height={3} style={{ bg: color() }} border="line" />
+//   //     {props.children}
+//   //     <text content="after2" width={6} height={5} />
+//   //   </layout>
+
+//   // )
 // }

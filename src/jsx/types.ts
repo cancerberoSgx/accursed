@@ -218,14 +218,14 @@ export interface BlessedJsx {
    * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See
    * https://reactjs.org/docs/refs-and-the-dom.html.
    */
-  createRef<T extends Element>(): RefObject<T>
+  createRef<T extends Element>(callback?: (current: T|undefined)=>void): RefObject<T>;
 
   /**
    * By default, accursed supports only blessed element intrinsic elements, and the creator functions for a gigen tag name is taken from the blessed namespace
    * as in `require('blessed').button({...})`. With this method, users users can mix third party blessed object creators, like  blessed--contrib for creating
-   * more intrinsic elements. If so they should also augment the global JSX namespace if they want to support TypeScript.  
+   * more intrinsic elements. If so they should also augment the global JSX namespace if they want to support TypeScript.
    */
-  addIntrinsicElementConstructors(blessedElementConstructors: {[type: string]:blessedElementConstructor} ): void
+  addIntrinsicElementConstructors(blessedElementConstructors: { [type: string]: blessedElementConstructor }): void
 }
 
 /** @internal */
@@ -286,9 +286,12 @@ export interface ArtificialEvent<T extends Element> {
 
 export type OnClickHandler<T extends Element> = (this: T, e: IMouseEventArg & ArtificialEvent<T>) => void
 
-
 export interface RefObject<T = any> {
+  /* when the RefObject is resolved, if provided, this call back will be called. */
+  callback?(current: T | undefined): any;
   current: T | undefined
 }
 /** @internal */
-export type  blessedElementConstructor<O extends ElementOptions=ElementOptions, T extends Element=Element>= (options?: O)=> T
+export type blessedElementConstructor<O extends ElementOptions = ElementOptions, T extends Element = Element> = (
+  options?: O
+) => T

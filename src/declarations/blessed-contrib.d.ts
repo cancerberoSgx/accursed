@@ -530,15 +530,11 @@ declare namespace BlessedContrib {
       childrenContent?: { [name: string]: any }
     }
 
-
-
-  // class ListTableElement extends ListElement implements IHasOptions<ListTableOptions> {
-  //   constructor(opts: ListTableOptions)
-
+    // class ListTableElement extends ListElement implements IHasOptions<ListTableOptions> {
+    //   constructor(opts: ListTableOptions)
 
     export class TreeElement<Node extends TreeElementNode = TreeElementNode> extends Blessed.Widgets.BoxElement
       implements IHasOptions<TreeOptions> {
-
       constructor(opts: TreeOptions)
 
       rows: Blessed.Widgets.ListElement & { selected?: Blessed.Widgets.BlessedElement }

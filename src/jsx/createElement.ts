@@ -1,7 +1,7 @@
 import * as blessed from 'blessed'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
 import { VirtualComponent } from '../blessed/virtualElement'
-import { Checkbox, Element, isElement as isElementDontUseMe, ElementOptions } from '../blessedTypes'
+import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes'
 import { log } from '../util/logger'
 import { Component } from './component'
 import {
@@ -34,23 +34,25 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
-
 /** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for
  *intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
  */
 class BlessedJsxImpl implements BlessedJsx {
-  
-  private _intrinsicElementFactory = {...blessed as any}
-  protected intrinsicElementFactory<O extends ElementOptions, T extends Element<O>> (type: string): blessedElementConstructor<O, T>|undefined{
+  private _intrinsicElementFactory = { ...(blessed as any) }
+  protected intrinsicElementFactory<O extends ElementOptions, T extends Element<O>>(
+    type: string
+  ): blessedElementConstructor<O, T> | undefined {
     return this._intrinsicElementFactory[type]
   }
 
-  addIntrinsicElementConstructors(blessedElementConstructors: {[type: string]:blessedElementConstructor} ): void{
-    const existing = Object.keys(blessedElementConstructors).find(newType=>Object.keys(this._intrinsicElementFactory).includes(newType))
-    if(existing){
-      throw new Error('Cannot add blessedElementConstructors because there is already a constructor called '+existing)
+  addIntrinsicElementConstructors(blessedElementConstructors: { [type: string]: blessedElementConstructor }): void {
+    const existing = Object.keys(blessedElementConstructors).find(newType =>
+      Object.keys(this._intrinsicElementFactory).includes(newType)
+    )
+    if (existing) {
+      throw new Error('Cannot add blessedElementConstructors because there is already a constructor called ' + existing)
     }
-    this._intrinsicElementFactory ={...  this._intrinsicElementFactory,...blessedElementConstructors} 
+    this._intrinsicElementFactory = { ...this._intrinsicElementFactory, ...blessedElementConstructors }
   }
 
   constructor(protected options: Options = {}) {}
@@ -145,8 +147,10 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid object cycles ? TODO: if not found look at attrs arg
     // just in case ?
-    if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
-      ;(el! as any).options.ref.current = el! as any
+    const ref = (el! as any) && (el! as any).options && (el! as any).options.ref as RefObject
+    if (ref&&!ref.current) {
+      ref.current = el! as any
+      ref.callback && ref.callback(ref.current)
     }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for
@@ -297,10 +301,10 @@ class BlessedJsxImpl implements BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void {
     this.afterRenderListeners.push(l)
   }
-  // createRef<T>(): RefObject<T>;
-  createRef<T extends Element>(): RefObject<T> {
+  createRef<T extends Element>(  callback?: (current: T | undefined)=> any): RefObject<T> {
     return ({
-      current: undefined
+      current: undefined,
+      callback
     } as any) as RefObject<T>
   }
 }
@@ -310,10 +314,3 @@ function isElementLike(e: any): e is Element {
 }
 
 export const React: BlessedJsx = new BlessedJsxImpl()
-
-// export function create__Virtual<Data=any>(data: Data): __Virtual<Data>{//TODO should we publish this in React object or better implementors  create this hack
-//   manually if they want... return {__virtual: '__virtual', data
-// }
-// }
-// function __virtu export class __VirtualImpl implements  {tag
-// }

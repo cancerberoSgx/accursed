@@ -122,7 +122,7 @@ export function isNode(n: any): n is Node {
 //   'form' = 'form',
 //   'textbox' = 'textbox',
 //   'radioset' = 'radioset',
-//   'radiobutton' = 'radiobutton',
+//   'radiobutton' = 'radiobutton'
 //   // 'tree' = 'tree'
 // }
 

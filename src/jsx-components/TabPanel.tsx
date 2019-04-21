@@ -65,6 +65,7 @@ interface TabProps extends CollapsibleProps {
 </TabPanel>
 ```
  */
+
 export class TabPanel extends Component<TabPanelProps> {
   _saveJSXChildrenProps = true
   render() {

@@ -1,4 +1,3 @@
-
 import * as contrib from 'blessed-contrib'
 
 export interface Options {
@@ -13,7 +12,6 @@ export interface Options {
   /** if true it wont render any UI and just consume the json input and verify it's OK */
   testInput?: boolean
 }
-
 
 export interface TNode extends contrib.Widgets.TreeElementNode {
   children: TChildren
