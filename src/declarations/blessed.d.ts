@@ -2995,17 +2995,17 @@ export namespace Widgets {
     screenshot(): void
 
     /** Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . @internal. Could  be overriden by element subclasses. */
-    protected _parseTags(s: string): string
+    _parseTags(s: string): string
     /** @internal  . Could  be overriden by element subclasses. */
-    protected _parseAttr(ines: string[]): string[]
+    _parseAttr(ines: string[]): string[]
     /** @internal . Could  be overriden by element subclasses. */
-    protected _align(line: string, width: number, align: string): void
+    _align(line: string, width: number, align: string): void
     /** @internal . Could  be overriden by element subclasses. */
-    protected _wrapContent(content: string, width: number): void
+    _wrapContent(content: string, width: number): void
     /** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
-    protected sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
+    sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
     /** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
-    protected clearPos(): void
+    clearPos(): void
 
     /**
      * Set the content. Note: When text is input, it will be stripped of all non-SGR

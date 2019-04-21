@@ -87,13 +87,14 @@ export function isElementUnSafe<E extends Element = Element>(n: any): n is E {
   return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
 }
 
-/** isNode type guard by asserting on a given type name (recommended) */
-export function isNodeByType<E extends Element = Element>(n: any, type: WidgetTypeNames): n is E {
-  return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
-}
+// /** isNode type guard by asserting on a given type name (recommended) */
+// export function isNodeByType<E extends Element = Element>(n: any, type: WidgetTypeNames): n is E {
+//   return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
+// }
 
 export function isScreen(n: any): n is Screen {
-  return isNodeByType(n, WidgetTypesEnum.screen)
+  // return isNodeByType(n, WidgetTypesEnum.screen)
+  return isNode(n) && !!(n as Screen).smartCSR && !!(n as Screen).setEffects
   // return n && isNode(n) && n.type === 'screen'
 }
 
@@ -102,51 +103,52 @@ export function isNode(n: any): n is Node {
   return n && n.insertBefore && n.forDescendants
 }
 
-export enum WidgetTypesEnum { // TODO: finish
-  'element' = 'element',
-  'node' = 'node',
-  'screen' = 'screen',
-  'box' = 'box',
-  'text' = 'text',
-  'line' = 'line',
-  'textarea' = 'textarea',
-  'layout' = 'layout',
-  'button' = 'button',
-  'checkbox' = 'checkbox',
-  'bigtext' = 'bigtext',
-  'list' = 'list',
-  'filemanager' = 'filemanager',
-  'listtable' = 'listtable',
-  'listbar' = 'listbar',
-  'form' = 'form',
-  'textbox' = 'textbox',
-  'radioset' = 'radioset',
-  'radiobutton' = 'radiobutton'
-}
+// export enum WidgetTypesEnum { // TODO: finish
+//   'element' = 'element',
+//   'node' = 'node',
+//   'screen' = 'screen',
+//   'box' = 'box',
+//   'text' = 'text',
+//   'line' = 'line',
+//   'textarea' = 'textarea',
+//   'layout' = 'layout',
+//   'button' = 'button',
+//   'checkbox' = 'checkbox',
+//   'bigtext' = 'bigtext',
+//   'list' = 'list',
+//   'filemanager' = 'filemanager',
+//   'listtable' = 'listtable',
+//   'listbar' = 'listbar',
+//   'form' = 'form',
+//   'textbox' = 'textbox',
+//   'radioset' = 'radioset',
+//   'radiobutton' = 'radiobutton',
+//   // 'tree' = 'tree'
+// }
 
-export interface WidgetTypes {
-  // TODO: finish
-  [WidgetTypesEnum.element]: Element
-  [WidgetTypesEnum.node]: Node
-  [WidgetTypesEnum.screen]: Screen
-  [WidgetTypesEnum.box]: Box
-  [WidgetTypesEnum.text]: Text
-  [WidgetTypesEnum.line]: Line
-  [WidgetTypesEnum.textarea]: Textarea
-  [WidgetTypesEnum.layout]: Layout
-  [WidgetTypesEnum.button]: Button
-  [WidgetTypesEnum.checkbox]: Button
-  [WidgetTypesEnum.bigtext]: BigText
-  [WidgetTypesEnum.list]: List
-  [WidgetTypesEnum.filemanager]: FileManager
-  [WidgetTypesEnum.listtable]: ListTable
-  [WidgetTypesEnum.listbar]: ListBar
-  [WidgetTypesEnum.form]: Form
-  [WidgetTypesEnum.textbox]: Textbox
-  [WidgetTypesEnum.radioset]: RadioSet
-  [WidgetTypesEnum.radiobutton]: RadioButton
-}
-type WidgetTypeNames = keyof WidgetTypes
+// export interface WidgetTypes {
+//   // TODO: finish
+//   [WidgetTypesEnum.element]: Element
+//   [WidgetTypesEnum.node]: Node
+//   [WidgetTypesEnum.screen]: Screen
+//   [WidgetTypesEnum.box]: Box
+//   [WidgetTypesEnum.text]: Text
+//   [WidgetTypesEnum.line]: Line
+//   [WidgetTypesEnum.textarea]: Textarea
+//   [WidgetTypesEnum.layout]: Layout
+//   [WidgetTypesEnum.button]: Button
+//   [WidgetTypesEnum.checkbox]: Button
+//   [WidgetTypesEnum.bigtext]: BigText
+//   [WidgetTypesEnum.list]: List
+//   [WidgetTypesEnum.filemanager]: FileManager
+//   [WidgetTypesEnum.listtable]: ListTable
+//   [WidgetTypesEnum.listbar]: ListBar
+//   [WidgetTypesEnum.form]: Form
+//   [WidgetTypesEnum.textbox]: Textbox
+//   [WidgetTypesEnum.radioset]: RadioSet
+//   [WidgetTypesEnum.radiobutton]: RadioButton
+// }
+// type WidgetTypeNames = keyof WidgetTypes
 
 // quickly categorization of visual related - no-styles- options. Notes: consider text as a widget not as content. some options could be in more than one category since same names are used for different semantis. Also the separation between styles and options is kind of arbitrary.
 export type MouseInputActivationOptions = 'mouse' | 'clickable' | 'draggable' | 'alwaysScroll' | 'focusable'
@@ -172,20 +174,20 @@ export type PositionOptionsNames = Pick<BlessedElementOptionsIntersection, Posit
 
 // TODO: Map Options and Styles with element types
 
-export interface ElementTypeOptions {
-  [WidgetTypesEnum.box]:
-    | MouseInputActivationOptions
-    | DimensionOptions
-    | PositionOptions
-    | TextStyleOptions
-    | DecorationOptions
-    | ColorOptions
-    | ContainerOptions
-    | ScrollStyleOptions
-  [WidgetTypesEnum.listbar]:
-    | ElementTypeOptions[WidgetTypesEnum.box]
-    | InputActivationOption
-    | EventEStyleOptions
-    | CompositionStyleOptions
-  //TODO: the rest
-}
+// export interface ElementTypeOptions {
+//   [WidgetTypesEnum.box]:
+//     | MouseInputActivationOptions
+//     | DimensionOptions
+//     | PositionOptions
+//     | TextStyleOptions
+//     | DecorationOptions
+//     | ColorOptions
+//     | ContainerOptions
+//     | ScrollStyleOptions
+//   [WidgetTypesEnum.listbar]:
+//     | ElementTypeOptions[WidgetTypesEnum.box]
+//     | InputActivationOption
+//     | EventEStyleOptions
+//     | CompositionStyleOptions
+//   //TODO: the rest
+// }

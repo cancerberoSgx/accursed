@@ -10,7 +10,7 @@ import {
   Visitor,
   VisitorOptions
 } from '../blessed/node'
-import { BlessedElementOptionsIntersection, Element, Style, WidgetTypesEnum } from '../blessedTypes'
+import { BlessedElementOptionsIntersection, Element, Style } from '../blessedTypes'
 import { RemoveProperties } from '../util/misc'
 
 /**
@@ -34,7 +34,7 @@ export abstract class Component<P = {}, S = {}> {
    * return the type name of ths component container blessed element
    */
   get type() {
-    return this.blessedElement.type as WidgetTypesEnum
+    return this.blessedElement.type //as WidgetTypesEnum
   }
 
   /** subclasses can override to prevent the blessed element to be rendered when the state changes */

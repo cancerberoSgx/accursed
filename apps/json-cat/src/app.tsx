@@ -1,14 +1,18 @@
 
-import {React, Component, Div, RefObject, Layout, Button2, Element, Screen, onTreeNodeFocus,   tree as createTree, textbox, findDescendant, EventOptions} from 'accursed'
+import {React, Component, Div, RefObject, Layout, Button2, Element, Screen, onTreeNodeFocus,   tree as createTree,  findDescendant, EventOptions} from 'accursed'
 import { Manager } from './manager';
 import { TNode } from './types';
 import * as contrib from 'blessed-contrib'
 import { readSync } from 'fs';
 
+
+export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
+
 declare global {
   export namespace JSX {
     export interface IntrinsicElements {
-      tree: OptionsProps<contrib.Widgets.TreeOptions> & EventOptions<contrib.Widgets.TreeElement>
+      tree: OptionsProps<contrib.Widgets.TreeOptions> & EventOptions<contrib.Widgets.TreeElement<RemoveProperties<contrib.Widgets.TreeOptions, 'children'>> >
+      // markdown: OptionsProps<contrib.Widgets.TreeOptions> & EventOptions<contrib.Widgets.TreeElement<RemoveProperties<contrib.Widgets.TreeOptions, 'children'>> >
     }
   }
 }
@@ -19,7 +23,7 @@ class TreeComponent extends Component<{}, {}> {
 
   render(){
 
-this.tree = createTree({
+var tree = createTree({
     // parent: this.props.
     // parent: p.parent,
     width: '70%',

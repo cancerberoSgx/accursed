@@ -13,14 +13,14 @@
     "jsx": "React",
     "skipLibCheck": true,    
     "baseUrl": ".",
-    //    "paths": {
-    //   "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
-    //   "blessed": ["../../dist/src/declarations/blessed"]
-    // },
-    "paths": {
-      "blessed-contrib": ["node_modules/accursed/dist/src/declarations/blessed-contrib"],      
-      "blessed": ["node_modules/accursed/dist/src/declarations/blessed"]
+       "paths": {
+      "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
+      "blessed": ["../../dist/src/declarations/blessed"]
     },
+    // "paths": {
+    //   "blessed-contrib": ["node_modules/accursed/dist/src/declarations/blessed-contrib"],      
+    //   "blessed": ["node_modules/accursed/dist/src/declarations/blessed"]
+    // },
   },
   "include": [
     "src", "spec"
