@@ -1,8 +1,12 @@
-import { appendFileSync, existsSync, createReadStream } from 'fs'
 import {  Options } from './types'
-import * as oboe from 'oboe'
 import { main } from './cli';
+import { Screen } from 'accursed';
 
-
+let screen: Screen= null as any
 const args = require('yargs-parser')(process.argv.slice(2)) as Options
-main(args)
+try {
+  const tool = main(args)
+  screen = tool.screen as any
+} catch (error) {
+ screen &&  screen.log('ERROR', error)
+}

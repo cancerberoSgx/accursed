@@ -42,5 +42,9 @@
     "command line",
     "emojis"
   ],
-  "repository": "https://github.com/cancerberoSgx/accursed"
+  "repository": "https://github.com/cancerberoSgx/accursed",
+  "custom": 1123123,
+  "custom2": false,
+  "custom3":null
+  
 }
