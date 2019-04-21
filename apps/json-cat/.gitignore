@@ -10,3 +10,4 @@ log.txt
 /data/*.xml
 .cache
 /build
+log2.txt
