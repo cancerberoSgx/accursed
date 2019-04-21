@@ -218,7 +218,7 @@ export interface BlessedJsx {
    * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See
    * https://reactjs.org/docs/refs-and-the-dom.html.
    */
-  createRef<T extends Element>(callback?: (current: T|undefined)=>void): RefObject<T>;
+  createRef<T extends Element>(callback?: (current: T | undefined) => void): RefObject<T>
 
   /**
    * By default, accursed supports only blessed element intrinsic elements, and the creator functions for a gigen tag name is taken from the blessed namespace
@@ -288,7 +288,7 @@ export type OnClickHandler<T extends Element> = (this: T, e: IMouseEventArg & Ar
 
 export interface RefObject<T = any> {
   /* when the RefObject is resolved, if provided, this call back will be called. */
-  callback?(current: T | undefined): any;
+  callback?(current: T | undefined): any
   current: T | undefined
 }
 /** @internal */

@@ -1,0 +1,44 @@
+import { debug } from 'accursed'
+import { EventEmitter } from 'events'
+import { managerOptions, TNode } from '../types'
+import { DataManager } from './DataManager'
+export class BaseManager extends EventEmitter {
+  protected static defaultOptions: Required<managerOptions> = {
+    loadingUpdateInterval: 1000,
+    noColors: false,
+    renderMode: 'progressively',
+    noLoadingFeedback: false
+  }
+  JSON_LOADED = 'json-loaded'
+  constructor(protected options: Required<managerOptions> = DataManager.defaultOptions) {
+    super()
+  }
+  protected dirty = false
+  protected LOADING_MSG: string = 'Loading...'
+  protected lastPath: string[] = null as any
+  protected data: TNode = {
+    name: 'Root',
+    extended: true,
+    children: {
+      ...(this.options.noLoadingFeedback
+        ? {}
+        : {
+            [this.LOADING_MSG]: {
+              name: this.LOADING_MSG,
+              extended: false,
+              children: {}
+            }
+          })
+    }
+  }
+  protected _jsonLoaded = false
+  set loaded(l: boolean) {
+    if (l) {
+      this.emit(this.JSON_LOADED)
+      this._jsonLoaded = l
+    }
+  }
+  log(...args: any[]) {
+    debug(...args)
+  }
+}

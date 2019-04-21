@@ -1,9 +1,8 @@
-import { debug, React, tree } from 'accursed'
+import { debug } from 'accursed'
 import { createReadStream, existsSync } from 'fs'
 import * as oboe from 'oboe'
-import { Manager } from './manager'
+import { DataManager } from './manager/DataManager'
 import { Options } from './types'
-
 
 export async function main(args: Options) {
   if (args.help) {
@@ -13,11 +12,11 @@ export async function main(args: Options) {
   const filter = args.filter || '*'
   let json: oboe.Oboe
 
-  let tree: Manager = null as any
+  let tree: DataManager = null as any
   // const tree = new Tree()
   if (!args.testInput) {
     try {
-      tree = new Manager()
+      tree = new DataManager()
       await tree.render()
     } catch (error) {
       debug('before', error)

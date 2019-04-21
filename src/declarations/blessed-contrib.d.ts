@@ -483,7 +483,10 @@ declare namespace BlessedContrib {
     export interface TreeOptions<Node extends TreeElementNode = TreeElementNode> extends BoxOptions {
       data?: Node
       extended?: boolean
-      keys?: string[]
+      /**
+       * Use pre-defined keys (i or enter for insert, e for editor, C-e for editor while inserting).
+       */
+      keys?: string | string[] | boolean
       template?: {
         extend?: string
         retract?: string

@@ -15,12 +15,12 @@ import {
   BeforeAppendChildListener,
   BeforeElementCreatedEvent,
   BeforeElementCreatedListener,
+  blessedElementConstructor,
   BlessedEventOptions,
   BlessedJsx,
   BlessedJsxAttrs,
   EventOptionNames,
-  RefObject,
-  blessedElementConstructor
+  RefObject
 } from './types'
 interface Options {
   dontInheritStyle?: boolean
@@ -147,8 +147,8 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid object cycles ? TODO: if not found look at attrs arg
     // just in case ?
-    const ref = (el! as any) && (el! as any).options && (el! as any).options.ref as RefObject
-    if (ref&&!ref.current) {
+    const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
+    if (ref && !ref.current) {
       ref.current = el! as any
       ref.callback && ref.callback(ref.current)
     }
@@ -301,7 +301,7 @@ class BlessedJsxImpl implements BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void {
     this.afterRenderListeners.push(l)
   }
-  createRef<T extends Element>(  callback?: (current: T | undefined)=> any): RefObject<T> {
+  createRef<T extends Element>(callback?: (current: T | undefined) => any): RefObject<T> {
     return ({
       current: undefined,
       callback
