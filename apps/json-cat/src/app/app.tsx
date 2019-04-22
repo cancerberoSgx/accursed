@@ -38,7 +38,6 @@ export class App extends Component<P, {}> {
       this.props.ready()
     }, 400)
   )
-
   render() {
     return (
       <Div ref={this.root}>
@@ -47,75 +46,20 @@ export class App extends Component<P, {}> {
           Search Filter Text: <textbox {...textBox()} hoverText="filter nodes by text" value="search" />
           Select (CSS4): <textbox {...textBox()} value="people.$*.email" />
         </Div>
-
         <Div height="75%" >
-
           <contribTree
             fg="green"
-            // padding={2}
-            // on={['focus', (e: any)=>{
-            //   debug('foccc')
-            // }]}
-            // lineNbr={3}
             ref={this.treeElement}
-            // bg="magenta"
             focusable={true}
-            // top="30%"
-            // border='line'
-            // label="'json"
-            // style={{
-            //      fg: 'green',
-            //   bg: 'black',
-            //   border: {
-            //     bg: 'yellow ',
-            //   },
-            //   //   // type: 'line',
-            //   //   fg: 'green'
-            //   // },
-            //   //  focus: {
-            //     //  bg: 'magenta',
-            //     //  fg: 'green',
-            //   //    border: {fg: 'magenta'
-            // // }}
-            //   }
-            // }
-            // width="70%"
-            // border="line'"
             height="80%"
             mouse={true}
             clickable={true}
           />
-          {/* lj aslkdalksj dlka sd
-        <Br />
-        asdasd asd asd asd
-        <Button2 onClick={e => {}}>click</Button2>
-        asdasd asd asd asd asldkjls kdjflkas df */}
         </Div>
-
       </Div>
-      //   <Br/>
-      // <Div
-      // top="33%"
-      //   height="70%"
-      //   name="treeContainer"
-      //   style={{
-      //     bg: 'red'
-      //   }}>
-      //   <Br/>
-      //   hello
-
-      //    by by
-
-      //    <Br/>
-      //    asdasd
-      // </Div>
-      //  }
     )
   }
-  // }
   get tree() {
     return this.treeElement.current!
   }
 }
-
-

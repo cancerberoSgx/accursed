@@ -10,7 +10,9 @@ import {
 import { App } from '../app/app'
 import { TNode } from '../types'
 import { BaseManager } from './BaseManager'
+
 export class AppManager extends BaseManager {
+  _app: App = null as any
   TREE_UPDATE_FINISH = 'TREE_UPDATE_FINISH'
   TREE_UPDATED = 'TREE_UPDATED'
   APP_RENDERED = 'APP_RENDERED'
@@ -22,11 +24,11 @@ export class AppManager extends BaseManager {
       }
     })
   }
+
   protected setTreeData(data: TNode = this.data, andUpdata = true) {
     this._app.tree.setData({ ...data })
     andUpdata && this._app.tree.screen.render() //TODO: check if its dirty
   }
-  _app: App = null as any
   /** cerates screen, and render app inside, waits till its ready before pushing data from json scream to tree componnet */
   async render() {
     const screen = createScreen({
@@ -51,14 +53,7 @@ export class AppManager extends BaseManager {
               this.buildTreeProgressively()
               this._app.tree.screen.render()
             }
-
-            // screen.key('tab', k => screen.focusNext())
-            // screen.key('S-tab', k => screen.focusPrevious())
-            // screen.render()
             screen.render()
-            // this._app.tree
-
-            // installFocusHandler('test1',screen.children.filter(isElement).map(el=>filterDescendants(el, d=>isElement(d) && d.type==="button" ||d.type==="textbox")).flat().filter(isElement), screen, undefined, false, true)
             this.emit(this.APP_RENDERED)
 
             installFocusHandler(
@@ -67,7 +62,7 @@ export class AppManager extends BaseManager {
               screen,
               undefined,
               false,
-              true
+              false
             )
           } catch (error) {
             this.log(error)
@@ -82,6 +77,7 @@ export class AppManager extends BaseManager {
     screen.render()
   }
   protected updateTimer: NodeJS.Timeout = null as any
+
   protected buildTreeProgressively() {
     this.updateTimer = setInterval(() => {
       try {
@@ -109,6 +105,7 @@ export class AppManager extends BaseManager {
       }
     }, this.options.loadingUpdateInterval)
   }
+
   protected buildTreeNonProgressively(): any {
     try {
       if (!this.dirty) {
@@ -120,14 +117,7 @@ export class AppManager extends BaseManager {
           node && (node as any).children && delete (node as any).children[this.LOADING_MSG]
         })
       }
-      // this.log('buildTreeNonProgressively',this.data);
-      // let t0 = performance.now();
       this.setTreeData({ ...this.data })
-      // this.app.tree.setData({ ...this.data })
-      // this.log('setData', performance.now() - t0);
-      // t0 = performance.now();
-      // this.app.tree.screen.render() //TODO: check if its dirty
-      // this.log('render', performance.now() - t0);
       this.dirty = false
     } catch (error) {
       this.log('error', error, 'DATA', this.data)
