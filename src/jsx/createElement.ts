@@ -260,7 +260,7 @@ class BlessedJsxImpl implements BlessedJsx {
    */
   protected appendChild(el: Element, child: Element): any {
     if (VirtualComponent.isVirtualElement(child)) {
-      return // HEADS UP - for safety & speed we dont call any listener for virtuals ?
+      return // HEADS UP - for safety & speed we dont call any listener for virtual ?
     }
     const event: BeforeAppendChildEvent = {
       el,

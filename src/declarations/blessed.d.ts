@@ -3348,6 +3348,11 @@ export namespace Widgets {
      */
     items?: string[]
 
+    /** selected item backgroundColor */
+    selectedBg?: string
+
+    //TODO: hold
+
     /**
      * A function that is called when vi mode is enabled and the key / is pressed. This function accepts a
      * callback function which should be called with the search string. The search string is then used to
