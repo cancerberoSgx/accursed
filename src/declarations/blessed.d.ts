@@ -3395,6 +3395,11 @@ export namespace Widgets {
      */
     ritems?: BlessedElement[]
 
+    /** 
+     * Current item values in the list. @internal 
+     */
+    items: BlessedElement[]
+
     /**
      * Original options object.
      */
@@ -3810,6 +3815,24 @@ export namespace Widgets {
      * The input text. read-only.
      */
     value: string
+
+    /**
+     * Is it currently capturing user input keys ? @internal
+     */
+    _reading: boolean
+
+    /** 
+     * Listener that receives key events. Could be overrided to customize the behavior. @internal 
+     */
+    _listener?: KeyEventListener
+    
+    /** 
+     * Called when reading input has finished which happens when the user blur or closes editor. 
+     * @internal 
+     */
+    _done?: (err:Error|undefined, value: string) {
+
+    }
 
     /**
      * Submit the textarea (emits submit).

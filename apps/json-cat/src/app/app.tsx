@@ -17,6 +17,7 @@ import { focusable, textBox } from './styles';
 import { debug } from 'util';
 import { AppManager } from '../manager/AppManager';
 
+
 let uiSetup
 export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
 

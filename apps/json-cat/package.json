@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "accursed": "file:../..",
+    "json-ptr": "^1.1.2",
     "misc-utils-of-mine-generic": "file:../../../misc-utils-of-mine/misc-utils-of-mine-generic",
     "misc-utils-of-mine-typescript": "0.0.12",
     "oboe": "^2.1.4",
