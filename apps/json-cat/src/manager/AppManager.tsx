@@ -12,10 +12,13 @@ import { TNode } from '../types'
 import { BaseManager } from './BaseManager'
 
 export class AppManager extends BaseManager {
-  _app: App = null as any
+  protected updateTimer: NodeJS.Timeout = null as any
+  protected _app: App = null as any
+
   TREE_UPDATE_FINISH = 'TREE_UPDATE_FINISH'
   TREE_UPDATED = 'TREE_UPDATED'
   APP_RENDERED = 'APP_RENDERED'
+  
   constructor() {
     super()
     this.on(this.JSON_LOADED, () => {
@@ -25,10 +28,11 @@ export class AppManager extends BaseManager {
     })
   }
 
-  protected setTreeData(data: TNode = this.data, andUpdata = true) {
+  protected setTreeData(data: TNode = this.data, andUpdate = true) {
     this._app.tree.setData({ ...data })
-    andUpdata && this._app.tree.screen.render() //TODO: check if its dirty
+    andUpdate && this._app.tree.screen.render() //TODO: check if its dirty
   }
+
   /** cerates screen, and render app inside, waits till its ready before pushing data from json scream to tree componnet */
   async render() {
     const screen = createScreen({
@@ -40,11 +44,9 @@ export class AppManager extends BaseManager {
       title: 'json-cat'
     })
     installExitKeys(screen)
-
-    installExitKeys(screen)
-
     this._app = new App(
       {
+        manager: this, 
         ready: () => {
           screen.focusNext()
           try {
@@ -55,7 +57,6 @@ export class AppManager extends BaseManager {
             }
             screen.render()
             this.emit(this.APP_RENDERED)
-
             installFocusHandler(
               'test1',
               filterDescendants(this._app.root.current!, d => isElement(d) && !!d.options.focusable),
@@ -76,7 +77,6 @@ export class AppManager extends BaseManager {
     screen.append(React.render(appEl))
     screen.render()
   }
-  protected updateTimer: NodeJS.Timeout = null as any
 
   protected buildTreeProgressively() {
     this.updateTimer = setInterval(() => {
@@ -88,6 +88,8 @@ export class AppManager extends BaseManager {
         if (this.loaded) {
           if (!this.options.noLoadingFeedback) {
           }
+          delete (this.data as any)[this.LOADING_MSG]
+          delete (this.data.children as any)[this.LOADING_MSG]
           visitTreeNodes(this.data, node => {
             node && delete (node as any)[this.LOADING_MSG]
             node && (node as any).children && delete (node as any).children[this.LOADING_MSG]

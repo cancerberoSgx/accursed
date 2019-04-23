@@ -28,6 +28,6 @@ export const focusable: () => ButtonOptions = () => ({
 });
 export const textBox: () => TextboxOptions = () => ({
   ...focusable(),
-  width: 9,
+  width: 14,
   style: { ...focusable().style, bg: 'gray', border: { fg: 'magenta' } , width: 18}
 });

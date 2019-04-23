@@ -1,10 +1,7 @@
-// Type definitions for blessed 0.1
-// Project: https://github.com/chjj/blessed
-// Definitions by: Bryn Austin Bellomy <https://github.com/brynbellomy>
-//                 Steve Kellock <https://github.com/skellock>
-//                 Max Brauer <https://github.com/mamachanko>
-// Definitions: https://github.com/borisyankov/DefinitelyTyped
-// TypeScript Version: 2.1
+// Type definitions for blessed 0.1 Project: https://github.com/chjj/blessed Definitions by: Bryn Austin
+// Bellomy <https://github.com/brynbellomy> Steve Kellock <https://github.com/skellock> Max Brauer
+// <https://github.com/mamachanko> Definitions: https://github.com/borisyankov/DefinitelyTyped TypeScript
+// Version: 2.1
 
 /// <reference types="node" />
 
@@ -14,16 +11,22 @@ import * as stream from 'stream'
 import { Readable, Writable } from 'stream'
 
 /**
- * A general representation of the data object received callbacks  of program's write operation  on the output.
+ * A general representation of the data object received callbacks  of program's write operation  on the
+ * output.
  *
- *  In general, each event type will respond with a data object that is mixed into this data object properties, and also is available individually in some of its properties, For example a  'device-status' request will respond with a 'statis property with only that information but also the properties mixed in the object itself'
+ *  In general, each event type will respond with a data object that is mixed into this data object
+ *  properties, and also is available individually in some of its properties, For example a  'device-status'
+ *  request will respond with a 'statis property with only that information but also the properties mixed in
+ *  the object itself'
  */
 interface ProgramResponseData {
-  /** The event type that was requested / write that caused this response. Example: 'window-manipulation',  'device-attributes', 'device-status',  */
+  /** The event type that was requested / write that caused this response. Example: 'window-manipulation',
+   * 'device-attributes', 'device-status',  */
   event: string
   /** example: '', 'DSR' */
   code: string
-  /** Identifies the request type that caused this response. For example, if a  'window-manipulation' is written the response type could be 'textarea-size',  example: 'textarea-size',  'cursor-status', */
+  /** Identifies the request type that caused this response. For example, if a  'window-manipulation' is
+   * written the response type could be 'textarea-size', example: 'textarea-size',  'cursor-status', */
   type: string
   size?: { height: number; width: number }
   height?: number
@@ -50,9 +53,9 @@ interface ProgramOutput extends Writable {
   // /**
   //  * Each time
   //  * @internal.
-  //  */
-  // on(e: 'response', callback: (e: { event?: string }) => void): this
-  // on(e: string, callback: (...args: any[]) => void): this
+  //    */
+  // on(e: 'response', callback: (e: { event?: string }) => void): this on(e: string, callback: (...args:
+  // any[]) => void): this
 }
 interface GpmEvent {
   name: 'mouse' | ''
@@ -81,14 +84,12 @@ interface GpmEvent {
 
 interface GpmClient extends EventEmitter {
   on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
-  // TODO:
-  // 'mousewheel',evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
-  // 'drag', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-  // 'mousewheel',               evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
-  // 'btndown', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-  // 'dblclick', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-  // 'btnup', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
-  // self.emit('click', evnt.buttons, evnt.modifiers, evnt.x, evnt.y);
+  // TODO: 'mousewheel',evnt.buttons, evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy);
+  // 'drag', evnt.buttons, evnt.modifiers, evnt.x, evnt.y); 'mousewheel',               evnt.buttons,
+  // evnt.modifiers,                evnt.x, evnt.y, evnt.wdx, evnt.wdy); 'btndown', evnt.buttons,
+  // evnt.modifiers, evnt.x, evnt.y); 'dblclick', evnt.buttons, evnt.modifiers, evnt.x, evnt.y); 'btnup',
+  // evnt.buttons, evnt.modifiers, evnt.x, evnt.y); self.emit('click', evnt.buttons, evnt.modifiers, evnt.x,
+  // evnt.y);
 }
 
 export interface IBlessedProgramOptions {
@@ -108,113 +109,84 @@ export interface IBlessedProgramOptions {
 }
 
 /**
- * The Program instance manages the low level interaction the the terminal. It emit the basi native events to the screens. It has associated an [[output]] writable stream attribute which ussually is stdout but could could be conigured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream from which the host terminal respond to the program requests. 
- * 
- * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream. The program is responsible of portability and supporting the same API thgouth several terminal standards / vendors 
- * 
- * Although the BlessedProgram instances are not Nodes (unlike Screens that are) they have a somwhat similar API, emiting events with similar names and has some simlar attributes, but it's important to known that most of these events and attributes refer to the host terminal window and not with the lines inside the screen. For example, focus or blur event refers to the terminal window focus, not the internal Blessed Element
- * 
- * In general users don't have to use the program for develop their applications, however, it can be accessed from the screen and its lower level api can be used along the application.
-
-## Example 1
-
-Starting a program alone, and register 'q' to exist
+ * The Program instance manages the low level interaction the the terminal. It emit the basi native events to
+ * the screens. It has associated an [[output]] writable stream attribute which ussually is stdout but could
+ * could be conigured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream
+ * from which the host terminal respond to the program requests. 
+ *
+ * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream.
+ * The program is responsible of portability and supporting the same API thgouth several terminal standards /
+ * vendors 
+ *
+ * Although the BlessedProgram instances are not Nodes (unlike Screens that are) they have a somwhat similar
+ * API, emiting events with similar names and has some simlar attributes, but it's important to known that
+ * most of these events and attributes refer to the host terminal window and not with the lines inside the
+ * screen. For example, focus or blur event refers to the terminal window focus, not the internal Blessed
+ * Element
+ *
+ * In general users don't have to use the program for develop their applications, however, it can be accessed
+ * from the screen and its lower level api can be used along the application.
+ *
+ * ## Example 1
+ *
+ * Starting a program alone, and register 'q' to exist
 ```
-const program = blessed.program({
+ * const program = blessed.program({
 })
-program.setMouse({
-  allMotion: true,
-}, true);
-program.alternateBuffer()
-program.enableMouse()
-program.key(['q', 'escape', 'C-c'], function () {
-  program.showCursor()
-  program.disableMouse()
-  program.normalBuffer()
-  process.exit(0)
+ * program.setMouse({allMotion: true,}, true); program.alternateBuffer() program.enableMouse()
+ * program.key(['q', 'escape', 'C-c'], function () {program.showCursor() program.disableMouse()
+ * program.normalBuffer() process.exit(0)
 })
 ```
-
-## Example 2: 
-
-Registering for resize, blur, and focus terminal window native events:
-
+ *
+ * ## Example 2: 
+ *
+ * Registering for resize, blur, and focus terminal window native events:
+ *
 ```
-program.setMouse({ sendFocus: true }, true)
-program.on('resize', function (data) {
-  setTimeout(function () {
-    program.clear();
-    program.cup(0, 0);
-  }, 200);
+ * program.setMouse({ sendFocus: true }, true) program.on('resize', function (data) {setTimeout(function ()
+ * {program.clear(); program.cup(0, 0);}, 200);
 });
-process.on('SIGWINCH', function (data) {
-  setTimeout(function () {
-    program.cup(1, 0);
-  }, 200);
+ * process.on('SIGWINCH', function (data) {setTimeout(function () {program.cup(1, 0);}, 200);
 });
-program.on('focus', function (data) {
-  program.clear();
-  program.cup(0, 0);
+ * program.on('focus', function (data) {program.clear(); program.cup(0, 0);
 });
-program.on('blur', function (data) {
-  program.clear();
-  program.cup(0, 0);
+ * program.on('blur', function (data) {program.clear(); program.cup(0, 0);
 });
 ```
-
-## Example 3: 
-
-Drawing on mouse move
-
+ *
+ * ## Example 3: 
+ *
+ * Drawing on mouse move
+ *
 ```
-program.setBackground('green', 'O')
-program.setForeground('red', 'i')
-program.on('mouse', function (data) {
-  program.cup(data.y, data.x);
-  program.write(' ', 'blue bg');
-  program.write('as', 'red fg');
-  program.cup(0, 0);
+ * program.setBackground('green', 'O') program.setForeground('red', 'i') program.on('mouse', function (data)
+ * {program.cup(data.y, data.x); program.write(' ', 'blue bg'); program.write('as', 'red fg'); program.cup(0,
+ * 0);
 });
 ```
-
-## Example 4
-
-Setting the cursor style
-
+ *
+ * ## Example 4
+ *
+ * Setting the cursor style
+ *
 ```
-program.showCursor();
-program.setCursorStyle(1);
-setTimeout(() => {
-  program.setCursorStyle(2);
-}, 9000);
-setTimeout(() => {
-  program.setCursorStyle(4);
-}, 3000);
-setTimeout(() => {
-  program.setCursorStyle(3);
-}, 6000);
+ * program.showCursor(); program.setCursorStyle(1); setTimeout(() => {program.setCursorStyle(2);}, 9000);
+ * setTimeout(() => {program.setCursorStyle(4);}, 3000); setTimeout(() => {program.setCursorStyle(3);}, 6000);
 ```
-## Example 5
-
-Minimize / Maximize the terminal window and requesting it size and position and cursor
-
+ * ## Example 5
+ *
+ * Minimize / Maximize the terminal window and requesting it size and position and cursor
+ *
 ```
-program.write('MINIMIZING IN 2 seconds')
-setTimeout(() => {
-  program.manipulateWindow(2, (err, data)=>{
-    program.log(data);
+ * program.write('MINIMIZING IN 2 seconds') setTimeout(() => {program.manipulateWindow(2, (err,
+ * data)=>{program.log(data);
   })
-}, 2000)
-setTimeout(() => {
-  program.manipulateWindow(1, (err, data)=>{
-    program.log(data);
+ * }, 2000) setTimeout(() => {program.manipulateWindow(1, (err, data)=>{program.log(data);
   })
-}, 4000)
-program.getCursor(function(err, data) {
-  program.write(util.inspect(data));
+ * }, 4000) program.getCursor(function(err, data) {program.write(util.inspect(data));
 });
-program.getWindowSize(function(err:any, data:any) {
-  program.log('getWindowSize', data);
+ * program.getWindowSize(function(err:any, data:any) {program.log('getWindowSize', data);
 });
 ```
 */
@@ -282,8 +254,7 @@ declare class BlessedProgram extends EventEmitter {
 
   write(text: string): boolean
   /**
-   * Writes to this.output
-   * Example: `program.write('Hello world', 'blue fg')`
+   * Writes to this.output Example: `program.write('Hello world', 'blue fg')`
    */
   write(text: string, style: string): boolean
   /**
@@ -316,11 +287,9 @@ declare class BlessedProgram extends EventEmitter {
   getTextParams(param: string, callback: Function): boolean
   /**
    * example call: 
-   * 
+   *
 ```
-program.getCursor(function(err, data) {
-  program.log('getCursor', data);
-  program.write(util.inspect(data));
+   * program.getCursor(function(err, data) {program.log('getCursor', data); program.write(util.inspect(data));
 });
 ```
    */
@@ -392,9 +361,7 @@ program.getCursor(function(err, data) {
   resetColors(param?: string): boolean
 
   /**
-   * OSC Ps ; Pt ST
-   * OSC Ps ; Pt BEL
-   * Change dynamic colors
+   * OSC Ps ; Pt ST OSC Ps ; Pt BEL Change dynamic colors
    */
   dynamicColors(param?: string): boolean
   selData(a: string, b: string): boolean
@@ -417,18 +384,15 @@ program.getCursor(function(err, data) {
   left(param?: number): boolean
   back(param?: number): boolean
   /**
-   * CSI Ps ; Ps H
-   * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
+   * CSI Ps ; Ps H Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
   cursorPos(row?: number, col?: number): boolean
   /**
-   * CSI Ps ; Ps H
-   * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
+   * CSI Ps ; Ps H Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
   cup(row?: number, col?: number): boolean
   /**
-   * CSI Ps ; Ps H
-   * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
+   * CSI Ps ; Ps H Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
   pos(row?: number, col?: number): boolean
 
@@ -442,68 +406,34 @@ program.getCursor(function(err, data) {
 
   /**
 ```
- CSI Pm m  Character Attributes (SGR).
-  Ps = 0  -> Normal (default).
-  Ps = 1  -> Bold.
-  Ps = 4  -> Underlined.
-  Ps = 5  -> Blink (appears as Bold).
-  Ps = 7  -> Inverse.
-  Ps = 8  -> Invisible, i.e., hidden (VT300).
-  Ps = 2 2  -> Normal (neither bold nor faint).
-  Ps = 2 4  -> Not underlined.
-  Ps = 2 5  -> Steady (not blinking).
-  Ps = 2 7  -> Positive (not inverse).
-  Ps = 2 8  -> Visible, i.e., not hidden (VT300).
-  Ps = 3 0  -> Set foreground color to Black.
-  Ps = 3 1  -> Set foreground color to Red.
-  Ps = 3 2  -> Set foreground color to Green.
-  Ps = 3 3  -> Set foreground color to Yellow.
-  Ps = 3 4  -> Set foreground color to Blue.
-  Ps = 3 5  -> Set foreground color to Magenta.
-  Ps = 3 6  -> Set foreground color to Cyan.
-  Ps = 3 7  -> Set foreground color to White.
-  Ps = 3 9  -> Set foreground color to default (original).
-  Ps = 4 0  -> Set background color to Black.
-  Ps = 4 1  -> Set background color to Red.
-  Ps = 4 2  -> Set background color to Green.
-  Ps = 4 3  -> Set background color to Yellow.
-  Ps = 4 4  -> Set background color to Blue.
-  Ps = 4 5  -> Set background color to Magenta.
-  Ps = 4 6  -> Set background color to Cyan.
-  Ps = 4 7  -> Set background color to White.
-  Ps = 4 9  -> Set background color to default (original).
+ CSI Pm m  Character Attributes (SGR). Ps = 0  -> Normal (default). Ps = 1  -> Bold. Ps = 4  -> Underlined. Ps
+  = 5  -> Blink (appears as Bold). Ps = 7  -> Inverse. Ps = 8  -> Invisible, i.e., hidden (VT300). Ps = 2 2
+  -> Normal (neither bold nor faint). Ps = 2 4  -> Not underlined. Ps = 2 5  -> Steady (not blinking). Ps = 2
+  7  -> Positive (not inverse). Ps = 2 8  -> Visible, i.e., not hidden (VT300). Ps = 3 0  -> Set foreground
+  color to Black. Ps = 3 1  -> Set foreground color to Red. Ps = 3 2  -> Set foreground color to Green. Ps = 3
+  3  -> Set foreground color to Yellow. Ps = 3 4  -> Set foreground color to Blue. Ps = 3 5  -> Set foreground
+  color to Magenta. Ps = 3 6  -> Set foreground color to Cyan. Ps = 3 7  -> Set foreground color to White. Ps
+  = 3 9  -> Set foreground color to default (original). Ps = 4 0  -> Set background color to Black. Ps = 4 1
+  -> Set background color to Red. Ps = 4 2  -> Set background color to Green. Ps = 4 3  -> Set background
+  color to Yellow. Ps = 4 4  -> Set background color to Blue. Ps = 4 5  -> Set background color to Magenta. Ps
+  = 4 6 -> Set background color to Cyan. Ps = 4 7  -> Set background color to White. Ps = 4 9  -> Set
+  background color to default (original).
 
-If 16-color support is compiled, the following apply.  Assume
-that xterm's resources are set so that the ISO color codes are
-the first 8 of a set of 16.  Then the aixterm colors are the
-bright versions of the ISO colors:
-  Ps = 9 0  -> Set foreground color to Black.
-  Ps = 9 1  -> Set foreground color to Red.
-  Ps = 9 2  -> Set foreground color to Green.
-  Ps = 9 3  -> Set foreground color to Yellow.
-  Ps = 9 4  -> Set foreground color to Blue.
-  Ps = 9 5  -> Set foreground color to Magenta.
-  Ps = 9 6  -> Set foreground color to Cyan.
-  Ps = 9 7  -> Set foreground color to White.
-  Ps = 1 0 0  -> Set background color to Black.
-  Ps = 1 0 1  -> Set background color to Red.
-  Ps = 1 0 2  -> Set background color to Green.
-  Ps = 1 0 3  -> Set background color to Yellow.
-  Ps = 1 0 4  -> Set background color to Blue.
-  Ps = 1 0 5  -> Set background color to Magenta.
-  Ps = 1 0 6  -> Set background color to Cyan.
-  Ps = 1 0 7  -> Set background color to White.
+ If 16-color support is compiled, the following apply.  Assume that xterm's resources are set so that the ISO
+ color codes are the first 8 of a set of 16.  Then the aixterm colors are the bright versions of the ISO
+ colors: Ps = 9 0  -> Set foreground color to Black. Ps = 9 1  -> Set foreground color to Red. Ps = 9 2 -> Set
+ foreground color to Green. Ps = 9 3  -> Set foreground color to Yellow. Ps = 9 4  -> Set foreground color to
+ Blue. Ps = 9 5  -> Set foreground color to Magenta. Ps = 9 6  -> Set foreground color to Cyan. Ps = 9 7  ->
+ Set foreground color to White. Ps = 1 0 0  -> Set background color to Black. Ps = 1 0 1  -> Set background
+ color to Red. Ps = 1 0 2  -> Set background color to Green. Ps = 1 0 3  -> Set background color to Yellow. Ps
+ = 1 0 4  -> Set background color to Blue. Ps = 1 0 5  -> Set background color to Magenta. Ps = 1 0 6  -> Set
+ background color to Cyan. Ps = 1 0 7  -> Set background color to White.
 
-If xterm is compiled with the 16-color support disabled, it
-supports the following, from rxvt:
-  Ps = 1 0 0  -> Set foreground and background color to
-  default.
+ If xterm is compiled with the 16-color support disabled, it supports the following, from rxvt: Ps = 1 0 0  ->
+ Set foreground and background color to default.
 
-If 88- or 256-color support is compiled, the following apply.
-  Ps = 3 8  ; 5  ; Ps -> Set foreground color to the second
-  Ps.
-  Ps = 4 8  ; 5  ; Ps -> Set background color to the second
-  Ps.
+ If 88- or 256-color support is compiled, the following apply. Ps = 3 8  ; 5  ; Ps -> Set foreground color to
+  the second Ps. Ps = 4 8  ; 5  ; Ps -> Set background color to the second Ps.
 ```
    */
   charAttributes(param: string, val?: string): boolean
@@ -512,13 +442,9 @@ If 88- or 256-color support is compiled, the following apply.
   /**
    * set the foreground color and character for the following writings to the output buffer. Example: 
 ```
-program.setBackground('green', 'O')
-program.setForeground('red', 'i')
-program.on('mouse', function (data) {
-  program.cup(data.y, data.x);
-  program.write(' ', 'blue bg');
-  program.write('as', 'red fg');
-  program.cup(0, 0);
+   * program.setBackground('green', 'O') program.setForeground('red', 'i') program.on('mouse', function (data)
+   * {program.cup(data.y, data.x); program.write(' ', 'blue bg'); program.write('as', 'red fg');
+   * program.cup(0, 0);
 });
 ```
    */
@@ -529,13 +455,9 @@ program.on('mouse', function (data) {
   /**
    * set the background color and character for the following writings to the output buffer. Example:
 ```
-program.setBackground('green', 'O')
-program.setForeground('red', 'i')
-program.on('mouse', function (data) {
-  program.cup(data.y, data.x);
-  program.write(' ', 'blue bg');
-  program.write('as', 'red fg');
-  program.cup(0, 0);
+   * program.setBackground('green', 'O') program.setForeground('red', 'i') program.on('mouse', function (data)
+   * {program.cup(data.y, data.x); program.write(' ', 'blue bg'); program.write('as', 'red fg');
+   * program.cup(0, 0);
 });
 ```
    */
@@ -575,8 +497,7 @@ CSI ? Ps n
   /**
   Example Call:
 ```
-  program.getCursor(function(err, data) {
-    program.log('getCursor', data);
+  program.getCursor(function(err, data) {program.log('getCursor', data);
   });
 ```
    */
@@ -585,8 +506,7 @@ CSI ? Ps n
 
   restoreReportedCursor: () => boolean
 
-  /** CSI Ps @
-  Insert Ps (Blank) Character(s) (default = 1) (ICH). */
+  /** CSI Ps @ Insert Ps (Blank) Character(s) (default = 1) (ICH). */
   insertChars(param?: number): boolean
   /** @see [[insertChars]]  */
   ich(param?: number): boolean
@@ -639,90 +559,42 @@ same as CSI Ps B ?
 
   /**
 ```
- CSI Pm h  Set Mode (SM).
-     Ps = 2  -> Keyboard Action Mode (AM).
-     Ps = 4  -> Insert Mode (IRM).
-     Ps = 1 2  -> Send/receive (SRM).
-     Ps = 2 0  -> Automatic Newline (LNM).
- CSI ? Pm h
-   DEC Private Mode Set (DECSET).
-     Ps = 1  -> Application Cursor Keys (DECCKM).
-     Ps = 2  -> Designate USASCII for character sets G0-G3
-     (DECANM), and set VT100 mode.
-     Ps = 3  -> 132 Column Mode (DECCOLM).
-     Ps = 4  -> Smooth (Slow) Scroll (DECSCLM).
-     Ps = 5  -> Reverse Video (DECSCNM).
-     Ps = 6  -> Origin Mode (DECOM).
-     Ps = 7  -> Wraparound Mode (DECAWM).
-     Ps = 8  -> Auto-repeat Keys (DECARM).
-     Ps = 9  -> Send Mouse X & Y on button press.  See the sec-
-     tion Mouse Tracking.
-     Ps = 1 0  -> Show toolbar (rxvt).
-     Ps = 1 2  -> Start Blinking Cursor (att610).
-     Ps = 1 8  -> Print form feed (DECPFF).
-     Ps = 1 9  -> Set print extent to full screen (DECPEX).
-     Ps = 2 5  -> Show Cursor (DECTCEM).
-     Ps = 3 0  -> Show scrollbar (rxvt).
-     Ps = 3 5  -> Enable font-shifting functions (rxvt).
-     Ps = 3 8  -> Enter Tektronix Mode (DECTEK).
-     Ps = 4 0  -> Allow 80 -> 132 Mode.
-     Ps = 4 1  -> more(1) fix (see curses resource).
-     Ps = 4 2  -> Enable Nation Replacement Character sets (DECN-
-     RCM).
-     Ps = 4 4  -> Turn On Margin Bell.
-     Ps = 4 5  -> Reverse-wraparound Mode.
-     Ps = 4 6  -> Start Logging.  This is normally disabled by a
-     compile-time option.
-     Ps = 4 7  -> Use Alternate Screen Buffer.  (This may be dis-
-     abled by the titeInhibit resource).
-     Ps = 6 6  -> Application keypad (DECNKM).
-     Ps = 6 7  -> Backarrow key sends backspace (DECBKM).
-     Ps = 1 0 0 0  -> Send Mouse X & Y on button press and
-     release.  See the section Mouse Tracking.
-     Ps = 1 0 0 1  -> Use Hilite Mouse Tracking.
-     Ps = 1 0 0 2  -> Use Cell Motion Mouse Tracking.
-     Ps = 1 0 0 3  -> Use All Motion Mouse Tracking.
-     Ps = 1 0 0 4  -> Send FocusIn/FocusOut events.
-     Ps = 1 0 0 5  -> Enable Extended Mouse Mode.
-     Ps = 1 0 1 0  -> Scroll to bottom on tty output (rxvt).
-     Ps = 1 0 1 1  -> Scroll to bottom on key press (rxvt).
-     Ps = 1 0 3 4  -> Interpret "meta" key, sets eighth bit.
-     (enables the eightBitInput resource).
-     Ps = 1 0 3 5  -> Enable special modifiers for Alt and Num-
-     Lock keys.  (This enables the numLock resource).
-     Ps = 1 0 3 6  -> Send ESC   when Meta modifies a key.  (This
-     enables the metaSendsEscape resource).
-     Ps = 1 0 3 7  -> Send DEL from the editing-keypad Delete
-     key.
-     Ps = 1 0 3 9  -> Send ESC  when Alt modifies a key.  (This
-     enables the altSendsEscape resource).
-     Ps = 1 0 4 0  -> Keep selection even if not highlighted.
-     (This enables the keepSelection resource).
-     Ps = 1 0 4 1  -> Use the CLIPBOARD selection.  (This enables
-     the selectToClipboard resource).
-     Ps = 1 0 4 2  -> Enable Urgency window manager hint when
-     Control-G is received.  (This enables the bellIsUrgent
-     resource).
-     Ps = 1 0 4 3  -> Enable raising of the window when Control-G
-     is received.  (enables the popOnBell resource).
-     Ps = 1 0 4 7  -> Use Alternate Screen Buffer.  (This may be
-     disabled by the titeInhibit resource).
-     Ps = 1 0 4 8  -> Save cursor as in DECSC.  (This may be dis-
-     abled by the titeInhibit resource).
-     Ps = 1 0 4 9  -> Save cursor as in DECSC and use Alternate
-     Screen Buffer, clearing it first.  (This may be disabled by
-     the titeInhibit resource).  This combines the effects of the 1
-     0 4 7  and 1 0 4 8  modes.  Use this with terminfo-based
-     applications rather than the 4 7  mode.
-     Ps = 1 0 5 0  -> Set terminfo/termcap function-key mode.
-     Ps = 1 0 5 1  -> Set Sun function-key mode.
-     Ps = 1 0 5 2  -> Set HP function-key mode.
-     Ps = 1 0 5 3  -> Set SCO function-key mode.
-     Ps = 1 0 6 0  -> Set legacy keyboard emulation (X11R6).
-     Ps = 1 0 6 1  -> Set VT220 keyboard emulation.
-     Ps = 2 0 0 4  -> Set bracketed paste mode.
- Modes:
-   http://vt100.net/docs/vt220-rm/chapter4.html
+ CSI Pm h  Set Mode (SM). Ps = 2  -> Keyboard Action Mode (AM). Ps = 4  -> Insert Mode (IRM). Ps = 1 2  ->
+     Send/receive (SRM). Ps = 2 0  -> Automatic Newline (LNM). CSI ? Pm h DEC Private Mode Set (DECSET). Ps =
+     1  -> Application Cursor Keys (DECCKM). Ps = 2  -> Designate USASCII for character sets G0-G3 (DECANM),
+     and set VT100 mode. Ps = 3  -> 132 Column Mode (DECCOLM). Ps = 4  -> Smooth (Slow) Scroll (DECSCLM). Ps =
+     5  -> Reverse Video (DECSCNM). Ps = 6 -> Origin Mode (DECOM). Ps = 7  -> Wraparound Mode (DECAWM). Ps = 8
+     -> Auto-repeat Keys (DECARM). Ps = 9  -> Send Mouse X & Y on button press.  See the sec- tion Mouse
+     Tracking. Ps = 1 0  -> Show toolbar (rxvt). Ps = 1 2  -> Start Blinking Cursor (att610). Ps = 1 8  ->
+     Print form feed (DECPFF). Ps = 1 9 -> Set print extent to full screen (DECPEX). Ps = 2 5  -> Show Cursor
+     (DECTCEM). Ps = 3 0  -> Show scrollbar (rxvt). Ps = 3 5  -> Enable font-shifting functions (rxvt). Ps = 3
+     8  -> Enter Tektronix Mode (DECTEK). Ps = 4 0  -> Allow 80 -> 132 Mode. Ps = 4 1  -> more(1) fix (see
+     curses resource). Ps = 4 2 -> Enable Nation Replacement Character sets (DECN- RCM). Ps = 4 4  -> Turn On
+     Margin Bell. Ps = 4 5  -> Reverse-wraparound Mode. Ps = 4 6  -> Start Logging.  This is normally disabled
+     by a compile-time option. Ps = 4 7  -> Use Alternate Screen Buffer.  (This may be dis- abled by the
+     titeInhibit resource). Ps = 6 6  -> Application keypad (DECNKM). Ps = 6 7  -> Backarrow key sends
+     backspace (DECBKM). Ps = 1 0 0 0  -> Send Mouse X & Y on button press and release.  See the section Mouse
+     Tracking. Ps = 1 0 0 1  -> Use Hilite Mouse Tracking. Ps = 1 0 0 2  -> Use Cell Motion Mouse Tracking. Ps
+     = 1 0 0 3  -> Use All Motion Mouse Tracking. Ps = 1 0 0 4  -> Send FocusIn/FocusOut events. Ps = 1 0 0 5
+     -> Enable Extended Mouse Mode. Ps = 1 0 1 0  -> Scroll to bottom on tty output (rxvt). Ps = 1 0 1 1  ->
+     Scroll to bottom on key press (rxvt). Ps = 1 0 3 4  -> Interpret "meta" key, sets eighth bit. (enables
+     the eightBitInput resource). Ps = 1 0 3 5  -> Enable special modifiers for Alt and Num- Lock keys.  (This
+     enables the numLock resource). Ps = 1 0 3 6  -> Send ESC   when Meta modifies a key.  (This enables the
+     metaSendsEscape resource). Ps = 1 0 3 7  -> Send DEL from the editing-keypad Delete key. Ps = 1 0 3 9 ->
+     Send ESC  when Alt modifies a key.  (This enables the altSendsEscape resource). Ps = 1 0 4 0  -> Keep
+     selection even if not highlighted. (This enables the keepSelection resource). Ps = 1 0 4 1  -> Use the
+     CLIPBOARD selection.  (This enables the selectToClipboard resource). Ps = 1 0 4 2  -> Enable Urgency
+     window manager hint when Control-G is received.  (This enables the bellIsUrgent resource). Ps = 1 0 4 3
+     -> Enable raising of the window when Control-G is received.  (enables the popOnBell resource). Ps = 1 0 4
+     7  -> Use Alternate Screen Buffer.  (This may be disabled by the titeInhibit resource). Ps = 1 0 4 8  ->
+     Save cursor as in DECSC.  (This may be dis- abled by the titeInhibit resource). Ps = 1 0 4 9  -> Save
+     cursor as in DECSC and use Alternate Screen Buffer, clearing it first.  (This may be disabled by the
+     titeInhibit resource).  This combines the effects of the 1 0 4 7  and 1 0 4 8  modes.  Use this with
+     terminfo-based applications rather than the 4 7  mode. Ps = 1 0 5 0  -> Set terminfo/termcap function-key
+     mode. Ps = 1 0 5 1  -> Set Sun function-key mode. Ps = 1 0 5 2  -> Set HP function-key mode. Ps = 1 0 5 3
+     -> Set SCO function-key mode. Ps = 1 0 6 0  -> Set legacy keyboard emulation (X11R6). Ps = 1 0 6 1  ->
+     Set VT220 keyboard emulation. Ps = 2 0 0 4  -> Set bracketed paste mode. Modes:
+     http://vt100.net/docs/vt220-rm/chapter4.html
 ```
 
    Example: Show cursor: 
@@ -740,7 +612,7 @@ same as CSI Ps B ?
   decset(...args: string[]): boolean
   /**
  * Uses [[setMode]] 2 5 to show the cursor:   
-  NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor 
+ * NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor 
  */
   showCursor(): boolean
 
@@ -872,10 +744,7 @@ CSI ? Pm l
 
   /**
 ```
- CSI Ps ; Ps r
-   Set Scrolling Region [top;bottom] (default = full size of win-
-   dow) (DECSTBM).
- CSI ? Pm r
+ CSI Ps ; Ps r Set Scrolling Region [top;bottom] (default = full size of win- dow) (DECSTBM). CSI ? Pm r
 ```
    */
   setScrollRegion(top: number, bottom: number): boolean
@@ -883,7 +752,7 @@ CSI ? Pm l
   csr(top: number, bottom: number): boolean
   /** @see [[setScrollRegion]]*/
   decstbm(top: number, bottom: number): boolean
-  /** 
+  /**
 ```
 CSI s
   Save cursor (ANSI.SYS). 
@@ -894,8 +763,7 @@ CSI s
   scA(): boolean
   /**
 ```
- CSI u
-   Restore cursor (ANSI.SYS).
+ CSI u Restore cursor (ANSI.SYS).
 ```
 
  */
@@ -917,26 +785,18 @@ CSI s
   sd(param?: number): boolean
   /** 
 ```
-   CSI Ps ; Ps ; Ps ; Ps ; Ps T
-   Initiate highlight mouse tracking.  Parameters are
-   [func;startx;starty;firstrow;lastrow].  See the section Mouse
-   Tracking. 
+   CSI Ps ; Ps ; Ps ; Ps ; Ps T Initiate highlight mouse tracking.  Parameters are
+   [func;startx;starty;firstrow;lastrow].  See the section Mouse Tracking. 
 ```
    */
   initMouseTracking(...args: string[]): boolean
   /**
 ``` 
-   CSI > Ps; Ps T
-    Reset one or more features of the title modes to the default
-    value.  Normally, "reset" disables the feature.  It is possi-
-    ble to disable the ability to reset features by compiling a
-    different default for the title modes into xterm.
-      Ps = 0  -> Do not set window/icon labels using hexadecimal.
-      Ps = 1  -> Do not query window/icon labels using hexadeci-
-      mal.
-      Ps = 2  -> Do not set window/icon labels using UTF-8.
-      Ps = 3  -> Do not query window/icon labels using UTF-8.
-    (See discussion of "Title Modes").
+   CSI > Ps; Ps T Reset one or more features of the title modes to the default value.  Normally, "reset"
+    disables the feature.  It is possi- ble to disable the ability to reset features by compiling a different
+    default for the title modes into xterm. Ps = 0  -> Do not set window/icon labels using hexadecimal. Ps = 1
+    -> Do not query window/icon labels using hexadeci- mal. Ps = 2  -> Do not set window/icon labels using
+    UTF-8. Ps = 3  -> Do not query window/icon labels using UTF-8. (See discussion of "Title Modes").
 ```
    */
   resetTitleModes(...args: string[]): boolean
@@ -978,14 +838,10 @@ CSI s
   /**
    * 
 ```
-  CSI > Ps p
-Set resource value pointerMode.  This is used by xterm to
-decide whether to hide the pointer cursor as the user types.
-Valid values for the parameter:
-  Ps = 0  -> never hide the pointer.
-  Ps = 1  -> hide if the mouse tracking mode is not enabled.
-  Ps = 2  -> always hide the pointer.  If no parameter is
-  given, xterm uses the default, which is 1 . 
+  CSI > Ps p Set resource value pointerMode.  This is used by xterm to decide whether to hide the pointer
+  cursor as the user types. Valid values for the parameter: Ps = 0  -> never hide the pointer. Ps = 1  -> hide
+  if the mouse tracking mode is not enabled. Ps = 2  -> always hide the pointer.  If no parameter is given,
+  xterm uses the default, which is 1 . 
 
 ```
   */
@@ -1007,15 +863,10 @@ Valid values for the parameter:
   loadLEDs(param?: number): boolean
   decll(param?: number): boolean
 
-  /** 
+  /**
 ```
-CSI Ps SP q
-Set cursor style (DECSCUSR, VT520).
- Ps = 0  -> blinking block.
- Ps = 1  -> blinking block (default).
- Ps = 2  -> steady block.
- Ps = 3  -> blinking underline.
- Ps = 4  -> steady underline.
+CSI Ps SP q Set cursor style (DECSCUSR, VT520). Ps = 0  -> blinking block. Ps = 1  -> blinking block
+(default). Ps = 2  -> steady block. Ps = 3  -> blinking underline. Ps = 4  -> steady underline.
 ```
    */
   setCursorStyle(
@@ -1040,12 +891,9 @@ Set cursor style (DECSCUSR, VT520).
 
   /**
 ```
-   CSI Ps " q
-  Select character protection attribute (DECSCA).  Valid values
-  for the parameter:
-    Ps = 0  -> DECSED and DECSEL can erase (default).
-    Ps = 1  -> DECSED and DECSEL cannot erase.
-    Ps = 2  -> DECSED and DECSEL can erase.
+   CSI Ps " q Select character protection attribute (DECSCA).  Valid values for the parameter: Ps = 0  ->
+   DECSED and DECSEL can erase (default). Ps = 1  -> DECSED and DECSEL cannot erase. Ps = 2  -> DECSED and
+   DECSEL can erase.
 ```
    */
   setCharProtectionAttr(param?: number): boolean
@@ -1053,20 +901,17 @@ Set cursor style (DECSCUSR, VT520).
   decsca(param?: number): boolean
   /**
 ```
-  CSI ? Pm r
-    Restore DEC Private Mode Values.  The value of Ps previously
-    saved is restored.  Ps values are the same as for DECSET. 
+  CSI ? Pm r Restore DEC Private Mode Values.  The value of Ps previously saved is restored.  Ps values are
+  the same as for DECSET. 
 ```
     */
   restorePrivateValues(...args: string[]): boolean
 
   /**
 ```
-   * CSI Pt; Pl; Pb; Pr; Ps$ r
-  Change Attributes in Rectangular Area (DECCARA), VT400 and up.
-    Pt; Pl; Pb; Pr denotes the rectangle.
-    Ps denotes the SGR attributes to change: 0, 1, 4, 5, 7.
-NOTE: xterm doesn't enable this code by default.
+   * CSI Pt; Pl; Pb; Pr; Ps$ r Change Attributes in Rectangular Area (DECCARA), VT400 and up. Pt; Pl; Pb; Pr
+   * denotes the rectangle. Ps denotes the SGR attributes to change: 0, 1, 4, 5, 7. NOTE: xterm doesn't enable
+   * this code by default.
 ```
    */
   setAttrInRectangle(Pt: number, Pl: number, Pb: number, Pr: number, Ps$: number): boolean
@@ -1077,62 +922,34 @@ NOTE: xterm doesn't enable this code by default.
   savePrivateValues(...args: string[]): boolean
 
   /**
-   * 
+
 ```
-    CSI Ps ; Ps ; Ps t
-   Window manipulation (from dtterm, as well as extensions).
-   These controls may be disabled using the allowWindowOps
-   resource.  Valid values for the first (and any additional
-   parameters) are:
+    CSI Ps ; Ps ; Ps t Window manipulation (from dtterm, as well as extensions). These controls may be
+    disabled using the allowWindowOps resource.  Valid values for the first (and any additional parameters)
+    are:
   ```
-     Ps = 1  -> De-iconify window.
-     Ps = 2  -> Iconify window.
-     Ps = 3  ;  x ;  y -> Move window to [x, y].
-     Ps = 4  ;  height ;  width -> Resize the xterm window to
-     height and width in pixels.
-     Ps = 5  -> Raise the xterm window to the front of the stack-
-     ing order.
-     Ps = 6  -> Lower the xterm window to the bottom of the
-     stacking order.
-     Ps = 7  -> Refresh the xterm window.
-     Ps = 8  ;  height ;  width -> Resize the text area to
-     [height;width] in characters.
-     Ps = 9  ;  0  -> Restore maximized window.
-     Ps = 9  ;  1  -> Maximize window (i.e., resize to screen
-     size).
-     Ps = 1 0  ;  0  -> Undo full-screen mode.
-     Ps = 1 0  ;  1  -> Change to full-screen.
-     Ps = 1 1  -> Report xterm window state.  If the xterm window
-     is open (non-iconified), it returns CSI 1 t .  If the xterm
-     window is iconified, it returns CSI 2 t .
-     Ps = 1 3  -> Report xterm window position.  Result is CSI 3
-     ; x ; y t
-     Ps = 1 4  -> Report xterm window in pixels.  Result is CSI
-     4  ;  height ;  width t
-     Ps = 1 8  -> Report the size of the text area in characters.
-     Result is CSI  8  ;  height ;  width t
-     Ps = 1 9  -> Report the size of the screen in characters.
-     Result is CSI  9  ;  height ;  width t
-     Ps = 2 0  -> Report xterm window's icon label.  Result is
-     OSC  L  label ST
-     Ps = 2 1  -> Report xterm window's title.  Result is OSC  l
-     label ST
-     Ps = 2 2  ;  0  -> Save xterm icon and window title on
-     stack.
-     Ps = 2 2  ;  1  -> Save xterm icon title on stack.
-     Ps = 2 2  ;  2  -> Save xterm window title on stack.
-     Ps = 2 3  ;  0  -> Restore xterm icon and window title from
-     stack.
-     Ps = 2 3  ;  1  -> Restore xterm icon title from stack.
-     Ps = 2 3  ;  2  -> Restore xterm window title from stack.
-     Ps >= 2 4  -> Resize to Ps lines (DECSLPP).
-     Ps >= 2 4  -> Resize to Ps lines (DECSLPP).
+     Ps = 1  -> De-iconify window. Ps = 2  -> Iconify window. Ps = 3  ;  x ;  y -> Move window to [x, y]. Ps =
+     4  ;  height ;  width -> Resize the xterm window to height and width in pixels. Ps = 5  -> Raise the
+     xterm window to the front of the stack- ing order. Ps = 6  -> Lower the xterm window to the bottom of the
+     stacking order. Ps = 7  -> Refresh the xterm window. Ps = 8  ;  height ;  width -> Resize the text area
+     to [height;width] in characters. Ps = 9  ;  0 -> Restore maximized window. Ps = 9  ;  1  -> Maximize
+     window (i.e., resize to screen size). Ps = 1 0  ;  0  -> Undo full-screen mode. Ps = 1 0  ;  1  -> Change
+     to full-screen. Ps = 1 1  -> Report xterm window state.  If the xterm window is open (non-iconified), it
+     returns CSI 1 t .  If the xterm window is iconified, it returns CSI 2 t . Ps = 1 3  -> Report xterm
+     window position.  Result is CSI 3; x ; y t Ps = 1 4  -> Report xterm window in pixels.  Result is CSI 4
+     ;  height ;  width t Ps = 1 8  -> Report the size of the text area in characters. Result is CSI  8  ;
+     height ;  width t Ps = 1 9  -> Report the size of the screen in characters. Result is CSI  9  ;  height ;
+     width t Ps = 2 0  -> Report xterm window's icon label.  Result is OSC  L  label ST Ps = 2 1  -> Report
+     xterm window's title.  Result is OSC  l label ST Ps = 2 2  ;  0  -> Save xterm icon and window title on
+     stack. Ps = 2 2  ;  1  -> Save xterm icon title on stack. Ps = 2 2  ;  2  -> Save xterm window title on
+     stack. Ps = 2 3  ;  0  -> Restore xterm icon and window title from stack. Ps = 2 3  ;  1 -> Restore xterm
+     icon title from stack. Ps = 2 3  ;  2  -> Restore xterm window title from stack. Ps >= 2 4  -> Resize to
+     Ps lines (DECSLPP). Ps >= 2 4  -> Resize to Ps lines (DECSLPP).
 ```
 ```
     Example call: 
 ```
-program.manipulateWindow(18, function(err:any, data:any) {
-  program.log('manipulateWindow', data);
+    program.manipulateWindow(18, function(err:any, data:any) {program.log('manipulateWindow', data);
 });
 
 ```
@@ -1155,7 +972,7 @@ program.manipulateWindow(18, function(err:any, data:any) {
     Ps = 2  -> Set window/icon labels using UTF-8.
     Ps = 3  -> Query window/icon labels using UTF-8.  (See dis-
     cussion of "Title Modes")
-XXX VTE bizarelly echos this:
+  XXX VTE bizarelly echos this:
 ```
 */
   setTitleModeFeature(...args: string[]): boolean
@@ -1166,32 +983,23 @@ XXX VTE bizarelly echos this:
   setMarginBellVolume(param?: number): boolean
   /**
    *```
-   CSI Pt; Pl; Pb; Pr; Pp; Pt; Pl; Pp$ v
-     Copy Rectangular Area (DECCRA, VT400 and up).
-       Pt; Pl; Pb; Pr denotes the rectangle.
-       Pp denotes the source page.
-       Pt; Pl denotes the target location.
-       Pp denotes the target page.
-   NOTE: xterm doesn't enable this code by default.
+   CSI Pt; Pl; Pb; Pr; Pp; Pt; Pl; Pp$ v Copy Rectangular Area (DECCRA, VT400 and up). Pt; Pl; Pb; Pr denotes
+     the rectangle. Pp denotes the source page. Pt; Pl denotes the target location. Pp denotes the target
+     page. NOTE: xterm doesn't enable this code by default.
 ```
    */
   copyRectangle(...args: string[]): boolean
   /**  @see [[copyRectangle]]  */
   deccra(...args: string[]): boolean
 
-  /** 
+  /**
    * ```
- CSI Pt ; Pl ; Pb ; Pr ' w
-   Enable Filter Rectangle (DECEFR), VT420 and up.
-   Parameters are [top;left;bottom;right].
-   Defines the coordinates of a filter rectangle and activates
-   it.  Anytime the locator is detected outside of the filter
-   rectangle, an outside rectangle event is generated and the
-   rectangle is disabled.  Filter rectangles are always treated
-   as "one-shot" events.  Any parameters that are omitted default
-   to the current locator position.  If all parameters are omit-
-   ted, any locator motion will be reported.  DECELR always can-
-   cels any prevous rectangle definition.
+ CSI Pt ; Pl ; Pb ; Pr ' w Enable Filter Rectangle (DECEFR), VT420 and up. Parameters are
+   [top;left;bottom;right]. Defines the coordinates of a filter rectangle and activates it.  Anytime the
+   locator is detected outside of the filter rectangle, an outside rectangle event is generated and the
+   rectangle is disabled. Filter rectangles are always treated as "one-shot" events.  Any parameters that are
+   omitted default to the current locator position.  If all parameters are omit- ted, any locator motion will
+   be reported.  DECELR always can- cels any prevous rectangle definition.
 ```
    */
   enableFilterRectangle(...args: string[]): boolean
@@ -1218,11 +1026,9 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
   decreqtparm(param: number): boolean
   /**
 ```
-   
-    CSI Ps x  Select Attribute Change Extent (DECSACE).
-      Ps = 0  -> from start to end position, wrapped.
-      Ps = 1  -> from start to end position, wrapped.
-      Ps = 2  -> rectangle (exact).
+
+    CSI Ps x  Select Attribute Change Extent (DECSACE). Ps = 0  -> from start to end position, wrapped. Ps = 1
+      -> from start to end position, wrapped. Ps = 2 -> rectangle (exact).
 ```
    */
   selectChangeExtent(param?: number): boolean
@@ -1231,11 +1037,8 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
 
   /**
 ```
-    CSI Pc; Pt; Pl; Pb; Pr$ x
-  Fill Rectangular Area (DECFRA), VT420 and up.
-    Pc is the character to use.
-    Pt; Pl; Pb; Pr denotes the rectangle.
-NOTE: xterm doesn't enable this code by default.
+    CSI Pc; Pt; Pl; Pb; Pr$ x Fill Rectangular Area (DECFRA), VT420 and up. Pc is the character to use. Pt;
+    Pl; Pb; Pr denotes the rectangle. NOTE: xterm doesn't enable this code by default.
 ```
    */
   fillRectangle(Pc: string, Pt: number, pl: number, pb: number, pr: number): boolean
@@ -1273,48 +1076,27 @@ CSI Ps ; Pu ' z
   decsera(...args: string[]): boolean
   /**
 ```
-  CSI Ps ' |
-     Request Locator Position (DECRQLP).
-     Valid values for the parameter are:
-       Ps = 0 , 1 or omitted -> transmit a single DECLRP locator
-       report.
-  
-     If Locator Reporting has been enabled by a DECELR, xterm will
-     respond with a DECLRP Locator Report.  This report is also
-     generated on button up and down events if they have been
-     enabled with a DECSLE, or when the locator is detected outside
-     of a filter rectangle, if filter rectangles have been enabled
-     with a DECEFR.
-  
+  CSI Ps ' | Request Locator Position (DECRQLP). Valid values for the parameter are: Ps = 0 , 1 or omitted ->
+  transmit a single DECLRP locator report.
+
+     If Locator Reporting has been enabled by a DECELR, xterm will respond with a DECLRP Locator Report.  This
+     report is also generated on button up and down events if they have been enabled with a DECSLE, or when
+     the locator is detected outside of a filter rectangle, if filter rectangles have been enabled with a
+     DECEFR.
+
        -> CSI Pe ; Pb ; Pr ; Pc ; Pp &  w
-  
-     Parameters are [event;button;row;column;page].
-     Valid values for the event:
-       Pe = 0  -> locator unavailable - no other parameters sent.
-       Pe = 1  -> request - xterm received a DECRQLP.
-       Pe = 2  -> left button down.
-       Pe = 3  -> left button up.
-       Pe = 4  -> middle button down.
-       Pe = 5  -> middle button up.
-       Pe = 6  -> right button down.
-       Pe = 7  -> right button up.
-       Pe = 8  -> M4 button down.
-       Pe = 9  -> M4 button up.
-       Pe = 1 0  -> locator outside filter rectangle.
-  ``button'' parameter is a bitmask indicating which buttons are
-       pressed:
-       Pb = 0  <- no buttons down.
-       Pb & 1  <- right button down.
-       Pb & 2  <- middle button down.
-       Pb & 4  <- left button down.
-       Pb & 8  <- M4 button down.
-  ``row'' and``column'' parameters are the coordinates of the
-       locator position in the xterm window, encoded as ASCII deci-
-       mal.
-     The``page'' parameter is not used by xterm, and will be omit-
-     ted.
+
+     Parameters are [event;button;row;column;page]. Valid values for the event: Pe = 0  -> locator unavailable
+     - no other parameters sent. Pe = 1  -> request - xterm received a DECRQLP. Pe = 2  -> left button down.
+     Pe = 3  -> left button up. Pe = 4  -> middle button down. Pe = 5  -> middle button up. Pe = 6  -> right
+     button down. Pe = 7  -> right button up. Pe = 8  -> M4 button down. Pe = 9  -> M4 button up. Pe = 1 0  ->
+     locator outside filter rectangle. ``button'' parameter is a bitmask indicating which buttons are pressed:
+     Pb = 0  <- no buttons down. Pb & 1  <- right button down. Pb & 2  <- middle button down. Pb & 4  <- left
+     button down. Pb & 8  <- M4 button down. ``row'' and``column'' parameters are the coordinates of the
+     locator position in the xterm window, encoded as ASCII deci- mal. The``page'' parameter is not used by
+     xterm, and will be omit- ted.
 ```
-  
+
    */
   requestLocatorPosition(param?: string, callback?: ProgramResponseCallback): boolean
   /** @see [[requestLocatorPosition]] */
@@ -1324,11 +1106,10 @@ CSI Ps ; Pu ' z
   /** @see [[requestLocatorPosition]] */
   decrqlp(param?: string, callback?: ProgramResponseCallback): boolean
 
-  /** 
+  /**
 ```
- CSI P m SP }
- Insert P s Column(s) (default = 1) (DECIC), VT420 and up.
- NOTE: xterm doesn't enable this code by default. 
+ CSI P m SP } Insert P s Column(s) (default = 1) (DECIC), VT420 and up. NOTE: xterm doesn't enable this code
+ by default. 
 ```
 */
   insertColumns(...args: string[]): boolean
@@ -1337,9 +1118,8 @@ CSI Ps ; Pu ' z
 
   /**
 ```
- CSI P m SP ~
- Delete P s Column(s) (default = 1) (DECDC), VT420 and up
- NOTE: xterm doesn't enable this code by default.
+ CSI P m SP ~ Delete P s Column(s) (default = 1) (DECDC), VT420 and up NOTE: xterm doesn't enable this code by
+ default.
 ```
    */
   deleteColumns(...args: string[]): boolean
@@ -1359,9 +1139,13 @@ CSI Ps ; Pu ' z
   //  on(e: 'response', c: (e: any) => void): this
   /** triggered when the terminal window is resized. */
   on(e: 'resize', c: (e: { winch: boolean; cols: number; rows: number }) => void): this
-  /** triggered when the terminal window gains focus n the host window manager. For exmmple when the user switchst form another application to the terminal with ctrl-tab.  Notice that these are native events, ocurring outside the terminal application.*/
+  /** triggered when the terminal window gains focus n the host window manager. For exmmple when the user
+   * switchst form another application to the terminal with ctrl-tab.  Notice that these are native events,
+   * ocurring outside the terminal application.*/
   on(e: 'focus', c: (e: any) => void): this
-  /** triggered when the terminal window loose focus host window manager. For exmmple when the user switchs from the shell to another form another application . Notice that these are native events, ocurring outside the terminal application. */
+  /** triggered when the terminal window loose focus host window manager. For exmmple when the user switchs
+   * from the shell to another form another application . Notice that these are native events, ocurring
+   * outside the terminal application. */
   on(e: 'blur', c: (e: any) => void): this
 
   on(e: 'keypress', c: Widgets.KeyEventListener): this
@@ -1397,39 +1181,33 @@ export namespace Widgets {
     // interface TBorder {
     //   /**
     //    * Type of border (line or bg). bg by default.
-    //    */
+    //      */
     //   type?: BorderType
 
-    //   /**
+    //    /**
     //    * Character to use if bg type, default is space.
-    //    */
-    //   ch?: string
+    //      */
+    //    ch?: string
 
-    //   /**
+    //    /**
     //    * Border foreground and background, must be numbers (-1 for default).
-    //    */
-    //   bg?: number
-    //   fg?: number
+    //      */
+    //    bg?: number fg?: number
 
-    //   /**
+    //    /**
     //    * Border attributes.
-    //    */
-    //   bold?: boolean
-    //   underline?: boolean
+    //      */
+    //    bold?: boolean underline?: boolean
 
-    //   top?: boolean
-    //   left?: boolean
-    //   right?: boolean
-    //   bottom?: boolean
-    // }
+    //   top?: boolean left?: boolean right?: boolean bottom?: boolean
+    //   }
 
     export interface TStyle {
       /** artificial type for user custom data (it doesn't exists just a type) */
       custom?: { [name: string]: any }
       overflow?: 'hidden'
 
-      // leave it open for custom style properties
-      // [name: string]: any
+      // leave it open for custom style properties [name: string]: any
       bg?: Color
       fg?: Color
       bold?: boolean
@@ -1717,7 +1495,8 @@ export namespace Widgets {
     screen: Screen
 
     /**
-     * Parent node. If null it means the element is not attached to any screen or program, or the node is a Screen.
+     * Parent node. If null it means the element is not attached to any screen or program, or the node is a
+     * Screen.
      */
     parent?: Node
 
@@ -1762,7 +1541,8 @@ export namespace Widgets {
     detach(): void
     free(): void
     /**
-     * Visit each node's descendants, with [[iter]] function,  parents first. If `s` is provided it will call [[iter]] on self first.
+     * Visit each node's descendants, with [[iter]] function,  parents first. If `s` is provided it will call
+     * [[iter]] on self first.
      */
     forDescendants(iter: (node: Node) => void, s?: boolean): void
     forAncestors(iter: (node: Node) => void, s?: boolean): void
@@ -1770,14 +1550,16 @@ export namespace Widgets {
     collectAncestors(s?: boolean): void
 
     /**
-     * Emit event for element, and recursively emit same event for all descendants. If `s` is provided it will call [[iter]] on self first.
+     * Emit event for element, and recursively emit same event for all descendants. If `s` is provided it will
+     * call [[iter]] on self first.
      */
     emitDescendants(type?: string, ...args: any[]): void
     emitAncestors(): void
     hasDescendant<T extends Node = Node>(target: Node): Node
     hasAncestor<T extends Node = Node>(target: Node): Node
     /**
-     * [[detach]]() this node from its parent, and will also detach and destroy each of its descendant nodes each of them emitting [[destory]] event also.
+     * [[detach]]() this node from its parent, and will also detach and destroy each of its descendant nodes
+     * each of them emitting [[destory]] event also.
      */
     destroy(): void
 
@@ -1791,7 +1573,8 @@ export namespace Widgets {
      */
     set(name: string, value: any): void
 
-    /** Received when node gains a new parent. If the node was detached from the sreen, newParent will be undefined. */
+    /** Received when node gains a new parent. If the node was detached from the sreen, newParent will be
+     * undefined. */
     on(event: 'reparent', listener: (this: this, newParent?: Node) => void): void
     /** emitted by a parent node when adding a new chhild node. */
     on(event: 'adopt', listener: (this: this, newChildren: Node) => void): void
@@ -1806,13 +1589,13 @@ export namespace Widgets {
 
   type NodeScreenEventType =
     /**
-     * Received when the terminal window focuses/blurs. Requires a terminal supporting the
-     * focus protocol and focus needs to be passed to program.enableMouse().
+     * Received when the terminal window focuses/blurs. Requires a terminal supporting the focus protocol and
+     * focus needs to be passed to program.enableMouse().
      */
     | 'focus'
     /**
-     * Received when the terminal window focuses/blurs. Requires a terminal supporting the
-     * focus protocol and focus needs to be passed to program.enableMouse().
+     * Received when the terminal window focuses/blurs. Requires a terminal supporting the focus protocol and
+     * focus needs to be passed to program.enableMouse().
      */
     | 'blur'
     /**
@@ -1905,16 +1688,16 @@ export namespace Widgets {
     smartCSR?: boolean
 
     /**
-     * Do CSR on any element within 20 cols of the screen edge on either side. Faster than smartCSR,
-     * but may cause flickering depending on what is on each side of the element.
+     * Do CSR on any element within 20 cols of the screen edge on either side. Faster than smartCSR, but may
+     * cause flickering depending on what is on each side of the element.
      */
     fastCSR?: boolean
 
     /**
-     * Attempt to perform back_color_erase optimizations for terminals that support it. It will also work
-     * with terminals that don't support it, but only on lines with the default background color. As it
-     * stands with the current implementation, it's uncertain how much terminal performance this adds at
-     * the cost of overhead within node.
+     * Attempt to perform back_color_erase optimizations for terminals that support it. It will also work with
+     * terminals that don't support it, but only on lines with the default background color. As it stands with
+     * the current implementation, it's uncertain how much terminal performance this adds at the cost of
+     * overhead within node.
      */
     useBCE?: boolean
 
@@ -1953,15 +1736,15 @@ export namespace Widgets {
     debug?: boolean
 
     /**
-     * Instance of the debug console that is enabled when calling debug options is actuve and key f12 is pressed.
-     * Useful to programmatically access it in case keys don't wonk.
+     * Instance of the debug console that is enabled when calling debug options is actuve and key f12 is
+     * pressed. Useful to programmatically access it in case keys don't wonk.
      * @internal
      */
     debugLog?: Log
 
     /**
-     * Array of keys in their full format (e.g. C-c) to ignore when keys are locked or grabbed. Useful
-     * for creating a key that will always exit no matter whether the keys are locked.
+     * Array of keys in their full format (e.g. C-c) to ignore when keys are locked or grabbed. Useful for
+     * creating a key that will always exit no matter whether the keys are locked.
      */
     ignoreLocked?: boolean
 
@@ -1972,18 +1755,18 @@ export namespace Widgets {
     dockBorders?: boolean
 
     /**
-     * Normally, dockable borders will not dock if the colors or attributes are different. This option
-     * will allow them to dock regardless. It may produce some odd looking multi-colored borders though.
+     * Normally, dockable borders will not dock if the colors or attributes are different. This option will
+     * allow them to dock regardless. It may produce some odd looking multi-colored borders though.
      */
     ignoreDockContrast?: boolean
 
     /**
      * Allow for rendering of East Asian double-width characters, utf-16 surrogate pairs, and unicode
-     * combining characters. This allows you to display text above the basic multilingual plane. This
-     * is behind an option because it may affect performance slightly negatively. Without this option
-     * enabled, all double-width, surrogate pair, and combining characters will be replaced by '??',
-     * '?', '' respectively. (NOTE: iTerm2 cannot display combining characters properly. Blessed simply
-     * removes them from an element's content if iTerm2 is detected).
+     * combining characters. This allows you to display text above the basic multilingual plane. This is
+     * behind an option because it may affect performance slightly negatively. Without this option enabled,
+     * all double-width, surrogate pair, and combining characters will be replaced by '??', '?', ''
+     * respectively. (NOTE: iTerm2 cannot display combining characters properly. Blessed simply removes them
+     * from an element's content if iTerm2 is detected).
      */
     fullUnicode?: boolean
 
@@ -1998,20 +1781,20 @@ export namespace Widgets {
     warnings?: boolean
 
     /**
-     * Force blessed to use unicode even if it is not detected via terminfo, env variables, or windows code page.
-     * If value is true unicode is forced. If value is false non-unicode is forced (default: null).
+     * Force blessed to use unicode even if it is not detected via terminfo, env variables, or windows code
+     * page. If value is true unicode is forced. If value is false non-unicode is forced (default: null).
      */
     forceUnicode?: boolean
 
     /**
-     * Input and output streams. process.stdin/process.stdout by default, however, it could be a
-     * net.Socket if you want to make a program that runs over telnet or something of that nature.
+     * Input and output streams. process.stdin/process.stdout by default, however, it could be a net.Socket if
+     * you want to make a program that runs over telnet or something of that nature.
      */
     input?: stream.Writable
 
     /**
-     * Input and output streams. process.stdin/process.stdout by default, however, it could be a
-     * net.Socket if you want to make a program that runs over telnet or something of that nature.
+     * Input and output streams. process.stdin/process.stdout by default, however, it could be a net.Socket if
+     * you want to make a program that runs over telnet or something of that nature.
      */
     output?: stream.Readable
 
@@ -2112,15 +1895,25 @@ export namespace Widgets {
   }
 
   /**
-   * The screen on which every other node renders. Can be compared wih the DOM document and manages many aspects of its descendants such as :
+   * Internal representation of screen lines.
+   * @internal
+   */
+  type Line = [number, string]
+
+  /**
+   * The screen on which every other node renders. Can be compared wih the DOM document and manages many
+   * aspects of its descendants such as :
    *
    * ## Focus:
    *
-   * The focus of all its descendant Elements is managed by the Screen, which adds any [[focusable]] node an index, in order of evaluation.
+   * The focus of all its descendant Elements is managed by the Screen, which adds any [[focusable]] node an
+   * index, in order of evaluation.
    *
-   * Focus can be changed using mehods public methods like [[focusPrevious]], [[focusNext]], Also it support focusing elements in a region and save/restor the focus state.
+   * Focus can be changed using mehods public methods like [[focusPrevious]], [[focusNext]], Also it support
+   * focusing elements in a region and save/restor the focus state.
    *
-   * Lsteners can be subscribed for focus changes with evenst [[focus]] and [[blur]]. The current focused element, if any, is available in attribtue [[focused]]
+   * Lsteners can be subscribed for focus changes with evenst [[focus]] and [[blur]]. The current focused
+   * element, if any, is available in attribtue [[focused]]
    *
    * A common scenario is to call focusNext or focusPrev on certain key presses (tab, S-tab).
    */
@@ -2128,9 +1921,11 @@ export namespace Widgets {
     constructor(opts: IScreenOptions)
 
     /**
-     * Parse the sides of an element to determine whether an element has uniform cells on both sides.
-     * If it does, we can use CSR to optimize scrolling on a scrollable element. Not exactly sure how worthwile this is.
-     * This will cause a performance/cpu-usage hit, but will it be less or greater than the performance hit of slow-rendering scrollable boxes with clean sides? */
+     * Parse the sides of an element to determine whether an element has uniform cells on both sides. If it
+     * does, we can use CSR to optimize scrolling on a scrollable element. Not exactly sure how worthwile this
+     * is. This will cause a performance/cpu-usage hit, but will it be less or greater than the performance
+     * hit of slow-rendering scrollable boxes with clean sides? 
+     */
     cleanSides(el: Widgets.BlessedElement): boolean
 
     /** true is the terminal was destroyed. @internal.  */
@@ -2157,16 +1952,16 @@ export namespace Widgets {
     smartCSR: boolean
 
     /**
-     * Do CSR on any element within 20 cols of the screen edge on either side. Faster than smartCSR,
-     * but may cause flickering depending on what is on each side of the element.
+     * Do CSR on any element within 20 cols of the screen edge on either side. Faster than smartCSR, but may
+     * cause flickering depending on what is on each side of the element.
      */
     fastCSR: boolean
 
     /**
-     * Attempt to perform back_color_erase optimizations for terminals that support it. It will also work
-     * with terminals that don't support it, but only on lines with the default background color. As it
-     * stands with the current implementation, it's uncertain how much terminal performance this adds at
-     * the cost of overhead within node.
+     * Attempt to perform back_color_erase optimizations for terminals that support it. It will also work with
+     * terminals that don't support it, but only on lines with the default background color. As it stands with
+     * the current implementation, it's uncertain how much terminal performance this adds at the cost of
+     * overhead within node.
      */
     useBCE: boolean
 
@@ -2194,8 +1989,8 @@ export namespace Widgets {
     dump: string
 
     /**
-     * Array of keys in their full format (e.g. C-c) to ignore when keys are locked or grabbed. Useful
-     * for creating a key that will always exit no matter whether the keys are locked.
+     * Array of keys in their full format (e.g. C-c) to ignore when keys are locked or grabbed. Useful for
+     * creating a key that will always exit no matter whether the keys are locked.
      */
     ignoreLocked: boolean
 
@@ -2206,18 +2001,18 @@ export namespace Widgets {
     dockBorders: boolean
 
     /**
-     * Normally, dockable borders will not dock if the colors or attributes are different. This option
-     * will allow them to dock regardless. It may produce some odd looking multi-colored borders though.
+     * Normally, dockable borders will not dock if the colors or attributes are different. This option will
+     * allow them to dock regardless. It may produce some odd looking multi-colored borders though.
      */
     ignoreDockContrast: boolean
 
     /**
      * Allow for rendering of East Asian double-width characters, utf-16 surrogate pairs, and unicode
-     * combining characters. This allows you to display text above the basic multilingual plane. This
-     * is behind an option because it may affect performance slightly negatively. Without this option
-     * enabled, all double-width, surrogate pair, and combining characters will be replaced by '??',
-     * '?', '' respectively. (NOTE: iTerm2 cannot display combining characters properly. Blessed simply
-     * removes them from an element's content if iTerm2 is detected).
+     * combining characters. This allows you to display text above the basic multilingual plane. This is
+     * behind an option because it may affect performance slightly negatively. Without this option enabled,
+     * all double-width, surrogate pair, and combining characters will be replaced by '??', '?', ''
+     * respectively. (NOTE: iTerm2 cannot display combining characters properly. Blessed simply removes them
+     * from an element's content if iTerm2 is detected).
      */
     fullUnicode: boolean
 
@@ -2232,20 +2027,20 @@ export namespace Widgets {
     warnings: boolean
 
     /**
-     * Force blessed to use unicode even if it is not detected via terminfo, env variables, or windows code page.
-     * If value is true unicode is forced. If value is false non-unicode is forced (default: null).
+     * Force blessed to use unicode even if it is not detected via terminfo, env variables, or windows code
+     * page. If value is true unicode is forced. If value is false non-unicode is forced (default: null).
      */
     forceUnicode: boolean
 
     /**
-     * Input and output streams. process.stdin/process.stdout by default, however, it could be a
-     * net.Socket if you want to make a program that runs over telnet or something of that nature.
+     * Input and output streams. process.stdin/process.stdout by default, however, it could be a net.Socket if
+     * you want to make a program that runs over telnet or something of that nature.
      */
     input: stream.Writable
 
     /**
-     * Input and output streams. process.stdin/process.stdout by default, however, it could be a
-     * net.Socket if you want to make a program that runs over telnet or something of that nature.
+     * Input and output streams. process.stdin/process.stdout by default, however, it could be a net.Socket if
+     * you want to make a program that runs over telnet or something of that nature.
      */
     output: stream.Readable
 
@@ -2345,7 +2140,7 @@ export namespace Widgets {
     title: string
 
     /** Internal Screen buffer of current lines. Exposed for debug purpuses. @internal */
-    lines: string[]
+    lines: Line[][]
 
     /**
      * Write string to the log file if one was created.
@@ -2373,7 +2168,9 @@ export namespace Widgets {
     draw(start: number, end: number): void
 
     /**
-     * Resets the focus, buffers, clear the sreen, alloc new memory, reset the keypad keys, stop listening to the mouse, etc. But won't emit destroy or other events nor unregister any listener. (I guess is like a reset)
+     * Resets the focus, buffers, clear the sreen, alloc new memory, reset the keypad keys, stop listening to
+     * the mouse, etc. But won't emit destroy or other events nor unregister any listener. (I guess is like a
+     * reset)
      * @internal
      */
     leave(): void
@@ -2444,7 +2241,8 @@ export namespace Widgets {
     spawn(file: string, args?: string[], options?: NodeChildProcessExecOptions): child_process.ChildProcess
 
     /**
-     * Spawn a process in the foreground, return to blessed app after exit. Executes callback on error or exit.
+     * Spawn a process in the foreground, return to blessed app after exit. Executes callback on error or
+     * exit.
      */
     exec(
       file: string,
@@ -2533,16 +2331,16 @@ export namespace Widgets {
     cursorReset(): void
 
     /**
-     * Take an SGR screenshot of the screen within the region. Returns a string containing only
-     * characters and SGR codes. Can be displayed by simply echoing it in a terminal.
+     * Take an SGR screenshot of the screen within the region. Returns a string containing only characters and
+     * SGR codes. Can be displayed by simply echoing it in a terminal.
      */
     screenshot(xi: number, xl: number, yi: number, yl: number): string
     screenshot(): void
 
     /**
-     * Destroy the screen object and remove it from the global list. Also remove all global events relevant
-     * to the screen object. If all screen objects are destroyed, the node process is essentially reset
-     * to its initial state.
+     * Destroy the screen object and remove it from the global list. Also remove all global events relevant to
+     * the screen object. If all screen objects are destroyed, the node process is essentially reset to its
+     * initial state.
      */
     destroy(): void
 
@@ -2576,13 +2374,34 @@ export namespace Widgets {
   }
 
   interface ElementOptions extends INodeOptions {
+    /**
+     * Enables tags syntax for content text.
+     */
     tags?: boolean
 
+    /**
+     * Foreground color (text).
+     */
     fg?: Color
+
+    /**
+     * Background color.
+     */
     bg?: Color
+
+    /**
+     * Content text with bold style.
+     */
     bold?: boolean
+
+    /**
+     * Content text with underline style.
+     */
     underline?: boolean
 
+    /**
+     * Style for this element.
+     */
     style?: Widgets.Types.TStyle
 
     /**
@@ -2604,6 +2423,10 @@ export namespace Widgets {
      * Element is focusable and can receive key input.
      */
     input?: boolean
+
+    /**
+     * Enable key events for this element.
+     */
     keyable?: boolean
 
     /**
@@ -2642,14 +2465,29 @@ export namespace Widgets {
     shrink?: boolean
 
     /**
-     * Amount of padding on the inside of the element. Can be a number or an object containing
-     * the properties: left, right, top, and bottom.
+     * Amount of padding on the inside of the element. Can be a number or an object containing the properties:
+     * left, right, top, and bottom.
      */
     padding?: number | Padding
 
+    /** 
+     * Element's top position.
+     */
     top?: Types.TTopLeft
+
+    /**
+     * Element's left position.
+     */
     left?: Types.TTopLeft
+
+    /**
+     * Element's right position.
+     */
     right?: Types.TPosition
+
+    /**
+     * Element's bottom position.
+     */
     bottom?: Types.TPosition
 
     /**
@@ -2659,9 +2497,8 @@ export namespace Widgets {
     width?: number | string
 
     /**
-     * Offsets of the element relative to its parent. Can be a number, percentage (0-100%), or
-     * keyword (center). right and bottom do not accept keywords. Percentages can also have
-     * offsets (50%+1, 50%-1).
+     * Offsets of the element relative to its parent. Can be a number, percentage (0-100%), or keyword
+     * (center). right and bottom do not accept keywords. Percentages can also have offsets (50%+1, 50%-1).
      */
     height?: number | string
 
@@ -2690,11 +2527,12 @@ export namespace Widgets {
      */
     shadow?: boolean
 
-    /** Miscelanus options. Currently JavaScript/Blessed allows to pass anything as option,
-     * this is just a bucket for TypeScript and have impact */
+    /** Miscelanus options. Currently JavaScript/Blessed allows to pass anything as option, this is just a
+     * bucket for TypeScript and have impact */
     _data?: { [name: string]: any }
 
-    /** `accursed` library custom support for React-like Refs. Declare the option here so it works out of the box. https://reactjs.org/docs/refs-and-the-dom.html. TODO: documentation */
+    /** `accursed` library custom support for React-like Refs. Declare the option here so it works out of the
+     * box. https://reactjs.org/docs/refs-and-the-dom.html. TODO: documentation */
     ref?: RefObject
   }
 
@@ -2720,27 +2558,36 @@ export namespace Widgets {
     side: Types.TAlign
   }
 
-  // TODO: scrollable - Note: If the scrollable option is enabled, Element inherits all methods from ScrollableBox.
+  // TODO: scrollable - Note: If the scrollable option is enabled, Element inherits all methods from
+  // ScrollableBox.
   /**
-   * Abstract base element. Elements are [[Node]] that are rendered visually so they have dimention, position, content,
-   * border, padding, etc.
+   * Abstract base element. Elements are [[Node]] that are rendered visually so they have dimention, position,
+   * content, border, padding, etc.
    *
    * ## Content Methods
    *
-   * * Methods for dealing with text content, line by line. Useful for writing a text editor,
-   * irc client, etc.
+   * * Methods for dealing with text content, line by line. Useful for writing a text editor, irc client, etc.
    *
-   * * Note: All of these methods deal with pre-aligned, pre-wrapped text. If you use deleteTop()
-   * on a box with a wrapped line at the top, it may remove 3-4 "real" lines (rows) depending
-   * on how long the original line was.
+   * * Note: All of these methods deal with pre-aligned, pre-wrapped text. If you use deleteTop() on a box
+   *   with a wrapped line at the top, it may remove 3-4 "real" lines (rows) depending on how long the
+   *   original line was.
    *
-   * * The lines parameter can be a string or an array of strings. The line parameter must
-   * be a string.
+   * * The lines parameter can be a string or an array of strings. The line parameter must be a string.
    */
   abstract class BlessedElement<Options extends ElementOptions = ElementOptions> extends NodeWithEvents
     implements IHasOptions<ElementOptions> {
-    shrink: boolean
+
     constructor(opts: Options)
+
+    /**
+     *  Shrink/flex/grow to content and child elements. Width/height during render.
+     */
+    shrink: boolean
+
+    /**
+     * The offset of the top of the scroll content. @internal
+     */
+    childBase: number
 
     /**
      * Original options object.
@@ -2757,14 +2604,21 @@ export namespace Widgets {
      */
     border: Widgets.Types.TBorder
 
-    /** Current element padding */
+    /** 
+     * Current element's padding. 
+     */
     padding: Required<Padding>
 
     style: Widgets.Types.TStyle
+
     position: Position
+
     content: string
+
     hidden: boolean
+
     // visible: boolean
+
     detached: boolean
 
     /**
@@ -2869,7 +2723,7 @@ export namespace Widgets {
     /**
      * Write content and children to the screen buffer.
      */
-    render(): Coords
+    render(): Coords|undefined
 
     /**
      * Hide element and triggers [[hide]] event
@@ -2892,33 +2746,35 @@ export namespace Widgets {
     focus(): void
 
     /**
-     * @internal parses given content string with no tags before rendering. Removes / transform characters that break the output . For example, double-width chars will eat the next char after render in this case it creates a blank character after it so it doesn't eat the real next char.
+     * Parses given content string with no tags before rendering. Removes / transform characters
+     * that break the output . For example, double-width chars will eat the next char after render in this
+     * case it creates a blank character after it so it doesn't eat the real next char.
+     * @internal
      */
     parseContent(noTags: string): boolean
 
     /**
-     * Same as el.on('screen', ...) except this will automatically keep track of which listeners
-     * are bound to the screen object. For use with removeScreenEvent(), free(), and destroy().
+     * Same as el.on('screen', ...) except this will automatically keep track of which listeners are bound to
+     * the screen object. For use with removeScreenEvent(), free(), and destroy().
      */
     onScreenEvent(type: string, handler: (...args: any[]) => void): void
 
     /**
-     * Same asel.removeListener('screen', ...) except this will automatically keep track of which
-     * listeners are bound to the screen object. For use with onScreenEvent(), free(), and destroy().
+     * Same asel.removeListener('screen', ...) except this will automatically keep track of which listeners
+     * are bound to the screen object. For use with onScreenEvent(), free(), and destroy().
      */
     removeScreenEvent(type: string, handler: (...args: any[]) => void): void
 
     /**
-     * Free up the element. Automatically unbind all events that may have been bound to the screen
-     * object. This prevents memory leaks. For use with onScreenEvent(), removeScreenEvent(),
-     * and destroy().
+     * Free up the element. Automatically unbind all events that may have been bound to the screen object.
+     * This prevents memory leaks. For use with onScreenEvent(), removeScreenEvent(), and destroy().
      */
 
     free(): void
 
     /**
-     * Same as the detach() method, except this will automatically call free() and unbind any screen
-     * events to prevent memory leaks. for use with onScreenEvent(), removeScreenEvent(), and free().
+     * Same as the detach() method, except this will automatically call free() and unbind any screen events to
+     * prevent memory leaks. for use with onScreenEvent(), removeScreenEvent(), and free().
      */
     destroy(): void
 
@@ -2948,8 +2804,8 @@ export namespace Widgets {
     removeLabel(): any
 
     /**
-     * text/options - Set a hover text box to follow the cursor. Similar to the "title" DOM attribute
-     * in the browser. Example options: {text:'foo'}
+     * text/options - Set a hover text box to follow the cursor. Similar to the "title" DOM attribute in the
+     * browser. Example options: {text:'foo'}
      */
     setHover(arg: string | LabelOptions): void
 
@@ -2984,35 +2840,68 @@ export namespace Widgets {
     disableDrag(): void
 
     /**
-     * Take an SGR screenshot of the screen within the region. Returns a string containing only
-     * characters and SGR codes. Can be displayed by simply echoing it in a terminal.
+     * Take an SGR screenshot of the screen within the region. Returns a string containing only characters and
+     * SGR codes. Can be displayed by simply echoing it in a terminal.
      */
     screenshot(xi: number, xl: number, yi: number, yl: number): string
     /**
-     * Take an SGR screenshot of the whole screen. Returns a string containing only
-     * characters and SGR codes. Can be displayed by simply echoing it in a terminal.
+     * Take an SGR screenshot of the whole screen. Returns a string containing only characters and SGR codes.
+     * Can be displayed by simply echoing it in a terminal.
      */
     screenshot(): void
 
-    /** Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . @internal. Could  be overriden by element subclasses. */
+    /** 
+     * Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . Could  be overriden by element subclasses. 
+     * @internal. 
+     * */
     _parseTags(s: string): string
-    /** @internal  . Could  be overriden by element subclasses. */
+
+    /** 
+     * Could  be overriden by element subclasses. 
+     * @internal 
+     */
     _parseAttr(ines: string[]): string[]
-    /** @internal . Could  be overriden by element subclasses. */
+
+    /** 
+     * Could  be overriden by element subclasses. 
+     * @internal . 
+     */
     _align(line: string, width: number, align: string): void
-    /** @internal . Could  be overriden by element subclasses. */
+
+    /**
+     * Could  be overriden by element subclasses. 
+     * @internal
+     */
     _wrapContent(content: string, width: number): void
-    /** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
+
+    /** 
+     * Calculates the value for painting screen lines from given style object. Style could also be a sub style , style.bar). It should be an object with properties fg, bg, bold, etc. Example: implementing render() method in a custom element: 
+     * 
+    ``` 
+    var lines = this.screen.lines
+    const attr = this.sattr(this.style)
+    for (let i = coords.xi; i < coords.xl; i++) {
+      for (let j = coords.yi; j < coords.yl; j++) {
+        lines[i][j] = [attr,  'x']        
+      }      
+    }
+    ```
+     * @internal
+     */
     sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
-    /** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
+
+    /** 
+     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. 
+     * @internal 
+     */
     clearPos(): void
 
     /**
-     * Set the content. Note: When text is input, it will be stripped of all non-SGR
-     * escape codes, tabs will be replaced with 8 spaces, and tags will be replaced
-     * with SGR codes (if enabled).
+     * Set the content. Note: When text is input, it will be stripped of all non-SGR escape codes, tabs will
+     * be replaced with 8 spaces, and tags will be replaced with SGR codes (if enabled).
      */
     setContent(text: string, noClear?: boolean, noTags?: boolean): void
+
     /**
      * Return content, slightly different from el.content. Assume the above formatting.
      */
@@ -3119,8 +3008,8 @@ export namespace Widgets {
     getScreenLines(): string[]
 
     /**
-     * Get a string's displayed width, taking into account double-width, surrogate pairs,
-     * combining characters, tags, and SGR escape codes.
+     * Get a string's displayed width, taking into account double-width, surrogate pairs, combining
+     * characters, tags, and SGR escape codes.
      */
     strWidth(text: string): string
   }
@@ -3132,22 +3021,21 @@ export namespace Widgets {
     baseLimit?: number
 
     /**
-     * A option which causes the ignoring of childOffset. This in turn causes the
-     * childBase to change every time the element is scrolled.
+     * A option which causes the ignoring of childOffset. This in turn causes the childBase to change every
+     * time the element is scrolled.
      */
     alwaysScroll?: boolean
 
     /**
-     * Object enabling a scrollbar.
-     * Style of the scrollbar track if present (takes regular style options).
+     * Object enabling a scrollbar. Style of the scrollbar track if present (takes regular style options).
      */
     scrollbar?: { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string } | boolean
   }
 
   interface ScrollableTextOptions extends ScrollableBoxOptions {
     /**
-     * Whether to enable automatic mouse support for this element.
-     * Use pre-defined mouse events (right-click for editor).
+     * Whether to enable automatic mouse support for this element. Use pre-defined mouse events (right-click
+     * for editor).
      */
     mouse?: boolean
 
@@ -3229,9 +3117,8 @@ export namespace Widgets {
   }
 
   /**
-   * DEPRECATED - Use Box with the scrollable and alwaysScroll options instead.
-   * A scrollable text box which can display and scroll text, as well as handle
-   * pre-existing newlines and escape codes.
+   * DEPRECATED - Use Box with the scrollable and alwaysScroll options instead. A scrollable text box which
+   * can display and scroll text, as well as handle pre-existing newlines and escape codes.
    */
   class ScrollableTextElement extends ScrollableBoxElement {}
 
@@ -3249,8 +3136,8 @@ export namespace Widgets {
 
   interface TextOptions extends ElementOptions {
     /**
-     * Fill the entire line with chosen bg until parent bg ends, even if there
-     * is not enough text to fill the entire width.
+     * Fill the entire line with chosen bg until parent bg ends, even if there is not enough text to fill the
+     * entire width.
      */
     fill?: boolean
 
@@ -3267,10 +3154,10 @@ export namespace Widgets {
     implements IHasOptions<Options> {
     constructor(opts: TextOptions)
 
-    // /**
+    //  /**
     //  * Original options object.
-    //  */
-    // options: TextOptions
+    //    */
+    //  options: TextOptions
   }
 
   /**
@@ -3338,10 +3225,10 @@ export namespace Widgets {
   }
 
   interface ListOptions<TStyle extends ListElementStyle = {}> extends BoxOptions {
-    // /**
+    //  /**
     //  * Style for a selected item. Style for an unselected item.
-    //  */
-    // style?: TStyle
+    //    */
+    //  style?: TStyle
 
     /**
      * An array of strings which become the list's items.
@@ -3355,8 +3242,8 @@ export namespace Widgets {
 
     /**
      * A function that is called when vi mode is enabled and the key / is pressed. This function accepts a
-     * callback function which should be called with the search string. The search string is then used to
-     * jump to an item that is found in items.
+     * callback function which should be called with the search string. The search string is then used to jump
+     * to an item that is found in items.
      */
     search?(err: any, value?: string): void
 
@@ -3518,7 +3405,8 @@ export namespace Widgets {
      *
      * This will executes a lots of times in small intervals of time so make sure your call backs are fast.
      *
-     * If you need to do some havy processing probably is better touse `on('select')` event instead (since is triggered only when the user presses `enter`)
+     * If you need to do some havy processing probably is better touse `on('select')` event instead (since is
+     * triggered only when the user presses `enter`)
      */
     on(event: 'select item', callback: (item: BlessedElement, index: number) => void): this
   }
@@ -3590,8 +3478,8 @@ export namespace Widgets {
     data?: string[][]
 
     /**
-     * Spaces to attempt to pad on the sides of each cell. 2 by default: one space on each side
-     * (only useful if the width is shrunken).
+     * Spaces to attempt to pad on the sides of each cell. 2 by default: one space on each side (only useful
+     * if the width is shrunken).
      */
     pad?: number
 
@@ -3617,10 +3505,7 @@ export namespace Widgets {
      * Set rows in table. Array of arrays of strings.
      * @example:
      *
-     * table.setData([
-     *      [ 'Animals',  'Foods'  ],
-     *      [ 'Elephant', 'Apple'  ],
-     *      [ 'Bird',     'Orange' ]
+     * table.setData([[ 'Animals',  'Foods'  ], [ 'Elephant', 'Apple'  ], [ 'Bird',     'Orange' ]
      *  ]);
      */
     setRows(rows: string[][]): void
@@ -3629,10 +3514,7 @@ export namespace Widgets {
      * Set rows in table. Array of arrays of strings.
      * @example:
      *
-     * table.setData([
-     *      [ 'Animals',  'Foods'  ],
-     *      [ 'Elephant', 'Apple'  ],
-     *      [ 'Bird',     'Orange' ]
+     * table.setData([[ 'Animals',  'Foods'  ], [ 'Elephant', 'Apple'  ], [ 'Bird',     'Orange' ]
      *  ]);
      */
     setData(rows: string[][]): void
@@ -3642,8 +3524,8 @@ export namespace Widgets {
     style?: ListElementStyle
 
     /**
-     * Set buttons using an object with keys as titles of buttons, containing of objects
-     * containing keys of keys and callback.
+     * Set buttons using an object with keys as titles of buttons, containing of objects containing keys of
+     * keys and callback.
      */
     commands: (Types.ListbarCommand[]) | ({ [name: string]: Types.ListbarCommand }) | { [name: string]: () => void }
     items?: Types.ListbarCommand[]
@@ -3827,38 +3709,38 @@ export namespace Widgets {
     cancel(): void
 
     /**
-     * Grab key events and start reading text from the keyboard. Takes a callback which receives
-     * the final value.
+     * Grab key events and start reading text from the keyboard. Takes a callback which receives the final
+     * value.
      */
     readInput(callback?: (err: any, value?: string) => void): void
 
     /**
-     * Grab key events and start reading text from the keyboard. Takes a callback which receives
-     * the final value.
+     * Grab key events and start reading text from the keyboard. Takes a callback which receives the final
+     * value.
      */
     input(callback: (err: any, value?: string) => void): void
 
     /**
-     * Grab key events and start reading text from the keyboard. Takes a callback which receives
-     * the final value.
+     * Grab key events and start reading text from the keyboard. Takes a callback which receives the final
+     * value.
      */
     setInput(callback: (err: any, value?: string) => void): void
 
     /**
-     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which
-     * receives the final value.
+     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which receives
+     * the final value.
      */
     readEditor(callback: (err: any, value?: string) => void): void
 
     /**
-     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which
-     * receives the final value.
+     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which receives
+     * the final value.
      */
     editor(callback: (err: any, value?: string) => void): void
 
     /**
-     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which
-     * receives the final value.
+     * Open text editor in $EDITOR, read the output from the resulting file. Takes a callback which receives
+     * the final value.
      */
     setEditor(callback: (err: any, value?: string) => void): void
 
@@ -3941,10 +3823,10 @@ export namespace Widgets {
      */
     checked?: boolean
 
-    // /**
+    //  /**
     //  * enable mouse support.
-    //  */
-    // mouse?: boolean
+    //    */
+    //  mouse?: boolean
   }
 
   /**
@@ -3996,8 +3878,8 @@ export namespace Widgets {
   interface RadioSetOptions extends BoxOptions {}
 
   /**
-   * An element wrapping RadioButtons. RadioButtons within this element will be mutually exclusive
-   * with each other.
+   * An element wrapping RadioButtons. RadioButtons within this element will be mutually exclusive with each
+   * other.
    */
   abstract class RadioSetElement extends BoxElement {
     constructor(opts: RadioSetOptions)
@@ -4057,8 +3939,8 @@ export namespace Widgets {
     options: MessageOptions
 
     /**
-     * Display a message for a time (default is 3 seconds). Set time to 0 for a
-     * perpetual message that is dismissed on keypress.
+     * Display a message for a time (default is 3 seconds). Set time to 0 for a perpetual message that is
+     * dismissed on keypress.
      */
     log(text: string, time: number, callback: (err: any) => void): void
     log(text: string, callback: (err: any) => void): void
@@ -4205,7 +4087,8 @@ export namespace Widgets {
     data?: string[][]
 
     /**
-     * spaces to attempt to pad on the sides of each cell. `2` by default: one space on each side (only useful if the width is shrunken).
+     * spaces to attempt to pad on the sides of each cell. `2` by default: one space on each side (only useful
+     * if the width is shrunken).
      */
     pad?: number
 
@@ -4305,15 +4188,15 @@ export namespace Widgets {
     file: string
 
     /**
-     * path to w3mimgdisplay. if a proper w3mimgdisplay path is not given, blessed will search the
-     * entire disk for the binary.
+     * path to w3mimgdisplay. if a proper w3mimgdisplay path is not given, blessed will search the entire disk
+     * for the binary.
      */
     type: 'ansi' | 'overlay' | 'w3m'
   }
 
   /**
-   * Display an image in the terminal (jpeg, png, gif) using w3mimgdisplay. Requires w3m to be installed.
-   * X11 required: works in xterm, urxvt, and possibly other terminals.
+   * Display an image in the terminal (jpeg, png, gif) using w3mimgdisplay. Requires w3m to be installed. X11
+   * required: works in xterm, urxvt, and possibly other terminals.
    */
   class ImageElement extends BoxElement implements IHasOptions<ImageOptions> {
     constructor(options?: ImageOptions)
@@ -4333,39 +4216,35 @@ export namespace Widgets {
     scale: number
 
     /**
-     * This differs from other element's width or height in that only one
-     * of them is needed: blessed will maintain the aspect ratio of the image
-     * as it scales down to the proper number of cells. NOTE: PNG/GIF's are
-     * always automatically shrunken to size (based on scale) if a width or
-     * height is not given.
+     * This differs from other element's width or height in that only one of them is needed: blessed will
+     * maintain the aspect ratio of the image as it scales down to the proper number of cells. NOTE: PNG/GIF's
+     * are always automatically shrunken to size (based on scale) if a width or height is not given.
      */
     width: number | string
     height: number | string
 
     /**
-     * Add various "density" ASCII characters over the rendering to give the
-     * image more detail, similar to libcaca/libcucul (the library mplayer uses
-     * to display videos in the terminal).
+     * Add various "density" ASCII characters over the rendering to give the image more detail, similar to
+     * libcaca/libcucul (the library mplayer uses to display videos in the terminal).
      */
     ascii: string
 
     /**
-     * Whether to animate if the image is an APNG/animating GIF. If false, only
-     * display the first frame or IDAT (Default: true).
+     * Whether to animate if the image is an APNG/animating GIF. If false, only display the first frame or
+     * IDAT (Default: true).
      */
     animate: boolean
 
     /**
-     * Set the speed of animation. Slower: 0.0-1.0. Faster: 1-1000. It cannot go
-     * faster than 1 frame per millisecond, so 1000 is the fastest. (Default: 1.0)
+     * Set the speed of animation. Slower: 0.0-1.0. Faster: 1-1000. It cannot go faster than 1 frame per
+     * millisecond, so 1000 is the fastest. (Default: 1.0)
      */
     speed: number
 
     /**
-     * mem or cpu. If optimizing for memory, animation frames will be rendered to
-     * bitmaps as the animation plays, using less memory. Optimizing for cpu will
-     * precompile all bitmaps beforehand, which may be faster, but might also OOM
-     * the process on large images. (Default: mem).
+     * mem or cpu. If optimizing for memory, animation frames will be rendered to bitmaps as the animation
+     * plays, using less memory. Optimizing for cpu will precompile all bitmaps beforehand, which may be
+     * faster, but might also OOM the process on large images. (Default: mem).
      */
     optimization: 'mem' | 'cpu'
   }
@@ -4416,14 +4295,14 @@ export namespace Widgets {
     file: string
 
     /**
-     * Render the file as ANSI art instead of using w3m to overlay Internally uses the
-     * ANSIImage element. See the ANSIImage element for more information/options. (Default: true).
+     * Render the file as ANSI art instead of using w3m to overlay Internally uses the ANSIImage element. See
+     * the ANSIImage element for more information/options. (Default: true).
      */
     ansi: boolean
 
     /**
-     * Path to w3mimgdisplay. If a proper w3mimgdisplay path is not given, blessed will
-     * search the entire disk for the binary.
+     * Path to w3mimgdisplay. If a proper w3mimgdisplay path is not given, blessed will search the entire disk
+     * for the binary.
      */
     w3m: string
 
@@ -4501,9 +4380,9 @@ export namespace Widgets {
      */
     renderer?(this: LayoutElement, coords: PositionCoords, i: number | undefined): LayoutIterator
     /**
-     * Using the default renderer, it provides two layouts: inline, and grid. inline is the default and will render
-     * akin to inline-block. grid will create an automatic grid based on element dimensions. The grid cells'
-     * width and height are always determined by the largest children in the layout.
+     * Using the default renderer, it provides two layouts: inline, and grid. inline is the default and will
+     * render akin to inline-block. grid will create an automatic grid based on element dimensions. The grid
+     * cells' width and height are always determined by the largest children in the layout.
      */
     layout?: 'inline' | 'inline-block' | 'grid'
   }
@@ -4520,29 +4399,29 @@ export namespace Widgets {
     renderer(coords: PositionCoords, i: number | undefined): void
 
     /**
-     * Check to see if a previous child element has been rendered and is visible on screen. This is only useful
-     * for checking child elements that have already been attempted to be rendered! see the example below.
+     * Check to see if a previous child element has been rendered and is visible on screen. This is only
+     * useful for checking child elements that have already been attempted to be rendered! see the example
+     * below.
      */
     isRendered(el: BlessedElement): boolean
 
     /**
-     * Get the last rendered and visible child element based on an index. This is useful for basing the position
-     * of the current child element on the position of the last child element.
+     * Get the last rendered and visible child element based on an index. This is useful for basing the
+     * position of the current child element on the position of the last child element.
      */
     getLast(i: number): BlessedElement
 
     /**
-     * Get the last rendered and visible child element coords based on an index. This is useful for basing the position
-     * of the current child element on the position of the last child element. See the example below.
+     * Get the last rendered and visible child element coords based on an index. This is useful for basing the
+     * position of the current child element on the position of the last child element. See the example below.
      */
     getLastCoords(i: number): PositionCoords
   }
 
   class Program {
     /**
-     * Wrap the given text in terminal formatting codes corresponding to the given attribute
-     * name. The `attr` string can be of the form `red fg` or `52 bg` where `52` is a 0-255
-     * integer color number.
+     * Wrap the given text in terminal formatting codes corresponding to the given attribute name. The `attr`
+     * string can be of the form `red fg` or `52 bg` where `52` is a 0-255 integer color number.
      */
     text(text: string, attr: string): string
   }
@@ -4702,19 +4581,15 @@ interface Unicode {
 
 //TODO
 
-// Helpers
-// All helpers reside on blessed.helpers or blessed.
+// Helpers All helpers reside on blessed.helpers or blessed.
 
-// merge(a, b) - Merge objects a and b into object a.
-// asort(obj) - Sort array alphabetically by name prop.
-// hsort(obj) - Sort array numerically by index prop.
-// findFile(start, target) - Find a file at start directory with name target.
-// escape(text) - Escape content's tags to be passed into el.setContent(). Example: box.setContent('escaped tag: ' + blessed.escape('{bold}{/bold}'));
-// parseTags(text) - Parse tags into SGR escape codes.
-// generateTags(style, text) - Generate text tags based on style object.
-// attrToBinary(style, element) - Convert style attributes to binary format.
-// stripTags(text) - Strip text of tags and SGR sequences.
-// cleanTags(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
+// merge(a, b) - Merge objects a and b into object a. asort(obj) - Sort array alphabetically by name prop.
+// hsort(obj) - Sort array numerically by index prop. findFile(start, target) - Find a file at start directory
+// with name target. escape(text) - Escape content's tags to be passed into el.setContent(). Example:
+// box.setContent('escaped tag: ' + blessed.escape('{bold}{/bold}')); parseTags(text) - Parse tags into SGR
+// escape codes. generateTags(style, text) - Generate text tags based on style object. attrToBinary(style,
+// element) - Convert style attributes to binary format. stripTags(text) - Strip text of tags and SGR
+// sequences. cleanTags(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
 // dropUnicode(text) - Drop text of any >U+FFFF characters.
 
 /**  terminfo/cap aliases for blessed. */
