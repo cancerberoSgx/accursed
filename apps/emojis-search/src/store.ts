@@ -1,2 +1,0 @@
-// import {Store} from 'accursed'
-

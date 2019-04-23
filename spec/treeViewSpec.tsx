@@ -281,7 +281,7 @@ describe('treeView', () => {
             onClick={e => {
               debug('clic')
 
-              treeRef.current!.setNodes([ 
+              treeRef.current!.setNodes([
                 {
                   name: 'n41',
                   children: [

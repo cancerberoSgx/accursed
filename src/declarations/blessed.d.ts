@@ -2323,8 +2323,8 @@ export namespace Widgets {
      */
     title: string
 
-    /** 
-     * Internal Screen buffer of current lines. Exposed for debug purpuses. @internal 
+    /**
+     * Internal Screen buffer of current lines. Exposed for debug purpuses. @internal
      */
     lines: ScreenLine[][]
 
@@ -2998,8 +2998,8 @@ export namespace Widgets {
      */
     screenshot(): void
 
-    /** 
-     * Converts `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m`. @internal.  
+    /**
+     * Converts `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m`. @internal.
      */
     _parseTags(s: string): string
 
@@ -3012,13 +3012,13 @@ export namespace Widgets {
     /** @internal  */
     _wrapContent(content: string, width: number): void
 
-    /** 
+    /**
      * calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to
-     * the rest of the properties and optionally bg and fg. 
+     * the rest of the properties and optionally bg and fg.
      */
     sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
     /**
-     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal 
+     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal
      */
     clearPos(): void
 

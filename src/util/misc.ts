@@ -118,7 +118,7 @@ export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>
 export function throttle<F extends (...args: any[]) => any>(
   func: F,
   wait: number,
-  options: {leading?: boolean; trailing?: boolean} = {},
+  options: { leading?: boolean; trailing?: boolean } = {}
 ) {
   let context: any, args: any, result: any
   let timeout: any = null
@@ -148,8 +148,6 @@ export function throttle<F extends (...args: any[]) => any>(
     return result
   }
 }
-
-
 
 /** use it to remove duplicates in .filter expressions like `array.filter(notSame)` */
 export function notSame<T>(t: T, i: number, a: T[]) {
