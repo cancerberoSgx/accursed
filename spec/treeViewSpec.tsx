@@ -260,41 +260,9 @@ describe('treeView', () => {
             style={{ focus: { fg: 'magenta', bg: 'cyan' } }}
             onChange={e => {
               treeRef.current!.toggleNodeHide(n => n.name.toLowerCase().includes(e.value.toLowerCase()))
-              //   visitNodes(n => {
-              //   if (n.name.toLowerCase().includes(e.value.toLowerCase())) {
-              //     n.hidden = false
-              //     treeRef.current!.visitAncestors(n, a => {
-              //       a.hidden = false
-              //       a.expanded = true
-              //       return false
-              //     })
-              //   } else {
-              //     n.hidden = true
-              //   }
-              //   treeRef.current!.setNodes()
               screen.render()
-              //   return false
-              // })
             }}
 
-            // on={['action', (e:any)=>{
-
-            //   treeRef.current!.visitNodes(n=>{
-            //     if(n.name && e &&  n.name.toLowerCase().includes((e as any).toLowerCase())) {
-            //       n.hidden=false
-            //     }
-            //     else {
-            //       n.hidden=true
-            //     }
-            //     debug('hidd',n.hidden, n.name && n.name.toLowerCase(), e &&  (e as any).toLowerCase(), n.name.toLowerCase().includes((e as any).toLowerCase()))
-            //     return false
-            //   })
-
-            //   // debug('visit', treeRef.current!.getNodes())
-            //   treeRef.current!.setNodes()
-            //   screen.render()
-
-            // }]}
           />
           <button
             content="click"

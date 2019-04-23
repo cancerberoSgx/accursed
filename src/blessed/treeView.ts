@@ -35,7 +35,8 @@ export interface TreeOptions extends Widgets.ElementOptions {
    */
   selectKeys?: string[]
   /**
-   * keys to scroll up in the tree. It will focus the node that is above the current focused node . Default value is ['up'].
+   * keys to scroll up in the tree. It will focus the node that is above the current focused node . Default
+   * value is ['up'].
    */
   focusUpKeys?: string[]
   /**
@@ -60,7 +61,8 @@ export interface TreeOptions extends Widgets.ElementOptions {
    */
   onNodeExpand?: (node: TreeViewNode) => void
   /**
-   * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current status of the node.
+   * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current
+   * status of the node.
    */
   nodeFocus?: (node: TreeViewNode) => void
 
@@ -79,7 +81,8 @@ interface ITreeView {
   on(event: 'nodeFocus', callback: (node: TreeViewNode) => void): this
 
   /**
-   * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current status of the node.
+   * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current
+   * status of the node.
    */
   on(event: 'nodeExpand', callback: (node: TreeViewNode) => void): this
 }
@@ -89,8 +92,8 @@ interface TreeViewStyle extends Style {
   selectedNode?: Style
 }
 /**
- * A Tree widget made from scratch, this is inheriting directly from Element, and implementing render() without using any
- * other Widget Implementation.
+ * A Tree widget made from scratch, this is inheriting directly from Element, and implementing render()
+ * without using any other Widget Implementation.
  *
  * It doesn't support border, padding, or label. To fully support all features, wrap this element in a box.
  *
@@ -100,7 +103,7 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
   type = 'treeview'
   style: TreeViewStyle = {}
 
-  private static defaultOptions: TreeOptions = {
+  protected static defaultOptions: TreeOptions = {
     rootNodes: [],
     expandKeys: ['space'],
     selectKeys: ['enter'],
@@ -161,7 +164,6 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
           if (!lastChild || !n.expanded) {
             return n
           }
-          //=>n.children.length - 1]
           return findLastVisualDescendant(lastChild)
         }
         this.currentNode = findLastVisualDescendant(this.currentNode.previousSibling)
@@ -214,12 +216,6 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     }
     this.screen.render()
   }
-  findNextSibling(n: Node, p: (s: Node) => boolean): Node | undefined {
-    function f(n?: Node): Node | undefined {
-      return !n ? undefined : p(n) ? n : f(n.nextSibling)
-    }
-    return f(n.nextSibling)
-  }
 
   render() {
     var coords = super.render()
@@ -229,7 +225,6 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     if (this.focusedLine === -1) {
       this.focusedLine = 0
     }
-    // debug(coords, this.position, this.aleft, this.top, this._getPos(), this._getTop(), this._getHeight())
     const notSelectedAttr = this.sattr({
       ...this.style,
       ...(this.screen.focused === this ? this.style.focus || {} : {})
@@ -264,20 +259,31 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
   }
 
   /**
-   * Sets the root nodes. If data is not given, it will be this.rootNodes so the UI will be sync/updated with current data (for example if user modified the nodes manually). Selected and focused nodes, will be reset.
+   * Sets the root nodes. If data is not given, it will be this.rootNodes so the UI will be sync/updated with
+   * current data (for example if user modified the nodes manually). Selected and focused nodes, will be
+   * reset.
    */
   setNodes(data: TreeViewNode[] = this.rootNodes) {
-    // data = data || this.rootNodes
     this.rootNodes = this.processNodes(data)
     this.currentNode = this.rootNodes[0]
     this.focusedLine = 0
     this.selectedNodes = []
   }
 
-  visitNodes(visitor: (n: Node) => boolean, nodes = this.rootNodes): boolean {
-    return nodes.some(n => visitor(n) || this.visitNodes(visitor, n.children))
+  /**
+   * given nodes and their descendants until visitor returns true or there are no more
+   */
+  visitNodes(visitor: (n: Node) => boolean, nodes = this.rootNodes): boolean|undefined {
+    return nodes.some(n => visitor(n) || !!this.visitNodes(visitor, n.children))
   }
 
+  /** 
+   * hide/show nodes depending on given predicate. Example: 
+    ```
+    tree.toggleNodeHide(n => n.name.toLowerCase().includes(e.value.toLowerCase())) 
+    screen.render()
+    ```
+   */
   toggleNodeHide(p: (n: TreeViewNode) => boolean) {
     this.visitNodes(n => {
       if (p(n)) {
@@ -295,12 +301,29 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     this.setNodes()
   }
 
-  visitAncestors(n: Node, visitor: (n: Node) => boolean) {
-    visitor(n)
+  /**
+   * Visit ancestors of given node until visitor returns true or there are no more.
+   */
+  visitAncestors(n: Node, visitor: (n: Node) => boolean|undefined) {
+    if(visitor(n)){
+      return
+    }
     n.parent && visitor(n.parent)
   }
 
-  /** it will set node's parent, previousSibling and nextSibling properties to user given TreeNodes */
+  /**
+   * Finds given node sibling that is after it.
+   */
+  findNextSibling(n: Node, p: (s: Node) => boolean): Node | undefined {
+    function f(n?: Node): Node | undefined {
+      return !n ? undefined : p(n) ? n : f(n.nextSibling)
+    }
+    return f(n.nextSibling)
+  }
+  
+  /** 
+   * For each node, recursively, set node's parent, previousSibling and nextSibling properties to user given Nodes.
+   */
   protected processNodes(nodes: TreeViewNode[]) {
     function f(n: Node, parent?: Node, prev?: Node, next?: Node) {
       n.parent = parent
@@ -316,7 +339,9 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     return nodes as Node[]
   }
 
-  /** calculate and paint node's lines */
+  /** 
+   * Calculate node lines to be rendered according to expanded and hidden node's properties. 
+   */
   protected getNodeLines(nodes: Node[], level = 0, lines: { node: Node; line: string }[] = []) {
     nodes.forEach(node => {
       if (!node.hidden) {
@@ -336,18 +361,22 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
   }
 
   /**
-   * gets the current focused node
+   * Gets the current focused node
    */
   getFocusedNode() {
     return this.currentNode
   }
 
+  /** 
+   * Gets the root nodes (the data) 
+   */
   getNodes() {
     return this.rootNodes
   }
 
   /**
-   * Get the current selected node, or nodes in case option.multipleSelection is enabled, or undefined if there is no selected node
+   * Gets the current selected node, or nodes in case option.multipleSelection is enabled, or undefined if
+   * there is no selected node
    */
   getSelectedNodes() {
     return this.selectedNodes
