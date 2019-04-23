@@ -1750,8 +1750,6 @@ export namespace Widgets {
      */
     destroy(): void
 
-
-
     /**
      * Get user property with a potential default value.
      */
@@ -2560,7 +2558,7 @@ export namespace Widgets {
     underline?: boolean
     blink?: boolean
     inverse?: boolean
-    invisible? : boolean
+    invisible?: boolean
     transparent?: boolean
 
     style?: Widgets.Types.TStyle
@@ -2682,23 +2680,26 @@ export namespace Widgets {
     current: T | undefined
   }
 
-  interface Coords {
+  interface Pos {
+    aleft: number
+    atop: number
+    aright: number
+    abottom: number
+
+    width?: number
+    height?: number
+  }
+  interface Coords extends Pos {
     xl: number
     xi: number
     yl: number
     yi: number
     base: number
-    _contentEnd: { x: number; y: number }|undefined
-    notop: Types.TTopLeft|undefined
-    noleft: Types.TTopLeft|undefined
-    noright: Types.TPosition|undefined
-    nobot: Types.TPosition|undefined
-    aleft: number,
-    atop: number,
-    aright: number,
-    abottom: number,
-    // width: number,
-    // height: number
+    _contentEnd: { x: number; y: number } | undefined
+    notop: Types.TTopLeft | undefined
+    noleft: Types.TTopLeft | undefined
+    noright: Types.TPosition | undefined
+    nobot: Types.TPosition | undefined
   }
 
   interface LabelOptions {
@@ -2855,9 +2856,15 @@ export namespace Widgets {
     /**
      * Write content and children to the screen buffer.
      */
-    render(): Coords|undefined
+    render(): Coords | undefined
 
-    _getCoords(get?: boolean, noscroll?: boolean): Coords|undefined
+    _getCoords(get?: boolean, noscroll?: boolean): Coords | undefined
+    _getPos(): Pos
+
+    _getLeft(get?: boolean): number
+    _getWidth(get?: boolean): number
+    _getTop(get?: boolean): number
+    _getHeight(get?: boolean): number
 
     /**
      * Hide element and triggers [[hide]] event
@@ -3500,7 +3507,7 @@ export namespace Widgets {
      * If you need react when the user select the items just moving the arrows use `on('select item')`.
      */
     on(event: 'select', callback: (item: BoxElement, index: number) => void): this
-    on(event: ListElementEventType, callback: () => void): this // TODO: callback
+    on(event: ListElementEventType, callback: (value: string) => void): this // TODO: callback
     /**
      * Emitted when the user moves the arrows to scroll the list items.
      *

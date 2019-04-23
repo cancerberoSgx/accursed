@@ -1,3 +1,4 @@
+import { TreeOptions, TreeView } from '../blessed'
 import {
   BigText,
   BigTextOptions,
@@ -82,10 +83,10 @@ export interface ArtificialEventOptions<T extends Element> {
   ) => void
   [ArtificialEventOptionNames.onRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
   [ArtificialEventOptionNames.onceRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
-  [ArtificialEventOptionNames.onChange]?: <V = any>(
+  [ArtificialEventOptionNames.onChange]?: (
     this: T,
     e: ArtificialEvent<T> & {
-      value: V
+      value: any
     }
   ) => void
   [ArtificialEventOptionNames.onSelect]?: <V = any>(
@@ -125,7 +126,7 @@ declare global {
       radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
-      // __virtual: __Virtual
+      treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
     }
     /** adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>

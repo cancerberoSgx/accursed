@@ -303,6 +303,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * node operations (ascendants, descendants, siblings, etc)
  * showInModal()
  * layout renderer with html like semantics display: block, overflow: hidden
+ * TreeView
 
 ## JSX components
 

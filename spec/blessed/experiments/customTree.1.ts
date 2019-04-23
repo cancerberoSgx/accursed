@@ -45,7 +45,7 @@
 //   protected nodeLines: string[] = []
 //   protected selectedLine = 0
 //   options: TreeOptions
-//     style: Widgets.Types.TStyle 
+//     style: Widgets.Types.TStyle
 
 //   constructor(options: TreeOptions = Tree.defaultOptions) {
 //     super({ ...Tree.defaultOptions, ...(options || {}) })
@@ -64,7 +64,7 @@
 //     //   this.style.invisible = options.invisible;
 //     //   this.style.transparent = options.transparent;
 //     // }
-    
+
 //     this.rootNodes = this.options.rootNodes.length === 0 ? [{ name: 'Root', children: [] }] : this.processNodes(this.options.rootNodes)
 //     this.currentNode = this.rootNodes[0]
 //     this.screen.key([...this.options.expandKeys!, ...this.options.selectKeys!, ...this.options.focusUpKeys!, ...this.options.focusDownKeys!], this.onKey.bind(this))
@@ -131,7 +131,7 @@
 //   render() {
 //     var coords = widget.Element.prototype.render.apply(this)
 //     if (!coords) {
-//       return 
+//       return
 //     }
 //     debug(coords)
 //     var lines = this.screen.lines
@@ -190,8 +190,6 @@
 //   }
 
 // }
-
-
 
 // // test our new element:
 // const screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })

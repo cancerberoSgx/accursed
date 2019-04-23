@@ -34,8 +34,10 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
-/** In this implementation, all the work is dont by createElement, that returns ready to use blessed elements. Attributes and children are only implemented for
- *intrinsic elements and all blessed types in JSX.IntrinsicElement should be supported. All event handlers in types are supported.
+/**
+ * In this implementation, all the work is dont by createElement, that returns ready to use blessed elements.
+ * Attributes and children are only implemented for intrinsic elements and all blessed types in
+ * JSX.IntrinsicElement should be supported. All event handlers in types are supported.
  */
 class BlessedJsxImpl implements BlessedJsx {
   private _intrinsicElementFactory = { ...(blessed as any) }
@@ -202,12 +204,19 @@ class BlessedJsxImpl implements BlessedJsx {
       } else if (attributeName === ArtificialEventOptionNames.onChange) {
         const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onChange']
         // TODO: verify that element type supports the value change semantic (i.e is a checkbox )?
-        el.on('check', e => {
-          fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
-        })
-        el.on('uncheck', e => {
-          fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
-        })
+        if (el.type === 'checkbox') {
+          el.on('check', e => {
+            fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+          })
+          el.on('uncheck', e => {
+            fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+          })
+        }
+        if (el.type === 'textbox' || el.type === 'textarea') {
+          el.on('submit', e => {
+            fn!.bind(el)({ currentTarget: el, value: e })
+          })
+        }
       } else if (attributeName === ArtificialEventOptionNames.onSelect) {
         const fn = artificialEventAttributes[attributeName] as ArtificialEventOptions<Element>['onSelect']
         el.on('select', e => {

@@ -1,8 +1,8 @@
-import { installExitKeys, createScreen, widget, Widgets, debug, IKeyEventArg, text } from '../../../src';
-import { repeat } from 'misc-utils-of-mine-generic';
+import { repeat } from 'misc-utils-of-mine-generic'
+import { createScreen, IKeyEventArg, installExitKeys, text, widget, Widgets } from '../../../src'
 
 interface TreeNode {
-  name: string,
+  name: string
   children: Node[]
   expanded?: boolean
 }
@@ -19,15 +19,14 @@ interface TreeOptions extends Widgets.TextOptions {
   focusDownKeys?: string[]
 }
 /**
- * A Tree widget made from scratch, this is inheriting directly from Element, and implementing render() without using any 
- * other Widget Implementation. 
- * 
- * It doesn't support border, padding, or label. 
- * 
- * It does support scrolling. 
+ * A Tree widget made from scratch, this is inheriting directly from Element, and implementing render() without using any
+ * other Widget Implementation.
+ *
+ * It doesn't support border, padding, or label.
+ *
+ * It does support scrolling.
  */
 class Tree extends widget.Element<TreeOptions> {
-
   type = 'accursed-tree'
 
   private static defaultOptions: TreeOptions = {
@@ -49,25 +48,32 @@ class Tree extends widget.Element<TreeOptions> {
   }
 
   protected currentNode: Node
-  protected rootNodes: Node[];
+  protected rootNodes: Node[]
   protected nodeLines: string[] = []
   protected selectedLine = 0
 
   constructor(options: TreeOptions = Tree.defaultOptions) {
     super({ ...Tree.defaultOptions, ...(options || {}) })
     this.options = { ...Tree.defaultOptions, ...(options || {}) }
-    this.rootNodes = this.options.rootNodes.length === 0 ? [{ name: 'Root', children: [] }] : this.processNodes(this.options.rootNodes)
+    this.rootNodes =
+      this.options.rootNodes.length === 0 ? [{ name: 'Root', children: [] }] : this.processNodes(this.options.rootNodes)
     this.currentNode = this.rootNodes[0]
-    this.key([...this.options.expandKeys!, ...this.options.selectKeys!, ...this.options.focusUpKeys!, ...this.options.focusDownKeys!], this.onKey.bind(this))
+    this.key(
+      [
+        ...this.options.expandKeys!,
+        ...this.options.selectKeys!,
+        ...this.options.focusUpKeys!,
+        ...this.options.focusDownKeys!
+      ],
+      this.onKey.bind(this)
+    )
   }
 
   onKey(ch: any, key: IKeyEventArg) {
-
     if (this.options.focusUpKeys!.includes(key.name)) {
       if (this.selectedLine > 0) {
         this.selectedLine = this.selectedLine - 1
-      }
-      else {
+      } else {
         return
       }
       if (this.currentNode.previousSibling) {
@@ -79,24 +85,20 @@ class Tree extends widget.Element<TreeOptions> {
           return findLastVisualDescendant(lastChild)
         }
         this.currentNode = findLastVisualDescendant(this.currentNode.previousSibling)
-      }
-      else if (this.currentNode.parent) {
+      } else if (this.currentNode.parent) {
         this.currentNode = this.currentNode.parent
       }
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.focusDownKeys!.includes(key.name)) {
+    } else if (this.options.focusDownKeys!.includes(key.name)) {
       if (this.selectedLine === this.nodeLines.length - 1) {
         return
       }
       this.selectedLine = this.selectedLine + 1
       if (this.currentNode.expanded && this.currentNode.children.length > 0) {
         this.currentNode = this.currentNode.children[0]
-      }
-      else if (this.currentNode.nextSibling) {
+      } else if (this.currentNode.nextSibling) {
         this.currentNode = this.currentNode.nextSibling
-      }
-      else {
+      } else {
         function findAscendantNextSibling(n: Node): Node {
           if (!n.parent) {
             return n
@@ -106,12 +108,10 @@ class Tree extends widget.Element<TreeOptions> {
         this.currentNode = findAscendantNextSibling(this.currentNode)
       }
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.expandKeys!.includes(key.name)) {
+    } else if (this.options.expandKeys!.includes(key.name)) {
       this.currentNode.expanded = !this.currentNode.expanded
       this.emit('nodeExpand', this.currentNode)
-    }
-    else if (this.options.selectKeys!.includes(key.name)) {
+    } else if (this.options.selectKeys!.includes(key.name)) {
       this.emit('nodeSelect', this.currentNode)
     }
     this.screen.render()
@@ -120,7 +120,7 @@ class Tree extends widget.Element<TreeOptions> {
   render() {
     var coords = super.render()
     if (!coords) {
-      return 
+      return
     }
     const notSelectedAttr = this.sattr(this.style)
     let attr = notSelectedAttr
@@ -128,17 +128,17 @@ class Tree extends widget.Element<TreeOptions> {
     const nodeLines = this.getNodeLines(this.rootNodes)
     let offset = 0
     const height = coords.yl - coords.yi
-    if(this.selectedLine> height -1 ){
-      offset = this.selectedLine - Math.round(height/2) // for handling "scroll" when selected line goes beyond element height
+    if (this.selectedLine > height - 1) {
+      offset = this.selectedLine - Math.round(height / 2) // for handling "scroll" when selected line goes beyond element height
     }
     for (let j = coords.yi; j < Math.min(nodeLines.length, coords.yl); j++) {
-      if (offset+j === this.selectedLine) {
+      if (offset + j === this.selectedLine) {
         attr = selectedAttr
       } else {
         attr = notSelectedAttr
       }
       for (let i = coords.xi; i < coords.xl; i++) {
-        this.screen.lines[j][i] = [attr, nodeLines[offset+j][i] || ' ']
+        this.screen.lines[j][i] = [attr, nodeLines[offset + j][i] || ' ']
       }
     }
     return coords
@@ -173,66 +173,100 @@ class Tree extends widget.Element<TreeOptions> {
       }
     })
     this.nodeLines = lines
-    return [...lines, ...repeat(Math.round(this.height/2)+1, ' ')]//, ' ',  ' ', ' ', ' '] // add a dummy one
+    return [...lines, ...repeat(Math.round(this.height / 2) + 1, ' ')] //, ' ',  ' ', ' ', ' '] // add a dummy one
   }
 
   getFocusedNode() {
     return this.currentNode
   }
-
 }
-
-
 
 // test our new element:
 const screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
 installExitKeys(screen)
 const rootNodes = [
   { name: 'n1', children: [{ expanded: true, name: 'n11', children: [] }] },
-  { expanded: true, name: 'n2', children: [   {
-    expanded: true, name: 'n21', children: [{
-      expanded: true, name: 'n211', children: [
-        { expanded: true, name: 'n2111', children: [{ expanded: true, name: 'n21111', children: [] }] },
-      ]
-    }]
-  },
-  { expanded: true, name: 'n22', children: [] },
-  { expanded: true, name: 'n23', children: [] },] },
   {
-    expanded: true, name: 'n3', children: [
+    expanded: true,
+    name: 'n2',
+    children: [
       {
-        expanded: true, name: 'n31', children: [{
-          expanded: true, name: 'n311', children: [
-            { expanded: true, name: 'n3111', children: [{ expanded: true, name: 'n31111', children: [] }] },
-          ]
-        }]
+        expanded: true,
+        name: 'n21',
+        children: [
+          {
+            expanded: true,
+            name: 'n211',
+            children: [{ expanded: true, name: 'n2111', children: [{ expanded: true, name: 'n21111', children: [] }] }]
+          }
+        ]
+      },
+      { expanded: true, name: 'n22', children: [] },
+      { expanded: true, name: 'n23', children: [] }
+    ]
+  },
+  {
+    expanded: true,
+    name: 'n3',
+    children: [
+      {
+        expanded: true,
+        name: 'n31',
+        children: [
+          {
+            expanded: true,
+            name: 'n311',
+            children: [{ expanded: true, name: 'n3111', children: [{ expanded: true, name: 'n31111', children: [] }] }]
+          }
+        ]
       },
       { expanded: true, name: 'n32', children: [] },
-      { expanded: true, name: 'n33', children: [] },
+      { expanded: true, name: 'n33', children: [] }
     ]
-  },{
-    expanded: true, name: 'n4', children: [
+  },
+  {
+    expanded: true,
+    name: 'n4',
+    children: [
       {
-        expanded: true, name: 'n41', children: [{
-          expanded: true, name: 'n411', children: [
-            { expanded: true, name: 'n4111', children: [{ expanded: true, name: 'n41111', children: [] }] },
-          ]
-        }]
+        expanded: true,
+        name: 'n41',
+        children: [
+          {
+            expanded: true,
+            name: 'n411',
+            children: [{ expanded: true, name: 'n4111', children: [{ expanded: true, name: 'n41111', children: [] }] }]
+          }
+        ]
       },
       { expanded: true, name: 'n42', children: [] },
-      { expanded: true, name: 'n43', children: [] },
+      { expanded: true, name: 'n43', children: [] }
     ]
   }
-
 ]
-const w = new Tree({ rootNodes, parent: screen, width: 15, height: 10, 
+const w = new Tree({
+  rootNodes,
+  parent: screen,
+  width: 15,
+  height: 10,
   // label: 'tree',
-//  border: 'line', 
- style: { bg: 'darkgray', fg: 'white', selected: { bg: 'green', fg: 'black' } }, scrollable: true })
+  //  border: 'line',
+  style: { bg: 'darkgray', fg: 'white', selected: { bg: 'green', fg: 'black' } },
+  scrollable: true
+})
 const t = text({ parent: screen, left: 19, top: 0, content: 'text' })
 
-w.on('nodeSelect', n => { t.content = `nodeSelect: ${n.name}, focusedNode: ${w.getFocusedNode().name}-------------`; screen.render() })
-w.on('nodeFocus', n => { t.content = `nodeFocus: ${n.name}, focusedNode: ${w.getFocusedNode().name}-------`; screen.render() })
-w.on('nodeExpand', n => { t.content = `nodeExpand: ${n.name}, focusedNode: ${w.getFocusedNode().name}-----------------`; screen.render() })
+w.on('nodeSelect', n => {
+  t.content = `nodeSelect: ${n.name}, focusedNode: ${w.getFocusedNode().name}-------------`
+  screen.render()
+})
+w.on('nodeFocus', n => {
+  t.content = `nodeFocus: ${n.name}, focusedNode: ${w.getFocusedNode().name}-------`
+  screen.render()
+})
+w.on('nodeExpand', n => {
+  t.content = `nodeExpand: ${n.name}, focusedNode: ${w.getFocusedNode().name}-----------------`
+  screen.render()
+})
 
 screen.render()
