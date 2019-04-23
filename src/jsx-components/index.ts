@@ -1,4 +1,5 @@
 export * from './accordion'
+export * from './autocomplete'
 export * from './button'
 export * from './collapsible'
 export * from './columns'

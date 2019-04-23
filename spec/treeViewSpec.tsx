@@ -262,7 +262,6 @@ describe('treeView', () => {
               treeRef.current!.toggleNodeHide(n => n.name.toLowerCase().includes(e.value.toLowerCase()))
               screen.render()
             }}
-
           />
           <button
             content="click"

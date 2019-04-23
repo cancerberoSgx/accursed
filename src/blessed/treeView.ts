@@ -3,7 +3,6 @@ import { IKeyEventArg, widget, Widgets } from '..'
 import { Style } from '../blessedTypes'
 import { React } from '../jsx'
 import { findAscendant } from './node'
-import { debug } from '..';
 
 export interface TreeViewNode {
   name: string
@@ -120,8 +119,8 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     style: {
       fg: 'green',
       bg: 'black',
-      focusedNode: { bg: 'green', fg: 'black', },
-      selectedNode: { bg: 'red', fg: 'black', }
+      focusedNode: { bg: 'green', fg: 'black' },
+      selectedNode: { bg: 'red', fg: 'black' }
     }
   }
 
@@ -148,7 +147,6 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
           ...this.options.downKeys!,
           ...this.options.pageDownKeys!,
           ...this.options.pageUpKeys!
-
         ],
         this.onKey.bind(this)
       )
@@ -202,25 +200,21 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     if (this.options.upKeys!.includes(key.name)) {
       upAction()
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.pageUpKeys!.includes(key.name)) {
+    } else if (this.options.pageUpKeys!.includes(key.name)) {
       for (let i = 0; i < this.height - 1; i++) {
         upAction()
       }
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.downKeys!.includes(key.name)) {
+    } else if (this.options.downKeys!.includes(key.name)) {
       downAction()
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.pageDownKeys!.includes(key.name)) {
+    } else if (this.options.pageDownKeys!.includes(key.name)) {
       const h = this.lpos.yl - this.lpos.yi - 1
       for (let i = 0; i < h; i++) {
         downAction()
       }
       this.emit('nodeFocus', this.currentNode)
-    }
-    else if (this.options.expandKeys!.includes(key.name)) {
+    } else if (this.options.expandKeys!.includes(key.name)) {
       this.currentNode.expanded = !this.currentNode.expanded
       this.emit('nodeExpand', this.currentNode)
     } else if (this.options.selectKeys!.includes(key.name)) {
@@ -238,8 +232,8 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
       const nodeSelectArg = this.options.multipleSelection
         ? this.selectedNodes
         : this.selectedNodes.length
-          ? this.selectedNodes[0]
-          : undefined
+        ? this.selectedNodes[0]
+        : undefined
       this.emit('nodeSelect', nodeSelectArg)
       this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
     }
@@ -352,7 +346,7 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     return f(n.nextSibling)
   }
 
-  /** 
+  /**
    * For each node, recursively, set node's parent, previousSibling and nextSibling properties to user given Nodes.
    */
   protected processNodes(nodes: TreeViewNode[]) {
@@ -370,15 +364,15 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     return nodes as Node[]
   }
 
-  /** 
-   * Calculate node lines to be rendered according to expanded and hidden node's properties. 
+  /**
+   * Calculate node lines to be rendered according to expanded and hidden node's properties.
    */
   protected getNodeLines(nodes: Node[], level = 0, lines: { node: Node; line: string }[] = []) {
     nodes.forEach(node => {
       if (!node.hidden) {
         const line = `${repeat(level * this.options.levelIndent!, ' ')}${
           node.expanded ? this.options.expandedPrefix : this.options.collapsedPrefix
-          } ${node.name}`
+        } ${node.name}`
         const i = line.indexOf('\n')
         lines.push({
           node,
@@ -400,8 +394,8 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     return this.currentNode
   }
 
-  /** 
-   * Gets the root nodes (the data) 
+  /**
+   * Gets the root nodes (the data)
    */
   getNodes() {
     return this.rootNodes
@@ -443,7 +437,7 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
 }
 
 React.addIntrinsicElementConstructors({
-  treeview: function (options?: TreeOptions) {
+  treeview: function(options?: TreeOptions) {
     return new TreeView(options)
   }
 })

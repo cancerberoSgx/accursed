@@ -3395,8 +3395,8 @@ export namespace Widgets {
      */
     ritems?: BlessedElement[]
 
-    /** 
-     * Current item values in the list. @internal 
+    /**
+     * Current item values in the list. @internal
      */
     items: BlessedElement[]
 
@@ -3821,18 +3821,15 @@ export namespace Widgets {
      */
     _reading: boolean
 
-    /** 
-     * Listener that receives key events. Could be overrided to customize the behavior. @internal 
+    /**
+     * Listener that receives key events. Could be overrided to customize the behavior. @internal
      */
     _listener?: KeyEventListener
-    
-    /** 
-     * Called when reading input has finished which happens when the user blur or closes editor. 
-     * @internal 
-     */
-    _done?: (err:Error|undefined, value: string) {
 
-    }
+    /**
+     * Called when reading input has finished which happens when the user blur or closes editor. @internal
+     */
+    _done?: (err: Error | undefined, value: string) => void
 
     /**
      * Submit the textarea (emits submit).
