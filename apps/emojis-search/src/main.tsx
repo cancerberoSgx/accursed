@@ -1,4 +1,4 @@
-import { installExitKeys, React, screen, createScreen2, log } from 'accursed'
+import { installExitKeys, React, createScreen2 } from 'accursed'
 import { App } from './app'
 
 (async ()=>{

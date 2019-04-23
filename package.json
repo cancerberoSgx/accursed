@@ -26,6 +26,7 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.12",
+    "deepmerge": "^3.2.0",
     "misc-utils-of-mine-generic": "0.0.14"
   },
   "devDependencies": {
