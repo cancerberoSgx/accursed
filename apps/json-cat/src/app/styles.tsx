@@ -5,16 +5,13 @@ export const focusable: () => ButtonOptions = () => ({
   clickable: true,
   keys: true,
   mouse: true,
-  keyable: true,
+  keyable: true,  
   border: 'line',
   style: {
     border: {
       fg: 'blue',
       type: 'line',
     },
-    // border: {
-    //   fg: 'yellow'
-    // },
     hover: {
       fg: 'yellow'
     },
@@ -28,6 +25,7 @@ export const focusable: () => ButtonOptions = () => ({
 });
 export const textBox: () => TextboxOptions = () => ({
   ...focusable(),
+  focused: true,
   width: 14,
   style: { ...focusable().style, bg: 'gray', border: { fg: 'magenta' } , width: 18}
 });

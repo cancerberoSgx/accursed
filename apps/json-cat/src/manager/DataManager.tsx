@@ -10,6 +10,7 @@ export class DataManager extends AppManager {
     super()
   }
   protected formatNodeValue(name: string, value: any): string {
+    // return value
     let f: string[] = []
     const t = typeof value
     let v = ''
@@ -26,10 +27,12 @@ export class DataManager extends AppManager {
       f = ['gray']
       v = inspect(value, { breakLength: 30, compact: true, maxArrayLength: 2 })
     }
-    return this.options.noColors ? v : format(v, f)
+    return v
+    // return this.options.noColors ? v : format(v, f)
   }
   protected formatNodeLabel(name: string, value: any): string {
-    return format(name, ['magenta'])
+    return name
+    // return format(name, ['magenta'])
   }
   handle(value: any, path: string[], partials: any[]): any {
     const node = this.buildTNodeWithVisualFeedback(path, value)
@@ -41,14 +44,14 @@ export class DataManager extends AppManager {
     if (isJSONObject(value) || Array.isArray(value)) {
       return {
         name: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
-        extended: false,
-        children: arrayToObject(objectKeys(value), childName => this.buildTNode((value as any)[childName], childName))
+        expanded: false,
+        children:  objectKeys(value).map(childName => this.buildTNode((value as any)[childName], childName))
       }
     } else {
       return {
         name: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
-        extended: false,
-        children: {}
+        expanded: false,
+        children: []
       }
     }
   }
@@ -58,18 +61,17 @@ export class DataManager extends AppManager {
     const name = path[path.length - 1]
     const node = this.buildTNode(value, name)
     if (!valueFinished) {
-      node.children = {
+      node.children = [
         ...(this.loaded || this.options.noLoadingFeedback
-          ? {}
-          : {
-              [this.LOADING_MSG]: {
+          ? []
+          : [{
                 name: this.LOADING_MSG,
-                children: {},
-                extended: false
-              }
-            }),
+                children: [],
+                expanded: false
+              }]
+            ),
         ...node.children
-      }
+          ]
     }
     return node
   }

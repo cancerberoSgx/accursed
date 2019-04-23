@@ -1,4 +1,5 @@
 import * as contrib from 'blessed-contrib'
+import { TreeViewNode } from '../../../dist/src';
 
 export interface Options {
   /**
@@ -13,8 +14,8 @@ export interface Options {
   testInput?: boolean
 }
 
-export interface TNode extends contrib.Widgets.TreeElementNode {
-  children: TChildren
+export interface TNode extends TreeViewNode {
+  // children: TChildren
 }
 export type TChildren = { [name: string]: TNode }
 export interface managerOptions {

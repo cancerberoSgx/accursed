@@ -9,7 +9,8 @@ import {
   RefObject,
   tree as createTree,
   ShowIf,
-  visitTreeNodes
+  visitTreeNodes,
+  TreeView
 } from 'accursed'
 import * as contrib from 'blessed-contrib'
 import { focusable, textBox } from './styles';
@@ -43,7 +44,7 @@ export class App extends Component<P, {}> {
     }, 800))
   }
   root: RefObject<Element> = React.createRef<Element>()
-  treeElement: RefObject<contrib.Widgets.TreeElement> = React.createRef<contrib.Widgets.TreeElement>(current =>
+  treeElement: RefObject<TreeView> = React.createRef<TreeView>(current =>
     setTimeout(() => {
       this.props.ready()
     }, 400)
@@ -63,25 +64,46 @@ export class App extends Component<P, {}> {
         <ShowIf onUpdate={fn => this.treeLoaded = fn}>
         Loading...
         </ShowIf>
-          <contribTree
+        <treeview
+        fg="green"
+            ref={this.treeElement}
+      keyable={true}
+            rootNodes={[{name: 'test', children: []}]}
+            focusable={true}
+            focused={true}
+            height="100%"
+            width="100%"//{30}
+            // mouse={true}
+            clickable={true}
+            style={{
+              bg: 'black',
+              fg: 'white',
+              focusedNode: {
+                bg: 'green',
+                fg: 'black'
+              }
+            }}
+            />
+          {/* <contribTree
             fg="green"
             ref={this.treeElement}
             focusable={true}
             height="100%"
             mouse={true}
             clickable={true}
-          />
+          /> */}
         </Div>
       </Div>
     )
   }
   filterByText(value: any): void {
-    visitTreeNodes( this.tree.data,node=>{
-      if(node.name&&!node.name.toLowerCase().includes(value.toLowerCase())){
-        node.name=''
-      }
-    })
-    this.tree.setData(this.tree.data)
+    // visitTreeNodes( this.tree.data,node=>{
+    //   if(node.name&&!node.name.toLowerCase().includes(value.toLowerCase())){
+    //     node.name=''
+    //   }
+    // })
+    // this.tree.setData(this.tree.data)
+    this.tree.toggleNodeHide(n=>n.name.toLowerCase().includes(value.toLowerCase()))
     this.tree.screen.render()
   }
   get tree() {
