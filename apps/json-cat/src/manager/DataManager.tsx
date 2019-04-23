@@ -1,4 +1,4 @@
-import { arrayToObject, objectKeys, setObjectProperty } from 'misc-utils-of-mine-generic'
+import { objectKeys, setObjectProperty } from 'misc-utils-of-mine-generic'
 import { FailReason } from 'oboe'
 import { inspect } from 'util'
 import { TNode } from '../types'
@@ -6,11 +6,11 @@ import { isJSONObject } from '../util'
 import { AppManager } from './AppManager'
 const { format } = require('ansi-escape-sequences')
 export class DataManager extends AppManager {
+
   constructor() {
     super()
   }
   protected formatNodeValue(name: string, value: any): string {
-    // return value
     let f: string[] = []
     const t = typeof value
     let v = ''
@@ -43,13 +43,17 @@ export class DataManager extends AppManager {
   protected buildTNode(value: any, name: string): TNode {
     if (isJSONObject(value) || Array.isArray(value)) {
       return {
-        name: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
+        name,
+        node: value,
+        label: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
         expanded: false,
-        children:  objectKeys(value).map(childName => this.buildTNode((value as any)[childName], childName))
+        children: objectKeys(value).map(childName => this.buildTNode((value as any)[childName], childName))
       }
     } else {
       return {
-        name: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
+        name, 
+        node: value,
+        label: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
         expanded: false,
         children: []
       }
@@ -64,19 +68,19 @@ export class DataManager extends AppManager {
       node.children = [
         ...(this.loaded || this.options.noLoadingFeedback
           ? []
-          : [{
+          : [
+              {
                 name: this.LOADING_MSG,
                 children: [],
                 expanded: false
-              }]
-            ),
+              }
+            ]),
         ...node.children
-          ]
+      ]
     }
     return node
   }
   failed(err: FailReason): any {
     this.log('An error occurred processing JSON input: ' + err)
-    // showInModal(this.screen as any, 'An error occurred processing JSON input: ' + err)
   }
 }

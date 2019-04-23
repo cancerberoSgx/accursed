@@ -42,14 +42,14 @@ export async function main(args: Options) {
       args.testInput && console.log('json node', path)
     }
   })
-  json.done(() => {
+  json.done((value) => {
     if (tree) {
-      tree.loaded = true
+      tree.loaded = value
     }
     args.testInput && console.log('done reading json')
   })
   json.fail(err => {
-    tree.loaded = true
+    tree.loaded = err
     tree && tree.failed(err)
     //TODO
     args.testInput && console.log('FAIL', err)

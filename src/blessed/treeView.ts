@@ -6,26 +6,29 @@ import { findAscendant } from './node'
 
 export interface TreeViewNode {
   name: string
-  children: Node[]
+  label?: string
+  children: TreeViewNode[]
   expanded?: boolean
   hidden?: boolean
 }
 
 interface Node extends TreeViewNode {
   focused?: boolean
+  children: Node[]
   parent?: Node
   nextSibling?: Node
   previousSibling?: Node
   selected?: boolean
+  path:string
 }
 
-export interface TreeOptions extends Widgets.ElementOptions {
+export interface TreeOptions<T extends TreeViewNode=TreeViewNode> extends Widgets.ElementOptions {
   collapsedPrefix?: string
   expandedPrefix?: string
   /**
    * The initial tree root nodes.
    */
-  rootNodes?: TreeViewNode[]
+  rootNodes?: T[]
   /**
    * Keys to expand nodes. Default value is ['space'].
    */
@@ -57,36 +60,36 @@ export interface TreeOptions extends Widgets.ElementOptions {
    * Emitted when user selects a node (pressing enter). undefined value means the user un-select all nodes.
    * undefined value means the user un-select all nodes
    */
-  onNodeSelect?: (node: TreeViewNode | TreeViewNode[] | undefined) => void
+  onNodeSelect?: <T extends TreeViewNode=TreeViewNode>(node: Node&T | Node&T[] | undefined) => void
   /**
    *  Emitted when user focus a tree node while navigating up or down with arrow keys.
    */
-  onNodeExpand?: (node: TreeViewNode) => void
+  onNodeExpand?: <T extends TreeViewNode=TreeViewNode>(node:  Node&T) => void
   /**
    * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current
    * status of the node.
    */
-  nodeFocus?: (node: TreeViewNode) => void
+  onNodeFocus?:<T extends TreeViewNode=TreeViewNode> (node:  Node&T) => void 
 
   style?: TreeViewStyle
 }
 
-interface ITreeView {
+interface ITreeView<T extends TreeViewNode=TreeViewNode> {
   /**
    * Emitted when user selects a node (pressing enter). undefined value means the user un-select all nodes
    */
-  on(event: 'nodeSelect', callback: (node: TreeViewNode) => void): this
+  on(event: 'nodeSelect', callback: (node: Node) => void): this
 
   /**
    * Emitted when user focus a tree node while navigating up or down with arrow keys.
    */
-  on(event: 'nodeFocus', callback: (node: TreeViewNode) => void): this
+  on(event: 'nodeFocus', callback: (node: Node) => void): this
 
   /**
    * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current
    * status of the node.
    */
-  on(event: 'nodeExpand', callback: (node: TreeViewNode) => void): this
+  on(event: 'nodeExpand', callback: (node: Node) => void): this
 }
 
 interface TreeViewStyle extends Style {
@@ -101,9 +104,15 @@ interface TreeViewStyle extends Style {
  *
  * It does support scrolling.
  */
-export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
+export class TreeView <T extends TreeViewNode=TreeViewNode>  extends widget.Element<TreeOptions<T>> implements ITreeView<T> {
   type = 'treeview'
   style: TreeViewStyle = {}
+
+  protected currentNode: Node
+  protected selectedNodes: Node[] = []
+  protected rootNodes: Node[]
+  protected nodeLines: { node: Node; line: string }[] = []
+  protected focusedLine = 0
 
   protected static defaultOptions: TreeOptions = {
     rootNodes: [],
@@ -124,20 +133,14 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
     }
   }
 
-  protected currentNode: Node
-  protected selectedNodes: Node[] = []
-  protected rootNodes: Node[]
-  protected nodeLines: { node: Node; line: string }[] = []
-  protected focusedLine = 0
-
-  constructor(options: TreeOptions = TreeView.defaultOptions) {
-    super({ ...TreeView.defaultOptions, ...(options || {}) })
+  constructor(options: TreeOptions<T> = TreeView.defaultOptions as any) {
+    super({ ...TreeView.defaultOptions as any, ...(options || {}) })
     this.style = { ...TreeView.defaultOptions.style, ...((options || {}).style || {}) }
     this.rootNodes =
       this.options.rootNodes!.length === 0
-        ? [{ name: 'Root', children: [] }]
+        ? [{ name: 'Root', children: [], path: '/Root' }]
         : this.processNodes(this.options.rootNodes!)
-    this.currentNode = this.rootNodes[0]
+    this.currentNode = this.rootNodes.find(n=>!n.hidden) ||  this.rootNodes[0]
     this.once('render', e => {
       this.screen.key(
         [
@@ -197,26 +200,50 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
         this.currentNode = findAscendantNextSibling(this.currentNode)
       }
     }
+    // const downAction = () => {
+    //   if (this.focusedLine === this.nodeLines.length - 1) {
+    //     return
+    //   }
+    //   this.focusedLine = this.focusedLine + 1
+    //   let candidate:Node|undefined 
+    //   // this.currentNode.focused = false
+    //   if (this.currentNode.expanded &&  (candidate== this.currentNode.children.find(c=>!c.hidden))) {
+    //     this.currentNode =candidate!
+    //   } 
+    //   else if ((candidate=this.findNextSibling(this.currentNode, s=>!s.hidden))) {
+    //     this.currentNode = candidate!
+    //   } 
+    //   else {
+    //     this.currentNode = findAscendantNextSibling(this.currentNode)
+    //   }
+    //   // this.currentNode.focused = true
+    // }
+
     if (this.options.upKeys!.includes(key.name)) {
       upAction()
       this.emit('nodeFocus', this.currentNode)
+      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node&T)
     } else if (this.options.pageUpKeys!.includes(key.name)) {
       for (let i = 0; i < this.height - 1; i++) {
         upAction()
       }
       this.emit('nodeFocus', this.currentNode)
+      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node&T)
     } else if (this.options.downKeys!.includes(key.name)) {
       downAction()
       this.emit('nodeFocus', this.currentNode)
+      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node&T)
     } else if (this.options.pageDownKeys!.includes(key.name)) {
       const h = this.lpos.yl - this.lpos.yi - 1
       for (let i = 0; i < h; i++) {
         downAction()
       }
       this.emit('nodeFocus', this.currentNode)
+      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node&T)
     } else if (this.options.expandKeys!.includes(key.name)) {
       this.currentNode.expanded = !this.currentNode.expanded
       this.emit('nodeExpand', this.currentNode)
+      this.options.onNodeExpand && this.options.onNodeExpand(this.currentNode as Node&T)
     } else if (this.options.selectKeys!.includes(key.name)) {
       this.currentNode.selected = !this.currentNode.selected
       if (this.options.multipleSelection) {
@@ -229,11 +256,11 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
         this.selectedNodes.forEach(n => (n.selected = false))
         this.selectedNodes = this.currentNode.selected ? [this.currentNode] : []
       }
-      const nodeSelectArg = this.options.multipleSelection
+      const nodeSelectArg: Node&T|undefined = this.options.multipleSelection
         ? this.selectedNodes
         : this.selectedNodes.length
         ? this.selectedNodes[0]
-        : undefined
+        : undefined as any
       this.emit('nodeSelect', nodeSelectArg)
       this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
     }
@@ -290,7 +317,7 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
    */
   setNodes(data: TreeViewNode[] = this.rootNodes) {
     this.rootNodes = this.processNodes(data)
-    this.currentNode = this.rootNodes[0]
+    this.currentNode =     this.currentNode = this.rootNodes.find(n=>!n.hidden) ||  this.rootNodes[0]  //this.rootNodes[0]
     this.focusedLine = 0
     this.selectedNodes = []
   }
@@ -350,12 +377,13 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
    * For each node, recursively, set node's parent, previousSibling and nextSibling properties to user given Nodes.
    */
   protected processNodes(nodes: TreeViewNode[]) {
-    function f(n: Node, parent?: Node, prev?: Node, next?: Node) {
-      n.parent = parent
-      n.previousSibling = prev
-      n.nextSibling = next
+    function f(n: TreeViewNode, parent?: TreeViewNode, prev?: TreeViewNode, next?: TreeViewNode) {
+      (n as Node).parent = parent as Node;
+      (n as Node).previousSibling = prev as Node;
+      (n as Node).nextSibling = next as Node;
+      (n as Node).path = (n as Node).path || (parent ? (parent as Node).path||'' : '')+ '/' + n.name
       n.children.forEach((c, i) => {
-        f(c, n, i > 0 ? n.children[i - 1] : undefined, i < n.children.length - 1 ? n.children[i + 1] : undefined)
+        f(c, n as any, i > 0 ? n.children[i - 1] : undefined, i < n.children.length - 1 ? n.children[i + 1] : undefined)
       })
     }
     nodes.forEach((n, i) => {
@@ -376,7 +404,7 @@ export class TreeView extends widget.Element<TreeOptions> implements ITreeView {
         const i = line.indexOf('\n')
         lines.push({
           node,
-          line: line.substring(0, i !== -1 ? i : line.length) //.replace(/\n/gm, ' ')
+          line: line.substring(0, i !== -1 ? i : line.length)
         })
         if (node.expanded) {
           this.getNodeLines(node.children, level + 1, lines)

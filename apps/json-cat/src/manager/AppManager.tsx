@@ -1,12 +1,4 @@
-import {
-  createScreen,
-  filterDescendants,
-  installExitKeys,
-  installFocusHandler,
-  isElement,
-  React,
-  visitTreeNodes
-} from 'accursed'
+import { createScreen, installExitKeys, React } from 'accursed'
 import { App } from '../app/app'
 import { TNode } from '../types'
 import { BaseManager } from './BaseManager'
@@ -18,7 +10,7 @@ export class AppManager extends BaseManager {
   TREE_UPDATE_FINISH = 'TREE_UPDATE_FINISH'
   TREE_UPDATED = 'TREE_UPDATED'
   APP_RENDERED = 'APP_RENDERED'
-  
+
   constructor() {
     super()
     this.on(this.JSON_LOADED, () => {
@@ -30,8 +22,8 @@ export class AppManager extends BaseManager {
 
   protected setTreeData(data: TNode = this.data, andUpdate = true) {
     // this.log('setTreeData', data)
-    this._app.tree.setNodes( data.children)
-    // andUpdate && 
+    this._app.tree.setNodes(data.children)
+    // andUpdate &&
     this._app.tree.screen.render() //TODO: check if its dirty
   }
 
@@ -40,7 +32,6 @@ export class AppManager extends BaseManager {
     const screen = createScreen({
       // useBCE: true,
       smartCSR: true,
-      
       focusable: true,
       sendFocus: true,
       log: 'log.txt',
@@ -53,25 +44,16 @@ export class AppManager extends BaseManager {
 
     this._app = new App(
       {
-        manager: this, 
+        manager: this,
         ready: () => {
           screen.focusNext()
           try {
-            // this._app.tree.focus()
             if (this.options.renderMode === 'progressively') {
               this.buildTreeProgressively()
               this._app.tree.screen.render()
             }
             screen.render()
             this.emit(this.APP_RENDERED)
-            // installFocusHandler(
-            //   'test1',
-            //   filterDescendants(this._app.root.current!, d => isElement(d) && !!d.options.focusable),
-            //   screen,
-            //   undefined,
-            //   false,
-            //   false
-            // )
           } catch (error) {
             this.log(error)
             throw error
@@ -102,11 +84,6 @@ export class AppManager extends BaseManager {
               return false
             })
           }
-            
-          // visitTreeNodes(this.data, node => {
-          //   node && delete (node as any)[this.LOADING_MSG]
-          //   node && (node as any).children && delete (node as any).children[this.LOADING_MSG]
-          // })
           clearInterval(this.updateTimer)
           this.emit(this.TREE_UPDATE_FINISH)
         }

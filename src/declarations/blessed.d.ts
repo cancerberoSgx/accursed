@@ -2309,6 +2309,11 @@ export namespace Widgets {
     hover: any
 
     /**
+     * Element that implements the text hover. @internal
+     */
+    _hoverText?: BoxElement
+
+    /**
      * Set or get terminal name. Set calls screen.setTerminal() internally.
      */
     terminal: string
@@ -2318,7 +2323,9 @@ export namespace Widgets {
      */
     title: string
 
-    /** Internal Screen buffer of current lines. Exposed for debug purpuses. @internal */
+    /** 
+     * Internal Screen buffer of current lines. Exposed for debug purpuses. @internal 
+     */
     lines: ScreenLine[][]
 
     /**
@@ -2347,7 +2354,9 @@ export namespace Widgets {
     draw(start: number, end: number): void
 
     /**
-     * Resets the focus, buffers, clear the sreen, alloc new memory, reset the keypad keys, stop listening to the mouse, etc. But won't emit destroy or other events nor unregister any listener. (I guess is like a reset)
+     * Resets the focus, buffers, clear the sreen, alloc new memory, reset the keypad keys, stop listening to
+     * the mouse, etc. But won't emit destroy or other events nor unregister any listener. (I guess is like a
+     * reset)
      * @internal
      */
     leave(): void
@@ -2918,12 +2927,12 @@ export namespace Widgets {
     destroy(): void
 
     /**
-     * Set the z-index of the element (changes rendering order).
+     * Change this element's index in its parent's children array. This will change the rendering order. If all elements are positioned by their selves then this could be similar to CSS z-index property. But if you are using a layout or relaying somhow in the children order then it will change the position of this element and its siblings.
      */
     setIndex(z: number): void
 
     /**
-     * Put the element in front of its siblings.
+     * Put the element in front of its siblings. Uses [[setIndex]]
      */
     setFront(): void
 
@@ -2989,17 +2998,28 @@ export namespace Widgets {
      */
     screenshot(): void
 
-    /** Convert `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m` . @internal. Could  be overriden by element subclasses. */
+    /** 
+     * Converts `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m`. @internal.  
+     */
     _parseTags(s: string): string
-    /** @internal  . Could  be overriden by element subclasses. */
+
+    /** @internal */
     _parseAttr(ines: string[]): string[]
-    /** @internal . Could  be overriden by element subclasses. */
+
+    /** @internal */
     _align(line: string, width: number, align: string): void
-    /** @internal . Could  be overriden by element subclasses. */
+
+    /** @internal  */
     _wrapContent(content: string, width: number): void
-    /** calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to the rest of the properties and optionally bg and fg. */
+
+    /** 
+     * calculates the value for `style` (could be substyle like style.bar) to paint in the screen according to
+     * the rest of the properties and optionally bg and fg. 
+     */
     sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
-    /** Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal */
+    /**
+     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal 
+     */
     clearPos(): void
 
     /**

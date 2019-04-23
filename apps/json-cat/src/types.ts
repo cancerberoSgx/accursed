@@ -1,5 +1,4 @@
-import * as contrib from 'blessed-contrib'
-import { TreeViewNode } from '../../../dist/src';
+import { TreeViewNode } from '../../../dist/src'
 
 export interface Options {
   /**
@@ -15,9 +14,11 @@ export interface Options {
 }
 
 export interface TNode extends TreeViewNode {
+  // propertyName: string
   // children: TChildren
+  node: any
 }
-export type TChildren = { [name: string]: TNode }
+// export type TChildren = { [name: string]: TNode }
 export interface managerOptions {
   noColors?: boolean
   renderMode?: 'waitForJsonLoad' | 'progressively'

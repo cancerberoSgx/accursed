@@ -18,23 +18,27 @@ export class BaseManager extends EventEmitter {
   protected lastPath: string[] = null as any
   protected data: TNode = {
     name: 'Root',
+    label: 'Root',
+    node: {},
     expanded: true,
     children: [
       ...(this.options.noLoadingFeedback
         ? []
-        : [{
-          name: this.LOADING_MSG,
-          expanded: false,
-          children: []
-        }])
-      ]
-    }
-    
-  protected _jsonLoaded = false
-  set loaded(l: boolean) {
-    if (l) {
-      this.emit(this.JSON_LOADED)
-      this._jsonLoaded = l
+        : [
+            {
+              name: this.LOADING_MSG,
+              expanded: false,
+              children: []
+            }
+          ])
+    ]
+  }
+
+  protected _jsonLoaded : any|undefined
+  set loaded(value: any) {
+    if (value) {
+      this.emit(this.JSON_LOADED, value)
+      this._jsonLoaded = value
     }
   }
   log(...args: any[]) {
