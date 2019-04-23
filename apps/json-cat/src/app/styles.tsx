@@ -20,7 +20,7 @@ export const focusable: () => ButtonOptions = () => ({
       fg: 'black',
       border: {
         fg: 'magenta'
-      },
+      }
     },
     bg: 'darkgray',
     fg: 'blue'
@@ -29,6 +29,7 @@ export const focusable: () => ButtonOptions = () => ({
 export const textBox: () => TextboxOptions = () => ({
   ...focusable(),
   // focused: true,
-  width: "100%", height: 3,
-  style: { ...focusable().style, bg: 'gray', border: { fg: 'magenta' }  }
+  width: '100%',
+  height: 3,
+  style: { ...focusable().style, bg: 'gray', border: { fg: 'magenta' } }
 })

@@ -42,7 +42,7 @@ export async function main(args: Options) {
       args.testInput && console.log('json node', path)
     }
   })
-  json.done((value) => {
+  json.done(value => {
     if (tree) {
       tree.loaded = value
     }

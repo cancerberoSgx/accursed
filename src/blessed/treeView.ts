@@ -161,45 +161,48 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     if (this !== this.screen.focused || !findAscendant(this, a => a === this.screen.focused)) {
       return
     }
-    const findLastVisualDescendant = (n: Node): Node => {
-      const lastChild = [...n.children].reverse().find(c => !c.hidden)
-      if (!lastChild || !n.expanded) {
-        return n
-      }
-      return findLastVisualDescendant(lastChild)
-    }
     const upAction = () => {
-      if (this.focusedLine > 0) {
-        this.focusedLine = this.focusedLine - 1
-      } else {
+      if (this.focusedLine <= 0) {
+      // } else {
         return
       }
-      this.currentNode.focused = false
-      if (this.currentNode.previousSibling) {
-        this.currentNode = findLastVisualDescendant(this.currentNode.previousSibling)
-      } else if (this.currentNode.parent) {
-        this.currentNode = this.currentNode.parent
-      }
-      this.currentNode.focused = true
-    }
-    const findAscendantNextSibling = (n: Node): Node => {
-      if (!n.parent) {
-        return n
-      }
-      return this.findNextSibling(n, s => !s.hidden) || findAscendantNextSibling(n.parent)
+      this.focusedLine = this.focusedLine - 1
+      this.currentNode = this.nodeLines[this.focusedLine].node
+
+      // this.currentNode.focused = false
+      // if (this.currentNode.previousSibling) {
+      //   const findLastVisualDescendant = (n: Node): Node => {
+      //     const lastChild = [...n.children].reverse().find(c => !c.hidden)
+      //     if (!lastChild || !n.expanded) {
+      //       return n
+      //     }
+      //     return findLastVisualDescendant(lastChild)
+      //   }
+      //   this.currentNode = findLastVisualDescendant(this.currentNode.previousSibling)
+      // } else if (this.currentNode.parent) {
+      //   this.currentNode = this.currentNode.parent
+      // }
+      // this.currentNode.focused = true
     }
     const downAction = () => {
       if (this.focusedLine === this.nodeLines.length - 1) {
         return
       }
       this.focusedLine = this.focusedLine + 1
-      if (this.currentNode.expanded && this.currentNode.children.length > 0) {
-        this.currentNode = this.currentNode.children[0]
-      } else if (this.currentNode.nextSibling) {
-        this.currentNode = this.currentNode.nextSibling
-      } else {
-        this.currentNode = findAscendantNextSibling(this.currentNode)
-      }
+      this.currentNode = this.nodeLines[this.focusedLine].node
+                // const findAscendantNextSibling = (n: Node): Node => {
+                //   if (!n.parent) {
+                //     return n
+                //   }
+                //   return this.findNextSibling(n, s => !s.hidden) || findAscendantNextSibling(n.parent)
+                // }
+      // if (this.currentNode.expanded && this.currentNode.children.length > 0) {
+      //   this.currentNode = this.currentNode.children[0]
+      // } else if (this.currentNode.nextSibling) {
+      //   this.currentNode = this.currentNode.nextSibling
+      // } else {
+      //   this.currentNode = findAscendantNextSibling(this.currentNode)
+      // }
     }
     // const downAction = () => {
     //   if (this.focusedLine === this.nodeLines.length - 1) {

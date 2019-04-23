@@ -6,7 +6,6 @@ import { isJSONObject } from '../util'
 import { AppManager } from './AppManager'
 const { format } = require('ansi-escape-sequences')
 export class DataManager extends AppManager {
-
   constructor() {
     super()
   }
@@ -51,7 +50,7 @@ export class DataManager extends AppManager {
       }
     } else {
       return {
-        name, 
+        name,
         node: value,
         label: `${this.formatNodeLabel(name, value)}: ${this.formatNodeValue(name, value)}`,
         expanded: false,

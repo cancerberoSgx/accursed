@@ -34,7 +34,7 @@ export class BaseManager extends EventEmitter {
     ]
   }
 
-  protected _jsonLoaded : any|undefined
+  protected _jsonLoaded: any | undefined
   set loaded(value: any) {
     if (value) {
       this.emit(this.JSON_LOADED, value)
