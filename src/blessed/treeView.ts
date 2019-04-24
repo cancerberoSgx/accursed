@@ -1,5 +1,5 @@
 import { repeat } from 'misc-utils-of-mine-generic'
-import { IKeyEventArg, widget, Widgets } from '..'
+import { IKeyEventArg, widget, Widgets, debug } from '..'
 import { Style } from '../blessedTypes'
 import { React } from '../jsx'
 import { findAscendant } from './node'
@@ -13,7 +13,7 @@ export interface TreeViewNode {
 }
 
 interface Node extends TreeViewNode {
-  focused?: boolean
+  // focused?: boolean
   children: Node[]
   parent?: Node
   nextSibling?: Node
@@ -157,32 +157,20 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     })
   }
 
+  /** if true, the view will ignore if it's screen.focused or not. Useful for automate the view form outside. */
+  // protected ignoreScreenFocused = false
   protected onKey(ch: any, key: IKeyEventArg) {
-    if (this !== this.screen.focused || !findAscendant(this, a => a === this.screen.focused)) {
+    if (
+      // !this.ignoreScreenFocused &&
+       (this !== this.screen.focused || !findAscendant(this, a => a === this.screen.focused))) {
       return
     }
     const upAction = () => {
       if (this.focusedLine <= 0) {
-      // } else {
         return
       }
       this.focusedLine = this.focusedLine - 1
       this.currentNode = this.nodeLines[this.focusedLine].node
-
-      // this.currentNode.focused = false
-      // if (this.currentNode.previousSibling) {
-      //   const findLastVisualDescendant = (n: Node): Node => {
-      //     const lastChild = [...n.children].reverse().find(c => !c.hidden)
-      //     if (!lastChild || !n.expanded) {
-      //       return n
-      //     }
-      //     return findLastVisualDescendant(lastChild)
-      //   }
-      //   this.currentNode = findLastVisualDescendant(this.currentNode.previousSibling)
-      // } else if (this.currentNode.parent) {
-      //   this.currentNode = this.currentNode.parent
-      // }
-      // this.currentNode.focused = true
     }
     const downAction = () => {
       if (this.focusedLine === this.nodeLines.length - 1) {
@@ -190,39 +178,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       }
       this.focusedLine = this.focusedLine + 1
       this.currentNode = this.nodeLines[this.focusedLine].node
-                // const findAscendantNextSibling = (n: Node): Node => {
-                //   if (!n.parent) {
-                //     return n
-                //   }
-                //   return this.findNextSibling(n, s => !s.hidden) || findAscendantNextSibling(n.parent)
-                // }
-      // if (this.currentNode.expanded && this.currentNode.children.length > 0) {
-      //   this.currentNode = this.currentNode.children[0]
-      // } else if (this.currentNode.nextSibling) {
-      //   this.currentNode = this.currentNode.nextSibling
-      // } else {
-      //   this.currentNode = findAscendantNextSibling(this.currentNode)
-      // }
     }
-    // const downAction = () => {
-    //   if (this.focusedLine === this.nodeLines.length - 1) {
-    //     return
-    //   }
-    //   this.focusedLine = this.focusedLine + 1
-    //   let candidate:Node|undefined
-    //   // this.currentNode.focused = false
-    //   if (this.currentNode.expanded &&  (candidate== this.currentNode.children.find(c=>!c.hidden))) {
-    //     this.currentNode =candidate!
-    //   }
-    //   else if ((candidate=this.findNextSibling(this.currentNode, s=>!s.hidden))) {
-    //     this.currentNode = candidate!
-    //   }
-    //   else {
-    //     this.currentNode = findAscendantNextSibling(this.currentNode)
-    //   }
-    //   // this.currentNode.focused = true
-    // }
-
     if (this.options.upKeys!.includes(key.name)) {
       upAction()
       this.emit('nodeFocus', this.currentNode)
@@ -263,8 +219,8 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       const nodeSelectArg: Node & T | undefined = this.options.multipleSelection
         ? this.selectedNodes
         : this.selectedNodes.length
-        ? this.selectedNodes[0]
-        : (undefined as any)
+          ? this.selectedNodes[0]
+          : (undefined as any)
       this.emit('nodeSelect', nodeSelectArg)
       this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
     }
@@ -281,7 +237,9 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     }
     const notSelectedAttr = this.sattr({
       ...this.style,
-      ...(this.screen.focused === this ? this.style.focus || {} : {})
+      ...((
+        // this.ignoreScreenFocused ||
+         this.screen.focused === this) ? this.style.focus || {} : {})
     })
     let attr = notSelectedAttr
     const selectedAttr = this.sattr(this.style.selectedNode || TreeView.defaultOptions.style!.selectedNode!)
@@ -295,7 +253,9 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     for (let j = coords.yi; j < coords.yl; j++) {
       if (this.nodeLines[j - coords.yi + offset] && this.nodeLines[j - coords.yi + offset].node.selected) {
         attr = selectedAttr
-      } else if (this === this.screen.focused && offset + j - coords.yi === this.focusedLine) {
+      } else if ((
+        // this.ignoreScreenFocused || 
+        this === this.screen.focused )&& offset + j - coords.yi === this.focusedLine) {
         attr = focusedAttr
       } else {
         attr = notSelectedAttr
@@ -322,8 +282,6 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
   setNodes(data: TreeViewNode[] = this.rootNodes) {
     this.rootNodes = this.processNodes(data as any)
     this.currentNode = this.currentNode = this.rootNodes.find(n => !n.hidden) || this.rootNodes[0]
-    // this.nodeLines = this.getNodeLines(this.rootNodes)
-    // this.currentNode = this.nodeLines.length ? this.nodeLines[0].node : this.rootNodes[0]
     this.focusedLine = 0
     this.selectedNodes = []
   }
@@ -357,6 +315,56 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       return false
     })
     this.setNodes()
+  }
+
+
+  /** 
+   * Will scroll down to given node's position, an focus it (ignoring if this === screen.focused). 
+   * 
+   * Useful to remark a node in this view from external code. 
+   */
+  focusNode(n: T) {
+    function ForceCast<T>(a: any): a is T{return true}
+    if(!ForceCast<Node>(n)){return }
+    // firsrt we expand all nodes so they are available in 
+
+    // if (foundIndex !== -1) {
+      // n.expanded = true
+      // n.selected = true
+      // this.currentNode = this.nodeLines[foundIndex].node
+      // debug({ foundIndex, currentNode: this.currentNode, n })
+      this.currentNode = n
+      this.selectedNodes.forEach(n=>n.selected = false)
+      this.visitAncestors(this.currentNode, n => {
+        n.hidden = false
+        n.expanded = true
+        return false
+      })
+      this.nodeLines = this.getNodeLines(this.rootNodes)
+      const foundIndex = this.nodeLines.findIndex(l => l.node === n as any)
+      this.focusedLine = foundIndex === -1 ? this.focusedLine: foundIndex
+      this.currentNode.hidden = false
+      this.currentNode.expanded = true
+      this.currentNode.selected = true
+      // this.ignoreScreenFocused = true
+      this.screen.render()
+      // this.ignoreScreenFocused = false
+    // }
+  }
+
+  /**
+   * Find a node recursively that matches with given predicate, or return undefined if none
+   */
+  findDescendant(predicate: (n: T) => boolean) {
+    let found: T | undefined
+    this.visitNodes(d => {
+      if (predicate(d as any)) {
+        found = d as any
+        return true
+      }
+      return false
+    })
+    return found
   }
 
   /**
@@ -407,7 +415,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       if (!node.hidden) {
         const line = `${repeat(level * this.options.levelIndent!, ' ')}${
           node.expanded || !node.children.length ? this.options.expandedPrefix : this.options.collapsedPrefix
-        } ${node.label || node.name}`
+          } ${node.label || node.name}`
         const i = line.indexOf('\n')
         lines.push({
           node,
@@ -471,7 +479,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
 }
 
 React.addIntrinsicElementConstructors({
-  treeview: function(options?: TreeOptions) {
+  treeview: function (options?: TreeOptions) {
     return new TreeView(options)
   }
 })

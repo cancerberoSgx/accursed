@@ -33,10 +33,13 @@ export class AppManager extends BaseManager {
       // useBCE: true,
       smartCSR: true,
       focusable: true,
+      dockBorders: true,
+      ignoreDockContrast: true,
       sendFocus: true,
       log: 'log.txt',
       title: 'json-cat'
     })
+    screen.cursorColor('lightred')
     installExitKeys(screen)
 
     screen.key('tab', k => screen.focusNext())
@@ -75,15 +78,15 @@ export class AppManager extends BaseManager {
           return
         }
         if (this.loaded) {
-          if (!this.options.noLoadingFeedback) {
-            delete (this.data as any)[this.LOADING_MSG]
-            delete (this.data.children as any)[this.LOADING_MSG]
-            this._app.tree.visitNodes(node => {
-              node && delete (node as any)[this.LOADING_MSG]
-              node && (node as any).children && delete (node as any).children[this.LOADING_MSG]
-              return false
-            })
-          }
+          // if (!this.options.noLoadingFeedback) {
+          //   delete (this.data as any)[this.LOADING_MSG]
+          //   delete (this.data.children as any)[this.LOADING_MSG]
+          //   this._app.tree.visitNodes(node => {
+          //     node && delete (node as any)[this.LOADING_MSG]
+          //     node && (node as any).children && delete (node as any).children[this.LOADING_MSG]
+          //     return false
+          //   })
+          // }
           clearInterval(this.updateTimer)
           this.emit(this.TREE_UPDATE_FINISH)
         }

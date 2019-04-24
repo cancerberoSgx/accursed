@@ -151,9 +151,12 @@ class BlessedJsxImpl implements BlessedJsx {
     // just in case ?
     const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
     if (ref && !ref.current) {
-      ref.current = el! as any
+      ref.current = component || el! as any
       ref.callback && ref.callback(ref.current)
     }
+    // if(component && el! &&(el! as any).options && (el! as any).options.ref) {
+
+    // }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for
     // intrinsic elements

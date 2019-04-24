@@ -45,9 +45,9 @@ export class Columns extends Component<ColumnsProps> {
     return (
       <Div {...this.props}>
         {columns.map(c => (
-          <box {...c.attrs} height={c.attrs.height || '100%'} width={c.width}>
+          <Div {...c.attrs} height={c.attrs.height || '100%'} width={c.width}>
             {c.children}
-          </box>
+          </Div>
         ))}
       </Div>
     )

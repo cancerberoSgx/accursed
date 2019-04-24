@@ -6,6 +6,7 @@ export const focusable: () => ButtonOptions = () => ({
   keys: true,
   mouse: true,
   keyable: true,
+
   border: 'line',
   style: {
     border: {
@@ -26,10 +27,20 @@ export const focusable: () => ButtonOptions = () => ({
     fg: 'blue'
   }
 })
+
+export const containerOptions: () => TextboxOptions = () => ({
+  border: 'line',
+  style: {
+    ...focusable().style,
+    bg: 'gray',
+    border: { fg: 'black' },
+    label: { fg: 'black', bg: 'magenta', transparent: true }
+  }
+})
 export const textBox: () => TextboxOptions = () => ({
   ...focusable(),
   // focused: true,
-  width: '100%',
+  width: '90%',
   height: 3,
-  style: { ...focusable().style, bg: 'gray', border: { fg: 'magenta' } }
+  style: { ...focusable().style, bg: 'lightgray', border: { fg: 'gray' } }
 })

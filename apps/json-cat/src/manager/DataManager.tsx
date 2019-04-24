@@ -5,10 +5,12 @@ import { TNode } from '../types'
 import { isJSONObject } from '../util'
 import { AppManager } from './AppManager'
 const { format } = require('ansi-escape-sequences')
+
 export class DataManager extends AppManager {
   constructor() {
     super()
   }
+
   protected formatNodeValue(name: string, value: any): string {
     let f: string[] = []
     const t = typeof value
@@ -29,16 +31,19 @@ export class DataManager extends AppManager {
     return v
     // return this.options.noColors ? v : format(v, f)
   }
+
   protected formatNodeLabel(name: string, value: any): string {
     return name
     // return format(name, ['magenta'])
   }
+
   handle(value: any, path: string[], partials: any[]): any {
     const node = this.buildTNodeWithVisualFeedback(path, value)
     setObjectProperty(this.data.children, path, { ...node.children })
     // debug('handle', path)
     this.dirty = true
   }
+
   protected buildTNode(value: any, name: string): TNode {
     if (isJSONObject(value) || Array.isArray(value)) {
       return {
@@ -58,25 +63,26 @@ export class DataManager extends AppManager {
       }
     }
   }
+
   protected buildTNodeWithVisualFeedback(path: string[], value: any) {
     const valueFinished = this.loaded && (this.lastPath ? path.length < this.lastPath.length : false)
     this.lastPath = path
     const name = path[path.length - 1]
     const node = this.buildTNode(value, name)
-    if (!valueFinished) {
-      node.children = [
-        ...(this.loaded || this.options.noLoadingFeedback
-          ? []
-          : [
-              {
-                name: this.LOADING_MSG,
-                children: [],
-                expanded: false
-              }
-            ]),
-        ...node.children
-      ]
-    }
+    // if (!valueFinished) {
+    //   node.children = [
+    //     ...(this.loaded || this.options.noLoadingFeedback
+    //       ? []
+    //       : [
+    //           {
+    //             name: this.LOADING_MSG,
+    //             children: [],
+    //             expanded: false
+    //           }
+    //         ]),
+    //     ...node.children
+    //   ]
+    // }
     return node
   }
   failed(err: FailReason): any {

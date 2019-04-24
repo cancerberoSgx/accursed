@@ -22,15 +22,15 @@ export class BaseManager extends EventEmitter {
     node: {},
     expanded: true,
     children: [
-      ...(this.options.noLoadingFeedback
-        ? []
-        : [
-            {
-              name: this.LOADING_MSG,
-              expanded: false,
-              children: []
-            }
-          ])
+      // ...(this.options.noLoadingFeedback
+      //   ? []
+      //   : [
+      //       {
+      //         name: this.LOADING_MSG,
+      //         expanded: false,
+      //         children: []
+      //       }
+      //     ])
     ]
   }
 

@@ -1,9 +1,15 @@
 import { Component, Div, List, ListOptions, React, TextboxOptions } from '..'
 import { Textbox } from '../blessedTypes'
 import { notSameNotFalsy } from '../util/misc'
+import { ArtificialEvent } from '../jsx/types';
 
 interface P extends TextboxOptions {
-  // /**
+
+  onChange?(e: ArtificialEvent<Textbox> & {
+    value: any;
+}): void;
+  
+// /**
   //  * Throttling time to render suggestion list. Default value is -1 which does not throttle.
   //  */
   // suggestionRenderThrottle?: number;
@@ -17,6 +23,7 @@ interface P extends TextboxOptions {
   optionsMax?: number
   inputOptions?: TextboxOptions
   listOptions?: ListOptions
+  // onChange?(e: ArtificialEvent<Textbox>&{value})
 }
 /**
  * Basic autocomplete input, with given options string array using textbox and a list. The list is only shown
@@ -60,7 +67,7 @@ export class AutoComplete extends Component<P> {
 
   render() {
     return (
-      <Div {...this.props}>
+      <Div {...this.props} onChange={undefined}>
         <textbox
           hoverText="arrows to autocomplete"
           width={12}
@@ -74,6 +81,11 @@ export class AutoComplete extends Component<P> {
           mouse={true}
           keyable={true}
           {...this.props.inputOptions || {}}
+
+          onChange={e=>{
+            this.props.onChange && this.props.onChange(e)
+          }}
+
           onKeyPress={
             // throttle(
             e => {
