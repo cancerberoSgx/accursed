@@ -1,4 +1,5 @@
 import { TODO } from 'misc-utils-of-mine-typescript';
+import { Color } from './drawille-canvas';
 
 //taken form drawille-blessed-contrib
 const map = [
@@ -7,7 +8,7 @@ const map = [
   [0x4, 0x20],
   [0x40, 0x80]
 ]
-interface Context__ {
+export interface Context_ {
   new (w: number, height: number): HTMLCanvasElement
   width: number
   height: number
@@ -17,8 +18,12 @@ interface Context__ {
   fontFg: string
   fontBg: string
   color: string
+  frame(delimiter?: string): string
+  strokeStyle: Color&any
+  fillStyle: Color
+  //TODO: the rest of the methdos
 }
-function Canvas(this: Context__, width: number, height: number) {
+function Canvas(this: Context_, width: number, height: number) {
   if(width%2 != 0) {
     throw new Error('Width must be multiple of 2!');
   }
@@ -27,10 +32,10 @@ function Canvas(this: Context__, width: number, height: number) {
   }
 this.width = width;
   this.height = height;
-this.content = new Buffer(width*height/8);
-this.colors = new Array(width*height/8);
-this.chars = new Array(width*height/8);
-this.content.fill(0);
+this.content = new Buffer(width*height/8)
+this.colors = new Array(width*height/8)
+this.chars = new Array(width*height/8)
+this.content.fill(0)
 
 this.fontFg='normal'
 this.fontBg='normal'

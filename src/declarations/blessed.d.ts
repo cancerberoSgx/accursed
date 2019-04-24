@@ -4656,6 +4656,10 @@ export function escape(item: any): any
 
 type ColorRgb = [number, number, number]
 export const colors: {
+  /**
+   * Match given color in a high level form (like rgb or hex expression) with a terminal color number  
+   * interpolatingg to a similar color. 
+   */
   match(r1: Widgets.Color | ColorRgb, g1?: number, b1?: number): number
   convert(color: Widgets.Color): number
   mixColors(c1: number, c2: number, alpha: number): number
@@ -4766,8 +4770,8 @@ interface Helpers {
   /**Convert style attributes to binary format. */
   attrToBinary(style: Widgets.Types.TStyle, element: Widgets.BlessedElement) : number
   // stripTags(text) - Strip text of tags and SGR sequences.
-  // cleanTags(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
-  // dropUnicode(text) - Drop text of any >U+FFFF characters.
+  // cleanTacgs(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
+  // dropUniode(text) - Drop text of any >U+FFFF characters.
 }
 
 export const helpers: Helpers

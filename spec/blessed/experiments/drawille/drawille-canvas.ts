@@ -1,20 +1,21 @@
 import { TODO } from 'misc-utils-of-mine-typescript';
-
-type DrawFn = (x:number, y: number)=>void
-type Point = [number, number]
-
-type Color = string|number|number[]
+import { Context_ } from './drawille-blessed-contrib';
 
 
-var Canvas = require('./drawille-blessed-contrib');
+var Canvas = require('./drawille-blessed-contrib') as Context_
 var bresenham = require('bresenham');
 var glMatrix = require('gl-matrix');
 var x256 = require('x256');
 var mat2d = glMatrix.mat2d;
 var vec2 = glMatrix.vec2;
 
+export type DrawFn = (x:number, y: number)=>void
+export type Point = [number, number]
 
-interface Context__ {
+export type Color = string|number|(number[])
+
+
+export interface Context2 {
   new (w: number, height: number): HTMLCanvasElement
   width: number
   height: number
@@ -24,7 +25,7 @@ interface Context__ {
   _stack: TODO[]
   _currentPath: TODO[]
 }
-function Context(this: Context__, width:number, height:number, canvasClass?: any) {
+function Context(this: Context2, width:number, height:number, canvasClass?: any) {
   var canvasClass = canvasClass || Canvas;
   this._canvas = new canvasClass(width, height);  
   this.canvas = this._canvas; //compatability  
@@ -131,6 +132,29 @@ function triangle(pa: Point, pb: Point, pc: Point, f: DrawFn) {
     }
   }
 }
+
+Context.prototype.arc = function arc(h: number, k: number, r: number, th1: number, th2: number, anticlockwise: any) {
+  var x, y;
+  var dth = Math.abs(Math.acos(1 / r) - Math.acos(2 / r))
+  if (anticlockwise) {
+    var tempth = th2;
+    th2 = th1 + 2 * Math.PI;  
+    th1 = tempth;
+  }
+  th1 = th1 % (2 * Math.PI)
+  if (th2<th1) th2 = th2 + 2 * Math.PI;
+  for (var th = th1; th <= th2; th = th + dth) {
+    y = clamp(r * Math.sin(th) + k, 0, this.height)
+    x = clamp(r * Math.cos(th) + h, 0, this.width)
+    addPoint(this._matrix, this._currentPath, x, y, true);
+  }
+};
+
+function clamp (value: number, min: number, max: number) {
+  return Math.round(Math.min(Math.max(value, min), max));
+};
+
+
 
 function quad(m: number, x: number, y: number, w: number, h: number, f: DrawFn) {
   var p1 = vec2.transformMat2d(vec2.create(), vec2.fromValues(x, y), m);
