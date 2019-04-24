@@ -61,6 +61,7 @@ interface P {
 }
 
 export class App extends Component<P, {}> {
+  
   protected autoCompleteList = React.createRef<List>()
   protected textFilterInput: Textbox = undefined as any
   protected nodePath: Text = null as any

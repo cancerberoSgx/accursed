@@ -31,7 +31,8 @@ export function installExitKeys(screen: Screen) {
     if (isModalVisible()) {
       closeModal(screen)
     } else {
-      return screen.destroy()
+      screen.destroy()
+      process.exit(0)
     }
   })
 }

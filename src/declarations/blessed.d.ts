@@ -1412,7 +1412,7 @@ export namespace Widgets {
       border?: TBorder | BorderType
       label?: TStyle
       track?: TStyle
-      scrollbar?: TStyle & { style: TStyle } | true
+      scrollbar?: TStyle & { style?: TStyle } | true
       focus?: TStyle
       item?: TStyle
       selected?: TStyle
@@ -1987,7 +1987,7 @@ export namespace Widgets {
     /**
      * The blessed Tput object (only available if you passed tput: true to the Program constructor.)
      */
-    tput?: Tput
+    tput?: Tput|boolean
 
     /**
      * Top of the focus history stack.
@@ -1997,12 +1997,12 @@ export namespace Widgets {
     /**
      * Width of the screen (same as program.cols).
      */
-    width?: Types.TPosition
+    width?: number
 
     /**
      * Height of the screen (same as program.rows).
      */
-    height?: Types.TPosition
+    height?: number
 
     /**
      * Same as screen.width.
@@ -2236,12 +2236,12 @@ export namespace Widgets {
     /**
      * Width of the screen (same as program.cols).
      */
-    width: Types.TPosition
+    width: number
 
     /**
      * Height of the screen (same as program.rows).
      */
-    height: Types.TPosition
+    height: number
 
     /**
      * Same as screen.width.
@@ -2348,6 +2348,11 @@ export namespace Widgets {
      */
     realloc(): void
 
+/**Convert an SGR string to our own attribute format.*/
+attrCode(code: string, cur: number, def: number): number
+
+// Convert our own attribute format to an SGR string.
+codeAttr(attr: number): string
     /**
      * Draw the screen based on the contents of the screen buffer.
      */
@@ -3156,7 +3161,7 @@ export namespace Widgets {
      * Object enabling a scrollbar.
      * Style of the scrollbar track if present (takes regular style options).
      */
-    scrollbar?: { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string } | boolean
+    scrollbar?: { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string }&Widgets.Types.TStyle | boolean
   }
 
   interface ScrollableTextOptions extends ScrollableBoxOptions {
@@ -3572,8 +3577,8 @@ export namespace Widgets {
     /**
      * Pick a single file and return the path in the callback.
      */
-    pick(cwd: string, callback: () => void): void
-    pick(callback: () => void): void
+    pick(cwd: string, callback: (err?: any, file?: string) => void): void
+    pick(callback: (err?: any, file?: string) => void): void
 
     /**
      * Reset back to original cwd.
@@ -4657,6 +4662,14 @@ export const colors: {
   RGBToHex(r: number, g: number, b: number): string
   RGBToHex(hex: string): ColorRgb
   blend(attr: number, attr2?: number, alpha?: number): number
+  /**
+ Seed all 256 colors. Assume xterm defaults.
+ Ported from the xterm color generation script. */
+  colors():number[]
+  /**  Map higher colors to the first 8 colors.
+ This allows translation of high colors to low colors on 8-color terminals. */
+   ccolors():number[]
+
   colorNames: {
     black: 0
     red: 1
@@ -4739,17 +4752,24 @@ interface Unicode {
 
 // Helpers
 // All helpers reside on blessed.helpers or blessed.
+interface Helpers {
 
-// merge(a, b) - Merge objects a and b into object a.
-// asort(obj) - Sort array alphabetically by name prop.
-// hsort(obj) - Sort array numerically by index prop.
-// findFile(start, target) - Find a file at start directory with name target.
-// escape(text) - Escape content's tags to be passed into el.setContent(). Example: box.setContent('escaped tag: ' + blessed.escape('{bold}{/bold}'));
-// parseTags(text) - Parse tags into SGR escape codes.
-// generateTags(style, text) - Generate text tags based on style object.
-// attrToBinary(style, element) - Convert style attributes to binary format.
-// stripTags(text) - Strip text of tags and SGR sequences.
-// cleanTags(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
-// dropUnicode(text) - Drop text of any >U+FFFF characters.
+  // merge(a, b) - Merge objects a and b into object a.
+  // asort(obj) - Sort array alphabetically by name prop.
+  // hsort(obj) - Sort array numerically by index prop.
+  // findFile(start, target) - Find a file at start directory with name target.
+  // escape(text) - Escape content's tags to be passed into el.setContent(). Example: box.setContent('escaped tag: ' + blessed.escape('{bold}{/bold}'));
+  // parseTags(text) - 
+  /** Parse tags into SGR escape codes. */
+  /**Generate text tags based on style object. */
+  generateTags(style: Widgets.Types.TStyle, text: string) : string
+  /**Convert style attributes to binary format. */
+  attrToBinary(style: Widgets.Types.TStyle, element: Widgets.BlessedElement) : number
+  // stripTags(text) - Strip text of tags and SGR sequences.
+  // cleanTags(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
+  // dropUnicode(text) - Drop text of any >U+FFFF characters.
+}
+
+export const helpers: Helpers
 
 /**  terminfo/cap aliases for blessed. */

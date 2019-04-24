@@ -4,12 +4,12 @@
     "target": "es2018",
     "module": "commonjs",
     "lib": [
-      "esnext"
+      "esnext", "dom"
     ],
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,
-    "strict": true,
+    // "strict": true,
     "baseUrl": ".",
     "paths": {
       "blessed-contrib": ["src/declarations/blessed-contrib"],      
