@@ -3,9 +3,10 @@
  * Copyright (c) 2007 Stefan Goessner (goessner.net)
  * Licensed under the MIT (MIT-LICENSE.txt) licence.
  */
+type ResultPath = 'VALUE' | 'PATH' | 'OTHER'
 interface JsonPath {
-  result: { [a: string]: any }
-  resultType: string
+  result: any[]
+  resultType: ResultPath
   normalize(expr: string): string
   walk(
     loc: string,
@@ -16,7 +17,7 @@ interface JsonPath {
   ): void
   [a: string]: any //string
 }
-function jsonPath(obj: any, expr: string, arg: any) {
+export function jsonPath(obj: any, expr: string, arg?: { resultType?: ResultPath }) {
   var P: JsonPath = {
     resultType: (arg && arg.resultType) || 'VALUE',
     result: [],
@@ -118,4 +119,8 @@ function jsonPath(obj: any, expr: string, arg: any) {
     P.trace(P.normalize(expr).replace(/^\$;/, ''), obj, '$')
     return P.result.length ? P.result : false
   }
+}
+
+export function jsonPathGet(val: any, path: string) {
+  return eval(`(function($){return ${path}})`)(val)
 }

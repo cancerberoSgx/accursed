@@ -44,3 +44,19 @@ export const textBox: () => TextboxOptions = () => ({
   height: 3,
   style: { ...focusable().style, bg: 'lightgray', border: { fg: 'gray' } }
 })
+export function autocompleteOptions() {
+  return {
+    width: '100%',
+    listOptions: {
+      width: '100%',
+      border: 'line',
+      style: { bg: 'lightgray', fg: 'black' }
+    },
+    inputOptions: {
+      ...textBox(),
+      width: '100%',
+      height: 3,
+      label: 'Select (JSON Pointer)'
+    }
+  }
+}

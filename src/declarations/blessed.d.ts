@@ -1410,7 +1410,7 @@ export namespace Widgets {
       transparent?: boolean
       shadow?: boolean
       border?: TBorder | BorderType
-      label?: string
+      label?: TStyle
       track?: TStyle
       scrollbar?: TStyle & { style: TStyle } | true
       focus?: TStyle

@@ -61,6 +61,21 @@ export function getElementLabel(el: Element): Element | undefined {
   return (el as any)._label
 }
 
+export function labelBlink(el: Element, options: { timeout?: number; omitBorder?: boolean } = {}) {
+  el.style.label = { ...(el.style.label || {}), blink: true }
+  if (!options.omitBorder && typeof el.style.border !== 'string') {
+    el.style.border = { ...(el.style.border || {}), blink: true }
+  }
+  el.screen.render()
+  setTimeout(() => {
+    el.style.label = { ...(el.style.label || {}), blink: false }
+    if (!options.omitBorder && typeof el.style.border !== 'string') {
+      el.style.border = { ...(el.style.border || {}), blink: false }
+    }
+    el.screen.render()
+  }, options.timeout || 10000)
+}
+
 /**
  * extract property stored on e.$ by path.
  */

@@ -1,15 +1,16 @@
 import { Component, Div, List, ListOptions, React, TextboxOptions } from '..'
 import { Textbox } from '../blessedTypes'
+import { ArtificialEvent } from '../jsx/types'
 import { notSameNotFalsy } from '../util/misc'
-import { ArtificialEvent } from '../jsx/types';
 
 interface P extends TextboxOptions {
+  onChange?(
+    e: ArtificialEvent<Textbox> & {
+      value: any
+    }
+  ): void
 
-  onChange?(e: ArtificialEvent<Textbox> & {
-    value: any;
-}): void;
-  
-// /**
+  // /**
   //  * Throttling time to render suggestion list. Default value is -1 which does not throttle.
   //  */
   // suggestionRenderThrottle?: number;
@@ -81,11 +82,9 @@ export class AutoComplete extends Component<P> {
           mouse={true}
           keyable={true}
           {...this.props.inputOptions || {}}
-
-          onChange={e=>{
+          onChange={e => {
             this.props.onChange && this.props.onChange(e)
           }}
-
           onKeyPress={
             // throttle(
             e => {

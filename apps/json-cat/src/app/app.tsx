@@ -7,6 +7,7 @@ import {
   debug,
   Div,
   EventOptions,
+  labelBlink,
   List,
   React,
   RefObject,
@@ -17,9 +18,10 @@ import {
   TreeView
 } from 'accursed'
 import * as contrib from 'blessed-contrib'
+import { jsonPath, jsonPathGet } from '../jsonPath'
 import { AppManager } from '../manager/AppManager'
 import { TNode } from '../types'
-import { containerOptions, focusable, textBox } from './styles'
+import { autocompleteOptions, containerOptions, focusable, textBox } from './styles'
 
 declare interface Ptr {
   list(
@@ -60,13 +62,13 @@ interface P {
 
 export class App extends Component<P, {}> {
   protected autoCompleteList = React.createRef<List>()
-  // protected filterContainer: Layout = undefined as any
   protected textFilterInput: Textbox = undefined as any
   protected nodePath: Text = null as any
   protected nodeText: Text = null as any
   protected includeValuesInTextSearch: boolean = false
   protected textSearchQuery: string = null as any
   protected json: any
+  protected jsonPointerSelectors: string[] = null as any
 
   constructor(p: P, s: any) {
     super(p, s)
@@ -79,6 +81,7 @@ export class App extends Component<P, {}> {
               // d.fragmentId
               d.pointer
           )
+          this.jsonPointerSelectors = selectors
           this.autoCompleteList.current!.setItems(selectors)
         } catch (error) {
           debug(error)
@@ -87,8 +90,6 @@ export class App extends Component<P, {}> {
       }, 100)
     })
   }
-
-  // root: RefObject<Element> = React.createRef<Element>()
 
   treeElement: RefObject<TreeView<TNode>> = React.createRef<TreeView<TNode>>(current =>
     setTimeout(() => {
@@ -100,9 +101,7 @@ export class App extends Component<P, {}> {
 
   render() {
     return (
-      <Div
-      // ref={this.root}
-      >
+      <Div>
         <Div height="70%" width="100%">
           {/* <ShowIf onUpdate={fn => (this.treeLoaded = fn)}>Loading...</ShowIf> */}
           <treeview<TNode>
@@ -153,9 +152,15 @@ export class App extends Component<P, {}> {
               label="Node Text"
               height="70%"
               {...focusable()}
+              style={{ ...containerOptions().style }}
+              {...{
+                scrollable: true,
+                mouse: true,
+                keys: true,
+                alwaysScroll: true
+              }}
               scrollable={true}
               ref={React.createRef<Text>(current => (this.nodeText = current!))}
-              style={{ ...containerOptions().style }}
             />
           </Div>
         </Div>
@@ -207,44 +212,59 @@ export class App extends Component<P, {}> {
 
           <Column {...containerOptions()} width="50%">
             <AutoComplete
-              width="100%"
+              {...autocompleteOptions()}
               listOptions={{
-                ref: this.autoCompleteList,
-                width: '100%',
-                border: 'line',
-                style: { bg: 'lightgray', fg: 'black' }
+                ...autocompleteOptions().listOptions,
+                ref: this.autoCompleteList
               }}
-              inputOptions={{
-                ...textBox(),
-                width: '100%',
-                height: 3,
-                label: 'Select (JSON Pointer)'
-              }}
-              // border={undefined}
               hoverText="Select using JSON-Pointer"
               value="people.$*.email"
               options={[]}
               onChange={e => {
-                
-                // showInModal(this.textFilterInput.screen, 'hola')
                 const result = ptr.get(this.json, e.value)
-                const found = this.tree.findDescendant(d=>d.node===result)
-                debug('ptr.get(this.json, e.value)0', result, found)
-                if(found){
-                  this.tree.focusNode(found)
-                }
-                // this.treeElement.
-                // debug('ptr.get(this.json, e.value)',{result, found})
-
-                if (!result) {
+                const found = result && this.tree.findDescendant(d => d.node === result)
+                if (!found) {
                   showInModal(
                     this.blessedElement.screen,
                     'Sorry, could not find expression "' + e.value + '" in current JSON.'
                   )
                   return
+                } else {
+                  this.tree.selectNode(found)
                 }
                 this.nodeText.content = JSON.stringify(result, null, 2)
-                this.blessedElement.screen.render()
+
+                labelBlink(this.nodeText)
+              }}
+            />
+
+            <AutoComplete
+              {...autocompleteOptions()}
+              value="$.*.value"
+              hoverText="Select using Path"
+              options={[]}
+              label="JSON Path"
+              onChange={e => {
+                let found: TNode | undefined
+                const result = jsonPath(this.json, e.value, { resultType: 'PATH' })
+                if (result && result.length) {
+                  try {
+                    this.nodeText.content = JSON.stringify(result, null, 2)
+                    // debug(result)
+                    this.tree.screen.render()
+                    const val = jsonPathGet(this.json, result[0])
+                    // debug(result,val)
+                    found = this.tree.findDescendant(d => d.node === val)
+                    // debug(result,val, found)
+                  } catch (error) {
+                    debug('error', error)
+                  }
+                }
+                if (!found) {
+                  showInModal(this.tree.screen, 'Sorry, could not find expression "' + e.value + '" in current JSON.')
+                } else {
+                  this.tree.selectNode(found)
+                }
               }}
             />
           </Column>

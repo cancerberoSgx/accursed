@@ -151,7 +151,7 @@ class BlessedJsxImpl implements BlessedJsx {
     // just in case ?
     const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
     if (ref && !ref.current) {
-      ref.current = component || el! as any
+      ref.current = component || (el! as any)
       ref.callback && ref.callback(ref.current)
     }
     // if(component && el! &&(el! as any).options && (el! as any).options.ref) {

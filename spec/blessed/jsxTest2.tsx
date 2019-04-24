@@ -1,10 +1,7 @@
-import * as blessed from 'blessed'
-import { renderer } from '../../src/blessed/layoutRenderer'
-import { installExitKeys } from '../../src/blessed/util'
-import { BoxOptions, Style } from '../../src/blessedTypes'
-import { React } from '../../src/jsx/createElement'
+// import * as blessed from 'blessed'
+import { BoxOptions, createScreen, installExitKeys, React, renderer } from '../../src'
 
-const screen = blessed.screen({ smartCSR: true })
+const screen = createScreen({ smartCSR: true })
 installExitKeys(screen)
 
 const commonOptions: BoxOptions = {
@@ -43,8 +40,8 @@ abstract class Component<P = {}> {
 
 class Comp2 extends Component<{ friends: string[] }> {
   render() {
-    //@ts-ignore
-    const style: Style = { style: { display: 'block' } }
+    // @ts-ignor e
+    const style: any = { style: { display: 'block' } }
     return (
       <layout {...commonOptions} width="100%" height="100%" parent={screen} renderer={renderer}>
         A Duplex stream is one that implements both Readable and Writable, such as a TCP socket connection. Because
