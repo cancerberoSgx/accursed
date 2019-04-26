@@ -25,31 +25,30 @@
   "license": "MIT",
   "dependencies": {
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.8.12",
-    "deepmerge": "^3.2.0",
-    "google-material-color-palette-json": "^2.0.1",
-    "gradstop": "^2.2.3",
-    "misc-utils-of-mine-generic": "0.0.14",
-    "window-size": "^1.1.1"
+    "blessed-contrib": "^4.8.15",
+    "misc-utils-of-mine-generic": "0.0.15"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.8.16",
-    "@types/node": "^10.5.2",
+    "google-material-color-palette-json": "^2.0.1",
+    "gradstop": "^2.2.3",
+    "@types/jasmine": "^3.3.12",
+    "@types/node": "^11.13.7",
     "ansi-diff-stream": "^1.2.1",
     "cli-driver": "0.2.0",
     "drawille-canvas": "^1.2.0",
     "editor-widget": "^1.1.1",
     "google-palette": "^1.1.0",
-    "jasmine": "^3.3.1",
+    "jasmine": "^3.4.0",
     "markdown-toc": "^1.2.0",
-    "prettier": "^1.16.4",
+    "prettier": "^1.17.0",
     "term.js": "0.0.7",
-    "ts-node": "^7.0.1",
+    "ts-node": "^8.1.0",
     "ts-refactor": "0.0.2",
     "typedoc": "^0.14.2",
     "typedoc-plugin-markdown": "^1.2.0",
-    "typescript": "^3.4.1",
-    "xterm": "^3.12.2"
+    "typescript": "^3.4.5",
+    "xterm": "^3.12.2",
+    "window-size": "^1.1.1"
   },
   "keywords": [
     "Command line",
