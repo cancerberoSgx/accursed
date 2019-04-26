@@ -1,8 +1,10 @@
+An example of a custom blessed element with complex UI and behavior (a tree-view) that doesn't use other elements internally but implements render() method by painting directly to the screen (so is more performant).  
+
+# spec/blessed/experiments/blessedExtendTs.tsx
+
+```ts
 import { repeat } from 'misc-utils-of-mine-generic'
-import { IKeyEventArg, widget, Widgets } from '..'
-import { Style } from '../blessedTypes'
-import { React } from '../jsx'
-import { findAscendant } from './node'
+import { IKeyEventArg, widget, Widgets, Style, React, findAscendant } from 'accursed'
 
 export interface TreeViewNode {
   name: string
@@ -23,15 +25,7 @@ interface Node extends TreeViewNode {
 }
 
 export interface TreeOptions<T extends TreeViewNode = TreeViewNode> extends Widgets.ElementOptions {
-  /** 
-   * String to show before an element representing the "expand" action, like "[+]", when the element is collapsed. 
-   * Default value: '\u25b6'. 
-   */
   collapsedPrefix?: string
-  /** 
-   * String to show before an element representing the "collapse" action, like "[-]", when the element is expanded. 
-   * Default value: '\u25bc'. 
-   */
   expandedPrefix?: string
   /**
    * The initial tree root nodes.
@@ -74,7 +68,7 @@ export interface TreeOptions<T extends TreeViewNode = TreeViewNode> extends Widg
    */
   onNodeExpand?: <T extends TreeViewNode = TreeViewNode>(node: Node & T) => void
   /**
-   * Emitted when user expand or collapses a node (pressing space). `node.expanded` property tells the current
+   * Emitted when user expand or collapses a node (pressing space). node.expanded property tells the current
    * status of the node.
    */
   onNodeFocus?: <T extends TreeViewNode = TreeViewNode>(node: Node & T) => void
@@ -488,3 +482,6 @@ React.addIntrinsicElementConstructors({
     return new TreeView(options)
   }
 })
+
+
+```

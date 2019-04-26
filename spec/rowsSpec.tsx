@@ -6,20 +6,21 @@ import {
   installExitKeys,
   installFocusHandler,
   React,
-  Screen
+  Screen,
+  Br, Collapsible, Row, Rows, Div
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, Collapsible, Column, Columns, Div } from '../src/jsx-components'
 import { words } from '../src/util/data'
 import { log } from '../src/util/logger'
 
-describe('columns', () => {
+describe('rows', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
   })
 
-  it('should layout content in columns', async done => {
+  // jasmine.DEFAULT_TIMEOUT_INTERVAL=9999
+  it('should layout content in rows', async done => {
     try {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
       installExitKeys(screen)
@@ -29,24 +30,24 @@ describe('columns', () => {
             <Br />
             {words(10).join(' ')}
             <Br />
-            <Columns>
-              <Column bg="red">
-                column1
+            <Rows>
+              <Row bg="red">
+                Row1
                 <Br />
                 {words(250).join(' ')}
-              </Column>
-              <Column bg="blue">
-                column2
+              </Row>
+              <Row bg="blue">
+                Row2
                 <Br />
                 {words(250).join(' ')}
-              </Column>
-              <Column bg="yellow">
-                column3
+              </Row>
+              <Row bg="yellow">
+                Row3
                 <Br />
                 {words(210).join(' ')}
-              </Column>
+              </Row>
               {}
-            </Columns>
+            </Rows>
             <Br />
             {words(10).join(' ')}
             <Br />
@@ -56,24 +57,24 @@ describe('columns', () => {
             <Br />
             {words(10).join(' ')}
             <Br />
-            <Columns>
-              <Column bg="red" width="30%">
-                column1
+            <Rows>
+              <Row bg="red" height="20%">
+                Row1
                 <Br />
                 {words(250).join(' ')}
-              </Column>
-              <Column bg="blue" width="70%">
-                column2
+              </Row>
+              <Row bg="blue" height="50%">
+                Row2
                 <Br />
                 {words(250).join(' ')}
-              </Column>
-              <Column bg="yellow">
-                column3
+              </Row>
+              <Row bg="yellow" height="30%">
+                Row3
                 <Br />
                 {words(210).join(' ')}
-              </Column>
+              </Row>
               {}
-            </Columns>
+            </Rows>
             <Br />
             {words(10).join(' ')}
             <Br />
@@ -87,12 +88,12 @@ describe('columns', () => {
       screen.append(el)
       screen.render()
 
-      // log(getContent(el))
-      await waitFor(() => getContent(el).includes('column1'))
-      expect(getContent(el)).toContain('column2')
-      expect(getContent(el)).toContain('column3')
+      log(getContent(el))
+      await waitFor(() => getContent(el).includes('Row1'))
+      expect(getContent(el)).toContain('Row2')
+      expect(getContent(el)).toContain('Row3')
 
-      //TODO: test the handler...
+      // //TODO: test the handler...
 
       done()
     } catch (error) {

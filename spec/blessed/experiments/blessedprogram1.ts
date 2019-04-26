@@ -62,7 +62,7 @@ program.setx(((program.cols / 2) | 0) - 4)
 program.down(5)
 program.write('Hi again!')
 program.bg('!black')
-program.feed()
+program.feed() 
 
 program.getCursor(function(err, data) {
   if (!err) {

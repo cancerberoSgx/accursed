@@ -5,9 +5,16 @@ import { React } from '../jsx/createElement'
 import { Br, Div } from './jsxUtil'
 
 export interface CollapsibleProps extends BoxOptions, CollapsibleOptions {
+  /**
+   * If true the box will be collapsed by default.
+   */
   collapsed?: boolean
-  /**  called when collapse/expand occurs */
+
+  /** 
+   * Called when collapse/expand occurs 
+   */
   onCollapseChange?: onCollapseChange
+  
   children: JSX.BlessedJsxNode | JSX.BlessedJsxNode[]
 }
 /** 

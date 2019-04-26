@@ -3,9 +3,6 @@ import { inspect } from 'util'
 import { inBrowser } from './browser'
 
 export function log(...args: any[]) {
-  // if(existsSync('log2.txt')){
-  //   writeFileSync('log2.txt', 'hello')
-  // }
   if (inBrowser()) {
     console.log(...args)
   } else {
@@ -14,7 +11,6 @@ export function log(...args: any[]) {
       '\n' +
         args
           .map(a => inspect(a))
-          // .map(a => a.replace(/\n+/g, ' ').substring(0, Math.min(600, a.length)))
           .join(' |||||||||| ')
     )
   }

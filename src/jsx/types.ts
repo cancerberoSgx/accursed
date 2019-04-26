@@ -62,7 +62,9 @@ export enum ArtificialEventOptionNames {
   onceRender = 'onceRender'
 }
 
-/** represents event handlers directly supported by blessed element methods (exactly same signature) */
+/** 
+ * Represents event handlers directly supported by blessed element methods (exactly same signature) 
+ */
 export interface BlessedEventOptions {
   [EventOptionNames.key]?: Parameters<NodeWithEvents['key']>
   [EventOptionNames.onceKey]?: Parameters<NodeWithEvents['onceKey']>
@@ -70,8 +72,10 @@ export interface BlessedEventOptions {
   [EventOptionNames.once]?: On<this>
 }
 
-/** represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This imply some manual event registration and mapping
- * to blessed supported ones. */
+/** 
+ * Represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This
+ * imply some manual event registration and mapping to blessed supported ones. 
+ */
 export interface ArtificialEventOptions<T extends Element> {
   [ArtificialEventOptionNames.onClick]?: OnClickHandler<T>
   [ArtificialEventOptionNames.onKeyPress]?: (
@@ -128,7 +132,8 @@ declare global {
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
       treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
     }
-    /** adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps unify the rest in one place (onClick, etc) */
+    /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
+     * unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>
 
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
@@ -180,13 +185,16 @@ declare global {
 /**
  * Type of the `React` object as in `React.createElement`.
  *
- * Note: it could have another name than React, but if so tsconfig needs to be configured (JSXFactory) so for simplicity we name the instance `React`
+ * Note: it could have another name than React, but if so tsconfig needs to be configured (JSXFactory) so for
+ * simplicity we name the instance `React`
  */
 export interface BlessedJsx {
   /**
-   * JSX.Element to blessed node factory method. i.e. `<box>foo</box>` will be translated to `React.createElement('box', {}, ['foo'])`.
+   * JSX.Element to blessed node factory method. i.e. `<box>foo</box>` will be translated to
+   * `React.createElement('box', {}, ['foo'])`.
    *
-   * This method should never be called directly by users, although is called internally when users call [[React.createEkenebt]]
+   * This method should never be called directly by users, although is called internally when users call
+   * [[React.createEkenebt]]
    */
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]): JSX.BlessedJsxNode
 
@@ -195,17 +203,19 @@ export interface BlessedJsx {
    */
   render(e: JSX.Element, options?: RenderOptions): Element
 
-  /** add listeners that will be notifies just after the Blessed Element instance is created. Attributes and children have not yet been set, besides blessed
-   * options native ones.*/
+  /** add listeners that will be notifies just after the Blessed Element instance is created. Attributes and
+   * children have not yet been set, besides blessed options native ones.*/
   addAfterElementCreatedListener(l: AfterElementCreatedListener): void
 
-  /** add listeners that will be notified just before a child is appended to its parent blessed element even for notes created from JSXText. If any listener
-   * return true the notification chain will stop, the children won't be appended to the element. */
+  /** add listeners that will be notified just before a child is appended to its parent blessed element even
+   * for notes created from JSXText. If any listener return true the notification chain will stop, the
+   * children won't be appended to the element. */
   addBeforeAppendChildListener(l: BeforeAppendChildListener): void
 
   /**
-   * add listeners that will be notified just before the blessed.foo() function is call with all the options as they are (normalized and valid).Children are
-   *  blessed elements unless the TextNodes that are still literals so be careful!. If any of the listeners returns a blessed element, it will interrupt the
+   * add listeners that will be notified just before the blessed.foo() function is call with all the options
+   *  as they are (normalized and valid).Children are blessed elements unless the TextNodes that are still
+   *  literals so be careful!. If any of the listeners returns a blessed element, it will interrupt the
    *  listener chain and that instance will be used instead of calling the blessed function.
    * */
   addBeforeElementCreatedListener(l: BeforeElementCreatedListener): void
@@ -216,15 +226,17 @@ export interface BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void
 
   /**
-   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time. See
-   * https://reactjs.org/docs/refs-and-the-dom.html.
+   * Creates a react-like Ref object to associate blessed elements with variables in the code at render-time.
+   * See https://reactjs.org/docs/refs-and-the-dom.html.
    */
   createRef<T extends Element>(callback?: (current: T | undefined) => void): RefObject<T>
 
   /**
-   * By default, accursed supports only blessed element intrinsic elements, and the creator functions for a gigen tag name is taken from the blessed namespace
-   * as in `require('blessed').button({...})`. With this method, users users can mix third party blessed object creators, like  blessed--contrib for creating
-   * more intrinsic elements. If so they should also augment the global JSX namespace if they want to support TypeScript.
+   * By default, accursed supports only blessed element intrinsic elements, and the creator functions for a
+   * gigen tag name is taken from the blessed namespace as in `require('blessed').button({...})`. With this
+   * method, users users can mix third party blessed object creators, like  blessed--contrib for creating more
+   * intrinsic elements. If so they should also augment the global JSX namespace if they want to support
+   * TypeScript.
    */
   addIntrinsicElementConstructors(blessedElementConstructors: { [type: string]: blessedElementConstructor }): void
 }

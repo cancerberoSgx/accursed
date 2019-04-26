@@ -1,30 +1,33 @@
 import { Component, Div, List, ListOptions, React, TextboxOptions } from '..'
 import { Textbox } from '../blessedTypes'
 import { ArtificialEvent } from '../jsx/types'
-import { notSameNotFalsy } from '../util/misc'
+import { notSameNotFalsy, throttle } from '../util/misc'
 
 interface P extends TextboxOptions {
+  
   onChange?(
     e: ArtificialEvent<Textbox> & {
       value: any
     }
   ): void
 
-  // /**
-  //  * Throttling time to render suggestion list. Default value is -1 which does not throttle.
-  //  */
-  // suggestionRenderThrottle?: number;
   /**
-   * Suggestion array
+   * Throttling time to render suggestion list. Default value is 0
+   */
+  suggestionRenderThrottle?: number;
+
+  /**
+   * Suggestions array.
    */
   options?: string[]
+
   /**
    * Maximum amount of options suggested to the user for an input. Note: Suggesting too much options can degrade the user experience while typing. Default value is 10.
    */
   optionsMax?: number
+
   inputOptions?: TextboxOptions
   listOptions?: ListOptions
-  // onChange?(e: ArtificialEvent<Textbox>&{value})
 }
 /**
  * Basic autocomplete input, with given options string array using textbox and a list. The list is only shown
@@ -86,7 +89,7 @@ export class AutoComplete extends Component<P> {
             this.props.onChange && this.props.onChange(e)
           }}
           onKeyPress={
-            // throttle(
+            throttle(
             e => {
               const list = this.listRef.current!
               const input = e.currentTarget!
@@ -127,7 +130,7 @@ export class AutoComplete extends Component<P> {
                 }
               }
             }
-            // , this.props.suggestionRenderThrottle||1000, {trailing: true})
+            , this.props.suggestionRenderThrottle||0, {trailing: true})
           }
         />
         <list

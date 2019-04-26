@@ -1,0 +1,217 @@
+import { tryTo, array } from 'misc-utils-of-mine-generic'
+import {
+  box,
+  Br,
+  button,
+  createScreen,
+  debug,
+  Div,
+  getContent,
+  installExitKeys,
+  React,
+  Screen,
+  text,
+  Text,
+  TreeView,
+  program
+} from '../src'
+import { waitFor } from '../src/blessed/waitFor'
+import { log } from '../src/util/logger'
+import { ansi } from 'cli-driver';
+import { sleep } from './blessedTestUtil';
+
+class KeyHelper {
+  constructor(protected screen: Screen) { }
+  down() {
+    this.screen.emit('key down', undefined, { name: 'down' })
+  }
+  up() {
+    this.screen.emit('key up', undefined, { name: 'up' })
+  }
+  space() {
+    this.screen.emit('key space', undefined, { name: 'space' })
+  }
+  enter() {
+    this.screen.emit('key enter', undefined, { name: 'enter' })
+  }
+}
+
+fdescribe('treeView', () => {
+  let screen: Screen
+  let tree: TreeView
+  let key: KeyHelper
+
+  afterEach(() => {
+    tryTo(() => screen.destroy())
+  })
+
+  beforeEach(async () => {
+    screen = createScreen({})
+    key = new KeyHelper(screen)
+    installExitKeys(screen)
+    tree = new TreeView({
+      rootNodes,
+      parent: screen,
+      width: 35,
+      height: 8,
+      style: { bg: 'blue', fg: 'white', focusedNode: { bg: 'green', fg: 'black' }, selectedNode: { bg: 'red' } },
+      scrollable: true
+    })
+    tree.focus()
+    screen.render()
+    await waitFor(() => !!tree.getContent().trim())
+  })
+
+  it('should render given expanded nodes', async done => {
+    expect(tree.getContent()).toContain('n1')
+    expect(tree.getContent()).not.toContain('n11')
+    expect(tree.getContent()).toContain('n2')
+    const n2Descendants = ['n21', 'n211', 'n2111', 'n21111', 'n22', 'n23']
+    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
+    done()
+  })
+
+  it('should focus the first node by default', async done => {
+    expect(tree.getFocusedNode().name).toBe('n1')
+    done()
+  })
+
+  it('should change focused node when pressing UP or DOWN', async done => {
+    expect(tree.getFocusedNode().name).toBe('n1')
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n2')
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n21') // can step down
+    key.up()
+    expect(tree.getFocusedNode().name).toBe('n2')
+    key.up()
+    expect(tree.getFocusedNode().name).toBe('n1')
+    key.up()
+    expect(tree.getFocusedNode().name).toBe('n1') // can't go further up
+    key.down()
+    key.down()
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n211')
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n2111')
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n21111')
+    key.up()
+    expect(tree.getFocusedNode().name).toBe('n2111')
+    key.down()
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n22') // can step up
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n23')
+    key.down()
+    expect(tree.getFocusedNode().name).toBe('n3')
+    done()
+  })
+
+  it('should expand/collapse nodes when pressing SPACE', async done => {
+    expect(tree.getContent()).not.toContain('n11')
+    key.space()
+    expect(tree.getContent()).toContain('n11')
+    key.space()
+    expect(tree.getContent()).not.toContain('n11')
+    key.down();
+    expect(tree.getFocusedNode().name).toBe('n2')
+    const n2Descendants = ['n21', 'n211', 'n2111', 'n21111', 'n22', 'n23']
+    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
+    key.space()
+    n2Descendants.forEach(name => expect(tree.getContent()).not.toContain(name))
+    key.space()
+    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
+    done()
+  })
+
+  it('should select/deselect nodes when pressing ENTER by default only one node', async done => {
+    expect(tree.getSelectedNodes().map(n => n.name)).toEqual([])
+    key.space()
+    key.down()
+    key.enter()
+    expect(tree.getSelectedNodes().map(n => n.name)).toEqual(['n11'])
+    key.enter()
+    expect(tree.getSelectedNodes().map(n => n.name)).toEqual([])
+    key.down()
+    key.enter()
+    expect(tree.getSelectedNodes().map(n => n.name)).toEqual(['n2'])
+    key.down()
+    key.enter()
+    expect(tree.getSelectedNodes().map(n => n.name)).toEqual(['n21'])
+    done()
+  })
+
+  it('should scroll down when focusing lower nodes', async done => {
+    expect(tree.getContent()).toContain('n1')
+    expect(tree.getContent()).not.toContain('n3') // outside frame
+    expect(tree.getContent()).not.toContain('n4')
+    array(9).forEach(() => key.down())
+    expect(tree.getContent()).toContain('n3')
+    expect(tree.getContent()).not.toContain('n4') // outside frame
+    expect(tree.getContent()).not.toContain('n1') // outside frame
+    done()
+  })
+
+})
+
+const rootNodes = [
+  { name: 'n1', children: [{ expanded: true, name: 'n11', children: [] }] },
+  {
+    expanded: true,
+    name: 'n2',
+    children: [
+      {
+        expanded: true,
+        name: 'n21',
+        children: [
+          {
+            expanded: true,
+            name: 'n211',
+            children: [{ expanded: true, name: 'n2111', children: [{ expanded: true, name: 'n21111', children: [] }] }]
+          }
+        ]
+      },
+      { expanded: true, name: 'n22', children: [] },
+      { expanded: true, name: 'n23', children: [] }
+    ]
+  },
+  {
+    expanded: false,
+    name: 'n3',
+    children: [
+      {
+        expanded: true,
+        name: 'n31',
+        children: [
+          {
+            expanded: true,
+            name: 'n311',
+            children: [{ expanded: true, name: 'n3111', children: [{ expanded: true, name: 'n31111', children: [] }] }]
+          }
+        ]
+      },
+      { expanded: true, name: 'n32', children: [] },
+      { expanded: true, name: 'n33', children: [] }
+    ]
+  },
+  {
+    expanded: false,
+    name: 'n4',
+    children: [
+      {
+        expanded: true,
+        name: 'n41',
+        children: [
+          {
+            expanded: true,
+            name: 'n411',
+            children: [{ expanded: true, name: 'n4111', children: [{ expanded: true, name: 'n41111', children: [] }] }]
+          }
+        ]
+      },
+      { expanded: true, name: 'n42', children: [] },
+      { expanded: true, name: 'n43', children: [] }
+    ]
+  }
+]

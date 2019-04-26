@@ -215,7 +215,7 @@ Any expression often used to declare conditions aor iterate inside JSX Expressio
 
 ## Refs
 
-https://reactjs.org/docs/refs-and-the-dom.html
+Implements [Reac refs](https://reactjs.org/docs/refs-and-the-dom.html) adding extra features. 
 
 ```jsx
 const screen = blessed.screen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
@@ -235,7 +235,18 @@ ref1.press()
 ...
 ```
 
- * it can be also used without JSX - remember is all the same... 
+Also `React.createRef()` accepts a callback that provides the new element: 
+
+```tsx
+class App extends Component {
+  protected container: Box
+  render(){
+    return <box ref={React.createRef(current=>this.container = current)}>
+    ...
+    </box>
+  }
+}
+```
 
 ## Virtual Elements
 
@@ -244,6 +255,10 @@ ref1.press()
  * Useful to define complex component API as markup and then render another thing that implements it. 
  * See [spec](spec/virtualElementRenderingSpec.tsx)
  * See  [guides/virtual-elements.md](guides/virtual-elements.md)
+ * Examples of components that heavily use virtual elements to define their APIs: 
+   * (src/jsx-components/tabPanel.tsx)[TabPanel]
+   * (src/jsx-components/listTable.tsx)[ListTable]
+   * (src/jsx-components/listBar.tsx)[ListBar]
 
 ## JSX Text
 

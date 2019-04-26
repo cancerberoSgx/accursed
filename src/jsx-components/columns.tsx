@@ -41,7 +41,6 @@ export class Columns extends Component<ColumnsProps> {
     const columns = getJSXChildrenProps(this)!
       .filter(e => e.tagName === 'Column')!
       .map((c, i, columns) => ({ ...c, width: c.attrs.width || `${Math.trunc(98 / columns.length)}%` }))
-    // log(columns.map(c => c.width))
     return (
       <Div {...this.props}>
         {columns.map(c => (

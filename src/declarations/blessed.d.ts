@@ -403,19 +403,24 @@ program.getCursor(function(err, data) {
   cuu(param?: number): boolean
   up(param?: number): boolean
 
-  cursorDown(param?: number): boolean
-  cud(param?: number): boolean
-  down(param?: number): boolean
+  /**
+   * Cursor Down `n` times, by default 1. 
+   */
+  cursorDown(n?: number): boolean
+  /** @see [[cursorDown]] */
+  cud(n?: number): boolean
+  /** @see [[cursorDown]] */
+  down(n?: number): boolean
 
-  cursorForward(param?: number): boolean
-  cuf(param?: number): boolean
-  right(param?: number): boolean
-  forward(param?: number): boolean
+  cursorForward(n?: number): boolean
+  cuf(n?: number): boolean
+  right(n?: number): boolean
+  forward(n?: number): boolean
 
-  cursorBackward(param?: number): boolean
-  cub(param?: number): boolean
-  left(param?: number): boolean
-  back(param?: number): boolean
+  cursorBackward(n?: number): boolean
+  cub(n?: number): boolean
+  left(n?: number): boolean
+  back(n?: number): boolean
   /**
    * CSI Ps ; Ps H
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
