@@ -74,7 +74,8 @@ class BlessedJsxImpl implements BlessedJsx {
   }
 
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]) {
-    // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything happens)
+    // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything
+    // happens)
 
     let el: JSX.BlessedJsxNode
 
@@ -84,12 +85,14 @@ class BlessedJsxImpl implements BlessedJsx {
     const artificialEventAttributes = {} as ArtificialEventOptions<Element>
     let component: Component | undefined
     if (isComponentConstructor(tag)) {
+      
       component = new tag({ ...attrs, children }, {})
 
       // TODO: beforeComponentCreated
 
       if (VirtualComponent.isVirtualComponent(component)) {
-        // then return a flagged object isVirtualElement so when the parent try to add it like child it realizes it and can extract the information.
+        // then return a flagged object isVirtualElement so when the parent try to add it like child it
+        // realizes it and can extract the information.
         el = VirtualComponent.createVirtualElement(component, tag.name)
       } else {
         if (component._saveJSXChildrenProps) {
@@ -105,8 +108,8 @@ class BlessedJsxImpl implements BlessedJsx {
       el = tag({ ...attrs, children })
       // TODO: add beforeElementRenderListeners
     } else if (typeof tag === 'string') {
-      // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and FunctionElement are responsible of implementing both its
-      // attrs and children on their own
+      // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and
+      // FunctionElement are responsible of implementing both its attrs and children on their own
       const fn = this.intrinsicElementFactory(tag) //as (options?: any) => Element
       // TODO: beforeBlessedOptionsCleanedListeners
       if (!fn) {
@@ -147,8 +150,8 @@ class BlessedJsxImpl implements BlessedJsx {
       l(afterElementCreatedEvent)
     })
 
-    // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid object cycles ? TODO: if not found look at attrs arg
-    // just in case ?
+    // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid
+    // object cycles ? TODO: if not found look at attrs arg just in case ?
     const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
     if (ref && !ref.current) {
       ref.current = el! as any
@@ -161,8 +164,8 @@ class BlessedJsxImpl implements BlessedJsx {
       ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
     }
 
-    // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for
-    // intrinsic elements
+    // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and
+    // continue installing attributes and children only for intrinsic elements
     if (typeof tag === 'string' || VirtualComponent.isVirtualComponent(component)) {
       this.installAttributesAndChildren(el!, blessedEventMethodAttributes, artificialEventAttributes, children)
     }
@@ -179,14 +182,17 @@ class BlessedJsxImpl implements BlessedJsx {
   ): any {
     // HEADS UP : casting JSX.Element to concrete blessing Element
     const el = jsxNode as Element
-      // EVENT HANDLER ATTRIBUTES native event handlers like on(), key() etc are exactly matched agains a blessed method. Exactly same signature.
+      // EVENT HANDLER ATTRIBUTES native event handlers like on(), key() etc are exactly matched agains a
+      // blessed method. Exactly same signature.
     ;(Object.keys(blessedEventMethodAttributes) as EventOptionNames[]).forEach(methodName => {
       const args = blessedEventMethodAttributes[methodName] as any[]
       ;(el as any)[methodName](...args.map(a => (typeof a === 'function' ? a.bind(el) : a)))
     })
-    // artificial event handlers like onClick, onChange (these doesn't exist on blessed - we need to map/install them manually)
+    // artificial event handlers like onClick, onChange (these doesn't exist on blessed - we need to
+    // map/install them manually)
     ;(Object.keys(artificialEventAttributes) as ArtificialEventOptionNames[]).forEach(attributeName => {
-      // TODO: we should type guard against element type so we only install event on correct element types (only on elements that support that)
+      // TODO: we should type guard against element type so we only install event on correct element types
+      // (only on elements that support that)
       if (attributeName === ArtificialEventOptionNames.onClick) {
         const fn = artificialEventAttributes[attributeName]!
         el.on('click', e => {
@@ -270,8 +276,9 @@ class BlessedJsxImpl implements BlessedJsx {
   }
 
   /**
-   * all children blessed nodes, even from text  are appended to the blessed element using this method, so subclasses can override to do something about it.
-   * will notify beforeAppendChildListeners and if any return true the child won't be appended
+   * all children blessed nodes, even from text  are appended to the blessed element using this method, so
+   * subclasses can override to do something about it. will notify beforeAppendChildListeners and if any
+   * return true the child won't be appended
    */
   protected appendChild(el: Element, child: Element): any {
     if (VirtualComponent.isVirtualElement(child)) {
