@@ -7,49 +7,49 @@ import { objectKeys } from 'misc-utils-of-mine-generic'
 /**
  * Returns a nested property of given object and given path. For example path could be 'foo.bar' and it will return `object['foo']['bar']`
  */
-export function getObjectProperty<T>(
-  object: any,
-  path: string | string[],
-  defaultValue: T | undefined = undefined
-): T | undefined {
-  if (!path) {
-    return object
-  } else if (object) {
-    var tokens = typeof path === 'string' ? path.split('.') : path,
-      prev = object,
-      n = 0
-    while (typeof prev !== 'undefined' && n < tokens.length) {
-      prev = prev[tokens[n++]]
-    }
-    if (typeof prev !== 'undefined') {
-      return prev
-    }
-  }
-  return defaultValue
-}
+// export function getObjectProperty<T>(
+//   object: any,
+//   path: string | string[],
+//   defaultValue: T | undefined = undefined
+// ): T | undefined {
+//   if (!path) {
+//     return object
+//   } else if (object) {
+//     var tokens = typeof path === 'string' ? path.split('.') : path,
+//       prev = object,
+//       n = 0
+//     while (typeof prev !== 'undefined' && n < tokens.length) {
+//       prev = prev[tokens[n++]]
+//     }
+//     if (typeof prev !== 'undefined') {
+//       return prev
+//     }
+//   }
+//   return defaultValue
+// }
 
-/**
- * sets a nested property on given path. For example path could be 'foo.bar' and it will set `object.foo.bar = value`
- */
-export function setObjectProperty<T>(object: any, path: string | string[], value: T) {
-  if (!path) {
-    return
-  } else if (!object) {
-    return
-  }
-  var tokens = typeof path === 'string' ? path.split('.') : path,
-    prev = object
-  for (var i = 0; i < tokens.length - 1; ++i) {
-    var currentToken = tokens[i]
-    if (typeof prev[currentToken] === 'undefined') {
-      prev[currentToken] = {}
-    }
-    prev = prev[currentToken]
-  }
-  if (tokens.length) {
-    prev[tokens[tokens.length - 1]] = value
-  }
-}
+// /**
+//  * sets a nested property on given path. For example path could be 'foo.bar' and it will set `object.foo.bar = value`
+//  */
+// export function setObjectProperty<T>(object: any, path: string | string[], value: T) {
+//   if (!path) {
+//     return
+//   } else if (!object) {
+//     return
+//   }
+//   var tokens = typeof path === 'string' ? path.split('.') : path,
+//     prev = object
+//   for (var i = 0; i < tokens.length - 1; ++i) {
+//     var currentToken = tokens[i]
+//     if (typeof prev[currentToken] === 'undefined') {
+//       prev[currentToken] = {}
+//     }
+//     prev = prev[currentToken]
+//   }
+//   if (tokens.length) {
+//     prev[tokens[tokens.length - 1]] = value
+//   }
+// }
 
 // export function getObjectPropertyPaths(object: any, options: {ignoreArrayElements?: boolean} = {ignoreArrayElements: true}) {
 //   function visit(object: any, p: (number|string)[]) {
@@ -96,26 +96,26 @@ export function strip(s: string) {
   return s.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g, '') // hope V8 caches the regexp
 }
 
-/** List given enum keys as array. Differently to [[enumKeys]], is should be used only on enums that doesn't have assigned values or other wise on those which values are identical to the keys or not strings. If not, they will be returned also! */
-export function enumNoValueKeys(anEnum: any): string[] {
-  return Object.keys(anEnum)
-    .map(i => anEnum[i as any])
-    .filter((s, i, a) => typeof s === 'string' && a.indexOf(s) === i)
-}
+// /** List given enum keys as array. Differently to [[enumKeys]], is should be used only on enums that doesn't have assigned values or other wise on those which values are identical to the keys or not strings. If not, they will be returned also! */
+// export function enumNoValueKeys(anEnum: any): string[] {
+//   return Object.keys(anEnum)
+//     .map(i => anEnum[i as any])
+//     .filter((s, i, a) => typeof s === 'string' && a.indexOf(s) === i)
+// }
 
-/**
- * build an object using keys in [[a]] and values returning from [[fn]] as long as they are not undefined
- */
-export function arrayToObject<T = any>(a: string[], fn: (a: string) => T | undefined) {
-  const o: { [s: string]: T } = {}
-  a.forEach(k => {
-    const v = fn(k)
-    if (typeof v !== 'undefined') {
-      o[k] = v
-    }
-  })
-  return o
-}
+// /**
+//  * build an object using keys in [[a]] and values returning from [[fn]] as long as they are not undefined
+//  */
+// export function arrayToObject<T = any>(a: string[], fn: (a: string) => T | undefined) {
+//   const o: { [s: string]: T } = {}
+//   a.forEach(k => {
+//     const v = fn(k)
+//     if (typeof v !== 'undefined') {
+//       o[k] = v
+//     }
+//   })
+//   return o
+// }
 
 /**
  * return the Enum type from given string enum key obtained with key [[enumNoValueKeys]]
@@ -124,75 +124,75 @@ export function enumValueFromString<T>(key: string, anEnum: any): T | undefined 
   return anEnum[key]
 }
 
-export function objectMapValues<O extends { [k in keyof O]: O[keyof O] } = any, T = any>(
-  o: O,
-  p: (k: keyof O, v: O[keyof O]) => T
-): { [k in keyof O]: T } {
-  var r: { [k in keyof O]: T } = {} as any
-  objectKeys(o).forEach(k => {
-    r[k] = p(k, o[k])
-  })
-  return r
-}
-export const objectMap = objectMapValues
+// export function objectMapValues<O extends { [k in keyof O]: O[keyof O] } = any, T = any>(
+//   o: O,
+//   p: (k: keyof O, v: O[keyof O]) => T
+// ): { [k in keyof O]: T } {
+//   var r: { [k in keyof O]: T } = {} as any
+//   objectKeys(o).forEach(k => {
+//     r[k] = p(k, o[k])
+//   })
+//   return r
+// }
+// export const objectMap = objectMapValues
 
-export function objectFilter<O extends { [k in keyof O]: O[keyof O] } = any>(
-  o: O,
-  p: (k: keyof O, v: O[keyof O]) => boolean
-): Partial<O> {
-  var r: Partial<O> = {}
-  objectKeys(o)
-    .filter((k, v) => p(k, o[k]))
-    .forEach(k => {
-      r[k] = o[k]
-    })
-  return r
-}
+// export function objectFilter<O extends { [k in keyof O]: O[keyof O] } = any>(
+//   o: O,
+//   p: (k: keyof O, v: O[keyof O]) => boolean
+// ): Partial<O> {
+//   var r: Partial<O> = {}
+//   objectKeys(o)
+//     .filter((k, v) => p(k, o[k]))
+//     .forEach(k => {
+//       r[k] = o[k]
+//     })
+//   return r
+// }
 
 export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
 
-export function throttle<F extends (...args: any[]) => any>(
-  func: F,
-  wait: number,
-  options: { leading?: boolean; trailing?: boolean } = {}
-) {
-  let context: any, args: any, result: any
-  let timeout: any = null
-  let previous = 0
-  options || (options = {})
-  let later = function() {
-    previous = options.leading === false ? 0 : Date.now()
-    timeout = null
-    result = func.apply(context, args)
-    context = args = null
-  }
-  return function(this: any) {
-    let now = Date.now()
-    if (!previous && options.leading === false) previous = now
-    let remaining = wait - (now - previous)
-    context = this
-    args = arguments
-    if (remaining <= 0) {
-      clearTimeout(timeout)
-      timeout = null
-      previous = now
-      result = func.apply(context, args)
-      context = args = null
-    } else if (!timeout && options.trailing !== false) {
-      timeout = setTimeout(later, remaining)
-    }
-    return result
-  }
-}
+// export function throttle<F extends (...args: any[]) => any>(
+//   func: F,
+//   wait: number,
+//   options: { leading?: boolean; trailing?: boolean } = {}
+// ) {
+//   let context: any, args: any, result: any
+//   let timeout: any = null
+//   let previous = 0
+//   options || (options = {})
+//   let later = function() {
+//     previous = options.leading === false ? 0 : Date.now()
+//     timeout = null
+//     result = func.apply(context, args)
+//     context = args = null
+//   }
+//   return function(this: any) {
+//     let now = Date.now()
+//     if (!previous && options.leading === false) previous = now
+//     let remaining = wait - (now - previous)
+//     context = this
+//     args = arguments
+//     if (remaining <= 0) {
+//       clearTimeout(timeout)
+//       timeout = null
+//       previous = now
+//       result = func.apply(context, args)
+//       context = args = null
+//     } else if (!timeout && options.trailing !== false) {
+//       timeout = setTimeout(later, remaining)
+//     }
+//     return result
+//   }
+// }
 
-/** use it to remove duplicates in .filter expressions like `array.filter(notSame)` */
-export function notSame<T>(t: T, i: number, a: T[]) {
-  return a.indexOf(t) === i
-}
-/** use it remove duplicates and falsy values in filter() expressions like `array.filter(notSameNotFalsy)` */
-export function notSameNotFalsy<T>(t: T, i: number, a: T[]): t is NotFalsy<T> {
-  return a.indexOf(t) === i
-}
+// /** use it to remove duplicates in .filter expressions like `array.filter(notSame)` */
+// export function notSame<T>(t: T, i: number, a: T[]) {
+//   return a.indexOf(t) === i
+// }
+// /** use it remove duplicates and falsy values in filter() expressions like `array.filter(notSameNotFalsy)` */
+// export function notSameNotFalsy<T>(t: T, i: number, a: T[]): t is NotFalsy<T> {
+//   return a.indexOf(t) === i
+// }
 type falsy = undefined | null | false | '' | 0
 
 /**
@@ -205,7 +205,13 @@ export type Falsy<T = never> = T extends never ? (never extends T ? falsy : Extr
 export type NotFalsy<T> = Exclude<T, falsy>
 // let c: NotFalsy<number|boolean>
 
-/** Useful for filtering out falsy values without casting. */
-export function notFalsy<T>(n: T): n is NotFalsy<T> {
-  return !!n
+// /** Useful for filtering out falsy values without casting. */
+// export function notFalsy<T>(n: T): n is NotFalsy<T> {
+//   return !!n
+// }
+
+export function rgb2Hex (s: string){
+  // prettier-ignore
+  //@ts-ignore
+  return s.match(/[0-9]+/g)!.reduce((a, b: any) => a + (b | 256).toString(16).slice(1), '#').toString(16)
 }

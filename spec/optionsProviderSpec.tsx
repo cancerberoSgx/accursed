@@ -4,7 +4,7 @@ import { waitFor } from '../src/blessed/waitFor'
 import { Br, Div } from '../src/jsx-components'
 import { OptionsProvider } from '../src/jsx-components/optionsProvider'
 
-describe('accordion', () => {
+describe('optionsProvider', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())

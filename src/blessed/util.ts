@@ -1,8 +1,6 @@
-// import * as blessed from 'blessed'
-import { asArray } from 'misc-utils-of-mine-generic'
+import { asArray, getObjectProperty, setObjectProperty } from 'misc-utils-of-mine-generic'
 import { Button, Checkbox, closeModal, Element, isElement, isModalVisible, Screen, screen, visitDescendants } from '..'
-import { getObjectProperty, setObjectProperty } from '../util/misc'
-// import { visitDescendants } from './node'
+import {  } from '../util/misc'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag

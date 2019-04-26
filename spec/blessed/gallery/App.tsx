@@ -3,7 +3,7 @@ import { Screen } from '../../../src/blessedTypes'
 import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
 import { React } from '../../../src/jsx/createElement'
-import { arrayToObject, enumNoValueKeys, enumValueFromString } from '../../../src/util/misc'
+import { enumValueFromString } from '../../../src/util/misc'
 import { allColors } from '../experiments/colors/allColors'
 import { color4 } from '../experiments/colors/colors4'
 import { colors5Demo } from '../experiments/colors/colors5'
@@ -13,6 +13,7 @@ import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
+import { enumNoValueKeys , arrayToObject, } from 'misc-utils-of-mine-generic';
 
 enum Demo {
   button,

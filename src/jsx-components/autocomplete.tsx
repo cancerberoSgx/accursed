@@ -1,7 +1,7 @@
 import { Component, Div, List, ListOptions, React, TextboxOptions } from '..'
 import { Textbox } from '../blessedTypes'
 import { ArtificialEvent } from '../jsx/types'
-import { notSameNotFalsy, throttle } from '../util/misc'
+import { notSameNotFalsy, throttle } from 'misc-utils-of-mine-generic'
 
 interface P extends TextboxOptions {
   onChange?(
