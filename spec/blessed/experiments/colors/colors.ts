@@ -1,17 +1,18 @@
 import * as blessed from 'blessed'
-import { words } from '../../../src/util/data';
-import { number, color } from '../gallery/util';
-import { installExitKeys, Box } from '../../../src';
-import { homedir } from 'os';
-import { settings } from 'cluster';
+import { Box, installExitKeys } from '../../../../src'
+import { words } from '../../../../src/util/data'
+import { number } from '../../gallery/util'
 
-
-var screen = blessed.screen({
-})
+var screen = blessed.screen({})
 
 function opts() {
   return {
-    top: number(4, 10), left: number(4, 10), width: number(14, 30), height: 14, style: { bg: rgb(), fg: rgb()}, content: words().join(' ')
+    top: number(4, 10),
+    left: number(4, 10),
+    width: number(14, 30),
+    height: 14,
+    style: { bg: rgb(), fg: rgb() },
+    content: words().join(' ')
   }
 }
 // var box = blessed.box({
@@ -20,29 +21,26 @@ function opts() {
 //   ...opts()
 // })
 const boxes: Box[] = []
-for (let i = 0; i < screen.width-4; i+=4) {
-  for (let j = 0; j < screen.height-4; j+=4) {
+for (let i = 0; i < screen.width - 4; i += 4) {
+  for (let j = 0; j < screen.height - 4; j += 4) {
     var box = blessed.box({
       parent: screen,
-      top: j, left: i,
+      top: j,
+      left: i,
       border: 'line',
-     style: style()
+      style: style()
     })
     boxes.push(box)
   }
 }
-function style(){
-  return  { bg: rgb(), fg: rgb(), border: {fg: rgb()}}
+function style() {
+  return { bg: rgb(), fg: rgb(), border: { fg: rgb() } }
 }
-
-
-
 
 let counter = 0
 function draw() {
-  boxes.forEach(box=>{
-
-    box.style= {...box.style, ...style()}
+  boxes.forEach(box => {
+    box.style = { ...box.style, ...style() }
   })
   // box.top = number(1, 10)
   // box.left = number(1, 10)
@@ -58,15 +56,20 @@ function draw() {
 }
 
 var panel = blessed.box({
-  parent: screen, style: { bg: 'blue', fg: 'white' },
-  border: 'line', top: 0, left: 0, width: 10, height: 10, content: 'FPS'
+  parent: screen,
+  style: { bg: 'blue', fg: 'white' },
+  border: 'line',
+  top: 0,
+  left: 0,
+  width: 10,
+  height: 10,
+  content: 'FPS'
 })
 let lastCounter = counter
 setInterval(() => {
   panel.content = `FPS: ${counter - lastCounter}`
   lastCounter = counter
-}, 1000);
-
+}, 1000)
 
 draw()
 
@@ -96,14 +99,11 @@ draw()
 //   ...opts()
 // })
 
-
-
 // console.log('1',{bg: rgb(), fg: rgb()}, '2',  blessed.helpers.attrToBinary({bg: rgb(), fg: rgb()}, box),  '2', blessed.escape('{red-fg}{green-bg}{bold}w{/bold}{/green-bg}{/red-fg}'));
 
 // blessed.colors.convert
 installExitKeys(screen)
 screen.render()
-
 
 // const c = blessed.colors.colors()
 // for (let j = 0; j < screen.lines.length; j++) {
@@ -113,6 +113,6 @@ screen.render()
 // }
 
 function rgb() {
-return   blessed.colors.RGBToHex(number(0, 255), number(0, 255), number(0, 255))
+  return blessed.colors.RGBToHex(number(0, 255), number(0, 255), number(0, 255))
   // return `rgb(${number(0, 255)},${number(0, 255)},${number(0, 255)})`;
 }

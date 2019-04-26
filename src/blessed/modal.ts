@@ -4,15 +4,25 @@ import { box, Element, Screen } from '..'
 import { Box } from '../blessedTypes'
 // import { box } from '..';
 
+let lastOnClosedListener: undefined | (() => void)
 /**
  * Easy to use modal: ``` showInModal(screen, anElement)``` or simply:  ``` showInModal(screen, 'some text')```
  *
  */
-export function showInModal(screen: Screen, s: string | Element, title = 'Modal', width = '50%', height = '50%') {
+export function showInModal(
+  screen: Screen,
+  s: string | Element,
+  title = 'Modal',
+  width = '50%',
+  height = '50%',
+  onClosed?: () => void
+) {
   closeModal(screen)
   if (!modalInstance) {
     modalInstance = box({
       parent: screen,
+      // focusable: true,
+      // focused: true,
       left: 'center',
       top: 'center',
       width,
@@ -20,6 +30,7 @@ export function showInModal(screen: Screen, s: string | Element, title = 'Modal'
       border: 'line',
       label: title
     })
+    //TODO: remove those childs ?
     ;[modalInstance, ...modalInstance.children].forEach(c => c.on('click', data => modalInstance!.hide()))
   }
   if (typeof s === 'string') {
@@ -32,8 +43,12 @@ export function showInModal(screen: Screen, s: string | Element, title = 'Modal'
     lastModalContent = s
     modalInstance.append(s)
   }
+  modalInstance.setFront()
   modalInstance.setLabel(title)
   modalInstance.show()
+  if (onClosed) {
+    lastOnClosedListener = onClosed
+  }
   screen.render()
 }
 let modalInstance: Box | undefined
@@ -43,6 +58,10 @@ let lastModalContent: Element | undefined
  * Close current opened modal
  */
 export function closeModal(screen: Screen) {
+  if (lastOnClosedListener) {
+    lastOnClosedListener()
+    lastOnClosedListener = undefined
+  }
   tryTo(() => {
     if (modalInstance) {
       modalInstance.hide()

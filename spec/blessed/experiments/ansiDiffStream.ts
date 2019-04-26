@@ -1,10 +1,7 @@
-
 import * as blessed from 'blessed'
-import { words } from '../../../src/util/data';
-import { number, color } from '../gallery/util';
-import { installExitKeys } from '../../../src';
-import { homedir } from 'os';
-import { settings } from 'cluster';
+import { installExitKeys } from '../../../src'
+import { words } from '../../../src/util/data'
+import { color, number } from '../gallery/util'
 var differ = require('ansi-diff-stream')
 var diff = differ()
 
@@ -15,13 +12,18 @@ var screen = blessed.screen({
   // tput: true,
   // useBCE: true,
   // input: diff,
-  smartCSR: true,
+  smartCSR: true
 })
 // screen.output.rea
 
 function opts() {
   return {
-    top: number(4, 10), left: number(4, 10), width: number(14, 30), height: 14, style: { bg: 'blue' }, content: words().join(' ')
+    top: number(4, 10),
+    left: number(4, 10),
+    width: number(14, 30),
+    height: 14,
+    style: { bg: 'blue' },
+    content: words().join(' ')
   }
 }
 var box = blessed.box({
@@ -30,7 +32,7 @@ var box = blessed.box({
   ...opts()
 })
 
-var size = require('window-size');
+var size = require('window-size')
 
 let counter = 0
 function draw() {
@@ -49,15 +51,20 @@ function draw() {
 }
 
 var panel = blessed.box({
-  parent: screen, style: { bg: 'blue', fg: 'white' },
-  border: 'line', top: 0, left: 0, width: 10, height: 10, content: 'FPS'
+  parent: screen,
+  style: { bg: 'blue', fg: 'white' },
+  border: 'line',
+  top: 0,
+  left: 0,
+  width: 10,
+  height: 10,
+  content: 'FPS'
 })
 let lastCounter = counter
 setInterval(() => {
   panel.content = `FPS: ${counter - lastCounter}`
   lastCounter = counter
-}, 1000);
-
+}, 1000)
 
 // setTimeout(end,  5000);
 // screen.key(['escape', 'q', 'Q', 'C-c'], function(ch, key) {

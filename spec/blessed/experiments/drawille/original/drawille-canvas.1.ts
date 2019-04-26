@@ -3,7 +3,7 @@
 
 // //@ts-nocheck
 // // type Canvas  = TODO
-// var DCanvas  = require('drawille') 
+// var DCanvas  = require('drawille')
 // var bresenham = require('bresenham');
 // var glMatrix = require('gl-matrix');
 // var earcut = require('earcut');
@@ -41,7 +41,6 @@
 
 // // }
 // // const DDContext: Context = DContext as any
-
 
 // // //@ts-ignore
 // // class DDContext  {
@@ -143,7 +142,6 @@
 //   }
 // }
 
-
 // function quad(m: any, x: number, y: number, w: number, h: number, f:DrawFn, clip: any[] | number[]) {
 //   var p1 = vec2.transformMat2d(vec2.create(), vec2.fromValues(x, y), m);
 //   var p2 = vec2.transformMat2d(vec2.create(), vec2.fromValues(x+w, y), m);
@@ -164,7 +162,7 @@
 // DContext.prototype.fill = function() {
 //   if (this._currentPath[this._currentPath.length-1].point !== this._currentPath[0].point) this.closePath();
 //   var vertices: any[] | never[] = [];
-//   this._currentPath.forEach(function (pt: { point: any[]; }) { 
+//   this._currentPath.forEach(function (pt: { point: any[]; }) {
 //     // @ts-ignore
 //     vertices.push(pt.point[0], pt.point[1]);
 //   });
@@ -180,7 +178,7 @@
 
 // DContext.prototype.strokeRect = function (x: number, y: number, w: number, h: number) {
 //   // console.log('ajkAHsdkljhalksdjalksjd as');
-  
+
 //   // debug('stroke rect', arguments)
 //   var fromX = clamp(x, 0, this.width),
 //       fromY = clamp(y, 0, this.height),
@@ -198,7 +196,6 @@
 //   bresenham(toX, toY, fromX, toY, set);
 //   bresenham(fromX, toY, fromX, fromY, set);
 // };
-
 
 // DContext.prototype.save = function save() {
 //   this._stack.push(mat2d.clone(mat2d.create(), this._matrix));
@@ -257,7 +254,7 @@
 //   var dth = Math.abs(Math.acos(1 / r) - Math.acos(2 / r))
 //   if (anticlockwise) {
 //     var tempth = th2;
-//     th2 = th1 + 2 * Math.PI;  
+//     th2 = th1 + 2 * Math.PI;
 //     th1 = tempth;
 //   }
 //   th1 = th1 % (2 * Math.PI)
@@ -354,6 +351,5 @@
 // function clamp (value: number, min: number, max: number) {
 //   return Math.round(Math.min(Math.max(value, min), max));
 // };
-
 
 // module.exports = DContext;

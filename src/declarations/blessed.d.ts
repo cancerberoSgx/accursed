@@ -1987,7 +1987,7 @@ export namespace Widgets {
     /**
      * The blessed Tput object (only available if you passed tput: true to the Program constructor.)
      */
-    tput?: Tput|boolean
+    tput?: Tput | boolean
 
     /**
      * Top of the focus history stack.
@@ -2348,11 +2348,11 @@ export namespace Widgets {
      */
     realloc(): void
 
-/**Convert an SGR string to our own attribute format.*/
-attrCode(code: string, cur: number, def: number): number
+    /**Convert an SGR string to our own attribute format.*/
+    attrCode(code: string, cur: number, def: number): number
 
-// Convert our own attribute format to an SGR string.
-codeAttr(attr: number): string
+    // Convert our own attribute format to an SGR string.
+    codeAttr(attr: number): string
     /**
      * Draw the screen based on the contents of the screen buffer.
      */
@@ -3161,7 +3161,9 @@ codeAttr(attr: number): string
      * Object enabling a scrollbar.
      * Style of the scrollbar track if present (takes regular style options).
      */
-    scrollbar?: { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string }&Widgets.Types.TStyle | boolean
+    scrollbar?:
+      | { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string } & Widgets.Types.TStyle
+      | boolean
   }
 
   interface ScrollableTextOptions extends ScrollableBoxOptions {
@@ -4657,8 +4659,8 @@ export function escape(item: any): any
 type ColorRgb = [number, number, number]
 export const colors: {
   /**
-   * Match given color in a high level form (like rgb or hex expression) with a terminal color number  
-   * interpolatingg to a similar color. 
+   * Match given color in a high level form (like rgb or hex expression) with a terminal color number
+   * interpolatingg to a similar color.
    */
   match(r1: Widgets.Color | ColorRgb, g1?: number, b1?: number): number
   convert(color: Widgets.Color): number
@@ -4669,10 +4671,10 @@ export const colors: {
   /**
  Seed all 256 colors. Assume xterm defaults.
  Ported from the xterm color generation script. */
-  colors():number[]
+  colors(): number[]
   /**  Map higher colors to the first 8 colors.
  This allows translation of high colors to low colors on 8-color terminals. */
-   ccolors():number[]
+  ccolors(): number[]
 
   colorNames: {
     black: 0
@@ -4757,18 +4759,17 @@ interface Unicode {
 // Helpers
 // All helpers reside on blessed.helpers or blessed.
 interface Helpers {
-
   // merge(a, b) - Merge objects a and b into object a.
   // asort(obj) - Sort array alphabetically by name prop.
   // hsort(obj) - Sort array numerically by index prop.
   // findFile(start, target) - Find a file at start directory with name target.
   // escape(text) - Escape content's tags to be passed into el.setContent(). Example: box.setContent('escaped tag: ' + blessed.escape('{bold}{/bold}'));
-  // parseTags(text) - 
+  // parseTags(text) -
   /** Parse tags into SGR escape codes. */
   /**Generate text tags based on style object. */
-  generateTags(style: Widgets.Types.TStyle, text: string) : string
+  generateTags(style: Widgets.Types.TStyle, text: string): string
   /**Convert style attributes to binary format. */
-  attrToBinary(style: Widgets.Types.TStyle, element: Widgets.BlessedElement) : number
+  attrToBinary(style: Widgets.Types.TStyle, element: Widgets.BlessedElement): number
   // stripTags(text) - Strip text of tags and SGR sequences.
   // cleanTacgs(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
   // dropUniode(text) - Drop text of any >U+FFFF characters.

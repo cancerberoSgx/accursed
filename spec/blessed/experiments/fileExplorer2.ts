@@ -1,11 +1,9 @@
 import * as blessed from 'blessed'
-import * as contrib from 'blessed-contrib'
-import * as fs from 'fs'
-import { debug, installExitKeys } from '../../../src';
+import { debug, installExitKeys } from '../../../src'
 
 var screen = blessed.screen({
   tput: true,
-  smartCSR: true,
+  smartCSR: true
 })
 
 const fm = blessed.filemanager({
@@ -31,8 +29,8 @@ const fm = blessed.filemanager({
   }
 })
 
-fm.pick('.', function (){
-debug(arguments)
+fm.pick('.', function() {
+  debug(arguments)
 })
 
 installExitKeys(screen)
@@ -49,39 +47,37 @@ var box = blessed.box({
   top: 'center',
   left: 'center',
   hidden: true
-});
+})
 
-fm.refresh();
+fm.refresh()
 
-screen.render();
+screen.render()
 
 screen.key('q', function() {
-  screen.destroy();
-});
+  screen.destroy()
+})
 
 screen.key(['s', 'p'], function() {
-  fm.hide();
-  screen.render();
+  fm.hide()
+  screen.render()
   setTimeout(function() {
     fm.pick(function(err, file) {
-      box.show();
-      box.setContent(err ? err + '' : file!);
-      screen.render();
+      box.show()
+      box.setContent(err ? err + '' : file!)
+      screen.render()
       setTimeout(function() {
-        box.hide();
+        box.hide()
         fm.reset(function() {
-          fm.show();
-          screen.render();
-        });
-      }, 2000);
-    });
-  }, 2000);
-});
-
+          fm.show()
+          screen.render()
+        })
+      }, 2000)
+    })
+  }, 2000)
+})
 
 // tree.focus()
 screen.render()
-
 
 // //create layout and widgets
 // var grid = new contrib.grid({ rows: 1, cols: 2, screen: screen })
@@ -184,7 +180,6 @@ screen.render()
 //   else tree.focus()
 // })
 
-
 // var blessed = require('../');
 
 // var screen = blessed.screen({
@@ -227,35 +222,34 @@ var box = blessed.box({
   top: 'center',
   left: 'center',
   hidden: true
-});
+})
 
-fm.refresh();
+fm.refresh()
 
-screen.render();
+screen.render()
 
 screen.key('q', function() {
-  screen.destroy();
-});
+  screen.destroy()
+})
 
 screen.key(['s', 'p'], function() {
-  fm.hide();
-  screen.render();
+  fm.hide()
+  screen.render()
   setTimeout(function() {
     fm.pick(function(err, file) {
-      box.show();
-      box.setContent(err ? err + '' : file!);
-      screen.render();
+      box.show()
+      box.setContent(err ? err + '' : file!)
+      screen.render()
       setTimeout(function() {
-        box.hide();
+        box.hide()
         fm.reset(function() {
-          fm.show();
-          screen.render();
-        });
-      }, 2000);
-    });
-  }, 2000);
-});
-
+          fm.show()
+          screen.render()
+        })
+      }, 2000)
+    })
+  }, 2000)
+})
 
 // tree.focus()
 screen.render()

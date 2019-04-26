@@ -239,10 +239,8 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     }
     const notSelectedAttr = this.sattr({
       ...this.style,
-      ...(// this.ignoreScreenFocused ||
-      this.screen.focused === this
-        ? this.style.focus || {}
-        : {})
+      ...// this.ignoreScreenFocused ||
+      (this.screen.focused === this ? this.style.focus || {} : {})
     })
     let attr = notSelectedAttr
     const selectedAttr = this.sattr(this.style.selectedNode || TreeView.defaultOptions.style!.selectedNode!)
