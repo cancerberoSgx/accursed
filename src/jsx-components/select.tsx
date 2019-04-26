@@ -1,4 +1,4 @@
-import { React } from '..'
+import { React , debug} from '..'
 import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
 import { List, ListOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
@@ -33,6 +33,7 @@ export class Select extends Component<SelectProps> {
     const childProps = getJSXChildrenProps(this)!
     const items = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.children.join(' ')) //.flat()
     const values = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.attrs.value || o.children.join(' '))
+    // debug(items)
     // log(items, values)
     return (
       <list

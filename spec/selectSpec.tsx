@@ -20,7 +20,7 @@ describe('select', () => {
     tryTo(() => screen.destroy())
   })
 
-  it('should show list of items', async done => {
+  fit('should show list of items', async done => {
     try {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
       installExitKeys(screen)
@@ -38,6 +38,7 @@ describe('select', () => {
             <SelectOption value="value 2">option2</SelectOption>
             <SelectOption value="value 3">option3</SelectOption>
             <SelectOption>option4</SelectOption>
+            {['hello', 'world'].map(o=><SelectOption>{o}</SelectOption>)}
             {}
           </Select>
           <Br />
@@ -57,7 +58,7 @@ describe('select', () => {
 
       //TODO: test the handler...
 
-      done()
+      // done()
     } catch (error) {
       log('ERROR', error)
     }

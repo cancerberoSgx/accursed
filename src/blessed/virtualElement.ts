@@ -2,6 +2,7 @@ import { notUndefined } from 'misc-utils-of-mine-typescript'
 import { Element } from '../blessedTypes'
 import { Component } from '../jsx'
 import { appendElementData } from './util'
+import { debug } from '..';
 /**
  * Why do we need this if we have props? you cannot decalre structured data like <tabPanel><tab><title>... etc - - props. only allows 21 level
  *
@@ -175,7 +176,7 @@ It will return a JSON Like this:
 ```
  */
 export function getJSXChildrenProps(component: Component): VirtualChildrenData[] {
-  return (component._jsxChildrenProps || []).map(process)
+  return (component._jsxChildrenProps || []).map(process).flat()
 }
 interface VirtualChildrenData {
   children: (VirtualChildrenData | string | number)[]
@@ -185,29 +186,38 @@ interface VirtualChildrenData {
 export function isElementData(c: any): c is VirtualChildrenData {
   return c && c.tagName
 }
-function process(p: JSXChildrenProps | undefined): VirtualChildrenData | string | number | undefined {
+function process(p: JSXChildrenProps | undefined): (VirtualChildrenData | string | number | undefined)[] {
   if (!p) {
     return undefined
   }
-  if (!p.props || !p.__virtualTagName) {
-    return p as any
+  // debug('jsjsjjs', p,  p && p.props, Object.keys(p && p.props ||{}) , p && (p as any).props && (p as any).props. children && (p as any).props.children.length)
+  if(Array.isArray(p)){
+    return p.map(process).flat()
   }
-  const children: any[] = []
-  ;(p.props.children || []).forEach(c => {
-    if (Array.isArray(c)) {
-      c.filter(notUndefined).forEach(cc => children.push(process(cc)))
-    } else if (typeof c !== 'object') {
-      return children.push(c)
-    } else {
-      children.push(process(c))
+  else {
+    const children: any[] = []
+
+    if (!p.props || !p.__virtualTagName) {
+      return p as any
     }
-  })
-  const attrs = { ...p.props }
-  delete attrs.children
-  return {
+    ;(p.props.children || []).forEach(c => {
+      // debug('process children', (c as any).type, (c as any).__virtualTagName, typeof c, Array.isArray(c), c+'')
+      if (Array.isArray(c)) {
+        c.filter(notUndefined).forEach(cc => children.push(process(cc)))
+      } else if (typeof c !== 'object') {
+        return children.push(c)
+      } else {
+        children.push(process(c))
+      }
+    })
+    const attrs = { ...p.props }
+    delete attrs.children
+
+  return [{
     children: children.filter(notUndefined),
     attrs,
     tagName: p.__virtualTagName
+  }]
   }
 }
 

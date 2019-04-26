@@ -34,6 +34,9 @@ export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsx
    */
   protected blessedElement: Element = undefined as any
 
+  get element(){
+    return this.blessedElement
+  }
   /**
    * return the type name of ths component container blessed element
    */

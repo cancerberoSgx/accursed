@@ -168,14 +168,16 @@ class BlessedJsxImpl implements BlessedJsx {
   private installRefs(el: JSX.BlessedJsxNode, component: Component): any {
     // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid
     // object cycles ? TODO: if not found look at attrs arg just in case ?
-    if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
-      ;(el! as any).options.ref.current = el! as any
-      ;(el! as any).options.ref.callback && (el! as any).options.ref.callback(el)
-    }
-    // install refs on components
+    
+    // install refs on components. if the
     if (component && (component as any).props && (component as any).props.ref) {
       ;(component as any).props.ref.current = component
       ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
+    }
+    // HEADS UP: if the component has a ref, then element's is not resolved. thats why it's an else if
+    else if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
+      ;(el! as any).options.ref.current = el! as any
+      ;(el! as any).options.ref.callback && (el! as any).options.ref.callback(el)
     }
   }
 
