@@ -1,4 +1,4 @@
-import { box, BoxOptions, Screen, text, showInModal, React, Div, Br } from '../../../../src'
+import { box, BoxOptions, Br, Div, React, Screen, showInModal, text } from '../../../../src';
 const palette = require('google-palette') as ((...args: any[]) => string[])&{listSchemes: any}
 
 

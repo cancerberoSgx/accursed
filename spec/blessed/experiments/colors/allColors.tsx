@@ -1,5 +1,5 @@
-import { box, checkbox, BoxOptions, Screen, text, showInModal, React, Div, Br, Box, isElement } from '../../../../src'
-import * as blessed from 'blessed'
+import * as blessed from 'blessed';
+import { box, Box, Br, Div, isElement, React, Screen, showInModal } from '../../../../src';
 
 export function allColors(screen: Screen) {
   var dx = 9

@@ -1,20 +1,18 @@
-import { debug } from '../../../src'
 import { showInModal } from '../../../src/blessed/modal'
 import { Screen } from '../../../src/blessedTypes'
 import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
 import { React } from '../../../src/jsx/createElement'
 import { arrayToObject, enumNoValueKeys, enumValueFromString } from '../../../src/util/misc'
+import { allColors } from '../experiments/colors/allColors'
 import { color4 } from '../experiments/colors/colors4'
+import { colors5Demo } from '../experiments/colors/colors5'
 import { ButtonDemo } from './ButtonDemo'
 import { CollapsibleDemo } from './CollapsibleDemo'
 import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
-import { colors5Main } from '../experiments/colors/colors5Main';
-import { colors5Demo } from '../experiments/colors/colors5';
-import { allColors } from '../experiments/colors/allColors';
 
 enum Demo {
   button,
@@ -44,29 +42,27 @@ export class App extends Component<P, S> {
         return React.render(<LayoutDemo />)
       } else if (demo === Demo.colorPalette) {
         // try {
-          // this.blessedElement.screen.free()
-          color4(this.blessedElement.screen)
-          this.blessedElement.screen.render()
+        // this.blessedElement.screen.free()
+        color4(this.blessedElement.screen)
+        this.blessedElement.screen.render()
         // } catch (error) {
         //   debug(error)
         // }
-      } 
-      else if (demo === Demo.colors5) {
+      } else if (demo === Demo.colors5) {
         // try {
-          colors5Demo(this.blessedElement.screen)
-          // this.blessedElement.screen.render()
+        colors5Demo(this.blessedElement.screen)
+        // this.blessedElement.screen.render()
         // } catch (error) {
         //   debug(error)
         // }
-      }  else if (demo === Demo.allColors) {
+      } else if (demo === Demo.allColors) {
         // try {
-          allColors(this.blessedElement.screen)
-          // this.blessedElement.screen.render()
+        allColors(this.blessedElement.screen)
+        // this.blessedElement.screen.render()
         // } catch (error) {
         //   debug(error)
         // }
-      } 
-      else if (demo === Demo.collapsible) {
+      } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)
       } else if (demo === Demo.robot) {
         // return React.render(<RobotDemo screen={this.props.screen} />)

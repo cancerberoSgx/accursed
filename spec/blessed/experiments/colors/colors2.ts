@@ -6,7 +6,7 @@ import { number } from '../../gallery/util'
 const gradstop = require('gradstop')
 
 const rgb2Hex = (s: string) =>
-//@ts-ignore
+  //@ts-ignore
   s
     .match(/[0-9]+/g)!
     .reduce((a, b: any) => a + (b | 256).toString(16).slice(1), '#')

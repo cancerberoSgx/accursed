@@ -1,15 +1,13 @@
-import { createScreen, installExitKeys, debug } from '../../../../src';
-import { allColors } from './allColors';
-
+import { createScreen, debug, installExitKeys } from '../../../../src'
+import { allColors } from './allColors'
 
 // var differ = require('ansi-diff-stream')
 // var diff = differ()
 // diff.pipe(process.stdout)
 
-allColorsMain();
+allColorsMain()
 
 function allColorsMain() {
-
   var screen = createScreen({
     // input: diff,
     smartCSR: true,
@@ -18,18 +16,17 @@ function allColorsMain() {
     // autoPadding: true,
     // ignoreDockContrast: true,
     // focusable: true,
-    title: 'All Colors',
+    title: 'All Colors'
     // sendFocus: true
-  });
-  installExitKeys(screen);
-  screen.key('tab', k => screen.focusNext());
-  screen.key('S-tab', k => screen.focusPrevious());
+  })
+  installExitKeys(screen)
+  screen.key('tab', k => screen.focusNext())
+  screen.key('S-tab', k => screen.focusPrevious())
   try {
-    allColors(screen);
+    allColors(screen)
+  } catch (error) {
+    debug(error)
   }
-  catch (error) {
-    debug(error);
-  }
-  screen.focusNext();
-  screen.render();
+  screen.focusNext()
+  screen.render()
 }
