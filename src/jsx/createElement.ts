@@ -60,6 +60,7 @@ class BlessedJsxImpl implements BlessedJsx {
   constructor(protected options: Options = {}) {}
 
   private defaultPluginsInstalled = false
+  
   render(e: JSX.Element) {
     if (!this.defaultPluginsInstalled) {
       this.defaultPluginsInstalled = true
@@ -70,10 +71,15 @@ class BlessedJsxImpl implements BlessedJsx {
     this.afterRenderListeners.forEach(l => l(event))
 
     // setTimeout(() => {screen.render()}, 1000);
+
+    // const el = (e as any )()
+
     return e as any
   }
 
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]) {
+
+    // return ()=>{
     // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything
     // happens)
 
@@ -138,7 +144,7 @@ class BlessedJsxImpl implements BlessedJsx {
         return !!listenerInstance
       })
       if (!listenerInstance) {
-        el = fn(attrs) as Element
+        el = fn({...attrs, children: undefined}) as Element
       } else {
         log('Element ' + tag + ' created by listener')
         return listenerInstance
@@ -150,20 +156,7 @@ class BlessedJsxImpl implements BlessedJsx {
       l(afterElementCreatedEvent)
     })
 
-    // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid
-    // object cycles ? TODO: if not found look at attrs arg just in case ?
-    const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
-    if (ref && !ref.current) {
-      ref.current = el! as any
-      ref.callback && ref.callback(ref.current)
-    }
-    // debug('debug', component &&  (component as any).props)
-
-    if (component && (component as any).props && (component as any).props.ref) {
-      ;(component as any).props.ref.current = component
-      ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
-    }
-
+    this.installRefs( el, component)
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and
     // continue installing attributes and children only for intrinsic elements
     if (typeof tag === 'string' || VirtualComponent.isVirtualComponent(component)) {
@@ -172,6 +165,20 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // TODO: finishElementCreateListeners
     return el!
+  //  }
+  }
+  private installRefs(  el: JSX.BlessedJsxNode, component: Component): any {
+    // install refs for all kind of elements (TODO: in a listener) TODO:  maybe a getter is better to avoid
+    // object cycles ? TODO: if not found look at attrs arg just in case ?
+    if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
+      (el! as any).options.ref.current = el! as any
+      (el! as any).options.ref.callback && (el! as any).options.ref.callback(el)
+    }
+    // install refs on components
+    if (component && (component as any).props && (component as any).props.ref) {
+      ;(component as any).props.ref.current = component
+      ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
+    }
   }
 
   private installAttributesAndChildren(
@@ -182,8 +189,8 @@ class BlessedJsxImpl implements BlessedJsx {
   ): any {
     // HEADS UP : casting JSX.Element to concrete blessing Element
     const el = jsxNode as Element
-      // EVENT HANDLER ATTRIBUTES native event handlers like on(), key() etc are exactly matched agains a
-      // blessed method. Exactly same signature.
+    // EVENT HANDLER ATTRIBUTES native event handlers like on(), key() etc are exactly matched against a
+    // blessed method. Exactly same signature.
     ;(Object.keys(blessedEventMethodAttributes) as EventOptionNames[]).forEach(methodName => {
       const args = blessedEventMethodAttributes[methodName] as any[]
       ;(el as any)[methodName](...args.map(a => (typeof a === 'function' ? a.bind(el) : a)))

@@ -51,6 +51,45 @@ export function setObjectProperty<T>(object: any, path: string | string[], value
   }
 }
 
+// export function getObjectPropertyPaths(object: any, options: {ignoreArrayElements?: boolean} = {ignoreArrayElements: true}) {
+//   function visit(object: any, p: (number|string)[]) {
+//     const objectIsArray = Array.isArray(object)
+//     if(options.ignoreArrayElements && objectIsArray){
+//       return 
+//     }
+//     for(var i in object) {
+//       p.push(objectIsArray ? parseInt(i) : i+'')
+//       var v = object[i]
+//       if(isObject(v)||isArray(v[i])){
+//         visit(v[i], p)
+//       }
+//     }
+//   }
+//   const p = []
+//   visit(object, p)
+//   return p
+// }
+
+// var toStr = Object.prototype.toString;
+
+//   export function getTypeScript(type: any){
+//   return toStr.call(type);
+// }
+//   export function isObject(obj: any){
+//     return typeof obj === 'object' && getTypeScript(obj) === "[object Object]";
+//   }
+
+//  export  var isArray = Array.isArray || function(obj: any){
+//     return toStr.call(obj) === '[object Array]';
+//   }
+
+//   export function isBoolean(obj: any){
+//     return typeof obj === 'boolean' || getTypeScript(obj) === '[object Boolean]';
+//   }
+
+
+
+
 /**
  * strips ANSI codes from a string. From https://github.com/xpl/ansicolor/blob/master/ansicolor.js
  * @param {string} s a string containing ANSI escape codes.

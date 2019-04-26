@@ -61,8 +61,10 @@ export type INodeGenericEventArg = blessed.Widgets.Events.INodeGenericEventArg
 export type NodeEventType = blessed.Widgets.NodeEventType
 export type NodeGenericEventType = blessed.Widgets.NodeGenericEventType
 
-export type Border = blessed.Widgets.Types.TStyle
+export type Border = blessed.Widgets.Types.TBorder
 export type Style = blessed.Widgets.Types.TStyle
+export type Position = blessed.Widgets.Types.TPosition
+export type TopLeft = blessed.Widgets.Types.TTopLeft
 export type ListElementStyle = blessed.Widgets.ListElementStyle
 export type Program = blessed.BlessedProgram
 
