@@ -62,8 +62,8 @@ export enum ArtificialEventOptionNames {
   onceRender = 'onceRender'
 }
 
-/** 
- * Represents event handlers directly supported by blessed element methods (exactly same signature) 
+/**
+ * Represents event handlers directly supported by blessed element methods (exactly same signature)
  */
 export interface BlessedEventOptions {
   [EventOptionNames.key]?: Parameters<NodeWithEvents['key']>
@@ -72,9 +72,9 @@ export interface BlessedEventOptions {
   [EventOptionNames.once]?: On<this>
 }
 
-/** 
+/**
  * Represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This
- * imply some manual event registration and mapping to blessed supported ones. 
+ * imply some manual event registration and mapping to blessed supported ones.
  */
 export interface ArtificialEventOptions<T extends Element> {
   [ArtificialEventOptionNames.onClick]?: OnClickHandler<T>

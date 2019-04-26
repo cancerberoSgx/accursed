@@ -4,7 +4,6 @@ import { ArtificialEvent } from '../jsx/types'
 import { notSameNotFalsy, throttle } from '../util/misc'
 
 interface P extends TextboxOptions {
-  
   onChange?(
     e: ArtificialEvent<Textbox> & {
       value: any
@@ -14,7 +13,7 @@ interface P extends TextboxOptions {
   /**
    * Throttling time to render suggestion list. Default value is 0
    */
-  suggestionRenderThrottle?: number;
+  suggestionRenderThrottle?: number
 
   /**
    * Suggestions array.
@@ -88,8 +87,7 @@ export class AutoComplete extends Component<P> {
           onChange={e => {
             this.props.onChange && this.props.onChange(e)
           }}
-          onKeyPress={
-            throttle(
+          onKeyPress={throttle(
             e => {
               const list = this.listRef.current!
               const input = e.currentTarget!
@@ -129,9 +127,10 @@ export class AutoComplete extends Component<P> {
                   input.screen.render()
                 }
               }
-            }
-            , this.props.suggestionRenderThrottle||0, {trailing: true})
-          }
+            },
+            this.props.suggestionRenderThrottle || 0,
+            { trailing: true }
+          )}
         />
         <list
           hidden={true}

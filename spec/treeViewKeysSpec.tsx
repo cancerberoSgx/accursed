@@ -1,27 +1,9 @@
-import { tryTo, array } from 'misc-utils-of-mine-generic'
-import {
-  box,
-  Br,
-  button,
-  createScreen,
-  debug,
-  Div,
-  getContent,
-  installExitKeys,
-  React,
-  Screen,
-  text,
-  Text,
-  TreeView,
-  program
-} from '../src'
+import { array, tryTo } from 'misc-utils-of-mine-generic'
+import { createScreen, installExitKeys, Screen, TreeView } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { log } from '../src/util/logger'
-import { ansi } from 'cli-driver';
-import { sleep } from './blessedTestUtil';
 
 class KeyHelper {
-  constructor(protected screen: Screen) { }
+  constructor(protected screen: Screen) {}
   down() {
     this.screen.emit('key down', undefined, { name: 'down' })
   }
@@ -36,7 +18,7 @@ class KeyHelper {
   }
 }
 
-fdescribe('treeView', () => {
+describe('treeView', () => {
   let screen: Screen
   let tree: TreeView
   let key: KeyHelper
@@ -114,7 +96,7 @@ fdescribe('treeView', () => {
     expect(tree.getContent()).toContain('n11')
     key.space()
     expect(tree.getContent()).not.toContain('n11')
-    key.down();
+    key.down()
     expect(tree.getFocusedNode().name).toBe('n2')
     const n2Descendants = ['n21', 'n211', 'n2111', 'n21111', 'n22', 'n23']
     n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
@@ -152,7 +134,6 @@ fdescribe('treeView', () => {
     expect(tree.getContent()).not.toContain('n1') // outside frame
     done()
   })
-
 })
 
 const rootNodes = [

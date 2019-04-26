@@ -12,13 +12,10 @@ import {
   Screen,
   text,
   Text,
-  TreeView,
-  program
+  TreeView
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
-import { ansi } from 'cli-driver';
-import { sleep } from './blessedTestUtil';
 
 describe('treeView', () => {
   let screen: Screen
@@ -26,12 +23,12 @@ describe('treeView', () => {
     tryTo(() => screen.destroy())
   })
 
-  jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
   it('should render', async done => {
     try {
-      screen = createScreen({ 
-        smartCSR: true, 
-        log: 'log.txt', 
+      screen = createScreen({
+        smartCSR: true,
+        log: 'log.txt',
         ignoreLocked: true,
         tput: true
       })
@@ -80,68 +77,6 @@ describe('treeView', () => {
       log('ERROR', error)
     }
   })
-
-
-
-  it('should respond to keys', async done => {
-    try {
-      screen = createScreen({ 
-      })
-      installExitKeys(screen)
-      const tree = new TreeView({
-        rootNodes,
-        parent: screen,
-        width: 15,
-        height: 10,
-        style: { bg: 'blue', fg: 'white', focusedNode: { bg: 'green', fg: 'black' }, selectedNode: { bg: 'red' } },
-        scrollable: true
-      })
-      tree.focus()
-      screen.render()
-      
-      await waitFor(() => tree.getContent().includes('n1'))
-      expect(tree.getContent()).toContain('n2')
-      expect(tree.getContent()).not.toContain('n11')
-
-      expect(tree.getFocusedNode().name).toBe('n1')
-      screen.emit('key space', undefined, { name: 'space'})
-      expect(tree.getContent()).toContain('n11')
-      
-      await sleep(100)
-      expect(tree.getContent()).toContain('n21')
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key space', undefined, { name: 'space'})
-      expect(tree.getContent()).not.toContain('n21')
-
-      await sleep(100)
-      expect(tree.getFocusedNode().name).not.toBe('n21111')
-      screen.emit('key space', undefined, { name: 'space'})
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key down', undefined, {       name: 'down'})      
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key down', undefined, {       name: 'down'})
-      expect(tree.getFocusedNode().name).toBe('n21111')
-
-      await sleep(100)
-      expect(tree.getSelectedNodes()).toEqual([])
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key enter', undefined, {       name: 'enter'})
-      await sleep(100)
-      expect(tree.getSelectedNodes().map(n=>n.name)).toEqual(['n22'])
-
-      await sleep(100)
-      screen.emit('key down', undefined, {       name: 'down'})
-      screen.emit('key enter', undefined, {       name: 'enter'})
-      await sleep(100)
-      expect(tree.getSelectedNodes().map(n=>n.name)).toEqual(['n23'])
-
-      done()
-    } catch (error) {
-      log('ERROR', error)
-    }
-  })
-
 
   it('should support jsx', async done => {
     try {

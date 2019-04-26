@@ -10,11 +10,11 @@ export interface CollapsibleProps extends BoxOptions, CollapsibleOptions {
    */
   collapsed?: boolean
 
-  /** 
-   * Called when collapse/expand occurs 
+  /**
+   * Called when collapse/expand occurs
    */
   onCollapseChange?: onCollapseChange
-  
+
   children: JSX.BlessedJsxNode | JSX.BlessedJsxNode[]
 }
 /** 

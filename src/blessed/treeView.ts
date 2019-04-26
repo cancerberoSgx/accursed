@@ -23,14 +23,14 @@ interface Node extends TreeViewNode {
 }
 
 export interface TreeOptions<T extends TreeViewNode = TreeViewNode> extends Widgets.ElementOptions {
-  /** 
-   * String to show before an element representing the "expand" action, like "[+]", when the element is collapsed. 
-   * Default value: '\u25b6'. 
+  /**
+   * String to show before an element representing the "expand" action, like "[+]", when the element is collapsed.
+   * Default value: '\u25b6'.
    */
   collapsedPrefix?: string
-  /** 
-   * String to show before an element representing the "collapse" action, like "[-]", when the element is expanded. 
-   * Default value: '\u25bc'. 
+  /**
+   * String to show before an element representing the "collapse" action, like "[-]", when the element is expanded.
+   * Default value: '\u25bc'.
    */
   expandedPrefix?: string
   /**

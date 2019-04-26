@@ -6,12 +6,6 @@ export function log(...args: any[]) {
   if (inBrowser()) {
     console.log(...args)
   } else {
-    appendFileSync(
-      'log2.txt',
-      '\n' +
-        args
-          .map(a => inspect(a))
-          .join(' |||||||||| ')
-    )
+    appendFileSync('log2.txt', '\n' + args.map(a => inspect(a)).join(' |||||||||| '))
   }
 }

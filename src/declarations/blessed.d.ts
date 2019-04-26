@@ -404,7 +404,7 @@ program.getCursor(function(err, data) {
   up(param?: number): boolean
 
   /**
-   * Cursor Down `n` times, by default 1. 
+   * Cursor Down `n` times, by default 1.
    */
   cursorDown(n?: number): boolean
   /** @see [[cursorDown]] */
