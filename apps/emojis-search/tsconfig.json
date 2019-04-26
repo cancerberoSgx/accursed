@@ -11,7 +11,12 @@
     "declaration": true,
     "strict": true,
     "jsx": "React",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+       "paths": {
+      "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
+      "blessed": ["../../dist/src/declarations/blessed"]
+    },
   },
   "include": [
     "src", "spec"
