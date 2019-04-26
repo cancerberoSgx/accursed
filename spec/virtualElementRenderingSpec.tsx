@@ -5,7 +5,7 @@ import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
 
 /** see guides/virtual-elements.md  */
-describe('virtualElementsRendering', () => {
+xdescribe('virtualElementsRendering', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())

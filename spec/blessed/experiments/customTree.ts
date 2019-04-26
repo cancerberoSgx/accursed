@@ -173,7 +173,7 @@ class Tree extends widget.Element<TreeOptions> {
       }
     })
     this.nodeLines = lines
-    return [...lines, ...repeat(Math.round(this.height / 2) + 1, ' ')] //, ' ',  ' ', ' ', ' '] // add a dummy one
+    return [...lines, ...repeat(Math.round((this.height as number) / 2) + 1, ' ')] //, ' ',  ' ', ' ', ' '] // add a dummy one
   }
 
   getFocusedNode() {

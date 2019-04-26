@@ -58,7 +58,7 @@ var layout = blessed.layout({
         // If our child does not overlap the right side of the Layout, set it's
         // `top`/`y` to the current `rowOffset` (the coordinate for the current
         // row).
-        if (el.position.left + el.width <= width) {
+        if (el.position.left + (el.width as number) <= width) {
           el.position.top = rowOffset
         } else {
           // Otherwise we need to start a new row and calculate a new
@@ -80,7 +80,7 @@ var layout = blessed.layout({
 
       // If our child overflows the Layout, do not render it!
       // Disable this feature for now.
-      if (el.position.top + el.height > height) {
+      if (el.position.top + (el.height as number) > height) {
         // Returning false tells blessed to ignore this child.
         // return false;
       }

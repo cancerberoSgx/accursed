@@ -1,18 +1,29 @@
-import { getContent, text, box, Screen } from '../../../src';
-import { waitFor } from '../../../src/blessed/waitFor';
-import { animate, bounceEasyOut, back, elastic, bounceEaseInOut, easeInQuad, easeInElastic, easeInOutQuad, easeOutBounce } from '../../../src/util/anim';
+import { box, getContent, Screen, text } from '../../../src'
+import { waitFor } from '../../../src/blessed/waitFor'
+import {
+  animate,
+  back,
+  bounceEaseInOut,
+  easeInElastic,
+  easeInOutQuad,
+  easeInQuad,
+  easeOutBounce,
+  elastic
+} from '../../../src/util/anim'
 
 export async function animDemo(screen: Screen) {
-  const parent = box({ parent: screen, top: 0, left: 'center', width: '70%', bg: 'black', border: 'line' });
-  const width = 8;
+  const parent = box({ parent: screen, top: 0, left: 'center', width: '70%', bg: 'black', border: 'line' })
+  const width = 8
   const g = text({
     parent,
     width,
     height: 2,
     content: 'bounce',
-    top: 0, left: 0, bg: 'white',
+    top: 0,
+    left: 0,
+    bg: 'white',
     fg: 'red'
-  });
+  })
   const g2 = text({
     parent,
     width,
@@ -22,7 +33,7 @@ export async function animDemo(screen: Screen) {
     left: 0,
     bg: 'yellow',
     fg: 'black'
-  });
+  })
   const g3 = text({
     parent,
     width,
@@ -30,8 +41,8 @@ export async function animDemo(screen: Screen) {
     top: 6,
     content: 'elastic',
     left: 0,
-    fg: '#ff88cc',
-  });
+    fg: '#ff88cc'
+  })
   const g4 = text({
     parent,
     width,
@@ -42,7 +53,7 @@ export async function animDemo(screen: Screen) {
     // clickable: true,
     bg: '#00ff00',
     fg: 'black'
-  });
+  })
   const g5 = text({
     parent,
     // width,
@@ -53,7 +64,7 @@ export async function animDemo(screen: Screen) {
     // clickable: true,
     bg: 'black',
     fg: '#7744ff'
-  });
+  })
 
   const g6 = text({
     parent,
@@ -64,7 +75,7 @@ export async function animDemo(screen: Screen) {
     left: 0,
     bg: '#00ff00',
     fg: 'black'
-  });
+  })
 
   const g7 = text({
     parent,
@@ -75,7 +86,7 @@ export async function animDemo(screen: Screen) {
     left: 0,
     bg: '#00ff00',
     fg: 'black'
-  });
+  })
   const g8 = text({
     parent,
     width,
@@ -85,7 +96,7 @@ export async function animDemo(screen: Screen) {
     left: 0,
     bg: '#00ff00',
     fg: 'black'
-  });
+  })
   // g4.on('click', e=>{
   //   g4.left = 0
   //   screen.render()
@@ -96,70 +107,95 @@ export async function animDemo(screen: Screen) {
   //     }, lapse: 0
   //   })
   // })
-  screen.render();
-  await waitFor(() => getContent(g).includes('bounce'));
-  const duration = 2000;
+  screen.render()
+  await waitFor(() => getContent(g).includes('bounce'))
+  const duration = 2000
   animate({
-    duration, timing: easeInQuad(), draw: t => {
-      g.left = Math.trunc(t * 90) + '%'; //Math.trunc(screen.width/2*t) - 3
-      screen.render();
-    }, lapse: 0
-  });
+    duration,
+    timing: easeInQuad(),
+    draw: t => {
+      g.left = Math.trunc(t * 90) + '%' //Math.trunc(screen.width/2*t) - 3
+      screen.render()
+    },
+    lapse: 0
+  })
   setTimeout(() => {
     animate({
-      duration, timing: back(), draw: t => {
-        g2.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration);
+      duration,
+      timing: back(),
+      draw: t => {
+        g2.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration)
   setTimeout(() => {
     animate({
-      duration, timing: elastic(1.2), draw: t => {
-        g3.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 2);
+      duration,
+      timing: elastic(1.2),
+      draw: t => {
+        g3.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 2)
   setTimeout(() => {
     animate({
-      duration, timing: bounceEaseInOut(), draw: t => {
-        g4.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 3);
+      duration,
+      timing: bounceEaseInOut(),
+      draw: t => {
+        g4.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 3)
   setTimeout(() => {
     animate({
-      duration, timing: easeInOutQuad(), draw: t => {
-        g6.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 4);
+      duration,
+      timing: easeInOutQuad(),
+      draw: t => {
+        g6.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 4)
   setTimeout(() => {
     animate({
-      duration, timing: easeInElastic(), draw: t => {
-        g7.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 5);
+      duration,
+      timing: easeInElastic(),
+      draw: t => {
+        g7.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 5)
   setTimeout(() => {
     animate({
-      duration, timing: easeOutBounce(), draw: t => {
-        g8.left = Math.trunc(t * 90) + '%'; // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 6);
+      duration,
+      timing: easeOutBounce(),
+      draw: t => {
+        g8.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 6)
   setTimeout(() => {
-    const content = 'Nostrud ex dolore dolor in est incididunt proident sunt ullamco. Amet aute quis tempor ut labore aliqua consectetur incididunt nostrud incididunt. Incididunt labore in sunt in et minim nostrud.';
+    const content =
+      'Nostrud ex dolore dolor in est incididunt proident sunt ullamco. Amet aute quis tempor ut labore aliqua consectetur incididunt nostrud incididunt. Incididunt labore in sunt in et minim nostrud.'
     animate({
-      duration: duration * 2, timing: bounceEaseInOut(), draw: t => {
-        g5.content = content.substring(0, Math.trunc(content.length * t)); // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
-        screen.render();
-      }, lapse: 0
-    });
-  }, duration * 7);
+      duration: duration * 2,
+      timing: bounceEaseInOut(),
+      draw: t => {
+        g5.content = content.substring(0, Math.trunc(content.length * t)) // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
+        screen.render()
+      },
+      lapse: 0
+    })
+  }, duration * 7)
 }

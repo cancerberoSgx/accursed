@@ -5,6 +5,8 @@ import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
 import { React } from '../../../src/jsx/createElement'
 import { enumValueFromString } from '../../../src/util/misc'
+import { anim2 } from '../experiments/anim2'
+import { animDemo } from '../experiments/animDemo'
 import { allColors } from '../experiments/colors/allColors'
 import { color4 } from '../experiments/colors/colors4'
 import { colors5Demo } from '../experiments/colors/colors5'
@@ -14,7 +16,6 @@ import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
-import { animDemo } from '../experiments/animDemo';
 
 enum Demo {
   button,
@@ -24,7 +25,8 @@ enum Demo {
   colorPalette,
   colors5,
   allColors,
-  anim
+  anim,
+  anim2
 }
 interface P {
   screen: Screen
@@ -50,7 +52,9 @@ export class App extends Component<P, S> {
         colors5Demo(this.blessedElement.screen)
       } else if (demo === Demo.allColors) {
         allColors(this.blessedElement.screen)
-      }else if (demo === Demo.anim) {
+      } else if (demo === Demo.anim2) {
+        anim2(this.blessedElement.screen)
+      } else if (demo === Demo.anim) {
         animDemo(this.blessedElement.screen)
       } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)

@@ -2,7 +2,6 @@ import { notUndefined } from 'misc-utils-of-mine-typescript'
 import { Element } from '../blessedTypes'
 import { Component } from '../jsx'
 import { appendElementData } from './util'
-import { debug } from '..';
 /**
  * Why do we need this if we have props? you cannot decalre structured data like <tabPanel><tab><title>... etc - - props. only allows 21 level
  *
@@ -191,10 +190,9 @@ function process(p: JSXChildrenProps | undefined): (VirtualChildrenData | string
     return undefined
   }
   // debug('jsjsjjs', p,  p && p.props, Object.keys(p && p.props ||{}) , p && (p as any).props && (p as any).props. children && (p as any).props.children.length)
-  if(Array.isArray(p)){
+  if (Array.isArray(p)) {
     return p.map(process).flat()
-  }
-  else {
+  } else {
     const children: any[] = []
 
     if (!p.props || !p.__virtualTagName) {
@@ -213,11 +211,13 @@ function process(p: JSXChildrenProps | undefined): (VirtualChildrenData | string
     const attrs = { ...p.props }
     delete attrs.children
 
-  return [{
-    children: children.filter(notUndefined),
-    attrs,
-    tagName: p.__virtualTagName
-  }]
+    return [
+      {
+        children: children.filter(notUndefined),
+        attrs,
+        tagName: p.__virtualTagName
+      }
+    ]
   }
 }
 

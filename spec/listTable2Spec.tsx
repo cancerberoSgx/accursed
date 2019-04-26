@@ -5,7 +5,7 @@ import { ListTable2, ListTableBody, ListTableCell, ListTableHead, ListTableRow }
 import { arr, number, string } from '../src/util/data'
 import { log } from '../src/util/logger'
 
-describe('listTableComponent', () => {
+xdescribe('listTableComponent', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())

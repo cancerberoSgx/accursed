@@ -194,7 +194,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
     } else if (this.options.pageUpKeys!.includes(key.name)) {
-      for (let i = 0; i < this.height - 1; i++) {
+      for (let i = 0; i < (this.height as number) - 1; i++) {
         upAction()
       }
       this.emit('nodeFocus', this.currentNode)

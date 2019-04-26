@@ -1,4 +1,4 @@
-import { React , debug} from '..'
+import { React } from '..'
 import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
 import { List, ListOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'

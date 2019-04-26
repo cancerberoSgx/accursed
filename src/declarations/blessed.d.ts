@@ -2831,32 +2831,32 @@ export namespace Widgets {
     /**
      * Calculated width.
      */
-    width: number|string
+    width: number | string
 
     /**
      * Calculated height.
      */
-    height: number|string
+    height: number | string
 
     /**
      * Calculated relative top offset.
      */
-    top: number|string
+    top: number | string
 
     /**
      * Calculated relative left offset.
      */
-    left: number|string
+    left: number | string
 
     /**
      * Calculated relative right offset.
      */
-    right: number|string
+    right: number | string
 
     /**
      * Calculated relative bottom offset.
      */
-    bottom: number|string
+    bottom: number | string
 
     /**
      * Calculated absolute top offset.
