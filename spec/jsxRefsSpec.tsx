@@ -1,9 +1,9 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { Button, createScreen, Div, installExitKeys, React, Screen } from '../src'
+import { Button, Component, createScreen, Div, installExitKeys, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 describe('jsxRefs', () => {
-  describe('should associate a element with vriable at render time ', () => {
+  describe('should associate a element with variable at render time ', () => {
     let screen: Screen
     afterEach(() => {
       tryTo(() => screen.destroy())
@@ -30,6 +30,23 @@ describe('jsxRefs', () => {
       ref1.current!.content = "'changed3"
       ref1.current!.screen.render()
       await waitFor(() => ref1.current! && ref1.current!.getContent().includes('changed3'))
+      done()
+    })
+
+    it('should associate component', async done => {
+      class C extends Component {
+        render() {
+          return <Div>hello world</Div>
+        }
+      }
+      screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
+      installExitKeys(screen)
+      let c: C
+      screen.append(React.render(<C ref={React.createRef<C>(current => (c = current))}>hello world</C>))
+      screen.render()
+      // ref1.current!.screen.render()
+      await waitFor(() => !!c)
+      expect(c instanceof C).toBe(true)
       done()
     })
   })

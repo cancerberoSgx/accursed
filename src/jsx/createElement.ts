@@ -151,12 +151,15 @@ class BlessedJsxImpl implements BlessedJsx {
     // just in case ?
     const ref = (el! as any) && (el! as any).options && ((el! as any).options.ref as RefObject)
     if (ref && !ref.current) {
-      ref.current = component || (el! as any)
+      ref.current = el! as any
       ref.callback && ref.callback(ref.current)
     }
-    // if(component && el! &&(el! as any).options && (el! as any).options.ref) {
+    // debug('debug', component &&  (component as any).props)
 
-    // }
+    if (component && (component as any).props && (component as any).props.ref) {
+      ;(component as any).props.ref.current = component
+      ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
+    }
 
     // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and continue installing attributes and children only for
     // intrinsic elements
@@ -313,7 +316,7 @@ class BlessedJsxImpl implements BlessedJsx {
   addAfterRenderListener(l: AfterRenderListener): void {
     this.afterRenderListeners.push(l)
   }
-  createRef<T extends Element>(callback?: (current: T | undefined) => any): RefObject<T> {
+  createRef<T extends Element | Component>(callback?: (current: T | undefined) => any): RefObject<T> {
     return ({
       current: undefined,
       callback

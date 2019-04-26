@@ -11,11 +11,12 @@ import {
   VisitorOptions
 } from '../blessed/node'
 import { Element } from '../blessedTypes'
+import { RefObject } from './types'
 
 /**
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a dummy state that will update the blessed element if changed by default
  */
-export abstract class Component<P = {}, S = {}> {
+export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsxNode }, S = {}> {
   constructor(protected props: P, protected state: S) {}
 
   /** if true then JSX children props will be save on property [[jsxChildrenProps]]. Component subclasses needing this information (like Virtual component parent) can override it. */
