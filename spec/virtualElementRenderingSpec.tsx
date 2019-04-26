@@ -5,7 +5,7 @@ import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
 
 /** see guides/virtual-elements.md  */
-xdescribe('virtualElementsRendering', () => {
+describe('virtualElementsRendering', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
@@ -45,7 +45,6 @@ xdescribe('virtualElementsRendering', () => {
       class ListTable extends Component<ListTableProps> {
         // we override this property so JSX children props data is available
         _saveJSXChildrenProps = true
-
         render() {
           const ths = getJSXChildrenProps(this)!
             .find(e => e.tagName === 'Thead')!

@@ -187,30 +187,27 @@ export function isElementData(c: any): c is VirtualChildrenData {
 }
 function process(p: JSXChildrenProps | undefined): (VirtualChildrenData | string | number | undefined)[] {
   if (!p) {
-    return undefined
+    return []
   }
-  // debug('jsjsjjs', p,  p && p.props, Object.keys(p && p.props ||{}) , p && (p as any).props && (p as any).props. children && (p as any).props.children.length)
   if (Array.isArray(p)) {
     return p.map(process).flat()
   } else {
     const children: any[] = []
 
     if (!p.props || !p.__virtualTagName) {
-      return p as any
+      return [p] as any
     }
     ;(p.props.children || []).forEach(c => {
-      // debug('process children', (c as any).type, (c as any).__virtualTagName, typeof c, Array.isArray(c), c+'')
       if (Array.isArray(c)) {
-        c.filter(notUndefined).forEach(cc => children.push(process(cc)))
+        c.filter(notUndefined).forEach(cc => children.push(...process(cc)))
       } else if (typeof c !== 'object') {
         return children.push(c)
       } else {
-        children.push(process(c))
+        children.push(...process(c))
       }
     })
     const attrs = { ...p.props }
     delete attrs.children
-
     return [
       {
         children: children.filter(notUndefined),

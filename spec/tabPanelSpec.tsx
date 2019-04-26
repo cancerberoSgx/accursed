@@ -15,7 +15,7 @@ import { Tab, TabBody, TabLabel, TabPanel } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
 import { log } from '../src/util/logger'
 
-xdescribe('tabPanelComponent', () => {
+describe('tabPanelComponent', () => {
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
