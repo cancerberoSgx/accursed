@@ -18,12 +18,11 @@ import { RefObject } from './types'
  * dummy state that will update the blessed element if changed by default
  */
 export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsxNode }, S = {}> {
-  
   constructor(protected props: P, protected state: S) {}
 
-  /** 
+  /**
    * If true then JSX children props will be save on property [[_jsxChildrenProps]]. Component subclasses
-   * needing this information (like Virtual component parent) can override it. 
+   * needing this information (like Virtual component parent) can override it.
    */
   _saveJSXChildrenProps = false
   _jsxChildrenProps: any = undefined
@@ -86,7 +85,7 @@ export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsx
   }
   //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
 
-  get screen(){
+  get screen() {
     return this.blessedElement && this.blessedElement.screen
   }
 
@@ -102,9 +101,9 @@ export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsx
     replaceChildren(this.blessedElement, newChildren, options)
   }
 
-  /** 
+  /**
    * Returns the text content of given node and all its children, in order. By default stripped from ansi
-   * escape chars and trimmed, and separated by space, but is configurable through options.  
+   * escape chars and trimmed, and separated by space, but is configurable through options.
    */
   getContent(options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}) {
     return getContent(this.blessedElement, options)

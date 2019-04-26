@@ -55,7 +55,7 @@ export function setObjectProperty<T>(object: any, path: string | string[], value
 //   function visit(object: any, p: (number|string)[]) {
 //     const objectIsArray = Array.isArray(object)
 //     if(options.ignoreArrayElements && objectIsArray){
-//       return 
+//       return
 //     }
 //     for(var i in object) {
 //       p.push(objectIsArray ? parseInt(i) : i+'')
@@ -86,9 +86,6 @@ export function setObjectProperty<T>(object: any, path: string | string[], value
 //   export function isBoolean(obj: any){
 //     return typeof obj === 'boolean' || getTypeScript(obj) === '[object Boolean]';
 //   }
-
-
-
 
 /**
  * strips ANSI codes from a string. From https://github.com/xpl/ansicolor/blob/master/ansicolor.js

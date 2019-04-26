@@ -8,7 +8,7 @@ describe('jsxRefs', () => {
     afterEach(() => {
       tryTo(() => screen.destroy())
     })
-    
+
     it('should create references to elements for markup at render time', async done => {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
       installExitKeys(screen)
