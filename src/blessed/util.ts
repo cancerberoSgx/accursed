@@ -1,6 +1,6 @@
 import { asArray, getObjectProperty, setObjectProperty } from 'misc-utils-of-mine-generic'
 import { Button, Checkbox, closeModal, Element, isElement, isModalVisible, Screen, screen, visitDescendants } from '..'
-import {  } from '../util/misc'
+import {} from '../util/misc'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag

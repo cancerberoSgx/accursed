@@ -24,7 +24,7 @@ describe('jsxCli', () => {
   })
 
   it('should render box with content and no children', async done => {
-    await client.enter('npx ts-node spec/assets/jsxNoChildren.tsx')
+    await client.enter('npx ts-node -T spec/assets/jsxNoChildren.tsx')
     expect(await helper.waitForStrippedDataToInclude('hehehehehe'))
     await client.enter('q')
     await helper.expectLastExitCode(true)
@@ -32,7 +32,7 @@ describe('jsxCli', () => {
   })
 
   it('should render box with one button children', async done => {
-    await client.enter('npx ts-node spec/assets/jsxOneChild.tsx')
+    await client.enter('npx ts-node -T spec/assets/jsxOneChild.tsx')
     const s = await helper.waitForStrippedDataToInclude('click')
     ;['hello', 'click', 'box', 'content'].forEach(w => expect(s).toContain(w))
     await client.enter('q')

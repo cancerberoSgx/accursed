@@ -1,5 +1,5 @@
-import { isElement, Layout, LayoutIterator } from '../blessedTypes'
 import { getObjectProperty } from 'misc-utils-of-mine-generic'
+import { isElement, Layout, LayoutIterator } from '../blessedTypes'
 
 /**
  * The same blessed Layout renderer function with a few modifications and adapted to TypeScript. Modifications:
@@ -103,7 +103,7 @@ export function renderer(this: Layout, coords: { xl: number; xi: number; yl: num
 
     const overflow =
       el.height < 0 ||
-      el.atop + el.height > this.atop + this.height ||
+      el.atop + el.height > this.atop + (this.height as any) ||
       el.position.top + el.height > height ||
       (el.getLines() || []).length > height
     // if (!overflow) {

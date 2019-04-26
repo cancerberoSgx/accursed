@@ -1,5 +1,3 @@
-import { objectKeys } from 'misc-utils-of-mine-generic'
-
 // export function notUndefined<T>(a: T): a is Exclude<T, undefined> {
 //   return typeof a !== 'undefined'
 // }
@@ -210,7 +208,7 @@ export type NotFalsy<T> = Exclude<T, falsy>
 //   return !!n
 // }
 
-export function rgb2Hex (s: string){
+export function rgb2Hex(s: string) {
   // prettier-ignore
   //@ts-ignore
   return s.match(/[0-9]+/g)!.reduce((a, b: any) => a + (b | 256).toString(16).slice(1), '#').toString(16)

@@ -1,22 +1,30 @@
-import { isArray } from 'misc-utils-of-mine-generic';
-import { format } from 'ansi-escape-sequences';
 import * as blessed from 'blessed'
-import { Element, debug } from '..';
-import { ElementOptions } from '../blessedTypes';
-import { rgb2Hex } from '../util/misc';
-import { React, EventOptions } from '../jsx';
+import { debug } from '..'
+import { ElementOptions } from '../blessedTypes'
+import { EventOptions, React } from '../jsx'
+import { rgb2Hex } from '../util/misc'
 
 const gradstop = require('gradstop')
 
 type GradientColors = [string, string] | [string, string, string] | [string, string, string, string]
-
 
 interface GradientTextOptions extends ElementOptions {
   fgGradientColors?: GradientColors
   bgGradientColors?: GradientColors
 }
 /**
- * TODO: vertical, diagonal ? 
+ * Example: 
+ ```
+const g = new GradientText({
+  width: 40,
+  height: 10,
+  wrap: true,
+  content: s
+  bgGradientColors: ['#000088', '#0006dd', '#338800'],
+  fgGradientColors: ['#ff0000', '#00ff00', '#0000ff']
+})
+ ```
+ * TODO: vertical, diagonal ?
  */
 export class GradientText<Options extends GradientTextOptions> extends blessed.widget.Element<Options> {
   type = 'gradienttext'
@@ -45,67 +53,69 @@ export class GradientText<Options extends GradientTextOptions> extends blessed.w
   }
   protected fgGradientColors: string[]
   protected getFgGradientColors(coords: blessed.Widgets.Coords) {
-    if (!this.fgGradientColors&&this.options.fgGradientColors) {
+    if (!this.fgGradientColors && this.options.fgGradientColors) {
       this.fgGradientColors = gradstop({
         stops: coords.xl - coords.xi,
-        inputFormat: 'hex',
+        inputFormat: this.getColorInputFormat(this.options.fgGradientColors),
         colorArray: this.options.fgGradientColors
-      }).map(rgb2Hex) as string[];
+      }).map(rgb2Hex) as string[]
     }
     return this.fgGradientColors
   }
   protected bgGradientColors: string[]
   protected getBgGradientColors(coords: blessed.Widgets.Coords) {
     debug(this._getWidth(), this._getWidth(true), coords)
-    if (!this.bgGradientColors&&this.options.bgGradientColors) {
+    if (!this.bgGradientColors && this.options.bgGradientColors) {
       this.bgGradientColors = gradstop({
         stops: coords.xl - coords.xi,
-        inputFormat: 'hex',
+        inputFormat: this.getColorInputFormat(this.options.bgGradientColors),
         colorArray: this.options.bgGradientColors
-      }).map(rgb2Hex) as string[];
+      }).map(rgb2Hex) as string[]
     }
     return this.bgGradientColors
   }
+  protected getColorInputFormat(s: string[]) {
+    return s[0].startsWith('#') ? 'hex' : s[0].startsWith('rgb') ? 'rgb' : 'hsl'
+  }
 }
-
 
 interface GradientTextAnimationOptions extends GradientTextOptions {
   interval?: number
-  mode?: 'shift-right'|'shift-left'|'transform-to-other-gradient'
+  mode?: 'shift-right' | 'shift-left' | 'transform-to-other-gradient'
 }
 export class GradientTextAnimation extends GradientText<GradientTextAnimationOptions> {
   type = 'text-gradient'
-  gradientAnimationTimer: NodeJS.Timeout|undefined
+  gradientAnimationTimer: NodeJS.Timeout | undefined
   constructor(options: GradientTextAnimationOptions) {
     super(options)
     this.startAnimation = this.startAnimation.bind(this)
     this.stopAnimation = this.stopAnimation.bind(this)
-    this.on('render',this.startAnimation )
-    this.on('show',this.startAnimation )
+    this.on('render', this.startAnimation)
+    this.on('show', this.startAnimation)
     this.on('hide', this.stopAnimation)
     this.on('destroy', this.stopAnimation)
     this.on('detach', this.stopAnimation)
   }
-  protected stopAnimation(){
+  protected stopAnimation() {
     clearInterval(this.gradientAnimationTimer)
     this.gradientAnimationTimer = undefined
   }
-  protected startAnimation(){
-    if(!this.gradientAnimationTimer){
+  protected startAnimation() {
+    if (!this.gradientAnimationTimer) {
       const coords = this._getCoords()
       this.getFgGradientColors(coords)
       this.getBgGradientColors(coords)
-      this.gradientAnimationTimer = setInterval(()=>{
-        if(this.fgGradientColors){
-          const first = this.fgGradientColors.shift()    
+      this.gradientAnimationTimer = setInterval(() => {
+        if (this.fgGradientColors) {
+          const first = this.fgGradientColors.shift()
           this.fgGradientColors.push(first)
         }
-        if(this.bgGradientColors){
-          const firstBg = this.bgGradientColors.shift()    
+        if (this.bgGradientColors) {
+          const firstBg = this.bgGradientColors.shift()
           this.bgGradientColors.push(firstBg)
         }
         this.screen.render()
-      }, this.options.interval||400)
+      }, this.options.interval || 400)
     }
   }
 }
@@ -121,13 +131,12 @@ React.addIntrinsicElementConstructors({
 
 declare global {
   export namespace JSX {
-    export interface IntrinsicElement {
-      gradientText : OptionsProps<GradientTextOptions> & EventOptions<GradientText<GradientTextOptions>>
-      gradientTextAnimation : OptionsProps<GradientTextAnimationOptions> & EventOptions<GradientTextAnimation>
-    } 
+    export interface IntrinsicElements {
+      gradientText: OptionsProps<GradientTextOptions> & EventOptions<GradientText<GradientTextOptions>>
+      gradientTextAnimation: OptionsProps<GradientTextAnimationOptions> & EventOptions<GradientTextAnimation>
+    }
   }
 }
-
 
 // const gradstop = require('gradstop')
 
@@ -155,7 +164,6 @@ declare global {
 //   //@ts-ignore
 //   s.match(/[0-9]+/g)!.reduce((a, b: any) => a + (b | 256).toString(16).slice(1), '#').toString(16)
 
-
 // export function gradientElementLine(e: Element, line: number, g: GradientColors, what: 'bg'|'fg' = 'fg'){
 //   const s = e.getLine(line)
 //   const colors = gradient({colors: g, stops: s.length})
@@ -167,14 +175,13 @@ declare global {
 //     const attr = e.sattr({...e.style, bg:  colors[i] , fg:   colors[i]}, colors[i], colors[i])
 //     e.screen.screen.lines[3][i] = [attr, 'c']
 
-
 //     //{...e.style, bg:  what==='bg'? colors[i] : e.style.bg, fg:  what==='fg'? colors[i] : e.style.fg})
 //     // if(c.match(/\s\n/)){
 //     //   return c
 //     // }
 //     // else {
 //     // }
-//     // return 
+//     // return
 //   }).join('')
 //   // console.log(r)
 //   // e.setContent(r)

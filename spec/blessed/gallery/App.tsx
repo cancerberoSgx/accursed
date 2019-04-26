@@ -1,3 +1,4 @@
+import { arrayToObject, enumNoValueKeys } from 'misc-utils-of-mine-generic'
 import { showInModal } from '../../../src/blessed/modal'
 import { Screen } from '../../../src/blessedTypes'
 import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
@@ -13,7 +14,7 @@ import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
-import { enumNoValueKeys , arrayToObject, } from 'misc-utils-of-mine-generic';
+import { animDemo } from '../experiments/animDemo';
 
 enum Demo {
   button,
@@ -22,7 +23,8 @@ enum Demo {
   robot,
   colorPalette,
   colors5,
-  allColors
+  allColors,
+  anim
 }
 interface P {
   screen: Screen
@@ -42,27 +44,14 @@ export class App extends Component<P, S> {
       } else if (demo === Demo.layout) {
         return React.render(<LayoutDemo />)
       } else if (demo === Demo.colorPalette) {
-        // try {
-        // this.blessedElement.screen.free()
         color4(this.blessedElement.screen)
         this.blessedElement.screen.render()
-        // } catch (error) {
-        //   debug(error)
-        // }
       } else if (demo === Demo.colors5) {
-        // try {
         colors5Demo(this.blessedElement.screen)
-        // this.blessedElement.screen.render()
-        // } catch (error) {
-        //   debug(error)
-        // }
       } else if (demo === Demo.allColors) {
-        // try {
         allColors(this.blessedElement.screen)
-        // this.blessedElement.screen.render()
-        // } catch (error) {
-        //   debug(error)
-        // }
+      }else if (demo === Demo.anim) {
+        animDemo(this.blessedElement.screen)
       } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)
       } else if (demo === Demo.robot) {
