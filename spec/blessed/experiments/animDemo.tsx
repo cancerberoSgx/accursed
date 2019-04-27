@@ -1,15 +1,5 @@
-import { box, getContent, Screen, text } from '../../../src'
+import { animate, box, easing, getContent, Screen, text } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
-import {
-  animate,
-  back,
-  bounceEaseInOut,
-  easeInElastic,
-  easeInOutQuad,
-  easeInQuad,
-  easeOutBounce,
-  elastic
-} from '../../../src/util/anim'
 
 export async function animDemo(screen: Screen) {
   const parent = box({ parent: screen, top: 0, left: 'center', width: '70%', bg: 'black', border: 'line' })
@@ -112,7 +102,7 @@ export async function animDemo(screen: Screen) {
   const duration = 2000
   animate({
     duration,
-    timing: easeInQuad(),
+    timing: easing.easeInQuad(),
     draw: t => {
       g.left = Math.trunc(t * 90) + '%' //Math.trunc(screen.width/2*t) - 3
       screen.render()
@@ -122,7 +112,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: back(),
+      timing: easing.back(),
       draw: t => {
         g2.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -133,7 +123,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: elastic(1.2),
+      timing: easing.elastic(1.2),
       draw: t => {
         g3.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -144,7 +134,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: bounceEaseInOut(),
+      timing: easing.bounceEaseInOut(),
       draw: t => {
         g4.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -155,7 +145,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: easeInOutQuad(),
+      timing: easing.easeInOutQuad(),
       draw: t => {
         g6.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -166,7 +156,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: easeInElastic(),
+      timing: easing.easeInElastic(),
       draw: t => {
         g7.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -177,7 +167,7 @@ export async function animDemo(screen: Screen) {
   setTimeout(() => {
     animate({
       duration,
-      timing: easeOutBounce(),
+      timing: easing.easeOutBounce(),
       draw: t => {
         g8.left = Math.trunc(t * 90) + '%' // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()
@@ -190,7 +180,7 @@ export async function animDemo(screen: Screen) {
       'Nostrud ex dolore dolor in est incididunt proident sunt ullamco. Amet aute quis tempor ut labore aliqua consectetur incididunt nostrud incididunt. Incididunt labore in sunt in et minim nostrud.'
     animate({
       duration: duration * 2,
-      timing: bounceEaseInOut(),
+      timing: easing.bounceEaseInOut(),
       draw: t => {
         g5.content = content.substring(0, Math.trunc(content.length * t)) // Math.trunc(screen.width/2*t) - 3 + Math.trunc(screen.width/2)
         screen.render()

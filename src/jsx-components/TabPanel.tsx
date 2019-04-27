@@ -132,7 +132,7 @@ export class TabPanel extends Component<TabPanelProps> {
         label.style = { ...(label.style || {}), ...(this.props.activeStyle || {}) }
       }
     })
-    this.blessedElement.screen.render()
+    // this.blessedElement.screen.render()
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
   }
 

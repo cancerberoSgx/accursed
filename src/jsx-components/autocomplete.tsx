@@ -37,7 +37,7 @@ interface P extends TextboxOptions {
 export class AutoComplete extends Component<P> {
   protected options: string[] = []
 
-  constructor(p: P, s: {}) {
+  constructor(p: P, s: {}={}) {
     super(p, s)
     this.setOptions(this.props.options || [])
   }
@@ -69,6 +69,8 @@ export class AutoComplete extends Component<P> {
   })
 
   render() {
+    this.props.inputOptions = this.props.inputOptions ||{}
+    this.props.inputOptions!.value = this.props.inputOptions!.value || this.props.value ||''
     return (
       <Div {...this.props} onChange={undefined}>
         <textbox

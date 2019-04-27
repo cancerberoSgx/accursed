@@ -3052,7 +3052,7 @@ export namespace Widgets {
      * Take an SGR screenshot of the whole screen. Returns a string containing only
      * characters and SGR codes. Can be displayed by simply echoing it in a terminal.
      */
-    screenshot(): void
+    screenshot(): string
 
     /**
      * Converts `{red-fg}foo{/red-fg}` to `\x1b[31mfoo\x1b[39m`. @internal.
@@ -4821,7 +4821,10 @@ interface Helpers {
   generateTags(style: Widgets.Types.TStyle, text: string): string
   /**Convert style attributes to binary format. */
   attrToBinary(style: Widgets.Types.TStyle, element: Widgets.BlessedElement): number
-  // stripTags(text) - Strip text of tags and SGR sequences.
+  /**
+   * Strip text of tags and SGR sequences.
+   */
+  stripTags(text: string): string 
   // cleanTacgs(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
   // dropUniode(text) - Drop text of any >U+FFFF characters.
 }

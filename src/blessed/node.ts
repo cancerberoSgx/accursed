@@ -1,5 +1,5 @@
-import { Element, isElement, Node } from '../blessedTypes'
-import { strip } from '../util/misc'
+import { Element, isElement, Node , helpers} from '..'
+import { strip } from '../util/misc';
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */
@@ -75,7 +75,14 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
 }
 //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
 
-/** Returns the text content of given node and all its descendants, in order. By default stripped from ansi escape chars and trimmed, and separated by space, but is configurable through options.  */
+/** 
+ * Returns the text content of given node and all its descendants, in order. 
+ * By default stripped from ansi escape chars and trimmed, and separated by space, 
+ * but is configurable through options.  
+ * 
+ * Notice that content can be hidden because scroll. If you need to extract only the visible 
+ * text then use [[printElement]]
+ * */
 export function getContent(
   e: Element,
   options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean; includeHidden?: boolean } = {}
@@ -99,6 +106,14 @@ export function getContent(
     { childrenFirst: !options.childrenLast }
   )
   return text.join(' ')
+}
+
+/**
+ * Similar to [[getContent]] but it will only return the visible part of the element's content.
+ */
+export function printElement(el: Element, opts: { dontStrip?: boolean } = {}) {
+  const s = el.screenshot()
+  return opts.dontStrip ? s : helpers.stripTags(s)
 }
 
 export function visitAscendants(n: Node, v: Visitor, o = {}): boolean {
@@ -128,6 +143,11 @@ export function filterAscendants<T extends Node = Node>(n: Node, p: ElementPredi
   return a
 }
 
-export function cleanElement(e: Element){
-  e.children.forEach(e=>e.detach())
+export function cleanNode(n: Node, dontDestroy?: boolean) {
+  n.children.forEach(e => {
+    e.detach()
+    if (!dontDestroy) {
+      e.destroy()
+    }
+  })
 }
