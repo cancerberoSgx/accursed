@@ -40,7 +40,7 @@ export class Rows extends Component<RowsProps> {
   render() {
     const Rows = getJSXChildrenProps(this)!
       .filter(e => e.tagName === 'Row')!
-      .map((c, i, Rows) => ({ ...c, height: c.attrs.height || `${Math.trunc(98 / Rows.length)}%` }))
+      .map((c, i, Rows) => ({ ...c, height: c.attrs.height || `${Math.trunc(100 / Rows.length)}%` }))
     return (
       <Div {...this.props}>
         {Rows.map(c => (

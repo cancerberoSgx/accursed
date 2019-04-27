@@ -40,7 +40,7 @@ export class Columns extends Component<ColumnsProps> {
   render() {
     const columns = getJSXChildrenProps(this)!
       .filter(e => e.tagName === 'Column')!
-      .map((c, i, columns) => ({ ...c, width: c.attrs.width || `${Math.trunc(98 / columns.length)}%` }))
+      .map((c, i, columns) => ({ ...c, width: c.attrs.width || `${Math.trunc(100 / columns.length)}%` }))
     return (
       <Div {...this.props}>
         {columns.map(c => (

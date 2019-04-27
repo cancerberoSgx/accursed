@@ -171,14 +171,14 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // install refs on components. if the
 
-    // HEADS UP: if the component has a ref, then element's is not resolved. thats why it's an else if
-    if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
-      ;(el! as any).options.ref.current = el! as any
-      ;(el! as any).options.ref.callback && (el! as any).options.ref.callback(el)
-    }
     if (component && (component as any).props && (component as any).props.ref) {
       ;(component as any).props.ref.current = component
       ;(component as any).props.ref.callback && (component as any).props.ref.callback(component)
+    }
+    // HEADS UP: if the component has a ref, then element's is not resolved. thats why it's an else if
+    else if ((el! as any) && (el! as any).options && (el! as any).options.ref && !(el! as any).options.ref.current) {
+      ;(el! as any).options.ref.current = el! as any
+      ;(el! as any).options.ref.callback && (el! as any).options.ref.callback(el)
     }
   }
 

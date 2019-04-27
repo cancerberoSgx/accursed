@@ -37,8 +37,8 @@ export function Div(
       {...{
         ...props,
         children: undefined,
-        height: props.height || '99%',
-        width: props.width || '95%',
+        height: props.height || '100%',
+        width: props.width || '100%',
         renderer: props.renderer || renderer
       }}>
       {props.children}

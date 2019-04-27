@@ -5,7 +5,6 @@ import { Component } from '../jsx/component'
 import { ArtificialEvent } from '../jsx/types'
 
 interface SelectProps extends ListOptions {
-  /**TODO */
   onSelect?: (event: ArtificialEvent<List> & { value: any; index: number }) => void
   children: (SelectOption)[]
 }
@@ -31,7 +30,7 @@ export class Select extends Component<SelectProps> {
   _saveJSXChildrenProps = true
   render() {
     const childProps = getJSXChildrenProps(this)!
-    const items = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.children.join(' ')) //.flat()
+    const items = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.children.join(' ')) 
     const values = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.attrs.value || o.children.join(' '))
     return (
       <list
@@ -55,38 +54,7 @@ export class Select extends Component<SelectProps> {
               value: values[e.currentTarget.selected || 0]
             })
         }}
-        // onKeyPress={e=>{
-        //   if (e.key.name === 'up' || e.key.name === 'k') {
-        //     e.currentTarget.up();
-        //     e.currentTarget.screen.render();
-        //   } else if (e.key.name === 'down' || e.key.name === 'j') {
-        //     e.currentTarget.down();
-        //     e.currentTarget.screen.render();
-        //   }
-        //   else if(e.key.name==='enter'||e.key.name==='space'){
-        //     e.currentTarget.select(e.currentTarget.selected||0)
-        //     e.currentTarget.screen.render();
-        //   }
-        // }}
       />
     )
   }
 }
-// }
-
-// list.on('keypress', function(ch, key) {
-//   if (key.name === 'up' || key.name === 'k') {
-//     list.up();
-//     screen.render();
-//     return;
-//   } else if (key.name === 'down' || key.name === 'j') {
-//     list.down();
-//     screen.render();
-//     return;
-//   }
-// });
-
-// list.on('select', function(item, select) {
-//   list.setLabel(' ' + item.getText() + ' ');
-//   screen.render();
-// });
