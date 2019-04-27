@@ -6,26 +6,31 @@ import {
   AutoComplete,
   Box,
   Br,
+  Button,
   closeModal,
   Column,
   Columns,
   Component,
   debug,
   Div,
+  Element,
   isElement,
+  isMaximized,
   React,
   Row,
   Rows,
   Screen,
   Select,
   SelectOption,
+  setMaximized,
   showInModal,
   Strong,
   Tab,
   TabBody,
   TabLabel,
   TabPanel,
-  TextareaOptions
+  TextareaOptions,
+  cleanElement
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
@@ -46,7 +51,7 @@ enum Action {
 
 const focusableOpts: () => TextareaOptions = () => ({
   mouse: true,
-  keys: true,
+  // keys: true,
   focusable: true,
   clickable: true,
   input: true,
@@ -71,13 +76,19 @@ const focusableOpts: () => TextareaOptions = () => ({
 interface P {
   parent: Screen
 }
-export class App extends Component<P> {
+interface S{
+  cleanOutputBeforeExecute?: boolean
+}
+export class App extends Component<P, S> {
   outputEl: Box
   editor: IEditor
   logEl: Box
   editorContainer: Box
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
+  setState(s: Partial<S>){
+    this.state={...this.state, ...s}
+  }
   render() {
     setTimeout(() => {
       this.afterRender()
@@ -91,12 +102,21 @@ export class App extends Component<P> {
                 <box
                   width="100%"
                   height="100%"
-                  label="Core editor"
-                  border="line"
                   focusable={true}
-                  ref={React.createRef<Box>(c => (this.editorContainer = c))}
-                />
-                Code Editor
+                  ref={React.createRef<Box>(c => (this.editorContainer = c))}>
+                  <button
+                    {...focusableOpts()}
+                    top={0}
+                    height={3}
+                    width={'Maximize editor'.length + 6}
+                    label={undefined}
+                    right={0}
+                    content="Maximize editor"
+                    onPress={e => {
+                      this.toggleMaximized(this.editorContainer, e.currentTarget, 'editor')
+                    }}
+                  />
+                </box>
                 <Br />
               </Row>
               <Row height="40%">
@@ -118,9 +138,9 @@ export class App extends Component<P> {
                   content="Help"
                   onPress={e => this.action(Action.Help)}
                 />
-                <checkbox {...focusableOpts()} content="clear output before execute?" />
+                <checkbox {...focusableOpts()} content="clear output before execute?" onChange={e=>this.setState({cleanOutputBeforeExecute: e.value})} />
                 <Br />
-                <Select {...focusableOpts()} height={8} onSelect={e => this.setExample(e.value)}>
+                <Select border="line" label="Examples" {...focusableOpts()} height={8} onSelect={e => this.setExample(e.value)}>
                   {examples.map(e => (
                     <SelectOption>{e.name}</SelectOption>
                   ))}
@@ -136,7 +156,6 @@ export class App extends Component<P> {
                   onChange={e => this.action(e.value)}
                   options={enumKeys(Action)}
                 />
-                {/* <Br /> */}
               </Row>
               {}
             </Rows>
@@ -195,11 +214,19 @@ export class App extends Component<P> {
     )
   }
 
-  setExample(value: any): void {
-    const code = examples.find(e => e.name === value).code
+  toggleMaximized(container: Element, btn: Button, label?: string) {
+    setMaximized(container, !isMaximized(container), { auto: false })
+    btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
+    this.screen.render()
+  }
+
+  
+  setExample(exampleName: string): void {
+    const code = examples.find(e => e.name === exampleName).code
     this.editor.textBuf.setText(code)
     this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
     this.screen.render()
+    this.execute()
   }
 
   action(action: Action): void {
@@ -240,11 +267,14 @@ export class App extends Component<P> {
       )
     )
   }
-
+  
   execute(): void {
+    if(this.state.cleanOutputBeforeExecute){
+      cleanElement(this.outputEl)
+    }
     const _log = []
     const options = {
-      // DONT REMOVE: will be evaluated!
+      // DONT REMOVE this variable: will be evaluated!
       parent: this.outputEl,
       accursed,
       blessed,
@@ -255,9 +285,7 @@ export class App extends Component<P> {
     let error: any
     const text = this.editor.textBuf.getText()
     const code = `
-    (
-    ${text}
-    )(options)`
+    (${text})(options)`
     try {
       eval(code)
     } catch (ex) {
@@ -292,6 +320,8 @@ export class App extends Component<P> {
     this.editor.once('focus', e => {
       this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
     })
+    this.editor.setBack()
+    // this.editor.hide()
     this.editorContainer.screen.render()
   }
 }

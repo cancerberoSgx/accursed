@@ -1,5 +1,6 @@
-import { createScreen, debug, React } from '../../../src'
+import { createScreen, debug, React, Screen } from '../../../src'
 import { App } from './blessedEval3'
+import { isAttached } from '../../../src/blessed/waitFor';
 function main() {
   try {
     debug('starting')
@@ -15,8 +16,7 @@ function main() {
     //   screen.destroy()
     //   process.exit(0)
     // })
-    screen.key('C-right', k => screen.focusNext())
-    screen.key('C-left', k => screen.focusPrevious())
+    installFocusHandlers(screen);
     // main(screen)
     const app = React.render(<App parent={screen} />)
     // screen.append(app)
@@ -28,3 +28,24 @@ function main() {
   }
 }
 main()
+
+function installFocusHandlers(screen: Screen) {
+  screen.key('C-right', k => {
+    if (!screen.focused || !isAttached(screen.focused)) {
+      screen.rewindFocus();
+    }
+    else {
+      screen.focusNext();
+    }
+  });
+  screen.key('C-left', k => {
+    if (!screen.focused || !isAttached(screen.focused)) {
+      screen.rewindFocus();
+    }
+    else {
+    screen.focusPrevious();
+   }
+   });
+}
+
+

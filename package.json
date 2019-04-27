@@ -12,14 +12,15 @@
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "copy": "cp src/declarations/*.d.ts dist/src/declarations && rm -rf dist/src/index.d.ts && cp dist/src/index_publish.d.ts dist/src/index.d.ts",
-    "docs": "rm -rf docs && npm run docs-readme-toc && npm run docs-readme-toc && npm run docs-blessed-md && npm run docs-blessed && npm run docs-accursed-md && npm run docs-accursed",
+    "copy": "cp src/declarations/*.d.ts dist/src/declarations && rm -rf dist/src/index.d.ts",
+    "docs": "rm -rf docs && npm run docs-readme-toc   && npm run docs-blessed-md && npm run docs-blessed && npm run docs-accursed-md && npm run docs-accursed",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "docs-blessed-md": "D=docs/api/blessed-md && rm -rf $D; mkdir -p $D ; npx typedoc --includeDeclarations  --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --theme markdown --out $D --excludeExternals --mdDocusaurus",
     "docs-blessed": "D=docs/api/blessed &&  rm -rf $D; mkdir -p $D ; npx typedoc --includeDeclarations  --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --out $D --excludeExternals",
-    "docs-accursed-md": "D=docs/api/accursed-md && rm -rf $D; mkdir $D ; npx typedoc --includeDeclarations  --name accursed --toc --hideGenerator --ignoreCompilerErrors 'src/index_publish.ts' --theme markdown --out $D --excludeExternals",
-    "docs-accursed": "D=docs/api/accursed && rm -rf $D; mkdir -p $D ; npm run build && npx typedoc --options typedoc.ts  --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --out $D --excludeExternals",
-    "all": "npm run clean && npm run prettier && npm run build && npm test"
+    "docs-accursed-md": "D=docs/api/accursed-md && rm -rf $D; mkdir $D ; npx typedoc  --options typedoc.ts  --theme markdown --out $D",
+    "docs-accursed": "D=docs/api/accursed && rm -rf $D; mkdir -p $D ; npm run build && npx typedoc  --options typedoc.ts --out $D",
+    "all": "npm run clean && npm run prettier && npm run build && npm test",
+    "all-docs": "npm run all && npm run docs"
   },
   "author": "Sebastian Gurin",
   "license": "MIT",
@@ -46,9 +47,7 @@
     "ts-refactor": "0.0.2",
     "typedoc": "^0.14.2",
     "typedoc-plugin-markdown": "^1.2.0",
-    "typescript": "^3.4.5",
-    "xterm": "^3.12.2",
-    "window-size": "^1.1.1"
+    "typescript": "^3.4.5"
   },
   "keywords": [
     "Command line",

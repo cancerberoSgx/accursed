@@ -14,7 +14,6 @@ var screen = blessed.screen({
   // input: diff,
   smartCSR: true
 })
-// screen.output.rea
 
 function opts() {
   return {
@@ -32,22 +31,17 @@ var box = blessed.box({
   ...opts()
 })
 
-var size = require('window-size')
-
 let counter = 0
 function draw() {
   box.top = number(1, 10)
   box.left = number(1, 10)
-  box.height = number(5, size.height - 11)
-  box.width = number(5, size.width - 11)
+  box.height = number(5, screen.height - 11)
+  box.width = number(5, screen.width - 11)
   box.style.fg = color()
   box.style.bg = color()
   box.content = words(20).join(' ')
-  // box.once('render', ()=>{
-  // })
   screen.render()
   counter++
-  // setTimeout(draw, 0)
 }
 
 var panel = blessed.box({

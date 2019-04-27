@@ -127,3 +127,7 @@ export function filterAscendants<T extends Node = Node>(n: Node, p: ElementPredi
   })
   return a
 }
+
+export function cleanElement(e: Element){
+  e.children.forEach(e=>e.detach())
+}

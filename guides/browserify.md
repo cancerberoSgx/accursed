@@ -91,13 +91,22 @@ window.onload = function () {
 
 ```
 
+## Accursed API
+
+this library provides with a `createScreenForBrowser()`` function that accepts a ScreenOptions object and returns a Screen object compatible with browsers or node.js dependending on the current environment detected: 
+
+```js
+import {createScreenForBrowser} from 'accursed'
+...
+const screen = await createScreenForBrowser({ focusable: true, sendFocus: true })
+```
+
+
 ## Browserify
 
 ```sh
 browserify test.js --ignore-missing -o bundle.js
 ```
-
-### Notes
 
  * Perhaps you need to install "term.js"  `npm i term.js`
 

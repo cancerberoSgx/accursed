@@ -52,9 +52,9 @@ export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsx
    */
   protected setState(s: Partial<S>) {
     this.state = { ...this.state, ...s }
-    if (!this.dontRenderOnStateChange) {
-      this.blessedElement.render()
-    }
+    // if (!this.dontRenderOnStateChange) {
+    //   this.blessedElement.render()
+    // }
   }
 
   protected getElementData<T>(key: string): T {

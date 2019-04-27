@@ -328,14 +328,14 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `ListTable`
  * `TabPanel`
  * `<If>` conditions with markup - not so useful but interesting....
- * Button
- * ShowIf
- * Collapsible
- * Select
- * Columns
- * Accordion
- * Autocomplete
- * OptionsProvider
+ * `Button2`
+ * `ShowIf`
+ * `Collapsible`
+ * `Select`
+ * `Columns`
+ * `Accordion`
+ * `Autocomplete`
+ * `OptionsProvider`
 
 # Apps
  

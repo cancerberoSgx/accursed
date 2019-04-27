@@ -4,12 +4,14 @@ import { Element } from '../../../src'
 var Range = require('text-buffer/lib/range')
 let types
 export interface Range {}
-export interface IEditor extends EventEmitter {
+export interface IEditor extends Element {
   focus(): void
   indent(range: Range): void
   buffer: Element
-  render(): void
-  append(text: string, options?: TODO): TODO
+  // render(): void
+  // append(text: string, options?: TODO): TODO
+  // append(node: Node|string):void
+  // append(...args: any[]):any
   _updateCursor(): void
   _updateContent(): void
   setLanguageMode(opts: { getLanguageId: () => string }): void

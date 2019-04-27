@@ -1,15 +1,18 @@
 module.exports = {
-  src: [
-        './dist/src/index.d.ts',
-        // './node_modules/node-pty/typings/node-pty.d.ts'
-    ],
-  "mode": 'file',
+  // src: [
+    // './src/index.ts'
+    // './dist/src/index.d.ts',
+  // ],
+  // "mode": 'file',
+  excludeNotExported: true,
   'includeDeclarations': true,
-  'tsconfig': 'tsconfig.json',
+  'tsconfig': './tsconfig.json',
   'out': 'docs/api/accursed',
   'excludePrivate': true,
+  exclude: './spec/**',
   // 'excludeProtected': true,
   'excludeExternals': true,
   'readme': 'README.md',
-  'name': 'accorsed'
+  'name': 'accursed',
+  top: true, hideGenerator: true, ignoreCompileErrors: true,
 }

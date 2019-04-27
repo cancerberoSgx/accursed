@@ -1,4 +1,5 @@
 import { box, Box, button, Element, findDescendant, isElement, setElementData } from '..'
+import { findAscendant } from './node'
 import { getElementData } from './util'
 
 interface Options {
@@ -11,6 +12,11 @@ interface Options {
   auto?: boolean
 }
 
+/**
+ * Maximize given element by attaching it as first child of the screen and with full dimensions. It stores original parent and index as data.
+ *
+ * TODO: if auto: true, then if we are adding a button for restoring we should also add a button for maximize which we dont
+ */
 export function setMaximized(el: Element, maximized: boolean, options: Options = { auto: true }) {
   if (!el) {
     return
@@ -58,8 +64,17 @@ export function restoreMaximize(options: Options = { auto: true }) {
   setMaximized(target, false)
 }
 
+export function isMaximized(el: Element) {
+  return !!findAscendant(el, e => e === getBox())
+}
+
 let bo: Box
 function getBox() {
+  function restore() {
+    const target = getElementData<Element>(getBox(), 'maximize-target')
+    setMaximized(target, false)
+  }
+
   if (!bo) {
     bo = box({
       // parent: screen,
@@ -85,13 +100,8 @@ function getBox() {
     b.on('pressed', e => {
       restore()
     })
-    box({ parent: bo, name: 'maximize-el-container', width: '100%', height: '100%', top: 1, left: 0 })
+    box({ parent: bo, name: 'maximize-el-container', width: '100%', height: '100%', top: 0, left: 0 })
   }
   return bo
-}
-function restore() {
-  // console.log('pressed!!!asdas');
-  const target = getElementData<Element>(getBox(), 'maximize-target')
-  setMaximized(target, false)
 }
 // TODO: minimize ?

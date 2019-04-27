@@ -9,5 +9,3 @@ export * from './jsx-components'
 export * from './jsx/types'
 export { createScreen2, createScreenForBrowser } from './util/browser'
 export { log as debug } from './util/logger'
-
-// export * from './declarations/blessed'

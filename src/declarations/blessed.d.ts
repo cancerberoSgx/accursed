@@ -228,7 +228,9 @@ declare class BlessedProgram extends EventEmitter {
   options: IBlessedProgramOptions
   input: Readable
   output: Writable
-  /** zero-based indexes for col, row values */
+  /**
+   * Is zero-based indexes for col, row values.
+   */
   zero: boolean
   useBuffer: boolean
   x: number
@@ -252,7 +254,9 @@ declare class BlessedProgram extends EventEmitter {
   isAlt: boolean
 
   constructor(options?: IBlessedProgramOptions)
-  /** writes arguments to [[log]] file passed in options*/
+  /**
+   * Writes arguments to [[log]] file passed in options.
+   */
   log(...args: any[]): boolean
   debug(s: string): boolean
   setupDump(): void
