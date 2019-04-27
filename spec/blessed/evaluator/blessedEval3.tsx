@@ -1,3 +1,4 @@
+import * as blessed from 'blessed'
 import { enumKeys } from 'misc-utils-of-mine-generic'
 import { inspect } from 'util'
 import * as accursed from '../../../src'
@@ -26,7 +27,6 @@ import {
   TabPanel,
   TextareaOptions
 } from '../../../src'
-import * as blessed from 'blessed'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
 import { IEditor, Range } from './types'
@@ -118,13 +118,13 @@ export class App extends Component<P> {
                   content="Help"
                   onPress={e => this.action(Action.Help)}
                 />
-                <checkbox                 {...focusableOpts()} content="clear output before execute?" />
+                <checkbox {...focusableOpts()} content="clear output before execute?" />
                 <Br />
                 <Select {...focusableOpts()} height={8} onSelect={e => this.setExample(e.value)}>
                   {examples.map(e => (
                     <SelectOption>{e.name}</SelectOption>
-                    ))}
-                    <SelectOption>Dummy</SelectOption>
+                  ))}
+                  <SelectOption>Dummy</SelectOption>
                   {}
                 </Select>
                 <Br />
@@ -145,8 +145,8 @@ export class App extends Component<P> {
             <Rows>
               <Row height="70%">
                 <box
-                {...focusableOpts()}
-                scrollable={true}
+                  {...focusableOpts()}
+                  scrollable={true}
                   width="100%"
                   height="100%"
                   label="Output"

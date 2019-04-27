@@ -1,7 +1,7 @@
-  export const examples = [
-    {
-      name: 'simple1',
-      code: `
+export const examples = [
+  {
+    name: 'simple1',
+    code: `
   function simple1(options) {
     options.log('starting')
     options.parent.children.forEach(c => {
@@ -30,10 +30,10 @@
     options.parent.screen.render()
   }
       `.trim()
-    },
-    {
-      name: 'fileManager1',
-      code: `   
+  },
+  {
+    name: 'fileManager1',
+    code: `   
       function simple1(options) {
         options.log('starting')
         const fm = options.accursed.filemanager({
@@ -97,9 +97,10 @@
         options.parent.screen.render()
       }  
       `
-    },
-    {name: 'allColors', 
-  code: `
+  },
+  {
+    name: 'allColors',
+    code: `
 
   function allColors(options) {
     var dx = 9;
@@ -167,5 +168,6 @@
       return '#' + padZero(r) + padZero(g) + padZero(b);
     }
   }
-  `}
-  ]
+  `
+  }
+]

@@ -1,9 +1,7 @@
 import * as blessed from 'blessed'
-import { box, Box, Br, Div, isElement, React, Screen, showInModal, installExitKeys, createScreen } from '../../../../src'
-
+import { box, Box, createScreen, installExitKeys } from '../../../../src'
 
 allColors()
-
 
 export function allColors() {
   var screen = createScreen({
