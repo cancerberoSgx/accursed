@@ -26,6 +26,7 @@ import {
   TabPanel,
   TextareaOptions
 } from '../../../src'
+import * as blessed from 'blessed'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
 import { IEditor, Range } from './types'
@@ -117,14 +118,17 @@ export class App extends Component<P> {
                   content="Help"
                   onPress={e => this.action(Action.Help)}
                 />
-                <checkbox content="clear output before execute?" />
+                <checkbox                 {...focusableOpts()} content="clear output before execute?" />
                 <Br />
-                <Select {...focusableOpts()} height={4} onSelect={e => this.setExample(e.value)}>
+                <Select {...focusableOpts()} height={8} onSelect={e => this.setExample(e.value)}>
                   {examples.map(e => (
                     <SelectOption>{e.name}</SelectOption>
-                  ))}
+                    ))}
+                    <SelectOption>Dummy</SelectOption>
                   {}
                 </Select>
+                <Br />
+                <Br />
                 <Br />
                 <AutoComplete
                   height={5}
@@ -132,7 +136,7 @@ export class App extends Component<P> {
                   onChange={e => this.action(e.value)}
                   options={enumKeys(Action)}
                 />
-                <Br />
+                {/* <Br /> */}
               </Row>
               {}
             </Rows>
@@ -141,6 +145,8 @@ export class App extends Component<P> {
             <Rows>
               <Row height="70%">
                 <box
+                {...focusableOpts()}
+                scrollable={true}
                   width="100%"
                   height="100%"
                   label="Output"
@@ -241,6 +247,7 @@ export class App extends Component<P> {
       // DONT REMOVE: will be evaluated!
       parent: this.outputEl,
       accursed,
+      blessed,
       log(...args: any[]) {
         _log.push(...args.map(a => inspect(a)))
       }
