@@ -1,6 +1,6 @@
 import * as blessed from 'blessed'
-var Point = require('text-buffer/lib/point');
-var Range = require('text-buffer/lib/range');
+var Point = require('text-buffer/lib/point')
+var Range = require('text-buffer/lib/range')
 
 const Editor = require('editor-widget')
 
@@ -56,17 +56,15 @@ screen.render()
 // })
 
 setTimeout(() => {
-//   editor.focus()
+  //   editor.focus()
 
-screen.render()
-this.editor.textBuf.setText(`function (){
+  screen.render()
+  this.editor.textBuf.setText(`function (){
   return 1
 }`)
-this.editor.language('js')
-this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
+  this.editor.language('js')
+  this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
 
   this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-screen.render()
-
-}, 1000);
-
+  screen.render()
+}, 1000)

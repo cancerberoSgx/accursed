@@ -98,6 +98,4 @@ function simple1(options) {
     }  
     `
   }
-];
-
-
+]

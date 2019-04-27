@@ -200,12 +200,10 @@
 //   }
 // ]
 
-
-
 // function start() {
 //   try {
 //     var screen = createScreen({
-//       // sendFocus: true, 
+//       // sendFocus: true,
 //       smartCSR: true,
 //       title: 'editor-widget example'
 //       // , focusable: true,
@@ -230,5 +228,3 @@
 //   }
 // }
 // start()
-
-

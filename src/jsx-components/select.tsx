@@ -30,7 +30,7 @@ export class Select extends Component<SelectProps> {
   _saveJSXChildrenProps = true
   render() {
     const childProps = getJSXChildrenProps(this)!
-    const items = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.children.join(' ')) 
+    const items = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.children.join(' '))
     const values = childProps.filter(e => e.tagName === 'SelectOption')!.map(o => o.attrs.value || o.children.join(' '))
     return (
       <list
