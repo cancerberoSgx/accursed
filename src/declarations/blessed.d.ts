@@ -1821,22 +1821,50 @@ export namespace Widgets {
     | 'click'
 
   type NodeGenericEventType =
+    | 
     /** Received on screen resize. */
-    | 'resize'
-    /** Received before render. */
-    | 'prerender'
+    'resize'
+    | 
+    /** 
+     * Received before render. 
+     */
+    
+    'prerender'
+    | 
     /** Received on render. */
-    | 'render'
-    /** Received when the screen is destroyed (only useful when using multiple screens). */
-    | 'destroy'
-    /** Received when the element is moved. */
-    | 'move'
-    /** Received when element is shown. */
-    | 'show'
-    /** Received when element becomes hidden. */
-    | 'hide'
-    | 'set content'
-    | 'parsed content'
+    'render'
+    | 
+    /**
+     * Received when the screen is destroyed (only useful when using multiple screens).
+     */
+    'destroy'
+    
+    |
+    /** 
+     * Received when the element is moved. For example when [[rtop]] or [[position]] properties are updated. 
+     */
+     'move'
+    | 
+    /** 
+     * Received when element is shown. 
+     */
+
+    'show'
+    | 
+    /** 
+     * Received when element becomes hidden. 
+     */
+    'hide'
+    | 
+    /** 
+     * Received when element [[content]] is updated.
+     */
+    'set content'
+    |
+     /** 
+     * Received when element [[content]] is parsed.
+     */
+    'parsed content'
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
@@ -1861,10 +1889,14 @@ export namespace Widgets {
     /** Received on mouse events. */
     on(event: NodeMouseEventType, callback: (arg: Events.IMouseEventArg) => void): this
 
-    /** Received on key events. */
+    /** 
+     * Received on key events. 
+    */
     on(event: 'keypress', callback: KeyEventListener): this
     on(event: NodeScreenEventType, callback: (arg: Screen) => void): this
-    /** Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). */
+    /** 
+     * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). 
+     */
     on(event: 'warning', callback: (text: string) => void): this
     on(event: NodeGenericEventType, callback: (arg: Events.INodeGenericEventArg) => void): this
   }
@@ -2887,28 +2919,44 @@ export namespace Widgets {
      */
     draggable: boolean
 
-    itop: Types.TTopLeft
-    ileft: Types.TTopLeft
-    iheight: Types.TPosition
-    iwidth: Types.TPosition
+    /**
+     * Calculated top coordinate taking into account padding and bodeer. 
+     */
+    readonly itop: number
+    /**
+     * Calculated left coordinate taking into account padding and bodeer. 
+     */
+    readonly ileft: number
+    /**
+     * Calculated height taking into account padding and bodeer. 
+     */
+    readonly iheight: number
+    /**
+     * Calculated width taking into account padding and bodeer. 
+     */
+    readonly iwidth: number
 
     /**
-     * Calculated relative top offset.
+     * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
      */
     rtop: Types.TTopLeft
 
     /**
-     * Calculated relative left offset.
+     * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
      */
     rleft: Types.TTopLeft
 
-    /**
-     * Calculated relative right offset.
+ /**
+     * Calculated relative bottom offset. 
+     * 
+     * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
      */
     rright: Types.TPosition
 
     /**
-     * Calculated relative bottom offset.
+     * Calculated relative bottom offset. 
+     * 
+     * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
      */
     rbottom: Types.TPosition
 
@@ -2952,7 +3000,12 @@ export namespace Widgets {
     focus(): void
 
     /**
-     * @internal parses given content string with no tags before rendering. Removes / transform characters that break the output . For example, double-width chars will eat the next char after render in this case it creates a blank character after it so it doesn't eat the real next char.
+     * Parses given content string with no tags before rendering. Removes / transform characters that break the output. 
+     * 
+     * For example, double-width chars will eat the next char after render in this case it creates a blank character 
+     * after it so it doesn't eat the real next char.
+     * 
+     * @internal
      */
     parseContent(noTags: string): boolean
 
