@@ -1,9 +1,9 @@
 import { Component, Div, Element, isElement, React, replaceChildren, Screen } from 'accursed'
 import { Categories } from './categories'
+import { setDataOnlyEmojis } from './data/data'
 import { inputOptions } from './elementOptions'
 import { Home } from './home'
 import { Search } from './search'
-import { setDataOnlyEmojis } from './data/data';
 
 interface P {
   screen: Screen

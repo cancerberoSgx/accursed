@@ -1,4 +1,4 @@
-import { listtable, Node, prompt, createScreen } from 'accursed'
+import { createScreen, listtable, Node, prompt } from 'accursed'
 
 function charCodeHexString(s: string) {
   return s

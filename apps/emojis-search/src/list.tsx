@@ -1,39 +1,55 @@
-import { Component, Div, React, showInModal, Element, isElement, replaceChildren, Br, Button2 } from 'accursed'
+import { Button2, Component, Div, Element, isElement, React, replaceChildren, showInModal } from 'accursed'
+import { asArray } from 'misc-utils-of-mine-generic'
 import { EmojiDefinition, getCategoryEmojis, getEmojiDefinitions } from './data/data'
 import { inputOptions, scrollableOptions } from './elementOptions'
-import {asArray} from 'misc-utils-of-mine-generic'
 
 export class List extends Component<{
   category?: string
   emojis?: (EmojiDefinition)[]
 }> {
-  private static lastListMode: 'compact'|'listTable'='listTable'
+  private static lastListMode: 'compact' | 'listTable' = 'listTable'
   render() {
     return (
       <Div height="100%">
-        <checkbox {...inputOptions()} checked={List.lastListMode === 'listTable' ? false : true} content="Compact View" onChange={e => {
-            this.replaceDescendantChildren("list-container", e.value ? this.compact() : this.listtable())
-            List.lastListMode = e.value? 'compact' : 'listTable'
-        }} />
-        <Button2 {...inputOptions()} onClick={e=>{
-          e.currentTarget.screen.readEditor({value: JSON.stringify(this.getListTableData(), null, 2)}, (err, data)=>{
-          })
-          // showInModal(e.currentTarget.screen, React.render(<textarea  {...inputOptions()}  width="100%" height="100%" value={JSON.stringify(this.getListTableData(), null, 2)} focused={true} keyable={true} keys={true} onceRender={e=>{e.currentTarget.focus(); e.currentTarget.screen.render()}}></textarea>))
-        }}>Save</Button2>
-        <Div name="list-container">{List.lastListMode === 'listTable' ? this.listtable() : this.compact() }        </Div>
+        <checkbox
+          {...inputOptions()}
+          checked={List.lastListMode === 'listTable' ? false : true}
+          content="Compact View"
+          onChange={e => {
+            this.replaceDescendantChildren('list-container', e.value ? this.compact() : this.listtable())
+            List.lastListMode = e.value ? 'compact' : 'listTable'
+          }}
+        />
+        <Button2
+          {...inputOptions()}
+          onClick={e => {
+            e.currentTarget.screen.readEditor(
+              { value: JSON.stringify(this.getListTableData(), null, 2) },
+              (err, data) => {}
+            )
+            // showInModal(e.currentTarget.screen, React.render(<textarea  {...inputOptions()}  width="100%" height="100%" value={JSON.stringify(this.getListTableData(), null, 2)} focused={true} keyable={true} keys={true} onceRender={e=>{e.currentTarget.focus(); e.currentTarget.screen.render()}}></textarea>))
+          }}>
+          Save
+        </Button2>
+        <Div name="list-container">{List.lastListMode === 'listTable' ? this.listtable() : this.compact()} </Div>
       </Div>
     )
   }
   // getDescendantNamed
-  replaceDescendantChildren(oldChildNameOrElement: string|Element, newChildren: (Element|JSX.Element)|(Element|JSX.Element)[]): any {
-    const newElements = asArray(newChildren).map(c=> isElement(c) ? c:  React.render(c))
-    const targetDescendant = isElement(oldChildNameOrElement) ? oldChildNameOrElement : this.findDescendant(d=>isElement(d) && d.name===oldChildNameOrElement)
-    if(newElements && targetDescendant){
-      replaceChildren(targetDescendant, newElements);
+  replaceDescendantChildren(
+    oldChildNameOrElement: string | Element,
+    newChildren: (Element | JSX.Element) | (Element | JSX.Element)[]
+  ): any {
+    const newElements = asArray(newChildren).map(c => (isElement(c) ? c : React.render(c)))
+    const targetDescendant = isElement(oldChildNameOrElement)
+      ? oldChildNameOrElement
+      : this.findDescendant(d => isElement(d) && d.name === oldChildNameOrElement)
+    if (newElements && targetDescendant) {
+      replaceChildren(targetDescendant, newElements)
       // targetDescendant.replaceChildren(targetDescendant)
     }
     // throw new Error('Method not implemented.');
-  } 
+  }
   private listtable() {
     return (
       <listtable
