@@ -1,22 +1,30 @@
 import * as blessed from 'blessed'
 
 var screen = blessed.screen({
-  dump: __dirname + '/logs/termblessed.log',
   smartCSR: true,
   warnings: true
+})
+
+screen.key('C-q', function() {
+  // NOTE:
+  // not necessary since screen.destroy causes terminal.term to be destroyed
+  // (screen2's input and output are no longer readable/writable)
+  // screen2.destroy();
+  screen.destroy()
+  process.exit(0)
 })
 
 var terminal = blessed.terminal({
   parent: screen,
   // cursor: 'line',
-  cursorBlink: true,
+  // cursorBlink: true,
   screenKeys: false,
   top: 'center',
   left: 'center',
   width: '90%',
   height: '90%',
   border: 'line',
-  handler: function() {},
+  // handler: function() {},
   style: {
     fg: 'default',
     bg: 'default',
@@ -30,33 +38,5 @@ var terminal = blessed.terminal({
 
 terminal.focus()
 
-var term = terminal.term
-
-var screen2 = blessed.screen({
-  // dump: __dirname + '/logs/termblessed2.log',
-  smartCSR: true,
-  warnings: true,
-  input: term,
-  output: term
-})
-
-var box1 = blessed.box({
-  parent: screen2,
-  top: 'center',
-  left: 'center',
-  width: 20,
-  height: 10,
-  border: 'line',
-  content: 'Hello world'
-})
-
-screen.key('C-q', function() {
-  // NOTE:
-  // not necessary since screen.destroy causes terminal.term to be destroyed
-  // (screen2's input and output are no longer readable/writable)
-  // screen2.destroy();
-  return screen.destroy()
-})
-
-screen2.render()
+terminal.focus()
 screen.render()

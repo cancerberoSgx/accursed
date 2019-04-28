@@ -12,7 +12,7 @@
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "copy": "cp src/declarations/*.d.ts dist/src/declarations && rm -rf dist/src/index.d.ts",
+    "copy": "cp src/declarations/*.d.ts dist/src/declarations",
     "docs": "rm -rf docs && npm run docs-readme-toc   && npm run docs-blessed-md && npm run docs-blessed && npm run docs-accursed-md && npm run docs-accursed",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "docs-blessed-md": "D=docs/api/blessed-md && rm -rf $D; mkdir -p $D ; npx typedoc --includeDeclarations  --name blessed --readme none --toc --hideGenerator --ignoreCompilerErrors 'src/declarations/blessed.d.ts' --theme markdown --out $D --excludeExternals --mdDocusaurus",
@@ -27,7 +27,8 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
-    "misc-utils-of-mine-generic": "0.0.16"
+    "misc-utils-of-mine-generic": "0.0.16",
+    "pty.js": "file:../pty.js"
   },
   "devDependencies": {
     "google-material-color-palette-json": "^2.0.1",

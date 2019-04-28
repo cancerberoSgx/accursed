@@ -52,18 +52,16 @@ Example:
 it('should show suggestions on focus and enter', async done => {
   // enter in input mode by focusing with a tab and pressing enter:
   screen.emit('key tab')
-  screen.focused.emit('keypress', null, { name: 'enter' })
-  
-  expect(printElement(screen.focused)).toContain('afghanistan')
-  expect(printElement(screen.focused)).not.toContain('brazil')
+  const input : Textarea = screen.focused as Textarea
+  input.emit('keypress', null, { name: 'enter' })
+  expect(printElement(el)).toContain('afghanistan')
+  expect(printElement(el)).not.toContain('brazil')
 
-  // when pressing enter it loose input so we call:
-  screen.focused.input(() => { })
-  await sleep(200)
-  screen.focused.emit('keypress', 'z', { name: 'z' })
-  screen.focused.emit('keypress', null, { name: 'enter' })
-  expect(printElement(screen.focused)).not.toContain('afghanistan')
-  expect(printElement(screen.focused)).toContain('brazil')
+  await sleep(100)// we need to wait . TODO: wait for? or some internal event?      
+  input.emit('keypress', 'z', { name: 'z' })
+  input.emit('keypress', null, { name: 'enter' })
+  expect(printElement(el)).not.toContain('afghanistan')
+  expect(printElement(el)).toContain('brazil')
   done()
 })
 ```

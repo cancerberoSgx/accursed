@@ -3036,7 +3036,9 @@ export namespace Widgets {
     /**
      * Enable dragging of the element.
      */
-    enableDrag(): void
+    enableDrag(cb: (e: Widgets.Events.IMouseEventArg) => any): void
+
+    kill(): any
 
     /**
      * Disable dragging of the element.
@@ -4338,6 +4340,7 @@ export namespace Widgets {
      */
     handler?(userInput: Buffer): void
 
+    term?: string
     /**
      * name of shell. $SHELL by default.
      */
@@ -4824,7 +4827,7 @@ interface Helpers {
   /**
    * Strip text of tags and SGR sequences.
    */
-  stripTags(text: string): string 
+  stripTags(text: string): string
   // cleanTacgs(text) - Strip text of tags, SGR escape code, and leading/trailing whitespace.
   // dropUniode(text) - Drop text of any >U+FFFF characters.
 }

@@ -10,7 +10,7 @@
     "rootDir": ".",
     "declaration": true,
     "strict": true,
-    "jsx": "React",
+    "jsx": "react",
     "skipLibCheck": true,
     "baseUrl": ".",
        "paths": {

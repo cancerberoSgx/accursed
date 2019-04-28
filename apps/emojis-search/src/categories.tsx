@@ -10,8 +10,10 @@ import {
   React,
   replaceChildren,
   input,
-  Columns,
-  Column
+  Rows,
+  Row,
+  Column,
+  Columns
 } from 'accursed'
 import { getCategoryNames } from './data/data'
 import { scrollableOptions, inputOptions } from './elementOptions'
@@ -24,14 +26,16 @@ export class Categories extends Component<{
   render() {
     return (
       <Div>
-        <Columns height={7}>
-        <Column>
+        <Rows >
+        <Row height="30%">
         Choose a category, filter them if there are too many, select character in the table to see its details. Switch for a compat view or click "Save" to open the results in  an editor. 
-        </Column>
-        <Column>
+        {/* 
+        <Row> */}
+        <Columns>
+        <Column width="40%">
         <textbox
           {...inputOptions()}
-          width="40%"
+          width="100%"
           padding={1}
           label="Filter Categories"
           height={5}
@@ -47,23 +51,27 @@ export class Categories extends Component<{
           ]}
         />
         </Column>
-        {}
-        </Columns>
-       
-        <Br />
+        <Column width="60%">
         <list
         ref={this.listRef}
           // padding={1}
           {...scrollableOptions()}
-          height={'20%'}
+          height={'60%'}
           items={this.getCategoryNames()}
-          // on={['select item', (e:Element, index:number)=>this.selected(e)]}
           onSelect={e => this.selected(e)}
-        />
-        <Br />
-        <Div name="list-container" height="70%">
+        /></Column>{}
+        </Columns>{}
+       
+      
+       </Row>
+       <Row height="70%">
+        <Div name="list-container" top={0} height="100%" width="100%"
+        >
           {this.props.category && <List category={this.props.category} />}
         </Div>
+       </Row>{}
+       </Rows>
+
       </Div>
     )
   }

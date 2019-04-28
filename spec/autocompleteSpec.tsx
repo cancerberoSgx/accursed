@@ -1,7 +1,18 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { AutoComplete, createScreen, debug, helpers, Div, installExitKeys, React, Screen, Element, cleanNode, printElement } from '../src'
+import {
+  AutoComplete,
+  cleanNode,
+  createScreen,
+  Div,
+  Element,
+  installExitKeys,
+  printElement,
+  React,
+  Screen,
+  Textarea
+} from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { sleep } from './blessedTestUtil';
+import { sleep } from './blessedTestUtil'
 
 describe('autoComplete', () => {
   let screen: Screen
@@ -62,7 +73,6 @@ describe('autoComplete', () => {
     done()
   })
 
-
   describe('keys', () => {
     let component: AutoComplete
     let el: Element
@@ -85,21 +95,74 @@ describe('autoComplete', () => {
     })
     it('should show suggestions on focus and enter', async done => {
       screen.emit('key tab')
-      component.input.emit('keypress', null, { name: 'enter' })
+      const input: Textarea = screen.focused as Textarea
+      input.emit('keypress', null, { name: 'enter' })
       expect(printElement(el)).toContain('afghanistan')
       expect(printElement(el)).not.toContain('brazil')
 
-      // when pressing enter it loose input so we call:
-      component.input.input(() => { })
-      await sleep(200)
-      component.input.emit('keypress', 'z', { name: 'z' })
-      component.input.emit('keypress', null, { name: 'enter' })
+      await sleep(100) // we need to wait . TODO: wait for? or some internal event?
+      input.emit('keypress', 'z', { name: 'z' })
+      input.emit('keypress', null, { name: 'enter' })
       expect(printElement(el)).not.toContain('afghanistan')
       expect(printElement(el)).toContain('brazil')
       done()
     })
   })
-
 })
 
-const countries = () => ["Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and/or Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic"]
+const countries = () => [
+  'Afghanistan',
+  'Albania',
+  'Algeria',
+  'American Samoa',
+  'Andorra',
+  'Angola',
+  'Anguilla',
+  'Antarctica',
+  'Antigua and/or Barbuda',
+  'Argentina',
+  'Armenia',
+  'Aruba',
+  'Australia',
+  'Austria',
+  'Azerbaijan',
+  'Bahamas',
+  'Bahrain',
+  'Bangladesh',
+  'Barbados',
+  'Belarus',
+  'Belgium',
+  'Belize',
+  'Benin',
+  'Bermuda',
+  'Bhutan',
+  'Bolivia',
+  'Bosnia and Herzegovina',
+  'Botswana',
+  'Bouvet Island',
+  'Brazil',
+  'British Indian Ocean Territory',
+  'Brunei Darussalam',
+  'Bulgaria',
+  'Burkina Faso',
+  'Burundi',
+  'Cambodia',
+  'Cameroon',
+  'Cape Verde',
+  'Cayman Islands',
+  'Central African Republic',
+  'Chad',
+  'Chile',
+  'China',
+  'Christmas Island',
+  'Cocos (Keeling) Islands',
+  'Colombia',
+  'Comoros',
+  'Congo',
+  'Cook Islands',
+  'Costa Rica',
+  'Croatia (Hrvatska)',
+  'Cuba',
+  'Cyprus',
+  'Czech Republic'
+]

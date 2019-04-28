@@ -1,5 +1,5 @@
-import { Element, isElement, Node , helpers} from '..'
-import { strip } from '../util/misc';
+import { Element, helpers, isElement, Node } from '..'
+import { strip } from '../util/misc'
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */
@@ -75,12 +75,12 @@ export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredica
 }
 //TODO: ancestors, direct children and siblings. nice to have getFirstDescendantOfType, etc
 
-/** 
- * Returns the text content of given node and all its descendants, in order. 
- * By default stripped from ansi escape chars and trimmed, and separated by space, 
- * but is configurable through options.  
- * 
- * Notice that content can be hidden because scroll. If you need to extract only the visible 
+/**
+ * Returns the text content of given node and all its descendants, in order.
+ * By default stripped from ansi escape chars and trimmed, and separated by space,
+ * but is configurable through options.
+ *
+ * Notice that content can be hidden because scroll. If you need to extract only the visible
  * text then use [[printElement]]
  * */
 export function getContent(

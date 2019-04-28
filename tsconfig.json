@@ -16,7 +16,7 @@
       "blessed": ["src/declarations/blessed"], 
       // "src/declarations/blessed":  ["blessed"] 
     },
-    "jsx": "React",
+    "jsx": "react",
     // "skipLibCheck": true
   },
   "include": [
