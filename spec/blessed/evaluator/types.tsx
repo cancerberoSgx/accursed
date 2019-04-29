@@ -2,8 +2,9 @@ import { EventEmitter } from 'events'
 import { TODO } from 'misc-utils-of-mine-typescript'
 import { Element } from '../../../src'
 var Range = require('text-buffer/lib/range')
-let types
+
 export interface Range {}
+
 export interface IEditor extends Element {
   focus(): void
   indent(range: Range): void
@@ -26,7 +27,8 @@ export interface IEditor extends Element {
   language(s: string): void
   selection: TODO
 }
-interface TextBuffer extends EventEmitter {
+
+export interface TextBuffer extends EventEmitter {
   emitDidChangeTextEvent(...args: TODO): TODO
   onDidChange(l: (...args: any[])=>TODO ):void
   onDidStopChanging(l: ()=>TODO ):void

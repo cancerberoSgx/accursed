@@ -45,3 +45,12 @@ this.editor.once('focus', e => {
 ## solution 1
 
  * don't use tab for change focus, use ctrl-right and ctrl-left.
+
+
+## listen for changes : 
+
+    // any change: 
+    this.editor.textBuf.onDidChange(  e=>{debug('onDidChange', e)})
+
+    // this is throttled: (better in most occasions) 
+    this.editor.textBuf.onDidStopChanging(()=>{this.dispatch(Action.Execute)})

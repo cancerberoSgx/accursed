@@ -13,14 +13,15 @@ import {
   Screen,
   setMaximized,
   TabPanel,
-  TextareaOptions
+  TextareaOptions,
+  ElementOptions
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
 import { IEditor, Range } from './types'
 import { focusableOpts } from './app';
 import { throttle } from 'misc-utils-of-mine-generic';
-const Editor = require('editor-widget')
+const Editor = require('editor-widget') 
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
 
@@ -57,8 +58,6 @@ export abstract class BaseApp extends Component<P, S> {
     const code = examples.find(e => e.name === exampleName).code
     this.editor.textBuf.setText(code)
     this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-    // this.dispatch(Action.Execute)
-    // this.execute()
   }
 
   dispatch(action: Action): void {
@@ -86,11 +85,11 @@ export abstract class BaseApp extends Component<P, S> {
       log(...args: any[]) {
         _log.push(...args.map(a => inspect(a)))
       },
-      updateLog: throttle(()=>{
-        this.logEl.content = _log.join('\n')
-          this.outputPanel.selectTab(0)
-          this.logEl.setScrollPerc(100)
-      }, 2000, {trailing: true})
+      // updateLog: throttle(()=>{
+      //   this.logEl.content = _log.join('\n')
+      //     this.outputPanel.selectTab(0)
+      //     this.logEl.setScrollPerc(100)
+      // }, 2000, {trailing: true})
     }
     let error: any
     const text = this.editor.textBuf.getText()
@@ -103,9 +102,7 @@ export abstract class BaseApp extends Component<P, S> {
       debug(ex)
       error = ex
     }
-    // if(result instanceof Promise){
       await result 
-    // }
     this.logEl.content = _log.join('\n')
     if (error) {
       this.errorsEl.content = inspect(error, error.stack)
@@ -119,9 +116,9 @@ export abstract class BaseApp extends Component<P, S> {
 
   async afterRender() {
     await waitFor(() => this.editorContainer)
-    const executeButton = this.findDescendant(b => isElement(b) && b.type === 'button' && b.name === 'execute-button')
-    executeButton.focus()
-    this.editor = new Editor({
+    // const executeButton = this.findDescendant(b => isElement(b) && b.type === 'button' && b.name === 'execute-button')
+    // executeButton.focus()
+    this.editor =     this.buildEditor({
       parent: this.editorContainer,
       ...focusableOpts(),
       top: 0,
@@ -129,18 +126,30 @@ export abstract class BaseApp extends Component<P, S> {
       width: '100%',
       height: '100%',
       keys: true,
-      keyable: true
+      keyable: true,
+      value: examples[0].code
     })
-    this.editor.textBuf.setText(examples[0].code)
-    this.editor.language('js')
-    this.editor.once('focus', e => {
-      this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-    })
-    // this.editor.textBuf.onDidChange(  e=>{debug('onDidChange', e)})
+    // this.editorContainer, examples[0].code);
     this.editor.textBuf.onDidStopChanging(()=>{this.dispatch(Action.Execute)})
-    // this.editor.buffer.on('set content', e=>{debug('set content', e)})
     this.editor.setBack()
     this.screen.render()
+  }
+
+  private buildEditor(options: TextareaOptions) {
+    const editor = new Editor(options)
+   editor.textBuf.setText(options.value||'');
+   editor.language('js');
+  //  editor.once('focus', e => {
+  //    editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)));
+  //   });
+    setTimeout(() => {
+    //  editor.focus();
+      // this.screen.emit('key C-left')
+      // this.screen.emit('key C-left')
+      // this.screen.emit('key enter');
+      editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)));
+    }, 100);
+    return editor
   }
 }
 

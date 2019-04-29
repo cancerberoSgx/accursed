@@ -179,17 +179,12 @@ export class App extends BaseApp {
                   <Tab active={true}>
                     <TabLabel {...focusableOpts()}>Log</TabLabel>
                     <TabBody
-                    //  {...focusableOpts()}
-                    // width="100%"
-                        // height="100%"
-                        // scrollable={true} 
                         >
                       <box
                         {...focusableOpts()}
                         width="100%"
                         scrollable={true}
                         scrollbar={{inverse: true}}
-                        // height="100%"
                         label="Log"
                         border="line"
                         ref={React.createRef<Box>(c => (this.logEl = c))}
@@ -200,17 +195,12 @@ export class App extends BaseApp {
                   <Tab>
                     <TabLabel {...focusableOpts()}>Errors</TabLabel>
                     <TabBody 
-                    // {...focusableOpts()}
-                    // width="100%"
-                        // height="100%"
-                        // scrollable={true} 
                         >
                       <box
                         {...focusableOpts()}
                         width="100%"
                         keyable={true}
                         scrollable={true} 
-                        // height="100%"
                         label="Errors"
                         border="line"
                         ref={React.createRef<Box>(c => (this.errorsEl = c))}
