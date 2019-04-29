@@ -1,6 +1,6 @@
 import { enumKeys } from 'misc-utils-of-mine-generic';
 import { AutoComplete, Box, Br, closeModal, Column, Columns, Div, React, Row, Rows, Select, SelectOption, showInModal, Strong, Tab, TabBody, TabLabel, TabPanel, TextareaOptions } from '../../../src';
-import { Action, BaseApp, toggleMaximized } from './baseApp';
+import { Action, BaseApp } from './baseApp';
 import { examples } from './examples';
 
 export const focusableOpts: () => TextareaOptions = () => ({
@@ -74,17 +74,21 @@ export class App extends BaseApp {
       this.afterRender()
     }, 10)
     return (
-      <Div parent={this.props.parent}>
-        <Columns>
+      <Div parent={this.props.parent} name="root-container">
+        <Columns name="root-columns" >
           <Column width="50%">
             <Rows>
               <Row height="60%">
-                <box
+              <box width="100%" height="100%">
+            
+                  <box
                   width="100%"
                   height="100%"
                   focusable={true}
                   ref={React.createRef<Box>(c => (this.editorContainer = c))}>
-                  <button
+                 
+                </box> 
+                <button
                     {...focusableOpts()}
                     top={0}
                     height={3}
@@ -93,10 +97,11 @@ export class App extends BaseApp {
                     right={0}
                     content="Maximize editor"
                     onPress={e => {
-                      toggleMaximized(this.editorContainer, e.currentTarget, 'editor')
+                      this.toggleMaximized(this.editorContainer.parent as any, e.currentTarget, 'editor')
                     }}
                   />
-                </box>
+              </box>
+             
                 <Br />
               </Row>
               <Row height="40%">
@@ -123,7 +128,13 @@ export class App extends BaseApp {
                   checked={this.state.cleanOutputBeforeExecute}
                   content="clear output before execute?"
                   onChange={e => this.setState({ cleanOutputBeforeExecute: e.value })}
-                />
+                /> 
+                <checkbox
+                {...focusableOpts()}
+                checked={this.state.autoExecute}
+                content="auto execute?"
+                onChange={e => this.setState({ autoExecute: e.value })}
+              />
                 <Br />
                 <Select
                   border="line"
@@ -155,15 +166,30 @@ export class App extends BaseApp {
           <Column width="50%">
             <Rows>
               <Row height="70%">
-                <box
-                  {...focusableOpts()}
-                  scrollable={true}
-                  width="100%"
-                  height="100%"
-                  label="Output"
-                  border="line"
-                  ref={React.createRef<Box>(c => (this.outputEl = c))}
+                <box>
+                  <box
+                {...focusableOpts()}
+                scrollable={true}
+                width="100%"
+                height="100%"
+                label="Output"
+                border="line"
+                ref={React.createRef<Box>(c => (this.outputEl = c))}
                 />
+                <button
+                {...focusableOpts()}
+                top={0}
+                height={3}
+                width={'Maximize'.length + 6}
+                label={undefined}
+                right={0}
+                content="Maximize"
+                onPress={e => {
+                this.toggleMaximized(this.outputEl.parent as any, e.currentTarget, 'editor')
+                }}
+                />
+                </box>
+
               </Row>
               <Row height="30%">
                 <TabPanel ref={React.createRef<TabPanel>(c => (this.outputPanel = c))} updateScreenOnChange={true} activeStyle={{...focusableOpts().style.selected}} inactiveStyle={{...focusableOpts().style.item}} width="100%"

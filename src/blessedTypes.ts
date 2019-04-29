@@ -91,7 +91,7 @@ export function isElementUnSafe<E extends Element = Element>(n: any): n is E {
 
 export function isScreen(n: any): n is Screen {
   // return isNodeByType(n, WidgetTypesEnum.screen)
-  return isNode(n) && !!(n as Screen).smartCSR && !!(n as Screen).setEffects
+  return isNode(n) && n.type==='screen'//!!(n as Screen).setEffects
   // return n && isNode(n) && n.type === 'screen'
 }
 

@@ -1,5 +1,6 @@
 import { Element, helpers, isElement, Node } from '..'
 import { strip } from '../util/misc'
+import { isScreen } from '../blessedTypes';
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /** settings for visitDescendants regarding visiting order and visit interruption modes. */
@@ -132,6 +133,9 @@ export function findAscendant<T extends Node = Node>(n: Element, p: ElementPredi
   return a
 }
 
+export function findRootElement(n: Element): Element{
+  return (isScreen(n) || isScreen(n.parent))? n : findAscendant(n, a=> isScreen(a) || isScreen(a.parent))
+}
 export function filterAscendants<T extends Node = Node>(n: Node, p: ElementPredicate, o: VisitorOptions = {}): T[] {
   const a: T[] = []
   visitAscendants(n, c => {

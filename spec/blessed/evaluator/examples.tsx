@@ -78,7 +78,6 @@ function simple1(options) {
   options.log('starting')
   const fm = options.accursed.filemanager({
     parent: options.parent,
-    // cwd: '.',
     border: 'line',
     style: {
       selected: {
@@ -92,7 +91,8 @@ function simple1(options) {
     label: ' {blue-fg}%path{/blue-fg} ',
     cwd: process.env.HOME,
     keys: true,
-    vi: true,
+    focusable: true,
+    // vi: true,
     scrollbar: {
       bg: 'white',
       ch: ' '
@@ -215,13 +215,16 @@ function simple1(options) {
     name: 'borders',
     code: `
 function borders(options){
-
   const number = (a = 10, b = a) => Math.floor(Math.random() * b) + (a === b ? 0 : a)
   function color() {
     const colors = ['red', 'blue', 'cyan', 'green', 'magenta', 'yellow', 'brown']
     return colors[number(0, colors.length - 1)]
   }
-  const l = options.accursed.layout(  {  parent: options.parent, width: '100%', height: '100%'})
+  const l = options.accursed.layout(  {  
+    parent: options.parent, 
+    width: '100%', 
+    height: '100%'
+  })
   options.accursed.borderStyles.map(style =>{
     options.accursed.borderBox({
       parent: l,

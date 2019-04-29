@@ -14,7 +14,8 @@ import {
   setMaximized,
   TabPanel,
   TextareaOptions,
-  ElementOptions
+  ElementOptions,
+  findDescendant
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
@@ -39,6 +40,7 @@ interface P {
   parent: Screen
 }
 interface S {
+  autoExecute?:boolean;
   cleanOutputBeforeExecute?: boolean
 }
 
@@ -49,7 +51,7 @@ export abstract class BaseApp extends Component<P, S> {
   editorContainer: Box
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
-  state: S = {cleanOutputBeforeExecute: true}
+  state: S = {cleanOutputBeforeExecute: true, autoExecute: true}
   protected abstract help()
 
   setExample(exampleName: string): void {
@@ -101,15 +103,16 @@ export abstract class BaseApp extends Component<P, S> {
       error = ex
     }
       await result 
-    this.logEl.content = _log.join('\n')
+      this.logEl.content = _log.join('\n')
+      this.logEl.setScrollPerc(100)
     if (error) {
       this.errorsEl.content = inspect(error, error.stack)
       this.outputPanel.selectTab(1)
     } else {
       this.outputPanel.selectTab(0)
+      this.errorsEl.content = ''
     }
     this.screen.render()
-    this.logEl.setScrollPerc(100)
   }
 
   async afterRender() {
@@ -127,15 +130,30 @@ export abstract class BaseApp extends Component<P, S> {
       text: examples[0].code
     })
     this.editor.focus()
-    this.editor.textBuf.onDidStopChanging(()=>{this.dispatch(Action.Execute)})
+    this.editor.textBuf.onDidStopChanging(()=>{
+      if(this.state.autoExecute) {
+        this.dispatch(Action.Execute)
+      }
+    })
     this.editor.setBack()
     this.screen.render()
+  }
+  toggleMaximized(container: Element, btn: Button, label?: string) {
+    setMaximized(container, !isMaximized(container), { auto: false })
+    btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
+    container.screen.render()
+    // if(!findDescendant(container, d=>d===this.editor)){
+    //   this.editorContainer.render()
+    //   this.editor.render()
+    //   this.editor._updateContent()
+    // }
   }
 
 }
 
-export function toggleMaximized(container: Element, btn: Button, label?: string) {
-  setMaximized(container, !isMaximized(container), { auto: false })
-  btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
-  container.screen.render()
-}
+// export function toggleMaximized(container: Element, btn: Button, label?: string) {
+//   setMaximized(container, !isMaximized(container), { auto: false })
+//   btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
+//   if(findDescendant(container, d=>d===d.type))
+//   container.screen.render()
+// }
