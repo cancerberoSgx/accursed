@@ -1,3 +1,5 @@
+import { enumKeys } from 'misc-utils-of-mine-generic';
+
 export enum BorderStyle {
   light = 'light',
   'double' = 'double',
@@ -22,6 +24,8 @@ export enum BorderStyle {
   // 'round2' = 'round2',
   // 'round3' = 'round3',
 }
+
+export const  borderStyles  = enumKeys(BorderStyle)
 
 export enum BorderSide {
   'topLeft' = 'topLeft',
@@ -106,7 +110,7 @@ const getBoxStyles: () => BoxStyles = () => {
         right: '│',
         bottom: '─',
         top: '─'
-      }, // ⎺ ⎻ ⎼ ⎽
+      },  
       roundDoubleDash: {
         topLeft: '╭',
         topRight: '╮',
@@ -137,62 +141,6 @@ const getBoxStyles: () => BoxStyles = () => {
         bottom: '┈',
         top: '┈'
       },
-      // round2: {
-      //   topLeft: '◜',
-      //   topRight: '◝',
-      //   bottomRight: '◞',
-      //   bottomLeft: '◟',
-      //   // topLeft: '⌌',
-      //   // topRight: '⌍',
-      //   // bottomRight: '⌏',
-      //   // bottomLeft: '⌎',
-      //   left: '⎸',
-      //   right: '⎹',
-
-      //   // left: '\u23d0',
-      //   // right: '\u23d0',
-      //   // left: '│',
-      //   // right: '│',
-
-      //   // left: '\u2502',
-      //   // right: '│',
-
-      //   // bottom: '─',
-      //   // top: '─'
-      //   bottom: '⎽',
-      //   top: '⎺'
-      // },
-
-      // round3: {
-      //   // topLeft: '◜',
-      //   // topRight: '◝',
-      //   // bottomRight: '◞',
-      //   // bottomLeft: '◟',
-      //   topLeft: '⌌',
-      //   topRight: '⌍',
-      //   bottomRight: '⌏',
-      //   bottomLeft: '⌎',
-      //   // left: '⎸',
-      //   // right: '⎹',
-
-      //   // left: '\u23d0',
-      //   // right: '\u23d0',
-      //   left: '│',
-      //   right: '│',
-
-      //   // left: '\u2502',
-      //   // right: '│',
-
-      //   bottom: '─',
-      //   top: '─'
-      //   // bottom: '⎽',
-      //   // top: '⎺'
-      // },
-
-      // ◜ ◝ ◞ ◟
-      // ⌌ ⌍ ⌎ ⌏
-
-      // ⎸ ⎹ ⎺ ⎽
 
       heavy: {
         topLeft: '┏',
@@ -257,46 +205,19 @@ const getBoxStyles: () => BoxStyles = () => {
         top: '─'
       },
       singleRareCorners: {
-        // topLeft: '⌈',
-        // topRight: '⌉',
-        // bottomRight: '⌋',
-        // bottomLeft: '⌊',
-        // // left: '│',
-        // right: '│',
-        // bottom: '⎽',
-        // top: '⎺',
         bottom: '⎽',
         top: '⎺',
-        // ⎺ ⎻ ⎼ ⎽
-
-        // left: '⎸',
-        // right: '⎹',
-
-        // left: '\u2502',
-        // right: '\u2502',
         left: '⎢',
         right: '⎥',
-        // ⎢ ⎣ ⎤ ⎥ ⎦
-        // ⎾ ⎿ ⏋ ⏌
-
-        // topLeft: '⎾',
-        // topRight: '⏋',
-        // bottomRight: '⏌',
-        // bottomLeft: '⎿',
         topLeft: '⎡',
         topRight: '⎤',
         bottomRight: '⎦',
         bottomLeft: '⎣'
-        // left: '⎢',
-        // right: '⎥',
-        // bottom: '▁',
-        // top: '⎺'
       },
 
       triangleCorners: {
         bottom: '_',
         top: '⎻',
-        // right: '\u2502',
         left: '⎸',
         right: ' ⎸',
         topLeft: '◸',

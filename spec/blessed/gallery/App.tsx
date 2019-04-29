@@ -16,6 +16,7 @@ import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
+import { allColors } from '../experiments/colors/allColors';
 
 enum Demo {
   button,
@@ -52,7 +53,7 @@ export class App extends Component<P, S> {
       } else if (demo === Demo.colors5) {
         colors5Demo(this.blessedElement.screen)
       } else if (demo === Demo.allColors) {
-        colors5Demo(this.blessedElement.screen)
+        allColors(this.blessedElement.screen)
       } else if (demo === Demo.borderBox) {
         return React.render(borderBoxDemo())
       } else if (demo === Demo.anim2) {

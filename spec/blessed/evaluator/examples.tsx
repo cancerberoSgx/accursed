@@ -1,101 +1,143 @@
+function simple1(options) {
+  options.log('starting')
+  const b = options.accursed.box({
+    parent: options.parent,
+    content: '{bold}Hello {red-fg}{green-bg}world{/}\nHow are you today ?',
+    tags: true,
+    align: 'center', 
+    valign: 'middle',
+    height: '100%', 
+    width: '100%',
+    style: {
+      bg: '#cdabc9',
+      fg: 'black'
+    }
+  })
+  options.log('finish')
+}
 export const examples = [
   {
     name: 'simple1',
     code: `
-  function simple1(options) {
-    options.log('starting')
-    options.parent.children.forEach(c => {
-      c.detach();
-      c.destroy()
-    })
-    const b = options.accursed.box({
-      parent: options.parent,
-      content: 'hello world',
-      height: 2, width: 6, top: 0, left: 0,
-      style: {
-        bg: 'red'
-      }
-    })
+function simple1(options) {
+  options.log('starting')
+  const b = options.accursed.box({
+    parent: options.parent,
+    content: '{bold}Hello {red-fg}{green-bg}world{/}\\nHow are you today ?',
+    tags: true,
+    align: 'center', 
+    valign: 'middle',
+    height: '100%', 
+    width: '100%',
+    // , top: 0, left: 0,
+    style: {
+      bg: '#cdabc9',
+      fg: 'black'
+    }
+  })
+  options.log('finish')
+}
+      `.trim()
+  },
+  {
+    name: 'simpleAnim',
+    code: `
+function simpleAnim(options) {
+  options.log('starting')
+  const b = options.accursed.box({
+    parent: options.parent,
+    content: 'hello world',
+    height: 2, width: 6, top: 0, left: 0,
+    style: {
+      bg: 'red'
+    }
+  })
+  return new Promise(resolve=>{
     const timer = setInterval(() => {
       b.top++
       b.left++
       b.width++
       b.height++
+  options.log(b._getCoords())
       options.parent.screen.render()
       if (b.top > options.parent.height - b.height ||
         b.left > options.parent.width - b.width) {
         clearInterval(timer)
+        resolve()
       }
     }, 10)
     options.parent.screen.render()
-  }
+  })
+}
       `.trim()
   },
   {
     name: 'fileManager1',
     code: `   
-      function simple1(options) {
-        options.log('starting')
-        const fm = options.accursed.filemanager({
-          parent: options.parent,
-          // cwd: '.',
-          border: 'line',
-          style: {
-            selected: {
-              bg: 'blue'
-            }
-          },
-          height: 'half',
-          width: 'half',
-          top: 'center',
-          left: 'center',
-          label: ' {blue-fg}%path{/blue-fg} ',
-          cwd: process.env.HOME,
-          keys: true,
-          vi: true,
-          scrollbar: {
-            bg: 'white',
-            ch: ' '
-          }
-        })
-        fm.pick('.', function () {
-          options.log(arguments)
-        })
+function simple1(options) {
+  options.log('starting')
+  const fm = options.accursed.filemanager({
+    parent: options.parent,
+    // cwd: '.',
+    border: 'line',
+    style: {
+      selected: {
+        bg: 'blue'
+      }
+    },
+    height: 'half',
+    width: 'half',
+    top: 'center',
+    left: 'center',
+    label: ' {blue-fg}%path{/blue-fg} ',
+    cwd: process.env.HOME,
+    keys: true,
+    vi: true,
+    scrollbar: {
+      bg: 'white',
+      ch: ' '
+    }
+  })
+  fm.pick('.', function () {
+    options.log(arguments)
+  })
+  options.parent.screen.render()
+  var box = options.accursed.box({
+    parent: options.parent,
+    style: {
+      bg: 'green'
+    },
+    border: 'line',
+    height: 'half',
+    width: 'half',
+    top: 'center',
+    left: 'center',
+    hidden: true
+  })
+  // fm.log = options.log
+  fm.refresh()
+  options.parent.once('focus', ()=>options.log('focus'))
+  options.parent.screen.render()
+  options.parent.screen.key(['s', 'p'], function () {
+    fm.hide()
+    options.parent.screen.render()
+    setTimeout(function () {
+      fm.pick(function (err, file) {
+        box.show()
+        box.setContent(err ? err + '' : file)
         options.parent.screen.render()
-        var box = options.accursed.box({
-          parent: options.parent,
-          style: {
-            bg: 'green'
-          },
-          border: 'line',
-          height: 'half',
-          width: 'half',
-          top: 'center',
-          left: 'center',
-          hidden: true
-        })
-        fm.refresh()
-        options.parent.screen.render()
-        options.parent.screen.key(['s', 'p'], function () {
-          fm.hide()
-          options.parent.screen.render()
-          setTimeout(function () {
-            fm.pick(function (err, file) {
-              box.show()
-              box.setContent(err ? err + '' : file)
-              options.parent.screen.render()
-              setTimeout(function () {
-                box.hide()
-                fm.reset(function () {
-                  fm.show()
-                  options.parent.screen.render()
-                })
-              }, 2000)
-            })
-          }, 2000)
-        })
-        options.parent.screen.render()
-      }  
+        setTimeout(function () {
+          box.hide()
+          fm.reset(function () {
+            fm.show()
+            options.parent.screen.render()
+          })
+        }, 2000)
+      })
+    }, 2000)
+  })
+  options.parent.screen.render()
+}  
       `
   },
   {
@@ -142,10 +184,9 @@ export const examples = [
         }
       }
     }
-
-    options.parent.parent.focus()
+    // options.parent.parent.focus()
     options.parent.screen.render()
-
+    // options.parent.once('focus', )
     function invertColor(hex) {
       function padZero(str, len) {
         len = len || 2;
@@ -169,5 +210,30 @@ export const examples = [
     }
   }
   `
+  },
+  {
+    name: 'borders',
+    code: `
+function borders(options){
+
+  const number = (a = 10, b = a) => Math.floor(Math.random() * b) + (a === b ? 0 : a)
+  function color() {
+    const colors = ['red', 'blue', 'cyan', 'green', 'magenta', 'yellow', 'brown']
+    return colors[number(0, colors.length - 1)]
+  }
+  const l = options.accursed.layout(  {  parent: options.parent, width: '100%', height: '100%'})
+  options.accursed.borderStyles.map(style =>{
+    options.accursed.borderBox({
+      parent: l,
+      borderStyle: style,
+      label: style,
+      style: { label: { fg: color() }, border: { fg: color() } },
+      width: 12, 
+      height: 7,
+      content: 'using border style '+style
+    })
+  })
+}
+`
   }
 ]

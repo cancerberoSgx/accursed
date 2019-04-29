@@ -10,6 +10,11 @@ function main() {
       // , focusable: true,
       // tput: true
     })
+    screen.key('C-q', k => {
+      screen.destroy()
+      process.exit(0)
+    })
+
     // installExitKeys(screen)
     // screen.key(['esc'], function (ch, key) {
     //   screen.destroy()

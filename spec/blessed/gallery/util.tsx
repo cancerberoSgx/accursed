@@ -26,10 +26,11 @@ export const commonOptions: () => { style: Style } = () => ({
       //   fg: 'cyan',
       // //   bg: ''
       // },
-      bg: 'cyan'
+      bg: '#4466dd'
     },
     item: {
-      bg: 'yellow'
+      bg: 'yellow',
+      fg: '#446688'
       // padding: 1,
 
       // border: {

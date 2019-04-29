@@ -10,7 +10,7 @@ export async function anim2(screen: Screen) {
       border: 'line',
       keyable: true,
       keys: true,
-      style: { focus: { border: { fg: 'red' } }, bg: 'blue', item: { bg: 'green' }, selected: { bg: 'red' } }
+      style: { focus: { border: { fg: 'red' } }, bg: 'blue', item: { bg: '#118822' }, selected: { bg: 'red' } }
     })
     let duration = 1000
     let easingName = Object.keys(easing)[0]

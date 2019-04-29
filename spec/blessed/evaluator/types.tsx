@@ -28,6 +28,8 @@ export interface IEditor extends Element {
 }
 interface TextBuffer extends EventEmitter {
   emitDidChangeTextEvent(...args: TODO): TODO
+  onDidChange(l: (...args: any[])=>TODO ):void
+  onDidStopChanging(l: ()=>TODO ):void
   getText(): string
   emitWillChangeTextEvent(): void
   setText(s: string): void

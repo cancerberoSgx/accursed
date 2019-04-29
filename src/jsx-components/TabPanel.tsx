@@ -14,6 +14,7 @@ interface ChangeEvent {
 }
 interface TabPanelProps extends BoxOptions {
   children: (Tab)[]
+  updateScreenOnChange?: boolean
   onChange?: (e: ChangeEvent) => void
   activeStyle?: Style
   inactiveStyle?: Style
@@ -69,6 +70,8 @@ interface TabProps extends CollapsibleProps {
 export class TabPanel extends Component<TabPanelProps> {
   _saveJSXChildrenProps = true
   render() {
+    this.props.activeStyle = this.props.activeStyle || {}
+    this.props.inactiveStyle = this.props.inactiveStyle || {}
     const childProps = getJSXChildrenProps(this)!
     const tabsData = childProps.filter(c => c.tagName === 'Tab')
     const tabs = tabsData.map((tabData, i) => {
@@ -101,7 +104,7 @@ export class TabPanel extends Component<TabPanelProps> {
     return (
       <Div>
         {...tabs.map(t => t.label)}
-        <Br />
+        {/* <Br /> */}
         {...tabs.map(t => t.body)}
       </Div>
     )
@@ -111,6 +114,9 @@ export class TabPanel extends Component<TabPanelProps> {
       const id = parseInt(tabName.substring('tab_label_'.length))
       if (id !== NaN) {
         this.selectTab(id)
+      }
+      if(this.props.updateScreenOnChange){
+        this.screen.render()
       }
     }
   }

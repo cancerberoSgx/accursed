@@ -10,6 +10,7 @@ So I'm learning, documenting prototyping and researching. The following is a sum
 
 <!-- toc -->
 
+- [Demos](#demos)
 - [JSX](#jsx)
   * [Attributes](#attributes)
   * [IntrinsicElements](#intrinsicelements)
@@ -48,6 +49,10 @@ So I'm learning, documenting prototyping and researching. The following is a sum
 - [TODO & ISSUES & Ideas](#todo--issues--ideas)
 
 <!-- tocstop -->
+
+# Demos 
+
+ * Gallery: [![asciicast](https://asciinema.org/a/KcOrsgaP3vwhNPAic776MY9yi.svg)](https://asciinema.org/a/KcOrsgaP3vwhNPAic776MY9yi)
 
 # JSX
 

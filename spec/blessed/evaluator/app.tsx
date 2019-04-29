@@ -1,26 +1,50 @@
-import { enumKeys } from 'misc-utils-of-mine-generic'
-import {
-  AutoComplete,
-  Box,
-  Br,
-  closeModal,
-  Column,
-  Columns,
-  Div,
-  React,
-  Row,
-  Rows,
-  Select,
-  SelectOption,
-  showInModal,
-  Strong,
-  Tab,
-  TabBody,
-  TabLabel,
-  TabPanel
-} from '../../../src'
-import { Action, BaseApp, focusableOpts, toggleMaximized } from './baseApp'
-import { examples } from './examples'
+import { enumKeys } from 'misc-utils-of-mine-generic';
+import { AutoComplete, Box, Br, closeModal, Column, Columns, Div, React, Row, Rows, Select, SelectOption, showInModal, Strong, Tab, TabBody, TabLabel, TabPanel, TextareaOptions } from '../../../src';
+import { Action, BaseApp, toggleMaximized } from './baseApp';
+import { examples } from './examples';
+
+export const focusableOpts: () => TextareaOptions = () => ({
+  mouse: true,
+  keys: true,
+  focusable: true,
+  clickable: true,
+  input: true,
+  keyable: true,
+  border: 'line',
+  style: {
+    bg: 'lightgray',
+    fg: 'black',
+    border: {
+      type: 'line',
+      fg: 'cyan'
+    },
+    focus: {
+      fg: 'black',
+      bg: '#507468',
+      border: {
+        fg: 'red'
+      }
+    },
+    item: {
+    bg: 'lightgray',
+    fg: 'black',
+        
+    },
+    selected: {
+        bg: 'magenta',
+        fg: 'black', 
+        // bold: true, 
+        underline: true
+    }
+  }
+})
+
+// export const activeStyle : ()=>Style = ()=>({
+//   bg: 'magenta',
+//   fg: 'black', 
+//   // bold: true, 
+//   underline: true
+// })
 
 /**
  * Adds the UI to the base app
@@ -103,6 +127,7 @@ export class App extends BaseApp {
                 />
                 <checkbox
                   {...focusableOpts()}
+                  checked={this.state.cleanOutputBeforeExecute}
                   content="clear output before execute?"
                   onChange={e => this.setState({ cleanOutputBeforeExecute: e.value })}
                 />
@@ -110,6 +135,7 @@ export class App extends BaseApp {
                 <Select
                   border="line"
                   label="Examples"
+                  scrollable={true}
                   {...focusableOpts()}
                   height={8}
                   onSelect={e => this.setExample(e.value)}>
@@ -119,6 +145,8 @@ export class App extends BaseApp {
                   <SelectOption>Dummy</SelectOption>
                   {}
                 </Select>
+                {/* <Br />
+                <Br />
                 <Br />
                 <Br />
                 <Br />
@@ -127,7 +155,7 @@ export class App extends BaseApp {
                   {...focusableOpts()}
                   onChange={e => this.dispatch(e.value)}
                   options={enumKeys(Action)}
-                />
+                /> */}
               </Row>
               {}
             </Rows>
@@ -146,13 +174,22 @@ export class App extends BaseApp {
                 />
               </Row>
               <Row height="30%">
-                <TabPanel ref={React.createRef<TabPanel>(c => (this.outputPanel = c))}>
+                <TabPanel ref={React.createRef<TabPanel>(c => (this.outputPanel = c))} updateScreenOnChange={true} activeStyle={{...focusableOpts().style.selected}} inactiveStyle={{...focusableOpts().style.item}} width="100%"
+                        height="100%" >
                   <Tab active={true}>
                     <TabLabel {...focusableOpts()}>Log</TabLabel>
-                    <TabBody>
+                    <TabBody
+                    //  {...focusableOpts()}
+                    // width="100%"
+                        // height="100%"
+                        // scrollable={true} 
+                        >
                       <box
+                        {...focusableOpts()}
                         width="100%"
-                        height="100%"
+                        scrollable={true}
+                        scrollbar={{inverse: true}}
+                        // height="100%"
                         label="Log"
                         border="line"
                         ref={React.createRef<Box>(c => (this.logEl = c))}
@@ -162,10 +199,18 @@ export class App extends BaseApp {
                   </Tab>
                   <Tab>
                     <TabLabel {...focusableOpts()}>Errors</TabLabel>
-                    <TabBody>
+                    <TabBody 
+                    // {...focusableOpts()}
+                    // width="100%"
+                        // height="100%"
+                        // scrollable={true} 
+                        >
                       <box
+                        {...focusableOpts()}
                         width="100%"
-                        height="100%"
+                        keyable={true}
+                        scrollable={true} 
+                        // height="100%"
                         label="Errors"
                         border="line"
                         ref={React.createRef<Box>(c => (this.errorsEl = c))}

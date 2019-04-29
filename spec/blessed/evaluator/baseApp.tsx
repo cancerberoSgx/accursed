@@ -18,6 +18,8 @@ import {
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
 import { IEditor, Range } from './types'
+import { focusableOpts } from './app';
+import { throttle } from 'misc-utils-of-mine-generic';
 const Editor = require('editor-widget')
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
@@ -32,30 +34,7 @@ export enum Action {
   'Save as' = 'Save as'
 }
 
-export const focusableOpts: () => TextareaOptions = () => ({
-  mouse: true,
-  // keys: true,
-  focusable: true,
-  clickable: true,
-  input: true,
-  keyable: true,
-  border: 'line',
-  style: {
-    bg: 'lightgray',
-    fg: 'black',
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
-    focus: {
-      fg: 'black',
-      bg: '#507468',
-      border: {
-        fg: 'red'
-      }
-    }
-  }
-})
+
 interface P {
   parent: Screen
 }
@@ -71,19 +50,20 @@ export abstract class BaseApp extends Component<P, S> {
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
 
+  state: S = {cleanOutputBeforeExecute: true}
   protected abstract help()
 
   setExample(exampleName: string): void {
     const code = examples.find(e => e.name === exampleName).code
     this.editor.textBuf.setText(code)
     this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-    this.dispatch(Action.Execute)
-    this.execute()
+    // this.dispatch(Action.Execute)
+    // this.execute()
   }
 
   dispatch(action: Action): void {
     if (action === Action.Execute) {
-      return this.execute()
+       this.execute()
     } else if (action === Action.Exit) {
       this.screen.destroy()
       process.exit(0)
@@ -93,7 +73,7 @@ export abstract class BaseApp extends Component<P, S> {
     this.screen.render()
   }
 
-  execute(): void {
+  async execute(): Promise<any> {
     if (this.state.cleanOutputBeforeExecute) {
       cleanNode(this.outputEl)
     }
@@ -105,18 +85,27 @@ export abstract class BaseApp extends Component<P, S> {
       blessed,
       log(...args: any[]) {
         _log.push(...args.map(a => inspect(a)))
-      }
+      },
+      updateLog: throttle(()=>{
+        this.logEl.content = _log.join('\n')
+          this.outputPanel.selectTab(0)
+          this.logEl.setScrollPerc(100)
+      }, 2000, {trailing: true})
     }
     let error: any
     const text = this.editor.textBuf.getText()
+    let result:any
     const code = `
     (${text})(options)`
     try {
-      eval(code)
+      result = eval(code)
     } catch (ex) {
       debug(ex)
       error = ex
     }
+    // if(result instanceof Promise){
+      await result 
+    // }
     this.logEl.content = _log.join('\n')
     if (error) {
       this.errorsEl.content = inspect(error, error.stack)
@@ -124,6 +113,8 @@ export abstract class BaseApp extends Component<P, S> {
     } else {
       this.outputPanel.selectTab(0)
     }
+    this.screen.render()
+    this.logEl.setScrollPerc(100)
   }
 
   async afterRender() {
@@ -135,8 +126,8 @@ export abstract class BaseApp extends Component<P, S> {
       ...focusableOpts(),
       top: 0,
       left: 0,
-      width: '95%',
-      height: '95%',
+      width: '100%',
+      height: '100%',
       keys: true,
       keyable: true
     })
@@ -145,8 +136,11 @@ export abstract class BaseApp extends Component<P, S> {
     this.editor.once('focus', e => {
       this.editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
     })
+    // this.editor.textBuf.onDidChange(  e=>{debug('onDidChange', e)})
+    this.editor.textBuf.onDidStopChanging(()=>{this.dispatch(Action.Execute)})
+    // this.editor.buffer.on('set content', e=>{debug('set content', e)})
     this.editor.setBack()
-    this.editorContainer.screen.render()
+    this.screen.render()
   }
 }
 
