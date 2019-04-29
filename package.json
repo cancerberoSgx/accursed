@@ -38,7 +38,7 @@
     "ansi-diff-stream": "^1.2.1",
     "cli-driver": "0.2.0",
     "drawille-canvas": "^1.2.0",
-    "editor-widget": "^1.1.1",
+    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
     "google-palette": "^1.1.0",
     "jasmine": "^3.4.0",
     "markdown-toc": "^1.2.0",

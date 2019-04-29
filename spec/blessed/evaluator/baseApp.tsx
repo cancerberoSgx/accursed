@@ -82,8 +82,13 @@ export abstract class BaseApp extends Component<P, S> {
   async editorSettings() {
     this.editorSettingsModal({
       onSave: () => {
+        // debug(this.settingsEditor.textBuf.getText())
         const text = this.settingsEditor.textBuf.getText()
-        writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text)
+        if(!text.trim()){
+          return // TODO; comes a second time
+        }
+        debug(text, typeof text)
+        writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text+' ')
       }
     })
 
