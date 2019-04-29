@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events'
 import { TODO } from 'misc-utils-of-mine-typescript'
-import { Element, TextareaOptions } from '../../../src'
+import { Element, TextareaOptions } from '..'
 
 const Range = require('text-buffer/lib/range')
 const Editor = require('editor-widget')

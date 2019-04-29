@@ -8,6 +8,6 @@ export * from './jsx'
 export * from './jsx-components'
 export * from './jsx/types'
 export * from './util/'
+export * from './editorWidget/editorWidget'
 export { blessed }
-
 import * as blessed from 'blessed'

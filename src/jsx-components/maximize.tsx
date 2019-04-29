@@ -2,13 +2,13 @@ import { Component, React } from '..'
 import { isMaximized, setMaximized } from '../blessed'
 import { BoxOptions, Button, Element, TextareaOptions } from '../blessedTypes'
 
-interface P extends BoxOptions {
+interface MaximizeProps extends BoxOptions {
   title?: string
   children: JSX.Element
   target?: () => Element
 }
 
-export class Maximize extends Component<P, {}> {
+export class Maximize extends Component<MaximizeProps, {}> {
   render() {
     const title = '\u2921 maximize'
     return (
@@ -43,6 +43,8 @@ export class Maximize extends Component<P, {}> {
     container.screen.render()
   }
 }
+
+/** @internal */
 export const focusableOpts: () => TextareaOptions = () => ({
   mouse: true,
   keys: true,
