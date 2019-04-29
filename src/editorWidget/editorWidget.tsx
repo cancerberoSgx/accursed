@@ -39,6 +39,9 @@ export interface EditorOptions extends TextareaOptions {
   language?: string
   text?: string
 }
+/**
+ * Builds editor widget loading [[options.text]] string on it, and setting [[options.language]] for highlighting, for example, 'js'.
+ */
 export function buildEditor(options: EditorOptions) {
   const editor = new Editor(options)
   editor.textBuf.setText(options.text || '')

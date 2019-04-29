@@ -1,4 +1,5 @@
 import * as blessed from 'blessed'
+import { readFileSync, writeFileSync } from 'fs'
 import { inspect } from 'util'
 import * as accursed from '../../../src'
 import {
@@ -14,8 +15,8 @@ import {
   TabPanel
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
-import { focusableOpts } from './app'
 import { buildEditor, IEditor, Range } from '../../../src/editorWidget/editorWidget'
+import { focusableOpts } from './app'
 import { examples } from './examples'
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
@@ -43,9 +44,15 @@ export abstract class BaseApp extends Component<P, S> {
   editor: IEditor
   logEl: Box
   editorContainer: Box
+
+  protected settingsEditorContainer: Box
+  protected settingsEditor: IEditor
+
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
   state: S = { cleanOutputBeforeExecute: true, autoExecute: true }
+  private readonly EDITOR_SETTINGS_INI_PATH = 'node_modules/editor-widget/editor-widget.ini'
+
   protected abstract help()
 
   setExample(exampleName: string): void {
@@ -55,16 +62,56 @@ export abstract class BaseApp extends Component<P, S> {
   }
 
   dispatch(action: Action): void {
-    if (action === Action.Execute) {
-      this.execute()
-    } else if (action === Action.Exit) {
-      this.screen.destroy()
-      process.exit(0)
-    } else if (action === Action.Help) {
-      this.help()
+    try {
+      if (action === Action.Execute) {
+        this.execute()
+      } else if (action === Action.Exit) {
+        this.screen.destroy()
+        process.exit(0)
+      } else if (action === Action.Help) {
+        this.help()
+      } else if (action === Action.Settings) {
+        this.editorSettings()
+      }
+      this.screen.render()
+    } catch (error) {
+      debug('Error dispatching ' + action, error)
     }
-    this.screen.render()
   }
+
+  async editorSettings() {
+    this.editorSettingsModal({
+      onSave: () => {
+        const text = this.settingsEditor.textBuf.getText()
+        writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text)
+      }
+    })
+
+    //   const modal = showInModal(this.screen,this.editorSettingsModal({onSave: ()=>{
+
+    // const text = this.settingsEditor.textBuf.getText();
+    // writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text);
+
+    //   }}), 'Editor Settings', '90%', '90%')
+
+    await waitFor(() => this.settingsEditorContainer)
+
+    // if (!this.settingsEditor) {
+    this.settingsEditor = buildEditor({
+      ...focusableOpts(),
+      parent: this.settingsEditorContainer,
+      text: readFileSync(this.EDITOR_SETTINGS_INI_PATH).toString(),
+      language: 'ini',
+      // top: 0,
+      // left: 0,
+      // width: '95%',
+      // height: '95%',
+      keys: true,
+      keyable: true
+    })
+    // }
+  }
+  abstract editorSettingsModal(props: { onSave: () => void }): void
 
   async execute(): Promise<any> {
     if (this.state.cleanOutputBeforeExecute) {

@@ -1,28 +1,20 @@
-function simple1(options) {
-  options.log('starting')
-  const b = options.accursed.box({
-    parent: options.parent,
-    content: '{bold}Hello {red-fg}{green-bg}world{/}\nHow are you today ?',
-    tags: true,
-    align: 'center',
-    valign: 'middle',
-    height: '100%',
-    width: '100%',
-    style: {
-      bg: '#cdabc9',
-      fg: 'black'
-    }
-  })
-  options.log('finish')
-}
 export const examples = [
   {
     name: 'simple1',
     code: `
-function simple1(options) {
-  options.log('starting')
-  const b = options.accursed.box({
-    parent: options.parent,
+
+// HEADS UP: In order to run, examples must declare a single function
+// that receives an options object that provides necessary
+// dependencies, most relevant, the parent element and the accursed
+// namespace from which you can access all blessed and accursed
+// utilities. 
+// It also provides with a log() function that prints any kind of 
+// objects in the Logs panel as console.log() would.
+
+function simple1({parent, accursed, log}) {
+  log('starting')
+  const b = accursed.box({
+    parent: parent,
     content: '{bold}Hello {red-fg}{green-bg}world{/}\\nHow are you today ?',
     tags: true,
     align: 'center', 
@@ -34,7 +26,7 @@ function simple1(options) {
       fg: 'black'
     }
   })
-  options.log('finish')
+  log('finish')
 }
       `.trim()
   },
@@ -57,7 +49,7 @@ function simpleAnim(options) {
       b.left++
       b.width++
       b.height++
-  options.log(b._getCoords())
+      options.log(b._getCoords())
       options.parent.screen.render()
       if (b.top > options.parent.height - b.height ||
         b.left > options.parent.width - b.width) {
@@ -205,19 +197,19 @@ function allColors({parent, accursed, log}) {
   {
     name: 'borders',
     code: `
-function borders(options){
+function borders({accursed, parent}){
   const number = (a = 10, b = a) => Math.floor(Math.random() * b) + (a === b ? 0 : a)
   function color() {
     const colors = ['red', 'blue', 'cyan', 'green', 'magenta', 'yellow', 'brown']
     return colors[number(0, colors.length - 1)]
   }
-  const l = options.accursed.layout(  {  
-    parent: options.parent, 
+  const l = accursed.layout(  {  
+    parent, 
     width: '100%', 
     height: '100%'
   })
-  options.accursed.borderStyles.map(style =>{
-    options.accursed.borderBox({
+  accursed.borderStyles.map(style =>{
+    accursed.borderBox({
       parent: l,
       borderStyle: style,
       label: style,
@@ -287,7 +279,6 @@ function listCapabilities(options) {
       }
     }
   });
-  // options.parent.on('key tab', () => options.parent.screen.focusNext());
   const FALSE = '\u2717';
   const TRUE = '\u2714';
   options.accursed.listtable({

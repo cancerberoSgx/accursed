@@ -1510,7 +1510,7 @@ export namespace Widgets {
     position: Position
     content: string
     hidden: boolean
-    // visible: boolean
+    visible: boolean
     detached: boolean
 
     /**
@@ -1582,7 +1582,7 @@ export namespace Widgets {
     draggable: boolean
 
     /**
-     * If true, the element won't be filled. 
+     * If true, the element won't be filled.
      * @internal
      */
     _noFill?: boolean
@@ -1634,7 +1634,7 @@ export namespace Widgets {
      */
     _label?: BlessedElement | undefined
 
-    /** 
+    /**
      * Givesthe total padding on any direction.
      */
     readonly tpadding: number
@@ -1643,75 +1643,74 @@ export namespace Widgets {
      * Write content and children to the screen buffer.
      */
     render(): Coords | undefined
-    
+
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getCoords(get?: boolean, noscroll?: boolean): Coords | undefined
 
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getShrinkBox(xi: number, xl: number, yi: number, yl: number, get?: boolean): SimpleCoords | undefined
 
-
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getShrink(xi: number, xl: number, yi: number, yl: number, get?: boolean): SimpleCoords | undefined
 
-     /**
-      * whenever Box.render is called `lpos` gets set on the element, an object containing the rendered
-      * coordinates. Since these don't update if the element is moved somehow, they're unreliable in that
-      * situation. However, if we can guarantee that lpos is good and up to date, it can be more accurate than
-      * the calculated positions below. In this case, if the element is being rendered, it's guaranteed that
-      * the parent will have been rendered first, in which case we can use the parant's lpos instead of
-      * recalculating it's position (since that might be wrong because it doesn't handle content shrinkage).
+    /**
+     * whenever Box.render is called `lpos` gets set on the element, an object containing the rendered
+     * coordinates. Since these don't update if the element is moved somehow, they're unreliable in that
+     * situation. However, if we can guarantee that lpos is good and up to date, it can be more accurate than
+     * the calculated positions below. In this case, if the element is being rendered, it's guaranteed that
+     * the parent will have been rendered first, in which case we can use the parant's lpos instead of
+     * recalculating it's position (since that might be wrong because it doesn't handle content shrinkage).
      * @internal
      */
     _getPos(): Pos
 
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getLeft(get?: boolean): number
 
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getWidth(get?: boolean): number
 
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getTop(get?: boolean): number
 
-     /**
-     * @param get if true it will force to recalculate. 
+    /**
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getBottom(get?: boolean): number
 
-     /**
-     * @param get if true it will force to recalculate. 
+    /**
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getRight(get?: boolean): number
-    
+
     /**
-     * @param get if true it will force to recalculate. 
+     * @param get if true it will force to recalculate.
      * @internal
      */
     _getHeight(get?: boolean): number
 
     /**
-     * Hide element, clear the element's region on the screen and triggers [[hide]] event. 
+     * Hide element, clear the element's region on the screen and triggers [[hide]] event.
      */
     hide(): void
 
@@ -2001,11 +2000,16 @@ export namespace Widgets {
 
     /**
      * Object enabling a scrollbar.
-     * 
+     *
      * Style of the scrollbar track if present (takes regular style options).
      */
     scrollbar?:
-      | { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string, ignoreBorder?: boolean } & Widgets.Types.TStyle
+      | {
+          style?: Widgets.Types.TStyle
+          track?: Widgets.Types.TStyle
+          ch?: string
+          ignoreBorder?: boolean
+        } & Widgets.Types.TStyle
       | boolean
   }
 

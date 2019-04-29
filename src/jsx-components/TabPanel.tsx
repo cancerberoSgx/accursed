@@ -80,22 +80,23 @@ export class TabPanel extends Component<TabPanelProps> {
       const counter = i
       const active = tabData.attrs && !tabData.attrs.active
       const body = (
-        <Div hidden={!active} name={'tab_body_' + counter}>
+        <Div {...bodyData.attrs || {}} hidden={!active} name={'tab_body_' + counter}>
           {...bodyData.children}
         </Div>
       )
       const label = (
         <button
+          border="line"
+          content={labelData.children.join(' ')}
+          focusable={true}
+          {...labelData.attrs || {}}
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),
             ...((active ? this.props.activeStyle : this.props.inactiveStyle) || {})
           }}
-          border="line"
-          content={labelData.children.join(' ')}
           onPress={e => this.selectTabNamed(e.currentTarget.name)}
           onClick={e => this.selectTabNamed(e.currentTarget.name)}
           name={'tab_label_' + counter}
-          focusable={true}
         />
       )
       const tab = { body, label }
@@ -104,7 +105,6 @@ export class TabPanel extends Component<TabPanelProps> {
     return (
       <Div>
         {...tabs.map(t => t.label)}
-        {/* <Br /> */}
         {...tabs.map(t => t.body)}
       </Div>
     )

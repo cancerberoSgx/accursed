@@ -50,7 +50,9 @@ export function showInModal(
     lastOnClosedListener = onClosed
   }
   screen.render()
+  return modalInstance
 }
+
 let modalInstance: Box | undefined
 let lastModalContent: Element | undefined
 

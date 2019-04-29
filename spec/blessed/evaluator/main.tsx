@@ -4,7 +4,7 @@ function main() {
   try {
     debug('starting')
     var screen = createScreen({
-      smartCSR: true,
+      smartCSR: true, //useBCE: true,
       title: 'editor-widget example'
     })
     screen.key('C-q', k => {
