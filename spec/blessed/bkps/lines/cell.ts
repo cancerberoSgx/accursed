@@ -111,7 +111,7 @@
 //         right: this.right().style,
 //         down: this.down().style
 //       });
-      
+
 //       return {
 //         char: chooseCharacter({
 //           left: this.left().style,

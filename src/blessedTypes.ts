@@ -1,7 +1,7 @@
 import * as contrib from 'blessed-contrib'
 import * as blessed from './declarations/blessed'
+import { BlessedProgram } from './declarations/blessedProgram'
 import { RemoveProperties } from './util/misc'
-import { BlessedProgram } from './declarations/blessedProgram';
 
 export type Node = blessed.Widgets.Node
 export type Box = blessed.Widgets.BoxElement
@@ -121,8 +121,6 @@ export type MouseInputActivationOptionNames = Pick<BlessedElementOptionsIntersec
 export type InputActivationOptionNames = Pick<BlessedElementOptionsIntersection, InputActivationOption>
 export type DimensionOptionsNames = Pick<BlessedElementOptionsIntersection, DimensionOptions>
 export type PositionOptionsNames = Pick<BlessedElementOptionsIntersection, PositionOptions>
-
-
 
 // export enum WidgetTypesEnum { // TODO: finish
 //   'element' = 'element',

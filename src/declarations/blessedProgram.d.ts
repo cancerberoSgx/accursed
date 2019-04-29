@@ -1,7 +1,7 @@
-import { EventEmitter } from 'events';
-import { Readable, Writable } from 'stream';
-import { Widgets } from './blessed';
-declare let blessedProgram;
+import { EventEmitter } from 'events'
+import { Readable, Writable } from 'stream'
+import { Widgets } from './blessed'
+declare let blessedProgram
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
  * output.
@@ -12,89 +12,101 @@ declare let blessedProgram;
  *  the object itself'
  */
 interface ProgramResponseData {
-  /** 
+  /**
    * The event type that was requested / write that caused this response. Example: 'window-manipulation',
-   * 'device-attributes', 'device-status', etc. 
+   * 'device-attributes', 'device-status', etc.
    * */
-  event: string;
-  /** 
-   * Example: '', 'DSR' 
+  event: string
+  /**
+   * Example: '', 'DSR'
    */
-  code: string;
-  /** 
+  code: string
+  /**
    * Identifies the request type that caused this response. For example, if a  'window-manipulation' is
-   * written the response type could be 'textarea-size',  example: 'textarea-size',  'cursor-status', 
+   * written the response type could be 'textarea-size',  example: 'textarea-size',  'cursor-status',
    *
-  */
-  type: string;
+   */
+  type: string
   size?: {
-    height: number;
-    width: number;
-  };
-  height?: number;
-  width?: number;
+    height: number
+    width: number
+  }
+  height?: number
+  width?: number
   status?: {
-    x?: number;
-    y: number;
-    page?: number;
-  };
-  page?: any;
-  x?: number;
-  y?: number;
+    x?: number
+    y: number
+    page?: number
+  }
+  page?: any
+  x?: number
+  y?: number
   cursor?: {
-    x: 1;
-    y: 1;
-    page: undefined;
-  };
+    x: 1
+    y: 1
+    page: undefined
+  }
   textAreaSizeCharacters?: {
-    height: number;
-    width: number;
-  };
+    height: number
+    width: number
+  }
   // TODO leave the object open since it has lots of combinations
-  [k: string]: any;
+  [k: string]: any
 }
-type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any;
-/** 
- * program.output Writable implementation should implement this interface 
+type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any
+/**
+ * program.output Writable implementation should implement this interface
  */
 interface ProgramOutput extends Writable {
-  isTTY?: boolean;
-  column: number;
-  rows: number;
+  isTTY?: boolean
+  column: number
+  rows: number
 }
 interface GpmEvent {
-  name: 'mouse' | '';
-  type: 'GPM';
-  action: Widgets.Types.TMouseAction | 'mousedown' | 'mouseup' | 'connect' | 'mousewheel' | 'data' | 'move' | 'dragbtndown' | 'dblclick' | 'btnup' | 'click' | 'error';
-  button: 'left' | 'middle' | 'right';
-  raw: [number, number, number, number];
-  x: number;
-  y: number;
-  shift: boolean;
-  meta: boolean;
-  ctrl: boolean;
+  name: 'mouse' | ''
+  type: 'GPM'
+  action:
+    | Widgets.Types.TMouseAction
+    | 'mousedown'
+    | 'mouseup'
+    | 'connect'
+    | 'mousewheel'
+    | 'data'
+    | 'move'
+    | 'dragbtndown'
+    | 'dblclick'
+    | 'btnup'
+    | 'click'
+    | 'error'
+  button: 'left' | 'middle' | 'right'
+  raw: [number, number, number, number]
+  x: number
+  y: number
+  shift: boolean
+  meta: boolean
+  ctrl: boolean
 }
 interface GpmClient extends EventEmitter {
-  on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this;
+  on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
 }
 export interface IBlessedProgramOptions {
-  input?: Readable;
-  output?: Writable;
-  /** 
-   * path to a file where to write when screen.log() or program.log are called 
+  input?: Readable
+  output?: Writable
+  /**
+   * path to a file where to write when screen.log() or program.log are called
    */
-  log?: string;
-  dump?: boolean;
-  /** 
-   * zero-based indexes for col, row values 
+  log?: string
+  dump?: boolean
+  /**
+   * zero-based indexes for col, row values
    */
-  zero?: boolean;
-  buffer?: boolean;
-  terminal?: string;
-  term?: string;
-  tput?: string;
-  debug?: boolean;
-  resizeTimeout?: boolean;
+  zero?: boolean
+  buffer?: boolean
+  terminal?: string
+  term?: string
+  tput?: string
+  debug?: boolean
+  resizeTimeout?: boolean
 }
 /**
  * The Program instance manages the low level interaction the the terminal. It emit the basi native events to
@@ -219,98 +231,98 @@ program.getWindowSize(function(err:any, data:any) {
 */
 export declare class BlessedProgram extends EventEmitter {
   /** @internal */
-  static instances: BlessedProgram[];
+  static instances: BlessedProgram[]
   /** @internal */
-  gpm?: GpmClient;
-  type: string;
-  options: IBlessedProgramOptions;
-  input: Readable;
-  output: Writable;
+  gpm?: GpmClient
+  type: string
+  options: IBlessedProgramOptions
+  input: Readable
+  output: Writable
   /**
    * Is zero-based indexes for col, row values.
    */
-  zero: boolean;
-  useBuffer: boolean;
-  x: number;
-  y: number;
-  savedX: number;
-  savedY: number;
-  cols: number;
-  rows: number;
-  scrollTop: number;
-  scrollBottom: number;
-  isOSXTerm: boolean;
-  isiTerm2: boolean;
-  isXFCE: boolean;
-  isTerminator: boolean;
-  isLXDE: boolean;
-  isVTE: boolean;
-  isRxvt: boolean;
-  isXterm: boolean;
-  mux: boolean;
-  tmuxVersion: number;
-  isAlt: boolean;
-  constructor(options?: IBlessedProgramOptions);
+  zero: boolean
+  useBuffer: boolean
+  x: number
+  y: number
+  savedX: number
+  savedY: number
+  cols: number
+  rows: number
+  scrollTop: number
+  scrollBottom: number
+  isOSXTerm: boolean
+  isiTerm2: boolean
+  isXFCE: boolean
+  isTerminator: boolean
+  isLXDE: boolean
+  isVTE: boolean
+  isRxvt: boolean
+  isXterm: boolean
+  mux: boolean
+  tmuxVersion: number
+  isAlt: boolean
+  constructor(options?: IBlessedProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
    */
-  log(...args: any[]): boolean;
-  debug(s: string): boolean;
-  setupDump(): void;
-  setupTput(): void;
-  setTerminal(terminal: string): void;
-  /** 
-   * Queries whether the terminal has the capability `name`. 
-  */
-  has(name: string): boolean;
+  log(...args: any[]): boolean
+  debug(s: string): boolean
+  setupDump(): void
+  setupTput(): void
+  setTerminal(terminal: string): void
+  /**
+   * Queries whether the terminal has the capability `name`.
+   */
+  has(name: string): boolean
   /** 	Queries whether the terminal of the type `is`. */
-  term(is: string): boolean;
-  listen(): void;
-  destroy(): void;
-  key(key: string | string[], l: Widgets.KeyEventListener): void;
-  onceKey(key: string | string[], l: Widgets.KeyEventListener): void;
-  unKey(key: string | string[], l: Widgets.KeyEventListener): void;
-  removeKey(key: string | string[], l: Widgets.KeyEventListener): void;
-  bindMouse(): void;
-  enableGpm(): void;
-  disableGpm(): void;
-  bindResponse(): void;
-  response(name: string, text: string, callback: Function, noBypass?: boolean): boolean;
-  response(name: string, callback?: Function): boolean;
-  write(text: string): boolean;
+  term(is: string): boolean
+  listen(): void
+  destroy(): void
+  key(key: string | string[], l: Widgets.KeyEventListener): void
+  onceKey(key: string | string[], l: Widgets.KeyEventListener): void
+  unKey(key: string | string[], l: Widgets.KeyEventListener): void
+  removeKey(key: string | string[], l: Widgets.KeyEventListener): void
+  bindMouse(): void
+  enableGpm(): void
+  disableGpm(): void
+  bindResponse(): void
+  response(name: string, text: string, callback: Function, noBypass?: boolean): boolean
+  response(name: string, callback?: Function): boolean
+  write(text: string): boolean
   /**
    * Writes to this.output
    * Example: `program.write('Hello world', 'blue fg')`
    */
-  write(text: string, style: string): boolean;
+  write(text: string, style: string): boolean
   /**
    * 	Flushes the buffer.
    */
-  flush(): void;
-  /** 	
-   * Determines whether to include text attributes when writing. 
+  flush(): void
+  /**
+   * Determines whether to include text attributes when writing.
    */
-  print(text: string, attr?: boolean): boolean;
-  echo(text: string, attr?: boolean): boolean;
-  /** 
-   * sets cursor 
+  print(text: string, attr?: boolean): boolean
+  echo(text: string, attr?: boolean): boolean
+  /**
+   * sets cursor
    */
-  setx(x: number): boolean;
-  sety(y: number): boolean;
-  move(x: number, y: number): boolean;
-  omove(x: number, y: number): void;
-  rsetx(x: number): boolean;
-  rsety(y: number): boolean;
-  rmove(x: number, y: number): void;
-  cursorCharAbsolute(x: number): number;
-  simpleInsert(ch: string, i?: number, attr?: boolean): boolean;
-  repeat(ch: string, i?: number): string;
-  copyToClipboard(text: string): boolean;
-  cursorShape(shape: 'block' | 'underline' | 'line', blink?: boolean): boolean;
-  cursorColor(color: string): boolean;
-  cursorReset(): boolean;
-  resetCursor(): boolean;
-  getTextParams(param: string, callback: Function): boolean;
+  setx(x: number): boolean
+  sety(y: number): boolean
+  move(x: number, y: number): boolean
+  omove(x: number, y: number): void
+  rsetx(x: number): boolean
+  rsety(y: number): boolean
+  rmove(x: number, y: number): void
+  cursorCharAbsolute(x: number): number
+  simpleInsert(ch: string, i?: number, attr?: boolean): boolean
+  repeat(ch: string, i?: number): string
+  copyToClipboard(text: string): boolean
+  cursorShape(shape: 'block' | 'underline' | 'line', blink?: boolean): boolean
+  cursorColor(color: string): boolean
+  cursorReset(): boolean
+  resetCursor(): boolean
+  getTextParams(param: string, callback: Function): boolean
   /**
    * Set's the cursor color. Example call:
    *
@@ -321,97 +333,97 @@ program.getCursor(function(err, data) {
 });
 ```
    */
-  getCursorColor(callback: Function): boolean;
-  nul(): boolean;
-  bell(): boolean;
-  bel(): boolean;
-  vtab(): boolean;
-  form(): boolean;
-  ff(): boolean;
-  backspace(): boolean;
-  kbs(): boolean;
-  tab(): boolean;
-  ht(): boolean;
+  getCursorColor(callback: Function): boolean
+  nul(): boolean
+  bell(): boolean
+  bel(): boolean
+  vtab(): boolean
+  form(): boolean
+  ff(): boolean
+  backspace(): boolean
+  kbs(): boolean
+  tab(): boolean
+  ht(): boolean
   /** @internal  */
-  _ncoords(): void;
-  shiftOut(): boolean;
-  shiftIn(): boolean;
-  return(): boolean;
-  cr(): boolean;
-  feed(): boolean;
-  newline(): boolean;
-  nl(): boolean;
-  index(): boolean;
-  ind(): boolean;
-  reverseIndex(): boolean;
-  reverse(): boolean;
-  ri(): boolean;
-  nextLine(): boolean;
-  reset(): boolean;
-  tabSet(): boolean;
-  saveCursor(key: string): boolean;
-  sc(key: string): boolean;
-  restoreCursor(key?: string, hide?: boolean): boolean;
-  rc(key?: string, hide?: boolean): boolean;
-  lsaveCursor(key?: string): void;
-  lrestoreCursor(key?: string, hide?: boolean): void;
-  lineHeight(): boolean;
-  charset(val?: string, level?: number): boolean;
-  enter_alt_charset_mode(): boolean;
-  as(): boolean;
-  smacs(): boolean;
-  exit_alt_charset_mode(): boolean;
-  ae(): boolean;
-  rmacs(): boolean;
-  setG(val: number): boolean;
-  setTitle(title: string): boolean;
-  resetColors(param?: string): boolean;
+  _ncoords(): void
+  shiftOut(): boolean
+  shiftIn(): boolean
+  return(): boolean
+  cr(): boolean
+  feed(): boolean
+  newline(): boolean
+  nl(): boolean
+  index(): boolean
+  ind(): boolean
+  reverseIndex(): boolean
+  reverse(): boolean
+  ri(): boolean
+  nextLine(): boolean
+  reset(): boolean
+  tabSet(): boolean
+  saveCursor(key: string): boolean
+  sc(key: string): boolean
+  restoreCursor(key?: string, hide?: boolean): boolean
+  rc(key?: string, hide?: boolean): boolean
+  lsaveCursor(key?: string): void
+  lrestoreCursor(key?: string, hide?: boolean): void
+  lineHeight(): boolean
+  charset(val?: string, level?: number): boolean
+  enter_alt_charset_mode(): boolean
+  as(): boolean
+  smacs(): boolean
+  exit_alt_charset_mode(): boolean
+  ae(): boolean
+  rmacs(): boolean
+  setG(val: number): boolean
+  setTitle(title: string): boolean
+  resetColors(param?: string): boolean
   /**
    * OSC Ps ; Pt ST
    * OSC Ps ; Pt BEL
    * Change dynamic colors
    */
-  dynamicColors(param?: string): boolean;
-  selData(a: string, b: string): boolean;
-  cursorUp(param?: number): boolean;
-  cuu(param?: number): boolean;
-  up(param?: number): boolean;
+  dynamicColors(param?: string): boolean
+  selData(a: string, b: string): boolean
+  cursorUp(param?: number): boolean
+  cuu(param?: number): boolean
+  up(param?: number): boolean
   /**
    * Cursor Down `n` times, by default 1.
    */
-  cursorDown(n?: number): boolean;
+  cursorDown(n?: number): boolean
   /** @see [[cursorDown]] */
-  cud(n?: number): boolean;
+  cud(n?: number): boolean
   /** @see [[cursorDown]] */
-  down(n?: number): boolean;
-  cursorForward(n?: number): boolean;
-  cuf(n?: number): boolean;
-  right(n?: number): boolean;
-  forward(n?: number): boolean;
-  cursorBackward(n?: number): boolean;
-  cub(n?: number): boolean;
-  left(n?: number): boolean;
-  back(n?: number): boolean;
+  down(n?: number): boolean
+  cursorForward(n?: number): boolean
+  cuf(n?: number): boolean
+  right(n?: number): boolean
+  forward(n?: number): boolean
+  cursorBackward(n?: number): boolean
+  cub(n?: number): boolean
+  left(n?: number): boolean
+  back(n?: number): boolean
   /**
    * CSI Ps ; Ps H
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
-  cursorPos(row?: number, col?: number): boolean;
+  cursorPos(row?: number, col?: number): boolean
   /**
    * CSI Ps ; Ps H
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
-  cup(row?: number, col?: number): boolean;
+  cup(row?: number, col?: number): boolean
   /**
    * CSI Ps ; Ps H
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
-  pos(row?: number, col?: number): boolean;
-  eraseInDisplay(param?: string): boolean;
-  ed(param?: string): boolean;
-  clear(): boolean;
-  eraseInLine(param?: string): boolean;
-  el(param?: string): boolean;
+  pos(row?: number, col?: number): boolean
+  eraseInDisplay(param?: string): boolean
+  ed(param?: string): boolean
+  clear(): boolean
+  eraseInLine(param?: string): boolean
+  el(param?: string): boolean
   /**
 ```
  CSI Pm m  Character Attributes (SGR).
@@ -478,8 +490,8 @@ If 88- or 256-color support is compiled, the following apply.
   Ps.
 ```
    */
-  charAttributes(param: string, val?: string): boolean;
-  charAttributes(param: string[], val?: string): boolean;
+  charAttributes(param: string, val?: string): boolean
+  charAttributes(param: string[], val?: string): boolean
   /**
    * set the foreground color and character for the following writings to the output buffer. Example:
 ```
@@ -493,9 +505,9 @@ program.on('mouse', function (data) {
 });
 ```
    */
-  setForeground(color: string, val?: string): boolean;
+  setForeground(color: string, val?: string): boolean
   /** @see [[setForeground]]  */
-  fg(color: string, val?: boolean): string;
+  fg(color: string, val?: boolean): string
   /**
    * set the background color and character for the following writings to the output buffer. Example:
 ```
@@ -509,9 +521,9 @@ program.on('mouse', function (data) {
 });
 ```
    */
-  setBackground(color: string, val?: string): boolean;
+  setBackground(color: string, val?: string): boolean
   /** @see [[setBackground]]  */
-  bg(color: string, val?: string): boolean;
+  bg(color: string, val?: string): boolean
   /**
 ```
 CSI Ps n  Device Status Report (DSR).
@@ -537,9 +549,9 @@ CSI ? Ps n
   CSI ? 5 0  n  No Locator, if not.
 ```
    */
-  deviceStatus(param?: string, callback?: ProgramResponseCallback, dec?: boolean, noBypass?: boolean): boolean;
+  deviceStatus(param?: string, callback?: ProgramResponseCallback, dec?: boolean, noBypass?: boolean): boolean
   /**@see [[deviceStatus]] */
-  dsr(param?: string, callback?: Function, dec?: boolean, noBypass?: boolean): boolean;
+  dsr(param?: string, callback?: Function, dec?: boolean, noBypass?: boolean): boolean
   /**
   Example Call:
 ```
@@ -548,14 +560,14 @@ CSI ? Ps n
   });
 ```
    */
-  getCursor(callback: ProgramResponseCallback): boolean;
-  saveReportedCursor(callback: ProgramResponseCallback): void;
-  restoreReportedCursor: () => boolean;
+  getCursor(callback: ProgramResponseCallback): boolean
+  saveReportedCursor(callback: ProgramResponseCallback): void
+  restoreReportedCursor: () => boolean
   /** CSI Ps @
   Insert Ps (Blank) Character(s) (default = 1) (ICH). */
-  insertChars(param?: number): boolean;
+  insertChars(param?: number): boolean
   /** @see [[insertChars]]  */
-  ich(param?: number): boolean;
+  ich(param?: number): boolean
   /**
 ```
 CSI Ps E
@@ -563,32 +575,32 @@ Cursor Next Line Ps Times (default = 1) (CNL).
 same as CSI Ps B ?
 ```
    */
-  cursorNextLine(param?: number): boolean;
+  cursorNextLine(param?: number): boolean
   /** @cursorNextLine */
-  cnl(param?: number): boolean;
-  cursorPrecedingLine(param?: number): boolean;
-  cpl(param?: number): boolean;
-  cursorCharAbsolute(param?: number): boolean;
-  cha(param?: number): boolean;
-  insertLines(param?: number): boolean;
-  il(param?: number): boolean;
-  deleteLines(param?: number): boolean;
-  dl(param?: number): boolean;
-  deleteChars(param?: number): boolean;
-  dch(param?: number): boolean;
-  eraseChars(param?: number): boolean;
-  ech(param?: number): boolean;
-  charPosAbsolute(param?: number): boolean;
-  hpa(param?: number): boolean;
-  HPositionRelative(param?: number): boolean;
-  sendDeviceAttributes(param?: number, callback?: ProgramResponseCallback): boolean;
-  da(param?: number, callback?: Function): boolean;
-  linePosAbsolute(param?: number): boolean;
-  vpa(param?: number): boolean;
-  VPositionRelative(param?: number): boolean;
-  vpr(param?: number): boolean;
-  HVPosition(row?: number, col?: number): boolean;
-  hvp(row?: number, col?: number): boolean;
+  cnl(param?: number): boolean
+  cursorPrecedingLine(param?: number): boolean
+  cpl(param?: number): boolean
+  cursorCharAbsolute(param?: number): boolean
+  cha(param?: number): boolean
+  insertLines(param?: number): boolean
+  il(param?: number): boolean
+  deleteLines(param?: number): boolean
+  dl(param?: number): boolean
+  deleteChars(param?: number): boolean
+  dch(param?: number): boolean
+  eraseChars(param?: number): boolean
+  ech(param?: number): boolean
+  charPosAbsolute(param?: number): boolean
+  hpa(param?: number): boolean
+  HPositionRelative(param?: number): boolean
+  sendDeviceAttributes(param?: number, callback?: ProgramResponseCallback): boolean
+  da(param?: number, callback?: Function): boolean
+  linePosAbsolute(param?: number): boolean
+  vpa(param?: number): boolean
+  VPositionRelative(param?: number): boolean
+  vpr(param?: number): boolean
+  HVPosition(row?: number, col?: number): boolean
+  hvp(row?: number, col?: number): boolean
   /**
 ```
  CSI Pm h  Set Mode (SM).
@@ -684,18 +696,18 @@ same as CSI Ps B ?
   });
 ```
    */
-  setMode(args: string, callback: ProgramResponseCallback): boolean;
+  setMode(args: string, callback: ProgramResponseCallback): boolean
   /** @see [[setMode]]  */
-  sm(...args: string[]): boolean;
-  decset(...args: string[]): boolean;
+  sm(...args: string[]): boolean
+  decset(...args: string[]): boolean
   /**
  * Uses [[setMode]] 2 5 to show the cursor:
   NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor
  */
-  showCursor(): boolean;
-  alternateBuffer(): boolean;
-  smcup(): boolean;
-  alternate(): boolean;
+  showCursor(): boolean
+  alternateBuffer(): boolean
+  smcup(): boolean
+  alternate(): boolean
   /**
 ```
 CSI Pm l  Reset Mode (RM).
@@ -780,35 +792,38 @@ CSI ? Pm l
     Ps = 2 0 0 4  -> Reset bracketed paste mode.
 ```
  */
-  resetMode(...args: string[]): boolean;
+  resetMode(...args: string[]): boolean
   /** @see [[resetMode]]  */
-  rm(...args: string[]): boolean;
-  decrst(...args: string[]): boolean;
-  hideCursor(): boolean;
-  civis(): boolean;
-  vi(): boolean;
-  cursor_invisible(): boolean;
-  dectcemh(): boolean;
-  normalBuffer(): boolean;
-  rmcup(): boolean;
-  enableMouse(): void;
-  disableMouse(): void;
-  setMouse(opt?: {
-    normalMouse?: boolean;
-    x10Mouse?: boolean;
-    hiliteTracking?: boolean;
-    vt200Mouse?: boolean;
-    allMotion?: boolean;
-    sendFocus?: boolean;
-    utfMode?: boolean;
-    sgrMouse?: boolean;
-    decMouse?: boolean;
-    urxvtMouse?: boolean;
-    ptermMouse?: boolean;
-    jsbtermMouse?: boolean;
-    gpmMouse?: boolean;
-    [s: string]: any;
-  }, enable?: boolean): void;
+  rm(...args: string[]): boolean
+  decrst(...args: string[]): boolean
+  hideCursor(): boolean
+  civis(): boolean
+  vi(): boolean
+  cursor_invisible(): boolean
+  dectcemh(): boolean
+  normalBuffer(): boolean
+  rmcup(): boolean
+  enableMouse(): void
+  disableMouse(): void
+  setMouse(
+    opt?: {
+      normalMouse?: boolean
+      x10Mouse?: boolean
+      hiliteTracking?: boolean
+      vt200Mouse?: boolean
+      allMotion?: boolean
+      sendFocus?: boolean
+      utfMode?: boolean
+      sgrMouse?: boolean
+      decMouse?: boolean
+      urxvtMouse?: boolean
+      ptermMouse?: boolean
+      jsbtermMouse?: boolean
+      gpmMouse?: boolean
+      [s: string]: any
+    },
+    enable?: boolean
+  ): void
   /**
 ```
  CSI Ps ; Ps r
@@ -817,20 +832,20 @@ CSI ? Pm l
  CSI ? Pm r
 ```
    */
-  setScrollRegion(top: number, bottom: number): boolean;
+  setScrollRegion(top: number, bottom: number): boolean
   /** @see [[setScrollRegion]]*/
-  csr(top: number, bottom: number): boolean;
+  csr(top: number, bottom: number): boolean
   /** @see [[setScrollRegion]]*/
-  decstbm(top: number, bottom: number): boolean;
+  decstbm(top: number, bottom: number): boolean
   /**
 ```
 CSI s
   Save cursor (ANSI.SYS).
 ```
   */
-  saveCursorA(): boolean;
+  saveCursorA(): boolean
   /** @see [[saveCursorA]]*/
-  scA(): boolean;
+  scA(): boolean
   /**
 ```
  CSI u
@@ -838,25 +853,25 @@ CSI s
 ```
  
  */
-  restoreCursorA(): boolean;
-  /** 
+  restoreCursorA(): boolean
+  /**
    * @see [[restoreCursorA]]
    * */
-  rcA(): boolean;
-  /**  
-   * Cursor Forward Tabulation Ps tab stops (default = 1) (CHT). 
+  rcA(): boolean
+  /**
+   * Cursor Forward Tabulation Ps tab stops (default = 1) (CHT).
    */
-  cursorForwardTab(param?: number): boolean;
+  cursorForwardTab(param?: number): boolean
   /** @see [[cursorForwardTab]]*/
-  cht(param?: number): boolean;
+  cht(param?: number): boolean
   /**CSI Ps S  Scroll up Ps lines (default = 1) (SU). */
-  scrollUp(param?: number): boolean;
+  scrollUp(param?: number): boolean
   /** @see [[scrollUp]]*/
-  su(param?: number): boolean;
+  su(param?: number): boolean
   /**  CSI Ps T  Scroll down Ps lines (default = 1) (SD). */
-  scrollDown(param?: number): boolean;
+  scrollDown(param?: number): boolean
   /** @see [[scrollDown]]*/
-  sd(param?: number): boolean;
+  sd(param?: number): boolean
   /**
 ```
    CSI Ps ; Ps ; Ps ; Ps ; Ps T
@@ -865,7 +880,7 @@ CSI s
    Tracking.
 ```
    */
-  initMouseTracking(...args: string[]): boolean;
+  initMouseTracking(...args: string[]): boolean
   /**
 ```
    CSI > Ps; Ps T
@@ -881,30 +896,30 @@ CSI s
     (See discussion of "Title Modes").
 ```
    */
-  resetTitleModes(...args: string[]): boolean;
+  resetTitleModes(...args: string[]): boolean
   /**  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
-  cursorBackwardTab(param?: number): boolean;
-  cbt(param?: number): boolean;
-  repeatPrecedingCharacter(param?: number): boolean;
-  rep(param?: number): boolean;
-  tabClear(param?: number): boolean;
-  tbc(param?: number): boolean;
-  mediaCopy(...args: string[]): boolean;
-  mc(...args: string[]): boolean;
-  mc0(): boolean;
-  print_screen(): boolean;
-  ps(): boolean;
-  mc5(): boolean;
-  prtr_on(): boolean;
-  po(): boolean;
-  mc4(): boolean;
-  prtr_off(): boolean;
-  pf(): boolean;
-  mc5p(): boolean;
-  prtr_non(): boolean;
-  p0(): boolean;
-  setResources(...args: string[]): boolean;
-  disableModifieres(...args: string[]): boolean;
+  cursorBackwardTab(param?: number): boolean
+  cbt(param?: number): boolean
+  repeatPrecedingCharacter(param?: number): boolean
+  rep(param?: number): boolean
+  tabClear(param?: number): boolean
+  tbc(param?: number): boolean
+  mediaCopy(...args: string[]): boolean
+  mc(...args: string[]): boolean
+  mc0(): boolean
+  print_screen(): boolean
+  ps(): boolean
+  mc5(): boolean
+  prtr_on(): boolean
+  po(): boolean
+  mc4(): boolean
+  prtr_off(): boolean
+  pf(): boolean
+  mc5p(): boolean
+  prtr_non(): boolean
+  p0(): boolean
+  setResources(...args: string[]): boolean
+  disableModifieres(...args: string[]): boolean
   /**
    *
 ```
@@ -919,18 +934,18 @@ Valid values for the parameter:
  
 ```
   */
-  setPointerMode(...args: string[]): boolean;
-  softReset(): boolean;
-  rs2(): boolean;
-  decstr(): boolean;
-  requestAnsiMode(param?: number): boolean;
-  decrqm(param?: number): boolean;
-  requestPrivateMode(param?: number): boolean;
-  decrqmp(param?: number): boolean;
-  setConformanceLevel(...args: string[]): boolean;
-  decscl(...args: string[]): boolean;
-  loadLEDs(param?: number): boolean;
-  decll(param?: number): boolean;
+  setPointerMode(...args: string[]): boolean
+  softReset(): boolean
+  rs2(): boolean
+  decstr(): boolean
+  requestAnsiMode(param?: number): boolean
+  decrqm(param?: number): boolean
+  requestPrivateMode(param?: number): boolean
+  decrqmp(param?: number): boolean
+  setConformanceLevel(...args: string[]): boolean
+  decscl(...args: string[]): boolean
+  loadLEDs(param?: number): boolean
+  decll(param?: number): boolean
   /**
 ```
 CSI Ps SP q
@@ -942,9 +957,25 @@ Set cursor style (DECSCUSR, VT520).
  Ps = 4  -> steady underline.
 ```
    */
-  setCursorStyle(cursor: 0 | 1 | 2 | 3 | 4 | 'blinkingblock' | 'block' | 'steady block' | 'blinking underline' | 'underline' | 'steady underline' | 'blinking bar' | 'bar' | 'steady bar'): boolean;
+  setCursorStyle(
+    cursor:
+      | 0
+      | 1
+      | 2
+      | 3
+      | 4
+      | 'blinkingblock'
+      | 'block'
+      | 'steady block'
+      | 'blinking underline'
+      | 'underline'
+      | 'steady underline'
+      | 'blinking bar'
+      | 'bar'
+      | 'steady bar'
+  ): boolean
   /** see [[setCursorStyle]] */
-  decscursr(cursor: number): boolean;
+  decscursr(cursor: number): boolean
   /**
 ```
    CSI Ps " q
@@ -955,9 +986,9 @@ Set cursor style (DECSCUSR, VT520).
     Ps = 2  -> DECSED and DECSEL can erase.
 ```
    */
-  setCharProtectionAttr(param?: number): boolean;
+  setCharProtectionAttr(param?: number): boolean
   /** @see [[setCharProtectionAttr]] */
-  decsca(param?: number): boolean;
+  decsca(param?: number): boolean
   /**
 ```
   CSI ? Pm r
@@ -965,7 +996,7 @@ Set cursor style (DECSCUSR, VT520).
     saved is restored.  Ps values are the same as for DECSET.
 ```
     */
-  restorePrivateValues(...args: string[]): boolean;
+  restorePrivateValues(...args: string[]): boolean
   /**
 ```
    * CSI Pt; Pl; Pb; Pr; Ps$ r
@@ -975,11 +1006,11 @@ Set cursor style (DECSCUSR, VT520).
 NOTE: xterm doesn't enable this code by default.
 ```
    */
-  setAttrInRectangle(Pt: number, Pl: number, Pb: number, Pr: number, Ps$: number): boolean;
+  setAttrInRectangle(Pt: number, Pl: number, Pb: number, Pr: number, Ps$: number): boolean
   /** @see [[setAttrInRectangle]] */
-  deccara(...args: string[]): boolean;
+  deccara(...args: string[]): boolean
   /**  Save DEC Private Mode Values.  Ps values are the same as for */
-  savePrivateValues(...args: string[]): boolean;
+  savePrivateValues(...args: string[]): boolean
   /**
    *
 ```
@@ -1042,11 +1073,11 @@ program.manipulateWindow(18, function(err:any, data:any) {
 ```
  
    */
-  manipulateWindow(data1: number, data2: number | undefined, c: ProgramResponseCallback): boolean;
-  manipulateWindow(data1: number, c: ProgramResponseCallback): boolean;
-  getWindowSize(callback?: ProgramResponseCallback): boolean;
-  reverseAttrInRectangle(...args: string[]): boolean;
-  decrara(...args: string[]): boolean;
+  manipulateWindow(data1: number, data2: number | undefined, c: ProgramResponseCallback): boolean
+  manipulateWindow(data1: number, c: ProgramResponseCallback): boolean
+  getWindowSize(callback?: ProgramResponseCallback): boolean
+  reverseAttrInRectangle(...args: string[]): boolean
+  decrara(...args: string[]): boolean
   /**```CSI > Ps; Ps t
   Set one or more features of the title modes.  Each parameter
   enables a single feature.
@@ -1058,10 +1089,10 @@ program.manipulateWindow(18, function(err:any, data:any) {
 XXX VTE bizarelly echos this:
 ```
 */
-  setTitleModeFeature(...args: string[]): boolean;
-  setWarningBellVolume(param?: number): boolean;
-  decswbv(param?: number): boolean;
-  setMarginBellVolume(param?: number): boolean;
+  setTitleModeFeature(...args: string[]): boolean
+  setWarningBellVolume(param?: number): boolean
+  decswbv(param?: number): boolean
+  setMarginBellVolume(param?: number): boolean
   /**
    *```
    CSI Pt; Pl; Pb; Pr; Pp; Pt; Pl; Pp$ v
@@ -1073,9 +1104,9 @@ XXX VTE bizarelly echos this:
    NOTE: xterm doesn't enable this code by default.
 ```
    */
-  copyRectangle(...args: string[]): boolean;
+  copyRectangle(...args: string[]): boolean
   /**  @see [[copyRectangle]]  */
-  deccra(...args: string[]): boolean;
+  deccra(...args: string[]): boolean
   /**
    * ```
  CSI Pt ; Pl ; Pb ; Pr ' w
@@ -1091,9 +1122,9 @@ XXX VTE bizarelly echos this:
    cels any prevous rectangle definition.
 ```
    */
-  enableFilterRectangle(...args: string[]): boolean;
+  enableFilterRectangle(...args: string[]): boolean
   /**  @see [[enableFilterRectangle]]  */
-  decefr(...args: string[]): boolean;
+  decefr(...args: string[]): boolean
   /**
 ```
 CSI Ps x  Request Terminal Parameters (DECREQTPARM).
@@ -1109,9 +1140,9 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
     Pn = 0  <- STP flags.
 ```
    */
-  requestParameters(param?: number): boolean;
+  requestParameters(param?: number): boolean
   /**  @see [[requestParameters]]  */
-  decreqtparm(param: number): boolean;
+  decreqtparm(param: number): boolean
   /**
 ```
    
@@ -1121,9 +1152,9 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
       Ps = 2  -> rectangle (exact).
 ```
    */
-  selectChangeExtent(param?: number): boolean;
+  selectChangeExtent(param?: number): boolean
   /**  @see [[selectChangeExtent]]  */
-  decsace(param?: number): boolean;
+  decsace(param?: number): boolean
   /**
 ```
     CSI Pc; Pt; Pl; Pb; Pr$ x
@@ -1133,9 +1164,9 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
 NOTE: xterm doesn't enable this code by default.
 ```
    */
-  fillRectangle(Pc: string, Pt: number, pl: number, pb: number, pr: number): boolean;
+  fillRectangle(Pc: string, Pt: number, pl: number, pb: number, pr: number): boolean
   /**  @see [[fillRectangle]]  */
-  decfra(...args: string[]): boolean;
+  decfra(...args: string[]): boolean
   /**
 ```
  
@@ -1154,14 +1185,14 @@ CSI Ps ; Pu ' z
 ```
  
  */
-  enableLocatorReporting(...args: string[]): boolean;
-  decelr(...args: string[]): boolean;
-  eraseRectangle(...args: string[]): boolean;
-  decera(...args: string[]): boolean;
-  setLocatorEvents(...args: string[]): boolean;
-  decsle(...args: string[]): boolean;
-  selectiveEraseRectangle(...args: string[]): boolean;
-  decsera(...args: string[]): boolean;
+  enableLocatorReporting(...args: string[]): boolean
+  decelr(...args: string[]): boolean
+  eraseRectangle(...args: string[]): boolean
+  decera(...args: string[]): boolean
+  setLocatorEvents(...args: string[]): boolean
+  decsle(...args: string[]): boolean
+  selectiveEraseRectangle(...args: string[]): boolean
+  decsera(...args: string[]): boolean
   /**
 ```
   CSI Ps ' |
@@ -1207,13 +1238,13 @@ CSI Ps ; Pu ' z
 ```
   
    */
-  requestLocatorPosition(param?: string, callback?: ProgramResponseCallback): boolean;
+  requestLocatorPosition(param?: string, callback?: ProgramResponseCallback): boolean
   /** @see [[requestLocatorPosition]] */
-  reqmp(param?: string, callback?: ProgramResponseCallback): boolean;
+  reqmp(param?: string, callback?: ProgramResponseCallback): boolean
   /** @see [[requestLocatorPosition]] */
-  req_mouse_pos(param?: string, callback?: ProgramResponseCallback): boolean;
+  req_mouse_pos(param?: string, callback?: ProgramResponseCallback): boolean
   /** @see [[requestLocatorPosition]] */
-  decrqlp(param?: string, callback?: ProgramResponseCallback): boolean;
+  decrqlp(param?: string, callback?: ProgramResponseCallback): boolean
   /**
 ```
  CSI P m SP }
@@ -1221,9 +1252,9 @@ CSI Ps ; Pu ' z
  NOTE: xterm doesn't enable this code by default.
 ```
 */
-  insertColumns(...args: string[]): boolean;
+  insertColumns(...args: string[]): boolean
   /** @see [[insertColumns]] */
-  decic(...args: string[]): boolean;
+  decic(...args: string[]): boolean
   /**
 ```
  CSI P m SP ~
@@ -1231,44 +1262,40 @@ CSI Ps ; Pu ' z
  NOTE: xterm doesn't enable this code by default.
 ```
    */
-  deleteColumns(...args: string[]): boolean;
-  /** 
-   * @see [[deleteColumns]] 
+  deleteColumns(...args: string[]): boolean
+  /**
+   * @see [[deleteColumns]]
    */
-  decdc(...args: string[]): boolean;
-  out(param: string, ...args: any[]): boolean;
-  sigtstp(callback?: ProgramResponseCallback): boolean;
-  pause(callback?: ProgramResponseCallback): Function;
-  resume: () => void;
-  /** 
+  decdc(...args: string[]): boolean
+  out(param: string, ...args: any[]): boolean
+  sigtstp(callback?: ProgramResponseCallback): boolean
+  pause(callback?: ProgramResponseCallback): Function
+  resume: () => void
+  /**
    * Triggered when native events in the host terminal window .
    **/
-  on(e: 'mouse', c: (e: GpmEvent) => void): this;
+  on(e: 'mouse', c: (e: GpmEvent) => void): this
   //  on(e: 'response', c: (e: any) => void): this
-  /** 
-   * Triggered when the terminal window is resized. 
+  /**
+   * Triggered when the terminal window is resized.
    * */
-  on(e: 'resize', c: (e: {
-    winch: boolean;
-    cols: number;
-    rows: number;
-  }) => void): this;
-  /** 
+  on(e: 'resize', c: (e: { winch: boolean; cols: number; rows: number }) => void): this
+  /**
    * Triggered when the terminal window gains focus n the host window manager. For exmmple when the user
    * switchst form another application to the terminal with ctrl-tab.  Notice that these are native events,
    * ocurring outside the terminal application.
    */
-  on(e: 'focus', c: (e: any) => void): this;
-  /** 
+  on(e: 'focus', c: (e: any) => void): this
+  /**
    * Triggered when the terminal window loose focus host window manager. For exmmple when the user switchs
    * from the shell to another form another application . Notice that these are native events, ocurring
    * outside the terminal application.
-  */
-  on(e: 'blur', c: (e: any) => void): this;
-  on(e: 'keypress', c: Widgets.KeyEventListener): this;
-  /** 
-   * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). 
    */
-  on(event: 'warning', callback: (text: string) => void): this;
-  on(e: string, c: (e: any) => void): this;
+  on(e: 'blur', c: (e: any) => void): this
+  on(e: 'keypress', c: Widgets.KeyEventListener): this
+  /**
+   * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc).
+   */
+  on(event: 'warning', callback: (text: string) => void): this
+  on(e: string, c: (e: any) => void): this
 }

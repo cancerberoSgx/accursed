@@ -11,7 +11,7 @@
 import * as child_process from 'child_process'
 import { EventEmitter } from 'events'
 import * as stream from 'stream'
-import { BlessedProgram } from './blessedProgram';
+import { BlessedProgram } from './blessedProgram'
 
 export namespace Widgets {
   export namespace Types {
@@ -22,13 +22,13 @@ export namespace Widgets {
     type TMouseAction = 'mousedown' | 'mouseup' | 'mousemove' | 'wheelup' | 'wheeldown'
 
     interface TBorder extends TStyle {
-      /** 
-       * Type of border (line or bg). bg by default. 
+      /**
+       * Type of border (line or bg). bg by default.
        */
       type?: BorderType
 
-      /** 
-       * Character to use if bg type, default is space. 
+      /**
+       * Character to use if bg type, default is space.
        */
       ch?: string
 
@@ -41,7 +41,7 @@ export namespace Widgets {
     type BorderType = string //'line' | 'bg'
 
     export interface TStyle {
-      /** 
+      /**
        * Artificial type for user custom data (it doesn't exists just a type) .
        */
       custom?: { [name: string]: any }
@@ -188,7 +188,7 @@ export namespace Widgets {
     destroy(): void
   }
 
-  interface IOptions { }
+  interface IOptions {}
 
   interface IHasOptions<T extends IOptions> {
     options: T
@@ -391,7 +391,7 @@ export namespace Widgets {
     detach(): void
     free(): void
     /**
-     * Visit each node's descendants, with [[iter]] function,  parents first. 
+     * Visit each node's descendants, with [[iter]] function,  parents first.
      * If `s` is provided it will call [[iter]] on self first.
      */
     forDescendants(iter: (node: Node) => void, s?: boolean): void
@@ -421,12 +421,12 @@ export namespace Widgets {
      */
     set(name: string, value: any): void
 
-    /** 
-     * Received when node gains a new parent. If the node was detached from the sreen, newParent will be undefined. 
+    /**
+     * Received when node gains a new parent. If the node was detached from the sreen, newParent will be undefined.
      */
     on(event: 'reparent', listener: (this: this, newParent?: Node) => void): void
     /**
-     * emitted by a parent node when adding a new child node. 
+     * emitted by a parent node when adding a new child node.
      */
     on(event: 'adopt', listener: (this: this, newChildren: Node) => void): void
     on(event: 'attach', listener: (this: this, newParent: Node) => void): void
@@ -485,8 +485,6 @@ export namespace Widgets {
     | 'mousemove'
     | 'click'
 
-
-
   /**
     'resize': Received on screen resize. 
   
@@ -507,12 +505,16 @@ export namespace Widgets {
   
     'parsed content':  Received when element [[content]] is parsed.
    */
-  type NodeGenericEventType = |
-    'resize' |
-    'prerender' | 'render' | 'destroy' | 'move' | 'show' | 'hide' | 'set content' |
-    'parsed content'
-
-
+  type NodeGenericEventType =
+    | 'resize'
+    | 'prerender'
+    | 'render'
+    | 'destroy'
+    | 'move'
+    | 'show'
+    | 'hide'
+    | 'set content'
+    | 'parsed content'
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
@@ -536,22 +538,22 @@ export namespace Widgets {
      * Remove a keypress listener for a specific key.
      */
     removeKey(name: string, listener: KeyEventListener): void
-    /** 
+    /**
      * Registers event listener to be notified on mouse events.
-    */
+     */
     on(event: string, listener: (...args: any[]) => void): this
-    /** 
+    /**
      * Registers event listener to be notified on mouse events.
-    */
+     */
     on(event: NodeMouseEventType, callback: (arg: Events.IMouseEventArg) => void): this
 
-    /** 
-     * Received on key events. 
-    */
+    /**
+     * Received on key events.
+     */
     on(event: 'keypress', callback: KeyEventListener): this
     on(event: NodeScreenEventType, callback: (arg: Screen) => void): this
-    /** 
-     * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc). 
+    /**
+     * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc).
      */
     on(event: 'warning', callback: (text: string) => void): this
     on(event: NodeGenericEventType, callback: (arg: Events.INodeGenericEventArg) => void): this
@@ -1576,19 +1578,19 @@ export namespace Widgets {
     draggable: boolean
 
     /**
-     * Calculated top coordinate taking into account padding and bodeer. 
+     * Calculated top coordinate taking into account padding and boder.
      */
     readonly itop: number
     /**
-     * Calculated left coordinate taking into account padding and bodeer. 
+     * Calculated left coordinate taking into account padding and boder.
      */
     readonly ileft: number
     /**
-     * Calculated height taking into account padding and bodeer. 
+     * Calculated height taking into account padding and boder.
      */
     readonly iheight: number
     /**
-     * Calculated width taking into account padding and bodeer. 
+     * Calculated width taking into account padding and boder.
      */
     readonly iwidth: number
 
@@ -1603,15 +1605,15 @@ export namespace Widgets {
     rleft: Types.TTopLeft
 
     /**
-        * Calculated relative bottom offset. 
-        * 
-        * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
-        */
+     * Calculated relative bottom offset.
+     *
+     * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
+     */
     rright: Types.TPosition
 
     /**
-     * Calculated relative bottom offset. 
-     * 
+     * Calculated relative bottom offset.
+     *
      * Setting this property will cause the element to change element's [[position]] property and emit [[move]] event.
      */
     rbottom: Types.TPosition
@@ -1656,11 +1658,11 @@ export namespace Widgets {
     focus(): void
 
     /**
-     * Parses given content string with no tags before rendering. Removes / transform characters that break the output. 
-     * 
-     * For example, double-width chars will eat the next char after render in this case it creates a blank character 
+     * Parses given content string with no tags before rendering. Removes / transform characters that break the output.
+     *
+     * For example, double-width chars will eat the next char after render in this case it creates a blank character
      * after it so it doesn't eat the real next char.
-     * 
+     *
      * @internal
      */
     parseContent(noTags: string): boolean
@@ -1924,8 +1926,8 @@ export namespace Widgets {
      * Style of the scrollbar track if present (takes regular style options).
      */
     scrollbar?:
-    | { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string } & Widgets.Types.TStyle
-    | boolean
+      | { style?: Widgets.Types.TStyle; track?: Widgets.Types.TStyle; ch?: string } & Widgets.Types.TStyle
+      | boolean
   }
 
   interface ScrollableTextOptions extends ScrollableBoxOptions {
@@ -2017,7 +2019,7 @@ export namespace Widgets {
    * A scrollable text box which can display and scroll text, as well as handle
    * pre-existing newlines and escape codes.
    */
-  class ScrollableTextElement extends ScrollableBoxElement { }
+  class ScrollableTextElement extends ScrollableBoxElement {}
 
   /**
    * A box element which draws a simple box containing content or other elements.
@@ -2720,7 +2722,7 @@ export namespace Widgets {
     censor: boolean
   }
 
-  interface ButtonOptions extends BoxOptions { }
+  interface ButtonOptions extends BoxOptions {}
 
   class ButtonElement extends InputElement implements IHasOptions<ButtonOptions> {
     constructor(opts: ButtonOptions)
@@ -2797,7 +2799,7 @@ export namespace Widgets {
     on(event: 'uncheck', callback: (this: CheckboxElement) => void): this
   }
 
-  interface RadioSetOptions extends BoxOptions { }
+  interface RadioSetOptions extends BoxOptions {}
 
   /**
    * An element wrapping RadioButtons. RadioButtons within this element will be mutually exclusive
@@ -2807,7 +2809,7 @@ export namespace Widgets {
     constructor(opts: RadioSetOptions)
   }
 
-  interface RadioButtonOptions extends CheckboxOptions { }
+  interface RadioButtonOptions extends CheckboxOptions {}
 
   /**
    * A radio button which can be used in a form element.
@@ -2816,7 +2818,7 @@ export namespace Widgets {
     constructor(opts: RadioButtonOptions)
   }
 
-  interface PromptOptions extends BoxOptions { }
+  interface PromptOptions extends BoxOptions {}
 
   /**
    * A prompt box containing a text input, okay, and cancel buttons (automatically hidden).
@@ -2834,7 +2836,7 @@ export namespace Widgets {
     readInput(text: string, value: string, callback: (err: any, value: string) => void): void
   }
 
-  interface QuestionOptions extends BoxOptions { }
+  interface QuestionOptions extends BoxOptions {}
 
   /**
    * A question box containing okay and cancel buttons (automatically hidden).
@@ -2850,7 +2852,7 @@ export namespace Widgets {
     ask(question: string, callback: (err: any, value: string) => void): void
   }
 
-  interface MessageOptions extends BoxOptions { }
+  interface MessageOptions extends BoxOptions {}
 
   /**
    * A box containing a message to be displayed (automatically hidden).
@@ -2876,7 +2878,7 @@ export namespace Widgets {
     error(text: string, callback: () => void): void
   }
 
-  interface LoadingOptions extends BoxOptions { }
+  interface LoadingOptions extends BoxOptions {}
 
   /**
    * A box with a spinning line to denote loading (automatically hidden).
@@ -3355,36 +3357,36 @@ export namespace Widgets {
 
 // publish classes on existin gpaths so users can reference the real values for extending
 export namespace widget {
-  class Node extends Widgets.Node { }
+  class Node extends Widgets.Node {}
   class Element<Options extends Widgets.ElementOptions = Widgets.ElementOptions> extends Widgets.BlessedElement<
     Options
-    > { }
-  class Box extends Widgets.BoxElement { }
-  class List extends Widgets.ListElement { }
-  class Screen extends Widgets.Screen { }
-  class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> { }
-  class Line extends Widgets.LineElement { }
-  class BigText extends Widgets.BigTextElement { }
-  class FileManager extends Widgets.FileManagerElement { }
-  class ListTable extends Widgets.ListTableElement { }
-  class Listbar extends Widgets.ListbarElement { }
-  class Form extends Widgets.FormElement { }
-  class Input extends Widgets.InputElement { }
-  class Textarea extends Widgets.TextareaElement { }
-  class Textbox extends Widgets.TextboxElement { }
-  class Button extends Widgets.ButtonElement { }
-  class Checkbox extends Widgets.CheckboxElement { }
-  class RadioSet extends Widgets.RadioSetElement { }
-  class RadioButton extends Widgets.RadioButtonElement { }
-  class Table extends Widgets.TableElement { }
-  class Prompt extends Widgets.PromptElement { }
-  class Question extends Widgets.QuestionElement { }
-  class Message extends Widgets.MessageElement { }
-  class Loading extends Widgets.LoadingElement { }
-  class Log extends Widgets.Log { }
-  class ProgressBar extends Widgets.ProgressBarElement { }
-  class Terminal extends Widgets.TerminalElement { }
-  class Layout extends Widgets.LayoutElement { }
+  > {}
+  class Box extends Widgets.BoxElement {}
+  class List extends Widgets.ListElement {}
+  class Screen extends Widgets.Screen {}
+  class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> {}
+  class Line extends Widgets.LineElement {}
+  class BigText extends Widgets.BigTextElement {}
+  class FileManager extends Widgets.FileManagerElement {}
+  class ListTable extends Widgets.ListTableElement {}
+  class Listbar extends Widgets.ListbarElement {}
+  class Form extends Widgets.FormElement {}
+  class Input extends Widgets.InputElement {}
+  class Textarea extends Widgets.TextareaElement {}
+  class Textbox extends Widgets.TextboxElement {}
+  class Button extends Widgets.ButtonElement {}
+  class Checkbox extends Widgets.CheckboxElement {}
+  class RadioSet extends Widgets.RadioSetElement {}
+  class RadioButton extends Widgets.RadioButtonElement {}
+  class Table extends Widgets.TableElement {}
+  class Prompt extends Widgets.PromptElement {}
+  class Question extends Widgets.QuestionElement {}
+  class Message extends Widgets.MessageElement {}
+  class Loading extends Widgets.LoadingElement {}
+  class Log extends Widgets.Log {}
+  class ProgressBar extends Widgets.ProgressBarElement {}
+  class Terminal extends Widgets.TerminalElement {}
+  class Layout extends Widgets.LayoutElement {}
 }
 
 /** @inheritdoc */

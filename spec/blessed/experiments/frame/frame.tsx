@@ -1,65 +1,55 @@
-import { React, screen } from '../../../../src'
-import { frameChar, Style } from './frameChear';
+import { frameChar, Style } from './frameChear'
 
-function box({xi, xl, yi, yl, style='normal'}: {xi: number, xl: number, yi: number, yl: number, style?: Style}){
+function box({ xi, xl, yi, yl, style = 'normal' }: { xi: number; xl: number; yi: number; yl: number; style?: Style }) {
   const arr = []
-  for (let j = yi; j <yl; j++) {
+  for (let j = yi; j < yl; j++) {
     const line = []
-for (let i = xi; i <xl; i++) {
-  if(j==0){
-    if(i===0){
-      line.push(frameChar({right: style, down: style}))
+    for (let i = xi; i < xl; i++) {
+      if (j == 0) {
+        if (i === 0) {
+          line.push(frameChar({ right: style, down: style }))
+        } else if (i === xl - 1) {
+          line.push(frameChar({ left: style, down: style }))
+        } else if (j === 0) {
+          line.push(frameChar({ left: style }))
+        } else {
+          line.push(' ')
+        }
+      } else if (j === yl - 1) {
+        if (i === 0) {
+          line.push(frameChar({ right: style, up: style }))
+        } else if (i === xl - 1) {
+          line.push(frameChar({ left: style, up: style }))
+        } else if (j === yl - 1) {
+          line.push(frameChar({ left: style }))
+        } else {
+          line.push(' ')
+        }
+      } else {
+        if (i === 0) {
+          line.push(frameChar({ down: style }))
+        } else if (i === xl - 1) {
+          line.push(frameChar({ up: style }))
+        } else {
+          line.push(' ')
+        }
+      }
     }
-    else if (i===xl-1){
-      line.push(frameChar({left: style, down: style}))
-    }
-    else if(j===0){
-      line.push(frameChar({left: style}))
-
-    }
-    else {
-      line.push(' ')
-    }
+    arr.push(line)
   }
-  else if(j===yl-1){
-    if(i===0){
-      line.push(frameChar({right: style, up: style}))
-    }
-    else if (i===xl-1){
-      line.push(frameChar({left: style, up: style}))
-    
-    }
-    else if(j===yl-1){
-      line.push(frameChar({left: style}))
-
-    }
-    else {
-      line.push(' ')
-    }
-  }
-  else {
-    if(i===0){
-      line.push(frameChar({down: style}))
-    }
-    else if(i===xl-1){
-      line.push(frameChar({up: style}))
-    }
-    else {
-      line.push(' ')
-    }
-    }
-}
-arr.push(line)
-}
-return arr
+  return arr
 }
 
-function print(s: string[][]){
-  return s.map(l=>l.join('')).join('\n')
+function print(s: string[][]) {
+  return s.map(l => l.join('')).join('\n')
 }
 
-console.log(box({xi: 0, xl: 5, yi: 0, yl: 5}))
-console.log(print(box({xi: 0, xl: 5, yi: 0, yl: 5})));
+console.log(box({ xi: 0, xl: 5, yi: 0, yl: 5 }))
+
+console.log(print(box({xi: 0, xl: 5, yi: 0, yl: 5, style: 'rounded' })))
+
+
+console.log(print(box({ xi: 0, xl: 10, yi: 0, yl: 5, style: 'double' })))
 
 /**
 

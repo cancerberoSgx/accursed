@@ -2,7 +2,6 @@
 // import {Line, line,  LineOptions} from './line'
 // import {cell, Cell} from './cell'
 // import { colorUtil } from './color';
- 
 
 // export type Point =  [number, number]
 // export class Lines extends Readable {
@@ -20,14 +19,14 @@
 
 //   line(o: LineOptions) {
 //     this._lines = this._lines.concat([line(o)]);
-//     return this; 
+//     return this;
 //   }
 
 //   box({from, to, style, color}: Line){//{from:Point , to: Point , style: string, color?: any}) {
 //     // var color, from, style, to;
 //     // if (arguments.length === 1) {
 //     //   ({from, to, style, color} = arguments[0]);
-//     // } 
+//     // }
 //     // else {
 //       // from = arguments[0];
 //       // to = arguments[1];
@@ -152,7 +151,7 @@
 //       stringVal += colorUtil.background('none');
 //     }
 //     console.log(stringVal);
-    
+
 //     return stringVal;
 //   }
 

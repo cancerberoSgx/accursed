@@ -1,4 +1,3 @@
-
 // import {Lines} from './lines'
 // import { chooseCharacter } from './char-query';
 // // var  rounded;
@@ -19,10 +18,8 @@
 // //   style: 'rounded'
 // // });
 
-
 // // const f = new Lines().line({from: [0,0], to: [0, 5], style: 'rounded'})
 // // console.log(f.toString());
-
 
 // // const l = new Lines().line({
 // //   from: [0, 0],
