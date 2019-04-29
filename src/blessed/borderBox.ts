@@ -1,15 +1,17 @@
-import { BorderSide, BorderStyle, getBoxStyleChar,  } from '../blessed'
-import { React} from '../jsx'
-import { Widgets , widget} from '../';
-import { Style, Border } from '../blessedTypes';
-import { isObject } from 'misc-utils-of-mine-generic';
+import { isObject } from 'misc-utils-of-mine-generic'
+import { widget, Widgets } from '../'
+import { BorderSide, BorderStyle, getBoxStyleChar } from '../blessed'
+import { PositionCoords } from '../blessedTypes'
+import { React } from '../jsx'
 // import { BorderSide, BorderStyle, getBoxStyleChar } from './border'
 
-export interface BorderBoxOptions extends Widgets.BoxOptions {
+interface BorderBoxOptionsConcrete {
   borderStyle: BorderStyle
   removeLabel?: boolean
   // style?: Style&{border?: Border}
 }
+export interface BorderBoxOptions extends Widgets.BoxOptions, BorderBoxOptionsConcrete {}
+
 /**
  * Its a [[box]] that support extra border styles. It will respect element's label by default but this can
  * be configures with option [[BorderBoxOptions.removeLabel]]
@@ -21,15 +23,17 @@ export interface BorderBoxOptions extends Widgets.BoxOptions {
 export class BorderBox extends widget.Box {
   type = 'borderbox'
 
-  protected static defaultOptions: BorderBoxOptions = {
-    borderStyle: BorderStyle.single,
+  static defaultOptions: BorderBoxOptions = {
+    borderStyle: BorderStyle.light,
     removeLabel: false
   }
+
   options: BorderBoxOptions
+
   constructor(options: BorderBoxOptions = BorderBox.defaultOptions as any) {
-    super({ ...(BorderBox.defaultOptions as any), ...(options || {}), border: 'line', ...{style: {...options.style||{}, border: typeof (options.style && options.style.border==='string') ? {type: (options.style && options.style.border||'line')} : (options.style &&options.style.border)||{type: 'line'}}} })
-    this.options.style = options.style||{}
-    this.options.style.border = isObject (this.options.style.border) ? this.options.style.border : {type: 'line'}
+    super({ ...(BorderBox.defaultOptions as any), ...getBorderBoxOptions(options) })
+    this.options.style = options.style || {}
+    this.options.style.border = isObject(this.options.style.border) ? this.options.style.border : { type: 'line' }
   }
 
   render() {
@@ -37,10 +41,17 @@ export class BorderBox extends widget.Box {
     if (!coords) {
       return
     }
-    const attr = this.sattr(this.options.style.border as any ||{type: 'line'})
-    const labelCoords = this._label._getCoords()
+    this.renderBorderBox(coords)
+    return coords
+  }
+  renderBorderBox(coords: PositionCoords) {
+    const attr = this.sattr((this.options.style.border as any) || { type: 'line' })
+    const labelCoords = this._label ? this._label._getCoords() : undefined
     this.screen.lines[coords.yi][coords.xi] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.topLeft)]
     this.screen.lines[coords.yi][coords.xl - 1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.topRight)]
+    if (!this.screen.lines[coords.yl - 1]) {
+      return
+    }
     this.screen.lines[coords.yl - 1][coords.xi] = [
       attr,
       getBoxStyleChar(this.options.borderStyle, BorderSide.bottomLeft)
@@ -54,15 +65,28 @@ export class BorderBox extends widget.Box {
       this.screen.lines[j][coords.xl - 1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.right)]
     }
     for (let i = coords.xi + 1; i < coords.xl - 1; i++) {
-      if (this.options.removeLabel || i < labelCoords.xi || i > labelCoords.xl - 1) {
+      if (this.options.removeLabel || !labelCoords || i < labelCoords.xi || i > labelCoords.xl - 1) {
         this.screen.lines[coords.yi][i] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.top)]
       }
       this.screen.lines[coords.yl - 1][i] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.bottom)]
     }
-    return coords
   }
 }
 
+function getBorderBoxOptions(options?: BorderBoxOptions) {
+  return {
+    ...(options || {}),
+    border: 'line',
+    ...{
+      style: {
+        ...(options.style || {}),
+        border: typeof (options.style && options.style.border === 'string')
+          ? { type: (options.style && options.style.border) || 'line' }
+          : (options.style && options.style.border) || { type: 'line' }
+      }
+    }
+  }
+}
 export function borderBox(options?: BorderBoxOptions) {
   return new BorderBox(options)
 }
@@ -70,6 +94,33 @@ export function borderBox(options?: BorderBoxOptions) {
 // install it so is available as JSX element
 React.addIntrinsicElementConstructors({
   borderBox: function(options?: BorderBoxOptions) {
+    return new BorderBox(options)
+  }
+})
+
+export interface BorderLayoutOptions extends Widgets.LayoutOptions, BorderBoxOptionsConcrete {}
+
+export class BorderLayout extends widget.Layout {
+  type = 'borderlayout'
+
+  constructor(options: BorderLayoutOptions = BorderBox.defaultOptions as any) {
+    super({ ...(BorderBox.defaultOptions as any), ...getBorderBoxOptions(options) })
+    this.options.style = options.style || {}
+    this.options.style.border = isObject(this.options.style.border) ? this.options.style.border : { type: 'line' }
+  }
+
+  render() {
+    var coords = super.render()
+    if (!coords) {
+      return
+    }
+    BorderBox.prototype.renderBorderBox.apply(this, [coords])
+    return coords
+  }
+}
+
+React.addIntrinsicElementConstructors({
+  borderLayout: function(options?: BorderBoxOptions) {
     return new BorderBox(options)
   }
 })

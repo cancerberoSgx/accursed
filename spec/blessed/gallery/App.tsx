@@ -7,7 +7,7 @@ import { React } from '../../../src/jsx/createElement'
 import { enumValueFromString } from '../../../src/util/misc'
 import { anim2 } from '../experiments/anim2'
 import { animDemo } from '../experiments/animDemo'
-import { allColors } from '../experiments/colors/allColors'
+import { borderBoxDemo } from '../experiments/borderBoxDemo'
 import { color4 } from '../experiments/colors/colors4'
 import { colors5Demo } from '../experiments/colors/colors5'
 import { ButtonDemo } from './ButtonDemo'
@@ -21,12 +21,13 @@ enum Demo {
   button,
   layout,
   collapsible,
-  robot,
+  // robot,
   colorPalette,
   colors5,
   allColors,
   anim,
-  anim2
+  anim2,
+  borderBox
 }
 interface P {
   screen: Screen
@@ -51,16 +52,20 @@ export class App extends Component<P, S> {
       } else if (demo === Demo.colors5) {
         colors5Demo(this.blessedElement.screen)
       } else if (demo === Demo.allColors) {
-        allColors(this.blessedElement.screen)
+        colors5Demo(this.blessedElement.screen)
+      } else if (demo === Demo.borderBox) {
+        return React.render(borderBoxDemo())
       } else if (demo === Demo.anim2) {
         anim2(this.blessedElement.screen)
       } else if (demo === Demo.anim) {
         animDemo(this.blessedElement.screen)
       } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)
-      } else if (demo === Demo.robot) {
-        // return React.render(<RobotDemo screen={this.props.screen} />)
-      } else {
+      }
+      // else if (demo === Demo.robot) {
+      //   // return React.render(<RobotDemo screen={this.props.screen} />)
+      // }
+      else {
         throw new Error('Demo unknown ' + d)
       }
     } catch (error) {

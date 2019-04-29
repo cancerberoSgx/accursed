@@ -1,5 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { box, createScreen, debug, getContent, installExitKeys, Screen, Widgets, BorderStyle, BorderBox } from '../src'
+import { BorderBox, BorderStyle, box, createScreen, debug, getContent, installExitKeys, Screen, Widgets } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 export interface BorderBoxOptions extends Widgets.BoxOptions {
@@ -25,7 +25,7 @@ describe('borderBox', () => {
         parent: screen,
         borderStyle: BorderStyle.double,
         top: 2,
-        style: {border: {fg: 'blue'}, label: {fg: 'red'}},
+        style: { border: { fg: 'blue' }, label: { fg: 'red' } },
         left: 3,
         label: 'hello'
       })

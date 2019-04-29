@@ -1,4 +1,4 @@
-import { BorderBox, BorderBoxOptions, TreeOptions, TreeView } from '../blessed'
+import { BorderBox, BorderBoxOptions, BorderLayout, BorderLayoutOptions, TreeOptions, TreeView } from '../blessed'
 import {
   BigText,
   BigTextOptions,
@@ -108,8 +108,6 @@ export interface ArtificialEventOptions<T extends Element> {
   ) => void
 }
 
-type PropsWithRef<P> = P & { ref?: P extends { ref?: infer R } ? R : undefined }
-
 declare global {
   export namespace JSX {
     export interface IntrinsicElements {
@@ -132,10 +130,17 @@ declare global {
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
       treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
       borderBox: OptionsProps<BorderBoxOptions> & EventOptions<BorderBox>
+      borderLayout: OptionsProps<BorderLayoutOptions> & EventOptions<BorderLayout>
     }
+
     /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
      * unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>
+
+    type PropsWithRef<P> = P & {
+      // children?: BlessedJsxNode ,
+      ref?: P extends { ref?: infer R } ? R : undefined
+    }
 
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
       type: ElementType
