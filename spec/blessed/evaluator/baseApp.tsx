@@ -18,10 +18,9 @@ import {
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { examples } from './examples'
-import { IEditor, Range } from './types'
+import { IEditor, Range, buildEditor } from './editor'
 import { focusableOpts } from './app';
 import { throttle } from 'misc-utils-of-mine-generic';
-const Editor = require('editor-widget') 
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
 
@@ -50,7 +49,6 @@ export abstract class BaseApp extends Component<P, S> {
   editorContainer: Box
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
-
   state: S = {cleanOutputBeforeExecute: true}
   protected abstract help()
 
@@ -116,9 +114,7 @@ export abstract class BaseApp extends Component<P, S> {
 
   async afterRender() {
     await waitFor(() => this.editorContainer)
-    // const executeButton = this.findDescendant(b => isElement(b) && b.type === 'button' && b.name === 'execute-button')
-    // executeButton.focus()
-    this.editor =     this.buildEditor({
+    this.editor =     buildEditor({
       parent: this.editorContainer,
       ...focusableOpts(),
       top: 0,
@@ -127,30 +123,15 @@ export abstract class BaseApp extends Component<P, S> {
       height: '100%',
       keys: true,
       keyable: true,
-      value: examples[0].code
+      language: 'js',
+      text: examples[0].code
     })
-    // this.editorContainer, examples[0].code);
+    this.editor.focus()
     this.editor.textBuf.onDidStopChanging(()=>{this.dispatch(Action.Execute)})
     this.editor.setBack()
     this.screen.render()
   }
 
-  private buildEditor(options: TextareaOptions) {
-    const editor = new Editor(options)
-   editor.textBuf.setText(options.value||'');
-   editor.language('js');
-  //  editor.once('focus', e => {
-  //    editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)));
-  //   });
-    setTimeout(() => {
-    //  editor.focus();
-      // this.screen.emit('key C-left')
-      // this.screen.emit('key C-left')
-      // this.screen.emit('key enter');
-      editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)));
-    }, 100);
-    return editor
-  }
 }
 
 export function toggleMaximized(container: Element, btn: Button, label?: string) {

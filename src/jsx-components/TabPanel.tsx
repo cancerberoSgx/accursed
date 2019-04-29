@@ -122,7 +122,6 @@ export class TabPanel extends Component<TabPanelProps> {
   }
 
   selectTab(tabIndex: number) {
-    // show hide bodies
     this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_body_')).forEach(body => {
       if (body.name !== 'tab_body_' + tabIndex) {
         body.hide()
@@ -130,7 +129,6 @@ export class TabPanel extends Component<TabPanelProps> {
         body.show()
       }
     })
-    // set label activeStyle inactiveStyle
     this.filterDescendants(d => isElement(d) && !!d.name && d.name.startsWith('tab_label_')).forEach(label => {
       if (label.name !== 'tab_label_' + tabIndex) {
         label.style = { ...(label.style || {}), ...(this.props.inactiveStyle || {}) }
@@ -138,7 +136,6 @@ export class TabPanel extends Component<TabPanelProps> {
         label.style = { ...(label.style || {}), ...(this.props.activeStyle || {}) }
       }
     })
-    // this.blessedElement.screen.render()
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
   }
 

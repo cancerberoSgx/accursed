@@ -39,13 +39,6 @@ export const focusableOpts: () => TextareaOptions = () => ({
   }
 })
 
-// export const activeStyle : ()=>Style = ()=>({
-//   bg: 'magenta',
-//   fg: 'black', 
-//   // bold: true, 
-//   underline: true
-// })
-
 /**
  * Adds the UI to the base app
  */
@@ -142,7 +135,6 @@ export class App extends BaseApp {
                   {examples.map(e => (
                     <SelectOption>{e.name}</SelectOption>
                   ))}
-                  <SelectOption>Dummy</SelectOption>
                   {}
                 </Select>
                 {/* <Br />
