@@ -1,7 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { box, createScreen, debug, getContent, installExitKeys, Screen, Widgets } from '../src'
-import { Border } from '../src/blessed/borderBox'
-import { BorderStyle } from '../src/blessed/boxes'
+import { box, createScreen, debug, getContent, installExitKeys, Screen, Widgets, BorderStyle, BorderBox } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 export interface BorderBoxOptions extends Widgets.BoxOptions {
@@ -23,10 +21,11 @@ describe('borderBox', () => {
 
   it('should show a border and respect label by default', async done => {
     try {
-      var border = new Border({
+      var border = new BorderBox({
         parent: screen,
         borderStyle: BorderStyle.double,
         top: 2,
+        style: {border: {fg: 'blue'}, label: {fg: 'red'}},
         left: 3,
         label: 'hello'
       })

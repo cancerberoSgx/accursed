@@ -1,4 +1,4 @@
-import { TreeOptions, TreeView } from '../blessed'
+import { BorderBox, BorderBoxOptions, TreeOptions, TreeView } from '../blessed'
 import {
   BigText,
   BigTextOptions,
@@ -131,6 +131,7 @@ declare global {
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
       treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
+      borderBox: OptionsProps<BorderBoxOptions> & EventOptions<BorderBox>
     }
     /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
      * unify the rest in one place (onClick, etc) */

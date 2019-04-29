@@ -1,3 +1,5 @@
+export * from './border'
+export * from './borderBox'
 export * from './collapsible'
 export * from './focus'
 export * from './gradient'
@@ -7,5 +9,3 @@ export * from './modal'
 export * from './node'
 export * from './treeView'
 export * from './util'
-
-// export * from './waitFor'
