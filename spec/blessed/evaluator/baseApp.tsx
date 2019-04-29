@@ -142,18 +142,6 @@ export abstract class BaseApp extends Component<P, S> {
     setMaximized(container, !isMaximized(container), { auto: false })
     btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
     container.screen.render()
-    // if(!findDescendant(container, d=>d===this.editor)){
-    //   this.editorContainer.render()
-    //   this.editor.render()
-    //   this.editor._updateContent()
-    // }
   }
 
 }
-
-// export function toggleMaximized(container: Element, btn: Button, label?: string) {
-//   setMaximized(container, !isMaximized(container), { auto: false })
-//   btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
-//   if(findDescendant(container, d=>d===d.type))
-//   container.screen.render()
-// }

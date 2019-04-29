@@ -3,6 +3,7 @@ import { findAscendant, visitAscendants, visitDescendants, findRootElement, getC
 import { getElementData } from './util'
 import { isScreen } from '../blessedTypes';
 import { debug } from '../util';
+import { Component } from '../jsx';
 
 interface Options {
   /**
@@ -191,3 +192,4 @@ export function isMaximized(el: Element) {
 //   return bo
 // }
 // // TODO: minimize ?
+
