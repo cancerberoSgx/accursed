@@ -46,8 +46,7 @@ function print(s: string[][]) {
 
 console.log(box({ xi: 0, xl: 5, yi: 0, yl: 5 }))
 
-console.log(print(box({xi: 0, xl: 5, yi: 0, yl: 5, style: 'rounded' })))
-
+console.log(print(box({ xi: 0, xl: 5, yi: 0, yl: 5, style: 'rounded' })))
 
 console.log(print(box({ xi: 0, xl: 10, yi: 0, yl: 5, style: 'double' })))
 

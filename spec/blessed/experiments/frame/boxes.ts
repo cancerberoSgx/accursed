@@ -6,18 +6,18 @@ export enum BorderStyle {
   'singleDouble' = 'singleDouble',
   'doubleSingle' = 'doubleSingle',
   'classic' = 'classic',
-  bolder = "bolder"
+  bolder = 'bolder'
 }
 
 export enum BorderSide {
-  "topLeft" = "topLeft",
-  "topRight" = "topRight",
-  "bottomRight" = "bottomRight",
-  "bottomLeft" = "bottomLeft",
-  "left" = "left",
-  "bottom" = "bottom",
-  "top" = "top",
-  right = "right"
+  'topLeft' = 'topLeft',
+  'topRight' = 'topRight',
+  'bottomRight' = 'bottomRight',
+  'bottomLeft' = 'bottomLeft',
+  'left' = 'left',
+  'bottom' = 'bottom',
+  'top' = 'top',
+  right = 'right'
 }
 
 export function getBoxStyle(s: BorderStyle) {
@@ -25,92 +25,92 @@ export function getBoxStyle(s: BorderStyle) {
 }
 
 export function getBoxStyleChar(s: BorderStyle, si: BorderSide) {
-  return  getBoxStyles()[s][si]
+  return getBoxStyles()[s][si]
 }
 type BoxStyles = { [s in BorderStyle]: { [side in BorderSide]: string } }
 let boxStyles: BoxStyles | undefined
 const getBoxStyles: () => BoxStyles = () => {
   if (!boxStyles) {
     boxStyles = {
-      "single": {
-        "topLeft": "┌",
-        "topRight": "┐",
-        "bottomRight": "┘",
-        "bottomLeft": "└",
-        "left": "│",
-        "right": "│",
-        "bottom": "─",
-        "top": "─",
+      single: {
+        topLeft: '┌',
+        topRight: '┐',
+        bottomRight: '┘',
+        bottomLeft: '└',
+        left: '│',
+        right: '│',
+        bottom: '─',
+        top: '─'
       },
-      "double": {
-        "topLeft": "╔",
-        "topRight": "╗",
-        "bottomRight": "╝",
-        "bottomLeft": "╚",
-        "left": "║",
-        "right": "║",
-        "bottom": "═",
-        "top": "═"
+      double: {
+        topLeft: '╔',
+        topRight: '╗',
+        bottomRight: '╝',
+        bottomLeft: '╚',
+        left: '║',
+        right: '║',
+        bottom: '═',
+        top: '═'
       },
-      "round": {
-        "topLeft": "╭",
-        "topRight": "╮",
-        "bottomRight": "╯",
-        "bottomLeft": "╰",
-        "left": "│",
-        "right": "│",
-        "bottom": "─",
-        "top": "─",
+      round: {
+        topLeft: '╭',
+        topRight: '╮',
+        bottomRight: '╯',
+        bottomLeft: '╰',
+        left: '│',
+        right: '│',
+        bottom: '─',
+        top: '─'
       },
-      "bold": {
-        "topLeft": "┏",
-        "topRight": "┓",
-        "bottomRight": "┛",
-        "bottomLeft": "┗",
-        "left": "┃",
-        "right": "┃",
-        "bottom": "━",
-        "top": "━"
+      bold: {
+        topLeft: '┏',
+        topRight: '┓',
+        bottomRight: '┛',
+        bottomLeft: '┗',
+        left: '┃',
+        right: '┃',
+        bottom: '━',
+        top: '━'
       },
-      "bolder": {
-        "topLeft": "▛",
-        "topRight": "▜",
-        "bottomRight": "▟",
-        "bottomLeft": "▙",
-        "left": "▌",
-        "right": "▐",
-        "bottom": "▄",
-        "top": "▀"
+      bolder: {
+        topLeft: '▛',
+        topRight: '▜',
+        bottomRight: '▟',
+        bottomLeft: '▙',
+        left: '▌',
+        right: '▐',
+        bottom: '▄',
+        top: '▀'
       },
-      "singleDouble": {
-        "topLeft": "╓",
-        "topRight": "╖",
-        "bottomRight": "╜",
-        "bottomLeft": "╙",
-        "left": "║",
-        "right": "║",
-        "bottom": "─",
-        "top": "─",
+      singleDouble: {
+        topLeft: '╓',
+        topRight: '╖',
+        bottomRight: '╜',
+        bottomLeft: '╙',
+        left: '║',
+        right: '║',
+        bottom: '─',
+        top: '─'
       },
-      "doubleSingle": {
-        "topLeft": "╒",
-        "topRight": "╕",
-        "bottomRight": "╛",
-        "bottomLeft": "╘",
-        "left": "│",
-        "right": "│",
-        "bottom": "═",
-        "top": "═",
+      doubleSingle: {
+        topLeft: '╒',
+        topRight: '╕',
+        bottomRight: '╛',
+        bottomLeft: '╘',
+        left: '│',
+        right: '│',
+        bottom: '═',
+        top: '═'
       },
-      "classic": {
-        "topLeft": "+",
-        "topRight": "+",
-        "bottomRight": "+",
-        "bottomLeft": "+",
-        "left": "|",
-        "right": "|",
-        "bottom": "═",
-        "top": "-",
+      classic: {
+        topLeft: '+',
+        topRight: '+',
+        bottomRight: '+',
+        bottomLeft: '+',
+        left: '|',
+        right: '|',
+        bottom: '═',
+        top: '-'
       }
     }
   }
@@ -164,11 +164,9 @@ const getBoxStyles: () => BoxStyles = () => {
 //   return arr
 // }
 
-
 // function print(s: string[][]) {
 //   return s.map(l => l.join('')).join('\n')
 // }
-
 
 // console.log(print(box({ w: 8, h: 3, style: BorderStyle.bold, side: BorderSide.left })))
 // console.log(print(box({ w: 8, h: 3 })))

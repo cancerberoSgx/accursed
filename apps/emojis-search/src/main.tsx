@@ -1,6 +1,5 @@
 import { createScreen2, debug, installExitKeys, React } from 'accursed'
 import { App } from './app'
-
 ;(async () => {
   try {
     var s = await createScreen2({

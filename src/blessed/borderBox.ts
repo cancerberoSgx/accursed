@@ -1,7 +1,7 @@
-import { React, widget, Widgets, installExitKeys, createScreen, debug, labelBlink, box } from '..'
-import { BorderSide, BorderStyle, getBoxStyleChar } from './boxes';
+import { React, widget, Widgets } from '..'
+import { BorderSide, BorderStyle, getBoxStyleChar } from './boxes'
 
-export interface BorderBoxOptions  extends Widgets.BoxOptions {
+export interface BorderBoxOptions extends Widgets.BoxOptions {
   borderStyle: BorderStyle
   removeLabel?: boolean
 }
@@ -13,11 +13,9 @@ export class Border extends widget.Box {
     borderStyle: BorderStyle.single,
     removeLabel: false
   }
-  options : BorderBoxOptions
+  options: BorderBoxOptions
   constructor(options: BorderBoxOptions = Border.defaultOptions as any) {
-    super({ ...(Border.defaultOptions as any), ...(options || {}) , 
-    border: 'line'
-  })
+    super({ ...(Border.defaultOptions as any), ...(options || {}), border: 'line' })
   }
 
   render() {
@@ -29,24 +27,29 @@ export class Border extends widget.Box {
     const labelCoords = this._label._getCoords()
 
     this.screen.lines[coords.yi][coords.xi] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.topLeft)]
-    this.screen.lines[coords.yi][coords.xl-1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.topRight)]
+    this.screen.lines[coords.yi][coords.xl - 1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.topRight)]
 
-    this.screen.lines[coords.yl-1 ][coords.xi] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.bottomLeft)]
-    this.screen.lines[coords.yl-1][coords.xl-1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.bottomRight)]
+    this.screen.lines[coords.yl - 1][coords.xi] = [
+      attr,
+      getBoxStyleChar(this.options.borderStyle, BorderSide.bottomLeft)
+    ]
+    this.screen.lines[coords.yl - 1][coords.xl - 1] = [
+      attr,
+      getBoxStyleChar(this.options.borderStyle, BorderSide.bottomRight)
+    ]
 
-    for(let j=coords.yi + 1; j<coords.yl-1; j++){
+    for (let j = coords.yi + 1; j < coords.yl - 1; j++) {
       this.screen.lines[j][coords.xi] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.left)]
-      this.screen.lines[j][coords.xl-1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.right)]
+      this.screen.lines[j][coords.xl - 1] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.right)]
     }
-    for(let i=coords.xi + 1; i<coords.xl-1; i++){
-      if(this.options.removeLabel ||  i<labelCoords.xi ||i>labelCoords.xl-1) {
+    for (let i = coords.xi + 1; i < coords.xl - 1; i++) {
+      if (this.options.removeLabel || i < labelCoords.xi || i > labelCoords.xl - 1) {
         this.screen.lines[coords.yi][i] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.top)]
       }
-      this.screen.lines[coords.yl-1][i] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.bottom)]
+      this.screen.lines[coords.yl - 1][i] = [attr, getBoxStyleChar(this.options.borderStyle, BorderSide.bottom)]
     }
     return coords
   }
-
 }
 
 // install it so is available as JSX element
@@ -55,7 +58,6 @@ React.addIntrinsicElementConstructors({
     return new Border(options)
   }
 })
-
 
 // var screen = createScreen({
 //   log: 'log.txt',
