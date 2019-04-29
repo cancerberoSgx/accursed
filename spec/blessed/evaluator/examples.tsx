@@ -29,7 +29,6 @@ function simple1(options) {
     valign: 'middle',
     height: '100%', 
     width: '100%',
-    // , top: 0, left: 0,
     style: {
       bg: '#cdabc9',
       fg: 'black'
@@ -74,10 +73,10 @@ function simpleAnim(options) {
   {
     name: 'fileManager1',
     code: `   
-function simple1(options) {
-  options.log('starting')
-  const fm = options.accursed.filemanager({
-    parent: options.parent,
+function simple1({accursed, parent, log}) {
+  log('starting')
+  const fm = accursed.filemanager({
+    parent: parent,
     border: 'line',
     style: {
       selected: {
@@ -92,18 +91,17 @@ function simple1(options) {
     cwd: process.env.HOME,
     keys: true,
     focusable: true,
-    // vi: true,
     scrollbar: {
       bg: 'white',
       ch: ' '
     }
   })
   fm.pick('.', function () {
-    options.log(arguments)
+    log(arguments)
   })
-  options.parent.screen.render()
-  var box = options.accursed.box({
-    parent: options.parent,
+  parent.screen.render()
+  var box = accursed.box({
+    parent: parent,
     style: {
       bg: 'green'
     },
@@ -114,101 +112,94 @@ function simple1(options) {
     left: 'center',
     hidden: true
   })
-  // fm.log = options.log
   fm.refresh()
-  options.parent.once('focus', ()=>options.log('focus'))
-  options.parent.screen.render()
-  options.parent.screen.key(['s', 'p'], function () {
+  parent.once('focus', ()=>log('focus'))
+  parent.screen.render()
+  parent.screen.key(['s', 'p'], function () {
     fm.hide()
-    options.parent.screen.render()
+    parent.screen.render()
     setTimeout(function () {
       fm.pick(function (err, file) {
         box.show()
         box.setContent(err ? err + '' : file)
-        options.parent.screen.render()
+        parent.screen.render()
         setTimeout(function () {
           box.hide()
           fm.reset(function () {
             fm.show()
-            options.parent.screen.render()
+            parent.screen.render()
           })
         }, 2000)
       })
     }, 2000)
   })
-  options.parent.screen.render()
+  parent.screen.render()
 }  
       `
   },
   {
     name: 'allColors',
     code: `
-
-  function allColors(options) {
-    var dx = 9;
-    let colorStep = 20;
-    var dy = 3;
-    let showText = true;
-    let x = 0, y = 1;
-    
-    options.accursed.text({
-      parent: options.parent,
-      top: y,
-      left: 0,
-      content: 'Scroll this box using the mouse wheel or up-down arrows'
-    });
-    y += dy;
-
-    for (let r = 0; r < 255; r += colorStep) {
-      for (let g = 0; g < 255; g += colorStep) {
-        for (let b = 0; b < 255; b += colorStep) {
-          const color = options.blessed.colors.RGBToHex(r, g, b);
-          options.accursed.box({
-            parent: options.parent,
-            top: y,
-            left: x,
-            width: dx,
-            height: dy,
-            valign: 'middle',
-            align: 'center',
-            content: showText ? color : '',
-            style: { bg: color, fg: showText ? invertColor(color) : undefined }
-          });
-          if (x >= options.parent.width - dx * 2) {
-            x = 0;
-            y += dy;
-          }
-          else {
-            x += dx;
-          }
+function allColors({parent, accursed, log}) {
+  var dx = 9
+  let colorStep = 20
+  var dy = 3
+  let showText = true
+  let x = 0, y = 1
+  accursed.text({
+    parent,
+    top: y,
+    left: 0,
+    content: 'Scroll this box using the mouse wheel or up-down arrows'
+  })
+  y += dy
+  for (let r = 0; r < 255; r += colorStep) {
+    for (let g = 0; g < 255; g += colorStep) {
+      for (let b = 0; b < 255; b += colorStep) {
+        const color = accursed.colors.RGBToHex(r, g, b)
+        accursed.box({
+          parent,
+          top: y,
+          left: x,
+          width: dx,
+          height: dy,
+          valign: 'middle',
+          align: 'center',
+          content: showText ? color : '',
+          style: { bg: color, fg: showText ? invertColor(color) : undefined }
+        });
+        if (x >= parent.width - dx * 2) {
+          x = 0;
+          y += dy;
+        }
+        else {
+          x += dx;
         }
       }
     }
-    // options.parent.parent.focus()
-    options.parent.screen.render()
-    // options.parent.once('focus', )
-    function invertColor(hex) {
-      function padZero(str, len) {
-        len = len || 2;
-        var zeros = new Array(len).join('0');
-        return (zeros + str).slice(-len);
-      }
-      if (hex.indexOf('#') === 0) {
-        hex = hex.slice(1);
-      }
-      // convert 3-digit hex to 6-digits.
-      if (hex.length === 3) {
-        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-      }
-      if (hex.length !== 6) {
-        throw new Error('Invalid HEX color.');
-      }
-      // invert color components
-      var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16), g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16), b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
-      // pad each with zeros and return
-      return '#' + padZero(r) + padZero(g) + padZero(b);
-    }
   }
+  parent.screen.render()
+  function invertColor(hex) {
+    function padZero(str, len) {
+      len = len || 2
+      var zeros = new Array(len).join('0')
+      return (zeros + str).slice(-len)
+    }
+    if (hex.indexOf('#') === 0) {
+      hex = hex.slice(1)
+    }
+    if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    }
+    if (hex.length !== 6) {
+      throw new Error('Invalid HEX color.')
+    }
+    var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16), 
+      g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16), 
+      b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16)
+    return '#' + padZero(r) + padZero(g) + padZero(b)
+  }
+}
   `
   },
   {
@@ -238,5 +229,136 @@ function borders(options){
   })
 }
 `
+  },
+
+  {
+    name: 'terminal capabilities',
+    code: `
+
+function listCapabilities(options) {
+  function enumKeys(anEnum) {
+    const a = []
+    for (let i in anEnum) {
+      a.push(i)
+    }
+    return a
+  }
+  const commonOptions = () => ({
+    border: 'line',
+    width: '30%',
+    parent: options.parent,
+    align: 'center',
+    tags: true,
+    height: '90%',
+    top: 0,
+    keys: true,
+    focusable: true,
+    draggable: true,
+    mouse: true,
+    scrollbar: { inverse: true }, 
+    style: {
+      border: {
+        fg: 'red'
+      },
+      header: {
+        fg: 'blue',
+        bg: '#446611',
+        bold: true,
+      },
+      cell: {
+        selected: {
+          bg: 'blue'
+        },
+      },
+      focus: {
+        bold: true,
+        underline: true,
+        border: {
+          fg: 'green',
+        },
+        cell: {
+          bg: 'lightgray',
+          fg: 'black',
+        },
+        header: {
+          fg: '#880055',
+          bg: 'gray'
+        }
+      }
+    }
+  });
+  // options.parent.on('key tab', () => options.parent.screen.focusNext());
+  const FALSE = '\u2717';
+  const TRUE = '\u2714';
+  options.accursed.listtable({
+    ...commonOptions(),
+    left: 0,
+    label: { side: 'center', text: 'Capability' },
+    data: [
+      ['Capability', 'Supported?'],
+      ...enumKeys(options.accursed.BlessedTerminalCapabilitiesBooleans)
+        .map(c => [c, options.parent.screen.program.has(c) ? TRUE : FALSE])
+    ],
+  });
+  options.accursed.listtable({
+    ...commonOptions(),
+    left: '33%',
+    label: { side: 'center', text: 'Capability' },
+    data: [
+      ['Capability', 'Supported?'],
+      ...enumKeys(options.accursed.BlessedTerminalCapabilitiesStrings)
+        .map(c => [c, options.parent.screen.program.has(c) ? TRUE : FALSE])
+    ],
+  });
+  options.accursed.listtable({
+    ...commonOptions(),
+    left: '66%',
+    label: { side: 'center', text: 'Capability' },
+    data: [
+      ['Capability', 'Supported?'],
+      ...enumKeys(options.accursed.BlessedTerminalCapabilitiesBooleansNnmbers)
+        .map(c => [c, options.parent.screen.program.has(c) ? TRUE : FALSE])
+    ]
+  });
+
+ setTimeout(()=>{
+  const modal = accursed.box({
+    parent: options.parent, padding: 1,
+    top:'center',left: 'center', width: '60%', height: '70%',
+    style: {bg: '#995599', fg: 'black' },
+    border: 'line', label: '[ X Close ]', 
+    content: \`
+Welcome! 
+
+These three tables display this terminal's capabilities. 
+
+Switch focus using [TAB] or [CONTROL-LEFT] [CONTROL_RIGHT] and scroll using [UP] and [DOWN] arrow keys or the mouse wheel. You can also drag the lists.
+
+Probably you will need to maximize the terminal and the output panel to see the whole content. 
+
+This is an blessed application example using listtable widget and styles for focused elements.
+
+Hope it helps a developer to better understand blessed API. 
+
+  -- Sebastián Gurin
+\`.trim()
+})
+
+options.parent.children.forEach(c=>c.once('keypress', ()=>modal.hide()))
+options.parent.once('keypress', ()=>modal.hide())
+options.parent.once('click', ()=>modal.hide())
+modal.once('click', ()=>modal.hide())
+modal._label.once('click', ()=>modal.hide())
+options.parent.screen.once('keypress', ()=>modal.hide())  
+
+options.parent.children.filter(options.accursed.isElement).find(c=>c.type==='listtable').focus()
+options.parent.screen.render()
+}, 1000);
+
+options.parent.children.filter(c=>c.type==='listtable')
+.forEach(c=>{c.focused = true, c.on('focus', ()=>c.setFront())})
+options.parent.screen.render()
+}
+    `
   }
 ]

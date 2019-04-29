@@ -1,7 +1,7 @@
 {
   "name": "accursed",
-  "version": "0.0.3",
-  "description": "blessed contributions, extensions, typings, documentation and apps",
+  "version": "0.0.4",
+  "description": "blessed extensions, typings, elements, frameworks, documentation and apps",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {

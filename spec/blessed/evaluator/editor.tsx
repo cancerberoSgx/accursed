@@ -1,9 +1,10 @@
 import { EventEmitter } from 'events'
 import { TODO } from 'misc-utils-of-mine-typescript'
 import { Element, TextareaOptions } from '../../../src'
-var Range = require('text-buffer/lib/range')
+
+const Range = require('text-buffer/lib/range')
 const Editor = require('editor-widget')
-var Point = require('text-buffer/lib/point')
+const Point = require('text-buffer/lib/point')
 
 export interface Range {}
 

@@ -3,18 +3,26 @@ import { isScreen } from '../blessedTypes'
 import { strip } from '../util/misc'
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
-/** settings for visitDescendants regarding visiting order and visit interruption modes. */
+/**
+ * settings for visitDescendants regarding visiting order and visit interruption modes.
+ */
 export interface VisitorOptions {
   childrenFirst?: boolean
-  /**if a descendant visitor returned true, we stop visiting and signal up */
+  /**
+   * if a descendant visitor returned true, we stop visiting and signal up
+   */
   breakOnDescendantSignal?: boolean
-  /***no matter if visitor returns true for a node, it will still visit its descendants and then break the chain */
+  /**
+   * no matter if visitor returns true for a node, it will still visit its descendants and then break the chain
+   */
   visitDescendantsOnSelfSignalAnyway?: boolean
 }
 
 /**
- * Visit node's descendants until the visitor function return true or there are no more. In the first different modes on which visiting the rest of descenda|nts or
- * ancestors are configurable through the options. By default, first the parent is evaluated which is configurable configurable with [[[VisitorOptions.childrenFirst]]
+ * Visit node's descendants until the visitor function return true or there are no more. In the first
+ * different modes on which visiting the rest of descenda|nts or ancestors are configurable through the
+ * options. By default, first the parent is evaluated which is configurable configurable with
+ * [[[VisitorOptions.childrenFirst]]
  * */
 export function visitDescendants(n: Node, v: Visitor, o: VisitorOptions = {}): boolean {
   let r = false
@@ -136,6 +144,7 @@ export function findAscendant<T extends Node = Node>(n: Element, p: ElementPredi
 export function findRootElement(n: Element): Element {
   return isScreen(n) || isScreen(n.parent) ? n : findAscendant(n, a => isScreen(a) || isScreen(a.parent))
 }
+
 export function filterAscendants<T extends Node = Node>(n: Node, p: ElementPredicate, o: VisitorOptions = {}): T[] {
   const a: T[] = []
   visitAscendants(n, c => {
@@ -147,8 +156,11 @@ export function filterAscendants<T extends Node = Node>(n: Node, p: ElementPredi
   return a
 }
 
-export function cleanNode(n: Node, dontDestroy?: boolean) {
+export function cleanNode(n: Node, dontDestroy: boolean = false) {
   n.children.forEach(e => {
+    if (isElement(e)) {
+      e.clearPos(true, true)
+    }
     e.detach()
     if (!dontDestroy) {
       e.destroy()

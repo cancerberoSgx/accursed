@@ -18,6 +18,7 @@ import {
   TabPanel,
   TextareaOptions
 } from '../../../src'
+import { Maximize } from '../../../src/jsx-components/maximize'
 import { Action, BaseApp } from './baseApp'
 import { examples } from './examples'
 
@@ -45,7 +46,8 @@ export const focusableOpts: () => TextareaOptions = () => ({
     },
     item: {
       bg: 'lightgray',
-      fg: 'black'
+      fg: 'black',
+      underline: false
     },
     selected: {
       bg: 'magenta',
@@ -96,14 +98,17 @@ export class App extends BaseApp {
           <Column width="50%">
             <Rows>
               <Row height="60%">
-                <box width="100%" height="100%">
+                <Maximize>
                   <box
                     width="100%"
                     height="100%"
                     focusable={true}
                     ref={React.createRef<Box>(c => (this.editorContainer = c))}
                   />
-                  <button
+                </Maximize>
+                {/* <box width="100%" height="100%"> */}
+
+                {/* <button
                     {...focusableOpts()}
                     top={0}
                     height={3}
@@ -114,8 +119,8 @@ export class App extends BaseApp {
                     onPress={e => {
                       this.toggleMaximized(this.editorContainer.parent as any, e.currentTarget, 'editor')
                     }}
-                  />
-                </box>
+                  /> */}
+                {/* </box> */}
 
                 <Br />
               </Row>
@@ -123,36 +128,43 @@ export class App extends BaseApp {
                 <button
                   {...focusableOpts()}
                   name="execute-button"
-                  content="Execute"
+                  // content={' \u23ef  Execute '}
+                  content={'Execute'}
                   onPress={e => this.dispatch(Action.Execute)}
                 />
                 <button
                   {...focusableOpts()}
                   name="exit-button"
-                  content="Exit"
+                  content={'Exit'}
+                  // content={' \u26d4 Exit '}
                   onPress={e => this.dispatch(Action.Exit)}
                 />
                 <button
                   {...focusableOpts()}
                   name="help-button"
-                  content="Help"
+                  content={'Help'}
                   onPress={e => this.dispatch(Action.Help)}
                 />
+                <Br />
                 <checkbox
                   {...focusableOpts()}
+                  border={undefined}
                   checked={this.state.cleanOutputBeforeExecute}
-                  content="clear output before execute?"
+                  content="clear before execute?"
                   onChange={e => this.setState({ cleanOutputBeforeExecute: e.value })}
                 />
+                {''}
                 <checkbox
                   {...focusableOpts()}
+                  border={undefined}
                   checked={this.state.autoExecute}
                   content="auto execute?"
                   onChange={e => this.setState({ autoExecute: e.value })}
                 />
+                {''}
                 <Br />
+                {''}
                 <Select
-                  border="line"
                   label="Examples"
                   scrollable={true}
                   {...focusableOpts()}
@@ -163,6 +175,7 @@ export class App extends BaseApp {
                   ))}
                   {}
                 </Select>
+                {''}
                 {/* <Br />
                 <AutoComplete
                   height={5}
@@ -177,7 +190,8 @@ export class App extends BaseApp {
           <Column width="50%">
             <Rows>
               <Row height="70%">
-                <box>
+                {/* <box> */}
+                <Maximize>
                   <box
                     {...focusableOpts()}
                     scrollable={true}
@@ -187,7 +201,8 @@ export class App extends BaseApp {
                     border="line"
                     ref={React.createRef<Box>(c => (this.outputEl = c))}
                   />
-                  <button
+                </Maximize>
+                {/* <button
                     {...focusableOpts()}
                     top={0}
                     height={3}
@@ -198,11 +213,12 @@ export class App extends BaseApp {
                     onPress={e => {
                       this.toggleMaximized(this.outputEl.parent as any, e.currentTarget, 'output')
                     }}
-                  />
-                </box>
+                  /> */}
+                {/* </box> */}
               </Row>
               <Row height="30%">
-                <box>
+                {/* <box> */}
+                <Maximize>
                   <TabPanel
                     ref={React.createRef<TabPanel>(c => (this.outputPanel = c))}
                     updateScreenOnChange={true}
@@ -211,30 +227,30 @@ export class App extends BaseApp {
                     width="100%"
                     height="100%">
                     <Tab active={true}>
-                      <TabLabel {...focusableOpts()}>Log</TabLabel>
+                      <TabLabel {...focusableOpts()}>- Logs -</TabLabel>
                       <TabBody>
                         <box
                           {...focusableOpts()}
                           width="100%"
                           scrollable={true}
                           scrollbar={{ inverse: true }}
-                          label="Log"
-                          border="line"
+                          // label="Logs"
+                          // border="line"
                           ref={React.createRef<Box>(c => (this.logEl = c))}
                         />
                       </TabBody>
                       {}
                     </Tab>
                     <Tab>
-                      <TabLabel {...focusableOpts()}>Errors</TabLabel>
+                      <TabLabel {...focusableOpts()}>- Errors -</TabLabel>
                       <TabBody>
                         <box
                           {...focusableOpts()}
                           width="100%"
-                          keyable={true}
                           scrollable={true}
-                          label="Errors"
-                          border="line"
+                          scrollbar={{ inverse: true }}
+                          // label="Errors"
+                          // border="line"
                           ref={React.createRef<Box>(c => (this.errorsEl = c))}
                         />
                       </TabBody>
@@ -242,7 +258,8 @@ export class App extends BaseApp {
                     </Tab>
                     {}
                   </TabPanel>
-                  <button
+                </Maximize>
+                {/* <button
                     {...focusableOpts()}
                     top={0}
                     height={3}
@@ -257,8 +274,8 @@ export class App extends BaseApp {
                         'logs and errors panel'
                       )
                     }}
-                  />
-                </box>
+                  /> */}
+                {/* </box> */}
               </Row>
               {}
             </Rows>

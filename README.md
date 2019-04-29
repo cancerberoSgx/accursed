@@ -342,6 +342,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `Accordion`
  * `Autocomplete`
  * `OptionsProvider`
+ * `Maximize` - wrapping an element with it will show a "maximize/restore" buttons floating at top-left
 
 # Apps
  

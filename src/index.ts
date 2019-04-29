@@ -8,3 +8,6 @@ export * from './jsx'
 export * from './jsx-components'
 export * from './jsx/types'
 export * from './util/'
+export { blessed }
+
+import * as blessed from 'blessed'

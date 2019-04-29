@@ -1078,12 +1078,14 @@ export namespace Widgets {
     /**
      * Clear any region on the screen.
      */
-    clearRegion(x1: number, x2: number, y1: number, y2: number): void
+    clearRegion(x1: number, x2: number, y1: number, y2: number, override?: boolean): void
 
     /**
      * Fill any region with a character of a certain attribute.
+     *
+     * Will force writing to screen input even if current pixel attr value didn't changed..
      */
-    fillRegion(attr: string, ch: string, x1: number, x2: number, y1: number, y2: number): void
+    fillRegion(attr: string, ch: string, x1: number, x2: number, y1: number, y2: number, override?: boolean): void
 
     /**
      * Focus element by offset of focusable elements.
@@ -1332,7 +1334,7 @@ export namespace Widgets {
     /**
      * A simple text label for the element.
      */
-    label?: string
+    label?: string | LabelOptions
 
     /**
      * A floating text label for the element which appears on mouseover.
@@ -1786,10 +1788,15 @@ export namespace Widgets {
      * the rest of the properties and optionally bg and fg.
      */
     sattr(style: Widgets.Types.TStyle, fg?: string, bg?: string): any // TODO: I don't fully understand what this does but is ery used in widget implementations to obtain the charvalues for painting in the screen... this is why I think it whould ebavailablr for implementors
+
     /**
-     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering. @internal
+     * Cleans the rectangle of this element on the screen. Useful for subclasses before rendering.
+     * @param get it's passed to [[_getCoords]]
+     * @param override it's passed to  [[Screen.clearRegion]]
+     *
+     * @internal
      */
-    clearPos(): void
+    clearPos(get?: boolean, override?: boolean): void
 
     /**
      * Set the content. Note: When text is input, it will be stripped of all non-SGR
