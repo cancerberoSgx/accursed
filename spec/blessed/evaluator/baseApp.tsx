@@ -8,20 +8,15 @@ import {
   Component,
   debug,
   Element,
-  isElement,
   isMaximized,
   Screen,
   setMaximized,
-  TabPanel,
-  TextareaOptions,
-  ElementOptions,
-  findDescendant
+  TabPanel
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
+import { focusableOpts } from './app'
+import { buildEditor, IEditor, Range } from './editor'
 import { examples } from './examples'
-import { IEditor, Range, buildEditor } from './editor'
-import { focusableOpts } from './app';
-import { throttle } from 'misc-utils-of-mine-generic';
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
 
@@ -35,12 +30,11 @@ export enum Action {
   'Save as' = 'Save as'
 }
 
-
 interface P {
   parent: Screen
 }
 interface S {
-  autoExecute?:boolean;
+  autoExecute?: boolean
   cleanOutputBeforeExecute?: boolean
 }
 
@@ -51,7 +45,7 @@ export abstract class BaseApp extends Component<P, S> {
   editorContainer: Box
   errorsEl: accursed.Widgets.BoxElement
   outputPanel: TabPanel
-  state: S = {cleanOutputBeforeExecute: true, autoExecute: true}
+  state: S = { cleanOutputBeforeExecute: true, autoExecute: true }
   protected abstract help()
 
   setExample(exampleName: string): void {
@@ -62,7 +56,7 @@ export abstract class BaseApp extends Component<P, S> {
 
   dispatch(action: Action): void {
     if (action === Action.Execute) {
-       this.execute()
+      this.execute()
     } else if (action === Action.Exit) {
       this.screen.destroy()
       process.exit(0)
@@ -84,7 +78,7 @@ export abstract class BaseApp extends Component<P, S> {
       blessed,
       log(...args: any[]) {
         _log.push(...args.map(a => inspect(a)))
-      },
+      }
       // updateLog: throttle(()=>{
       //   this.logEl.content = _log.join('\n')
       //     this.outputPanel.selectTab(0)
@@ -93,7 +87,7 @@ export abstract class BaseApp extends Component<P, S> {
     }
     let error: any
     const text = this.editor.textBuf.getText()
-    let result:any
+    let result: any
     const code = `
     (${text})(options)`
     try {
@@ -102,9 +96,9 @@ export abstract class BaseApp extends Component<P, S> {
       debug(ex)
       error = ex
     }
-      await result 
-      this.logEl.content = _log.join('\n')
-      this.logEl.setScrollPerc(100)
+    await result
+    this.logEl.content = _log.join('\n')
+    this.logEl.setScrollPerc(100)
     if (error) {
       this.errorsEl.content = inspect(error, error.stack)
       this.outputPanel.selectTab(1)
@@ -117,7 +111,7 @@ export abstract class BaseApp extends Component<P, S> {
 
   async afterRender() {
     await waitFor(() => this.editorContainer)
-    this.editor =     buildEditor({
+    this.editor = buildEditor({
       parent: this.editorContainer,
       ...focusableOpts(),
       top: 0,
@@ -130,8 +124,8 @@ export abstract class BaseApp extends Component<P, S> {
       text: examples[0].code
     })
     this.editor.focus()
-    this.editor.textBuf.onDidStopChanging(()=>{
-      if(this.state.autoExecute) {
+    this.editor.textBuf.onDidStopChanging(() => {
+      if (this.state.autoExecute) {
         this.dispatch(Action.Execute)
       }
     })
@@ -143,5 +137,4 @@ export abstract class BaseApp extends Component<P, S> {
     btn.content = (isMaximized(container) ? 'Restore' : 'Maximize') + (label ? ' ' + label : '')
     container.screen.render()
   }
-
 }

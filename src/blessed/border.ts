@@ -1,4 +1,4 @@
-import { enumKeys } from 'misc-utils-of-mine-generic';
+import { enumKeys } from 'misc-utils-of-mine-generic'
 
 export enum BorderStyle {
   light = 'light',
@@ -25,7 +25,7 @@ export enum BorderStyle {
   // 'round3' = 'round3',
 }
 
-export const  borderStyles  = enumKeys(BorderStyle)
+export const borderStyles = enumKeys(BorderStyle)
 
 export enum BorderSide {
   'topLeft' = 'topLeft',
@@ -110,7 +110,7 @@ const getBoxStyles: () => BoxStyles = () => {
         right: '│',
         bottom: '─',
         top: '─'
-      },  
+      },
       roundDoubleDash: {
         topLeft: '╭',
         topRight: '╮',

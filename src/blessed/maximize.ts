@@ -1,9 +1,7 @@
-import { box, Box, button, Element, findDescendant, isElement, setElementData } from '..'
-import { findAscendant, visitAscendants, visitDescendants, findRootElement, getContent } from './node'
+import { Element, isElement, setElementData } from '..'
+import { debug } from '../util'
+import { findAscendant, visitDescendants } from './node'
 import { getElementData } from './util'
-import { isScreen } from '../blessedTypes';
-import { debug } from '../util';
-import { Component } from '../jsx';
 
 interface Options {
   /**
@@ -55,27 +53,25 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
     currentTarget = el
     // debug(root && root.type, root && root.name)
     // screen.children.filter(c=>c!==root).filter(isElement).forEach(c=>{debug(c.type, getContent(c)); c.style.fg='magenta'; c.style.border={fg: 'magenta'}})
-    visitDescendants(screen, d=>{
+    visitDescendants(screen, d => {
       // debug(d.type, (d as any).name)//getContent(d))
-      if(isElement(d) &&( !findAscendant(d, a=>a===el)&&d!==el&&!findAscendant(el, a=>a===d))) {
-        debug(d.type, d.name)//getContent(d))        
+      if (isElement(d) && (!findAscendant(d, a => a === el) && d !== el && !findAscendant(el, a => a === d))) {
+        debug(d.type, d.name) //getContent(d))
         d.hide()
       }
       return false
     })
-    
+
     setElementData(el, 'maximized-target-width', el.width)
     setElementData(el, 'maximized-target-height', el.height)
     setElementData(el, 'maximized-target-rtop', el.rtop)
     setElementData(el, 'maximized-target-rleft', el.rleft)
 
-
-        el.width=screen.width
-        el.height=screen.height
-        el.rtop=0
-        el.rleft=0
+    el.width = screen.width
+    el.height = screen.height
+    el.rtop = 0
+    el.rleft = 0
     // screen.render()
-
 
     // container!.children.forEach(e => e.detach())
 
@@ -85,48 +81,41 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
     // box.setFront()
     // setElementData(box, 'maximize-target', el) // needed in auto
   } else {
-// 
-visitDescendants(screen, d=>{
-  //TODO: dont show the ones that were originally hidden
-  if(isElement(d)){
-   
-    // getElementData(el, 'maximized-target-width')
-    // getElementData(el, 'maximized-target-height')
-    // getElementData(el, 'maximized-target-rtop')
-    // getElementData(el, 'maximized-target-rleft')
+    //
+    visitDescendants(screen, d => {
+      //TODO: dont show the ones that were originally hidden
+      if (isElement(d)) {
+        // getElementData(el, 'maximized-target-width')
+        // getElementData(el, 'maximized-target-height')
+        // getElementData(el, 'maximized-target-rtop')
+        // getElementData(el, 'maximized-target-rleft')
 
+        if (d.hidden) {
+          setTimeout(() => {
+            d.show()
+            d.render()
+          }, 10)
+        }
+      }
 
-    if(d.hidden){
+      // debug(d.type, (d as any).name)//getContent(d))
+      // if(isElement(d) &&( !findAscendant(d, a=>a===el)&&d!==el&&!findAscendant(el, a=>a===d))) {
+      //   debug(d.type, d.name)//getContent(d))
+      //   d.hide()
+      // }
+      return false
+    })
 
+    setTimeout(() => {
+      screen.render()
+    }, 100)
 
-    setTimeout(()=>{
-      d.show()
-      d.render()      
-    }, 10)
+    el.width = getElementData(el, 'maximized-target-width')
+    el.height = getElementData(el, 'maximized-target-height')
+    el.rtop = getElementData(el, 'maximized-target-rtop')
+    el.rleft = getElementData(el, 'maximized-target-rleft')
 
-   }
-  }
-
-
-  // debug(d.type, (d as any).name)//getContent(d))
-  // if(isElement(d) &&( !findAscendant(d, a=>a===el)&&d!==el&&!findAscendant(el, a=>a===d))) {
-  //   debug(d.type, d.name)//getContent(d))
-  //   d.hide()
-  // }
-  return false
-})
-
-
-setTimeout(() => {
-  screen.render()
-}, 100);
-
-el.width=getElementData(el, 'maximized-target-width')
-el.height=  getElementData(el, 'maximized-target-height')
-el.rtop=getElementData(el, 'maximized-target-rtop')
-el.rleft=getElementData(el, 'maximized-target-rleft')
-
-currentTarget=undefined
+    currentTarget = undefined
     // const box = getBox()
     // //TODO: check that el is descendant of box
     // const parent = getElementData<Element>(el, 'maximize-parent')
@@ -137,17 +126,17 @@ currentTarget=undefined
     // box.detach()
   }
   // if (options.auto) {
-    screen.render()
+  screen.render()
   // }
 }
 
-let currentTarget: Element|undefined
+let currentTarget: Element | undefined
 /**
  * restore the state of current maximized element if any
  */
 export function restoreMaximize(options: Options = { auto: true }) {
   // const target = getElementData<Element>(getBox(), 'maximize-target')
-    setMaximized(currentTarget, false)
+  setMaximized(currentTarget, false)
 }
 
 export function isMaximized(el: Element) {
@@ -192,4 +181,3 @@ export function isMaximized(el: Element) {
 //   return bo
 // }
 // // TODO: minimize ?
-

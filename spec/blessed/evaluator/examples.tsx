@@ -4,9 +4,9 @@ function simple1(options) {
     parent: options.parent,
     content: '{bold}Hello {red-fg}{green-bg}world{/}\nHow are you today ?',
     tags: true,
-    align: 'center', 
+    align: 'center',
     valign: 'middle',
-    height: '100%', 
+    height: '100%',
     width: '100%',
     style: {
       bg: '#cdabc9',

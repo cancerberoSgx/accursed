@@ -8,6 +8,7 @@ import { enumValueFromString } from '../../../src/util/misc'
 import { anim2 } from '../experiments/anim2'
 import { animDemo } from '../experiments/animDemo'
 import { borderBoxDemo } from '../experiments/borderBoxDemo'
+import { allColors } from '../experiments/colors/allColors'
 import { color4 } from '../experiments/colors/colors4'
 import { colors5Demo } from '../experiments/colors/colors5'
 import { ButtonDemo } from './ButtonDemo'
@@ -16,7 +17,6 @@ import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
-import { allColors } from '../experiments/colors/allColors';
 
 enum Demo {
   button,

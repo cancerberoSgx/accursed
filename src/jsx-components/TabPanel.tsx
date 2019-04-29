@@ -3,7 +3,7 @@ import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed
 import { BoxOptions, isElement, Node, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { CollapsibleProps } from './collapsible'
-import { Br, Div } from './jsxUtil'
+import { Div } from './jsxUtil'
 
 export class TabLabel extends VirtualComponent<TabLabelProps> {}
 export class Tab extends VirtualComponent<TabProps> {}
@@ -115,7 +115,7 @@ export class TabPanel extends Component<TabPanelProps> {
       if (id !== NaN) {
         this.selectTab(id)
       }
-      if(this.props.updateScreenOnChange){
+      if (this.props.updateScreenOnChange) {
         this.screen.render()
       }
     }

@@ -1,8 +1,8 @@
-import { EventEmitter } from 'events';
-import { TODO } from 'misc-utils-of-mine-typescript';
-import { Element, TextareaOptions } from '../../../src';
+import { EventEmitter } from 'events'
+import { TODO } from 'misc-utils-of-mine-typescript'
+import { Element, TextareaOptions } from '../../../src'
 var Range = require('text-buffer/lib/range')
-const Editor = require('editor-widget') 
+const Editor = require('editor-widget')
 var Point = require('text-buffer/lib/point')
 
 export interface Range {}
@@ -28,8 +28,8 @@ export interface IEditor extends Element {
 
 export interface TextBuffer extends EventEmitter {
   emitDidChangeTextEvent(...args: TODO): TODO
-  onDidChange(l: (...args: any[])=>TODO ):void
-  onDidStopChanging(l: ()=>TODO ):void
+  onDidChange(l: (...args: any[]) => TODO): void
+  onDidStopChanging(l: () => TODO): void
   getText(): string
   emitWillChangeTextEvent(): void
   setText(s: string): void
@@ -40,10 +40,10 @@ export interface EditorOptions extends TextareaOptions {
 }
 export function buildEditor(options: EditorOptions) {
   const editor = new Editor(options)
- editor.textBuf.setText(options.text||'');
- editor.language(options.language||'js');
+  editor.textBuf.setText(options.text || '')
+  editor.language(options.language || 'js')
   setTimeout(() => {
-    editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)));
-  }, 100);
+    editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
+  }, 100)
   return editor
 }
