@@ -1,7 +1,6 @@
 import { asArray, getObjectProperty, getObjectPropertyPaths, setObjectProperty } from 'misc-utils-of-mine-generic'
 import { Component, React } from '..'
-import { Color } from '../../spec/blessed/experiments/drawille/drawille-canvas'
-import { Border, BoxOptions, Element, isElement, Padding, Position, Style, TopLeft } from '../blessedTypes'
+import { Border, BoxOptions, Color, Element, isElement, Padding, Position, Style, TopLeft } from '../blessedTypes'
 import { Div } from './jsxUtil'
 
 interface SupportedOptions {

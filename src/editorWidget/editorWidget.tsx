@@ -80,6 +80,10 @@ export function createEditor(options: CreateEditorOptions) {
   })
 }
 
+export function isEditorWidget(n: Node): n is IEditor {
+  return n && (n as any).moveCursorHorizontal && (n as any).lineWithEndingForRow
+}
+
 export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>
 
 React.addIntrinsicElementConstructors({ editor: createEditor })

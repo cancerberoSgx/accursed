@@ -1,12 +1,12 @@
 import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, TreeView, TreeViewNode } from 'accursed'
 import { join, resolve } from 'path'
 import { ls, test } from 'shelljs'
-import { ActionManager } from '../store/actionManager'
 import { Component } from '../component'
+import { ActionManager } from '../store/actionManager'
 import { File, State } from '../store/state'
 import { focusableOpts } from '../style'
 import { PREFIX } from '../util'
-import { SIDEBAR_ACTION, SetCwdAction, OpenFilesAction } from './sidebarActions';
+import { SetCwdAction, SIDEBAR_ACTION } from './sidebarActions'
 
 export class Sidebar extends Component {
   render() {
@@ -56,7 +56,7 @@ export class Explorer extends Component {
   treeView: TreeView<File>
 
   render() {
-    ActionManager.get().onActionDispatched(SIDEBAR_ACTION.SET_CWD,(a: SetCwdAction, s)=>this.onCwdChanged(a, s))
+    ActionManager.get().onActionDispatched(SIDEBAR_ACTION.SET_CWD, (a: SetCwdAction, s) => this.onCwdChanged(a, s))
 
     return (
       <treeview<File>
@@ -98,8 +98,6 @@ export class Explorer extends Component {
   }
 }
 
-
-
 export function listDirectoryAsNodes(cwd: string) {
   return ls(cwd).map(p => ({
     filePath: resolve(join(cwd, p)),
@@ -108,4 +106,3 @@ export function listDirectoryAsNodes(cwd: string) {
     isDirectory: test('-d', resolve(join(cwd, p)))
   }))
 }
-

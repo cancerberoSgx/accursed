@@ -1,4 +1,5 @@
 import * as blessed from 'blessed'
+import { sleep } from 'misc-utils-of-mine-generic'
 import { installExitKeys } from '../src/blessed/util'
 import { Element, Screen } from '../src/blessedTypes'
 import { React } from '../src/jsx/createElement'
@@ -157,12 +158,4 @@ interface Options {
 
   // /** users can provide their own Screen instance at any time */
   // screen?: Screen
-}
-
-export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
-  })
 }

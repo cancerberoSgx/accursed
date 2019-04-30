@@ -34,15 +34,20 @@ var bar = blessed.listbar({
       bg: 'red',
       hover: {
         bg: 'blue'
+      },
+      focus: {
+        bg: 'blue'
       }
-      //focus: {
-      //  bg: 'blue'
-      //}
     },
     selected: {
-      bg: 'blue'
+      bg: 'blue',
+      border: {
+        type: 'line',
+        fg: 'cyan'
+      }
     }
-  } as any,
+  },
+  // we will use the object synyax altough an arrya symyax is also supported.
   commands: {
     one: {
       keys: ['a'],
@@ -51,13 +56,17 @@ var bar = blessed.listbar({
         screen.render()
       }
     },
+    // just a function
     two: function() {
       box.setContent('Pressed two.')
       screen.render()
     },
-    three: function() {
-      box.setContent('Pressed three.')
-      screen.render()
+    three: {
+      keys: ['3'],
+      function() {
+        box.setContent('Pressed three.')
+        screen.render()
+      }
     },
     four: function() {
       box.setContent('Pressed four.')

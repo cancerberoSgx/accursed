@@ -2303,8 +2303,8 @@ export namespace Widgets {
     /**
      * Removes an item from the list. Child can be an element, index, or string.
      */
-    removeItem(child: BlessedElement): BlessedElement
-
+    removeItem(item: BlessedElement): BlessedElement
+    removeItem(itemIndex: number): BlessedElement
     /**
      * Push an item onto the list.
      */
@@ -2361,12 +2361,12 @@ export namespace Widgets {
     getItemIndex(child: BlessedElement): number
 
     /**
-     * Select an index of an item.
+     * Selects a command from the list. Notice that this is emitted when the user focus commands using the arrow keys, not when it pressed enter. In that case use [[selectTab]] method.
      */
-    select(index: number): void
+    select(index: number | BlessedElement): void
 
     /**
-     * Select item based on current offset.
+     * Select item based on current offset. See [[select]] method
      */
     move(offset: number): void
 
@@ -2383,8 +2383,8 @@ export namespace Widgets {
     /**
      * Show/focus list and pick an item. The callback is executed with the result.
      */
+    pick(label: string, callback: () => void): void
     pick(callback: () => void): void
-
     /**
      * Find an item based on its text content.
      */
@@ -2530,7 +2530,10 @@ export namespace Widgets {
      * Set buttons using an object with keys as titles of buttons, containing of objects
      * containing keys of keys and callback.
      */
-    commands: (Types.ListbarCommand[]) | ({ [name: string]: Types.ListbarCommand }) | { [name: string]: () => void }
+    commands: (Types.ListbarCommand[]) | ({ [name: string]: Types.ListbarCommand | (() => void) })
+    /**
+     * alias for [[commands]]
+     */
     items?: Types.ListbarCommand[]
 
     /**
@@ -2539,18 +2542,47 @@ export namespace Widgets {
     autoCommandKeys?: boolean
   }
 
+  /**
+   * Implements an horizontal list of actionable items with an easy to use command definition API, keybinding
+   * and focus.
+   *
+   * Key binding: The [[keys]] property provided in commands, if any, are automatically and globally bind and will activate the command.
+   *
+   * Focus: When the list aquires focus, user can natigate through internal comman actionables with the arrow keys in isolation.
+   *
+   * Navitagion and selection:
+   *
+   * When the user uses the arrow keys to focus/scroll through the list items the event `select item` is
+   * emitted. Notice that the user didn't actionate the command yet, is just exploring. This is the equivalent
+   * action to call method [[select]], [[move]], etc.
+   *
+   * On the other hand, when the user clicks an item, or presses enter / space when standing on the item, the
+   * event `select` or `action` which is an alias are emitted.
+   *
+   * Finally calling method [[selectTab]] wil emit event `select tab` which happens when user pressed one of the [[autoCommandKeys]]
+   *
+   * Although it doesnt' implements [[ListElement]] it has similar interface. and an elegant cmmand selection.
+   */
   class ListbarElement extends BoxElement implements IHasOptions<ListbarOptions> {
     constructor(opts: ListbarOptions)
 
     /**
-     * currently selected item index
+     * currently selected item index.
      */
     selected: number
 
     /**
-     * Current list of command objects (after being processed from options in object form).
+     * Current list of command objects (after being processed from options in object form). They have
+     * associated its corresponding item element.
      */
-    commands: (Types.ListbarCommand&{element:Element})[]
+    commands: (Types.ListbarCommand & { element: Element })[]
+
+    /**
+     * Elements representing each command. They can be used to reference commands (like indexes) in most of
+     * this class methods. The elements have associated its corresponding [[ListbarCommand]] object in
+     * property [[_cmd]]
+     */
+    items: (BlessedElement & { _cmd: Types.ListbarCommand })[]
 
     /**
      * Original options object.
@@ -2563,29 +2595,35 @@ export namespace Widgets {
     setItems(commands: Types.ListbarCommand[]): void
 
     /**
-     * Append an item to the bar.
+     * Alias for [[appendItem]].
      */
-    add(item: Types.ListbarCommand, callback: () => void): void
+    addItem(item: Types.ListbarCommand | (() => void)): void
+    addItem(item: string, callback: () => void): void
 
     /**
-     * Append an item to the bar.
+     * Append an item to the bar. In case a function is provided, the command name will be thefunction's name
      */
-    addItem(item: Types.ListbarCommand, callback: () => void): void
+    appendItem(item: Types.ListbarCommand | (() => void)): void
+    appendItem(item: string, callback: () => void): void
 
     /**
-     * Append an item to the bar.
+     * Alias for [[appendItem]].
      */
-    appendItem(item: Types.ListbarCommand, callback: () => void): void
+    add(item: Types.ListbarCommand | (() => void)): void
+    add(item: string, callback: () => void): void
 
     /**
-     * Select an item on the bar.
+     * Select an item on the bar. Notice that the meaning of this method is equivalent to the user navigating
+     * thoguth the items with the arrow keys, not when its acctially actionain the commands. So the command
+     * callbacks are not called in this method. The same for other methods based on this one like [[move]],
+     * [[moveLeft]], etc.
      */
-    select(offset: number): void
+    select(offset: number | BlessedElement): void
 
     /**
      * Remove item from the bar.
      */
-    removeItem(child: BlessedElement): void
+    removeItem(child: number | BlessedElement): void
 
     /**
      * Move relatively across the bar.
@@ -2603,15 +2641,40 @@ export namespace Widgets {
     moveRight(offset: number): void
 
     /**
-     * Select button and execute its callback.
+     * Actionate a command by giving its keys. and execute its callback.
      */
     selectTab(index: number): void
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'action', listener: (item: any, selectedIndex:number) => void): this
-    on(event: 'select', listener: (item: any, selectedIndex:number) => void): this
-    on(event: 'cancel', listener: (item: any, selectedIndex:number) => void): this
-    on(event: 'set items' | 'remove item' | 'select tab', callback: () => void): this
+    /**
+     * Emitted when a command is activated (by pressing enter, or clicking, o by pressing [[autoCommandKeys]].
+     * @see [[ListBarElement]] class description.
+     */
+    on(event: 'action', listener: (item: any, selectedIndex: number) => void): this
+    /**
+     * Emitted when user moves thgourh the list items, with the arrow keys. @see [[ListBarElement]] class
+     * description.
+     */
+    on(event: 'select item', listener: (item: any, selectedIndex: number) => void): this
+    /**
+     * Emitted when a command is activated (by pressing enter, or clicking, o by pressing [[autoCommandKeys]].
+     * @see [[ListBarElement]] class description.
+     */
+    on(event: 'select', listener: (item: any, selectedIndex: number) => void): this
+    on(event: 'cancel', listener: (item: any, selectedIndex: number) => void): this
+    /**
+     * Emitted when the items are initialized or reseted.  This happens on initialization when method
+     * [[setItems]] is called.
+     */
+    on(event: 'set items', callback: (item: BlessedElement, index: number) => void): this
+    /**
+     * Emitted when a list item is rmoed programatically. @see [[ListBarElement]] class description.
+     */
+    on(event: 'remove item', callback: (item: BlessedElement, index: number) => void): this
+    /**
+     * Emitted when [[autoCommandKeys]] is pressed. @see [[ListBarElement]] class description.
+     */
+    on(event: 'select tab', callback: (item: BlessedElement, index: number) => void): this
   }
 
   interface FormOptions extends BoxOptions {

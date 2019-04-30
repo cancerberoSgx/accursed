@@ -1,5 +1,5 @@
+import { sleep } from 'misc-utils-of-mine-generic'
 import { findDescendant } from '..'
-import { sleep } from '../../spec/blessedTestUtil'
 import { Element, isScreen, Screen } from '../blessedTypes'
 
 // tools for wait  (pooling) until a element has some state - mostly for testing...

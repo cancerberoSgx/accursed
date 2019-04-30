@@ -65,6 +65,7 @@ export type NodeGenericEventType = blessed.Widgets.NodeGenericEventType
 
 export type Border = blessed.Widgets.Types.TBorder
 export type Style = blessed.Widgets.Types.TStyle
+export type Color = blessed.Widgets.Color
 export type Position = blessed.Widgets.Types.TPosition
 export type TopLeft = blessed.Widgets.Types.TTopLeft
 export type ListElementStyle = blessed.Widgets.ListElementStyle

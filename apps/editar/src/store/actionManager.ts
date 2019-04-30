@@ -1,7 +1,7 @@
 import { ok } from 'assert'
-import { debug } from '../../../../dist/src'
+import { debug } from 'accursed'
 import { State } from './state'
-import { AllActions, Store } from './store'
+import { ActionForType, AllActions, Store } from './store'
 let actionManager
 // type ActionListener <A extends AllActions> = (type: A['type'], l: (a: A, state: State)=>void)=>void
 type ActionListener<A extends AllActions> = (a: A, state: State) => void
@@ -35,7 +35,7 @@ export class ActionManager {
   private constructor(private store: Store) {}
   protected _actionListener(): any {}
   protected _actionListeners: { [type in AllActions['type']]: ActionListener<AllActions>[] } = {} as any
-  onActionDispatched<A extends AllActions>(type: A['type'], l: ActionListener<A>) {
+  onActionDispatched<T extends AllActions['type'], A extends ActionForType<T>>(type: T, l: ActionListener<A>) {
     if (!this._actionListeners[type]) {
       this._actionListeners[type] = []
     }

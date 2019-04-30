@@ -1,12 +1,12 @@
-import { BoxOptions, TextareaOptions } from 'accursed'
+import { TextareaOptions } from '..'
 
+/** @internal */
 export const focusableOpts: () => TextareaOptions = () => ({
   mouse: true,
-  // clickable: true,
   keys: true,
   focusable: true,
   clickable: true,
-  // input: true,
+  input: true,
   keyable: true,
   border: 'line',
   style: {
@@ -25,8 +25,7 @@ export const focusableOpts: () => TextareaOptions = () => ({
     },
     item: {
       bg: 'lightgray',
-      fg: 'black',
-      underline: false
+      fg: 'black'
     },
     selected: {
       bg: 'magenta',
@@ -35,10 +34,4 @@ export const focusableOpts: () => TextareaOptions = () => ({
       underline: true
     }
   }
-})
-
-export const transparentBox: () => BoxOptions = () => ({
-  width: '100%',
-  height: '100%',
-  border: undefined
 })

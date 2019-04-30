@@ -2,45 +2,9 @@ import { shorter } from 'misc-utils-of-mine-generic'
 import { inspect } from 'util'
 import { Element, ElementOptions, isElement, Screen } from '..'
 import { findDescendantNamed, getElementData, setElementData, TreeViewNode } from '../blessed'
-import { BoxOptions } from '../blessedTypes'
 import { React } from '../jsx'
 import { Row, Rows } from '../jsx-components'
-
-export const focusableOpts: () => BoxOptions = () => ({
-  mouse: true,
-  keys: true,
-  focusable: true,
-  clickable: true,
-  input: true,
-  keyable: true,
-  border: 'line',
-  style: {
-    bg: 'lightgray',
-    fg: 'black',
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
-    focus: {
-      fg: 'black',
-      bg: '#507468',
-      border: {
-        fg: 'red'
-      }
-    },
-    item: {
-      bg: 'lightgray',
-      fg: 'black',
-      underline: false
-    },
-    selected: {
-      bg: 'magenta',
-      fg: 'black',
-      // bold: true,
-      underline: true
-    }
-  }
-})
+import { focusableOpts } from './sharedOptions'
 
 interface Options {
   /** if true blessed element will be associated in tree node as propety `blessedElement` */

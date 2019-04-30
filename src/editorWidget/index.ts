@@ -1,2 +1,2 @@
-export * from './editorWidgetTypes'
 export * from './editorWidget'
+export * from './editorWidgetTypes'

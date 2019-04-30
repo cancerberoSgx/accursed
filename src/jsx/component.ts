@@ -17,7 +17,7 @@ import { RefObject } from './types'
  * Very simple abstract Component class (like React.Component) but without life cycle methods, or Refs. Has a
  * dummy state that will update the blessed element if changed by default
  */
-export abstract class Component<P = { ref?: RefObject; children?: JSX.BlessedJsxNode }, S = {}> {
+export abstract class Component<UP = {}, S = {}, P = UP & { ref?: RefObject; children?: JSX.BlessedJsxNode }> {
   constructor(protected props: P, protected state: S) {}
 
   /**

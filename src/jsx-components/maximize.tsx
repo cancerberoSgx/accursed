@@ -1,6 +1,7 @@
 import { Component, React } from '..'
 import { isMaximized, setMaximized } from '../blessed'
-import { BoxOptions, Button, Element, TextareaOptions } from '../blessedTypes'
+import { BoxOptions, Button, Element } from '../blessedTypes'
+import { focusableOpts } from '../util/sharedOptions'
 
 interface MaximizeProps extends BoxOptions {
   /**
@@ -86,39 +87,3 @@ export class Maximize extends Component<MaximizeProps, {}> {
     container.screen.render()
   }
 }
-
-/** @internal */
-export const focusableOpts: () => TextareaOptions = () => ({
-  mouse: true,
-  keys: true,
-  focusable: true,
-  clickable: true,
-  input: true,
-  keyable: true,
-  border: 'line',
-  style: {
-    bg: 'lightgray',
-    fg: 'black',
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
-    focus: {
-      fg: 'black',
-      bg: '#507468',
-      border: {
-        fg: 'red'
-      }
-    },
-    item: {
-      bg: 'lightgray',
-      fg: 'black'
-    },
-    selected: {
-      bg: 'magenta',
-      fg: 'black',
-      // bold: true,
-      underline: true
-    }
-  }
-})

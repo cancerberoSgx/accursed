@@ -1,4 +1,4 @@
-import { tryTo } from 'misc-utils-of-mine-generic'
+import { sleep, tryTo } from 'misc-utils-of-mine-generic'
 import {
   AutoComplete,
   cleanNode,
@@ -12,7 +12,6 @@ import {
   Textarea
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { sleep } from './blessedTestUtil'
 
 describe('autoComplete', () => {
   let screen: Screen

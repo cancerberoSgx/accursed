@@ -1,10 +1,10 @@
-import { Component as AccursedComponent, findDescendant, isElement, Log } from 'accursed'
-import { inspect } from 'util'
-import { ActionManager } from './store/actionManager'
+import { Component as AccursedComponent } from 'accursed'
+// import { inspect } from 'util'
 import { Context } from './context/context'
+import { ActionManager } from './store/actionManager'
+// import { WORKSPACE_ACTION } from './store/actions'
 import { State } from './store/state'
-import { AllActions, Store, ActionType } from './store/store'
-import { WORKSPACE_ACTION } from './store/actions';
+import { ActionForType, AllActions, Store } from './store/store'
 
 export interface Props {
   store: Store
@@ -20,36 +20,37 @@ export interface Props {
 export type ActionListener<A extends AllActions> = (a: A, state: State) => void
 
 export abstract class Component<T extends Props = Props> extends AccursedComponent<T> {
-
   protected dispatch<A extends AllActions>(a: A) {
     ActionManager.get().dispatch(a)
   }
 
-  protected onActionDispatched<A extends AllActions>(type: A['type'], l: ActionListener<A>) {
-    ActionManager.get().onActionDispatched(type,l );
+  protected onActionDispatched<T extends AllActions['type']>(type: T, l: ActionListener<ActionForType<T>>) {
+    ActionManager.get().onActionDispatched(type, l)
   }
-  
+
   protected get s() {
     return this.props.store.getState()
   }
 
-
   protected debug(...args: any[]) {
-    this.dispatch({
-      type: WORKSPACE_ACTION.LOG_MESSAGE, 
-      message: args.map(a => inspect(a)).join(', '), 
-      messageType: 'debug'
-    })
+    // this.dispatch({
+    //   type: WORKSPACE_ACTION.LOG_MESSAGE,
+    //   message: args.map(a => inspect(a)).join(', '),
+    //   messageType: 'debug'
+    // })
+
+
+    
     // const d = this.screen && findDescendant<Log>(this.screen, d => isElement(d) && d.name === 'debug')
     // if (d) {
-      // if (this._debugPending) {
-      //   this._debugPending.forEach(l => {
-      //     d.log(l)
-      //   })
-      //   this._debugPending = []
-      // }
-      // d.log(args.map(a => inspect(a)).join(', '))
-      // this.screen.render()
+    // if (this._debugPending) {
+    //   this._debugPending.forEach(l => {
+    //     d.log(l)
+    //   })
+    //   this._debugPending = []
+    // }
+    // d.log(args.map(a => inspect(a)).join(', '))
+    // this.screen.render()
     // } else {
     //   this._debugPending.push(args.map(a => inspect(a)).join(', '))
     //   setTimeout(() => {
@@ -57,7 +58,6 @@ export abstract class Component<T extends Props = Props> extends AccursedCompone
     //   }, 2000)
     // }
   }
-
 
   // protected static _actionListener(): any {
   // }

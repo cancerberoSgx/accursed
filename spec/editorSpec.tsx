@@ -1,8 +1,7 @@
-import { tryTo } from 'misc-utils-of-mine-generic'
+import { sleep, tryTo } from 'misc-utils-of-mine-generic'
 import { Column, Columns, createScreen, printElement, React, Row, Rows, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import {} from '../src/jsx-components'
-import { sleep } from './blessedTestUtil'
 
 describe('editor', () => {
   let screen: Screen

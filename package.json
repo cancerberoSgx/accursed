@@ -28,18 +28,18 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
     "misc-utils-of-mine-generic": "0.0.16",
-    "pty.js": "file:../pty.js"
+    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git"
   },
   "devDependencies": {
-    "google-material-color-palette-json": "^2.0.1",
-    "gradstop": "^2.2.3",
     "@types/jasmine": "^3.3.12",
-    "@types/node": "^11.13.7",
+    "@types/node": "^11.13.8",
     "ansi-diff-stream": "^1.2.1",
     "cli-driver": "0.2.0",
     "drawille-canvas": "^1.2.0",
-    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
+    "google-material-color-palette-json": "^2.0.1",
+    "pty.js": "file:../pty.js",
     "google-palette": "^1.1.0",
+    "gradstop": "^2.2.3",
     "jasmine": "^3.4.0",
     "markdown-toc": "^1.2.0",
     "prettier": "^1.17.0",

@@ -1,11 +1,19 @@
 import { React } from '..'
-import { focusableOpts } from '../../spec/blessed/evaluator/app'
 import { getJSXChildrenProps, VirtualChildrenData, VirtualComponent } from '../blessed/virtualElement'
-import { ButtonOptions, ElementOptions, ListBar } from '../blessedTypes'
+import { ButtonOptions, Element, ElementOptions, ListBar } from '../blessedTypes'
 import { Component } from '../jsx/component'
+import { focusableOpts } from '../util/sharedOptions'
 
 interface ListBarProps extends ElementOptions {
   children: ListBarCommand | ListBarCommand[]
+  /**
+   * Notifies when the user moves thought the list as when pressing arrow functions. Notice that the user did not actionate the command, is just exploring the options.
+   */
+  onSelectItem?(index: number, item: Element): void
+  /**
+   * Notifies when the user presses ENTER or clicks a command.
+   */
+  onCommand?(index: number, item: Element): void
 }
 interface ListBarCommandProps extends ButtonOptions {
   children: string | string[]
@@ -13,7 +21,7 @@ interface ListBarCommandProps extends ButtonOptions {
   active?: boolean
   keys?: string[]
 }
-interface Command  {
+interface Command {
   text?: string
   prefix?: string
   // commandId?: string
@@ -27,14 +35,27 @@ export class ListBarCommand extends VirtualComponent<ListBarCommandProps> {}
 /** 
    * Example:
 ```jsx
-<ListBar>
-  TODO
-</ListBar>
+<ListBar2 left="center">
+<ListBarCommand
+  callback={() => {
+    showInModal(screen, 'play')
+  }}>
+  play
+</ListBarCommand>
+<ListBarCommand
+  callback={() => {
+    showInModal(screen, 'stop')
+  }}>
+  stop
+</ListBarCommand>
+...
+</ListBar2>
 
 ```
    */
 export class ListBar2 extends Component<ListBarProps> {
   _saveJSXChildrenProps = true
+  dontEmitAction: any
   render() {
     const childProps = getJSXChildrenProps(this)!
 
@@ -42,16 +63,19 @@ export class ListBar2 extends Component<ListBarProps> {
 
     const commands: { [commandName: string]: Command } = {}
     Commands.forEach(b => {
-      commands[b.children.join(' ')] = { keys: b.attrs.keys || undefined, callback: b.attrs.callback.bind(this), text: b.attrs.text||undefined, prefix: b.attrs.prefix||undefined, 
-        // commandId: b.attrs.commandId||undefined 
+      commands[b.children.join(' ')] = {
+        keys: b.attrs.keys || undefined,
+        callback: b.attrs.callback.bind(this),
+        text: b.attrs.text || undefined,
+        prefix: b.attrs.prefix || undefined
+        // commandId: b.attrs.commandId||undefined
       }
     })
 
     //TODO: command button styles
     // const commandIds
-
     return (
-    /*
+      /*
   we will be using this syntax for commands: 
   
 commands: {
@@ -61,11 +85,7 @@ commands: {
       box.setContent('Pressed one.')
       screen.render()
     }
-  },
-  two: function() {
-    box.setContent('Pressed two.')
-    screen.render()
-  },
+  },....
      */
 
       <listbar
@@ -85,13 +105,40 @@ commands: {
     this.element.get
   }
 
-  get commands(){
-    return this.element.commands
+  handleAction(index: number, item: Element) {
+    if (!this.dontEmitAction && this.props.onCommand) {
+      this.props.onCommand(index, item)
+    }
   }
-  get selected(){
-    return this.element.selected
+
+  // on={['select', (index, item)=>this.handleAction(index, item)]}
+  // on={['select', (index, item)=>this.handleAction(index, item)]}
+  handleSelectItem(index: number, item: Element) {
+    if (!this.dontEmitAction && this.props.onCommand) {
+      this.props.onCommand(index, item)
+    }
   }
+  /**
+   * Will focus one of the list items. This won't call the callback, is the same action as moving though the list using the arrow keys.
+   */
+  select(index: number, options: { dontEmit?: boolean } = { dontEmit: false }) {
+    this.element.select(index)
+  }
+
+  /**
+   * This is equivalent to the user executing a command by pressing enter,  clicking it or pressing one of the commands [[keys]].
+   */
+  execute(index: number, options: { dontEmit?: boolean } = { dontEmit: false }) {
+    this.element.selectTab(index)
+  }
+
   get element(): ListBar {
     return this.blessedElement as ListBar
+  }
+  // get commands(){
+  //   return this.element.commands
+  // }
+  get selected() {
+    return this.element.selected
   }
 }

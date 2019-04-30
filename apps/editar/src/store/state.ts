@@ -1,4 +1,4 @@
-import { TreeViewNode } from '../../../../dist/src'
+import { TreeViewNode } from 'accursed'
 
 export interface Document {
   /** basename */
@@ -29,7 +29,6 @@ export interface File extends TreeViewNode {
 
 export interface ToolsPanel {
   logMessages: LogMessages[]
-
 }
 
 export interface LogMessages {
@@ -37,4 +36,4 @@ export interface LogMessages {
   messageType?: LogMessageType
 }
 
-export type LogMessageType = 'info'|'warninng'|'error'|'debug'
+export type LogMessageType = 'info' | 'warninng' | 'error' | 'debug'

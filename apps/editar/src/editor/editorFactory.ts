@@ -1,13 +1,15 @@
 // associates EditorWidget with Documents
 // responsible of dispatching /& coordinate, save(), open(), close(),etc
 
-import { IEditor, Element, buildEditor } from 'accursed'
-import { Document, State } from '../store/state'
-import { WORKSPACE_ACTION } from '../store/actions';
-import { notUndefined } from 'misc-utils-of-mine-typescript';
+import { buildEditor, Element, IEditor } from 'accursed'
+import { notUndefined } from 'misc-utils-of-mine-typescript'
+import { WORKSPACE_ACTION } from '../store/actions'
+import { Document } from '../store/state'
 
-
-export interface DocumentEditor { editor: IEditor; document: Document }
+export interface DocumentEditor {
+  editor: IEditor
+  document: Document
+}
 const editors: { [path: string]: DocumentEditor } = {}
 
 export async function getEditorFor(document: Document, parent: Element) {
@@ -16,8 +18,8 @@ export async function getEditorFor(document: Document, parent: Element) {
       const text = (await this.props.context.fs.read(document.path)) || ''
       const editor = buildEditor({
         parent,
-        text,  
-        language: 'js'  
+        text,
+        language: 'js'
       })
       editors[document.path] = { editor, document }
     } catch (error) {
@@ -32,7 +34,6 @@ export async function getEditorFor(document: Document, parent: Element) {
   return editors[document.path]
 }
 
-
 export function getEditorsFor(documents: Document[], parents: []) {
-  return documents.map((d,i)=>getEditorFor(d, parents[i])).filter(notUndefined)
+  return documents.map((d, i) => getEditorFor(d, parents[i])).filter(notUndefined)
 }
