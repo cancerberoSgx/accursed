@@ -2,7 +2,7 @@ import { appendFileSync } from 'fs'
 import { rm } from 'shelljs'
 import { format, inspect } from 'util'
 
-rm('-rm', 'test_output.txt')
+rm('-rf', 'test_output.txt')
 
 var Jasmine = require('jasmine')
 
