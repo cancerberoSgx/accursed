@@ -1,6 +1,7 @@
 import { Element, helpers, isElement, Node } from '..'
-import { isScreen } from '../blessedTypes'
+import { isScreen, Screen } from '../blessedTypes'
 import { strip } from '../util/misc'
+import { notUndefined, notFalsy } from 'misc-utils-of-mine-typescript';
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /**
@@ -58,6 +59,15 @@ export function filterDescendants<T extends Node = Node>(n: Node, p: ElementPred
     if (p(c)) {
       a.push(c as T)
     }
+    return false
+  })
+  return a
+}
+
+export function mapDescendants<T extends Node = Node, V=any>(n: Node, p: (p:T)=>V, o: VisitorOptions = {}): V[] {
+  const a: V[] = []
+  visitDescendants(n, c => {
+      a.push(p(c as any))
     return false
   })
   return a
@@ -166,4 +176,14 @@ export function cleanNode(n: Node, dontDestroy: boolean = false) {
       e.destroy()
     }
   })
+}
+
+
+export function findDescendantNamed(el: Element|Screen, name: string){
+  // return findDescendant(el as Element, c=>(c as any).name===name)
+  return asElements(el).map(c=>findDescendant(c, d=>(d as any).name===name)).find(notFalsy)
+  // return findDescendant()
+}
+export function asElements(el: Element|Screen) {
+ return isScreen(el) ? el.children.filter(isElement) : [el]
 }

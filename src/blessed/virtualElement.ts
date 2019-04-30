@@ -177,7 +177,7 @@ It will return a JSON Like this:
 export function getJSXChildrenProps(component: Component): VirtualChildrenData[] {
   return (component._jsxChildrenProps || []).map(process).flat()
 }
-interface VirtualChildrenData {
+export interface VirtualChildrenData {
   children: (VirtualChildrenData | string | number)[]
   attrs: { [name: string]: any }
   tagName: string

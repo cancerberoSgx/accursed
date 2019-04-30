@@ -2,7 +2,8 @@ import { Br, Column, Columns, Div, React, Row, Rows } from 'accursed'
 import { pwd } from 'shelljs'
 import { Component } from './component'
 import { Editors } from './editors'
-import { Sidebar, SIDEBAR_ACTION } from './sidebar'
+import { Sidebar } from './sidebar'
+import { SIDEBAR_ACTION } from "./sidebarActions";
 import { focusableOpts } from './style'
 
 // interface AppProps extends Props{
