@@ -130,8 +130,8 @@ export function getContent(
 /**
  * Similar to [[getContent]] but it will only return the visible part of the element's content.
  */
-export function printElement(el: Element, opts: { dontStrip?: boolean } = {}) {
-  const s = el.screenshot()
+export function printElement(el: Element|Screen, opts: { dontStrip?: boolean } = {}) {
+  const s = el.screenshot()||''
   return opts.dontStrip ? s : helpers.stripTags(s)
 }
 

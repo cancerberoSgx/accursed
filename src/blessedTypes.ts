@@ -83,7 +83,7 @@ export type BlessedElementOptionsIntersection = BoxOptions &
 
 /** isElement type guard without type parameters */
 export function isElement(n: any): n is Element {
-  return n && n.removeLabel && n.disableDrag && n.setContent && n.getScreenLines
+  return !!n && !!n.removeLabel && !!n.disableDrag && !!n.setContent && !!n.getScreenLines
 }
 
 /** isElement type guard that cast to a concrete type by without really asserting on the concrete type - use only if sure */

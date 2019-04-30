@@ -2,7 +2,45 @@ import { Element, Screen, isElement, ElementOptions, colors } from '..';
 import { TreeViewNode, findDescendantNamed, getContent, setElementData, getElementData , } from '../blessed';
 import { React } from '../jsx';
 import { Rows, Row } from '../jsx-components';
-import { throttle } from 'misc-utils-of-mine-generic';
+import { throttle, shorter } from 'misc-utils-of-mine-generic';
+import { inspect } from 'util';
+import { TextareaOptions, BoxOptions } from '../blessedTypes';
+
+export const focusableOpts: () => BoxOptions = () => ({
+  mouse: true,
+  keys: true,
+  focusable: true,
+  clickable: true,
+  input: true,
+  keyable: true,
+  border: 'line',
+  style: {
+    bg: 'lightgray',
+    fg: 'black',
+    border: {
+      type: 'line',
+      fg: 'cyan'
+    },
+    focus: {
+      fg: 'black',
+      bg: '#507468',
+      border: {
+        fg: 'red'
+      }
+    },
+    item: {
+      bg: 'lightgray',
+      fg: 'black',
+      underline: false
+    },
+    selected: {
+      bg: 'magenta',
+      fg: 'black',
+      // bold: true,
+      underline: true
+    }
+  }
+})
 
 interface Options {
   /** if true blessed element will be associated in tree node as propety `blessedElement` */
@@ -11,7 +49,7 @@ interface Options {
 }
 const defaultOptions: Options = {
   getNodeLabel(n: Element) {
-    return `${n.type} ${n.name || ''}`
+    return !n ? 'undefined' :`${n.type} ${n.name || ''}`
   }
 }
 
@@ -27,23 +65,29 @@ export function getTreeNode(el: Element | Screen, o: Options = defaultOptions): 
 }
 
 function buildTreeNode(el: Element, o: Options = defaultOptions) {
+  if(!el){
+    return {
+      label: 'undefined', name: 'undefined', expanded: true, children: []
+    }
+  }
   o = {...defaultOptions, ...o}
-
   return {...{
-    label: o.getNodeLabel(el),
+    label: o.getNodeLabel(el) + '  - isElement: ' +isElement(el)+' - '+ shorter(el.content||'undefined', 40),
     name: el.type + `[${el.index}]`,
     expanded: true,
     children: (el.children || []).filter(isElement).map(c => buildTreeNode(c, o))
   }, ...o.linkElements ? {blessedElement: el}: {}}
 }
 
-export function logText(s: string, e: Element | Screen){
+
+export function logText( e: Element | Screen, ...args:any[]){
   const box = findDescendantNamed(e.screen, 'debug-tree-node-text')
   if(isElement(box)){
-    box.content+=s
+    box.content+='\n'+args.map(a=>inspect(a)).join(' ')
   box.screen.render()
   }
 }
+
 
 let lastFocused: Element
 let timer : any
@@ -54,7 +98,9 @@ export function renderDescendants(el: Element | Screen, o: Options&ElementOption
   return React.render( 
   <Rows parent={o.parent||undefined} >
     <Row >
-<treeview height="100%" width="100%" border="line" label="tree" focusable={true} clickable={true} keyable={true} rootNodes={nodes} onNodeSelect={n=>treeNodeHighlight(n as any)
+<treeview {...focusableOpts()} height="100%" width="100%" border="line" label="tree"
+// focusable={true} clickable={true} keyable={true} 
+rootNodes={nodes} onNodeSelect={n=>treeNodeHighlight(n as any)
 //   throttle((n: TreeNode&any)=>{
 
 // treeNodeHighlight(n);
@@ -62,7 +108,7 @@ export function renderDescendants(el: Element | Screen, o: Options&ElementOption
 }></treeview>
     </Row>
     <Row >
-      <box name="debug-tree-node-text" label="node text" height= "100%" width="100%" border="line"></box>
+      <box {...focusableOpts()} name="debug-tree-node-text" label="node text" height= "100%" width="100%" border="line" scrollable={true} scrollbar={{inverse: true}}></box>
     </Row>{}
   </Rows>
 )
@@ -86,7 +132,7 @@ export function renderDescendants(el: Element | Screen, o: Options&ElementOption
         e.style.blink = false;
       }
       lastFocused = e;
-      logText(e.getContent(), e);
+      // logText(e.getContent(), e);
       e.style.blink = true;
       setElementData(e, 'debugNodeTreeHightlight', e.style.fg);
       // let old = e.style.fg

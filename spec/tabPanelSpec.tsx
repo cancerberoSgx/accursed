@@ -16,7 +16,8 @@ import { waitFor } from '../src/blessed/waitFor'
 import { Tab, TabBody, TabLabel, TabPanel, Columns, Column, Rows, Row } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
 import { log } from '../src/util/logger'
-import { renderDescendants, getTreeNode } from '../src/util/debugNode';
+import { renderDescendants, getTreeNode, logText } from '../src/util/debugNode';
+import { getJSXChildrenProps } from '../src/blessed/virtualElement';
 
 describe('tabPanelComponent', () => {
   let screen: Screen
@@ -86,7 +87,7 @@ describe('tabPanelComponent', () => {
 
 
 
-  fit('should add tabs dynamically', async done => {
+  xit('should add tabs dynamically', async done => {
     let tabPanel: TabPanel
     try {
       screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
@@ -164,9 +165,12 @@ describe('tabPanelComponent', () => {
 
       // debug(JSON.stringify(getTreeNode(screen)))
       // debug('debug-node-tree', findDescendantNamed(el, 'debug-node-tree')  )
-      const parent =  findDescendantNamed(el, 'debug-node-tree') 
       // debug(!!parent, typeof parent, Array.isArray(parent) , parent.type, parent.name)
-      const w = renderDescendants(el.parent as any, { parent})
+renderDescendants(el.parent as any, { parent: findDescendantNamed(el, 'debug-node-tree') })
+
+
+logText(el, JSON.stringify(getJSXChildrenProps(tabPanel)))
+
 // screen.append(w)
 // parent.append(w)
 // parent.style.bg='red'
