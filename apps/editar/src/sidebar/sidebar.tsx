@@ -1,11 +1,11 @@
 import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, TreeView, TreeViewNode } from 'accursed'
 import { join, resolve } from 'path'
 import { ls, test } from 'shelljs'
-import { ActionManager } from './actionManager'
-import { Component } from './component'
-import { File, State } from './state'
-import { focusableOpts } from './style'
-import { PREFIX } from './util'
+import { ActionManager } from '../store/actionManager'
+import { Component } from '../component'
+import { File, State } from '../store/state'
+import { focusableOpts } from '../style'
+import { PREFIX } from '../util'
 import { SIDEBAR_ACTION, SetCwdAction, OpenFilesAction } from './sidebarActions';
 
 export class Sidebar extends Component {
@@ -52,16 +52,11 @@ export class Sidebar extends Component {
   }
 }
 
-// interface ExplorerProps extends Props{
-
-// }
 export class Explorer extends Component {
   treeView: TreeView<File>
 
   render() {
     ActionManager.get().onActionDispatched(SIDEBAR_ACTION.SET_CWD,(a: SetCwdAction, s)=>this.onCwdChanged(a, s))
-
-    
 
     return (
       <treeview<File>

@@ -2,8 +2,8 @@
 // responsible of dispatching /& coordinate, save(), open(), close(),etc
 
 import { IEditor, Element, buildEditor } from 'accursed'
-import { Document, State } from './state'
-import { WORKSPACE_ACTION } from './actions';
+import { Document, State } from '../store/state'
+import { WORKSPACE_ACTION } from '../store/actions';
 import { notUndefined } from 'misc-utils-of-mine-typescript';
 
 

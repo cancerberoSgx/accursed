@@ -1,10 +1,10 @@
 import { createScreen, debug, React, Screen } from 'accursed'
 import { createStore, Store } from 'redux'
-import { ActionManager } from './actionManager'
+import { ActionManager } from './store/actionManager'
 import { App } from './app'
-import { Context } from './context'
-import { FSImpl } from './impl/fsImpl'
-import { reducer } from './store'
+import { Context } from './context/context'
+import { FSImpl } from './context/impl/fsImpl'
+import { reducer } from './store/store'
 
 function main() {
   // (async ()=>{

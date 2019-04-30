@@ -1,5 +1,5 @@
 import { ok } from 'assert'
-import { debug } from '../../../dist/src'
+import { debug } from '../../../../dist/src'
 import { State } from './state'
 import { AllActions, Store } from './store'
 let actionManager

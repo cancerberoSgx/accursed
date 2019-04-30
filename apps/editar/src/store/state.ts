@@ -1,4 +1,4 @@
-import { TreeViewNode } from '../../../dist/src'
+import { TreeViewNode } from '../../../../dist/src'
 
 export interface Document {
   /** basename */
@@ -9,6 +9,7 @@ export interface Document {
 
 export interface State {
   search: Search
+  toolsPanel: ToolsPanel
   /** opened docs */
   documents: Document[]
   cwd: string
@@ -25,3 +26,15 @@ export interface File extends TreeViewNode {
   directoryLoaded?: boolean
   isDirectory?: boolean
 }
+
+export interface ToolsPanel {
+  logMessages: LogMessages[]
+
+}
+
+export interface LogMessages {
+  message: string
+  messageType?: LogMessageType
+}
+
+export type LogMessageType = 'info'|'warninng'|'error'|'debug'

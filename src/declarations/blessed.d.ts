@@ -96,6 +96,8 @@ export namespace Widgets {
     interface ListbarCommand {
       key?: string
       callback(): void
+      text?: string
+      prefix?: string
     }
 
     interface TImage {
@@ -2253,9 +2255,11 @@ export namespace Widgets {
     /** Either a select or a cancel event was received. */
     | 'action'
     | 'create item'
+    /** emitted when a new item has been added to the list or subclass intstance */
     | 'add item'
     | 'remove item'
     | 'insert item'
+    /** Emitted by list subclasses when the items have been setted and are ready to be selected by user.  */
     | 'set items'
 
   class ListElement extends BoxElement implements IHasOptions<ListOptions<ListElementStyle>> {
@@ -2539,6 +2543,16 @@ export namespace Widgets {
     constructor(opts: ListbarOptions)
 
     /**
+     * currently selected item index
+     */
+    selected: number
+
+    /**
+     * Current list of command objects (after being processed from options in object form).
+     */
+    commands: (Types.ListbarCommand&{element:Element})[]
+
+    /**
      * Original options object.
      */
     options: ListbarOptions
@@ -2594,6 +2608,9 @@ export namespace Widgets {
     selectTab(index: number): void
 
     on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'action', listener: (item: any, selectedIndex:number) => void): this
+    on(event: 'select', listener: (item: any, selectedIndex:number) => void): this
+    on(event: 'cancel', listener: (item: any, selectedIndex:number) => void): this
     on(event: 'set items' | 'remove item' | 'select tab', callback: () => void): this
   }
 

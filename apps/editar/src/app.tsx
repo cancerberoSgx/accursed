@@ -1,10 +1,11 @@
 import { Br, Column, Columns, Div, React, Row, Rows } from 'accursed'
 import { pwd } from 'shelljs'
 import { Component } from './component'
-import { Editors } from './editors'
-import { Sidebar } from './sidebar'
-import { SIDEBAR_ACTION } from "./sidebarActions";
+import { Editors } from './editor/editors'
+import { Sidebar } from './sidebar/sidebar'
+import { SIDEBAR_ACTION } from "./sidebar/sidebarActions";
 import { focusableOpts } from './style'
+import { Panel } from './panel';
 
 // interface AppProps extends Props{
 // }
@@ -35,10 +36,7 @@ export class App extends Component {
               </Row>
 
               <Row height="30%">
-                <Br />
-                <log name="debug" content="log" {...focusableOpts()} height="100%" width="100%" />
-                <Br />
-                terminal and other editors here
+              <Panel {...this.props}/>
               </Row>
               {}
             </Rows>

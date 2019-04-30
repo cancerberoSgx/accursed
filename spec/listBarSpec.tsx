@@ -1,10 +1,8 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import { Box, createScreen, debug, getContent, installExitKeys, React, Screen, showInModal } from '../src'
-import { setMaximized } from '../src/blessed/maximize'
+import { createScreen, debug, getContent, installExitKeys, React, Screen, showInModal } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Br, Column, Columns, Div, Row, Rows } from '../src/jsx-components'
-import { words } from '../src/util/data'
-import { ListBar, ListBarCommand } from '../src/jsx-components/listBar';
+import { Div } from '../src/jsx-components'
+import { ListBar2, ListBarCommand } from '../src/jsx-components/listBar'
 
 describe('listbar', () => {
   let screen: Screen
@@ -24,13 +22,34 @@ describe('listbar', () => {
     try {
       const t1 = (
         <Div>
-          <ListBar left="center">
-            <ListBarCommand callback={() => { showInModal(screen, 'play') }}>play</ListBarCommand>
-            <ListBarCommand callback={() => { showInModal(screen, 'stop') }}>stop</ListBarCommand>
-            <ListBarCommand callback={() => { showInModal(screen, 'eat') }}>eat</ListBarCommand>
-            <ListBarCommand keys={['r']} callback={() => { showInModal(screen, 'record') }}>record</ListBarCommand>
+          <ListBar2 left="center">
+            <ListBarCommand
+              callback={() => {
+                showInModal(screen, 'play')
+              }}>
+              play
+            </ListBarCommand>
+            <ListBarCommand
+              callback={() => {
+                showInModal(screen, 'stop')
+              }}>
+              stop
+            </ListBarCommand>
+            <ListBarCommand
+              callback={() => {
+                showInModal(screen, 'eat')
+              }}>
+              eat
+            </ListBarCommand>
+            <ListBarCommand
+              keys={['r']}
+              callback={() => {
+                showInModal(screen, 'record')
+              }}>
+              record
+            </ListBarCommand>
             {}
-          </ListBar>
+          </ListBar2>
         </Div>
       )
       const el = React.render(t1)
@@ -46,5 +65,5 @@ describe('listbar', () => {
       debug('ERROR', error)
     }
   })
-  xit('keys should work', ()=>{})
+  xit('keys should work', () => {})
 })

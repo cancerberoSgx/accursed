@@ -1,23 +1,27 @@
-import { Box, buildEditor, IEditor, React } from 'accursed'
-import { ActionManager } from './actionManager'
-import { WORKSPACE_ACTION } from './actions'
-import { Component, Props } from './component'
+import { Box, buildEditor,  React } from 'accursed'
+import { ActionManager } from '../store/actionManager'
+import { WORKSPACE_ACTION } from '../store/actions'
+import { Component, Props } from '../component'
 import { getEditorFor, DocumentEditor } from './editorFactory'
-import { SIDEBAR_ACTION } from "./sidebarActions";
-import { Document, State } from './state'
-import { AllActions } from './store'
+import { SIDEBAR_ACTION } from "../sidebar/sidebarActions";
+import { Document, State } from '../store/state'
+import { AllActions, ActionType } from '../store/store'
 
 interface EditorProps extends Props {
   document: Document
 }
 
 export class Editor extends Component<EditorProps> {
-  // protected editor: IEditor
+  
+  constructor(p,s){
+    super(p,s)
+    this.openFiles = this.openFiles.bind(this)
+    this.onActionDispatched(SIDEBAR_ACTION.OPEN_FILES, this.openFiles);
+  }
+
   docEd: DocumentEditor
 
   render() {
-    ActionManager.get().onActionDispatched(SIDEBAR_ACTION.OPEN_FILES, (a, s) => this.openFiles(a, s))
-
     this.debug('rendering editor')
     return <box ref={React.createRef<Box>(c => this.containerReady(c))} />
   }
@@ -25,7 +29,6 @@ export class Editor extends Component<EditorProps> {
     throw new Error('Method not implemented.')
   }
   async containerReady(parent: Box) {
-    // this.editor = 
     this.docEd = await getEditorFor(this.props.document, parent)
     this.screen.render()
     if (!this.docEd) {
