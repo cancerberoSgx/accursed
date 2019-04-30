@@ -1,19 +1,32 @@
 import {React, Component, Columns, Column, TreeView, Rows, Row, Div, createScreen, installExitKeys, Screen, debug, findChildren, isElement, findDescendant} from 'accursed'
 import {Store, createStore} from 'redux'
-import { App } from './app';
-import { State } from './state';
-import { reducer } from './store';
+debug('init0')
 
+import { reducer, AllActions, ActionManager } from './store';
+debug('init1')
+
+import { Context } from './context';
+import { FSImpl } from './impl/fsImpl';
+
+debug('init2')
+import { App } from './app';
+
+debug('init3')
+
+function main(){
 
 // (async ()=>{
   let screen: Screen
-    try {
-
+  try {
+debug('starts')
     const store = createStore(reducer)
+    ActionManager._create(store)
+  debug('store created')
     screen=  buildScreen(store);
     screen.render();
     // screen=  await buildScreen(store);
     
+      
 
 } catch (error) {
   debug(error)
@@ -22,6 +35,10 @@ import { reducer } from './store';
   process.exit(1)
 
 }
+
+}
+
+main()
   // })()
 
 
@@ -34,7 +51,11 @@ function buildScreen( store: Store) {
     installGlobalKeyHandlers(screen);
   screen.render();
   
-    screen.append(React.render(<App store={store} />));
+  const context: Context = {fs: new FSImpl()}
+  const AppConstructor = ()=><App store={store}
+  //  dispatch={ (a: AllActions)=>ActionManager.get().dispatch(a)}
+    context={context}/>
+    screen.append(React.render(AppConstructor()));
   // screen.sendFocus = true
   // screen.render();
 

@@ -1,3 +1,4 @@
+import { TreeViewNode } from '../../../dist/src';
 
 export interface Document {
   /** basename */
@@ -11,7 +12,16 @@ export interface State{
   /** opened docs */
   documents: Document[]
   cwd: string 
+  cwdRootFiles: File[]
 }
+
 export interface Search {
   caseSensitive?: boolean
+}
+
+export interface File extends TreeViewNode {
+  filePath: string
+  /** we will list directory files async */
+  loaded?: boolean
+  isDirectory?: boolean
 }

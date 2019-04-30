@@ -22,10 +22,12 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
     "misc-utils-of-mine-generic": "0.0.16",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
     "@types/node": "^11.13.7",
+    "@types/shelljs": "^0.8.5",
     "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
     "prettier": "^1.17.0",
     "ts-node": "^8.1.0",
