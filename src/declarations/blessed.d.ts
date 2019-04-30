@@ -932,6 +932,13 @@ export namespace Widgets {
      */
     focused: BlessedElement
 
+    /** 
+     * Descendant elements which are keyable. These elements are the ones that can have focus, 
+     * For example, the next element to focus while callin [[nextFocus]] is inferred from this array.
+     * @internal
+     */
+    keyable: Element[]
+
     /**
      * Width of the screen (same as program.cols).
      */

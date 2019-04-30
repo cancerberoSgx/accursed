@@ -1,0 +1,42 @@
+{
+  "name": "editar",
+  "version": "0.0.1",
+  "description": "a cli editor based on editor-widget.",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "tsc && npm run copy",
+    "test": "ts-node -T  node_modules/jasmine/bin/jasmine && echo $?",
+    "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
+    "prepare": "npm run build",
+    "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
+    "clean": "rm -rf dist",
+    "copy": "echo hello",
+    "all": "npm run clean && npm run prettier && npm run build && npm test"
+  },
+  "author": "Sebastian Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "accursed": "file:../..",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.15",
+    "misc-utils-of-mine-generic": "0.0.16",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.7",
+    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
+    "prettier": "^1.17.0",
+    "ts-node": "^8.1.0",
+    "ts-refactor": "0.0.2",
+    "typescript": "^3.4.5"
+  },
+  "keywords": [
+    "Command line",
+    "blessed",
+    "CLI",
+    "interactive"
+  ],
+  "repository": "https://github.com/cancerberoSgx/accursed"
+}

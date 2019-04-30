@@ -21,8 +21,6 @@ export function showInModal(
   if (!modalInstance) {
     modalInstance = box({
       parent: screen,
-      // focusable: true,
-      // focused: true,
       left: 'center',
       top: 'center',
       width,

@@ -41,7 +41,9 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions
+  TextOptions,
+  LogOptions,
+  Log
 } from '../blessedTypes'
 import { Component } from './component'
 
@@ -124,6 +126,7 @@ declare global {
       listtable: OptionsProps<ListTableOptions> & EventOptions<ListTable>
       listbar: OptionsProps<ListbarOptions> & EventOptions<ListBar>
       form: OptionsProps<FormOptions> & EventOptions<Form>
+      log: OptionsProps<LogOptions> & EventOptions<Log>
       textbox: OptionsProps<TextboxOptions> & EventOptions<Textbox>
       radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>

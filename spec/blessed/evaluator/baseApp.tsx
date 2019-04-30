@@ -82,39 +82,25 @@ export abstract class BaseApp extends Component<P, S> {
   async editorSettings() {
     this.editorSettingsModal({
       onSave: () => {
-        // debug(this.settingsEditor.textBuf.getText())
         const text = this.settingsEditor.textBuf.getText()
-        if(!text.trim()){
+        if (!text.trim()) {
           return // TODO; comes a second time
         }
         debug(text, typeof text)
-        writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text+' ')
+        writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text + ' ')
       }
     })
 
-    //   const modal = showInModal(this.screen,this.editorSettingsModal({onSave: ()=>{
-
-    // const text = this.settingsEditor.textBuf.getText();
-    // writeFileSync(this.EDITOR_SETTINGS_INI_PATH, text);
-
-    //   }}), 'Editor Settings', '90%', '90%')
-
     await waitFor(() => this.settingsEditorContainer)
 
-    // if (!this.settingsEditor) {
     this.settingsEditor = buildEditor({
       ...focusableOpts(),
       parent: this.settingsEditorContainer,
       text: readFileSync(this.EDITOR_SETTINGS_INI_PATH).toString(),
       language: 'ini',
-      // top: 0,
-      // left: 0,
-      // width: '95%',
-      // height: '95%',
       keys: true,
       keyable: true
     })
-    // }
   }
   abstract editorSettingsModal(props: { onSave: () => void }): void
 
@@ -131,11 +117,6 @@ export abstract class BaseApp extends Component<P, S> {
       log(...args: any[]) {
         _log.push(...args.map(a => inspect(a)))
       }
-      // updateLog: throttle(()=>{
-      //   this.logEl.content = _log.join('\n')
-      //     this.outputPanel.selectTab(0)
-      //     this.logEl.setScrollPerc(100)
-      // }, 2000, {trailing: true})
     }
     let error: any
     const text = this.editor.textBuf.getText()

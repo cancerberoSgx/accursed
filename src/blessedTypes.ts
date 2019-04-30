@@ -27,7 +27,9 @@ export type Prompt = blessed.Widgets.PromptElement
 export type Textbox = blessed.Widgets.TextboxElement
 export type RadioSet = blessed.Widgets.RadioSetElement
 export type RadioButton = blessed.Widgets.RadioButtonElement
+export type Log = blessed.Widgets.Log
 
+export type LogOptions = RemoveProperties<blessed.Widgets.LogOptions, 'children'>
 export type PromptOptions = RemoveProperties<blessed.Widgets.PromptOptions, 'children'>
 export type BoxOptions = RemoveProperties<blessed.Widgets.BoxOptions, 'children'>
 export type ListTableOptions = RemoveProperties<blessed.Widgets.ListTableOptions, 'children'>

@@ -70,8 +70,6 @@ export const transparentBox: () => BoxOptions = () => ({
  * Adds the UI to the base app
  */
 export class App extends BaseApp {
-  // protected settingsEditorContainer: Box;
-  // protected settingsEditor: IEditor;
   help(): void {
     showInModal(
       this.screen,
@@ -242,26 +240,9 @@ export class App extends BaseApp {
           </Column>
           {}
         </Columns>
-        {/* <layout width={this.props.parent.screen.width} height={this.props.parent.screen.height} hidden={true}>
-        <box  ref={React.createRef<Box>(c=>this.settingsEditorContainer = c)}></box>
-        <Br/>
-        <Button2 onClick={e=>{}}>Cancel</Button2>
-        <Button2 onClick={e=>{}}>Save</Button2>
-        </layout> */}
       </Div>
     )
   }
-
-  // showSettingsEditor(){
-  //   // if(!this.settingsEditor){
-  //   //   this.settingsEditor = buildEditor({
-  //   //    ...options,
-  //   //   //  parent: this.settingsEditorContainer
-  //   //   })
-  //   // }
-  //   // this.settingsEditorContainer.show()
-  //   // this.screen.render()
-  // }
 
   editorSettingsModal(props: { onSave: () => void }) {
     showInModal(
