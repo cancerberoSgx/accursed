@@ -2,22 +2,22 @@ import { tryTo } from 'misc-utils-of-mine-generic'
 import {
   Br,
   createScreen,
+  debug,
   Div,
   filterDescendants,
+  findDescendantNamed,
   getContent,
   installExitKeys,
   installFocusHandler,
   React,
-  Screen,
-  printElement,
-  findDescendantNamed, debug
+  Screen
 } from '../src'
+import { getJSXChildrenProps } from '../src/blessed/virtualElement'
 import { waitFor } from '../src/blessed/waitFor'
-import { Tab, TabBody, TabLabel, TabPanel, Columns, Column, Rows, Row } from '../src/jsx-components'
+import { Column, Columns, Tab, TabBody, TabLabel, TabPanel } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
+import { logText, renderDescendants } from '../src/util/debugNode'
 import { log } from '../src/util/logger'
-import { renderDescendants, getTreeNode, logText } from '../src/util/debugNode';
-import { getJSXChildrenProps } from '../src/blessed/virtualElement';
 
 describe('tabPanelComponent', () => {
   let screen: Screen
@@ -85,8 +85,6 @@ describe('tabPanelComponent', () => {
     }
   })
 
-
-
   xit('should add tabs dynamically', async done => {
     let tabPanel: TabPanel
     try {
@@ -97,55 +95,42 @@ describe('tabPanelComponent', () => {
         <Div parent={screen}>
           <Columns>
             <Column>
-         
-              <TabPanel ref={React.createRef(c => tabPanel = c)} >
+              <TabPanel ref={React.createRef(c => (tabPanel = c))}>
                 <Tab active={true}>
-                  <TabLabel >tab 1</TabLabel>
-                  <TabBody>
-                    body1
-              </TabBody>
+                  <TabLabel>tab 1</TabLabel>
+                  <TabBody>body1</TabBody>
                   {}
                 </Tab>
                 <Tab>
-                  <TabLabel >tab 2</TabLabel>
-                  <TabBody>
-                    body2
-              </TabBody>
+                  <TabLabel>tab 2</TabLabel>
+                  <TabBody>body2</TabBody>
                   {}
                 </Tab>
                 {}
               </TabPanel>
-               
-             </Column>{}
+            </Column>
+            {}
 
-
-
-             <Column>
-
+            <Column>
               {/* here there will be the node tree <Br />
               here there will be the node tree <Br />
               here there will be the node tree <Br />
               here there will be the node tree <Br />
               here there will be the node tree <Br /> */}
-          {/* <Br />    */}
+              {/* <Br />    */}
 
-
-          <Div border="line" label="hell" name="debug-node-tree">
-          
-          </Div>
-           {/* <box border="line" label="hell" name="debug-node-tree" height="90%" width="100%">
+              <Div border="line" label="hell" name="debug-node-tree" />
+              {/* <box border="line" label="hell" name="debug-node-tree" height="90%" width="100%">
           
           </box> */}
-          {/* <Br /> */}
+              {/* <Br /> */}
               {/* here there will be the node tree <Br />
               here there will be the node tree <Br />
               here there will be the node tree <Br /> */}
- 
-             </Column>{}
-
-           </Columns>{}
-
-
+            </Column>
+            {}
+          </Columns>
+          {}
 
           {/* <box border="line" name="debug1">hello!al skdjalks jdlkaj sdklaj sld ks</box> */}
         </Div>
@@ -166,22 +151,18 @@ describe('tabPanelComponent', () => {
       // debug(JSON.stringify(getTreeNode(screen)))
       // debug('debug-node-tree', findDescendantNamed(el, 'debug-node-tree')  )
       // debug(!!parent, typeof parent, Array.isArray(parent) , parent.type, parent.name)
-renderDescendants(el.parent as any, { parent: findDescendantNamed(el, 'debug-node-tree') })
+      renderDescendants(el.parent as any, { parent: findDescendantNamed(el, 'debug-node-tree') })
 
+      logText(el, JSON.stringify(getJSXChildrenProps(tabPanel)))
 
-logText(el, JSON.stringify(getJSXChildrenProps(tabPanel)))
-
-// screen.append(w)
-// parent.append(w)
-// parent.style.bg='red'
-// parent.style.fg='blue'
+      // screen.append(w)
+      // parent.append(w)
+      // parent.style.bg='red'
+      // parent.style.fg='blue'
       // renderDescendants(el, {parent:screen})
 
-
-
-      tabPanel!.insertTab({}, {content: 'new label'}, {children: React.render(<Div>Hello World</Div>)}, 0)
+      tabPanel!.insertTab({}, { content: 'new label' }, { children: React.render(<Div>Hello World</Div>) }, 0)
       screen.render()
-
 
       // await waitFor(() => printElement(el).includes('new label'))
       // expect(printElement(el)).toContain('Hello World')
@@ -192,12 +173,11 @@ logText(el, JSON.stringify(getJSXChildrenProps(tabPanel)))
     }
   })
 
+  xit('should show body when label clicked and hide the other bodies', () => {})
 
-  xit('should show body when label clicked and hide the other bodies', () => { })
+  xit('should show body when calling selectTab() ', () => {})
 
-  xit('should show body when calling selectTab() ', () => { })
+  xit('should notify tab activation with props.onChange) ', () => {})
 
-  xit('should notify tab activation with props.onChange) ', () => { })
-
-  xit('should support keyboard', () => { })
+  xit('should support keyboard', () => {})
 })

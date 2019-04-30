@@ -1,15 +1,8 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  Br,
-  createScreen,
-  Div,
-  React,
-  Screen,
-  debug, Tab, TabBody, TabLabel, TabPanel, Columns, Column, Rows, Row, printElement
-} from '../src'
+import { Column, Columns, createScreen, printElement, React, Row, Rows, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { } from '../src/jsx-components'
-import { sleep } from './blessedTestUtil';
+import {} from '../src/jsx-components'
+import { sleep } from './blessedTestUtil'
 
 describe('editor', () => {
   let screen: Screen
@@ -31,9 +24,10 @@ describe('editor', () => {
 
   describe('jsx', () => {
     it('dont need to pass parent', async done => {
-      const el = React.render(<box >
-        <editor text="function f(a){return a + 11}" language="js" />
-      </box>
+      const el = React.render(
+        <box>
+          <editor text="function f(a){return a + 11}" language="js" />
+        </box>
       )
       screen.render()
       await sleep(100)
@@ -46,8 +40,7 @@ describe('editor', () => {
       done()
     })
     it('dont need a container', async done => {
-      const el = React.render( <editor text={`a:hover { border: 2px solid pink; }`} language="css" />
-      )
+      const el = React.render(<editor text={`a:hover { border: 2px solid pink; }`} language="css" />)
       screen.render()
       await sleep(100)
       expect(printElement(screen)).not.toContain('border: 2px solid pink; }')
@@ -59,9 +52,16 @@ describe('editor', () => {
       done()
     })
     it('multiple editors in same container', async done => {
-      const el = React.render( <Columns>
-      <Column>
-      <Rows><Row><editor text={`a:hover { border: 2px solid pink; }`} language="css" /></Row><Row><editor text={`
+      const el = React.render(
+        <Columns>
+          <Column>
+            <Rows>
+              <Row>
+                <editor text={`a:hover { border: 2px solid pink; }`} language="css" />
+              </Row>
+              <Row>
+                <editor
+                  text={`
 # Welcome to Foo
 
 Dolor sit elit id **deserunt ullamco aute anim** fugiat sint Lorem enim voluptate qui dolore. 
@@ -81,15 +81,27 @@ export function f(a: number){
   return Math.round(a)+1
 }
 \`\`\`.trim()
-`} language="md" /></Row>{}
-      </Rows>
-      </Column>
-      <Column> 
-      <Rows>
-        <Row><editor text={`export function app(){ return 'hola' }`} language="js" /></Row> 
-      <Row>   <editor text={`{"name": "foo", "version": "1.0.1"}`} language="json" /></Row>{}</Rows> </Column>{}
-      </Columns>
-      
+`}
+                  language="md"
+                />
+              </Row>
+              {}
+            </Rows>
+          </Column>
+          <Column>
+            <Rows>
+              <Row>
+                <editor text={`export function app(){ return 'hola' }`} language="js" />
+              </Row>
+              <Row>
+                {' '}
+                <editor text={`{"name": "foo", "version": "1.0.1"}`} language="json" />
+              </Row>
+              {}
+            </Rows>{' '}
+          </Column>
+          {}
+        </Columns>
       )
       screen.render()
       await sleep(100)
@@ -98,10 +110,15 @@ export function f(a: number){
       screen.append(el)
       screen.render()
       await waitFor(() => printElement(screen).includes('a:hover'))
-      const s = ['deserunt ullamco aute anim', 'return Math.round(a)+1', 'a:hover { border: 2px solid pink; }',`export function app(){ return 'hola' }`,`{"name": "foo", "version": "1.0.1"}` ]
-      s.forEach(c=>expect(printElement(screen)).toContain(c))
+      const s = [
+        'deserunt ullamco aute anim',
+        'return Math.round(a)+1',
+        'a:hover { border: 2px solid pink; }',
+        `export function app(){ return 'hola' }`,
+        `{"name": "foo", "version": "1.0.1"}`
+      ]
+      s.forEach(c => expect(printElement(screen)).toContain(c))
       done()
     })
   })
-
 })

@@ -1,7 +1,7 @@
+import { notFalsy } from 'misc-utils-of-mine-typescript'
 import { Element, helpers, isElement, Node } from '..'
 import { isScreen, Screen } from '../blessedTypes'
 import { strip } from '../util/misc'
-import { notUndefined, notFalsy } from 'misc-utils-of-mine-typescript';
 
 export type Visitor<T extends Node = Node> = (n: T) => boolean
 /**
@@ -64,10 +64,10 @@ export function filterDescendants<T extends Node = Node>(n: Node, p: ElementPred
   return a
 }
 
-export function mapDescendants<T extends Node = Node, V=any>(n: Node, p: (p:T)=>V, o: VisitorOptions = {}): V[] {
+export function mapDescendants<T extends Node = Node, V = any>(n: Node, p: (p: T) => V, o: VisitorOptions = {}): V[] {
   const a: V[] = []
   visitDescendants(n, c => {
-      a.push(p(c as any))
+    a.push(p(c as any))
     return false
   })
   return a
@@ -130,8 +130,8 @@ export function getContent(
 /**
  * Similar to [[getContent]] but it will only return the visible part of the element's content.
  */
-export function printElement(el: Element|Screen, opts: { dontStrip?: boolean } = {}) {
-  const s = el.screenshot()||''
+export function printElement(el: Element | Screen, opts: { dontStrip?: boolean } = {}) {
+  const s = el.screenshot() || ''
   return opts.dontStrip ? s : helpers.stripTags(s)
 }
 
@@ -178,12 +178,13 @@ export function cleanNode(n: Node, dontDestroy: boolean = false) {
   })
 }
 
-
-export function findDescendantNamed(el: Element|Screen, name: string){
+export function findDescendantNamed(el: Element | Screen, name: string) {
   // return findDescendant(el as Element, c=>(c as any).name===name)
-  return asElements(el).map(c=>findDescendant(c, d=>(d as any).name===name)).find(notFalsy)
+  return asElements(el)
+    .map(c => findDescendant(c, d => (d as any).name === name))
+    .find(notFalsy)
   // return findDescendant()
 }
-export function asElements(el: Element|Screen) {
- return isScreen(el) ? el.children.filter(isElement) : [el]
+export function asElements(el: Element | Screen) {
+  return isScreen(el) ? el.children.filter(isElement) : [el]
 }

@@ -16,7 +16,7 @@ import {
 } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { buildEditor } from '../../../src/editorWidget/editorWidget'
-import { IEditor } from "../../../src/editorWidget/editorWidgetTypes";
+import { IEditor } from '../../../src/editorWidget/editorWidgetTypes'
 import { focusableOpts } from './app'
 import { examples } from './examples'
 var Point = require('text-buffer/lib/point')

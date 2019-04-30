@@ -1,12 +1,10 @@
 import { React } from '..'
+import { findDescendant } from '../blessed'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
-import { BoxOptions, isElement, Node, Style, Button, Layout, Element } from '../blessedTypes'
+import { BoxOptions, Button, Element, isElement, Layout, Node, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { CollapsibleProps } from './collapsible'
 import { Div } from './jsxUtil'
-import { findDescendant, visitDescendants, filterDescendants, mapDescendants } from '../blessed';
-import { debug } from '../util';
-import { getTreeNode, logText } from '../util/debugNode';
 
 export class TabLabel extends VirtualComponent<TabLabelProps> {}
 export class Tab extends VirtualComponent<TabProps> {}
@@ -71,7 +69,6 @@ interface TabProps extends CollapsibleProps {
  */
 
 export class TabPanel extends Component<TabPanelProps> {
-
   _saveJSXChildrenProps = true
 
   render() {
@@ -147,25 +144,32 @@ export class TabPanel extends Component<TabPanelProps> {
   }
 
   insertTab(tabProps: Partial<TabProps>, labelProps: Partial<TabLabelProps>, bodyProps: TabBodyProps, index: number) {
+    const tabPanel = React.render(
+      <TabPanel>
+        <Tab {...tabProps}>
+          <TabLabel {...labelProps}>{labelProps.content || labelProps.children || index}</TabLabel>
+          <TabBody {...bodyProps}>{bodyProps.children}</TabBody>
+          {}
+        </Tab>
+        {}
+      </TabPanel>
+    )
 
-    const tabPanel = React.render(<TabPanel><Tab {...tabProps}><TabLabel {...labelProps}>{labelProps.content||labelProps.children||index}</TabLabel><TabBody {...bodyProps}>{bodyProps.children}</TabBody>{}</Tab>{}</TabPanel>)
-    
-    const body = findDescendant(tabPanel, TabPanel.isBody) as Element|undefined
-    const label = findDescendant(tabPanel, TabPanel.isLabel)as Element|undefined
-    const bodies = this.filterDescendants(TabPanel.isBody)as Element[]
+    const body = findDescendant(tabPanel, TabPanel.isBody) as Element | undefined
+    const label = findDescendant(tabPanel, TabPanel.isLabel) as Element | undefined
+    const bodies = this.filterDescendants(TabPanel.isBody) as Element[]
 
     // logText(this.element, body, label)
-    const labels = this.filterDescendants(TabPanel.isLabel)as Element[]
+    const labels = this.filterDescendants(TabPanel.isLabel) as Element[]
 
     // debug(JSON.stringify(getJSXChildrenProps(this)!.find(c => c.tagName === 'Tab')))
-    
+
     // debug(JSON.stringify(getTreeNode(tabPanel)))
-    
+
     // debug(JSON.stringify(getTreeNode(this.element)))
 
-
     // bodies.map( e=>(e as any).name + ' - ' + (e as any).content))
-    
+
     // if(bodies.length>index){
     //   body.name = 'tab_body_'+index
     //   this.blessedElement.insertBefore(body, bodies[index])
@@ -173,8 +177,8 @@ export class TabPanel extends Component<TabPanelProps> {
     //     bodies[i].name='tab_body_'+(i+1)
     //   }
     // }else {
-      body.name = 'tab_body_'+(bodies.length+1)
-      this.blessedElement.append(body)
+    body.name = 'tab_body_' + (bodies.length + 1)
+    this.blessedElement.append(body)
     // }
     // if(labels.length>=index){
     //   label.name = 'tab_label_'+index
@@ -183,20 +187,19 @@ export class TabPanel extends Component<TabPanelProps> {
     //     labels[i].name='tab_label_'+(i+1)
     //   }
     // }else {
-      label.name = 'tab_label_'+(labels.length+1)
-      this.blessedElement.append(label)
-      // }
-      // debug(JSON.stringify(getJSXChildrenProps(this)!.find(c => c.tagName === 'Tab')), 
-      
-      // mapDescendants(this.element, e=>(e as any).name + ' - ' + (e as any).content), 
-      this.screen.render()
+    label.name = 'tab_label_' + (labels.length + 1)
+    this.blessedElement.append(label)
+    // }
+    // debug(JSON.stringify(getJSXChildrenProps(this)!.find(c => c.tagName === 'Tab')),
+
+    // mapDescendants(this.element, e=>(e as any).name + ' - ' + (e as any).content),
+    this.screen.render()
 
     // bodies.map( e=>(e as any).name + ' - ' + (e as any).content))
-
   }
 
   protected static isBody(d: Node): d is Layout {
-    return  isElement(d) && !!d.name && d.name.startsWith('tab_body_')
+    return isElement(d) && !!d.name && d.name.startsWith('tab_body_')
   }
 
   static isLabel(e: Node): e is Button {

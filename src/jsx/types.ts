@@ -46,7 +46,6 @@ import {
   TextOptions
 } from '../blessedTypes'
 import { Component } from './component'
-import { IEditor } from "../editorWidget/editorWidgetTypes";
 
 export enum EventOptionNames {
   key = 'key',
