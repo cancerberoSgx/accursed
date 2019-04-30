@@ -27,6 +27,8 @@ import {
   ListOptions,
   ListTable,
   ListTableOptions,
+  Log,
+  LogOptions,
   NodeGenericEventType,
   NodeMouseEventType,
   NodeWithEvents,
@@ -41,9 +43,7 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions,
-  LogOptions,
-  Log
+  TextOptions
 } from '../blessedTypes'
 import { Component } from './component'
 

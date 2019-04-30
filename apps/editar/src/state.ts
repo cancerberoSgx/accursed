@@ -1,4 +1,4 @@
-import { TreeViewNode } from '../../../dist/src';
+import { TreeViewNode } from '../../../dist/src'
 
 export interface Document {
   /** basename */
@@ -7,11 +7,11 @@ export interface Document {
   path: string
 }
 
-export interface State{
-  search: Search;
+export interface State {
+  search: Search
   /** opened docs */
   documents: Document[]
-  cwd: string 
+  cwd: string
   cwdRootFiles: File[]
 }
 
@@ -22,6 +22,6 @@ export interface Search {
 export interface File extends TreeViewNode {
   filePath: string
   /** we will list directory files async */
-  loaded?: boolean
+  directoryLoaded?: boolean
   isDirectory?: boolean
 }

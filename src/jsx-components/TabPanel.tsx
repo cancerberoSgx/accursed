@@ -116,7 +116,7 @@ export class TabPanel extends Component<TabPanelProps> {
         this.selectTab(id)
       }
       // if (this.props.updateScreenOnChange) {
-        this.screen.render()
+      this.screen.render()
       // }
     }
   }

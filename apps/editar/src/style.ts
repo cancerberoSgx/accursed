@@ -1,4 +1,4 @@
-import { TextareaOptions, BoxOptions } from '../../../dist/src';
+import { BoxOptions, TextareaOptions } from '../../../dist/src'
 
 export const focusableOpts: () => TextareaOptions = () => ({
   mouse: true,

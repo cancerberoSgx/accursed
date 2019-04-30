@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
        "paths": {
       "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
