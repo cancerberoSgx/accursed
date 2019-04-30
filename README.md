@@ -328,6 +328,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * TreeView
  * Maximize/Restore
  * BorderBox
+ * EditorWidget form Slapeditor project. I updated dependencies and documented EditorWidget which is great. Made easy to use API that automatically highlights and focus the editor.
 
 ## JSX components
 
@@ -343,7 +344,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `Autocomplete`
  * `OptionsProvider`
  * `Maximize` - wrapping an element with it will show a "maximize/restore" buttons floating at top-left
-
+ * editor component to easy render editor-component from slap editor project. 
 # Apps
  
  * apps/emojis-search  : a unicode data table explorer. Test blessed performance by letting ht user interactively navigate/search, etc the FULL unicode charset . 

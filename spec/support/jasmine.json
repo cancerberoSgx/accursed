@@ -3,5 +3,8 @@
   "spec_files": [
     "**/*Spec.ts*"
   ],
+  "helpers": [
+    "spec/support/*"
+],
   "random": false
 }
