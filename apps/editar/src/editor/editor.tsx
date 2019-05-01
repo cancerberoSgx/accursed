@@ -1,4 +1,4 @@
-import { Box, Div, React } from 'accursed'
+import { Box, Div, findChildren, React } from 'accursed'
 import { Component, Props } from '../component'
 import { DocumentEditor } from './editorFactory'
 
@@ -40,14 +40,21 @@ export class Editor extends Component<EditorProps> {
     }
     if (this.currentDocumentEditor) {
       // TODO : check in slap if there is some way to notify the widget when detached
-      this.container.remove(this.currentDocumentEditor.editor)
+      // this.container.remove(this.currentDocumentEditor.editor)
       // this.currentDocumentEditor.editor.detach()
+      this.currentDocumentEditor.editor.hide()
     }
+    // setElementData(ed.editor, PREFIX('editor-path'), ed.document.path)
     this.currentDocumentEditor = ed
-    this.container.append(this.currentDocumentEditor.editor)
+    // const existing = findChildren(this.container, c=>getElementData(c, PREFIX('editor-path'))===ed.document.path)
+    const existing = findChildren(this.container, c => c === ed.editor)
+    if (!existing) {
+      this.container.append(this.currentDocumentEditor.editor)
+    }
     // if (!this.currentDocumentEditor.editor.visible) {
+    this.currentDocumentEditor.editor.insertMode(true)
     this.currentDocumentEditor.editor.show()
-    this.currentDocumentEditor.editor.focus()
+    // this.currentDocumentEditor.editor.focus()
     // }
     this.screen.render()
   }
