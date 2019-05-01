@@ -32,6 +32,7 @@ export class Editor extends Component<EditorProps> {
   }
 
   async setEditor(ed: DocumentEditor) {
+    this.debug('editor.-setEitor cañled')
     if (this.editor) {
       // TODO : check in slap if there is some way to notify the widget when detached
       this.editor.detach()

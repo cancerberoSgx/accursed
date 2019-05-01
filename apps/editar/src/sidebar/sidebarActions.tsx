@@ -26,5 +26,3 @@ export interface SetCwdAction extends Action<SIDEBAR_ACTION.SET_CWD> {
   type: SIDEBAR_ACTION.SET_CWD
   cwd: string
 }
-
-

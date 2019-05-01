@@ -1,17 +1,16 @@
 debugger
 console.log('1111')
 import { createScreen, debug, React, Screen } from 'accursed'
-console.log('1111')
-
-
 import { createStore, Store } from 'redux'
-console.log('1111')
 import { App } from './app'
-console.log('1111')
 import { Context } from './context/context'
 import { FSImpl } from './context/impl/fsImpl'
 import { ActionManager } from './store/actionManager'
-import { reducer } from './store/store'
+import { reducer } from './store/generalReducer'
+console.log('1111')
+
+console.log('1111')
+console.log('1111')
 
 function main() {
   // (async ()=>{

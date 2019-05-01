@@ -28,10 +28,10 @@ export interface File extends TreeViewNode {
 }
 
 export interface ToolsPanel {
-  logMessages: LogMessages[]
+  logMessages: LogMessage[]
 }
 
-export interface LogMessages {
+export interface LogMessage {
   message: string
   messageType?: LogMessageType
 }

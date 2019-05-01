@@ -1,7 +1,8 @@
-import { ok } from 'assert'
 import { debug } from 'accursed'
+import { ok } from 'assert'
 import { State } from './state'
 import { ActionForType, AllActions, Store } from './store'
+
 let actionManager
 // type ActionListener <A extends AllActions> = (type: A['type'], l: (a: A, state: State)=>void)=>void
 type ActionListener<A extends AllActions> = (a: A, state: State) => void
@@ -61,3 +62,11 @@ export class ActionManager {
     }
   }
 }
+
+// protected dispatch<A extends AllActions>(a: A) {
+//   ActionManager.get().dispatch(a)
+// }
+
+// protected onActionDispatched<T extends AllActions['type']>(type: T, l: ActionListener<ActionForType<T>>) {
+//   ActionManager.get().onActionDispatched(type, l)
+// }
