@@ -13,19 +13,30 @@ j.loadConfigFile('spec/support/jasmine.json')
 
 j.configureDefaultReporter({
   print: function(...args) {
-    appendFileSync('test_output.txt', 'print: ' + args.map(a => inspect(a)).join(', '))
+    appendFileSync(
+      'test_output.txt',
+      'print: ' +
+        args
+          .map(a => {
+            if (a instanceof Error) {
+              return `${a}\n${a.stack.split('\n').join('\n')}`
+            } else {
+              return inspect(a)
+            }
+          })
+          .join(', ')
+    )
     process.stdout.write(format.apply(this, arguments))
   }
 })
 
 j.onComplete(function(passed) {
   console.log('RESULT FILE WAS WRITTEN TO test_output.txt')
-
   if (passed) {
-    console.log('YIUUUYPIIII All specs have passed')
+    console.log('All specs have passed')
     process.exit(0)
   } else {
-    console.log('AUHHHU, At least one spec has failed')
+    console.log('At least one spec has failed')
     process.exit(1)
   }
 })

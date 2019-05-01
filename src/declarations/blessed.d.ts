@@ -11,6 +11,7 @@
 import * as child_process from 'child_process'
 import { EventEmitter } from 'events'
 import * as stream from 'stream'
+import { RefObject } from '../jsx'
 import { BlessedProgram } from './blessedProgram'
 
 export namespace Widgets {
@@ -939,7 +940,7 @@ export namespace Widgets {
      * For example, the next element to focus while callin [[nextFocus]] is inferred from this array.
      * @internal
      */
-    keyable: Element[]
+    keyable: BlessedElement[]
 
     /**
      * Width of the screen (same as program.cols).
@@ -1442,10 +1443,11 @@ export namespace Widgets {
     ref?: RefObject
   }
 
-  interface RefObject<T = any> {
-    current: T | undefined
-  }
-
+  // interface RefObject<T = any> {
+  //   /* when the RefObject is resolved, if provided, this call back will be called. */
+  //   callback?(current: T | undefined): any
+  //   current: T | undefined
+  // }
   interface Pos {
     aleft: number
     atop: number
@@ -2575,14 +2577,21 @@ export namespace Widgets {
      * Current list of command objects (after being processed from options in object form). They have
      * associated its corresponding item element.
      */
-    commands: (Types.ListbarCommand & { element: Element })[]
+    commands: (Types.ListbarCommand & { element: BlessedElement })[]
 
     /**
      * Elements representing each command. They can be used to reference commands (like indexes) in most of
      * this class methods. The elements have associated its corresponding [[ListbarCommand]] object in
      * property [[_cmd]]
+     * @internal
      */
     items: (BlessedElement & { _cmd: Types.ListbarCommand })[]
+
+    /**
+     * Just the text of current items
+     * @internal
+     */
+    ritems: string[]
 
     /**
      * Original options object.

@@ -4,7 +4,7 @@
     "target": "es2018",
     "module": "commonjs",
     "lib": [
-      "esnext", "dom"
+      "esnext"
     ],
     "moduleResolution": "node",
     "rootDir": ".",
@@ -14,10 +14,8 @@
     "paths": {
       "blessed-contrib": ["src/declarations/blessed-contrib"],      
       "blessed": ["src/declarations/blessed"], 
-      // "src/declarations/blessed":  ["blessed"] 
     },
     "jsx": "react",
-    // "skipLibCheck": true
   },
   "include": [
     "src", "spec"

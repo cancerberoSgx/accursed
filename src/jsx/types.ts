@@ -38,6 +38,8 @@ import {
   RadioButtonOptions,
   RadioSet,
   RadioSetOptions,
+  Terminal,
+  TerminalOptions,
   Text,
   Textarea,
   TextareaOptions,
@@ -131,6 +133,7 @@ declare global {
       radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
+      terminal: OptionsProps<TerminalOptions> & EventOptions<Terminal>
       treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
       borderBox: OptionsProps<BorderBoxOptions> & EventOptions<BorderBox>
       borderLayout: OptionsProps<BorderLayoutOptions> & EventOptions<BorderLayout>

@@ -1,8 +1,8 @@
 import { Point, Range } from 'text-buffer'
 import { debug } from '..'
-import { box, Box } from '../'
-import { Node } from '../blessedTypes'
-import { EventOptions, React } from '../jsx'
+import { box } from '../'
+import { ElementOptions, Node } from '../blessedTypes'
+import { EventOptions, React, ref } from '../jsx'
 import { EditorOptions, IEditor } from './editorWidgetTypes'
 const Editor = require('editor-widget')
 
@@ -22,6 +22,13 @@ export function buildEditor(options: EditorOptions & { parent: Node }) {
     if (options.language) {
       editor.language(options.language)
     }
+    // try {
+    // support user's options.ref
+
+    // } catch (error) {
+    //   debug(error)
+    //   throw error
+    // }
     return editor
   } catch (error) {
     debug(error)
@@ -41,42 +48,78 @@ interface CreateEditorOptions extends EditorOptions {
    */
   waitBeforeHighlight?: number
 }
+
+/**
+ * This creator function is a high level version of [[buildEditor]] that doesn't require to pass `parent`.
+ * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the editor-widget.
+ *
+ * @returns the editor's parent BoxElement
+ */
+export function createEditor(options: CreateEditorOptions) {
+  const parent = box({
+    ...options
+  })
+  let editor: IEditor
+  try {
+    editor = buildEditor({ ...options, parent })
+    resolveRef(options, editor)
+    if (!options.disableSyntaxHighlighAtStartup) {
+      // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them. TODO: investigate
+      setTimeout(() => {
+        editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
+      }, 700)
+    }
+  } catch (error) {
+    debug(error)
+    throw error
+  }
+  return parent
+}
+
 /**
  * This creator function is a high level version of [[buildEditor]] that doesn't require to pass `parent`.
  * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the editor-widget.
  *
  */
-export function createEditor(options: CreateEditorOptions) {
-  return box({
-    ...options,
-    ref: React.createRef<Box>(c => {
-      const editor = buildEditor({ ...options, parent: c })
+export function createEditorAsync(options: CreateEditorOptions): Promise<IEditor> {
+  return new Promise((resolve, fail) => {
+    try {
+      debug('createEditorAsync', options.ref)
+      createEditor({
+        ...options,
+        ref: ref<IEditor>(c => {
+          debug('createEditorAsync', !!c, options.ref)
+          resolveRef(options, c)
+          resolve(c)
+        })
+      })
+      // const container = box({
+      //   ...options,
+      //   ref: React.createRef<Box>(c => {
+      //     const editor = buildEditor({ ...options, parent: c })
 
-      if (!options.disableSyntaxHighlighAtStartup) {
-        // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them. TODO: investigate
-
-        // workaround to automatically syntax highlight and focus the editor
-        // setTimeout(() => {
-        //   c.screen.emit('key', undefined, {name: 'up'})
-        //   c.screen.emit('key up', undefined, {name: 'up'})
-        // }, 300)
-        setTimeout(() => {
-          editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-        }, 700)
-      }
-
-      try {
-        // support user's options.ref
-        if (options.ref) {
-          if ((options.ref as any).callback) {
-            ;(options.ref as any).callback(editor)
-          }
-          ;(options.ref as any).current = editor
-        }
-      } catch (error) {
-        debug(error)
-      }
-    })
+      //     if (!options.disableSyntaxHighlighAtStartup) {
+      //       // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them. TODO: investigate
+      //       setTimeout(() => {
+      //         editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
+      //       }, 700)
+      //     }
+      //     try {
+      //       // support user's options.ref
+      //       if (options.ref) {
+      //         if ((options.ref as any).callback) {
+      //           ;(options.ref as any).callback(editor)
+      //         }
+      //         ;(options.ref as any).current = editor
+      //       }
+      //       resolve({ editor, container })
+    } catch (error) {
+      debug(error)
+      fail(error)
+      throw error
+    }
+    //   })
+    // })
   })
 }
 
@@ -93,5 +136,19 @@ declare global {
     export interface IntrinsicElements {
       editor: OptionsProps<EditorOptions> & EventOptions<IEditor>
     }
+  }
+}
+
+function resolveRef(options: ElementOptions, current: any) {
+  try {
+    if (options.ref) {
+      options.ref.current = current
+      if (options.ref.callback) {
+        options.ref.callback(current)
+      }
+    }
+  } catch (error) {
+    debug(error)
+    throw error
   }
 }

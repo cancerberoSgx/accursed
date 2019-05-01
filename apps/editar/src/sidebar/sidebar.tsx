@@ -16,7 +16,7 @@ export class Sidebar extends Component {
             </TabBody>
             {}
           </Tab>
-          <Tab active={false} _data={{ [PREFIX('sidebarTool')]: 'search' }}>
+          <Tab _data={{ [PREFIX('sidebarTool')]: 'search' }}>
             <TabLabel {...focusableOpts()}>Search</TabLabel>
             <TabBody>
               <textbox {...focusableOpts()} value="search" />
@@ -29,7 +29,7 @@ export class Sidebar extends Component {
             </TabBody>
             {}
           </Tab>
-          <Tab active={false} _data={{ [PREFIX('sidebarTool')]: 'sourceControl' }}>
+          <Tab _data={{ [PREFIX('sidebarTool')]: 'sourceControl' }}>
             <TabLabel {...focusableOpts()}>Source Control</TabLabel>
             <TabBody>
               <textbox {...focusableOpts()} value="Message" />

@@ -7,6 +7,7 @@ import {
   Column,
   Columns,
   Div,
+  Maximize,
   React,
   Row,
   Rows,
@@ -17,48 +18,11 @@ import {
   Tab,
   TabBody,
   TabLabel,
-  TabPanel,
-  TextareaOptions
+  TabPanel
 } from '../../../src'
-import { Maximize } from '../../../src/jsx-components/maximize'
+import { focusableOpts } from '../../../src/util/sharedOptions'
 import { Action, BaseApp } from './baseApp'
 import { examples } from './examples'
-
-export const focusableOpts: () => TextareaOptions = () => ({
-  mouse: true,
-  keys: true,
-  focusable: true,
-  clickable: true,
-  input: true,
-  keyable: true,
-  border: 'line',
-  style: {
-    bg: 'lightgray',
-    fg: 'black',
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
-    focus: {
-      fg: 'black',
-      bg: '#507468',
-      border: {
-        fg: 'red'
-      }
-    },
-    item: {
-      bg: 'lightgray',
-      fg: 'black',
-      underline: false
-    },
-    selected: {
-      bg: 'magenta',
-      fg: 'black',
-      // bold: true,
-      underline: true
-    }
-  }
-})
 
 export const transparentBox: () => BoxOptions = () => ({
   width: '100%',
@@ -96,6 +60,7 @@ export class App extends BaseApp {
       )
     )
   }
+
   render() {
     setTimeout(() => {
       this.afterRender()

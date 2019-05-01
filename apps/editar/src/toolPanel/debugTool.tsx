@@ -1,4 +1,4 @@
-import { Div, Log, React } from 'accursed'
+import { debug, Div, Log, React } from 'accursed'
 import { Component } from '../component'
 import { LogMessageAction, WORKSPACE_ACTION } from '../store/actions'
 import { State } from '../store/state'
@@ -21,19 +21,24 @@ export class LogPanel extends Component {
           width="100%"
           ref={React.createRef(c => {
             this.logEl = c
-            // debugToolLog = (m: LogMessage) => {
-            //   this.logEl.log(m.message)
-            // }
+            // this.logEl.log('this.logEl '+typeof c)
           })}
         />
       </Div>
     )
   }
+  private pendingMessages: LogMessageAction[] = []
   protected onLogMessage(a: LogMessageAction, s: State) {
     if (this.logEl) {
+      if (this.pendingMessages.length) {
+        debug('this.pendingMessages.length')
+        this.pendingMessages.forEach(m => this.logEl.log(a.message))
+        this.pendingMessages.length = 0
+      }
       this.logEl.log(a.message)
-      this.logEl.screen.render()
+      // this.logEl.screen.render()
     } else {
+      this.pendingMessages.push(a)
       //TODO: handle logs when logel is not ready
     }
   }

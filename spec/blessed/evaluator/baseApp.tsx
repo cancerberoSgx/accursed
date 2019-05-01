@@ -17,7 +17,7 @@ import {
 import { waitFor } from '../../../src/blessed/waitFor'
 import { buildEditor } from '../../../src/editorWidget/editorWidget'
 import { IEditor } from '../../../src/editorWidget/editorWidgetTypes'
-import { focusableOpts } from './app'
+import { focusableOpts } from '../../../src/util/sharedOptions'
 import { examples } from './examples'
 var Point = require('text-buffer/lib/point')
 var Range = require('text-buffer/lib/range')
@@ -35,6 +35,7 @@ export enum Action {
 interface P {
   parent: Screen
 }
+
 interface S {
   autoExecute?: boolean
   cleanOutputBeforeExecute?: boolean
@@ -53,6 +54,10 @@ export abstract class BaseApp extends Component<P, S> {
   outputPanel: TabPanel
   state: S = { cleanOutputBeforeExecute: true, autoExecute: true }
   private readonly EDITOR_SETTINGS_INI_PATH = 'node_modules/editor-widget/editor-widget.ini'
+
+  protected setState(s: Partial<S>) {
+    this.state = { ...this.state, ...s }
+  }
 
   protected abstract help()
 

@@ -1,4 +1,4 @@
-import { Box, Div, IEditor, React } from 'accursed'
+import { Box, Div, React } from 'accursed'
 import { Component, Props } from '../component'
 import { DocumentEditor } from './editorFactory'
 
@@ -8,7 +8,8 @@ interface EditorProps extends Props {
 /** I'm just a container for a given editor widget and document */
 export class Editor extends Component<EditorProps> {
   container: Box
-  editor: IEditor
+  // editor: IEditor
+  currentDocumentEditor: DocumentEditor
   constructor(p, s) {
     super(p, s)
     // this.openFiles = this.openFiles.bind(this)
@@ -21,6 +22,7 @@ export class Editor extends Component<EditorProps> {
     // this.debug('rendering editor')
     return (
       <Div
+        height="90%"
         ref={React.createRef<Box>(c => {
           this.container = c
           if (this.props.document) {
@@ -32,17 +34,22 @@ export class Editor extends Component<EditorProps> {
   }
 
   async setEditor(ed: DocumentEditor) {
-    this.debug('editor.-setEitor cañled')
-    if (this.editor) {
+    this.debug('editor.setEditor called')
+    if (this.currentDocumentEditor === ed) {
+      return
+    }
+    if (this.currentDocumentEditor) {
       // TODO : check in slap if there is some way to notify the widget when detached
-      this.editor.detach()
+      this.container.remove(this.currentDocumentEditor.editor)
+      // this.currentDocumentEditor.editor.detach()
     }
-    this.editor = ed.editor
-    this.container.append(this.editor)
-    if (!this.editor.visible) {
-      this.editor.show()
-    }
-    this.editor.screen.render()
+    this.currentDocumentEditor = ed
+    this.container.append(this.currentDocumentEditor.editor)
+    // if (!this.currentDocumentEditor.editor.visible) {
+    this.currentDocumentEditor.editor.show()
+    this.currentDocumentEditor.editor.focus()
+    // }
+    this.screen.render()
   }
   // openFiles(a: OpenFilesAction, s: State): void {
 

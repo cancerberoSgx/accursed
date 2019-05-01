@@ -15,21 +15,19 @@ interface ListBarProps extends ElementOptions {
    */
   onCommand?(index: number, item: Element): void
 }
-interface ListBarCommandProps extends ButtonOptions {
+interface ListBarCommandProps extends ButtonOptions, Command {
   children: string | string[]
-  callback: () => void
+  // callback: () => void
   active?: boolean
   keys?: string[]
 }
 interface Command {
   text?: string
   prefix?: string
-  // commandId?: string
   keys?: string[]
   callback(): void
 }
 
-// export class ListBar extends VirtualComponent<ListBarProps> {}
 export class ListBarCommand extends VirtualComponent<ListBarCommandProps> {}
 
 /** 
@@ -58,7 +56,6 @@ export class ListBar2 extends Component<ListBarProps> {
   dontEmitAction: any
   render() {
     const childProps = getJSXChildrenProps(this)!
-
     const Commands = childProps.filter(e => e.tagName === 'ListBarCommand')! as VirtualChildrenData[]
 
     const commands: { [commandName: string]: Command } = {}
@@ -96,13 +93,14 @@ commands: {
           keys: true,
           focusable: true,
           mouse: true,
+          width: '100%',
           ...this.props,
+          ref: undefined,
           children: undefined
         }}
         commands={commands}
       />
     )
-    this.element.get
   }
 
   handleAction(index: number, item: Element) {
@@ -111,18 +109,22 @@ commands: {
     }
   }
 
-  // on={['select', (index, item)=>this.handleAction(index, item)]}
-  // on={['select', (index, item)=>this.handleAction(index, item)]}
   handleSelectItem(index: number, item: Element) {
     if (!this.dontEmitAction && this.props.onCommand) {
       this.props.onCommand(index, item)
     }
   }
+
   /**
    * Will focus one of the list items. This won't call the callback, is the same action as moving though the list using the arrow keys.
    */
-  select(index: number, options: { dontEmit?: boolean } = { dontEmit: false }) {
-    this.element.select(index)
+  select(indexOrText: number | string, options: { dontEmit?: boolean } = { dontEmit: false }) {
+    if (typeof indexOrText === 'string') {
+      indexOrText = this.element.ritems.findIndex(i => i === indexOrText)
+    }
+    // if(indexOrText>0&&indexOrText<this.element.items.length){
+    this.element.select(indexOrText)
+    // }
   }
 
   /**
@@ -132,13 +134,22 @@ commands: {
     this.element.selectTab(index)
   }
 
+  addCommand(c: Command, options = { dontRenderScreen: false }) {
+    this.element.appendItem(c)
+    if (!options.dontRenderScreen) {
+      this.screen.render()
+    }
+  }
+
   get element(): ListBar {
     return this.blessedElement as ListBar
   }
-  // get commands(){
-  //   return this.element.commands
-  // }
-  get selected() {
+
+  get selectedIndex() {
     return this.element.selected
+  }
+
+  get selectedText() {
+    return this.element.ritems[this.element.selected]
   }
 }

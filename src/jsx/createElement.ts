@@ -344,3 +344,10 @@ function isElementLike(e: any): e is Element {
 }
 
 export const React: BlessedJsx = new BlessedJsxImpl()
+
+/**
+ * Shortcut for `React.createRef`
+ */
+export function ref<C extends Component<any> | Element = any>(fn: (c: C) => void) {
+  return React.createRef(fn)
+}

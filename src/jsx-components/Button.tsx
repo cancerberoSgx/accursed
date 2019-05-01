@@ -2,6 +2,7 @@ import { Button, ButtonOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { React } from '../jsx/createElement'
 import { ArtificialEvent } from '../jsx/types'
+import { focusableOpts } from '../util/sharedOptions'
 
 interface P extends ButtonOptions {
   onClick: (e: ArtificialEvent<Button>) => void
@@ -9,19 +10,11 @@ interface P extends ButtonOptions {
 }
 
 export class Button2 extends Component<P, {}> {
-  protected defaultOptions() {
-    return {
-      mouse: true,
-      clickable: true,
-      focusable: true,
-      border: 'line'
-    }
-  }
   render() {
     return (
       <button
         {...{
-          ...this.defaultOptions(),
+          ...focusableOpts(),
           ...this.props,
           children: undefined
         }}

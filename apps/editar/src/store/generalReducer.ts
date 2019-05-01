@@ -10,7 +10,7 @@ export const initialState: State = {
   cwd: '.',
   search: {},
   toolsPanel: { logMessages: [] },
-  documents: [{ name: 'Unamed.txt', path: '/home/sg/projects/cool/unamed.txt' }]
+  documents: [] //[{ name: 'Unamed.txt', path: '/home/sg/projects/cool/unamed.txt' }]
 }
 
 export function reducer(s: State = initialState, a: AllActions) {

@@ -1,8 +1,9 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { createScreen, debug, getContent, installExitKeys, React, Screen, showInModal } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { Div } from '../src/jsx-components'
+import { Button2, Div } from '../src/jsx-components'
 import { ListBar2, ListBarCommand } from '../src/jsx-components/listBar'
+import { ref } from '../src/jsx/createElement'
 
 describe('listbar', () => {
   let screen: Screen
@@ -14,15 +15,26 @@ describe('listbar', () => {
     screen.key('tab', k => screen.focusNext())
     screen.key('S-tab', k => screen.focusPrevious())
   })
+
   afterEach(() => {
     tryTo(() => screen.destroy())
   })
 
   it('should render   commands', async done => {
     try {
+      let listBar: ListBar2
       const t1 = (
         <Div>
-          <ListBar2 left="center">
+          <Button2
+            onClick={e => {
+              listBar.addCommand({
+                text: 'newCommad',
+                callback() {}
+              })
+            }}>
+            add item
+          </Button2>
+          <ListBar2 ref={ref(c => (listBar = c))}>
             <ListBarCommand
               callback={() => {
                 showInModal(screen, 'play')
@@ -60,7 +72,7 @@ describe('listbar', () => {
       expect(getContent(el)).toContain('record')
       done()
 
-      //TODO: interative
+      //TODO: interactive
     } catch (error) {
       debug('ERROR', error)
     }

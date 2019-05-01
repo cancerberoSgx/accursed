@@ -1,10 +1,12 @@
 // associates EditorWidget with Documents
 // responsible of dispatching /& coordinate, save(), open(), close(),etc
 
-import { buildEditor, Element, IEditor } from 'accursed'
-import { notUndefined } from 'misc-utils-of-mine-typescript'
-import { WORKSPACE_ACTION } from '../store/actions'
+import { createEditorAsync, IEditor } from 'accursed'
+import { inspect } from 'util'
+import { getContext } from '../context/contextFactory'
 import { Document } from '../store/state'
+import { focusableOpts } from '../style'
+import { debugInApp } from '../util'
 
 export interface DocumentEditor {
   editor: IEditor
@@ -12,28 +14,28 @@ export interface DocumentEditor {
 }
 const editors: { [path: string]: DocumentEditor } = {}
 
-export async function getEditorFor(document: Document, parent: Element) {
+export async function getEditorFor(document: Document) {
   if (!editors[document.path]) {
     try {
-      const text = (await this.props.context.fs.read(document.path)) || ''
-      const editor = buildEditor({
-        parent,
+      debugInApp('editorFactory About to read file', document.path)
+      const text = (await getContext().fs.read(document.path)) || ''
+      debugInApp(`editorFactory file ${document.path} successfully read, bytes: ${text.length}`)
+      const editor = await createEditorAsync({
+        ...focusableOpts(),
         text,
         language: 'js'
       })
+      debugInApp(`editor widget successfully created for file ${document.path} `)
       editors[document.path] = { editor, document }
     } catch (error) {
-      this.dispatch({
-        type: WORKSPACE_ACTION.NOTIFY_FILE_ERROR,
-        error,
-        msg: 'Error while opening file ' + this.props.document.path + ' to open it in editor-widget'
-      })
-      return undefined
+      debugInApp('Error while creating editor widget for file ' + document.path + ': ' + inspect(error))
+      throw error
     }
   }
+  debugInApp('editorFactory returning ', !!editors[document.path], document.path)
   return editors[document.path]
 }
 
-export function getEditorsFor(documents: Document[], parents: []) {
-  return documents.map((d, i) => getEditorFor(d, parents[i])).filter(notUndefined)
-}
+// export function getEditorsFor(documents: Document[], parents: []) {
+//   return documents.map((d, i) => getEditorFor(d, parents[i])).filter(notUndefined)
+// }
