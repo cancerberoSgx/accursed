@@ -1,8 +1,8 @@
 import { Component as AccursedComponent } from 'accursed'
-import { Context } from './context/context'
-import { ActionManager } from './store/actionManager'
-import { State } from './store/state'
-import { ActionForType, AllActions, Store } from './store/store'
+import { Context } from '../context/context'
+import { ActionManager } from '../store/actionManager'
+import { State } from '../store/state'
+import { ActionForType, AllActions, Store } from '../store/store'
 import { debugInApp } from './util'
 
 export interface Props {

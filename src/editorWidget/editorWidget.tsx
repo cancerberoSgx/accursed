@@ -7,11 +7,14 @@ import { EditorOptions, IEditor } from './editorWidgetTypes'
 const Editor = require('editor-widget')
 
 /**
- * Builds editor widget by calling its constructor as it is, without any tricks for auto-highlighting, focus or bypass the required parent option. There's only a workaround to load option.text as string [[options.text]]  but just that.
+ * Builds editor widget by calling its constructor as it is, without any tricks for auto-highlighting, focus
+ * or bypass the required parent option. There's only a workaround to load option.text as string
+ * [[options.text]]  but just that.
  *
  * Passing [[options.parent]] is mandatory here.
  *
- * For a higher level creator, see [[createEditor]] which allows to create the widget without passing [[options.parent]] and will auto-highlight and focus the editor at startup.
+ * For a higher level creator, see [[createEditor]] which allows to create the widget without passing
+ * [[options.parent]] and will auto-highlight and focus the editor at startup.
  */
 export function buildEditor(options: EditorOptions & { parent: Node }) {
   try {
@@ -22,13 +25,6 @@ export function buildEditor(options: EditorOptions & { parent: Node }) {
     if (options.language) {
       editor.language(options.language)
     }
-    // try {
-    // support user's options.ref
-
-    // } catch (error) {
-    //   debug(error)
-    //   throw error
-    // }
     return editor
   } catch (error) {
     debug(error)
@@ -51,20 +47,19 @@ interface CreateEditorOptions extends EditorOptions {
 
 /**
  * This creator function is a high level version of [[buildEditor]] that doesn't require to pass `parent`.
- * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the editor-widget.
+ * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the
+ * editor-widget.
  *
  * @returns the editor's parent BoxElement
  */
 export function createEditor(options: CreateEditorOptions) {
-  const parent = box({
-    ...options
-  })
+  const parent = box({})
   let editor: IEditor
   try {
     editor = buildEditor({ ...options, parent })
     resolveRef(options, editor)
     if (!options.disableSyntaxHighlighAtStartup) {
-      // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them. TODO: investigate
+      // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them.
       setTimeout(() => {
         editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
       }, 700)
@@ -78,7 +73,8 @@ export function createEditor(options: CreateEditorOptions) {
 
 /**
  * This creator function is a high level version of [[buildEditor]] that doesn't require to pass `parent`.
- * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the editor-widget.
+ * What it does is to create a box reference and after it renders it will use buildEditor to instantiate the
+ * editor-widget.
  *
  */
 export function createEditorAsync(options: CreateEditorOptions): Promise<IEditor> {
@@ -93,33 +89,11 @@ export function createEditorAsync(options: CreateEditorOptions): Promise<IEditor
           resolve(c)
         })
       })
-      // const container = box({
-      //   ...options,
-      //   ref: React.createRef<Box>(c => {
-      //     const editor = buildEditor({ ...options, parent: c })
-
-      //     if (!options.disableSyntaxHighlighAtStartup) {
-      //       // TODO: when this happens, just pressing up or down keys solves it but I'm dont known how to emit them. TODO: investigate
-      //       setTimeout(() => {
-      //         editor.indent(new Range(new Point(Infinity, Infinity), new Point(Infinity, Infinity)))
-      //       }, 700)
-      //     }
-      //     try {
-      //       // support user's options.ref
-      //       if (options.ref) {
-      //         if ((options.ref as any).callback) {
-      //           ;(options.ref as any).callback(editor)
-      //         }
-      //         ;(options.ref as any).current = editor
-      //       }
-      //       resolve({ editor, container })
     } catch (error) {
       debug(error)
       fail(error)
       throw error
     }
-    //   })
-    // })
   })
 }
 

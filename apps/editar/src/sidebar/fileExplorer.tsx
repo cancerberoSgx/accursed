@@ -1,7 +1,7 @@
 import { React, ref, TreeView, TreeViewNode } from 'accursed'
-import { Component } from '../component'
 import { File, State } from '../store/state'
-import { focusableOpts } from '../style'
+import { Component } from '../util/component'
+import { focusableOpts } from '../util/style'
 import { SetCwdAction, SIDEBAR_ACTION } from './sidebarActions'
 import { listDirectoryAsNodes } from './sideBarReducers'
 
@@ -25,7 +25,7 @@ export class FileExplorer extends Component {
         rootNodes={this.buildRootNodes()}
         onNodeSelect={e => {
           const f = (e as any) as File
-          this.debug('explorer selected', f.filePath)
+          // this.debug('explorer selected', f.filePath)
           this.dispatch({
             type: SIDEBAR_ACTION.OPEN_FILES,
             paths: [f.filePath]

@@ -1,15 +1,12 @@
-import { Driver } from 'cli-driver'
-import { Helper } from './interactionHelper'
-
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000
+import { Driver, InteractionSpecHelper } from 'cli-driver'
 
 describe('jsxCli', () => {
   let client: Driver
-  let helper: Helper
+  let helper: InteractionSpecHelper
 
   beforeAll(async done => {
     client = new Driver()
-    helper = new Helper(client)
+    helper = new InteractionSpecHelper(client)
     await client.start({
       notSilent: true
     })

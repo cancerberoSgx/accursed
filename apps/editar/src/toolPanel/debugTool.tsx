@@ -1,8 +1,8 @@
-import { debug, Div, Log, React } from 'accursed'
-import { Component } from '../component'
+import { debug, Div, Log, React, ref } from 'accursed'
 import { LogMessageAction, WORKSPACE_ACTION } from '../store/actions'
 import { State } from '../store/state'
-import { focusableOpts } from '../style'
+import { Component } from '../util/component'
+import { focusableOpts } from '../util/style'
 
 export class LogPanel extends Component {
   logEl: Log
@@ -19,9 +19,8 @@ export class LogPanel extends Component {
           {...focusableOpts()}
           height="100%"
           width="100%"
-          ref={React.createRef(c => {
+          ref={ref(c => {
             this.logEl = c
-            // this.logEl.log('this.logEl '+typeof c)
           })}
         />
       </Div>
@@ -36,14 +35,9 @@ export class LogPanel extends Component {
         this.pendingMessages.length = 0
       }
       this.logEl.log(a.message)
-      // this.logEl.screen.render()
     } else {
       this.pendingMessages.push(a)
       //TODO: handle logs when logel is not ready
     }
   }
 }
-
-// export let debugToolLog = (m: LogMessage) => {
-
-// }

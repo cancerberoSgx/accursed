@@ -1,13 +1,14 @@
 {
   "name": "editar",
   "version": "0.0.1",
-  "description": "a cli editor based on editor-widget.",
+  "description": "text editor for the command line",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "bin": "bin/editar.js",
   "scripts": {
     "watch": "tsc --watch",
     "build": "tsc && npm run copy",
-    "test": "exit 0 && ts-node -T  node_modules/jasmine/bin/jasmine && echo $?",
+    "test": "ts-node -T spec/support/customJasmine && echo $?",
     "test-debug": "exit 0 && node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@types/node": "^11.13.8",
     "@types/shelljs": "^0.8.5",
+    "cli-driver": "^0.2.1",
     "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
     "prettier": "^1.17.0",
     "ts-node": "^8.1.0",
@@ -42,7 +44,9 @@
     "Command line",
     "blessed",
     "CLI",
-    "interactive"
+    "interactive",
+    "text editor",
+    "editor"
   ],
   "repository": "https://github.com/cancerberoSgx/accursed"
 }

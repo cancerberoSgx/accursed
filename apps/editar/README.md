@@ -1,6 +1,7 @@
 # editar
 
- * a CLI text editor research based on editor-widget.
+ * a CLI text editor research
+ * based on accursed, blessed, redux and editor-widget.
  * no affiliation with slap editor
  * WIP
 
@@ -8,10 +9,7 @@
 
  * support TS projects:
   * ts ans tsx syntax highlight
-
  * language service ? 
-
-
 
 # doubts: 
 

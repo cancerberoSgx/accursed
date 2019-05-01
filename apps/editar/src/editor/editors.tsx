@@ -1,9 +1,9 @@
 import { Div, ListBar2, ListBarCommand, React, ref } from 'accursed'
 import { ok } from 'assert'
-import { Component } from '../component'
 import { OpenFilesAction, SIDEBAR_ACTION } from '../sidebar/sidebarActions'
 import { State } from '../store/state'
-import { debugInApp } from '../util'
+import { Component } from '../util/component'
+import { debugInApp } from '../util/util'
 import { Editor } from './editor'
 import { DocumentEditor, getEditorFor } from './editorFactory'
 

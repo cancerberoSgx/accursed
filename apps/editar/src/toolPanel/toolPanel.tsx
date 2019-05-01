@@ -1,7 +1,7 @@
 import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
-import { Component } from '../component'
-import { focusableOpts } from '../style'
-import { PREFIX } from '../util'
+import { Component } from '../util/component'
+import { focusableOpts } from '../util/style'
+import { PREFIX } from '../util/util'
 import { LogPanel } from './debugTool'
 
 /** this is the bottom panel that contains tools such as the terminal, problems, etc */

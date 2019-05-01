@@ -5,8 +5,8 @@ import { createEditorAsync, IEditor } from 'accursed'
 import { inspect } from 'util'
 import { getContext } from '../context/contextFactory'
 import { Document } from '../store/state'
-import { focusableOpts } from '../style'
-import { debugInApp } from '../util'
+import { focusableOpts } from '../util/style'
+import { debugInApp } from '../util/util'
 
 export interface DocumentEditor {
   editor: IEditor

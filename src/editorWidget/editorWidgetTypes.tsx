@@ -16,7 +16,6 @@ interface BufferOptions {
   tabSize?: number
 }
 export interface IEditor extends Textarea {
-  // focus(): void;
   /**
    * Increases the indentation to the right one level in given range or, if none if provided, in current [[selection]]
    */
@@ -66,7 +65,9 @@ export interface IEditor extends Textarea {
    */
   lineWithEndingForRow(row: number): number
 
-  /** If range not provided it will delete current selection range  */
+  /**
+   * If range not provided it will delete current selection range
+   */
   delete(range?: Range)
   /**
    * Gets the current visible position.
@@ -85,26 +86,3 @@ export interface IEditor extends Textarea {
 
   moveCursorHorizontal(count: number, words?: boolean): this
 }
-
-// export interface TextBuffer extends EventEmitter {
-//   emitDidChangeTextEvent(...args: TODO): TODO
-//   onDidChange(l: (...args: any[]) => TODO): void
-//   onDidStopChanging(l: () => TODO): void
-//   getText(): string
-//   delete(range?: Range)
-//   lineForRow(row: number): number
-//   emitWillChangeTextEvent(): void
-//   setText(s: string): void
-// }
-
-// let editorWidgetTypes;
-// const Range = require('text-buffer/lib/range') as Range
-// const Point = require('text-buffer/lib/point')
-// export interface Range {
-//   start: number
-//   end: number
-// }
-// export interface Point {
-//   row: number
-//   column: number
-// }

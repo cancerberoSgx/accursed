@@ -1,10 +1,10 @@
 import { Br, Column, Columns, Div, React, Row, Rows } from 'accursed'
 import { pwd } from 'shelljs'
-import { Component } from './component'
 import { Editors } from './editor/editors'
 import { Sidebar } from './sidebar/sidebar'
 import { SIDEBAR_ACTION } from './sidebar/sidebarActions'
 import { Panel } from './toolPanel/toolPanel'
+import { Component } from './util/component'
 
 export class App extends Component {
   render() {
