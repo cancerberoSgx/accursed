@@ -17,25 +17,24 @@ import {
 import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
+
 describe('treeView', () => {
+
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
   })
+  beforeEach(async () => {
+    screen = createScreen({})
+    installExitKeys(screen)
+    screen.render()
+  })
 
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
   it('should render', async done => {
     try {
-      screen = createScreen({
-        smartCSR: true,
-        log: 'log.txt',
-        ignoreLocked: true,
-        tput: true
-      })
-      installExitKeys(screen)
-      const tree = new TreeView({
+       const tree = new TreeView({
         rootNodes,
-
         parent: screen,
         width: 15,
         height: 10,
@@ -50,7 +49,7 @@ describe('treeView', () => {
           {
             name: 'n41',
             children: [{ name: 'n411', children: [{ name: 'n4111', children: [{ name: 'n41111', children: [] }] }] }]
-          },
+          }, 
           { name: 'n42', children: [] },
           { name: 'n43', children: [] }
         ])
@@ -80,12 +79,8 @@ describe('treeView', () => {
 
   it('should support jsx', async done => {
     try {
-      screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
-      installExitKeys(screen)
-
       const treeRef = React.createRef<TreeView>()
       const textRef = React.createRef<Text>()
-
       React.render(
         <treeview
           parent={screen}
@@ -93,7 +88,6 @@ describe('treeView', () => {
           rootNodes={rootNodes}
           width={15}
           height={10}
-          // top={2} left={5}
           style={{ bg: 'black', fg: 'white', focusedNode: { bg: 'green', fg: 'black' }, selectedNode: { bg: 'red' } }}
           scrollable={true}
           onNodeSelect={node => {
@@ -123,21 +117,11 @@ describe('treeView', () => {
           }}
         />
       )
-
       React.render(<text ref={textRef} {...{ parent: screen, left: 19, top: 0, content: 'text' }} />)
-
       screen.render()
-
       await waitFor(() => getContent(treeRef.current!).includes('n1'))
       expect(getContent(treeRef.current!)).toContain('n2')
       expect(getContent(treeRef.current!)).not.toContain('n11')
-
-      // TODO: press space to verify it expand
-
-      // screen.program.write(' ')
-      // screen.emit('key', undefined, {name: 'space'})
-
-      // debug(getContent(tree))
 
       done()
     } catch (error) {
@@ -145,10 +129,8 @@ describe('treeView', () => {
     }
   })
 
-  it('should render in arbitrary position and inside a box', async done => {
+  fit('should render in arbitrary position and inside a box', async done => {
     try {
-      screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true, focusable: true })
-      installExitKeys(screen)
       const b = box({
         parent: screen,
         top: 13,
@@ -175,45 +157,22 @@ describe('treeView', () => {
         t.content = `nodeExpand: ${n.name}, focusedNode: ${tree.getFocusedNode().name}-----------------`
         screen.render()
       })
-
-      // setTimeout(() => {
-      //   tree.height = 5
-      //   screen.render()
-      // }, 2000);
       screen.render()
-
       debug(getContent(tree))
       await waitFor(() => getContent(tree).includes('n1'))
       expect(getContent(tree)).toContain('n2')
       expect(getContent(tree)).not.toContain('n11')
 
-      // TODO: press space to verify it expand
-
-      // screen.program.write(' ')
-      // screen.emit('key', undefined, {name: 'space'})
-
-      done()
+      // done()
     } catch (error) {
       log('ERROR', error)
     }
   })
 
-  // jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999999
-
   it('should support jsx2', async done => {
     try {
-      screen = createScreen({
-        smartCSR: true,
-        log: 'log.txt',
-        focusable: true,
-        sendFocus: true
-        //  grabKeys: true
-      })
-      installExitKeys(screen)
-
       const treeRef = React.createRef<TreeView>()
       const textRef = React.createRef<Text>()
-
       React.render(
         <Div parent={screen}>
           asdasd
@@ -312,13 +271,6 @@ describe('treeView', () => {
       await waitFor(() => getContent(treeRef.current!).includes('n1'))
       expect(getContent(treeRef.current!)).toContain('n2')
       // expect(getContent(treeRef.current!)).not.toContain('n11')
-
-      // TODO: press space to verify it expand
-
-      // screen.program.write(' ')
-      // screen.emit('key', undefined, {name: 'space'})
-
-      // debug(getContent(tree))
 
       done()
     } catch (error) {

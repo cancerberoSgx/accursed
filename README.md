@@ -346,6 +346,8 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `Maximize` - wrapping an element with it will show a "maximize/restore" buttons floating at top-left
  * `<editor>` component to easy render editor-component from slap editor project.
  * `<ListBar>` - listbar semantics with jsx  markup
+ * `cicks` to listen for multiple clicks (double click)
+ 
 # Apps
  
  * apps/emojis-search  : a unicode data table explorer. Test blessed performance by letting ht user interactively navigate/search, etc the FULL unicode charset . 

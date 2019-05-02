@@ -1,20 +1,20 @@
 import { array, tryTo } from 'misc-utils-of-mine-generic'
-import { createScreen, installExitKeys, Screen, TreeView } from '../src'
+import { createScreen, installExitKeys, Screen, TreeView, Node } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 class KeyHelper {
-  constructor(protected screen: Screen) {}
+  constructor(protected node: Node) {}
   down() {
-    this.screen.emit('key down', undefined, { name: 'down' })
+    this.node.emit('key down', undefined, { name: 'down' })
   }
   up() {
-    this.screen.emit('key up', undefined, { name: 'up' })
+    this.node.emit('key up', undefined, { name: 'up' })
   }
   space() {
-    this.screen.emit('key space', undefined, { name: 'space' })
+    this.node.emit('key space', undefined, { name: 'space' })
   }
   enter() {
-    this.screen.emit('key enter', undefined, { name: 'enter' })
+    this.node.emit('key enter', undefined, { name: 'enter' })
   }
 }
 
@@ -29,7 +29,6 @@ describe('treeView', () => {
 
   beforeEach(async () => {
     screen = createScreen({})
-    key = new KeyHelper(screen)
     installExitKeys(screen)
     tree = new TreeView({
       rootNodes,
@@ -39,6 +38,7 @@ describe('treeView', () => {
       style: { bg: 'blue', fg: 'white', focusedNode: { bg: 'green', fg: 'black' }, selectedNode: { bg: 'red' } },
       scrollable: true
     })
+    key = new KeyHelper(tree)
     tree.focus()
     screen.render()
     await waitFor(() => !!tree.getContent().trim())

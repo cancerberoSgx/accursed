@@ -1,8 +1,11 @@
 import { repeat } from 'misc-utils-of-mine-generic'
 import { IKeyEventArg, widget, Widgets } from '..'
-import { Style } from '../blessedTypes'
+import { Style, IMouseEventArg } from '../blessedTypes'
 import { React } from '../jsx'
 import { findAscendant } from './node'
+import { showInModal } from './modal';
+import { inspect } from 'util';
+import { clicks } from './clicks';
 
 export interface TreeViewNode {
   name: string
@@ -13,7 +16,6 @@ export interface TreeViewNode {
 }
 
 interface Node extends TreeViewNode {
-  // focused?: boolean
   children: Node[]
   parent?: Node
   nextSibling?: Node
@@ -150,8 +152,10 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
         ? [{ name: 'Root', children: [], path: '/Root' }]
         : this.processNodes(this.options.rootNodes! as any)
     this.currentNode = this.rootNodes.find(n => !n.hidden) || this.rootNodes[0]
+    this.onKey = this.onKey.bind(this)
+    this.onClick = this.onClick.bind(this)
     this.once('render', e => {
-      this.screen.key(
+      this.key(
         [
           ...this.options.expandKeys!,
           ...this.options.selectKeys!,
@@ -160,12 +164,33 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
           ...this.options.pageDownKeys!,
           ...this.options.pageUpKeys!
         ],
-        this.onKey.bind(this)
+        this.onKey 
       )
+      clicks({target: this, handler:  this.onClick})
     })
   }
 
-  /** if true, the view will ignore if it's screen.focused or not. Useful for automate the view form outside. */
+  protected onClick(e: IMouseEventArg&{count: number}) {
+    showInModal(this.screen, inspect(e))
+    const x = e.y - this.atop
+    const line = this.nodeLines[x]
+    if(!line){
+      return
+    }
+    this.focusedLine = x
+    this.currentNode = line.node
+    this.emit('nodeFocus', this.currentNode)
+    if(e.count===1) {
+      this.toggleExpand()
+    }
+    else {
+      this.currentNode.selected = !this.currentNode.selected
+      this.processSelect(e.ctrl)            
+    }
+    this.screen.render()
+    // showInModal(this.screen, inspect(e))
+  }
+  /* * if true, the view will ignore if it's screen.focused or not. Useful for automate the view form outside. */
   // protected ignoreScreenFocused = false
   protected onKey(ch: any, key: IKeyEventArg) {
     if (
@@ -211,30 +236,40 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
     } else if (this.options.expandKeys!.includes(key.name)) {
-      this.currentNode.expanded = !this.currentNode.expanded
-      this.emit('nodeExpand', this.currentNode)
-      this.options.onNodeExpand && this.options.onNodeExpand(this.currentNode as Node & T)
+      this.toggleExpand();
     } else if (this.options.selectKeys!.includes(key.name)) {
       this.currentNode.selected = !this.currentNode.selected
-      if (this.options.multipleSelection) {
-        if (this.currentNode.selected) {
-          this.selectedNodes.push(this.currentNode)
-        } else {
-          this.selectedNodes = this.selectedNodes.filter(n => n !== this.currentNode)
-        }
-      } else {
-        this.selectedNodes.forEach(n => (n.selected = false))
-        this.selectedNodes = this.currentNode.selected ? [this.currentNode] : []
-      }
-      const nodeSelectArg: Node & T | undefined = this.options.multipleSelection
-        ? this.selectedNodes
-        : this.selectedNodes.length
-        ? this.selectedNodes[0]
-        : (undefined as any)
-      this.emit('nodeSelect', nodeSelectArg)
-      this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
+      this.processSelect()
     }
     this.screen.render()
+  }
+  protected processSelect(multipleSelectionApplies=true) {
+    if (this.options.multipleSelection && multipleSelectionApplies) {
+      if (this.currentNode.selected) {
+        this.selectedNodes.push(this.currentNode)
+      } else {
+        this.selectedNodes = this.selectedNodes.filter(n => n !== this.currentNode)
+      }
+    } else {
+      this.selectedNodes.forEach(n => (n.selected = false))
+      this.selectedNodes = this.currentNode.selected ? [this.currentNode] : []
+    }
+    const nodeSelectArg: Node & T | undefined = this.options.multipleSelection
+      ? this.selectedNodes
+      : this.selectedNodes.length
+      ? this.selectedNodes[0]
+      : (undefined as any)
+    this.emit('nodeSelect', nodeSelectArg)
+    this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
+  }
+
+  /**
+   * toggles currentNode expand/collaps
+   */
+  toggleExpand() {
+    this.currentNode.expanded = !this.currentNode.expanded;
+    this.emit('nodeExpand', this.currentNode);
+    this.options.onNodeExpand && this.options.onNodeExpand(this.currentNode as Node & T);
   }
 
   render() {
