@@ -1,7 +1,7 @@
-import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize } from 'accursed'
+import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize, Collapsible } from 'accursed'
 import { Component } from '../util/component'
 import { labels } from '../util/labels'
-import { focusableOpts, tabPanelOpts } from '../util/style'
+import { focusableOpts, tabPanelOpts, tabLabelOpts } from '../util/style'
 import { PREFIX } from '../util/util'
 import { FileExplorer } from './fileExplorer'
 
@@ -12,14 +12,14 @@ export class Sidebar extends Component {
         {/* <Maximize button={{...focusableOpts()}}> */}
         <TabPanel {...tabPanelOpts()}>
           <Tab active={true} _data={{ [PREFIX('sidebarTool')]: 'explorer' }}>
-            <TabLabel {...focusableOpts()}>{labels.sidebarExplorerTab}</TabLabel>
+            <TabLabel {...tabLabelOpts()}>{labels.sidebarExplorerTab}</TabLabel>
             <TabBody>
               <FileExplorer {...this.props} />
             </TabBody>
             {}
           </Tab>
           <Tab _data={{ [PREFIX('sidebarTool')]: 'search' }}>
-            <TabLabel {...focusableOpts()}>Search</TabLabel>
+            <TabLabel {...tabLabelOpts()}>Search</TabLabel>
             <TabBody>
               <textbox {...focusableOpts()} value="search" />
               <Br />
@@ -32,7 +32,7 @@ export class Sidebar extends Component {
             {}
           </Tab>
           <Tab _data={{ [PREFIX('sidebarTool')]: 'sourceControl' }}>
-            <TabLabel {...focusableOpts()}>Source Control</TabLabel>
+            <TabLabel {...tabLabelOpts()}>Source Control</TabLabel>
             <TabBody>
               <textbox {...focusableOpts()} value="Message" />
               <Br />

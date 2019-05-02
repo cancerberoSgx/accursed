@@ -8,7 +8,8 @@ import {
   getContent,
   visitDescendants,
   Visitor,
-  VisitorOptions
+  VisitorOptions,
+  findDescendantNamed
 } from '../blessed/node'
 import { Element } from '../blessedTypes'
 import { RefObject } from './types'
@@ -98,6 +99,10 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
    */
   getContent(options: { dontTrim?: boolean; dontStrip?: boolean; childrenLast?: boolean } = {}) {
     return getContent(this.blessedElement, options)
+  }
+
+  getDescendantNamed<T extends Element>(n: string):T|undefined {
+    return findDescendantNamed<T>(this.blessedElement, n)
   }
 }
 

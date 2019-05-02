@@ -322,9 +322,14 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
    */
   setNodes(data: TreeViewNode[] = this.rootNodes) {
     this.rootNodes = this.processNodes(data as any)
-    this.currentNode = this.currentNode = this.rootNodes.find(n => !n.hidden) || this.rootNodes[0]
-    this.focusedLine = 0
-    this.selectedNodes = []
+    if(data!==this.rootNodes){
+      this.currentNode = this.currentNode = this.rootNodes.find(n => !n.hidden) || this.rootNodes[0]
+      this.focusedLine = 0
+      this.selectedNodes = []
+    }
+    else {
+      //TODO handle situations when an ancestor is collapsed or removed so this.currentNode should be changed
+    }
   }
 
   /**

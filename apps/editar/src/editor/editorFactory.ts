@@ -23,14 +23,14 @@ export async function getEditorFor(document: Document) {
         ...focusableOpts(),
         text,
         language: getLanguage(document),
-        scrollable: true,
-        scrollbar: {inverse: true}
-        // bindings: {
-        //   focusNext: ['C-S-tab', 'escape']
-        // }
+        scrollable: false,
       })
-      editor.selection.setHeadPosition({ column: 0, row: 0 })
-      editor.selection.setTailPosition({ column: 0, row: 0 })
+      editor.once('render', ()=>{
+        setTimeout(() => {
+          editor.selection.setHeadPosition([ 0, 0])
+        editor.selection.clearTail()
+        }, 700);
+      })
       editors[document.path] = { editor, document }
     } catch (error) {
       debugInApp('Error while creating editor widget for file ' + document.path + ': ' + inspect(error))

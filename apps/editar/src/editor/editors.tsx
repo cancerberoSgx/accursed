@@ -18,9 +18,10 @@ export class Editors extends Component {
   }
   render() {
     return (
-      <Div  >
+      // <Div  >
       <Maximize>
-      <Div>
+      <Div 
+          style={{overflow: undefined}}>
         <ListBar2
         {...focusableOpts()}
           ref={ref<ListBar2>(c => this.listBar = c)}
@@ -39,8 +40,8 @@ export class Editors extends Component {
           })}
         />
       </Div>
-        </Maximize>
-      </Div>
+         </Maximize>
+      // </Div>
     )
   }
 

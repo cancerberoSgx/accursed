@@ -83,8 +83,8 @@ export class App extends BaseApp {
                     {...transparentBox()}
                     ref={React.createRef<TabPanel>(c => (this.outputPanel = c))}
                     updateScreenOnChange={true}
-                    activeStyle={{ ...focusableOpts().style.selected }}
-                    inactiveStyle={{ ...focusableOpts().style.item }}>
+                    activeTab={{ style: {...focusableOpts().style.selected} }}
+                    inactiveTab={{ style: {...focusableOpts().style.item }}}>
                     <Tab active={true}>
                       <TabLabel {...focusableOpts()} border={undefined}>
                         - Logs -

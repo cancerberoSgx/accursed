@@ -19,8 +19,8 @@ export interface TabPanelProps extends BoxOptions {
   children: (Tab)[]
   updateScreenOnChange?: boolean
   onChange?: (e: ChangeEvent) => void
-  activeStyle?: Style
-  inactiveStyle?: Style
+  activeTab?: BoxOptions
+  inactiveTab?: BoxOptions
 }
 
 interface TabLabelProps extends BoxOptions {
@@ -77,8 +77,8 @@ export class TabPanel extends Component<TabPanelProps> {
   _saveJSXChildrenProps = true
 
   render() {
-    this.props.activeStyle = this.props.activeStyle || {}
-    this.props.inactiveStyle = this.props.inactiveStyle || {}
+    this.props.activeTab = this.props.activeTab || {}
+    this.props.inactiveTab = this.props.inactiveTab || {}
     const childProps = getJSXChildrenProps(this)!
     const tabsData = childProps.filter(c => c.tagName === 'Tab')
     const tabs = tabsData.map((tabData, i) => {
@@ -98,10 +98,11 @@ export class TabPanel extends Component<TabPanelProps> {
           {...focusableOpts()}
           border="line"
           content={labelData.children.join(' ')}
+          {...(active?this.props.activeTab : this.props.inactiveTab)||{}}
           {...labelData.attrs || {}}
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),
-            ...((active ? this.props.activeStyle : this.props.inactiveStyle) || {})
+            ...((active ? (this.props.activeTab && this.props.activeTab.style) : (this.props.inactiveTab && this.props.inactiveTab.style)) || {})
           }}
           onPress={e => this.selectTabNamed(e.currentTarget.name)}
           onClick={e => this.selectTabNamed(e.currentTarget.name)}
@@ -141,9 +142,9 @@ export class TabPanel extends Component<TabPanelProps> {
     })
     this.filterDescendants(TabPanel.isLabel).forEach(label => {
       if (label.name !== 'tab_label_' + tabIndex) {
-        label.style = { ...(label.style || {}), ...(this.props.inactiveStyle || {}) }
+        label.style = { ...(label.style || {}), ...(this.props.inactiveTab && this.props.inactiveTab.style|| {}) }
       } else {
-        label.style = { ...(label.style || {}), ...(this.props.activeStyle || {}) }
+        label.style = { ...(label.style || {}), ...(this.props.activeTab && this.props.activeTab.style || {}) }
       }
     })
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })

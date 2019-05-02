@@ -4,21 +4,23 @@ import { Sidebar } from './sidebar/sidebar'
 import { SIDEBAR_ACTION } from './sidebar/sidebarActions'
 import { Panel } from './toolPanel/toolPanel'
 import { Component } from './util/component'
+import { installKeyBindings } from './keyBindings';
 
 export class App extends Component {
   render() {
     return (
       <Div ref={ref(c => this.start())}>
         <Columns>
-          <Column width="30%">
+          <Column width="25%">
             <Sidebar {...this.props} />
           </Column>
-          <Column width="70%">
+          <Column width="75%">
             <Rows>
-              <Row height="65%">
+              <Row height="68%">
                 <Editors {...this.props} />
               </Row>
               <Row height="30%">
+              <Br/>
                 <Panel {...this.props} />
               </Row>
               {}
@@ -38,6 +40,10 @@ export class App extends Component {
         cwd: this.s.cwd
       })
       this.screen.focusNext()
+      installKeyBindings({
+        screen: this.screen, 
+        
+      })
     }, 200)
   }
 }

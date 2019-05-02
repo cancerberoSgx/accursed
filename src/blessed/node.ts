@@ -178,12 +178,10 @@ export function cleanNode(n: Node, dontDestroy: boolean = false) {
   })
 }
 
-export function findDescendantNamed(el: Element | Screen, name: string) {
-  // return findDescendant(el as Element, c=>(c as any).name===name)
+export function findDescendantNamed<T extends Element>(el: Element | Screen, name: string): T|undefined {
   return asElements(el)
     .map(c => findDescendant(c, d => (d as any).name === name))
     .find(notFalsy)
-  // return findDescendant()
 }
 export function asElements(el: Element | Screen) {
   return isScreen(el) ? el.children.filter(isElement) : [el]
