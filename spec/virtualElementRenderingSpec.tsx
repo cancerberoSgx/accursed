@@ -2,7 +2,7 @@ import { tryTo } from 'misc-utils-of-mine-generic'
 import { Br, Component, createScreen, Div, getContent, installExitKeys, React, Screen, Style } from '../src'
 import { getJSXChildrenProps, VirtualComponent } from '../src/blessed/virtualElement'
 import { waitFor } from '../src/blessed/waitFor'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 /** see guides/virtual-elements.md  */
 describe('virtualElementsRendering', () => {
@@ -54,7 +54,7 @@ describe('virtualElementsRendering', () => {
             .find(e => e.tagName === 'TBody')!
             .children.filter(c => (c as any).tagName === 'Tr')
             .map(c => (c as any).children.map((c: any) => c.children.join('')))
-          log(JSON.stringify(getJSXChildrenProps(this)))
+          debug(JSON.stringify(getJSXChildrenProps(this)))
           return <listtable width="100%" height="80%" border="line" data={[ths, ...tds]} />
         }
       }
@@ -89,7 +89,7 @@ describe('virtualElementsRendering', () => {
       const el = React.render(userApp4)
       screen.append(el)
       screen.render()
-      log(el.getContent(), getContent(el))
+      debug(el.getContent(), getContent(el))
       await waitFor(() => getContent(el).includes('Description'))
       expect(getContent(el).includes('Number code'))
       expect(getContent(el).includes('sample123'))
@@ -97,7 +97,7 @@ describe('virtualElementsRendering', () => {
       expect(getContent(el).includes('laura'))
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 

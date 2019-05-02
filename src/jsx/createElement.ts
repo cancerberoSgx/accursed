@@ -3,7 +3,6 @@ import { enumKeys } from 'misc-utils-of-mine-typescript'
 import { VirtualComponent } from '../blessed/virtualElement'
 import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes'
 import { debug } from '../util'
-import { log } from '../util/logger'
 import { Component } from './component'
 import {
   AfterElementCreatedEvent,
@@ -119,7 +118,7 @@ class BlessedJsxImpl implements BlessedJsx {
       // TODO: beforeBlessedOptionsCleanedListeners
       if (!fn) {
         const s = 'blessed.' + tag + ' function not found'
-        log(s)
+        debug(s)
         throw new Error(s)
       }
       // ATTRIBUTE NORMALIZATION (remove attributes that are not valid blessed options)
@@ -145,7 +144,7 @@ class BlessedJsxImpl implements BlessedJsx {
       if (!listenerInstance) {
         el = fn({ ...attrs, children: undefined }) as Element
       } else {
-        log('Element ' + tag + ' created by listener')
+        debug('Element ' + tag + ' created by listener')
         return listenerInstance
       }
     }
@@ -249,7 +248,7 @@ class BlessedJsxImpl implements BlessedJsx {
           fn!.bind(el)({ ...e, currentTarget: el })
         })
       } else {
-        log('Unrecognized artificialEventAttribute ' + attributeName)
+        debug('Unrecognized artificialEventAttribute ' + attributeName)
         throw new Error('Unrecognized artificialEventAttribute ' + attributeName)
       }
     })

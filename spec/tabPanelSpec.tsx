@@ -18,7 +18,6 @@ import { waitFor } from '../src/blessed/waitFor'
 import { Column, Columns, Tab, TabBody, TabLabel, TabPanel } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
 import { logText, renderDescendants } from '../src/util/debugNode'
-import { log } from '../src/util/logger'
 
 describe('tabPanelComponent', () => {
   let screen: Screen
@@ -89,7 +88,7 @@ describe('tabPanelComponent', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 

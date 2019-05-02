@@ -12,7 +12,7 @@ import {
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import { Button2 } from '../src/jsx-components'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 describe('button2', () => {
   let screen: Screen
@@ -36,7 +36,7 @@ describe('button2', () => {
               showInModal(e.currentTarget.screen, 'ajsjsjsjsjs')
               e.currentTarget.content = Math.random() + ''
               e.currentTarget.screen.render()
-              log('clicked ', e)
+              debug('clicked ', e)
             }}>
             click me
           </Button2>
@@ -59,7 +59,7 @@ describe('button2', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })

@@ -13,6 +13,7 @@ import { color4 } from '../experiments/colors/colors4'
 import { colors5Demo } from '../experiments/colors/colors5'
 import { ButtonDemo } from './ButtonDemo'
 import { CollapsibleDemo } from './CollapsibleDemo'
+import { ColumnsAndRowsDemo } from './columnsAndRowsDemo'
 import { LayoutDemo } from './LayoutDemo'
 import { screen } from './main'
 // import { RobotDemo } from './RobotDemo'
@@ -28,7 +29,8 @@ enum Demo {
   allColors,
   anim,
   anim2,
-  borderBox
+  borderBox,
+  columnsAndRows
 }
 interface P {
   screen: Screen
@@ -44,7 +46,7 @@ export class App extends Component<P, S> {
         throw new Error('Demo not found ' + d)
       }
       if (demo === Demo.button) {
-        return React.render(<ButtonDemo screen={this.props.screen} />)
+        return React.render(<ButtonDemo />)
       } else if (demo === Demo.layout) {
         return React.render(<LayoutDemo />)
       } else if (demo === Demo.colorPalette) {
@@ -62,6 +64,8 @@ export class App extends Component<P, S> {
         animDemo(this.blessedElement.screen)
       } else if (demo === Demo.collapsible) {
         return React.render(<CollapsibleDemo />)
+      } else if (demo === Demo.columnsAndRows) {
+        return React.render(<ColumnsAndRowsDemo />)
       }
       // else if (demo === Demo.robot) {
       //   // return React.render(<RobotDemo screen={this.props.screen} />)

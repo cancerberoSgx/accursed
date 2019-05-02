@@ -1,6 +1,35 @@
 import * as blessed from 'blessed'
-import { Element, Style } from '../blessedTypes'
+import { Emitter } from 'misc-utils-of-mine-generic'
+import { Element, Screen, Style } from '../blessedTypes'
 import { isBlessedElement } from './util'
+
+export function isFocused(screen: blessed.Widgets.Screen, el: Element) {
+  return el === screen.focused || el.hasDescendant(screen.focused)
+}
+
+/**
+ * Same as [[onFocus]] but without polling screen.focused. This implementation wraps Screen.prototype._focus to detect when focused element changes
+ */
+export function onFocused(screen: Screen, f: OnFocusedListener) {
+  if (!onFocused_focus) {
+    const onFocused_focus = blessed.widget.Screen.prototype._focus
+    blessed.widget.Screen.prototype._focus = function(focused: Element, old?: Element) {
+      const result = onFocused_focus.apply(this, [focused, old])
+      onFocusedEmitter.emit({ focused, old })
+      return result
+    }
+  }
+  onFocusedEmitter.add(f)
+}
+type OnFocusedListener = ({ focused, old }: { focused: Element; old?: Element }) => void
+/**
+ * Removes an onFocused listener. See [[onFocused]]
+ */
+export function offFocused(f: OnFocusedListener) {
+  onFocusedEmitter.remove(f)
+}
+const onFocusedEmitter = new Emitter()
+let onFocused_focus: typeof blessed.widget.Screen.prototype._focus | undefined
 
 const focusStyle: Style = {
   // border: {
@@ -10,6 +39,8 @@ const focusStyle: Style = {
 }
 
 /**
+ * @obsolete in favor of [[onFocused]].
+ *
  * Provides blur/focus notifications on those terminals that focus protocol is not supported (so bless focus/blur events won't work).
  *
  * It will poll screen.focused and notify when focus/blur is detected.
@@ -31,6 +62,8 @@ export function onBlur(
 }
 
 /**
+ * @obsolete in favor of [[onFocused]].
+ *
  * Provides blur/focus notifications on those terminals that focus protocol is not supported (so bless focus/blur events won't work).
  *
  * It will poll screen.focused and notify when focus/blur is detected.
@@ -54,6 +87,8 @@ export function onFocus(
 type OnFocusChangeListener = (focused?: Element, previous?: Element) => void
 
 /**
+ * @obsolete in favor of [[onFocused]].
+ *
  * Provides blur/focus notifications on those terminals that focus protocol is not supported (so bless focus/blur events won't work).
  *
  * It will poll screen.focused and notify when focus/blur is detected.
@@ -79,6 +114,8 @@ const onFocusChangeListeners: OnFocusChangeListener[] = []
 let onFocusChangeInterval = 500
 
 /**
+ * @obsolete in favor of [[onFocused]].
+ *
  * change the polling interval. By default it's 500 ms
  */
 export function setOnFocusChangeInterval(t: number) {
@@ -91,6 +128,8 @@ let lastFocused: Element | undefined
 let lastFocus: { [id: string]: number } = {}
 
 /**
+ * @obsolete in favor of [[onFocused]].
+ *
  * It resets the focus manager. Useful if you are destroying / recreating the screen.
  */
 export function resetFocusManager() {
@@ -99,7 +138,9 @@ export function resetFocusManager() {
   lastFocus = {}
   onFocusChangeListeners.length = 0
 }
-
+/**
+ * @obsolete in favor of [[onFocused]].
+ */
 export function uninstallFocusHandler(focusId: string) {
   if (typeof lastFocus[focusId] === 'undefined') {
     console.log('Cannot uninstall focus handler that is not yet installed: ' + focusId)
@@ -107,7 +148,9 @@ export function uninstallFocusHandler(focusId: string) {
   }
   lastFocus[focusId] = -Infinity
 }
-
+/**
+ * @obsolete in favor of [[onFocused]].
+ */
 export function installFocusHandler(
   focusId: string,
   elements: Element[],
@@ -168,8 +211,4 @@ export function installFocusHandler(
       })
     }
   }
-}
-
-export function isFocused(screen: blessed.Widgets.Screen, el: Element) {
-  return el === screen.focused || el.hasDescendant(screen.focused)
 }

@@ -9,7 +9,7 @@ import {
   Screen
 } from '../../../src'
 import { getJSXChildrenProps, VirtualComponent } from '../../../src/blessed/virtualElement'
-import { log } from '../../../src/util/logger'
+import { debug } from '../../../src/util/logger'
 
 // log('hashdhhs')
 interface ListTableProps {
@@ -53,7 +53,7 @@ try {
         .children.filter(c => (c as any).tagName === 'Tr')
         .map(c => (c as any).children.map((c: any) => c.children.join('')))
       // const virtualChildren = getJSXChildrenProps(this)
-      log('ListTable: ', tds)
+      debug('ListTable: ', tds)
       // this._jsxChildrenProps
       // const d = this.getElementData<any[]>(VirtualComponent.VIRTUAL_DATA_OPTION) || 'none'
       // this.log(d)
@@ -126,5 +126,5 @@ try {
   screen.render()
 } catch (error) {
   // screen.log(error)
-  log('ERROR', error)
+  debug('ERROR', error)
 }

@@ -328,7 +328,9 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * TreeView
  * Maximize/Restore
  * BorderBox
- * EditorWidget form Slapeditor project. I updated dependencies and documented EditorWidget which is great. Made easy to use API that automatically highlights and focus the editor.
+ * EditorWidget from Slapeditor project. I updated dependencies and documented EditorWidget which is great. Made easy to use API that automatically highlights and focus the editor.
+ * ` visibleOnAncestorFocus` Automatically shows/hides descendants when ancestors (or any of its descendants) are focused
+ * `screenLogger` simple logger visual logger API
 
 ## JSX components
 
@@ -347,14 +349,18 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * `<editor>` component to easy render editor-component from slap editor project.
  * `<ListBar>` - listbar semantics with jsx  markup
  * `cicks` to listen for multiple clicks (double click)
- 
+
 # Apps
  
  * apps/emojis-search  : a unicode data table explorer. Test blessed performance by letting ht user interactively navigate/search, etc the FULL unicode charset . 
 
- * accursed gallery, spec/blessed/gallery/LayoutDemo.tsx I tried to use these tools to build a interactive playground with examplesWIP
+ * accursed gallery, spec/blessed/gallery/LayoutDemo.tsx I tried to use these tools to build a interactive playground with examples. WIP
 
- * https://github.com/cancerberoSgx/demos/tree/master/docs/typescript-ast-explorer - explore a TypeScripty project AST , visualliszetogether with sources code and even apply refactors. 
+ * json-cat: CLI app that render json streams with a tree view. Supports async render when streams are loading, filtering by text or json JSONPath. 
+
+ * editar: CLI text-editor, inspired on vscode, based on editor-widget (independent form slap-editor)
+
+ * https://github.com/cancerberoSgx/demos/tree/master/docs/typescript-ast-explorer - explore a TypeScript project AST , visualize together with sources code and even apply refactors. 
 
 
 # Typings:

@@ -12,7 +12,7 @@ import {
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, Select, SelectOption } from '../src/jsx-components'
 import { words } from '../src/util/data'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 describe('select', () => {
   let screen: Screen
@@ -32,7 +32,7 @@ describe('select', () => {
           <Select
             border="line"
             onSelect={e => {
-              log(e.value, e.index)
+              debug(e.value, e.index)
             }}>
             <SelectOption>option1</SelectOption>
             <SelectOption value="value 2">option2</SelectOption>
@@ -62,7 +62,7 @@ describe('select', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })

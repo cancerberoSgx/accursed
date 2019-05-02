@@ -28,7 +28,7 @@
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
     "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
-    "misc-utils-of-mine-generic": "0.0.17"
+    "misc-utils-of-mine-generic": "0.0.19"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.12",

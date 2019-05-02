@@ -16,7 +16,6 @@ import {
   TreeView
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
-import { log } from '../src/util/logger'
 
 describe('treeView', () => {
   let screen: Screen
@@ -71,7 +70,7 @@ describe('treeView', () => {
       screen.render()
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 
@@ -165,7 +164,7 @@ describe('treeView', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 
@@ -331,7 +330,7 @@ describe('treeView', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })

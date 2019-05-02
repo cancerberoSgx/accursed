@@ -1,10 +1,9 @@
-import { Screen } from '../../../src/blessedTypes'
 import { Br, Div } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
 import { React } from '../../../src/jsx/createElement'
 import { number } from './util'
 
-export class ButtonDemo extends Component<{ screen: Screen }> {
+export class ButtonDemo extends Component {
   render() {
     return (
       <Div>
@@ -23,7 +22,7 @@ export class ButtonDemo extends Component<{ screen: Screen }> {
           style={{ border: { fg: 'cyan' }, hover: { bg: 'green' }, bg: 'magenta' }}
           onClick={e => {
             e.currentTarget.setText(e.currentTarget.getText() + number())
-            this.props.screen.render()
+            e.currentTarget.screen.render()
           }}
         />
         <Br />

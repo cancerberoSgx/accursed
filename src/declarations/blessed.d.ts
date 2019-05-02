@@ -931,7 +931,7 @@ export namespace Widgets {
     tput: Tput
 
     /**
-     * Top of the focus history stack.
+     * Top of the focus history stack. If set, it will change the focus to given element.
      */
     focused: BlessedElement
 
@@ -1057,10 +1057,19 @@ export namespace Widgets {
      */
     realloc(): void
 
-    /**Convert an SGR string to our own attribute format.*/
+    /**
+     * @internal
+     */
+    _focus(self: BlessedElement, old?: BlessedElement): void
+
+    /**
+     * Convert an SGR string to our own attribute format.
+     */
     attrCode(code: string, cur: number, def: number): number
 
-    // Convert our own attribute format to an SGR string.
+    /**
+     * Convert our own attribute format to an SGR string.
+     */
     codeAttr(attr: number): string
     /**
      * Draw the screen based on the contents of the screen buffer.
@@ -1249,6 +1258,18 @@ export namespace Widgets {
      * Reset the terminal to term. Reloads terminfo.
      */
     setTerminal(term: string): void
+
+    // on(event: string, callback: (...args: any[])=>void):this
+
+    // /**
+    //  * Screen will emit 'focus' event when the focus is set to any element, passing the previous focused element as parameter.
+    //  */
+    // on(event: 'focus', callback: (old: BlessedElement)=>void):this
+
+    // /**
+    //  * Screen will emit 'blur' event when na element looses focus and another is focused, passing the new focused element as argument.
+    //  */
+    // on(event: 'blur', callback: (newFocused: BlessedElement)=>void):this
   }
 
   interface Padding {
@@ -3544,7 +3565,9 @@ export namespace widget {
   > {}
   class Box extends Widgets.BoxElement {}
   class List extends Widgets.ListElement {}
-  class Screen extends Widgets.Screen {}
+  class Screen extends Widgets.Screen {
+    static prototype: typeof Widgets.Screen.prototype
+  }
   class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> {}
   class Line extends Widgets.LineElement {}
   class BigText extends Widgets.BigTextElement {}

@@ -11,7 +11,7 @@ import {
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, Collapsible, Div } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 describe('collapsible', () => {
   let screen: Screen
@@ -59,7 +59,7 @@ describe('collapsible', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })

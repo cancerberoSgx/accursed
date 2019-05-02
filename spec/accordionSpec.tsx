@@ -12,7 +12,7 @@ import { waitFor } from '../src/blessed/waitFor'
 import { Br, Div } from '../src/jsx-components'
 import { Accordion, AccordionBlock } from '../src/jsx-components/accordion'
 import { words } from '../src/util/data'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 describe('accordion', () => {
   let screen: Screen
@@ -66,7 +66,7 @@ describe('accordion', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })

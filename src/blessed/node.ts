@@ -55,33 +55,45 @@ export type ElementPredicate<T extends Node = Node> = (n: T) => boolean
 
 export function filterDescendants<T extends Node = Node>(n: Node, p: ElementPredicate, o: VisitorOptions = {}): T[] {
   const a: T[] = []
-  visitDescendants(n, c => {
-    if (p(c)) {
-      a.push(c as T)
-    }
-    return false
-  })
+  visitDescendants(
+    n,
+    c => {
+      if (p(c)) {
+        a.push(c as T)
+      }
+      return false
+    },
+    o
+  )
   return a
 }
 
 export function mapDescendants<T extends Node = Node, V = any>(n: Node, p: (p: T) => V, o: VisitorOptions = {}): V[] {
   const a: V[] = []
-  visitDescendants(n, c => {
-    a.push(p(c as any))
-    return false
-  })
+  visitDescendants(
+    n,
+    c => {
+      a.push(p(c as any))
+      return false
+    },
+    o
+  )
   return a
 }
 
 export function findDescendant<T extends Node = Node>(n: Node, p: ElementPredicate, o: VisitorOptions = {}) {
   let a: T | undefined
-  visitDescendants(n, c => {
-    if (p(c)) {
-      a = c as T
-      return true
-    }
-    return false
-  })
+  visitDescendants(
+    n,
+    c => {
+      if (p(c)) {
+        a = c as T
+        return true
+      }
+      return false
+    },
+    o
+  )
   return a
 }
 
@@ -141,13 +153,17 @@ export function visitAscendants(n: Node, v: Visitor, o = {}): boolean {
 
 export function findAscendant<T extends Node = Node>(n: Element, p: ElementPredicate, o = {}) {
   let a: T | undefined
-  visitAscendants(n, c => {
-    if (p(c)) {
-      a = c as T
-      return true
-    }
-    return false
-  })
+  visitAscendants(
+    n,
+    c => {
+      if (p(c)) {
+        a = c as T
+        return true
+      }
+      return false
+    },
+    o
+  )
   return a
 }
 
@@ -178,11 +194,26 @@ export function cleanNode(n: Node, dontDestroy: boolean = false) {
   })
 }
 
-export function findDescendantNamed<T extends Element>(el: Element | Screen, name: string): T | undefined {
+export function findDescendantNamed<T extends Element>(
+  el: Element | Screen,
+  name: string,
+  o: VisitorOptions = {}
+): T | undefined {
   return asElements(el)
-    .map(c => findDescendant(c, d => (d as any).name === name))
+    .map(c => findDescendant(c, d => (d as any).name === name, o))
     .find(notFalsy)
 }
+
+export function filterDescendantByName<T extends Element>(
+  el: Element | Screen,
+  name: string,
+  o: VisitorOptions = {}
+): T[] {
+  return asElements(el)
+    .map(c => filterDescendants(c, d => (d as any).name === name, o))
+    .find(notFalsy)
+}
+
 export function asElements(el: Element | Screen) {
   return isScreen(el) ? el.children.filter(isElement) : [el]
 }

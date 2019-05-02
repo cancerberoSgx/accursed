@@ -12,7 +12,7 @@ import {
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, ShowIf } from '../src/jsx-components'
 import { string, words } from '../src/util/data'
-import { log } from '../src/util/logger'
+import { debug } from '../src/util/logger'
 
 describe('showIf', () => {
   let screen: Screen
@@ -35,7 +35,7 @@ describe('showIf', () => {
               showContent = !showContent
               update(showContent)
               e.currentTarget.content = showContent ? 'hide' : 'show'
-              log('Button2', showContent, e.currentTarget.content)
+              debug('Button2', showContent, e.currentTarget.content)
               screen.render()
             }}
           />
@@ -65,7 +65,7 @@ describe('showIf', () => {
 
       done()
     } catch (error) {
-      log('ERROR', error)
+      debug('ERROR', error)
     }
   })
 })
