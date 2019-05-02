@@ -3,6 +3,7 @@ import { findDescendant } from '../blessed'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
 import { BoxOptions, Button, Element, isElement, Layout, Node, Style } from '../blessedTypes'
 import { Component } from '../jsx/component'
+import { focusableOpts } from '../util/sharedOptions'
 import { CollapsibleProps } from './collapsible'
 import { Div } from './jsxUtil'
 
@@ -13,20 +14,24 @@ export class TabBody extends VirtualComponent<TabBodyProps> {}
 interface ChangeEvent {
   activeTab: number
 }
-interface TabPanelProps extends BoxOptions {
+
+export interface TabPanelProps extends BoxOptions {
   children: (Tab)[]
   updateScreenOnChange?: boolean
   onChange?: (e: ChangeEvent) => void
   activeStyle?: Style
   inactiveStyle?: Style
 }
+
 interface TabLabelProps extends BoxOptions {
   children: JSX.BlessedJsxText
 }
+
 interface TabBodyProps extends BoxOptions {
   children: JSX.BlessedJsxNode
 }
-interface TabProps extends CollapsibleProps {
+
+export interface TabProps extends CollapsibleProps {
   active?: boolean
   children: (TabBody | TabLabel)[]
 }
@@ -81,7 +86,8 @@ export class TabPanel extends Component<TabPanelProps> {
       const labelData = tabData.children.filter(isElementData).find(c => c.tagName === 'TabLabel')!
       // const counter = (this.props._tabNameCounter || 0)
       const counter = i
-      const active = tabData.attrs && !tabData.attrs.active
+      const active = tabData.attrs && !!tabData.attrs.active
+      // debug(labelData.children.join(' '), active)
       const body = (
         <Div {...bodyData.attrs || {}} hidden={!active} name={'tab_body_' + counter}>
           {...bodyData.children}
@@ -89,9 +95,9 @@ export class TabPanel extends Component<TabPanelProps> {
       )
       const label = (
         <button
+          {...focusableOpts()}
           border="line"
           content={labelData.children.join(' ')}
-          focusable={true}
           {...labelData.attrs || {}}
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),

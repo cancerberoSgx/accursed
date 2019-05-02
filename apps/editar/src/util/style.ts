@@ -1,24 +1,31 @@
-import { BoxOptions, TextareaOptions } from 'accursed'
+import { BoxOptions, Style, TabPanelProps, TextareaOptions } from 'accursed'
+
+export const activeStyle: () => Style = () => ({
+  bg: 'magenta',
+  fg: 'black',
+  underline: true
+})
+export const inactiveStyle: () => Style = () => ({
+  bg: '#507468',
+  fg: 'black'
+})
 
 export const focusableOpts: () => TextareaOptions = () => ({
   mouse: true,
-  // clickable: true,
   keys: true,
   focusable: true,
   clickable: true,
-  // input: true,
   keyable: true,
   border: 'line',
   style: {
-    bg: 'lightgray',
-    fg: 'black',
+    ...inactiveStyle(),
     border: {
       type: 'line',
       fg: 'cyan'
     },
     focus: {
       fg: 'black',
-      bg: '#507468',
+      bg: 'lightgray',
       border: {
         fg: 'red'
       }
@@ -28,13 +35,13 @@ export const focusableOpts: () => TextareaOptions = () => ({
       fg: 'black',
       underline: false
     },
-    selected: {
-      bg: 'magenta',
-      fg: 'black',
-      // bold: true,
-      underline: true
-    }
+    selected: activeStyle()
   }
+})
+
+export const tabPanelOpts: () => Partial<TabPanelProps> = () => ({
+  activeStyle: activeStyle(),
+  inactiveStyle: inactiveStyle()
 })
 
 export const transparentBox: () => BoxOptions = () => ({

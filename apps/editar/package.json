@@ -24,7 +24,7 @@
     "blessed-contrib": "^4.8.15",
     "build": "^0.1.4",
     "get-random-port": "0.0.1",
-    "misc-utils-of-mine-generic": "0.0.16",
+    "misc-utils-of-mine-generic": "0.0.17",
     "npm": "^6.9.0",
     "redux": "^4.0.1",
     "run": "^1.4.0",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@types/node": "^11.13.8",
     "@types/shelljs": "^0.8.5",
+    "@types/text-buffer": "^13.0.4",
     "cli-driver": "^0.2.1",
     "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
     "prettier": "^1.17.0",

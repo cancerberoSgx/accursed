@@ -21,8 +21,8 @@ describe('cli', () => {
     done()
   })
 
-  it('ts-node src/main should render and quit with control-q', async done => {
-    await client.enter('npx ts-node -T src/main')
+  it('ts-node src/cli should render and quit with control-q', async done => {
+    await client.enter('npx ts-node -T src/cli')
     expect(await helper.waitForStrippedDataToInclude(labels.sidebarExplorerTab))
     await client.enter(ansi.keys.getSequenceFor({ name: 'q', ctrl: true }))
     await helper.expectLastExitCode(true)

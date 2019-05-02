@@ -1,5 +1,4 @@
-import { Br, Column, Columns, Div, React, Row, Rows } from 'accursed'
-import { pwd } from 'shelljs'
+import { Br, Column, Columns, Div, React, ref, Row, Rows } from 'accursed'
 import { Editors } from './editor/editors'
 import { Sidebar } from './sidebar/sidebar'
 import { SIDEBAR_ACTION } from './sidebar/sidebarActions'
@@ -8,25 +7,17 @@ import { Component } from './util/component'
 
 export class App extends Component {
   render() {
-    setTimeout(() => {
-      // mock - we simulate the user opening folder '.'
-      this.dispatch({
-        type: SIDEBAR_ACTION.SET_CWD,
-        cwd: pwd().toString()
-      })
-    }, 2000)
     return (
-      <Div>
+      <Div ref={ref(c => this.start())}>
         <Columns>
           <Column width="30%">
             <Sidebar {...this.props} />
           </Column>
           <Column width="70%">
             <Rows>
-              <Row height="70%">
+              <Row height="65%">
                 <Editors {...this.props} />
               </Row>
-
               <Row height="30%">
                 <Panel {...this.props} />
               </Row>
@@ -38,5 +29,15 @@ export class App extends Component {
         </Columns>
       </Div>
     )
+  }
+  start(): any {
+    setTimeout(() => {
+      // mock - we simulate the user opening folder '.'
+      this.dispatch({
+        type: SIDEBAR_ACTION.SET_CWD,
+        cwd: this.s.cwd
+      })
+      this.screen.focusNext()
+    }, 200)
   }
 }

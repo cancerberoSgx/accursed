@@ -1,15 +1,16 @@
 import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
 import { Component } from '../util/component'
-import { focusableOpts } from '../util/style'
+import { focusableOpts, tabPanelOpts } from '../util/style'
 import { PREFIX } from '../util/util'
 import { LogPanel } from './debugTool'
+import { Terminal } from './terminal'
 
 /** this is the bottom panel that contains tools such as the terminal, problems, etc */
 export class Panel extends Component {
   render() {
     return (
       <Div>
-        <TabPanel>
+        <TabPanel {...tabPanelOpts()}>
           <Tab _data={{ [PREFIX('panelTool')]: 'debug' }} active={true}>
             <TabLabel {...focusableOpts()}>Debug</TabLabel>
             <TabBody>
@@ -19,7 +20,9 @@ export class Panel extends Component {
           </Tab>
           <Tab _data={{ [PREFIX('panel')]: 'terminal' }}>
             <TabLabel {...focusableOpts()}>Terminal</TabLabel>
-            <TabBody>{/* <terminal ></terminal> */}</TabBody>
+            <TabBody>
+              <Terminal {...this.props} />
+            </TabBody>
             {}
           </Tab>
           <Tab _data={{ [PREFIX('PanelTool')]: 'Problems' }}>

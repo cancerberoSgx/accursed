@@ -27,12 +27,13 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
-    "misc-utils-of-mine-generic": "0.0.16",
+    "misc-utils-of-mine-generic": "0.0.17",
     "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.12",
     "@types/node": "^11.13.8",
+    "@types/text-buffer": "^13.0.4",
     "ansi-diff-stream": "^1.2.1",
     "cli-driver": "^0.2.1",
     "drawille-canvas": "^1.2.0",

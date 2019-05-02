@@ -1,7 +1,7 @@
 import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
 import { Component } from '../util/component'
 import { labels } from '../util/labels'
-import { focusableOpts } from '../util/style'
+import { focusableOpts, tabPanelOpts } from '../util/style'
 import { PREFIX } from '../util/util'
 import { FileExplorer } from './fileExplorer'
 
@@ -9,7 +9,7 @@ export class Sidebar extends Component {
   render() {
     return (
       <Div>
-        <TabPanel>
+        <TabPanel {...tabPanelOpts()}>
           <Tab active={true} _data={{ [PREFIX('sidebarTool')]: 'explorer' }}>
             <TabLabel {...focusableOpts()}>{labels.sidebarExplorerTab}</TabLabel>
             <TabBody>

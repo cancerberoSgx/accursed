@@ -1,12 +1,13 @@
 import { TODO } from 'misc-utils-of-mine-typescript'
-import { Marker, Point, Range, TextBuffer } from 'text-buffer'
-import { Element, Textarea, TextareaOptions } from '..'
+import { TextareaOptions } from '..'
+import { Box, Node } from '../blessedTypes'
 
 export interface EditorOptions extends TextareaOptions {
   language?: string
   text?: string
   defaultEncoding?: string
   multiLine?: boolean
+  buffer?: BufferOptions
 }
 /**
  * The Buffer visual concept represent the editor area and has these settings:
@@ -15,13 +16,43 @@ interface BufferOptions {
   useSpaces?: boolean
   tabSize?: number
 }
-export interface IEditor extends Textarea {
+
+interface EditorBuffer extends BaseWidget {}
+
+type Direction = -1 | 1
+
+interface BaseWidget extends Box {
+  walkDepthFirst(direction: Direction, after: Node, fn: (n: Node, i?: number, arr?: Node[]) => void)
+  focusFirst(direction: Direction, after: Node)
+  focusNext(): this
+  focusPrev(): this
+  isAttached(): boolean
+  hasFocus(asChild?: boolean): boolean
+  pos(): TextBuffer.Point
+  size(): TextBuffer.Point
+  shrinkWidth(): number
+  getBindings(): any
+  resolveBinding(key: string): string | undefined
+}
+export interface IEditor extends BaseWidget {
+  /** @internal */
+  buffer: EditorBuffer
+
+  /**
+   * The main text buffer. It's responsible of maintaining the text, apply changed, notify, etc.
+   */
+  textBuf: TextBuffer.TextBuffer
+
+  /**
+   * Maintains current selection in the editor. (and cursor without selection also? TODO)
+   */
+  selection: TextBuffer.Marker
+
   /**
    * Increases the indentation to the right one level in given range or, if none if provided, in current [[selection]]
    */
-  indent(range?: Range): void
-  /** @internal */
-  buffer: Element
+  indent(range?: TextBuffer.Range): void
+
   _updateCursor(): void
   _updateContent(): void
   _getTabString(): string
@@ -30,11 +61,7 @@ export interface IEditor extends Textarea {
   save(p: string): Promise<string>
   undo(options: TODO): TODO
   redo(options: TODO): TODO
-  indent(range: Range, dedent?: boolean): this
-  /**
-   * The main text buffer. It's responsible of maintaining the text, apply changed, notify, etc.
-   */
-  textBuf: TextBuffer
+  indent(range: TextBuffer.Range, dedent?: boolean): this
   /**
    * Copies current selected text to system clipboard
    */
@@ -43,10 +70,6 @@ export interface IEditor extends Textarea {
    * Pastes current system clipboard content into current cursor range, possible replacing selected text if any
    */
   pageXOffset(): Promise<this>
-  /**
-   * Maintains current selection in the editor. (and cursor without selection also? TODO)
-   */
-  selection: Marker
   /**
    * Getter and Setter for insertMode
    */
@@ -68,19 +91,19 @@ export interface IEditor extends Textarea {
   /**
    * If range not provided it will delete current selection range
    */
-  delete(range?: Range)
+  delete(range?: TextBuffer.Range)
   /**
    * Gets the current visible position.
    */
-  visiblePos(pos: Range): Range
-  visiblePos(pos: Point): Point
-  visiblePos(pos: [number, number]): Point
+  visiblePos(pos: TextBuffer.Range): TextBuffer.Range
+  visiblePos(pos: TextBuffer.Point): TextBuffer.Point
+  visiblePos(pos: [number, number]): TextBuffer.Point
   /**
    * Gets the current visible position.
    */
-  realPos(pos: Range): Range
-  realPos(pos: Point): Point
-  realPos(pos: [number, number]): Point
+  realPos(pos: TextBuffer.Range): TextBuffer.Range
+  realPos(pos: TextBuffer.Point): TextBuffer.Point
+  realPos(pos: [number, number]): TextBuffer.Point
 
   moveCursorVertical(count: number, paragraphs?: boolean): this
 

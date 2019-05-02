@@ -52,6 +52,7 @@ export class FileExplorer extends Component {
   onCwdChanged(a: SetCwdAction, s: State) {
     this.treeView.setNodes(s.cwdRootFiles)
     this.screen.render()
+    this.treeView.focus()
   }
 
   buildRootNodes(): TreeViewNode[] {

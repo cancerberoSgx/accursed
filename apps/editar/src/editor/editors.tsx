@@ -1,4 +1,4 @@
-import { Div, ListBar2, ListBarCommand, React, ref } from 'accursed'
+import { Br, Div, ListBar2, ListBarCommand, React, ref } from 'accursed'
 import { ok } from 'assert'
 import { OpenFilesAction, SIDEBAR_ACTION } from '../sidebar/sidebarActions'
 import { State } from '../store/state'
@@ -33,6 +33,7 @@ export class Editors extends Component {
           ))}
           {}
         </ListBar2>
+        <Br />
         <Editor
           {...this.props}
           ref={React.createRef<Editor>(c => {

@@ -1,14 +1,15 @@
 import { createScreen, debug, React, Screen } from 'accursed'
-import { createStore, Store } from 'redux'
+import { createStore } from 'redux'
 import { App } from './app'
 import { getContext } from './context/contextFactory'
 import { ActionManager } from './store/actionManager'
 import { reducer } from './store/generalReducer'
+import { Store } from './store/store'
 
-function main() {
+export function main() {
   let screen: Screen
   try {
-    const store = createStore(reducer)
+    const store = createStore(reducer) as Store
     ActionManager._create(store)
     screen = buildScreen(store)
     screen.render()
@@ -22,10 +23,10 @@ function main() {
 function buildScreen(store: Store) {
   const screen = createScreen({
     useBCE: true,
-    warnings: true,
-    log: 'log.txt',
-    smartCSR: true,
-    sendFocus: true
+    // warnings: true,
+    // log: 'log.txt',
+    smartCSR: true
+    // sendFocus: true
   })
   installGlobalKeyHandlers(screen)
   screen.render()
@@ -47,5 +48,3 @@ function installGlobalKeyHandlers(screen: Screen) {
     screen.focusPrevious()
   })
 }
-
-main()

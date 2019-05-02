@@ -1,4 +1,4 @@
-import { Box, Div, findChildren, React } from 'accursed'
+import { Box, Div, findChildren, Maximize, React } from 'accursed'
 import { Component, Props } from '../util/component'
 import { DocumentEditor } from './editorFactory'
 
@@ -16,15 +16,17 @@ export class Editor extends Component<EditorProps> {
 
   render() {
     return (
-      <Div
-        height="90%"
-        ref={React.createRef<Box>(c => {
-          this.container = c
-          if (this.props.document) {
-            this.setEditor(this.props.document)
-          }
-        })}
-      />
+      <Maximize>
+        <Div
+          height="100%"
+          ref={React.createRef<Box>(c => {
+            this.container = c
+            if (this.props.document) {
+              this.setEditor(this.props.document)
+            }
+          })}
+        />
+      </Maximize>
     )
   }
 
@@ -33,7 +35,6 @@ export class Editor extends Component<EditorProps> {
       return
     }
     if (this.currentDocumentEditor) {
-      // TODO : check in slap if there is some way to notify the widget when detached
       this.currentDocumentEditor.editor.hide()
     }
     this.currentDocumentEditor = ed

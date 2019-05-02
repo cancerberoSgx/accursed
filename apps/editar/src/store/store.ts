@@ -1,11 +1,11 @@
 import { Store as ReduxStore } from 'redux'
-import { OpenFilesAction, SelectFilesAction, SetCwdAction } from '../sidebar/sidebarActions'
-import { LogMessageAction, NotifyFileErrorAction } from './actions'
+import { OpenFilesAction, SetCwdAction } from '../sidebar/sidebarActions'
+import { LogMessageAction } from './actions'
 import { State } from './state'
 
 export interface Store extends ReduxStore<State> {}
 
-export type AllActions = SelectFilesAction | OpenFilesAction | SetCwdAction | NotifyFileErrorAction | LogMessageAction
+export type AllActions = OpenFilesAction | SetCwdAction | LogMessageAction
 export type ActionType = AllActions['type']
 
 export type ActionForType<T extends AllActions['type']> = AllActions extends infer R

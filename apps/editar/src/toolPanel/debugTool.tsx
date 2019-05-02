@@ -1,4 +1,4 @@
-import { debug, Div, Log, React, ref } from 'accursed'
+import { Div, Log, React, ref } from 'accursed'
 import { LogMessageAction, WORKSPACE_ACTION } from '../store/actions'
 import { State } from '../store/state'
 import { Component } from '../util/component'
@@ -14,14 +14,13 @@ export class LogPanel extends Component {
     return (
       <Div>
         <log
-          name="debug"
-          content="log"
+          // name="debug"
+          // content="log"
           {...focusableOpts()}
+          border={undefined}
           height="100%"
           width="100%"
-          ref={ref(c => {
-            this.logEl = c
-          })}
+          ref={ref(c => (this.logEl = c))}
         />
       </Div>
     )
@@ -30,7 +29,7 @@ export class LogPanel extends Component {
   protected onLogMessage(a: LogMessageAction, s: State) {
     if (this.logEl) {
       if (this.pendingMessages.length) {
-        debug('this.pendingMessages.length')
+        // debug('this.pendingMessages.length')
         this.pendingMessages.forEach(m => this.logEl.log(a.message))
         this.pendingMessages.length = 0
       }

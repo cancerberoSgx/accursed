@@ -9,6 +9,7 @@ import {
   getContent,
   installExitKeys,
   installFocusHandler,
+  printElement,
   React,
   Screen
 } from '../src'
@@ -60,6 +61,12 @@ describe('tabPanelComponent', () => {
               </TabBody>
               {}
             </Tab>
+
+            <Tab>
+              <TabLabel style={{ focus: { bg: 'yellow' } }}>tab 3</TabLabel>
+              <TabBody>body3</TabBody>
+              {}
+            </Tab>
             {}
           </TabPanel>
         </Div>
@@ -68,16 +75,17 @@ describe('tabPanelComponent', () => {
       const el = React.render(t1)
       installFocusHandler('test1', filterDescendants(el, TabPanel.isLabel), screen, undefined, false, true)
 
-      // screen.key('tab', k => screen.focusNext())
-      // screen.key('S-tab', k => screen.focusPrevious())
+      screen.key('tab', k => screen.focusNext())
+      screen.key('S-tab', k => screen.focusPrevious())
 
       screen.append(el)
       screen.render()
 
-      await waitFor(() => getContent(el).includes('tab 1'))
-      expect(getContent(el)).toContain('body1')
-      expect(getContent(el)).toContain('tab 2')
-      expect(getContent(el)).toContain('button1')
+      await waitFor(() => printElement(el).includes('tab 1'))
+      expect(printElement(el)).toContain('body1')
+      expect(printElement(el)).toContain('tab 2')
+      expect(printElement(el)).toContain('button1')
+      expect(printElement(el)).not.toContain('body2')
 
       done()
     } catch (error) {
