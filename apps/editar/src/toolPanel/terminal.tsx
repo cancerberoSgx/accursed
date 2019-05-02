@@ -3,7 +3,6 @@ import { SIDEBAR_ACTION } from '../sidebar/sidebarActions'
 import { Component } from '../util/component'
 import { focusableOpts } from '../util/style'
 
-/** this is the bottom panel that contains tools such as the terminal, problems, etc */
 export class Terminal extends Component {
   terminal: TerminalElement
   constructor(p, s) {

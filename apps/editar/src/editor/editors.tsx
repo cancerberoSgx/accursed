@@ -65,8 +65,6 @@ export class Editors extends Component {
   /** when a new document  is opened we are responsible of get the EditorWidget from editorFactory, update the UI tabs, ask the file contents to the context.fs if needed, and switch the current widget widget. */
   protected async onOpenedFiles(a: OpenFilesAction, s: State) {
     try {
-      // this.debug('editors onOpenedFiles', this.s.cwd)
-
       // TODO: just supporting one file - first one
       let p: string = a.paths.length ? a.paths[0] : undefined
       if (!p) {

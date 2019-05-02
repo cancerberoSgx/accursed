@@ -1,6 +1,6 @@
 import { Store as ReduxStore } from 'redux'
 import { OpenFilesAction, SetCwdAction } from '../sidebar/sidebarActions'
-import { LogMessageAction } from './actions'
+import { LogMessageAction } from '../toolPanel/toolPanelActions'
 import { State } from './state'
 
 export interface Store extends ReduxStore<State> {}

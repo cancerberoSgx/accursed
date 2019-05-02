@@ -1,9 +1,9 @@
 import { Action } from 'redux'
-import { LogMessageType } from './state'
+import { LogMessageType } from '../store/state'
 
-export enum WORKSPACE_ACTION {
+export enum TOOL_PANEL_ACTION {
   // NOTIFY_FILE_ERROR = 'WORKSPACE_ACTION.NOTIFY_FILE_ERROR',
-  LOG_MESSAGE = 'WORKSPACE_ACTION.LOG_MESSAGE'
+  LOG_MESSAGE = 'TOOL_PANEL_ACTION.LOG_MESSAGE'
 }
 
 // export interface NotifyFileErrorAction extends Action<WORKSPACE_ACTION.NOTIFY_FILE_ERROR> {
@@ -12,8 +12,8 @@ export enum WORKSPACE_ACTION {
 //   type: WORKSPACE_ACTION.NOTIFY_FILE_ERROR
 // }
 
-export interface LogMessageAction extends Action<WORKSPACE_ACTION.LOG_MESSAGE> {
+export interface LogMessageAction extends Action<TOOL_PANEL_ACTION.LOG_MESSAGE> {
   message: string
   messageType?: LogMessageType
-  type: WORKSPACE_ACTION.LOG_MESSAGE
+  type: TOOL_PANEL_ACTION.LOG_MESSAGE
 }

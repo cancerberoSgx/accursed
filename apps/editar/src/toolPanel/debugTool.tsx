@@ -1,27 +1,19 @@
 import { Div, Log, React, ref } from 'accursed'
-import { LogMessageAction, WORKSPACE_ACTION } from '../store/actions'
 import { State } from '../store/state'
 import { Component } from '../util/component'
 import { focusableOpts } from '../util/style'
+import { LogMessageAction, TOOL_PANEL_ACTION } from './toolPanelActions'
 
 export class LogPanel extends Component {
   logEl: Log
   constructor(p, s) {
     super(p, s)
-    this.onActionDispatched(WORKSPACE_ACTION.LOG_MESSAGE, (a, s) => this.onLogMessage(a, s))
+    this.onActionDispatched(TOOL_PANEL_ACTION.LOG_MESSAGE, (a, s) => this.onLogMessage(a, s))
   }
   render() {
     return (
       <Div>
-        <log
-          // name="debug"
-          // content="log"
-          {...focusableOpts()}
-          border={undefined}
-          height="100%"
-          width="100%"
-          ref={ref(c => (this.logEl = c))}
-        />
+        <log {...focusableOpts()} border={undefined} height="100%" width="100%" ref={ref(c => (this.logEl = c))} />
       </Div>
     )
   }
@@ -29,14 +21,12 @@ export class LogPanel extends Component {
   protected onLogMessage(a: LogMessageAction, s: State) {
     if (this.logEl) {
       if (this.pendingMessages.length) {
-        // debug('this.pendingMessages.length')
         this.pendingMessages.forEach(m => this.logEl.log(a.message))
         this.pendingMessages.length = 0
       }
       this.logEl.log(a.message)
     } else {
       this.pendingMessages.push(a)
-      //TODO: handle logs when logel is not ready
     }
   }
 }
