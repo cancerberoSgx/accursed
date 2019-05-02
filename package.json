@@ -27,11 +27,13 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.15",
-    "misc-utils-of-mine-generic": "0.0.17",
-    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git"
+    "editor-widget": "git+https://github.com/cancerberoSgx/editor-widget.git",
+    "misc-utils-of-mine-generic": "0.0.17"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.12",
+    "p-map": "^2.1.0",
+    "picomatch": "^2.0.5",
     "@types/node": "^11.13.8",
     "@types/text-buffer": "^13.0.4",
     "ansi-diff-stream": "^1.2.1",
@@ -39,6 +41,7 @@
     "drawille-canvas": "^1.2.0",
     "google-material-color-palette-json": "^2.0.1",
     "google-palette": "^1.1.0",
+    "googleapis": "^39.2.0",
     "gradstop": "^2.2.3",
     "jasmine": "^3.4.0",
     "markdown-toc": "^1.2.0",

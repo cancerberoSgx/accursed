@@ -1,3 +1,4 @@
 export const labels = {
-  sidebarExplorerTab: 'Explorer'
+  sidebarExplorerTab: 'Explorer',
+  sidebarSearchTab: 'Search'
 }

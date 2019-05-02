@@ -1,9 +1,10 @@
 import { Action } from 'redux'
 
 export enum SIDEBAR_ACTION {
-  OPEN_FILES = 'SIDEBAR_ACTION_OPEN_FILE', // the document could already be opened or not. ust hadle both cases
+  OPEN_FILES = 'SIDEBAR_ACTION.OPEN_FILE',
   // SELECT_FILES = 'SIDEBAR_ACTION_SELECT',
-  SET_CWD = 'SIDEBAR_ACTION_SET_CWD' // TODO: MOVE TO MORE GENREAL file
+  SET_CWD = 'SIDEBAR_ACTION.SET_CWD',
+  SEARCH_FILES_OPEN = "SIDEBAR_ACTION.SEARCH_FILES_OPEN"
 }
 
 /** this happens when the user explicitly enters [ENTER] or doiuble clicks with mouse, expliocitly giving the
@@ -25,4 +26,8 @@ export interface OpenFilesAction extends Action<SIDEBAR_ACTION.OPEN_FILES> {
 export interface SetCwdAction extends Action<SIDEBAR_ACTION.SET_CWD> {
   type: SIDEBAR_ACTION.SET_CWD
   cwd: string
+}
+
+export interface SearchFilesOpenAction extends Action<SIDEBAR_ACTION.SEARCH_FILES_OPEN> {
+  type: SIDEBAR_ACTION.SEARCH_FILES_OPEN
 }

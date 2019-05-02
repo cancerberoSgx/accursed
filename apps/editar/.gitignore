@@ -1,0 +1,11 @@
+node_modules
+dist
+tmp
+*.tgz
+.DS_Store
+*.log
+log*.txt
+/docs
+test_output.txt
+credentials.json
+token.json

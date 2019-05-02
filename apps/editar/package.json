@@ -24,7 +24,7 @@
     "blessed-contrib": "^4.8.15",
     "build": "^0.1.4",
     "get-random-port": "0.0.1",
-    "misc-utils-of-mine-generic": "0.0.17",
+    "misc-utils-of-mine-generic": "0.0.18",
     "npm": "^6.9.0",
     "redux": "^4.0.1",
     "run": "^1.4.0",

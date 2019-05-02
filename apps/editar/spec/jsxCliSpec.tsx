@@ -4,6 +4,7 @@ import { labels } from '../src/util/labels'
 describe('cli', () => {
   let client: Driver
   let helper: InteractionSpecHelper
+  // console.log( ansi.keys.getSequenceFor({name: 'f', control: true, shift: true}))
 
   beforeAll(async done => {
     client = new Driver()

@@ -1,16 +1,29 @@
-import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize, Collapsible } from 'accursed'
+import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize, Collapsible, ref } from 'accursed'
 import { Component } from '../util/component'
 import { labels } from '../util/labels'
 import { focusableOpts, tabPanelOpts, tabLabelOpts } from '../util/style'
 import { PREFIX } from '../util/util'
 import { FileExplorer } from './fileExplorer'
+import { SIDEBAR_ACTION } from './sidebarActions';
+import { SearchFiles } from './searchFiles';
 
 export class Sidebar extends Component {
+  tabPanel: TabPanel;
+  searchFiles: SearchFiles;
+
+  constructor(p, s) {
+    super(p, s)
+    this.onActionDispatched(SIDEBAR_ACTION.SEARCH_FILES_OPEN, (a, s)=>{
+      this.tabPanel.selectTab(1)
+      this.searchFiles.focusSearchInput()
+    })
+  }
+
   render() {
     return (
       <Div >
         {/* <Maximize button={{...focusableOpts()}}> */}
-        <TabPanel {...tabPanelOpts()}>
+        <TabPanel {...tabPanelOpts()} ref={ref<TabPanel>(c=>this.tabPanel = c)}>
           <Tab active={true} _data={{ [PREFIX('sidebarTool')]: 'explorer' }}>
             <TabLabel {...tabLabelOpts()}>{labels.sidebarExplorerTab}</TabLabel>
             <TabBody>
@@ -19,15 +32,9 @@ export class Sidebar extends Component {
             {}
           </Tab>
           <Tab _data={{ [PREFIX('sidebarTool')]: 'search' }}>
-            <TabLabel {...tabLabelOpts()}>Search</TabLabel>
+            <TabLabel {...tabLabelOpts()}>{labels.sidebarSearchTab}</TabLabel>
             <TabBody>
-              <textbox {...focusableOpts()} value="search" />
-              <Br />
-              <checkbox {...focusableOpts()} checked={this.s.search.caseSensitive} content="Case sensitive" />
-              <Br />
-              Files to include: <Br />
-              <textbox {...focusableOpts()} value="" />
-              <Br />
+              <SearchFiles {...this.props} ref={ref<SearchFiles>(c=>this.searchFiles = c)}/>
             </TabBody>
             {}
           </Tab>

@@ -521,7 +521,7 @@ export namespace Widgets {
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
-  class NodeWithEvents extends Node {
+  class   NodeWithEvents extends Node {
     /**
      * Bind a keypress listener for a specific key.
      */

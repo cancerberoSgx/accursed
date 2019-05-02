@@ -104,8 +104,8 @@ export class TabPanel extends Component<TabPanelProps> {
             ...((labelData.attrs && labelData.attrs.style) || {}),
             ...((active ? (this.props.activeTab && this.props.activeTab.style) : (this.props.inactiveTab && this.props.inactiveTab.style)) || {})
           }}
-          onPress={e => this.selectTabNamed(e.currentTarget.name)}
-          onClick={e => this.selectTabNamed(e.currentTarget.name)}
+          onPress={e => this._selectTabNamed(e.currentTarget.name)}
+          onClick={e => this._selectTabNamed(e.currentTarget.name)}
           name={'tab_label_' + counter}
         />
       )
@@ -120,18 +120,14 @@ export class TabPanel extends Component<TabPanelProps> {
     )
   }
 
-  protected selectTabNamed(tabName: String) {
+  protected _selectTabNamed(tabName: String) {
     if (tabName.startsWith('tab_label_')) {
       const id = parseInt(tabName.substring('tab_label_'.length))
       if (id !== NaN) {
         this.selectTab(id)
       }
-      // if (this.props.updateScreenOnChange) {
-      this.screen.render()
-      // }
     }
   }
-
   selectTab(tabIndex: number) {
     this.filterDescendants(TabPanel.isBody).forEach(body => {
       if (body.name !== 'tab_body_' + tabIndex) {
@@ -148,6 +144,8 @@ export class TabPanel extends Component<TabPanelProps> {
       }
     })
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
+    this.screen.render()
+
   }
 
   insertTab(tabProps: Partial<TabProps>, labelProps: Partial<TabLabelProps>, bodyProps: TabBodyProps, index: number) {
