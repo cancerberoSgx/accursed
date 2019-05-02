@@ -1,4 +1,4 @@
-import { Br, Div, ListBar2, ListBarCommand, React, ref } from 'accursed'
+import { Br, Div, ListBar2, ListBarCommand, React, ref, Maximize } from 'accursed'
 import { ok } from 'assert'
 import { OpenFilesAction, SIDEBAR_ACTION } from '../sidebar/sidebarActions'
 import { State } from '../store/state'
@@ -6,7 +6,8 @@ import { Component } from '../util/component'
 import { debugInApp } from '../util/util'
 import { Editor } from './editor'
 import { DocumentEditor, getEditorFor } from './editorFactory'
-
+import { focusableOpts } from '../util/style';
+ 
 export class Editors extends Component {
   protected listBar: ListBar2
   editorContainer: Editor
@@ -17,14 +18,12 @@ export class Editors extends Component {
   }
   render() {
     return (
+      <Div  >
+      <Maximize>
       <Div>
         <ListBar2
-          ref={ref<ListBar2>(c => {
-            // this.debug('ListBar2', typeof c)
-            // debug('ListBar2', typeof c)
-            this.listBar = c
-            // this.installEventHandlers()
-          })}
+        {...focusableOpts()}
+          ref={ref<ListBar2>(c => this.listBar = c)}
           onSelectItem={this.tabSelected}>
           {this.s.documents.map(d => (
             <ListBarCommand _data={{ filePath: d.path }} callback={this.tabSelected}>
@@ -33,7 +32,6 @@ export class Editors extends Component {
           ))}
           {}
         </ListBar2>
-        <Br />
         <Editor
           {...this.props}
           ref={React.createRef<Editor>(c => {
@@ -41,14 +39,10 @@ export class Editors extends Component {
           })}
         />
       </Div>
+        </Maximize>
+      </Div>
     )
   }
-  // installEventHandlers(): any {
-  // setTimeout(() => {
-  //   debugInApp('installEventHa', typeof this.listBar, isElement(this.listBar), isComponent(this.listBar), typeof this.listBar.addCommand)
-  //   this.listBar.addCommand({text: 'seba', callback(){debugInApp('hello')}})
-  // }, 1000);
-  // }
 
   protected documentEditors: DocumentEditor[] = []
   protected tabSelected() {
@@ -59,7 +53,6 @@ export class Editors extends Component {
     )
     const selectedEd = this.documentEditors[this.listBar.selectedIndex]
     this.editorContainer.setEditor(selectedEd)
-    // debug(this.listBar.commands[this.listBar.selected].element)
   }
 
   /** when a new document  is opened we are responsible of get the EditorWidget from editorFactory, update the UI tabs, ask the file contents to the context.fs if needed, and switch the current widget widget. */
@@ -78,11 +71,8 @@ export class Editors extends Component {
       const index = this.documentEditors.findIndex(e => e === docEd)
       await this.editorContainer.setEditor(docEd)
       if (index >= 0) {
-        // debugInApp('editors document editor exists!')
-        // this.listBar.select(doc.name)
         this.listBar.select(index)
       } else {
-        // debugInApp('editors adding new tab')
         this.listBar.addCommand({
           text: doc.name, //TODO: check if there's already a document with the name and of so name the listBar command with different one.
           callback: this.tabSelected

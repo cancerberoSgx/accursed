@@ -1,4 +1,4 @@
-import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
+import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize } from 'accursed'
 import { Component } from '../util/component'
 import { labels } from '../util/labels'
 import { focusableOpts, tabPanelOpts } from '../util/style'
@@ -8,7 +8,8 @@ import { FileExplorer } from './fileExplorer'
 export class Sidebar extends Component {
   render() {
     return (
-      <Div>
+      <Div >
+        {/* <Maximize button={{...focusableOpts()}}> */}
         <TabPanel {...tabPanelOpts()}>
           <Tab active={true} _data={{ [PREFIX('sidebarTool')]: 'explorer' }}>
             <TabLabel {...focusableOpts()}>{labels.sidebarExplorerTab}</TabLabel>
@@ -44,6 +45,7 @@ export class Sidebar extends Component {
           </Tab>
           {}
         </TabPanel>
+        {/* </Maximize> */}
       </Div>
     )
   }

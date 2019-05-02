@@ -22,10 +22,16 @@ describe('editor', () => {
   })
 
   describe('jsx', () => {
+    // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
+
     it('dont need to pass parent', async done => {
       const el = React.render(
         <box>
-          <editor text="function f(a){return a + 11}" language="js" />
+          <editor
+            text="function f(a){return a + 11}"
+            language="js"
+            {...{ bindings: { goLeftWord: ['C-u', 'C-left'] } }}
+          />
         </box>
       )
       screen.render()

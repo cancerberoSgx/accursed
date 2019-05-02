@@ -17,10 +17,7 @@ import {
 import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
-
 describe('treeView', () => {
-
   let screen: Screen
   afterEach(() => {
     tryTo(() => screen.destroy())
@@ -33,7 +30,7 @@ describe('treeView', () => {
 
   it('should render', async done => {
     try {
-       const tree = new TreeView({
+      const tree = new TreeView({
         rootNodes,
         parent: screen,
         width: 15,
@@ -49,7 +46,7 @@ describe('treeView', () => {
           {
             name: 'n41',
             children: [{ name: 'n411', children: [{ name: 'n4111', children: [{ name: 'n41111', children: [] }] }] }]
-          }, 
+          },
           { name: 'n42', children: [] },
           { name: 'n43', children: [] }
         ])
@@ -129,7 +126,9 @@ describe('treeView', () => {
     }
   })
 
-  fit('should render in arbitrary position and inside a box', async done => {
+  it('should render in arbitrary position and inside a box', async done => {
+    // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
+
     try {
       const b = box({
         parent: screen,
@@ -163,7 +162,7 @@ describe('treeView', () => {
       expect(getContent(tree)).toContain('n2')
       expect(getContent(tree)).not.toContain('n11')
 
-      // done()
+      done()
     } catch (error) {
       log('ERROR', error)
     }

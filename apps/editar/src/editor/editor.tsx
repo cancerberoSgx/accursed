@@ -16,7 +16,6 @@ export class Editor extends Component<EditorProps> {
 
   render() {
     return (
-      <Maximize>
         <Div
           height="100%"
           ref={React.createRef<Box>(c => {
@@ -26,7 +25,6 @@ export class Editor extends Component<EditorProps> {
             }
           })}
         />
-      </Maximize>
     )
   }
 

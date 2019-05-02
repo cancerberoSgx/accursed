@@ -45,7 +45,9 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions
+  TextOptions,
+  QuestionOptions,
+  Question
 } from '../blessedTypes'
 import { Component } from './component'
 
@@ -133,6 +135,7 @@ declare global {
       radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
       radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
       prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
+      question: OptionsProps<QuestionOptions> & EventOptions<Question>
       terminal: OptionsProps<TerminalOptions> & EventOptions<Terminal>
       treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
       borderBox: OptionsProps<BorderBoxOptions> & EventOptions<BorderBox>

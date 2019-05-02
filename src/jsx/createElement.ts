@@ -1,27 +1,11 @@
-import * as blessed from 'blessed'
-import { enumKeys } from 'misc-utils-of-mine-typescript'
-import { VirtualComponent } from '../blessed/virtualElement'
-import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes'
-import { log } from '../util/logger'
-import { Component } from './component'
-import {
-  AfterElementCreatedEvent,
-  AfterElementCreatedListener,
-  AfterRenderEvent,
-  AfterRenderListener,
-  ArtificialEventOptionNames,
-  ArtificialEventOptions,
-  BeforeAppendChildEvent,
-  BeforeAppendChildListener,
-  BeforeElementCreatedEvent,
-  BeforeElementCreatedListener,
-  blessedElementConstructor,
-  BlessedEventOptions,
-  BlessedJsx,
-  BlessedJsxAttrs,
-  EventOptionNames,
-  RefObject
-} from './types'
+import * as blessed from 'blessed';
+import { enumKeys } from 'misc-utils-of-mine-typescript';
+import { VirtualComponent } from '../blessed/virtualElement';
+import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes';
+import { debug } from '../util';
+import { log } from '../util/logger';
+import { Component } from './component';
+import { AfterElementCreatedEvent, AfterElementCreatedListener, AfterRenderEvent, AfterRenderListener, ArtificialEventOptionNames, ArtificialEventOptions, BeforeAppendChildEvent, BeforeAppendChildListener, BeforeElementCreatedEvent, BeforeElementCreatedListener, blessedElementConstructor, BlessedEventOptions, BlessedJsx, BlessedJsxAttrs, EventOptionNames, RefObject } from './types';
 interface Options {
   dontInheritStyle?: boolean
 }
@@ -350,4 +334,22 @@ export const React: BlessedJsx = new BlessedJsxImpl()
  */
 export function ref<C extends Component<any> | Element = any>(fn: (c: C) => void) {
   return React.createRef(fn)
+}
+
+/**
+ * internal tool to resolve refObject from given options
+ * @internal
+ */
+export function resolveRef(options: ElementOptions, current: any) {
+  try {
+    if (options.ref) {
+      options.ref.current = current
+      if (options.ref.callback) {
+        options.ref.callback(current)
+      }
+    }
+  } catch (error) {
+    debug(error)
+    throw error
+  }
 }

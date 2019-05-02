@@ -29,6 +29,7 @@ export type RadioSet = blessed.Widgets.RadioSetElement
 export type RadioButton = blessed.Widgets.RadioButtonElement
 export type Log = blessed.Widgets.Log
 export type Terminal = blessed.Widgets.TerminalElement
+export type Question = blessed.Widgets.QuestionElement
 
 export type LogOptions = RemoveProperties<blessed.Widgets.LogOptions, 'children'>
 export type PromptOptions = RemoveProperties<blessed.Widgets.PromptOptions, 'children'>
@@ -53,6 +54,7 @@ export type RadioSetOptions = RemoveProperties<blessed.Widgets.RadioSetOptions, 
 export type RadioButtonOptions = RemoveProperties<blessed.Widgets.RadioButtonOptions, 'children'>
 export type ScreenOptions = RemoveProperties<blessed.Widgets.IScreenOptions, 'children'>
 export type TerminalOptions = RemoveProperties<blessed.Widgets.TerminalOptions, 'children'>
+export type QuestionOptions = RemoveProperties<blessed.Widgets.QuestionOptions, 'children'>
 
 export type PositionCoords = blessed.Widgets.PositionCoords
 

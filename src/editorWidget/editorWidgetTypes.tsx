@@ -1,23 +1,38 @@
 import { TODO } from 'misc-utils-of-mine-typescript'
-import { TextareaOptions } from '..'
-import { Box, Node } from '../blessedTypes'
+import { Box, BoxOptions, Node, Padding, Style } from '../blessedTypes'
 
-export interface EditorOptions extends TextareaOptions {
+export interface EditorOptions extends BoxOptions {
+  //RemoveProperties<BoxOptions, 'style'> {
   language?: string
   text?: string
   defaultEncoding?: string
   multiLine?: boolean
-  buffer?: BufferOptions
+  pageLines?: number
+  doubleClickDuration?: number
+  highlight?: boolean
+
+  buffer?: EditorBufferOptions
+  gutter?: GutterOptions
+
+  bindings?: EditorBindingsOptions
+  style?: EditorStyle
 }
+
 /**
  * The Buffer visual concept represent the editor area and has these settings:
  */
-interface BufferOptions {
+interface EditorBufferOptions extends BoxOptions {
   useSpaces?: boolean
   tabSize?: number
+  visibleWhiteSpace?: boolean
+  visibleLineEndings?: boolean
+  cursorPadding?: Padding
 }
 
-interface EditorBuffer extends BaseWidget {}
+interface GutterOptions extends BoxOptions {
+  lineNumberWidth?: number
+  style: Style & { currentLine?: string }
+}
 
 type Direction = -1 | 1
 
@@ -36,7 +51,9 @@ interface BaseWidget extends Box {
 }
 export interface IEditor extends BaseWidget {
   /** @internal */
-  buffer: EditorBuffer
+  buffer: BaseWidget
+  /** @internal */
+  gutter: BaseWidget
 
   /**
    * The main text buffer. It's responsible of maintaining the text, apply changed, notify, etc.
@@ -108,4 +125,102 @@ export interface IEditor extends BaseWidget {
   moveCursorVertical(count: number, paragraphs?: boolean): this
 
   moveCursorHorizontal(count: number, words?: boolean): this
+}
+
+export interface EditorBindingsOptions {
+  goLeft?: string | string[] | false
+  goLeftWord?: string | string[] | false
+  goLeftInfinity?: string | string[] | false
+  goRight?: string | string[] | false
+  goRightWord?: string | string[] | false
+  goRightInfinity?: string | string[] | false
+  goUpParagraph?: string | string[] | false
+  goUp?: string | string[] | false
+  goUpPage?: string | string[] | false
+  goUpInfinity?: string | string[] | false
+  goDownParagraph?: string | string[] | false
+  goDown?: string | string[] | false
+  goDownPage?: string | string[] | false
+  goDownInfinity?: string | string[] | false
+  goMatchingBracket?: string | string[] | false
+  selectAll?: string | string[] | false
+  selectLeft?: string | string[] | false
+  selectLeftWord?: string | string[] | false
+  selectLeftInfinity?: string | string[] | false
+  selectRight?: string | string[] | false
+  selectRightWord?: string | string[] | false
+  selectRightInfinity?: string | string[] | false
+  selectUp?: string | string[] | false
+  selectUpParagraph?: string | string[] | false
+  selectUpPage?: string | string[] | false
+  selectUpInfinity?: string | string[] | false
+  selectDown?: string | string[] | false
+  selectDownParagraph?: string | string[] | false
+  selectDownPage?: string | string[] | false
+  selectDownInfinity?: string | string[] | false
+  selectMatchingBracket?: string | string[] | false
+  deleteLeft?: string | string[] | false
+  deleteRight?: string | string[] | false
+  deleteLeftWord?: string | string[] | false
+  deleteRightWord?: string | string[] | false
+  deleteLeftInfinity?: string | string[] | false
+  deleteRightInfinity?: string | string[] | false
+  deleteLine?: string | string[] | false
+  duplicateLine?: string | string[] | false
+  indent?: string | string[] | false
+  dedent?: string | string[] | false
+  undo?: string | string[] | false
+  redo?: string | string[] | false
+  copy?: string | string[] | false
+  cut?: string | string[] | false
+  paste?: string | string[] | false
+  toggleInsertMode?: string | string[] | false
+  focusNext?: string | string[] | false
+  focusPrev?: string | string[] | false
+}
+
+export interface EditorStyle extends Style {
+  //RemoveProperties<Style, 'label'> {
+  selection?: string
+  match?: string
+  matchingBracket?: string
+  mismatchedBracket?: string
+  whiteSpace?: string
+  keyword?: string
+  built_in?: string
+  preprocessor?: string
+  title?: string
+  params?: string
+  class?: string
+  function?: string
+  decorator?: string
+  shebang?: string
+  variable?: string
+  operator?: string
+  subst?: string
+  number?: string
+  string?: string
+  regexp?: string
+  literal?: string
+  comment?: string
+  header?: string
+  strong?: string
+  code?: string
+  link_label?: string
+  link_url?: string
+  bullet?: string
+  attribute?: string
+  value?: string
+  setting?: string
+  // label?: string
+  symbol?: string
+  constant?: string
+}
+
+export interface EditorGutterStyle extends Style {
+  currentLine?: string
+}
+export interface EditorPerf {
+  matchesRenderThrottle?: number
+  updateContentThrottle?: number
 }

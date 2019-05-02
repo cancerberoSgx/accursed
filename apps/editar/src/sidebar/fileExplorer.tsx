@@ -1,4 +1,4 @@
-import { React, ref, TreeView, TreeViewNode } from 'accursed'
+import { React, ref, TreeView, TreeViewNode, Node } from 'accursed'
 import { File, State } from '../store/state'
 import { Component } from '../util/component'
 import { focusableOpts } from '../util/style'
@@ -11,6 +11,7 @@ export class FileExplorer extends Component {
   constructor(p, s) {
     super(p, s)
     this.onActionDispatched(SIDEBAR_ACTION.SET_CWD, (a, s) => this.onCwdChanged(a, s))
+    this.onNodeSelect = this.onNodeSelect.bind(this)
   }
 
   render() {
@@ -23,30 +24,25 @@ export class FileExplorer extends Component {
         width="100%"
         height="100%"
         rootNodes={this.buildRootNodes()}
-        onNodeSelect={e => {
-          const f = (e as any) as File
-          // this.debug('explorer selected', f.filePath)
-          this.dispatch({
-            type: SIDEBAR_ACTION.OPEN_FILES,
-            paths: [f.filePath]
-          })
-        }}
-        onNodeExpand={async e => {
-          const f = (e as any) as File
-          if (f.isDirectory && !f.directoryLoaded) {
-            e.children.push(...listDirectoryAsNodes(f.filePath))
-            this.treeView.setNodes()
-            this.screen.render()
-          } else if (!f.isDirectory) {
-            this.dispatch({
-              type: SIDEBAR_ACTION.OPEN_FILES,
-              paths: [f.filePath]
-            })
-          }
-        }}
+        onNodeSelect={this.onNodeSelect as any}
+        onNodeExpand={this.onNodeSelect as any}
         ref={ref<TreeView<File>>(c => (this.treeView = c))}
       />
     )
+  }
+
+  private onNodeSelect(f: File) {
+    if (f.isDirectory && !f.directoryLoaded) {
+      f.children.push(...listDirectoryAsNodes(f.filePath));
+      this.treeView.setNodes();
+      this.screen.render();
+    }
+    else if (!f.isDirectory) {
+      this.dispatch({
+        type: SIDEBAR_ACTION.OPEN_FILES,
+        paths: [f.filePath]
+      });
+    }
   }
 
   onCwdChanged(a: SetCwdAction, s: State) {

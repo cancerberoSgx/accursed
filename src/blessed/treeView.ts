@@ -1,11 +1,9 @@
 import { repeat } from 'misc-utils-of-mine-generic'
 import { IKeyEventArg, widget, Widgets } from '..'
-import { Style, IMouseEventArg } from '../blessedTypes'
+import { IMouseEventArg, Style } from '../blessedTypes'
 import { React } from '../jsx'
+import { clicks } from './clicks'
 import { findAscendant } from './node'
-import { showInModal } from './modal';
-import { inspect } from 'util';
-import { clicks } from './clicks';
 
 export interface TreeViewNode {
   name: string
@@ -164,31 +162,28 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
           ...this.options.pageDownKeys!,
           ...this.options.pageUpKeys!
         ],
-        this.onKey 
+        this.onKey
       )
-      clicks({target: this, handler:  this.onClick})
+      clicks({ target: this, handler: this.onClick })
     })
   }
 
-  protected onClick(e: IMouseEventArg&{count: number}) {
-    showInModal(this.screen, inspect(e))
+  protected onClick(e: IMouseEventArg & { count: number }) {
     const x = e.y - this.atop
     const line = this.nodeLines[x]
-    if(!line){
+    if (!line) {
       return
     }
     this.focusedLine = x
     this.currentNode = line.node
     this.emit('nodeFocus', this.currentNode)
-    if(e.count===1) {
+    if (e.count === 1) {
       this.toggleExpand()
-    }
-    else {
+    } else {
       this.currentNode.selected = !this.currentNode.selected
-      this.processSelect(e.ctrl)            
+      this.processSelect(e.ctrl)
     }
     this.screen.render()
-    // showInModal(this.screen, inspect(e))
   }
   /* * if true, the view will ignore if it's screen.focused or not. Useful for automate the view form outside. */
   // protected ignoreScreenFocused = false
@@ -236,14 +231,14 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
     } else if (this.options.expandKeys!.includes(key.name)) {
-      this.toggleExpand();
+      this.toggleExpand()
     } else if (this.options.selectKeys!.includes(key.name)) {
       this.currentNode.selected = !this.currentNode.selected
       this.processSelect()
     }
     this.screen.render()
   }
-  protected processSelect(multipleSelectionApplies=true) {
+  protected processSelect(multipleSelectionApplies = true) {
     if (this.options.multipleSelection && multipleSelectionApplies) {
       if (this.currentNode.selected) {
         this.selectedNodes.push(this.currentNode)
@@ -267,9 +262,9 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
    * toggles currentNode expand/collaps
    */
   toggleExpand() {
-    this.currentNode.expanded = !this.currentNode.expanded;
-    this.emit('nodeExpand', this.currentNode);
-    this.options.onNodeExpand && this.options.onNodeExpand(this.currentNode as Node & T);
+    this.currentNode.expanded = !this.currentNode.expanded
+    this.emit('nodeExpand', this.currentNode)
+    this.options.onNodeExpand && this.options.onNodeExpand(this.currentNode as Node & T)
   }
 
   render() {

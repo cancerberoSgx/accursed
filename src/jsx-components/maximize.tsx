@@ -1,9 +1,10 @@
 import { Component, React } from '..'
 import { isMaximized, setMaximized } from '../blessed'
-import { BoxOptions, Button, Element } from '../blessedTypes'
+import { BoxOptions, Button, Element, Style, ButtonOptions } from '../blessedTypes'
 import { focusableOpts } from '../util/sharedOptions'
 
 interface MaximizeProps extends BoxOptions {
+  children?: JSX.Element
   /**
    * Label for the maximize button. Default: '\u2921 maximize'.
    */
@@ -16,11 +17,10 @@ interface MaximizeProps extends BoxOptions {
    * The title or label for information when maximized.
    */
   title?: string
-  children?: JSX.Element
-  // /**
-  //  * If given, this element will be used as a target instead of its children
-  //  */
-  // target?: () => Element
+  /** 
+   * Options for the maximize/restore button. 
+   */
+  button?: ButtonOptions
   /**
    * Notifies listeners when a maximize or restore event occurs
    */
@@ -45,9 +45,9 @@ maximized it will also be "Restore" button. It relies on setMaximized() utility 
  */
 export class Maximize extends Component<MaximizeProps, {}> {
   private static defaultProps: MaximizeProps = {
-    restoreLabel: '\u2935 restore',
-    maximizeLabel: '\u2921 maximize',
-    title: 'Panel'
+    restoreLabel: ' \u2935 restore',
+    maximizeLabel: ' \u2921 maximize',
+    title: ''
   }
   render() {
     this.props = { ...Maximize.defaultProps, ...this.props }
@@ -65,12 +65,13 @@ export class Maximize extends Component<MaximizeProps, {}> {
           content={title}
           onPress={e => {
             this.toggleMaximized(
-              // this.props.target ? this.props.target() : this.props.children[0].parent,
               this.props.children[0].parent,
               e.currentTarget,
               this.props.title || ''
             )
           }}
+          {...this.props.button||{}}
+          style={{...focusableOpts().style, ...this.props.button && this.props.button.style ||{}}}
         />
       </box>
     )

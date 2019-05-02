@@ -1,4 +1,4 @@
-import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
+import { Br, Div, React, Tab, TabBody, TabLabel, TabPanel, Maximize } from 'accursed'
 import { Component } from '../util/component'
 import { focusableOpts, tabPanelOpts } from '../util/style'
 import { PREFIX } from '../util/util'
@@ -9,7 +9,8 @@ import { Terminal } from './terminal'
 export class Panel extends Component {
   render() {
     return (
-      <Div>
+      <Div >
+      {/* <Maximize> */}
         <TabPanel {...tabPanelOpts()}>
           <Tab _data={{ [PREFIX('panelTool')]: 'debug' }} active={true}>
             <TabLabel {...focusableOpts()}>Debug</TabLabel>
@@ -37,7 +38,7 @@ export class Panel extends Component {
           </Tab>
           {}
         </TabPanel>
-        <Br />
+        {/* </Maximize> */}
       </Div>
     )
   }

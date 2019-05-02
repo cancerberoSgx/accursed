@@ -1,5 +1,5 @@
 import { array, tryTo } from 'misc-utils-of-mine-generic'
-import { createScreen, installExitKeys, Screen, TreeView, Node } from '../src'
+import { createScreen, installExitKeys, Node, Screen, TreeView } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 class KeyHelper {

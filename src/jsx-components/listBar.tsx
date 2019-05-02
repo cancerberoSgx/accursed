@@ -3,6 +3,7 @@ import { getJSXChildrenProps, VirtualChildrenData, VirtualComponent } from '../b
 import { ButtonOptions, Element, ElementOptions, ListBar } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { focusableOpts } from '../util/sharedOptions'
+import { ref, resolveRef } from '../jsx/createElement';
 
 interface ListBarProps extends ElementOptions {
   children: ListBarCommand | ListBarCommand[]
@@ -21,6 +22,7 @@ interface ListBarCommandProps extends ButtonOptions, Command {
   active?: boolean
   keys?: string[]
 }
+
 interface Command {
   text?: string
   prefix?: string
@@ -54,6 +56,13 @@ export class ListBarCommand extends VirtualComponent<ListBarCommandProps> {}
 export class ListBar2 extends Component<ListBarProps> {
   _saveJSXChildrenProps = true
   dontEmitAction: any
+
+  constructor(p, s){
+    super(p, s)
+    this.handleAction = this.handleAction.bind(this)
+    this.handleSelectItem = this.handleSelectItem.bind(this)
+  }
+  
   render() {
     const childProps = getJSXChildrenProps(this)!
     const Commands = childProps.filter(e => e.tagName === 'ListBarCommand')! as VirtualChildrenData[]
@@ -70,22 +79,12 @@ export class ListBar2 extends Component<ListBarProps> {
     })
 
     //TODO: command button styles
-    // const commandIds
     return (
-      /*
-  we will be using this syntax for commands: 
-  
-commands: {
-  one: {
-    keys: ['a'],
-    callback: function() {
-      box.setContent('Pressed one.')
-      screen.render()
-    }
-  },....
-     */
-
-      <listbar
+      <listbar ref={ref<ListBar>(c=>{
+        this.installHandlers(c)
+        resolveRef(this.props, c)
+        
+      })}
         {...{
           ...focusableOpts(),
           keyable: true,
@@ -102,14 +101,18 @@ commands: {
       />
     )
   }
+  protected installHandlers(c: ListBar)  {
+    c.on('select', this.handleAction)
+    c.on('selcet item', this.handleSelectItem)
+  }
 
-  handleAction(index: number, item: Element) {
+  protected handleAction(index: number, item: Element) {
     if (!this.dontEmitAction && this.props.onCommand) {
       this.props.onCommand(index, item)
     }
   }
 
-  handleSelectItem(index: number, item: Element) {
+  protected handleSelectItem(index: number, item: Element) {
     if (!this.dontEmitAction && this.props.onCommand) {
       this.props.onCommand(index, item)
     }
@@ -120,10 +123,10 @@ commands: {
    */
   select(indexOrText: number | string, options: { dontEmit?: boolean } = { dontEmit: false }) {
     if (typeof indexOrText === 'string') {
-      indexOrText = this.element.ritems.findIndex(i => i === indexOrText)
+      indexOrText = this.listBar.ritems.findIndex(i => i === indexOrText)
     }
-    // if(indexOrText>0&&indexOrText<this.element.items.length){
-    this.element.select(indexOrText)
+    // if(indexOrText>0&&indexOrText<this.listBar.items.length){
+    this.listBar.select(indexOrText)
     // }
   }
 
@@ -131,25 +134,25 @@ commands: {
    * This is equivalent to the user executing a command by pressing enter,  clicking it or pressing one of the commands [[keys]].
    */
   execute(index: number, options: { dontEmit?: boolean } = { dontEmit: false }) {
-    this.element.selectTab(index)
+    this.listBar.selectTab(index)
   }
 
   addCommand(c: Command, options = { dontRenderScreen: false }) {
-    this.element.appendItem(c)
+    this.listBar.appendItem(c)
     if (!options.dontRenderScreen) {
       this.screen.render()
     }
   }
 
-  get element(): ListBar {
+  get listBar(): ListBar {
     return this.blessedElement as ListBar
   }
 
   get selectedIndex() {
-    return this.element.selected
+    return this.listBar.selected
   }
 
   get selectedText() {
-    return this.element.ritems[this.element.selected]
+    return this.listBar.ritems[this.listBar.selected]
   }
 }

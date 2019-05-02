@@ -1,4 +1,4 @@
-import { createScreen, debug, React, Screen } from 'accursed'
+import { createScreen, debug, React, Screen, installFocusAndExitKeysForEditorWidget} from 'accursed'
 import { createStore } from 'redux'
 import { App } from './app'
 import { getContext } from './context/contextFactory'
@@ -23,28 +23,13 @@ export function main() {
 function buildScreen(store: Store) {
   const screen = createScreen({
     useBCE: true,
-    // warnings: true,
-    // log: 'log.txt',
-    smartCSR: true
-    // sendFocus: true
+    smartCSR: true,
+    dockBorders: true
   })
-  installGlobalKeyHandlers(screen)
+  installFocusAndExitKeysForEditorWidget(screen)
   screen.render()
 
   const AppConstructor = () => <App store={store} context={getContext()} />
   screen.append(React.render(AppConstructor()))
   return screen
-}
-
-function installGlobalKeyHandlers(screen: Screen) {
-  screen.key('C-q', k => {
-    screen.destroy()
-    process.exit(0)
-  })
-  screen.key('C-right', k => {
-    screen.focusNext()
-  })
-  screen.key('C-left', k => {
-    screen.focusPrevious()
-  })
 }

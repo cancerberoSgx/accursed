@@ -59,7 +59,7 @@ export namespace Widgets {
       transparent?: boolean
       shadow?: boolean
       border?: TBorder | BorderType
-      label?: TStyle
+      label?: string | TStyle
       track?: TStyle
       scrollbar?: TStyle & { style?: TStyle } | true
       focus?: TStyle
@@ -1285,6 +1285,8 @@ export namespace Widgets {
     inverse?: boolean
     invisible?: boolean
     transparent?: boolean
+
+    autoFocus?: boolean
 
     style?: Widgets.Types.TStyle
 
@@ -2901,7 +2903,9 @@ export namespace Widgets {
     censor: boolean
   }
 
-  interface ButtonOptions extends BoxOptions {}
+  interface ButtonOptions extends BoxOptions {
+
+  }
 
   class ButtonElement extends InputElement implements IHasOptions<ButtonOptions> {
     constructor(opts: ButtonOptions)

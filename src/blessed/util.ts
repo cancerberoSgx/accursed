@@ -61,13 +61,19 @@ export function getElementLabel(el: Element): Element | undefined {
 }
 
 export function labelBlink(el: Element, options: { timeout?: number; omitBorder?: boolean } = {}) {
-  el.style.label = { ...(el.style.label || {}), blink: true }
+  el.style.label = {
+    ...(typeof el.style.label === 'string' ? { text: el.style.label } : el.style.label || {}),
+    blink: true
+  }
   if (!options.omitBorder && typeof el.style.border !== 'string') {
     el.style.border = { ...(el.style.border || {}), blink: true }
   }
   el.screen.render()
   setTimeout(() => {
-    el.style.label = { ...(el.style.label || {}), blink: false }
+    el.style.label = {
+      ...(typeof el.style.label === 'string' ? { text: el.style.label } : el.style.label || {}),
+      blink: false
+    }
     if (!options.omitBorder && typeof el.style.border !== 'string') {
       el.style.border = { ...(el.style.border || {}), blink: false }
     }

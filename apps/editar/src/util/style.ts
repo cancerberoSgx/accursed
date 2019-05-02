@@ -16,19 +16,20 @@ export const focusableOpts: () => TextareaOptions = () => ({
   focusable: true,
   clickable: true,
   keyable: true,
-  border: 'line',
+  // border: 'line',
+  padding: 0,
   style: {
     ...inactiveStyle(),
-    border: {
-      type: 'line',
-      fg: 'cyan'
-    },
+    // border: {
+    //   type: 'line',
+    //   fg: 'cyan'
+    // },
     focus: {
       fg: 'black',
       bg: 'lightgray',
-      border: {
-        fg: 'red'
-      }
+      // border: {
+      //   fg: 'red'
+      // }
     },
     item: {
       bg: 'lightgray',
@@ -40,8 +41,8 @@ export const focusableOpts: () => TextareaOptions = () => ({
 })
 
 export const tabPanelOpts: () => Partial<TabPanelProps> = () => ({
-  activeStyle: activeStyle(),
-  inactiveStyle: inactiveStyle()
+  activeStyle: {...activeStyle()},
+  inactiveStyle: {...inactiveStyle()},
 })
 
 export const transparentBox: () => BoxOptions = () => ({
