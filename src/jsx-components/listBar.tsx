@@ -2,8 +2,8 @@ import { React } from '..'
 import { getJSXChildrenProps, VirtualChildrenData, VirtualComponent } from '../blessed/virtualElement'
 import { ButtonOptions, Element, ElementOptions, ListBar } from '../blessedTypes'
 import { Component } from '../jsx/component'
+import { ref, resolveRef } from '../jsx/createElement'
 import { focusableOpts } from '../util/sharedOptions'
-import { ref, resolveRef } from '../jsx/createElement';
 
 interface ListBarProps extends ElementOptions {
   children: ListBarCommand | ListBarCommand[]
@@ -57,12 +57,12 @@ export class ListBar2 extends Component<ListBarProps> {
   _saveJSXChildrenProps = true
   dontEmitAction: any
 
-  constructor(p, s){
+  constructor(p, s) {
     super(p, s)
     this.handleAction = this.handleAction.bind(this)
     this.handleSelectItem = this.handleSelectItem.bind(this)
   }
-  
+
   render() {
     const childProps = getJSXChildrenProps(this)!
     const Commands = childProps.filter(e => e.tagName === 'ListBarCommand')! as VirtualChildrenData[]
@@ -80,11 +80,11 @@ export class ListBar2 extends Component<ListBarProps> {
 
     //TODO: command button styles
     return (
-      <listbar ref={ref<ListBar>(c=>{
-        this.installHandlers(c)
-        resolveRef(this.props, c)
-        
-      })}
+      <listbar
+        ref={ref<ListBar>(c => {
+          this.installHandlers(c)
+          resolveRef(this.props, c)
+        })}
         {...{
           ...focusableOpts(),
           keyable: true,
@@ -101,7 +101,7 @@ export class ListBar2 extends Component<ListBarProps> {
       />
     )
   }
-  protected installHandlers(c: ListBar)  {
+  protected installHandlers(c: ListBar) {
     c.on('select', this.handleAction)
     c.on('selcet item', this.handleSelectItem)
   }

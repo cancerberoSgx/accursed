@@ -1,19 +1,11 @@
+import { question } from 'blessed'
 import { Point, Range } from 'text-buffer'
-import { debug } from '..'
+import { debug, EditorBindingsOptions, EditorGutterStyle, EditorOptions, EditorPerf, EditorStyle, IEditor } from '..'
 import { box } from '../'
-import {question} from 'blessed'
-import { ElementOptions, Node, Screen, Element } from '../blessedTypes'
+import { Element, Node, Screen } from '../blessedTypes'
 import { EventOptions, React, ref } from '../jsx'
-import {
-  EditorBindingsOptions,
-  EditorGutterStyle,
-  EditorOptions,
-  EditorPerf,
-  EditorStyle,
-  IEditor
-} from '..'
-import { resolveRef } from '../jsx/createElement';
-import { focusableOpts } from '../util/sharedOptions';
+import { resolveRef } from '../jsx/createElement'
+import { focusableOpts } from '../util/sharedOptions'
 const Editor = require('editor-widget')
 
 /**
@@ -118,7 +110,6 @@ declare global {
   }
 }
 
-
 export const editorBindings: EditorBindingsOptions = {
   goLeft: ['left'],
   goLeftWord: ['C-left', 'M-left', '\u001b\u001b[D', 'M-b', 'M-S-b'],
@@ -221,48 +212,45 @@ export const editorPerf: EditorPerf = {
  * Install exit keys in given screen, considering EditorWidget. tab/S-tab will switch focus only if current
  * focused element is not a EditorWidget. If focused element is EditorWidget, 'C-S-tab', 'escape' can be used
  * to focus next element. Finally, exit keys 'C-q', 'q', 'Q', 'C-c' can be used, if current focused element is
- * not a EditorWidget and it will ask the user to confirm the action. 
+ * not a EditorWidget and it will ask the user to confirm the action.
  */
 export function installFocusAndExitKeysForEditorWidget(screen: Screen) {
   screen.key(['C-q'], k => {
-    if(!isEditorWidget(screen.focused)){
+    if (!isEditorWidget(screen.focused)) {
       screen.destroy()
       process.exit(0)
     }
   })
-  screen.key([ 'q', 'Q', 'C-c'], k => {
-    if(!isEditorWidget(screen.focused)){
+  screen.key(['q', 'Q', 'C-c'], k => {
+    if (!isEditorWidget(screen.focused)) {
       const q = question({
         ...focusableOpts(),
-        parent: screen,        
-      }).ask('Do you really want to exit? (y/n)', (err, value)=>{
-        if(value){
+        parent: screen
+      }).ask('Do you really want to exit? (y/n)', (err, value) => {
+        if (value) {
           screen.destroy()
           process.exit(0)
-        }
-        else {
-          (q as any as Element).hide();
-          (q as any as Element).detach();
-          (q as any as Element).destroy()
+        } else {
+          ;((q as any) as Element).hide()
+          ;((q as any) as Element).detach()
+          ;((q as any) as Element).destroy()
         }
       })
     }
   })
   screen.key(['C-S-tab', 'escape'], k => {
-    if(isEditorWidget(screen.focused)){
+    if (isEditorWidget(screen.focused)) {
       screen.focusNext()
     }
   })
   screen.key('tab', k => {
-    if(!isEditorWidget(screen.focused)){
+    if (!isEditorWidget(screen.focused)) {
       screen.focusNext()
     }
   })
   screen.key('S-tab', k => {
-    if(!isEditorWidget(screen.focused)){
+    if (!isEditorWidget(screen.focused)) {
       screen.focusPrevious()
     }
   })
-
 }
-

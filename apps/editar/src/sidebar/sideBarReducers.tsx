@@ -19,10 +19,30 @@ export function openFiles(s: State = initialState, a: OpenFilesAction) {
 }
 
 export function listDirectoryAsNodes(cwd: string) {
-  return ls(cwd).map(p => ({
-    filePath: resolve(join(cwd, p)),
-    children: [],
-    name: p,
-    isDirectory: test('-d', resolve(join(cwd, p)))
-  }))
+
+  //TODO: we must use fs.ls, etc...
+  return ls(cwd).map(p => {
+    const isDirectory = test('-d', resolve(join(cwd, p)))
+    return {
+      filePath: resolve(join(cwd, p)),
+      children: [],
+      name: p,
+      isDirectory,
+      expanded: false,
+      expandedPrefix: isDirectory ? '📂' : '📄',
+      collapsedPrefix: isDirectory ? '📁' : '📄'
+    }
+  })
+  // return await Promise.all((await fs.ls(cwd)).map(async p => {
+  //   const isDirectory = await fs.isDirectory(p)
+  //   return {
+  //     filePath: p, 
+  //     children: [],
+  //     name: p,
+  //     isDirectory,
+  //     expanded: false, 
+  //     expandedPrefix: isDirectory ? '📂' : '📄',
+  //     collapsedPrefix: isDirectory ? '📁' : '📄'
+  //   }
+  // }))
 }

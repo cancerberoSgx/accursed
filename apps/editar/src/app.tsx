@@ -1,10 +1,10 @@
 import { Br, Column, Columns, Div, React, ref, Row, Rows } from 'accursed'
 import { Editors } from './editor/editors'
+import { installKeyBindings } from './keyBindings'
 import { Sidebar } from './sidebar/sidebar'
 import { SIDEBAR_ACTION } from './sidebar/sidebarActions'
 import { Panel } from './toolPanel/toolPanel'
 import { Component } from './util/component'
-import { installKeyBindings } from './keyBindings';
 
 export class App extends Component {
   render() {
@@ -20,7 +20,7 @@ export class App extends Component {
                 <Editors {...this.props} />
               </Row>
               <Row height="30%">
-              <Br/>
+                <Br />
                 <Panel {...this.props} />
               </Row>
               {}
@@ -41,8 +41,7 @@ export class App extends Component {
       })
       this.screen.focusNext()
       installKeyBindings({
-        screen: this.screen, 
-        
+        screen: this.screen
       })
     }, 200)
   }

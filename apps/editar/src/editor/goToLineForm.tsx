@@ -1,32 +1,36 @@
-import { Box, Div, findChildren, Maximize, React, ArtificialEvent, Textbox, Br, findDescendantNamed, ref } from 'accursed'
+import { ArtificialEvent, Br, Div, React, ref, Textbox } from 'accursed'
+import { tryTo } from 'misc-utils-of-mine-generic'
 import { Component, Props } from '../util/component'
-import { focusableOpts } from '../util/style';
-import { PREFIX } from '../util/util';
-import { tryTo } from 'misc-utils-of-mine-generic';
+import { focusableOpts } from '../util/style'
+import { PREFIX } from '../util/util'
 
 interface GoToLineFormProps extends Props {
   onSubmit(line: number): void
   // onCancel(): void
-
 }
 
 /** I'm just a container for a given GoToLineForm widget and document */
 export class GoToLineForm extends Component<GoToLineFormProps> {
-
   constructor(p, s) {
     super(p, s)
   }
 
   render() {
     return (
-        <Div>
-          {/* Go to line number:  */}
-          <textbox {...focusableOpts()} input={true} focused={true} inputOnFocus={true} width="100%" onChange={e=>this.onChange(e)} 
-          ref={ref<Textbox>(c=>{
+      <Div>
+        {/* Go to line number:  */}
+        <textbox
+          {...focusableOpts()}
+          input={true}
+          focused={true}
+          inputOnFocus={true}
+          width="100%"
+          onChange={e => this.onChange(e)}
+          ref={ref<Textbox>(c => {
             // c.on('attached', ()=>{
-              setTimeout(() => {
-                    tryTo(()=>c.focus())
-                  }, 300);
+            setTimeout(() => {
+              tryTo(() => c.focus())
+            }, 300)
             // })
           })}
           // onRender={e=>{
@@ -34,22 +38,20 @@ export class GoToLineForm extends Component<GoToLineFormProps> {
           //     tryTo(()=>e.currentTarget.focus())
           //   }, 300);
           // }}
-          />
-          <Br/>
-          <text name={PREFIX('GoToLineFormErrorMessage')}></text>
-        </Div>
+        />
+        <Br />
+        <text name={PREFIX('GoToLineFormErrorMessage')} />
+      </Div>
     )
   }
 
-  onChange(e: ArtificialEvent<Textbox> & { value: string; })  {
+  onChange(e: ArtificialEvent<Textbox> & { value: string }) {
     const n = parseInt(e.value)
-    if(!n) {
+    if (!n) {
       this.getDescendantNamed(PREFIX('GoToLineFormErrorMessage')).setContent('Invalid number')
       this.screen.render()
-    }
-    else {
+    } else {
       this.props.onSubmit(n)
     }
   }
-
 }

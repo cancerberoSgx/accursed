@@ -1,7 +1,7 @@
-import { Div, Log, React, ref } from 'accursed'
+import { Log, React, ref } from 'accursed'
 import { State } from '../store/state'
 import { Component } from '../util/component'
-import { focusableOpts, scrollableOpts } from '../util/style'
+import { scrollableOpts } from '../util/style'
 import { LogMessageAction, TOOL_PANEL_ACTION } from './toolPanelActions'
 
 export class LogPanel extends Component {
@@ -13,7 +13,7 @@ export class LogPanel extends Component {
   render() {
     return (
       // <Div>
-        <log {...scrollableOpts()} height="100%" width="100%" ref={ref(c => (this.logEl = c))} />
+      <log {...scrollableOpts()} height="100%" width="100%" ref={ref(c => (this.logEl = c))} />
       // </Div>
     )
   }

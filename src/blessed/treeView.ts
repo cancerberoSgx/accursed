@@ -330,12 +330,11 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
    */
   setNodes(data: TreeViewNode[] = this.rootNodes) {
     this.rootNodes = this.processNodes(data as any)
-    if(data!==this.rootNodes){
+    if (data !== this.rootNodes) {
       this.currentNode = this.currentNode = this.rootNodes.find(n => !n.hidden) || this.rootNodes[0]
       this.focusedLine = 0
       this.selectedNodes = []
-    }
-    else {
+    } else {
       //TODO handle situations when an ancestor is collapsed or removed so this.currentNode should be changed
     }
   }
@@ -461,7 +460,9 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     nodes.forEach(node => {
       if (!node.hidden) {
         const line = `${repeat(level * this.options.levelIndent!, ' ')}${
-          node.expanded || !node.children.length ? (node.expandedPrefix || this.options.expandedPrefix) : (node.collapsedPrefix || this.options.collapsedPrefix)
+          node.expanded || !node.children.length
+            ? node.expandedPrefix || this.options.expandedPrefix
+            : node.collapsedPrefix || this.options.collapsedPrefix
         } ${node.label || node.name}`
         const i = line.indexOf('\n')
         lines.push({

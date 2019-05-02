@@ -23,13 +23,13 @@ export async function getEditorFor(document: Document) {
         ...focusableOpts(),
         text,
         language: getLanguage(document),
-        scrollable: false,
+        scrollable: false
       })
-      editor.once('render', ()=>{
+      editor.once('render', () => {
         setTimeout(() => {
-          editor.selection.setHeadPosition([ 0, 0])
-        editor.selection.clearTail()
-        }, 700);
+          editor.selection.setHeadPosition([0, 0])
+          editor.selection.clearTail()
+        }, 700)
       })
       editors[document.path] = { editor, document }
     } catch (error) {
@@ -44,4 +44,3 @@ function getLanguage(d: Document) {
   const ext = getFileExtension(d.path).toLowerCase() || 'js'
   return ext
 }
-

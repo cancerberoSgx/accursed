@@ -521,7 +521,7 @@ export namespace Widgets {
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
-  class   NodeWithEvents extends Node {
+  class NodeWithEvents extends Node {
     /**
      * Bind a keypress listener for a specific key.
      */
@@ -2903,9 +2903,7 @@ export namespace Widgets {
     censor: boolean
   }
 
-  interface ButtonOptions extends BoxOptions {
-
-  }
+  interface ButtonOptions extends BoxOptions {}
 
   class ButtonElement extends InputElement implements IHasOptions<ButtonOptions> {
     constructor(opts: ButtonOptions)

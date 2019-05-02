@@ -1,4 +1,4 @@
-import { createScreen, debug, React, Screen, installFocusAndExitKeysForEditorWidget} from 'accursed'
+import { createScreen, debug, installFocusAndExitKeysForEditorWidget, React, Screen } from 'accursed'
 import { createStore } from 'redux'
 import { App } from './app'
 import { getContext } from './context/contextFactory'

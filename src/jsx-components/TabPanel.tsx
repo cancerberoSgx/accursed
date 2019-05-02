@@ -1,7 +1,7 @@
 import { React } from '..'
 import { findDescendant } from '../blessed'
 import { getJSXChildrenProps, isElementData, VirtualComponent } from '../blessed/virtualElement'
-import { BoxOptions, Button, Element, isElement, Layout, Node, Style } from '../blessedTypes'
+import { BoxOptions, Button, Element, isElement, Layout, Node } from '../blessedTypes'
 import { Component } from '../jsx/component'
 import { focusableOpts } from '../util/sharedOptions'
 import { CollapsibleProps } from './collapsible'
@@ -98,11 +98,13 @@ export class TabPanel extends Component<TabPanelProps> {
           {...focusableOpts()}
           border="line"
           content={labelData.children.join(' ')}
-          {...(active?this.props.activeTab : this.props.inactiveTab)||{}}
+          {...(active ? this.props.activeTab : this.props.inactiveTab) || {}}
           {...labelData.attrs || {}}
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),
-            ...((active ? (this.props.activeTab && this.props.activeTab.style) : (this.props.inactiveTab && this.props.inactiveTab.style)) || {})
+            ...((active
+              ? this.props.activeTab && this.props.activeTab.style
+              : this.props.inactiveTab && this.props.inactiveTab.style) || {})
           }}
           onPress={e => this._selectTabNamed(e.currentTarget.name)}
           onClick={e => this._selectTabNamed(e.currentTarget.name)}
@@ -138,14 +140,13 @@ export class TabPanel extends Component<TabPanelProps> {
     })
     this.filterDescendants(TabPanel.isLabel).forEach(label => {
       if (label.name !== 'tab_label_' + tabIndex) {
-        label.style = { ...(label.style || {}), ...(this.props.inactiveTab && this.props.inactiveTab.style|| {}) }
+        label.style = { ...(label.style || {}), ...((this.props.inactiveTab && this.props.inactiveTab.style) || {}) }
       } else {
-        label.style = { ...(label.style || {}), ...(this.props.activeTab && this.props.activeTab.style || {}) }
+        label.style = { ...(label.style || {}), ...((this.props.activeTab && this.props.activeTab.style) || {}) }
       }
     })
     this.props.onChange && this.props.onChange({ activeTab: tabIndex })
     this.screen.render()
-
   }
 
   insertTab(tabProps: Partial<TabProps>, labelProps: Partial<TabLabelProps>, bodyProps: TabBodyProps, index: number) {

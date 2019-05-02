@@ -1,9 +1,9 @@
 import { debug } from 'accursed'
 import { ok } from 'assert'
+import { TOOL_PANEL_ACTION } from '../toolPanel/toolPanelActions'
+import { debugInApp } from '../util/util'
 import { State } from './state'
 import { ActionForType, ActionType, AllActions, Store } from './store'
-import { debugInApp } from '../util/util';
-import { TOOL_PANEL_ACTION } from '../toolPanel/toolPanelActions';
 
 type ActionListener<A extends AllActions> = (a: A, state: State) => void
 let instance: ActionManager
@@ -28,15 +28,15 @@ export class ActionManager {
   /** all dispatches must pass though here */
   dispatch<A extends AllActions>(a: A) {
     try {
-      a.type!== TOOL_PANEL_ACTION.LOG_MESSAGE &&  debugInApp('ActionManager before dispatch', a.type)
+      a.type !== TOOL_PANEL_ACTION.LOG_MESSAGE && debugInApp('ActionManager before dispatch', a.type)
       this.store.dispatch(a)
-      a.type!== TOOL_PANEL_ACTION.LOG_MESSAGE &&  debugInApp('ActionManager after dispatch', a.type)
-
+      a.type !== TOOL_PANEL_ACTION.LOG_MESSAGE && debugInApp('ActionManager after dispatch', a.type)
     } catch (error) {
       debug('ERROR WHILE DISPATCHING ACTION', a, error)
     }
     if (this._actionListeners[a.type]) {
-      a.type!== TOOL_PANEL_ACTION.LOG_MESSAGE &&  debugInApp('ActionManager notifying listeners for action ', a.type, this._actionListeners[a.type].length)
+      a.type !== TOOL_PANEL_ACTION.LOG_MESSAGE &&
+        debugInApp('ActionManager notifying listeners for action ', a.type, this._actionListeners[a.type].length)
       const state = this.store.getState()
       this._actionListeners[a.type].forEach(l => l(a, state))
     }

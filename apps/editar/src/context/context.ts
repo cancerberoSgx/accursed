@@ -11,6 +11,6 @@ export interface FS {
 }
 
 export interface FSGlobOptions {
-  cwd?: string,
-   exclude?: string[]
+  cwd?: string
+  exclude?: string[]
 }

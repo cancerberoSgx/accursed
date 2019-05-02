@@ -178,7 +178,7 @@ export function cleanNode(n: Node, dontDestroy: boolean = false) {
   })
 }
 
-export function findDescendantNamed<T extends Element>(el: Element | Screen, name: string): T|undefined {
+export function findDescendantNamed<T extends Element>(el: Element | Screen, name: string): T | undefined {
   return asElements(el)
     .map(c => findDescendant(c, d => (d as any).name === name))
     .find(notFalsy)

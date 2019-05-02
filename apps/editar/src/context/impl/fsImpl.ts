@@ -1,13 +1,12 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { ls, test } from 'shelljs'
-import { FS, FSGlobOptions } from '../context'
-import { pathJoin } from 'misc-utils-of-mine-generic';
-const pm = require('picomatch') 
+import { FS } from '../context'
+const pm = require('picomatch')
 
 export class FSImpl implements FS {
-async cwd(){
-  return '.'
-}
+  async cwd() {
+    return '.'
+  }
   async read(path: string): Promise<string> {
     return readFileSync(path).toString()
   }
@@ -23,12 +22,12 @@ async cwd(){
   //   const process = async (files: string[], predicate: ((s:string)=>boolean)) => {
   //     // const r = await Promise.all(files.filter(f=>!predicates.find(p=>{
   //     //   const abs = pathJoin(cwd, f)
-  //     //   console.log(abs, p(abs));        
+  //     //   console.log(abs, p(abs));
   //     //   return !p(abs)
   //     // })))
   //     // const absFiles = files.map(f=>pathJoin(cwd, f))
   //     const results= files. filter(f=>{
-  //       console.log(f, predicate(f));        
+  //       console.log(f, predicate(f));
   //       return predicate(f)
   //     })
   //     //.map(async f=>({path: f, isDirectory: await this.isDirectory(f) })))
@@ -51,5 +50,5 @@ async cwd(){
   async write(path: string, content: string): Promise<void> {
     writeFileSync(path, content)
   }
-  static instance = new FSImpl
+  static instance = new FSImpl()
 }

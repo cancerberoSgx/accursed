@@ -1,10 +1,7 @@
-import { React, ref, Component, TreeView, TreeViewNode, createScreen, installFocusAndExitKeysForEditorWidget, debug, showInModal } from 'accursed'
-import { focusableOpts } from '../../../src/util/style';
-import { authorizeAndRun } from './driveClient';
-import { google, drive_v3 } from 'googleapis';
-import { readFileSync, createWriteStream } from 'fs';
-import { P, App } from './app';
-import { File, listFiles } from './drive';
+import { Component, React, ref, showInModal, TreeView } from 'accursed'
+import { focusableOpts } from '../../../src/util/style'
+import { P } from './app'
+import { File, listFiles } from './drive'
 
 export class FileExplorer extends Component<P> {
   treeView: TreeView<File>
@@ -33,11 +30,10 @@ export class FileExplorer extends Component<P> {
 
   private async onNodeSelect(f: File) {
     if (f.isDirectory && !f.directoryLoaded) {
-      f.children.push(...await listFiles(f.fileId));
-      this.treeView.setNodes();
-      this.screen.render();
-    }
-    else if (!f.isDirectory) {
+      f.children.push(...(await listFiles(f.fileId)))
+      this.treeView.setNodes()
+      this.screen.render()
+    } else if (!f.isDirectory) {
       const text = await this.props.fileManager.get(f.fileId)
       showInModal(this.screen, text)
       // this.dispatch({

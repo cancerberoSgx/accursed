@@ -1,4 +1,4 @@
-import { React, ref, TreeView, TreeViewNode, Node } from 'accursed'
+import { React, ref, TreeView, TreeViewNode } from 'accursed'
 import { File, State } from '../store/state'
 import { Component } from '../util/component'
 import { focusableOpts } from '../util/style'
@@ -33,15 +33,14 @@ export class FileExplorer extends Component {
 
   private onNodeSelect(f: File) {
     if (f.isDirectory && !f.directoryLoaded) {
-      f.children.push(...listDirectoryAsNodes(f.filePath));
-      this.treeView.setNodes();
-      this.screen.render();
-    }
-    else if (!f.isDirectory) {
+      f.children.push(...listDirectoryAsNodes(f.filePath))
+      this.treeView.setNodes()
+      this.screen.render()
+    } else if (!f.isDirectory) {
       this.dispatch({
         type: SIDEBAR_ACTION.OPEN_FILES,
         paths: [f.filePath]
-      });
+      })
     }
   }
 
@@ -55,3 +54,7 @@ export class FileExplorer extends Component {
     return this.s.cwdRootFiles
   }
 }
+
+// [0x1f4dd, 0x1f4c1, 0x1f4c2, 0x1f4c4].forEach(n=>{
+//   console.log(  String.fromCodePoint(n));
+// })

@@ -4,7 +4,7 @@ export enum SIDEBAR_ACTION {
   OPEN_FILES = 'SIDEBAR_ACTION.OPEN_FILE',
   // SELECT_FILES = 'SIDEBAR_ACTION_SELECT',
   SET_CWD = 'SIDEBAR_ACTION.SET_CWD',
-  SEARCH_FILES_OPEN = "SIDEBAR_ACTION.SEARCH_FILES_OPEN"
+  SEARCH_FILES_OPEN = 'SIDEBAR_ACTION.SEARCH_FILES_OPEN'
 }
 
 /** this happens when the user explicitly enters [ENTER] or doiuble clicks with mouse, expliocitly giving the

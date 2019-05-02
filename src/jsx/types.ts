@@ -34,6 +34,8 @@ import {
   NodeWithEvents,
   Prompt,
   PromptOptions,
+  Question,
+  QuestionOptions,
   RadioButton,
   RadioButtonOptions,
   RadioSet,
@@ -45,9 +47,7 @@ import {
   TextareaOptions,
   Textbox,
   TextboxOptions,
-  TextOptions,
-  QuestionOptions,
-  Question
+  TextOptions
 } from '../blessedTypes'
 import { Component } from './component'
 

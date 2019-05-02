@@ -1,5 +1,5 @@
-import { Div, Log, React, ref, Component } from 'accursed'
-import { scrollableOpts } from './style';
+import { Component, Log, React, ref } from 'accursed'
+import { scrollableOpts } from './style'
 
 export class LogPanel extends Component {
   logEl: Log
@@ -10,12 +10,12 @@ export class LogPanel extends Component {
   render() {
     return (
       // <Div>
-        <log {...scrollableOpts()} height="100%" width="100%" ref={ref(c => (this.logEl = c))} />
+      <log {...scrollableOpts()} height="100%" width="100%" ref={ref(c => (this.logEl = c))} />
       // </Div>
     )
   }
   private pendingMessages: string[] = []
-  logMessage(m:string) {
+  logMessage(m: string) {
     if (this.logEl) {
       if (this.pendingMessages.length) {
         this.pendingMessages.forEach(m => this.logEl.log(m))

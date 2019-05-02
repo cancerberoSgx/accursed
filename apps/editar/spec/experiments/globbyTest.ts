@@ -24,13 +24,10 @@
 //   // console.log(picomatch(picomatch.makeRe('./foo*bar'))('./foohihibar'))
 
 //   console.log( await FSImpl.instance.search(['**/*.ts']));
-  
+
 //   // console.log(await FSImpl.instance.glob(['./src/*.ts']));
-  
+
 // })();
-
-
-
 
 // // interface Options{
 // //   fs?: FS
@@ -60,13 +57,12 @@
 // //   const isIgnored = await  gitignore({cwd: pwd().toString()})
 // //   const folders = ls('.').filter(f=>test('-d', f)).filter(f=>!isIgnored(f.toString()))
 // //   const currentFolderFiles = await globby('*.json', {gitignore: true, onlyFiles: true});
-  
+
 // //   const result = await pMap(folders, f=>globby(f+'/**/*.json', {gitignore: true, onlyFiles: false}))
 // //   console.log(folders, currentFolderFiles, result);
-  
+
 // //   // const currentFolderFiles = = await globby('*.json', {gitignore: true, onlyFiles: true});
-  
+
 // // 	// console.log(paths);
 // // 	//=> ['unicorn', 'rainbow']
 // // })();
-

@@ -1,11 +1,28 @@
-import * as blessed from 'blessed';
-import { enumKeys } from 'misc-utils-of-mine-typescript';
-import { VirtualComponent } from '../blessed/virtualElement';
-import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes';
-import { debug } from '../util';
-import { log } from '../util/logger';
-import { Component } from './component';
-import { AfterElementCreatedEvent, AfterElementCreatedListener, AfterRenderEvent, AfterRenderListener, ArtificialEventOptionNames, ArtificialEventOptions, BeforeAppendChildEvent, BeforeAppendChildListener, BeforeElementCreatedEvent, BeforeElementCreatedListener, blessedElementConstructor, BlessedEventOptions, BlessedJsx, BlessedJsxAttrs, EventOptionNames, RefObject } from './types';
+import * as blessed from 'blessed'
+import { enumKeys } from 'misc-utils-of-mine-typescript'
+import { VirtualComponent } from '../blessed/virtualElement'
+import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes'
+import { debug } from '../util'
+import { log } from '../util/logger'
+import { Component } from './component'
+import {
+  AfterElementCreatedEvent,
+  AfterElementCreatedListener,
+  AfterRenderEvent,
+  AfterRenderListener,
+  ArtificialEventOptionNames,
+  ArtificialEventOptions,
+  BeforeAppendChildEvent,
+  BeforeAppendChildListener,
+  BeforeElementCreatedEvent,
+  BeforeElementCreatedListener,
+  blessedElementConstructor,
+  BlessedEventOptions,
+  BlessedJsx,
+  BlessedJsxAttrs,
+  EventOptionNames,
+  RefObject
+} from './types'
 interface Options {
   dontInheritStyle?: boolean
 }

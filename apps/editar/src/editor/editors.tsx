@@ -1,13 +1,13 @@
-import { Br, Div, ListBar2, ListBarCommand, React, ref, Maximize } from 'accursed'
+import { Div, ListBar2, ListBarCommand, Maximize, React, ref } from 'accursed'
 import { ok } from 'assert'
 import { OpenFilesAction, SIDEBAR_ACTION } from '../sidebar/sidebarActions'
 import { State } from '../store/state'
 import { Component } from '../util/component'
+import { focusableOpts } from '../util/style'
 import { debugInApp } from '../util/util'
 import { Editor } from './editor'
 import { DocumentEditor, getEditorFor } from './editorFactory'
-import { focusableOpts } from '../util/style';
- 
+
 export class Editors extends Component {
   protected listBar: ListBar2
   editorContainer: Editor
@@ -20,27 +20,23 @@ export class Editors extends Component {
     return (
       // <Div  >
       <Maximize>
-      <Div 
-          style={{overflow: undefined}}>
-        <ListBar2
-        {...focusableOpts()}
-          ref={ref<ListBar2>(c => this.listBar = c)}
-          onSelectItem={this.tabSelected}>
-          {this.s.documents.map(d => (
-            <ListBarCommand _data={{ filePath: d.path }} callback={this.tabSelected}>
-              {d.name}
-            </ListBarCommand>
-          ))}
-          {}
-        </ListBar2>
-        <Editor
-          {...this.props}
-          ref={React.createRef<Editor>(c => {
-            this.editorContainer = c
-          })}
-        />
-      </Div>
-         </Maximize>
+        <Div style={{ overflow: undefined }}>
+          <ListBar2 {...focusableOpts()} ref={ref<ListBar2>(c => (this.listBar = c))} onSelectItem={this.tabSelected}>
+            {this.s.documents.map(d => (
+              <ListBarCommand _data={{ filePath: d.path }} callback={this.tabSelected}>
+                {d.name}
+              </ListBarCommand>
+            ))}
+            {}
+          </ListBar2>
+          <Editor
+            {...this.props}
+            ref={React.createRef<Editor>(c => {
+              this.editorContainer = c
+            })}
+          />
+        </Div>
+      </Maximize>
       // </Div>
     )
   }

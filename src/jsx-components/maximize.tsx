@@ -1,6 +1,6 @@
 import { Component, React } from '..'
 import { isMaximized, setMaximized } from '../blessed'
-import { BoxOptions, Button, Element, Style, ButtonOptions } from '../blessedTypes'
+import { BoxOptions, Button, ButtonOptions, Element } from '../blessedTypes'
 import { focusableOpts } from '../util/sharedOptions'
 
 interface MaximizeProps extends BoxOptions {
@@ -17,8 +17,8 @@ interface MaximizeProps extends BoxOptions {
    * The title or label for information when maximized.
    */
   title?: string
-  /** 
-   * Options for the maximize/restore button. 
+  /**
+   * Options for the maximize/restore button.
    */
   button?: ButtonOptions
   /**
@@ -64,14 +64,10 @@ export class Maximize extends Component<MaximizeProps, {}> {
           right={0}
           content={title}
           onPress={e => {
-            this.toggleMaximized(
-              this.props.children[0].parent,
-              e.currentTarget,
-              this.props.title || ''
-            )
+            this.toggleMaximized(this.props.children[0].parent, e.currentTarget, this.props.title || '')
           }}
-          {...this.props.button||{}}
-          style={{...focusableOpts().style, ...this.props.button && this.props.button.style ||{}}}
+          {...this.props.button || {}}
+          style={{ ...focusableOpts().style, ...((this.props.button && this.props.button.style) || {}) }}
         />
       </box>
     )
