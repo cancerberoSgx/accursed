@@ -11,6 +11,14 @@ export interface TreeViewNode {
   children: TreeViewNode[]
   expanded?: boolean
   hidden?: boolean
+  /**
+   * This will take priority over TreeViewOptions.expandedPrefix
+   */
+  expandedPrefix?: string
+  /**
+   * This will take priority over TreeViewOptions.collapsedPrefix
+   */
+  collapsedPrefix?: string
 }
 
 interface Node extends TreeViewNode {
@@ -453,7 +461,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     nodes.forEach(node => {
       if (!node.hidden) {
         const line = `${repeat(level * this.options.levelIndent!, ' ')}${
-          node.expanded || !node.children.length ? this.options.expandedPrefix : this.options.collapsedPrefix
+          node.expanded || !node.children.length ? (node.expandedPrefix || this.options.expandedPrefix) : (node.collapsedPrefix || this.options.collapsedPrefix)
         } ${node.label || node.name}`
         const i = line.indexOf('\n')
         lines.push({

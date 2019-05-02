@@ -12,7 +12,8 @@ import {
   Screen,
   text,
   Text,
-  TreeView
+  TreeView,
+  printElement
 } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import { log } from '../src/util/logger'
@@ -276,6 +277,51 @@ describe('treeView', () => {
       debug('ERROR', error)
     }
   })
+
+
+  // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
+  it('should render per node collapsed/expanded prefix options', async done => {
+    try {
+      const b = box({
+        parent: screen,
+        top: 13,
+        left: 15
+      })
+      const folderOptions = {
+        expandedPrefix: '+', collapsedPrefix: '-', expanded: true
+      }
+      const txtOptions = {
+        expandedPrefix: 'T', collapsedPrefix: 'T', children: []
+      }
+      const jsOptions = {
+        expandedPrefix: 'J', collapsedPrefix: 'J', children: []
+      }
+      const tree = new TreeView({
+        rootNodes: [
+          {name: 'folder1', ...folderOptions, children: [
+          {name: 'file1.txt', ...txtOptions}, {name: 'file2.js', ...jsOptions}, , {name: 'folder11', ...folderOptions, children: [
+            {name: 'file11.txt', ...txtOptions}, {name: 'file12.js', ...jsOptions}, 
+          ]}
+        ]}
+      ],
+        parent: b,
+        width: 15,
+        height: 10,
+        style: { bg: 'blue', fg: 'white', focusedNode: { bg: 'green', fg: 'black' }, selectedNode: { bg: 'red' } },
+        scrollable: true
+      })
+      screen.render()
+      await waitFor(() => printElement(tree).includes('+ folder1'))
+      expect(printElement(tree)).toContain('T file1.txt')
+      expect(printElement(tree)).toContain('J file2.js')
+      
+      done()
+    } catch (error) {
+      log('ERROR', error)
+    }
+  })
+
+
 })
 
 const rootNodes = [
