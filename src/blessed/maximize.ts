@@ -24,39 +24,10 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
   }
   const screen = el.screen
   if (maximize) {
-    // setElementData(el, 'maximize-parent', el.parent)
-    // setElementData(el, 'maximize-index', el.index)
-    // //TODO: check if undefined and throw
-    // const box = getBox()
-    // const container = findDescendant(box, e => isElement(e) && e.name === 'maximize-el-container')
-    // const restoreButton = findDescendant(box, e => isElement(e) && e.name === 'maximize-restore-button') as Element
-    // if (options.auto) {
-    //   restoreButton!.show()
-    //   //TODO: set custom labels from options
-    // } else {
-    //   restoreButton.hide()
-    // }
-    // visitAscendants(el, a=>{
-    //   if(isElement(a) && isScreen(a.parent)){
-    //     a.setFront()
-    //     a.width=screen.width
-    //     a.height=screen.height
-    //   }
-    //   else if(isElement(a)) {
-    //     a.setFront()
-    //     a.width='100%'
-    //     a.height='100%'
-    //   }
-    //   return false
-    // })
-    // setElementData(screen, 'maximize-target', el )
     currentTarget = el
-    // debug(root && root.type, root && root.name)
-    // screen.children.filter(c=>c!==root).filter(isElement).forEach(c=>{debug(c.type, getContent(c)); c.style.fg='magenta'; c.style.border={fg: 'magenta'}})
     visitDescendants(screen, d => {
-      // debug(d.type, (d as any).name)//getContent(d))
       if (isElement(d) && (!findAscendant(d, a => a === el) && d !== el && !findAscendant(el, a => a === d))) {
-        debug(d.type, d.name) //getContent(d))
+        debug(d.type, d.name)
         d.hide()
       }
       return false
@@ -71,25 +42,10 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
     el.height = screen.height
     el.rtop = 0
     el.rleft = 0
-    // screen.render()
-
-    // container!.children.forEach(e => e.detach())
-
-    // el.detach()
-    // container.append(el)
-    // screen.append(box)
-    // box.setFront()
-    // setElementData(box, 'maximize-target', el) // needed in auto
   } else {
-    //
     visitDescendants(screen, d => {
       //TODO: dont show the ones that were originally hidden
       if (isElement(d)) {
-        // getElementData(el, 'maximized-target-width')
-        // getElementData(el, 'maximized-target-height')
-        // getElementData(el, 'maximized-target-rtop')
-        // getElementData(el, 'maximized-target-rleft')
-
         if (d.hidden) {
           setTimeout(() => {
             d.show()
@@ -97,12 +53,6 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
           }, 10)
         }
       }
-
-      // debug(d.type, (d as any).name)//getContent(d))
-      // if(isElement(d) &&( !findAscendant(d, a=>a===el)&&d!==el&&!findAscendant(el, a=>a===d))) {
-      //   debug(d.type, d.name)//getContent(d))
-      //   d.hide()
-      // }
       return false
     })
 
@@ -116,68 +66,19 @@ export function setMaximized(el: Element, maximize: boolean, options: Options = 
     el.rleft = getElementData(el, 'maximized-target-rleft')
 
     currentTarget = undefined
-    // const box = getBox()
-    // //TODO: check that el is descendant of box
-    // const parent = getElementData<Element>(el, 'maximize-parent')
-    // const index = getElementData<number>(el, 'maximize-index')
-    // //TODO: check if undefined and throw
-    // el.detach()
-    // parent.insert(el, index)
-    // box.detach()
   }
-  // if (options.auto) {
   screen.render()
-  // }
 }
 
 let currentTarget: Element | undefined
+
 /**
  * restore the state of current maximized element if any
  */
 export function restoreMaximize(options: Options = { auto: true }) {
-  // const target = getElementData<Element>(getBox(), 'maximize-target')
   setMaximized(currentTarget, false)
 }
 
 export function isMaximized(el: Element) {
-  // return !!findAscendant(el, e => e === getBox())
   return !!currentTarget
 }
-
-// let bo: Box
-// function getBox() {
-//   function restore() {
-//     const target = getElementData<Element>(getBox(), 'maximize-target')
-//     setMaximized(target, false)
-//   }
-
-//   if (!bo) {
-//     bo = box({
-//       // parent: screen,
-//       // style: { bg: 'blue', fg: 'white' },
-//       border: 'line',
-//       top: 0,
-//       left: 0,
-//       width: '100%',
-//       height: '100%'
-//     })
-//     const b = button({
-//       parent: bo,
-//       content: 'Restore',
-//       name: 'maximize-restore-button',
-//       input: true,
-//       clickable: true,
-//       focusable: true,
-//       keyable: true
-//     })
-//     b.on('click', e => {
-//       restore()
-//     })
-//     b.on('pressed', e => {
-//       restore()
-//     })
-//     box({ parent: bo, name: 'maximize-el-container', width: '100%', height: '100%', top: 0, left: 0 })
-//   }
-//   return bo
-// }
-// // TODO: minimize ?

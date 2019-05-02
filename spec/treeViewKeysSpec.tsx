@@ -1,5 +1,5 @@
 import { array, tryTo } from 'misc-utils-of-mine-generic'
-import { createScreen, installExitKeys, Node, Screen, TreeView, printElement } from '../src'
+import { createScreen, installExitKeys, Node, printElement, Screen, TreeView } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 class KeyHelper {
@@ -43,7 +43,7 @@ describe('treeView', () => {
     screen.render()
     await waitFor(() => !!printElement(tree).trim())
   })
-  
+
   // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
   it('should render given expanded nodes', async done => {
     expect(printElement(tree)).toContain('n1')
@@ -51,7 +51,7 @@ describe('treeView', () => {
     expect(printElement(tree)).toContain('n2')
     const n2Descendants = ['n21', 'n211', 'n2111', 'n21111']
     n2Descendants.forEach(name => expect(printElement(tree)).toContain(name))
-     done()
+    done()
   })
 
   it('should focus the first node by default', async done => {

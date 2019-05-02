@@ -220,27 +220,27 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       return true
     }
     if (this.options.upKeys!.includes(key.name)) {
-      if(upAction()) {
+      if (upAction()) {
         this.emit('nodeFocus', this.currentNode)
         this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
       }
     } else if (this.options.pageUpKeys!.includes(key.name)) {
       for (let i = 0; i < (this.height as number) - 1; i++) {
-        if(!upAction()){
+        if (!upAction()) {
           break
         }
       }
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
     } else if (this.options.downKeys!.includes(key.name)) {
-      if(downAction()){
+      if (downAction()) {
         this.emit('nodeFocus', this.currentNode)
         this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
       }
     } else if (this.options.pageDownKeys!.includes(key.name)) {
       const h = this.lpos.yl - this.lpos.yi - 1
       for (let i = 0; i < h; i++) {
-        if(!downAction()){
+        if (!downAction()) {
           break
         }
       }
@@ -463,11 +463,14 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
   /**
    * Calculate node lines to be rendered according to expanded and hidden node's properties.
    */
-  protected getNodeLines(nodes: Node[] = this.rootNodes, level = 0, lines: { node: Node; line: string }[] = []
-    , height = this.height as number
-    ): { node: Node; line: string }[] {
+  protected getNodeLines(
+    nodes: Node[] = this.rootNodes,
+    level = 0,
+    lines: { node: Node; line: string }[] = [],
+    height = this.height as number
+  ): { node: Node; line: string }[] {
     nodes.some(node => {
-      if(lines.length>this.focusedLine+ height*2){ 
+      if (lines.length > this.focusedLine + height * 2) {
         // Heads up: height * 2 contemplate scroll down but also when expanding a large node and there is empty space below
         return true
       }
@@ -483,7 +486,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
           line: line.substring(0, i !== -1 ? i : line.length)
         })
         if (node.expanded) {
-          this.getNodeLines(node.children, level + 1, lines , height)
+          this.getNodeLines(node.children, level + 1, lines, height)
         }
       }
       return false

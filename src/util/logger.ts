@@ -18,7 +18,6 @@ export function debug(...args: any[]) {
 export function screenLogger(screen: Screen) {
   if (!screenLoggerInstance) {
     screenLoggerInstance = blessed.log({
-      parent: screen,
       scrollable: true,
       keyable: true,
       scrollbar: {
@@ -27,12 +26,14 @@ export function screenLogger(screen: Screen) {
       top: '70%',
       left: '70%'
     })
+    screen.prepend(screenLoggerInstance)
   }
   screenLoggerInstance.setFront()
-  screen.render
+  screen.render()
   return {
     log(...args: any[]) {
       screenLoggerInstance.log(args.map(a => inspect(a)).join(' '))
+      screenLoggerInstance.setFront()
       screen.render()
     },
     instance: screenLoggerInstance
