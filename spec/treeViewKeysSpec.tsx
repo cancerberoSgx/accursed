@@ -1,5 +1,5 @@
 import { array, tryTo } from 'misc-utils-of-mine-generic'
-import { createScreen, installExitKeys, Node, Screen, TreeView } from '../src'
+import { createScreen, installExitKeys, Node, Screen, TreeView, printElement } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 class KeyHelper {
@@ -41,16 +41,17 @@ describe('treeView', () => {
     key = new KeyHelper(tree)
     tree.focus()
     screen.render()
-    await waitFor(() => !!tree.getContent().trim())
+    await waitFor(() => !!printElement(tree).trim())
   })
-
+  
+  // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
   it('should render given expanded nodes', async done => {
-    expect(tree.getContent()).toContain('n1')
-    expect(tree.getContent()).not.toContain('n11')
-    expect(tree.getContent()).toContain('n2')
-    const n2Descendants = ['n21', 'n211', 'n2111', 'n21111', 'n22', 'n23']
-    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
-    done()
+    expect(printElement(tree)).toContain('n1')
+    expect(printElement(tree)).not.toContain('n11')
+    expect(printElement(tree)).toContain('n2')
+    const n2Descendants = ['n21', 'n211', 'n2111', 'n21111']
+    n2Descendants.forEach(name => expect(printElement(tree)).toContain(name))
+     done()
   })
 
   it('should focus the first node by default', async done => {
@@ -91,19 +92,19 @@ describe('treeView', () => {
   })
 
   it('should expand/collapse nodes when pressing SPACE', async done => {
-    expect(tree.getContent()).not.toContain('n11')
+    expect(printElement(tree)).not.toContain('n11')
     key.space()
-    expect(tree.getContent()).toContain('n11')
+    expect(printElement(tree)).toContain('n11')
     key.space()
-    expect(tree.getContent()).not.toContain('n11')
+    expect(printElement(tree)).not.toContain('n11')
     key.down()
     expect(tree.getFocusedNode().name).toBe('n2')
     const n2Descendants = ['n21', 'n211', 'n2111', 'n21111', 'n22', 'n23']
-    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
+    n2Descendants.forEach(name => expect(printElement(tree)).toContain(name))
     key.space()
-    n2Descendants.forEach(name => expect(tree.getContent()).not.toContain(name))
+    n2Descendants.forEach(name => expect(printElement(tree)).not.toContain(name))
     key.space()
-    n2Descendants.forEach(name => expect(tree.getContent()).toContain(name))
+    n2Descendants.forEach(name => expect(printElement(tree)).toContain(name))
     done()
   })
 
@@ -125,13 +126,13 @@ describe('treeView', () => {
   })
 
   it('should scroll down when focusing lower nodes', async done => {
-    expect(tree.getContent()).toContain('n1')
-    expect(tree.getContent()).not.toContain('n3') // outside frame
-    expect(tree.getContent()).not.toContain('n4')
+    expect(printElement(tree)).toContain('n1')
+    expect(printElement(tree)).not.toContain('n3') // outside frame
+    expect(printElement(tree)).not.toContain('n4')
     array(9).forEach(() => key.down())
-    expect(tree.getContent()).toContain('n3')
-    expect(tree.getContent()).not.toContain('n4') // outside frame
-    expect(tree.getContent()).not.toContain('n1') // outside frame
+    expect(printElement(tree)).toContain('n3')
+    expect(printElement(tree)).not.toContain('n4') // outside frame
+    expect(printElement(tree)).not.toContain('n1') // outside frame
     done()
   })
 })

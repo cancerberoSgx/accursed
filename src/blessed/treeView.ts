@@ -205,36 +205,44 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     }
     const upAction = () => {
       if (this.focusedLine <= 0) {
-        return
+        return false
       }
       this.focusedLine = this.focusedLine - 1
       this.currentNode = this.nodeLines[this.focusedLine].node
+      return true
     }
     const downAction = () => {
       if (this.focusedLine === this.nodeLines.length - 1) {
-        return
+        return false
       }
       this.focusedLine = this.focusedLine + 1
       this.currentNode = this.nodeLines[this.focusedLine].node
+      return true
     }
     if (this.options.upKeys!.includes(key.name)) {
-      upAction()
-      this.emit('nodeFocus', this.currentNode)
-      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
+      if(upAction()) {
+        this.emit('nodeFocus', this.currentNode)
+        this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
+      }
     } else if (this.options.pageUpKeys!.includes(key.name)) {
       for (let i = 0; i < (this.height as number) - 1; i++) {
-        upAction()
+        if(!upAction()){
+          break
+        }
       }
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
     } else if (this.options.downKeys!.includes(key.name)) {
-      downAction()
-      this.emit('nodeFocus', this.currentNode)
-      this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
+      if(downAction()){
+        this.emit('nodeFocus', this.currentNode)
+        this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
+      }
     } else if (this.options.pageDownKeys!.includes(key.name)) {
       const h = this.lpos.yl - this.lpos.yi - 1
       for (let i = 0; i < h; i++) {
-        downAction()
+        if(!downAction()){
+          break
+        }
       }
       this.emit('nodeFocus', this.currentNode)
       this.options.onNodeFocus && this.options.onNodeFocus(this.currentNode as Node & T)
@@ -291,7 +299,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     let attr = notSelectedAttr
     const selectedAttr = this.sattr(this.style.selectedNode || TreeView.defaultOptions.style!.selectedNode!)
     const focusedAttr = this.sattr(this.style.focusedNode || TreeView.defaultOptions.style!.focusedNode!)
-    this.nodeLines = this.getNodeLines(this.rootNodes)
+    this.nodeLines = this.getNodeLines()
     let offset = 0
     const height = coords.yl - coords.yi
     if (this.focusedLine > height - 1) {
@@ -389,7 +397,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
       n.expanded = true
       return false
     })
-    this.nodeLines = this.getNodeLines(this.rootNodes)
+    this.nodeLines = this.getNodeLines()
     const foundIndex = this.nodeLines.findIndex(l => l.node === (n as any))
     this.focusedLine = foundIndex === -1 ? this.focusedLine : foundIndex
     this.currentNode.hidden = false
@@ -455,9 +463,14 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
   /**
    * Calculate node lines to be rendered according to expanded and hidden node's properties.
    */
-  protected getNodeLines(nodes: Node[], level = 0): { node: Node; line: string }[] {
-    const lines: { node: Node; line: string }[] = []
-    nodes.forEach(node => {
+  protected getNodeLines(nodes: Node[] = this.rootNodes, level = 0, lines: { node: Node; line: string }[] = []
+    , height = this.height as number
+    ): { node: Node; line: string }[] {
+    nodes.some(node => {
+      if(lines.length>this.focusedLine+ height*2){ 
+        // Heads up: height * 2 contemplate scroll down but also when expanding a large node and there is empty space below
+        return true
+      }
       if (!node.hidden) {
         const line = `${repeat(level * this.options.levelIndent!, ' ')}${
           node.expanded || !node.children.length
@@ -470,9 +483,10 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
           line: line.substring(0, i !== -1 ? i : line.length)
         })
         if (node.expanded) {
-          lines.push(...this.getNodeLines(node.children, level + 1))
+          this.getNodeLines(node.children, level + 1, lines , height)
         }
       }
+      return false
     })
     return lines
   }
