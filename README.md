@@ -331,6 +331,7 @@ Think on the TREE of blessed elements that will be generated). Also buttons will
  * EditorWidget from Slapeditor project. I updated dependencies and documented EditorWidget which is great. Made easy to use API that automatically highlights and focus the editor.
  * ` visibleOnAncestorFocus` Automatically shows/hides descendants when ancestors (or any of its descendants) are focused
  * `screenLogger` simple logger visual logger API
+ * `rowColumnResize`: adds small controls to resize rows or columns, easy to use with the keyboard and non invasive since the¥ only appear when column/row or descendant have focus.
 
 ## JSX components
 
