@@ -64,6 +64,10 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
     return findDescendant(this.blessedElement, p)
   }
 
+  findDescendantNamed<T extends Element = Element>(name: string): T | undefined {
+    return findDescendantNamed(this.blessedElement, name)
+  }
+
   filterDescendants<T extends Element = Element>(p: ElementPredicate): T[] {
     return filterDescendants(this.blessedElement, p)
   }

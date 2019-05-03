@@ -1,0 +1,47 @@
+{
+  "name": "cli-fonts-gallery",
+  "version": "0.0.1",
+  "description": "cli-fonts-gallery",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": "bin/cli-fonts-gallery.js",
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "tsc && npm run copy",
+    "test": "ts-node -T spec/support/customJasmine && echo $?",
+    "test-debug": "exit 0 && node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
+    "prepare": "npm run build",
+    "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
+    "clean": "rm -rf dist",
+    "copy": "echo hello",
+    "all": "npm run clean && npm run prettier && npm run build && npm test"
+  },
+  "author": "Sebastian Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "accursed": "file:../..",
+    "figlet": "^1.2.1",
+    "misc-utils-of-mine-generic": "0.0.18",
+    "p-queue": "^5.0.0",
+    "redux": "^4.0.1",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.8",
+    "@types/shelljs": "^0.8.5",
+    "cli-driver": "^0.2.1",
+    "prettier": "^1.17.0",
+    "ts-node": "^8.1.0",
+    "ts-refactor": "0.0.2",
+    "typescript": "^3.4.5"
+  },
+  "keywords": [
+    "Command line",
+    "blessed",
+    "CLI",
+    "interactive",
+    "text editor",
+    "editor"
+  ],
+  "repository": "https://github.com/cancerberoSgx/accursed"
+}

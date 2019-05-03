@@ -1,6 +1,6 @@
 import { Component, React } from '..'
 import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
-import { BoxOptions } from '../blessedTypes'
+import { BoxOptions, Element } from '../blessedTypes'
 import { Div } from './jsxUtil'
 
 interface RowsProps extends BoxOptions {
@@ -42,13 +42,21 @@ export class Rows extends Component<RowsProps> {
       .filter(e => e.tagName === 'Row')!
       .map((c, i, Rows) => ({ ...c, height: c.attrs.height || `${Math.trunc(100 / Rows.length)}%` }))
     return (
-      <Div {...this.props}>
+      <Div {...this.props} _data={{...this.props._data||{}, __Rows_isRows: true}}>
         {Rows.map(c => (
-          <Div {...c.attrs} width={c.attrs.width || '100%'} height={c.height}>
+          <Div {...c.attrs} width={c.attrs.width || '100%'} height={c.height} _data={{...c.attrs && c.attrs ._data||{}, __Rows_isRow: true}}>
             {c.children}
           </Div>
         ))}
       </Div>
     )
   }
+}
+
+export function isRows(e: Element){
+  return e && e.options._data &&e.options._data.__Rows_isRows
+}
+
+export function isRow(e: Element){
+  return e && e.options._data &&e.options._data.__Rows_isRow
 }

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "declaration": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+       "paths": {
+      "blessed-contrib": ["../../dist/src/declarations/blessed-contrib"],      
+      "blessed": ["../../dist/src/declarations/blessed"]
+    },
+    "jsx": "react",
+  },
+  "include": [
+    "src", "spec"
+  ],
+  "exclude": [
+    "node_modules", "dist"
+  ]
+}

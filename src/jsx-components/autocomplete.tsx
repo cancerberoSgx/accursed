@@ -5,11 +5,22 @@ import { ArtificialEvent } from '../jsx/types'
 
 interface P extends TextboxOptions {
   onChange?(
+    /**
+     * Notifies when the user submitted the box, by pressing enter. This is not triggered just when scrolling the list using the arrow keys.
+     */
     e: ArtificialEvent<Textbox> & {
       value: any
     }
   ): void
 
+  /**
+   * Notifies when the user scrolls through the options using the arrow keys or mouse wheel. It doesn't  when the user confirm the selection pressing enter, for that use [[onChange]]
+   */
+  onSelectOption?(
+    e: ArtificialEvent<Textbox> & {
+      value: any
+    }
+  ): void
   /**
    * Throttling time to render suggestion list. Default value is 0
    */
@@ -28,6 +39,7 @@ interface P extends TextboxOptions {
   inputOptions?: TextboxOptions
   listOptions?: ListOptions
 }
+
 /**
  * Basic autocomplete input, with given options string array using textbox and a list. The list is only shown
  * when there are matches and the textbox is being edited.
@@ -72,7 +84,7 @@ export class AutoComplete extends Component<P> {
     this.props.inputOptions = this.props.inputOptions || {}
     this.props.inputOptions!.value = this.props.inputOptions!.value || this.props.value || ''
     return (
-      <Div {...this.props} onChange={undefined}>
+      <Div {...this.props} onChange={e=>{}}>
         <textbox
           hoverText="arrows to autocomplete"
           width={12}
@@ -89,7 +101,8 @@ export class AutoComplete extends Component<P> {
           onChange={e => {
             this.props.onChange && this.props.onChange(e)
           }}
-          onKeyPress={throttle(
+          onKeyPress={
+            // throttle(
             e => {
               const list = this.listRef.current!
               const input = e.currentTarget!
@@ -111,6 +124,7 @@ export class AutoComplete extends Component<P> {
                 if (val) {
                   input.setValue(val)
                   input.screen.render()
+                  this.props.onSelectOption && this.props.onSelectOption({value: val, currentTarget: input })
                 }
               } else if (e.key.name === 'down') {
                 const selected = list.selected! < list.items.length! - 1 ? list.selected! + 1 : 0
@@ -119,6 +133,7 @@ export class AutoComplete extends Component<P> {
                 if (val) {
                   input.setValue(val)
                   input.screen.render()
+                  this.props.onSelectOption && this.props.onSelectOption({value: val, currentTarget: input })
                 }
               } else {
                 const v = value.toLowerCase()
@@ -129,10 +144,11 @@ export class AutoComplete extends Component<P> {
                   input.screen.render()
                 }
               }
-            },
-            this.props.suggestionRenderThrottle || 0,
-            { trailing: true }
-          )}
+            }
+            // this.props.suggestionRenderThrottle || 0,
+            // { trailing: true }
+          // )
+        }
         />
         <list
           hidden={true}

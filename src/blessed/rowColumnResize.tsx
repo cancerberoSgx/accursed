@@ -1,5 +1,9 @@
-import { Element, findAscendant, isElement } from '..'
+import { Element, findAscendant, isElement, React} from '..'
 import { screenLogger } from '../util';
+import { Component, ref } from '../jsx';
+import { Div, Button2 } from '../jsx-components';
+import { focusableOpts } from '../util/sharedOptions';
+import { isAttached } from './waitFor';
 let rowColumnResize
 interface Options {
   e: Element
@@ -12,9 +16,10 @@ interface Options {
 }
 /**
  * TODO:
- *  * maximum and minimum (so containers dont get invisible)
+ *  * maximum and minimum (so containers dont get invisible). Nice to have: per column/row
  *  * restore button on all boxes
  *  * support width also since the algorithm should be the same.
+ * * a single button and be able to resize with arrow keys / mouse wheel
  */
 export function rowColumnResizeHandler(options: Options) {
   const { e, increment = false, step = 10, width } = options
@@ -28,20 +33,10 @@ export function rowColumnResizeHandler(options: Options) {
       screenLogger(e.screen).log('otherColumns', otherColumns.length,  get(column.options._data.rowColumnResize), 'otherStep: ', Math.round(step / otherColumns.length))
       set(column.options._data.rowColumnResize, get(column.options._data.rowColumnResize) + (increment ? step : step * -1))
       const otherStep = Math.round(step / otherColumns.length)
-      // column.options._data.rowColumnResize.width =
-        // column.options._data.rowColumnResize.width + (increment ? step : step * -1)
-        // screenLogger(e.screen).log('otherColumns', otherColumns.length,  get(column.options._data.rowColumnResize), 'otherStep: ', Math.round(step / otherColumns.length))
-     
         set(column, `${get(column.options._data.rowColumnResize)}%`)
-      // column.width = `${column.options._data.rowColumnResize.width}%`
       otherColumns.forEach(c => {
       set(c.options._data.rowColumnResize, get(c.options._data.rowColumnResize) - (increment ? otherStep : otherStep * -1))
-
-        // c.options._data.rowColumnResize.width =
-          // c.options._data.rowColumnResize.width - (increment ? otherStep : otherStep * -1)
         set(c, `${get(c.options._data.rowColumnResize)}%`)
-
-        // c.width = `${c.options._data.rowColumnResize.width}%`
       })
       e.screen.render()
     }
@@ -58,3 +53,34 @@ export function rowColumnResizeHandler(options: Options) {
     }
   }
 }
+
+
+// export class RowColumnResizer extends Component {
+//   constructor(p,s){
+//     super(p,s)
+//   }
+// render(){
+//   return <Div height={1} name="rowColumnResize" hidden={true} ref={ref<Element>(c=>this.install(c))}>
+//   <Button2
+//     {...focusableOpts()}
+//     border={undefined}
+//     onClick={e => rowColumnResizeHandler({ e: e.currentTarget, increment: false, width: false })}>
+//     {'<'}
+//   </Button2>
+//   <Button2
+//     {...focusableOpts()}
+//     border={undefined}
+//     onClick={e => rowColumnResizeHandler({ e: e.currentTarget, increment: true, width: false  })}>
+//     {'>'}
+//   </Button2>               
+// </Div>
+// }
+// async install(box: Element){
+//   await attached(box)
+
+// }
+// }
+
+// async function attached(e: Element){
+//   return isAttached(e) ? Promise.resolve(e) : new Promise(resolve=>e.once('attach', ()=>resolve(e)))
+// }
