@@ -20,6 +20,8 @@ j.configureDefaultReporter({
           .map(a => {
             if (a instanceof Error) {
               return `${a}\n${a.stack.split('\n').join('\n')}`
+            } else if (typeof a === 'string') {
+              return a
             } else {
               return inspect(a)
             }

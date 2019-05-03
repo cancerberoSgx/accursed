@@ -7,10 +7,7 @@ import { Panel } from './toolPanel/toolPanel'
 export class App extends Component {
   constructor(p, s) {
     super(p, s)
-    this.tabSelected = this.tabSelected.bind(this)
   }
-
-  // listBar: ListBar2;
   render() {
     return (
       <Div>

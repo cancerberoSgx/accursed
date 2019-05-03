@@ -2,9 +2,8 @@ import { React } from '..'
 import { getJSXChildrenProps, VirtualComponent } from '../blessed/virtualElement'
 import { IKeyEventArg, List, ListOptions } from '../blessedTypes'
 import { Component } from '../jsx/component'
-import { ref, resolveRef } from '../jsx/createElement'
+import { ref } from '../jsx/createElement'
 import { ArtificialEvent } from '../jsx/types'
-import { Div } from './jsxUtil';
 
 interface SelectProps extends ListOptions {
   /**
@@ -56,40 +55,41 @@ export class Select extends Component<SelectProps> {
     this.items = selectOptions.map(o => o.children.join(' '))
     this.values = selectOptions.map(o => o.attrs.value || o.children.join(' '))
     return (
-        <list
-      ref={ref<List>(c => {this.list = c
-      })}
-      focusable={true}
-      keys={true}
-      keyable={true}
-      interactive={true}
-      clickable={true}
-      vi={true}
-      mouse={true}
-      input={true}
-      style={{ bg: 'blue', item: { bg: 'green' }, focus: { bg: 'yellow' }, selected: { bg: 'red' } }}
-      {...{ ...this.props, ref: undefined, children: undefined }}
-      items={this.items}
-      on={[
-      'select item',
-      (item, index) => {
-      this.props.onSelectItem &&
-      this.props.onSelectItem({
-      currentTarget: this.list,
-      index: index || 0,
-      value: this.values[index || 0]
-      })
-      }
-      ]}
-      onSelect={e => {
-      this.props.onSelect &&
-      this.props.onSelect({
-      ...e,
-      index: e.currentTarget.selected || 0,
-      value: this.values[e.currentTarget.selected || 0]
-      })
-      }}
-      onKeyPress={this.onKeyPress}
+      <list
+        ref={ref<List>(c => {
+          this.list = c
+        })}
+        focusable={true}
+        keys={true}
+        keyable={true}
+        interactive={true}
+        clickable={true}
+        vi={true}
+        mouse={true}
+        input={true}
+        style={{ bg: 'blue', item: { bg: 'green' }, focus: { bg: 'yellow' }, selected: { bg: 'red' } }}
+        {...{ ...this.props, ref: undefined, children: undefined }}
+        items={this.items}
+        on={[
+          'select item',
+          (item, index) => {
+            this.props.onSelectItem &&
+              this.props.onSelectItem({
+                currentTarget: this.list,
+                index: index || 0,
+                value: this.values[index || 0]
+              })
+          }
+        ]}
+        onSelect={e => {
+          this.props.onSelect &&
+            this.props.onSelect({
+              ...e,
+              index: e.currentTarget.selected || 0,
+              value: this.values[e.currentTarget.selected || 0]
+            })
+        }}
+        onKeyPress={this.onKeyPress}
       />
     )
   }
