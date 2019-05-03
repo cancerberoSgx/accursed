@@ -3,6 +3,7 @@ import { appendFileSync } from 'fs'
 import { inspect } from 'util'
 import { Log, Screen } from '../blessedTypes'
 import { inBrowser } from './browser'
+import { focusableOpts } from './sharedOptions';
 
 export function debug(...args: any[]) {
   if (inBrowser()) {
@@ -18,6 +19,7 @@ export function debug(...args: any[]) {
 export function screenLogger(screen: Screen) {
   if (!screenLoggerInstance) {
     screenLoggerInstance = blessed.log({
+      ...focusableOpts(),
       scrollable: true,
       keyable: true,
       scrollbar: {
