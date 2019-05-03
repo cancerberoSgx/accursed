@@ -62,7 +62,13 @@ export interface TreeOptions<T extends TreeViewNode = TreeViewNode> extends Widg
    * Keys to scroll down in the tree. It will focus the node that is below the current focused node.
    */
   downKeys?: string[]
+  /**
+   * If given, those keys will be installed in the list to advance 1 page down. By default [pagedown] is installed.
+   */
   pageDownKeys?: string[]
+  /**
+   * If given, those keys will be installed in the list to advance 1 page down. By default [pageup] is installed.
+   */
   pageUpKeys?: string[]
   /**
    * Indentation size for expanded children. Default value is 2.

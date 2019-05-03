@@ -14,7 +14,8 @@
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
     "copy": "echo hello",
-    "all": "npm run clean && npm run prettier && npm run build && npm test"
+    "all": "npm run clean && npm run prettier && npm run build && npm test",
+    "browserify": "rm -rf dist build && npm run build && mkdir -p build && npx browserify   -x blessed  -x term.js -x blessed-contrib -x editor-widget  -x text-buffer dist/src/main.js -o build/cli-fonts-gallery.js --ignore-missing   --no-debug && cp src/browser/* build && npx terser build/cli-fonts-gallery.js -o build/cli-fonts-gallery.js && mkdir -p ../../docs/browser && mv build/* ../../docs/browser" 
   },
   "author": "Sebastian Gurin",
   "license": "MIT",

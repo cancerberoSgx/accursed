@@ -35,7 +35,7 @@ export function appLogger(...args: any[]) {
       pendingMessages.length = 0
     }
     logEl.log(s)
-    debug(...args)
+    // debug(...args)
     logEl.screen.render()
     // appLogger(a.error);
   } else {

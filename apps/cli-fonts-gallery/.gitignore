@@ -9,3 +9,4 @@ log*.txt
 test_output.txt
 credentials.json
 token.json
+build

@@ -3,13 +3,16 @@ import { appendFileSync } from 'fs'
 import { inspect } from 'util'
 import { Log, Screen } from '../blessedTypes'
 import { inBrowser } from './browser'
-import { focusableOpts } from './sharedOptions';
+import { focusableOpts } from './sharedOptions'
 
 export function debug(...args: any[]) {
   if (inBrowser()) {
     console.log(...args)
   } else {
-    appendFileSync('log2.txt', '\n' + args.map(a => inspect(a)).join(' |||||||||| '))
+    appendFileSync(
+      'log2.txt',
+      '\n' + args.map(a => inspect(a, { compact: true, breakLength: 200, maxArrayLength: 5 })).join(' |||||||||| ')
+    )
   }
 }
 

@@ -16,21 +16,21 @@ import { RefObject } from '../jsx'
 import { BlessedProgram } from './blessedProgram'
 
 /**
- * These are the blessed library elements. 
+ * These are the blessed library elements.
  *
  * They all are [[EventEmitter]].
  *
- * The base class is [[Node]] which implements the tree structure and general events. 
+ * The base class is [[Node]] which implements the tree structure and general events.
  *
  * [[BlessedElement]] implements a visual object and all concrete elements to build a GUI inherits from it,
  * like [[BoxElement]], [[ListElement]], etc.
  *
  * All elements are rendered in a [[Screen]] which is the top-level Node of the tree. It's responsible of
- * drawing them and supporting keyboard, mouse and life cycle events, colors and styles, ect. 
+ * drawing them and supporting keyboard, mouse and life cycle events, colors and styles, ect.
  *
  * The screen is supported by the [[BlessedProgram]] which directly dialogues with the terminal and devices
  * thtough library [[TPut]] and others. It supports a low level API which is compatible with most terminal
- * implementations. 
+ * implementations.
  *
  * Finally, end users can build their GUIs using concrete elements such as [[List]], [[Table]], [[ListTable]],
  * [[Box]], [[Listbab]], [[Button]], [[Textarea]], etc. These respect a common API regarding positioning,
@@ -38,7 +38,7 @@ import { BlessedProgram } from './blessedProgram'
  *
  * Users can extend these classes to build new custom elements with their own events, and aestetic, both
  * composing concrete elements or extending [[BlessedElement]] or [[Node]] classes and implement a custom
- * [[BlessedElement.render]] method. 
+ * [[BlessedElement.render]] method.
  */
 export namespace Widgets {
   export namespace Types {
@@ -232,11 +232,11 @@ export namespace Widgets {
     terminfoPrefix?: string
     termcapFile?: string
   }
-// TODO: move to blessedProgram.d.ts
+  // TODO: move to blessedProgram.d.ts
 
-/**
- * Low level implementation of tput protocol to dialogue with terminal implementations. 
- */
+  /**
+   * Low level implementation of tput protocol to dialogue with terminal implementations.
+   */
   class Tput implements IHasOptions<TputsOptions> {
     constructor(opts: TputsOptions)
 

@@ -1,16 +1,12 @@
-import { Element, findAscendant, isElement, React} from '..'
-import { screenLogger } from '../util';
-import { Component, ref } from '../jsx';
-import { Div, Button2 } from '../jsx-components';
-import { focusableOpts } from '../util/sharedOptions';
-import { isAttached } from './waitFor';
+import { Element, findAscendant, isElement } from '..'
+import { screenLogger } from '../util'
 let rowColumnResize
 interface Options {
   e: Element
   increment?: boolean
   step?: number
   /**
-   * if true it will work with element's `width` attribute, as if they were CColumns. If false it will work with `height` as if they were Rows. 
+   * if true it will work with element's `width` attribute, as if they were CColumns. If false it will work with `height` as if they were Rows.
    */
   width: boolean
 }
@@ -30,30 +26,41 @@ export function rowColumnResizeHandler(options: Options) {
       a => isElement(a) && a.options._data && a.options._data.rowColumnResize && a !== column
     ) as Element[]
     if (otherColumns.length) {
-      screenLogger(e.screen).log('otherColumns', otherColumns.length,  get(column.options._data.rowColumnResize), 'otherStep: ', Math.round(step / otherColumns.length))
-      set(column.options._data.rowColumnResize, get(column.options._data.rowColumnResize) + (increment ? step : step * -1))
+      screenLogger(e.screen).log(
+        'otherColumns',
+        otherColumns.length,
+        get(column.options._data.rowColumnResize),
+        'otherStep: ',
+        Math.round(step / otherColumns.length)
+      )
+      set(
+        column.options._data.rowColumnResize,
+        get(column.options._data.rowColumnResize) + (increment ? step : step * -1)
+      )
       const otherStep = Math.round(step / otherColumns.length)
-        set(column, `${get(column.options._data.rowColumnResize)}%`)
+      set(column, `${get(column.options._data.rowColumnResize)}%`)
       otherColumns.forEach(c => {
-      set(c.options._data.rowColumnResize, get(c.options._data.rowColumnResize) - (increment ? otherStep : otherStep * -1))
+        set(
+          c.options._data.rowColumnResize,
+          get(c.options._data.rowColumnResize) - (increment ? otherStep : otherStep * -1)
+        )
         set(c, `${get(c.options._data.rowColumnResize)}%`)
       })
       e.screen.render()
     }
   }
 
-  function get<T extends {width: number,height: number }>(e:T):number{
-    return width?e.width : e.height
+  function get<T extends { width: number; height: number }>(e: T): number {
+    return width ? e.width : e.height
   }
-  function set<T extends {width: string|number,height: string|number, }>(e: T, value: string|number){
-    if(width){
+  function set<T extends { width: string | number; height: string | number }>(e: T, value: string | number) {
+    if (width) {
       e.width = value
-    }else {
+    } else {
       e.height = value
     }
   }
 }
-
 
 // export class RowColumnResizer extends Component {
 //   constructor(p,s){
@@ -72,7 +79,7 @@ export function rowColumnResizeHandler(options: Options) {
 //     border={undefined}
 //     onClick={e => rowColumnResizeHandler({ e: e.currentTarget, increment: true, width: false  })}>
 //     {'>'}
-//   </Button2>               
+//   </Button2>
 // </Div>
 // }
 // async install(box: Element){

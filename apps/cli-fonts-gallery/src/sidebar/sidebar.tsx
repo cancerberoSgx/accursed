@@ -12,7 +12,6 @@ export class Sidebar extends Component {
   autocomplete: AutoComplete
 
   render() {
-    const fonts = enumKeys(FIGLET_FONTS)
     return (
       <TabPanel {...tabPanelOpts()} ref={ref<TabPanel>(c => (this.tabPanel = c))}>
         <Tab active={true}>

@@ -5,6 +5,7 @@ import { box } from '../'
 import { Element, Node, Screen } from '../blessedTypes'
 import { EventOptions, React, ref } from '../jsx'
 import { resolveRef } from '../jsx/createElement'
+import { isEditorWidget } from '../util'
 import { focusableOpts } from '../util/sharedOptions'
 
 /**
@@ -94,10 +95,6 @@ export function createEditorAsync(options: CreateEditorOptions): Promise<IEditor
       throw error
     }
   })
-}
-
-export function isEditorWidget(n: Node): n is IEditor {
-  return n && (n as any).moveCursorHorizontal && (n as any).lineWithEndingForRow
 }
 
 React.addIntrinsicElementConstructors({ editor: createEditor })

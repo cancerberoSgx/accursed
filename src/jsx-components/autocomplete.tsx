@@ -1,4 +1,4 @@
-import { notSameNotFalsy, throttle } from 'misc-utils-of-mine-generic'
+import { notSameNotFalsy } from 'misc-utils-of-mine-generic'
 import { Component, Div, List, ListOptions, React, TextboxOptions } from '..'
 import { Textbox } from '../blessedTypes'
 import { ArtificialEvent } from '../jsx/types'
@@ -84,7 +84,7 @@ export class AutoComplete extends Component<P> {
     this.props.inputOptions = this.props.inputOptions || {}
     this.props.inputOptions!.value = this.props.inputOptions!.value || this.props.value || ''
     return (
-      <Div {...this.props} onChange={e=>{}}>
+      <Div {...this.props as any}>
         <textbox
           hoverText="arrows to autocomplete"
           width={12}
@@ -124,7 +124,7 @@ export class AutoComplete extends Component<P> {
                 if (val) {
                   input.setValue(val)
                   input.screen.render()
-                  this.props.onSelectOption && this.props.onSelectOption({value: val, currentTarget: input })
+                  this.props.onSelectOption && this.props.onSelectOption({ value: val, currentTarget: input })
                 }
               } else if (e.key.name === 'down') {
                 const selected = list.selected! < list.items.length! - 1 ? list.selected! + 1 : 0
@@ -133,7 +133,7 @@ export class AutoComplete extends Component<P> {
                 if (val) {
                   input.setValue(val)
                   input.screen.render()
-                  this.props.onSelectOption && this.props.onSelectOption({value: val, currentTarget: input })
+                  this.props.onSelectOption && this.props.onSelectOption({ value: val, currentTarget: input })
                 }
               } else {
                 const v = value.toLowerCase()
@@ -147,8 +147,8 @@ export class AutoComplete extends Component<P> {
             }
             // this.props.suggestionRenderThrottle || 0,
             // { trailing: true }
-          // )
-        }
+            // )
+          }
         />
         <list
           hidden={true}
