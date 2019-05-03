@@ -1,7 +1,5 @@
 import { AutoComplete, React, ref, Tab, TabBody, TabLabel, TabPanel, Textarea } from 'accursed'
-import { enumKeys } from 'misc-utils-of-mine-typescript'
 import { Component } from '../component'
-import { FIGLET_FONTS } from '../figletFonts'
 import { tabLabelOpts, tabPanelOpts } from '../util/style'
 import { FontEditor } from './fontEditor'
 import { Metadata } from './metadataPanel'

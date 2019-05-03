@@ -46,6 +46,4 @@ export class App extends Component {
       </Div>
     )
   }
-
-  protected tabSelected() {}
 }

@@ -4,10 +4,10 @@ import { format, inspect } from 'util'
 
 rm('-rf', 'test_output.txt')
 
-var Jasmine = require('jasmine')
+let Jasmine = require('jasmine')
 
-//@ts-ignore
-var j = new Jasmine()
+// @ts-ignore
+let j = new Jasmine()
 
 j.loadConfigFile('spec/support/jasmine.json')
 

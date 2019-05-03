@@ -39,9 +39,11 @@ export interface TypedReducer<T extends ActionType> {
   reduce: Reducer<T>
 }
 
-/** listeners react to actions AFTER they are dispatched (model changed) and can be asynchronous. They don't
+/**
+ * listeners react to actions AFTER they are dispatched (model changed) and can be asynchronous. They don't
  * modify the state but perform some action in consequence of a state change. (are like redux-sagas). They can
- * dispatch. */
+ * dispatch.
+ */
 export type Listener<T extends ActionType> = (a: ActionForType<T>, store: Store) => void
 export interface Saga<T extends ActionType = ACTIONS> {
   type: T

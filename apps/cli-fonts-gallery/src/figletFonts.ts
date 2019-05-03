@@ -192,7 +192,7 @@ export enum FIGLET_FONTS {
   'Octal' = 'Octal',
   'Ogre' = 'Ogre',
   'Old Banner' = 'Old Banner',
-  "Patorjk's Cheese" = "Patorjk's Cheese",
+  'Patorjk\'s Cheese' = 'Patorjk\'s Cheese',
   'Patorjk-HeX' = 'Patorjk-HeX',
   'Pawp' = 'Pawp',
   'Peaks Slant' = 'Peaks Slant',

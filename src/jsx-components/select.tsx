@@ -58,7 +58,6 @@ export class Select extends Component<SelectProps> {
     return (
         <list
       ref={ref<List>(c => {this.list = c
-      // ; resolveRef(this.props, this)
       })}
       focusable={true}
       keys={true}
@@ -69,8 +68,7 @@ export class Select extends Component<SelectProps> {
       mouse={true}
       input={true}
       style={{ bg: 'blue', item: { bg: 'green' }, focus: { bg: 'yellow' }, selected: { bg: 'red' } }}
-      // {...{ ...this.props, ref: undefined }}
-      // children={undefined}
+      {...{ ...this.props, ref: undefined, children: undefined }}
       items={this.items}
       on={[
       'select item',

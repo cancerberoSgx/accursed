@@ -1,4 +1,4 @@
-import { Br, debug, Div, Log, React, ref } from 'accursed'
+import { Br, Div, Log, React, ref } from 'accursed'
 import { inspect } from 'util'
 import { Component } from '../component'
 import { ACTIONS, FontsErrorAction } from '../store/fontsAction'
