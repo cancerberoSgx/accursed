@@ -1,11 +1,13 @@
-import { Action, State } from './store';
+import { Action } from './store';
+import { State } from "./state";
 // implementations 
 let fontsAction;
 export enum ACTIONS {
   FONTS_SHOW = 'FONTS_SHOW',
   FONTS_FONT_SELECTED = 'FONTS_FONT_SELECTED',
   FONTS_ERROR = "FONTS_ERROR",
-  FONTS_TEXT_CHANGED = 'FONTS_TEXT_CHANGED'
+  FONTS_TEXT_CHANGED = 'FONTS_TEXT_CHANGED',
+  FONT_METADATA_SHOW = "FONTS_SHOW_FONT_METADATA"
 }
 export interface FontSelectedAction extends Action<ACTIONS.FONTS_FONT_SELECTED> {
   type: ACTIONS.FONTS_FONT_SELECTED;
@@ -24,6 +26,12 @@ export interface FontsErrorAction extends Action<ACTIONS.FONTS_ERROR> {
   error: any;
 }
 
+export interface FontsMetadataShowAction extends Action<ACTIONS.FONT_METADATA_SHOW> {
+  type: ACTIONS.FONT_METADATA_SHOW;
+
+  options: any
+  headerComment: any
+}
 
 export const fontShow = {
   type: ACTIONS.FONTS_SHOW,
@@ -49,3 +57,11 @@ export const textChange = {
   
 }
 
+
+export const fontMetadataShow = {
+  type: ACTIONS.FONT_METADATA_SHOW,
+  reduce(s: State, a: TextChangeAction) {
+    return { ...s, fonts: { ...s.fonts, text: a.text } };
+  }
+  
+}

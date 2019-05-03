@@ -1,5 +1,5 @@
 import { Br, Column, Columns, Div, React, ref, Row, Rows, ListBar2 } from 'accursed'
-import { Output } from './editor/editors'
+import { Output } from './editor/outputPanel'
 import { Sidebar } from './sidebar/sidebar'
 import { Panel } from './toolPanel/toolPanel'
 import { focusableOpts } from './util/style';
@@ -12,29 +12,27 @@ export class App extends Component {
     this.tabSelected = this.tabSelected.bind(this)
   }
 
-  listBar: ListBar2;
+  // listBar: ListBar2;
   render() {
     return (
-      <Div ref={ref(c => this.start())}>
-        <ListBar2 {...focusableOpts()} ref={ref<ListBar2>(c => (this.listBar = c))} onSelectItem={this.tabSelected}>
+      <Div>
+        {/* <ListBar2 {...focusableOpts()} ref={ref<ListBar2>(c => (this.listBar = c))} onSelectItem={this.tabSelected}> */}
             {/* {this.s.documents.map(d => (
               <ListBarCommand _data={{ filePath: d.path }} callback={this.tabSelected}>
                 {d.name}
               </ListBarCommand>
             ))}
             {} */}
-          </ListBar2>
-
+          {/* </ListBar2> */}
         <Columns>
-          <Column width="40%">
-            <Sidebar {...this.props} />
-          </Column>
-          <Column width="60%">
+          <Column width="70%">
             <Rows>
-              <Row height="65%">
+             
+            <Row height="65%">
                 <Output {...this.props} />
               </Row>
-              <Row height="37%">
+
+              <Row height="30%">
                 <Br />
                 <Panel {...this.props} />
               </Row>
@@ -42,15 +40,14 @@ export class App extends Component {
             </Rows>
             <Br />
           </Column>
+          <Column width="30%">
+            <Sidebar {...this.props} />
+          </Column>
+          
           {}
         </Columns>
       </Div>
     )
-  }
-  start(): any {
-    setTimeout(() => {
-    
-    }, 200)
   }
 
   protected tabSelected() {

@@ -1,5 +1,7 @@
 import { Component as AccursedComponent } from 'accursed'
-import { ActionForType, AllActions, Store, State } from './store'
+import { ActionForType, AllActions } from './store'
+import { Store } from "./storeImpl";
+import { State } from "./state";
 
 export interface Props {
   store: Store

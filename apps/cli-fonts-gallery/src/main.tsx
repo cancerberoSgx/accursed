@@ -1,10 +1,11 @@
 import { createScreen, debug, installFocusAndExitKeysForEditorWidget, React, Screen } from 'accursed'
 import { App } from './app'
-import { Store, State } from './store';
+import { Store } from "./storeImpl";
+import { State } from "./state";
 import { ACTIONS, fontSelected, textChange, fontShow } from "./fontsAction";
 import { enumKeys } from 'misc-utils-of-mine-typescript';
 import { FIGLET_FONTS } from './figletFonts';
-import { onTextChangeRenderer, onFontSelectRenderer } from './sagas';
+import { onTextChangeRenderer, onFontSelectRenderer, onFontChangeMetadataExtractor } from './sagas';
 import { appLogger } from './toolPanel/debugTool';
 
 export function main() {
@@ -12,12 +13,12 @@ export function main() {
   try {
     const initialState : State= {
       fonts: {
-        text: 'Hello', 
+        text: 'Hello World', 
         selected: enumKeys(FIGLET_FONTS)[0]
       }
     }
     const store = new Store(initialState)
-    const allSagas = [onFontSelectRenderer, onTextChangeRenderer]
+    const allSagas = [onFontSelectRenderer, onTextChangeRenderer, onFontChangeMetadataExtractor]
     allSagas.forEach(s=>{
       store.addActionListener(s.type, s.listener)
     })

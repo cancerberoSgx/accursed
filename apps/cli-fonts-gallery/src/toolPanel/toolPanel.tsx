@@ -21,7 +21,7 @@ export class Panel extends Component {
         <Tab >
           <TabLabel {...tabLabelOpts()}>Terminal</TabLabel>
           <TabBody>
-            {/* <Terminal {...this.props} /> */}
+            {/* <terminal {...this.props} /> */}
           </TabBody>
           {}
         </Tab>

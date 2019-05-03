@@ -24,12 +24,13 @@ export const focusableOpts: () => TextareaOptions = () => ({
     ...inactiveStyle(),
     border: {
       type: 'line',
-      fg: 'cyan'
+      fg: 'white'
     },
     // border: undefined,
     focus: {
       fg: 'black',
       bg: 'lightgray',
+      bold: true,
       border: {
         fg: 'red'
       }
