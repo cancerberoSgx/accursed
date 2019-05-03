@@ -1,7 +1,7 @@
 import { Br, React, Tab, TabBody, TabLabel, TabPanel } from 'accursed'
+import { Component } from '../component'
 import { focusableOpts, tabLabelOpts, tabPanelOpts } from '../util/style'
 import { LogPanel } from './debugTool'
-import { Component } from '../component';
 
 /** this is the bottom panel that contains tools such as the terminal, problems, etc */
 export class Panel extends Component {
@@ -11,21 +11,19 @@ export class Panel extends Component {
       // <Collapsible>
       // <Maximize>
       <TabPanel {...tabPanelOpts()}>
-        <Tab  active={true}>
+        <Tab active={true}>
           <TabLabel {...tabLabelOpts()}>Debug</TabLabel>
           <TabBody>
             <LogPanel {...this.props} />
           </TabBody>
           {}
         </Tab>
-        <Tab >
+        <Tab>
           <TabLabel {...tabLabelOpts()}>Terminal</TabLabel>
-          <TabBody>
-            {/* <terminal {...this.props} /> */}
-          </TabBody>
+          <TabBody>{/* <terminal {...this.props} /> */}</TabBody>
           {}
         </Tab>
-        <Tab >
+        <Tab>
           <TabLabel {...tabLabelOpts()}>Problems</TabLabel>
           <TabBody>
             <textbox {...focusableOpts()} value="Filter" label="Filter" border="line" />

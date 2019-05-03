@@ -1,6 +1,6 @@
-export enum FIGLET_FONTS{
+export enum FIGLET_FONTS {
   '1Row' = '1Row',
-  '3-D'='3-D',
+  '3-D' = '3-D',
   '3D Diagonal' = '3D Diagonal',
   '3D-ASCII' = '3D-ASCII',
   '3x5' = '3x5',
@@ -28,7 +28,7 @@ export enum FIGLET_FONTS{
   'Avatar' = 'Avatar',
   'B1FF' = 'B1FF',
   'Banner' = 'Banner',
-  'Banner3-D'='Banner3-D',
+  'Banner3-D' = 'Banner3-D',
   'Banner3' = 'Banner3',
   'Banner4' = 'Banner4',
   'Barbwire' = 'Barbwire',
@@ -56,7 +56,7 @@ export enum FIGLET_FONTS{
   'Bulbhead' = 'Bulbhead',
   'Caligraphy' = 'Caligraphy',
   'Caligraphy2' = 'Caligraphy2',
-  'Calvin S' ='Calvin S',
+  'Calvin S' = 'Calvin S',
   'Cards' = 'Cards',
   'Catwalk' = 'Catwalk',
   'Chiseled' = 'Chiseled',
@@ -82,7 +82,7 @@ export enum FIGLET_FONTS{
   'Dancing Font' = 'Dancing Font',
   'Decimal' = 'Decimal',
   'Def Leppard' = 'Def Leppard',
-  'Delta Corps Priest 1'='Delta Corps Priest 1',
+  'Delta Corps Priest 1' = 'Delta Corps Priest 1',
   'Diamond' = 'Diamond',
   'Diet Cola' = 'Diet Cola',
   'Digital' = 'Digital',
@@ -104,7 +104,7 @@ export enum FIGLET_FONTS{
   'Epic' = 'Epic',
   'Fender' = 'Fender',
   'Filter' = 'Filter',
-  'Fire Font-k'='Fire Font-k',
+  'Fire Font-k' = 'Fire Font-k',
   'Fire Font-s' = 'Fire Font-s',
   'Flipped' = 'Flipped',
   'Flower Power' = 'Flower Power',
@@ -156,7 +156,7 @@ export enum FIGLET_FONTS{
   'Konto Slant' = 'Konto Slant',
   'Konto' = 'Konto',
   'LCD' = 'LCD',
-  'Larry 3D 2'='Larry 3D 2',
+  'Larry 3D 2' = 'Larry 3D 2',
   'Larry 3D' = 'Larry 3D',
   'Lean' = 'Lean',
   'Letters' = 'Letters',
@@ -192,7 +192,7 @@ export enum FIGLET_FONTS{
   'Octal' = 'Octal',
   'Ogre' = 'Ogre',
   'Old Banner' = 'Old Banner',
-  'Patorjk\'s Cheese' = 'Patorjk\'s Cheese',
+  "Patorjk's Cheese" = "Patorjk's Cheese",
   'Patorjk-HeX' = 'Patorjk-HeX',
   'Pawp' = 'Pawp',
   'Peaks Slant' = 'Peaks Slant',
@@ -284,7 +284,5 @@ export enum FIGLET_FONTS{
   'Weird' = 'Weird',
   'Wet Letter' = 'Wet Letter',
   'Whimsy' = 'Whimsy',
-  'Wow' = 'Wow',
-  
-
+  'Wow' = 'Wow'
 }

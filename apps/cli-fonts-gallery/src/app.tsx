@@ -1,12 +1,10 @@
-import { Br, Column, Columns, Div, React, ref, Row, Rows, ListBar2 } from 'accursed'
+import { Br, Column, Columns, Div, React, Row, Rows } from 'accursed'
+import { Component } from './component'
 import { Output } from './editor/outputPanel'
 import { Sidebar } from './sidebar/sidebar'
 import { Panel } from './toolPanel/toolPanel'
-import { focusableOpts } from './util/style';
-import { Component } from './component';
 
 export class App extends Component {
-
   constructor(p, s) {
     super(p, s)
     this.tabSelected = this.tabSelected.bind(this)
@@ -17,18 +15,17 @@ export class App extends Component {
     return (
       <Div>
         {/* <ListBar2 {...focusableOpts()} ref={ref<ListBar2>(c => (this.listBar = c))} onSelectItem={this.tabSelected}> */}
-            {/* {this.s.documents.map(d => (
+        {/* {this.s.documents.map(d => (
               <ListBarCommand _data={{ filePath: d.path }} callback={this.tabSelected}>
                 {d.name}
               </ListBarCommand>
             ))}
             {} */}
-          {/* </ListBar2> */}
+        {/* </ListBar2> */}
         <Columns>
           <Column width="70%">
             <Rows>
-             
-            <Row height="65%">
+              <Row height="65%">
                 <Output {...this.props} />
               </Row>
 
@@ -43,13 +40,12 @@ export class App extends Component {
           <Column width="30%">
             <Sidebar {...this.props} />
           </Column>
-          
+
           {}
         </Columns>
       </Div>
     )
   }
 
-  protected tabSelected() {
-  }
+  protected tabSelected() {}
 }
