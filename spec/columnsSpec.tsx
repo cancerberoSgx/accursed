@@ -2,22 +2,16 @@ import { tryTo } from 'misc-utils-of-mine-generic'
 import {
   createScreen,
   debug,
-  Element,
-  findAscendant,
   findDescendantNamed,
   getContent,
   installExitKeys,
-  isElement,
   printElement,
   React,
-  Screen,
-  screenLogger
+  Screen
 } from '../src'
-import { installVisibleOnAncestorFocus } from '../src/blessed/visibleOnAncestorFocus'
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, Button2, Collapsible, Column, Columns, Div, Row, Rows } from '../src/jsx-components'
 import { words } from '../src/util/data'
-import { focusableOpts } from '../src/util/sharedOptions'
 
 describe('columns', () => {
   let screen: Screen
@@ -213,5 +207,4 @@ describe('columns', () => {
       debug('ERROR', error)
     }
   })
-
 })

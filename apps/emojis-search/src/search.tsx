@@ -9,7 +9,8 @@ import {
   List as ListElement,
   React,
   replaceChildren,
-  Strong
+  Strong,
+  debug
 } from 'accursed'
 import { getCategoryNames, getEmojiDefinitions } from './data/data'
 import { inputOptions } from './elementOptions'
@@ -38,7 +39,7 @@ export class Search extends Component<{
             (value: string) => {
               if (this.blessedElement && this.blessedElement.screen) {
                 const v = value.toLowerCase().trim()
-                this.log('search', v)
+                debug('search', v)
                 const emojis = emojiDescriptions.filter(c => {
                   return JSON.stringify(c)
                     .toLowerCase()

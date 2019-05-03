@@ -1,6 +1,6 @@
+import * as blessed from 'blessed'
 import { asArray, getObjectProperty, setObjectProperty } from 'misc-utils-of-mine-generic'
-import { Button, Checkbox, closeModal, Element, isElement, isModalVisible, Screen, screen, visitDescendants } from '..'
-import {} from '../util/misc'
+import { Button, Checkbox, closeModal, Element, isElement, isModalVisible, Screen, visitDescendants } from '..'
 
 export function isBlessedElement(n: any): n is Element {
   return n && n.screenshot && n.enableDrag
@@ -218,4 +218,4 @@ export function replaceChildren(
   }
 }
 
-export const createScreen = screen
+export const createScreen = blessed.screen

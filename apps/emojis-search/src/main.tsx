@@ -5,7 +5,7 @@ import { App } from './app'
     var s = await createScreen2({
       useBCE: true,
       // warnings: true,
-      log: 'log.txt',
+      // log: 'log.txt',
       fullUnicode: true
     })
     // debugger

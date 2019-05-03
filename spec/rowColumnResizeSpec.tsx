@@ -1,20 +1,24 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import {
+  Button2,
+  Column,
+  Columns,
   createScreen,
   debug,
+  Div,
   Element,
   findDescendantNamed,
-  getContent,
   installExitKeys,
+  installVisibleOnAncestorFocus,
   isElement,
   printElement,
   React,
   Screen,
-  screenLogger, installVisibleOnAncestorFocus, Br, Button2, Collapsible, Column, Columns, Div, Row, Rows
+  screenLogger
 } from '../src'
+import { rowColumnResizeHandler } from '../src/blessed/rowColumnResize'
 import { waitFor } from '../src/blessed/waitFor'
 import { focusableOpts } from '../src/util/sharedOptions'
-import { rowColumnResizeHandler } from '../src/blessed/rowColumnResize';
 
 describe('rowColumnResize', () => {
   let screen: Screen
@@ -132,7 +136,6 @@ describe('rowColumnResize', () => {
     }
   })
 
-
   // jasmine.DEFAULT_TIMEOUT_INTERVAL=99999
   it('an initial experiment', async done => {
     try {
@@ -220,9 +223,4 @@ describe('rowColumnResize', () => {
       debug('ERROR', error)
     }
   })
-
-
 })
-
-
-

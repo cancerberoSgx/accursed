@@ -1,5 +1,6 @@
-import { createScreen } from '../blessed'
-import { Screen, ScreenOptions } from '../blessedTypes'
+// import { createScreen } from '..'
+import * as blessed from 'blessed'
+import { Screen, ScreenOptions } from '..'
 
 declare var window: any
 declare var document: any
@@ -19,8 +20,8 @@ export async function createScreenForBrowser(options: ScreenOptions = {}): Promi
 
       const termJs = require('term.js')
       var term = new termJs.Terminal({
-        cols: 80,
-        rows: 24,
+        cols: options.cols || 120,
+        rows: options.rows || 50,
         useStyle: true,
         screenKeys: true
       })
@@ -44,15 +45,14 @@ export async function createScreenForBrowser(options: ScreenOptions = {}): Promi
       // process.listeners = function fakelisteners() {
       //   return []
       // }
-      term.resize(options.cols || 120, options.rows || 36)
-      const screen = createScreen({ ...options, input: term, output: term, tput: undefined })
+      term.resize(options.cols || 120, options.rows || 50)
+      const screen = blessed.screen({ ...options, input: term, output: term, tput: undefined })
       resolve(screen)
     }
   })
 }
 
 export function inBrowser() {
-  //@ts- gnore
   return typeof window !== 'undefined' && typeof document !== 'undefined'
 }
 
@@ -61,6 +61,6 @@ export function createScreen2(options: ScreenOptions = {}): Promise<Screen> {
   if (inBrowser()) {
     return createScreenForBrowser(options)
   } else {
-    return Promise.resolve(createScreen(options))
+    return Promise.resolve(blessed.screen(options))
   }
 }

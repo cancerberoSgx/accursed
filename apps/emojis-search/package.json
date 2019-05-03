@@ -11,9 +11,11 @@
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "browserify": "rm -rf dist build && npm run build && mkdir -p dist/src/data/generated build && cp -r src/data/generated/* dist/src/data/generated &&  npx browserify dist/src/main.js -o build/bundle.js --ignore-missing -t brfs --no-debug && cp src/index.html build && npx terser build/bundle.js -o build/bundle.js",
+    "browserify": "rm -rf dist build && npm run build && mkdir -p dist/src/data/generated build && cp -r src/data/generated/* dist/src/data/generated   && npx browserify   -x blessed  -x term.js -x blessed-contrib -x editor-widget  -x text-buffer dist/src/main.js -o build/emoji-search-nodeps.js --ignore-missing -t brfs --no-debug && cp src/browser/* build && npx terser build/emoji-search-nodeps.js -o build/emoji-search-nodeps.js && mkdir -p ../../docs/browser && cp build/* ../../docs/browser" ,
     "all": "npm run clean && npm run prettier && npm run build"
   },
+
+
   "author": "Sebastian Gurin",
   "license": "MIT",
   "dependencies": {

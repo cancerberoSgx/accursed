@@ -6,7 +6,6 @@ import { Element, Node, Screen } from '../blessedTypes'
 import { EventOptions, React, ref } from '../jsx'
 import { resolveRef } from '../jsx/createElement'
 import { focusableOpts } from '../util/sharedOptions'
-const Editor = require('editor-widget')
 
 /**
  * Builds editor widget by calling its constructor as it is, without any tricks for auto-highlighting, focus
@@ -20,6 +19,7 @@ const Editor = require('editor-widget')
  */
 export function buildEditor(options: EditorOptions & { parent: Node }) {
   try {
+    const Editor = require('editor-widget')
     const editor = new Editor(options)
     if (options.text) {
       editor.textBuf.setText(options.text)

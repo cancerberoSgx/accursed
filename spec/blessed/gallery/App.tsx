@@ -1,4 +1,5 @@
 import { arrayToObject, enumNoValueKeys } from 'misc-utils-of-mine-generic'
+import { debug } from '../../../src'
 import { showInModal } from '../../../src/blessed/modal'
 import { Screen } from '../../../src/blessedTypes'
 import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
@@ -15,7 +16,7 @@ import { ButtonDemo } from './ButtonDemo'
 import { CollapsibleDemo } from './CollapsibleDemo'
 import { ColumnsAndRowsDemo } from './columnsAndRowsDemo'
 import { LayoutDemo } from './LayoutDemo'
-import { screen } from './main'
+// import { getScreen } from './main'
 // import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
 
@@ -74,7 +75,7 @@ export class App extends Component<P, S> {
         throw new Error('Demo unknown ' + d)
       }
     } catch (error) {
-      screen.log('Error in demo ', error)
+      debug('Error in demo ', error)
     }
     throw new Error('Demo unknown ' + d)
   }

@@ -1,5 +1,8 @@
 # TODO / questions / ideas / issues
 
+* move editor-widget to a separate project accursed-editor-widget
+* move all blessed-contrib related stuff to a separate project
+
 JSX important: blessed elements (and custom subclasses)comply with Component (render() signature). class Custom extends blessed.widget.Box {...} ; React.render(<Custom/>)  should work out of the box.. fix createElement, ours:  render(): JSX.BlessedJsxNode - blessed:    render(): Coords
 
 # Ideas
