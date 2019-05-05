@@ -1,6 +1,6 @@
 //@ts-nocheck
 
-const Tput = require('../src/blessed/tput') 
+const Tput = require('../../src/blessed/tput') 
 
 const tput = Tput({
   terminal: process.env.TERM,

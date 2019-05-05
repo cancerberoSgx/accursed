@@ -1,4 +1,4 @@
-import {TPut} from '../src'
+import {TPut} from '../..'
 
 const tput = new TPut({
   terminal: process.env.TERM,
