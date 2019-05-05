@@ -2,9 +2,76 @@
 
 import { EventEmitter } from 'events'
 import { Readable, Writable } from 'stream'
-import { Widgets } from './blessed'
 import { Tput } from './tput';
-import {RemoveProperties} from '../util/misc'
+
+
+interface IMouseEventArg extends IAbstractEventArg {
+  x: number
+  y: number
+  action: TMouseAction
+  button: 'left' | 'right' | 'middle' | 'unknown'
+  name: 'mouse'
+}
+type TMouseAction = 'mousedown' | 'mouseup' | 'mousemove' | 'wheelup' | 'wheeldown'
+interface IKeyEventArg extends IAbstractEventArg {
+  full: string
+  sequence: string
+}
+
+interface IAbstractEventArg {
+  name: string
+  shift: boolean
+  ctrl: boolean
+  meta: boolean
+  type: string
+  raw: [number, number, number, string]
+  bug: Buffer
+}
+
+type NodeMouseEventType =
+| 'mouse'
+| 'mouseout'
+| 'mouseover'
+| 'mousedown'
+| 'mouseup'
+| 'mousewheel'
+| 'wheeldown'
+| 'wheelup'
+| 'mousemove'
+| 'click'
+
+/**
+'resize': Received on screen resize. 
+
+'prerender':  Received before render. 
+
+'render': Received on render. 
+
+'destroy'    :  Received when the screen is destroyed (only useful when using multiple screens).
+
+'move':  Received when the element is moved. For example when [[rtop]] or [[position]] properties are
+  updated. 
+
+'show':  Received when element is shown. 
+
+'hide':  Received when element becomes hidden. 
+
+'set content':  Received when element [[content]] is updated.
+
+'parsed content':  Received when element [[content]] is parsed.
+*/
+type NodeGenericEventType =
+| 'resize'
+| 'prerender'
+| 'render'
+| 'destroy'
+| 'move'
+| 'show'
+| 'hide'
+| 'set content'
+| 'parsed content'
+
+export type KeyEventListener = (ch: string, key: IKeyEventArg) => void
 
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
@@ -62,7 +129,7 @@ interface ProgramResponseData {
   [k: string]: any
 }
 
-type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any
+type ProgramResponseCallback = (this: Program, err: Error, data: ProgramResponseData) => any
 
 /**
  * program.output Writable implementation should implement this interface
@@ -77,7 +144,7 @@ interface GpmEvent {
   name: 'mouse' | ''
   type: 'GPM'
   action:
-    | Widgets.Types.TMouseAction
+    | TMouseAction
     | 'mousedown'
     | 'mouseup'
     | 'connect'
@@ -102,7 +169,7 @@ interface GpmClient extends EventEmitter {
   on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
 }
 
-export interface IBlessedProgramOptions {
+export interface IProgramOptions {
 
   input?: Readable
 
@@ -130,7 +197,7 @@ export interface IBlessedProgramOptions {
  * The Program instance manages the low level interaction with the terminal and is used by [[Screen]] to read and write terminal, and access mouse, etc. Is responsible of reading / writing to the terminal using [[Tput]] and support mouse. 
  * 
  * It has associated an [[output]] writable stream attribute which usually is stdout but could
- * could be configured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream
+ * could be configured by the user using [[IProgramOptions]]. The same for an [[input]] Readable stream
  * from which the host terminal respond to the program requests.
  *
  * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream. It extends tput to add support for mouse and other devices. 
@@ -243,29 +310,15 @@ program.getWindowSize(function(err:any, data:any) {
 });
 ```
 */
-export declare class BlessedProgram extends Tput  implements  EventEmitter {
+export declare class Program extends Tput  implements  EventEmitter {
   
-  addListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  once(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  off(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeAllListeners(event?: string | symbol): this 
-  setMaxListeners(n: number): this 
-  getMaxListeners(): number 
-  listeners(event: string | symbol): Function[] 
-  rawListeners(event: string | symbol): Function[] 
-  emit(event: string | symbol, ...args: any[]): boolean 
-  eventNames(): (string | symbol)[] 
-  listenerCount(type: string | symbol): number 
 
   /** @internal */
-  static instances: BlessedProgram[]
+  static instances: Program[]
   /** @internal */
   gpm?: GpmClient
   type: string
-  options: IBlessedProgramOptions
+  options: IProgramOptions
   input: Readable
   output: Writable
   /**
@@ -463,7 +516,7 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
 
 
   
-  constructor(options?: IBlessedProgramOptions)
+  constructor(options?: IProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
    */
@@ -480,10 +533,10 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   term(is: string): boolean
   listen(): void
   destroy(): void
-  key(key: string | string[], l: Widgets.KeyEventListener): void
-  onceKey(key: string | string[], l: Widgets.KeyEventListener): void
-  unKey(key: string | string[], l: Widgets.KeyEventListener): void
-  removeKey(key: string | string[], l: Widgets.KeyEventListener): void
+  key(key: string | string[], l: KeyEventListener): void
+  onceKey(key: string | string[], l: KeyEventListener): void
+  unKey(key: string | string[], l: KeyEventListener): void
+  removeKey(key: string | string[], l: KeyEventListener): void
   bindMouse(): void
   /**
    * Enable GPM mouse support.
@@ -1610,10 +1663,27 @@ CSI Ps ; Pu ' z
    * outside the terminal application.
    */
   on(e: 'blur', c: (e: any) => void): this
-  on(e: 'keypress', c: Widgets.KeyEventListener): this
+  on(e: 'keypress', c: KeyEventListener): this
   /**
    * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc).
    */
   on(event: 'warning', callback: (text: string) => void): this
   on(e: string, c: (e: any) => void): this
+
+  // event emiter interface 
+
+  addListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  once(event: string | symbol, listener: (...args: any[]) => void): this 
+  prependListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  removeListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  off(event: string | symbol, listener: (...args: any[]) => void): this 
+  removeAllListeners(event?: string | symbol): this 
+  setMaxListeners(n: number): this 
+  getMaxListeners(): number 
+  listeners(event: string | symbol): Function[] 
+  rawListeners(event: string | symbol): Function[] 
+  emit(event: string | symbol, ...args: any[]): boolean 
+  eventNames(): (string | symbol)[] 
+  listenerCount(type: string | symbol): number 
 }

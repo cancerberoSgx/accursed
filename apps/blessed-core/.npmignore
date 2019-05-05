@@ -1,0 +1,12 @@
+dist/spec
+src
+scripts
+tmp
+spec
+*.tgz
+apps
+log.txt
+tsconfig.json
+.travis.yml
+/docs
+/guides
