@@ -549,10 +549,34 @@ export declare class Program extends Tput  implements  EventEmitter {
   bindResponse(): void
   response(name: string, text: string, callback: Function, noBypass?: boolean): boolean
   response(name: string, callback?: Function): boolean
+  
   /**
    * Writes given string to [[output]] bypassing the buffer. 
    */
   write(text: string): boolean
+
+   /**
+   * Writes given string to [[output]] to the buffer. 
+   */
+  _write(text: string): boolean
+  
+  /**
+   * Returns the string with given attr enabled or disabled, for example: 
+   * 
+   ```
+  program._write(program._attr('green fg', true) + 'GREEN' +
+    program._attr('green fg', false) + ' NORMAL')
+
+  program._write('\n\n' + program._attr(['yellow fg', 'bold', 'blue bg'], true) + 'bg, fg, bold' +
+    program._attr('default fg', true) + ' No FG ' +
+    program._attr('default bg', true) + ' No BG ' +
+    program._attr('bold', false) + ' No bold '
+  )
+   ```
+   */
+  _attr(attrs: string|string[], enable: boolean): string
+
+
   // /**
   //  * Writes to [[output]] at current cursor location with given style. 
   //  * Example: `program.write('Hello world', 'blue fg')`
@@ -1687,3 +1711,10 @@ CSI Ps ; Pu ' z
   eventNames(): (string | symbol)[] 
   listenerCount(type: string | symbol): number 
 }
+
+// declare class programClass = typeof Program
+// const p : typeof Program = require('../blessed/program')
+
+// export {p as Program2} 
+
+module.exports.Program =  require('../blessed/program')

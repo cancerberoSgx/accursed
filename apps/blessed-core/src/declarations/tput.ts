@@ -1079,3 +1079,4 @@ export declare class Tput implements   TputFeatures {
 }
 
 
+module.exports.TPut =  require('../blessed/tput')

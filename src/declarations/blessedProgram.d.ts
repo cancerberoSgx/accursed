@@ -500,6 +500,26 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
    * Writes given string to [[output]] bypassing the buffer. 
    */
   write(text: string): boolean
+  /**
+   * Writes given string to [[output]] to the buffer. 
+   */
+  _write(text: string): boolean
+  /**
+   * Returns the string with given attr enabled or disabled, for example: 
+   * 
+   ```
+  program._write(program._attr('green fg', true) + 'GREEN' +
+    program._attr('green fg', false) + ' NORMAL')
+
+  program._write('\n\n' + program._attr(['yellow fg', 'bold', 'blue bg'], true) + 'bg, fg, bold' +
+    program._attr('default fg', true) + ' No FG ' +
+    program._attr('default bg', true) + ' No BG ' +
+    program._attr('bold', false) + ' No bold '
+  )
+   ```
+   */
+  _attr(attrs: string|string[], enable: boolean): string
+
   // /**
   //  * Writes to [[output]] at current cursor location with given style. 
   //  * Example: `program.write('Hello world', 'blue fg')`

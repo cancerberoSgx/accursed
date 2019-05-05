@@ -23,6 +23,7 @@
     "browserify": "^16.2.3",
     "cli-driver": "^0.2.1",
     "jasmine": "^3.4.0",
+    "misc-utils-of-mine-generic": "0.0.19",
     "terser": "^3.17.0",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
