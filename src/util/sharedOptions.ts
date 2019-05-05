@@ -1,4 +1,5 @@
 import { TextareaOptions } from '..'
+import { BoxOptions } from '../blessedTypes'
 
 /** @internal */
 export const focusableOpts: () => TextareaOptions = () => ({
@@ -34,4 +35,29 @@ export const focusableOpts: () => TextareaOptions = () => ({
       underline: true
     }
   }
+})
+
+export const focusableBorderedOpts: () => TextareaOptions = () => ({
+  ...focusableOpts(),
+  border: 'line',
+  style: {
+    ...focusableOpts().style,
+    border: {
+      type: 'line',
+      fg: 'cyan'
+    },
+    focus: {
+      fg: 'black',
+      bg: 'lightgray',
+      border: {
+        fg: 'red'
+      }
+    }
+  }
+})
+
+export const scrollableOpts: () => BoxOptions = () => ({
+  ...focusableOpts(),
+  scrollable: true,
+  scrollbar: { inverse: true }
 })

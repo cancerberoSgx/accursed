@@ -14,6 +14,7 @@ import { EventEmitter } from 'events'
 import * as stream from 'stream'
 import { RefObject } from '../jsx'
 import { BlessedProgram } from './blessedProgram'
+import { Tput } from './tput';
 
 /**
  * These are the blessed library elements.
@@ -217,78 +218,10 @@ export namespace Widgets {
     destroy(): void
   }
 
-  interface IOptions {}
+  export interface IOptions {}
 
-  interface IHasOptions<T extends IOptions> {
+  export interface IHasOptions<T extends IOptions> {
     options: T
-  }
-
-  interface TputsOptions extends IOptions {
-    terminal?: string
-    extended?: boolean
-    debug?: boolean
-    termcap?: string
-    terminfoFile?: string
-    terminfoPrefix?: string
-    termcapFile?: string
-  }
-  // TODO: move to blessedProgram.d.ts
-
-  /**
-   * Low level implementation of tput protocol to dialogue with terminal implementations.
-   */
-  class Tput implements IHasOptions<TputsOptions> {
-    constructor(opts: TputsOptions)
-
-    /**
-     * Original options object.
-     */
-    options: TputsOptions
-
-    debug: boolean
-    padding: boolean
-    extended: boolean
-    printf: boolean
-    termcap: string
-    terminfoPrefix: string
-    terminfoFile: string
-    termcapFile: string
-    error: Error
-    terminal: string
-
-    setup(): void
-    term(is: any): boolean
-    readTerminfo(term: string): string
-    parseTerminfo(
-      data: any,
-      file: string
-    ): {
-      header: {
-        dataSize: number
-        headerSize: number
-        magicNumber: boolean
-        namesSize: number
-        boolCount: number
-        numCount: number
-        strCount: number
-        strTableSize: number
-        extended: {
-          dataSize: number
-          headerSize: number
-          boolCount: number
-          numCount: number
-          strCount: number
-          strTableSize: number
-          lastStrTableOffset: number
-        }
-      }
-      name: string
-      names: string[]
-      desc: string
-      bools: any
-      numbers: any
-      strings: any
-    }
   }
 
   interface IDestroyable {
@@ -319,15 +252,10 @@ export namespace Widgets {
   ``` 
    */
   type NodeEventType =
-    /** Received when node is added to a parent. */
     | 'adopt'
-    /** Received when node is removed from it's current parent. */
     | 'remove'
-    /** Received when node gains a new parent. */
     | 'reparent'
-    /** Received when node is attached to the screen directly or somewhere in its ancestry. */
     | 'attach'
-    /** Received when node is detached from the screen directly or somewhere in its ancestry. */
     | 'detach'
 
   /**
@@ -339,6 +267,9 @@ export namespace Widgets {
     /** Unique identifier for Node instances. @internal */
     uid: number
 
+    /**
+     * If true, `screen.focusNext()` and methods related to focus will consider this Element.
+     */
     focusable: boolean
 
     /**
@@ -422,7 +353,9 @@ export namespace Widgets {
      * Remove node from its parent.
      */
     detach(): void
+
     free(): void
+
     /**
      * Visit each node's descendants, with [[iter]] function,  parents first.
      * If `s` is provided it will call [[iter]] on self first.
@@ -439,6 +372,7 @@ export namespace Widgets {
     emitAncestors(): void
     hasDescendant<T extends Node = Node>(target: Node): Node
     hasAncestor<T extends Node = Node>(target: Node): Node
+
     /**
      * [[detach]]() this node from its parent, and will also detach and destroy each of its descendant nodes each of them emitting [[destory]] event also.
      */
@@ -458,17 +392,28 @@ export namespace Widgets {
      * Received when node gains a new parent. If the node was detached from the sreen, newParent will be undefined.
      */
     on(event: 'reparent', listener: (this: this, newParent?: Node) => void): void
+
     /**
      * emitted by a parent node when adding a new child node.
      */
     on(event: 'adopt', listener: (this: this, newChildren: Node) => void): void
+
+    /**
+     * Emitted when the node or one of its ancestors is added to a parent and previous nor the node or any of its ancestors where  screen child.
+     */
     on(event: 'attach', listener: (this: this, newParent: Node) => void): void
-    /** Emitted by a node that is being detached frmo the screen or ancester. */
+
+    /** 
+     * Emitted by a node or an ancestor is being detached from the screen being previously a screen child
+     */
     on(event: 'detach', listener: (this: this, newParent: Node) => void): void
-    /** Triggered by a parent node when removing a child node */
+
+    /** 
+     * Triggered by a parent node when removing a child node 
+     */
     on(event: 'remove', listener: (this: this, removedChild: Node) => void): void
+
     on(event: string, listener: (...args: any[]) => void): this
-    // on(event: NodeEventType, callback: (arg: Node) => void): this
   }
 
   /**
@@ -481,19 +426,8 @@ export namespace Widgets {
      * 'click': Element was clicked (slightly smarter than mouseup).
    */
   type NodeScreenEventType =
-    /**
-     * Received when the terminal window focuses/blurs. Requires a terminal supporting the
-     * focus protocol and focus needs to be passed to program.enableMouse().
-     */
     | 'focus'
-    /**
-     * Received when the terminal window focuses/blurs. Requires a terminal supporting the
-     * focus protocol and focus needs to be passed to program.enableMouse().
-     */
     | 'blur'
-    /**
-     * Element was clicked (slightly smarter than mouseup).
-     */
     | 'click'
     | 'element click'
     | 'element mouseover'
@@ -551,6 +485,9 @@ export namespace Widgets {
 
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
+  /**
+   * This is an artificial abstract class type, it doesn't really exist on blessed types. Was defined only to better organize the typings source code. 
+   */
   class NodeWithEvents extends Node {
     /**
      * Bind a keypress listener for a specific key.
@@ -571,6 +508,7 @@ export namespace Widgets {
      * Remove a keypress listener for a specific key.
      */
     removeKey(name: string, listener: KeyEventListener): void
+    
     /**
      * Registers event listener to be notified on mouse events.
      */
@@ -579,7 +517,6 @@ export namespace Widgets {
      * Registers event listener to be notified on mouse events.
      */
     on(event: NodeMouseEventType, callback: (arg: Events.IMouseEventArg) => void): this
-
     /**
      * Received on key events.
      */

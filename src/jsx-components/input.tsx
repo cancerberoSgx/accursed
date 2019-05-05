@@ -23,15 +23,15 @@
 
 // /**
 //  * An opinionated and flexible version of textbox, more similar to input HTML API. Not virtual elements or wrappers, just decorated with a Component. Provides:
-//  *
+//  * * allow to use the arrow keys to move the cursor. 
+//  *    * nice to have ctrl-arrow
+//  *  * by default, while inside, pressing tab will  escape, and blur to next element. pressing ESC eil blur but not focus.(so pressing enter aquires input again. )
 //  *  * onSubmit
 //  *  * onChange // like in HTML only on blur or on enter
 //  *  * onInput // as in HTML, when user is writing or navigating a list, tree or table, scrolling, collapsing, expanding, etc. User has performed some input but didn't performed the change/action gesture.
 //  *  * onEscape the same as blessed onReset (I don't agree with that name).
 //  *  * configuration for escape keys (so I can prevent TAB to cause blur). By default will be the same as in
-//  *
-//  * The idea is to define/refine the events better than blesse's so from here we build the rest of the components
-//    * Example:
+//  Notes :  *  ^* tjis doesnt pretend to be a base class, is a concrete input box
 // ```jsx
 // <Input onAction={} placeholder=""/>
 

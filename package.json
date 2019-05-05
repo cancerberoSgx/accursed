@@ -36,6 +36,7 @@
     "browserify": "^16.2.3",
     "cli-driver": "^0.2.1",
     "gradstop": "^2.2.3",
+    "hrtime-now": "^1.0.5",
     "jasmine": "^3.4.0",
     "markdown-toc": "^1.2.0",
     "prettier": "^1.17.0",

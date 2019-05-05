@@ -1,7 +1,9 @@
 import { EventEmitter } from 'events'
 import { Readable, Writable } from 'stream'
 import { Widgets } from './blessed'
-declare let blessedProgram
+import { Tput } from './tput';
+import {RemoveProperties} from '../util/misc'
+
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
  * output.
@@ -12,21 +14,25 @@ declare let blessedProgram
  *  the object itself'
  */
 interface ProgramResponseData {
+
   /**
    * The event type that was requested / write that caused this response. Example: 'window-manipulation',
    * 'device-attributes', 'device-status', etc.
    * */
   event: string
+
   /**
    * Example: '', 'DSR'
    */
   code: string
+
   /**
    * Identifies the request type that caused this response. For example, if a  'window-manipulation' is
    * written the response type could be 'textarea-size',  example: 'textarea-size',  'cursor-status',
    *
    */
   type: string
+
   size?: {
     height: number
     width: number
@@ -53,7 +59,9 @@ interface ProgramResponseData {
   // TODO leave the object open since it has lots of combinations
   [k: string]: any
 }
+
 type ProgramResponseCallback = (this: BlessedProgram, err: Error, data: ProgramResponseData) => any
+
 /**
  * program.output Writable implementation should implement this interface
  */
@@ -62,6 +70,7 @@ interface ProgramOutput extends Writable {
   column: number
   rows: number
 }
+
 interface GpmEvent {
   name: 'mouse' | ''
   type: 'GPM'
@@ -86,16 +95,22 @@ interface GpmEvent {
   meta: boolean
   ctrl: boolean
 }
+
 interface GpmClient extends EventEmitter {
   on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
 }
+
 export interface IBlessedProgramOptions {
+
   input?: Readable
+
   output?: Writable
+  
   /**
    * path to a file where to write when screen.log() or program.log are called
    */
   log?: string
+
   dump?: boolean
   /**
    * zero-based indexes for col, row values
@@ -104,25 +119,22 @@ export interface IBlessedProgramOptions {
   buffer?: boolean
   terminal?: string
   term?: string
-  tput?: string
+  tput?: Tput
   debug?: boolean
   resizeTimeout?: boolean
 }
+
 /**
- * The Program instance manages the low level interaction the the terminal. It emit the basi native events to
- * the screens. It has associated an [[output]] writable stream attribute which ussually is stdout but could
- * could be conigured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream
+ * The Program instance manages the low level interaction with the terminal and is used by [[Screen]] to read and write terminal, and access mouse, etc. Is responsible of reading / writing to the terminal using [[Tput]] and support mouse. 
+ * 
+ * It has associated an [[output]] writable stream attribute which usually is stdout but could
+ * could be configured by the user using [[IBlessedProgramOptions]]. The same for an [[input]] Readable stream
  * from which the host terminal respond to the program requests.
  *
- * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream.
- * The program is responsible of portability and supporting the same API thgouth several terminal standards /
+ * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream. It extends tput to add support for mouse and other devices. 
+ * 
+ * The program is responsible of portability and supporting the same API through several terminal standards /
  * vendors
- *
- * Although the BlessedProgram instances are not Nodes (unlike Screens that are) they have a somwhat similar
- * API, emiting events with similar names and has some simlar attributes, but it's important to known that
- * most of these events and attributes refer to the host terminal window and not with the lines inside the
- * screen. For example, focus or blur event refers to the terminal window focus, not the internal Blessed
- * Element
  *
  * In general users don't have to use the program for develop their applications, however, it can be accessed
  * from the screen and its lower level api can be used along the application.
@@ -229,7 +241,23 @@ program.getWindowSize(function(err:any, data:any) {
 });
 ```
 */
-export declare class BlessedProgram extends EventEmitter {
+export declare class BlessedProgram extends Tput  implements  EventEmitter {
+  
+  addListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  once(event: string | symbol, listener: (...args: any[]) => void): this 
+  prependListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  removeListener(event: string | symbol, listener: (...args: any[]) => void): this 
+  off(event: string | symbol, listener: (...args: any[]) => void): this 
+  removeAllListeners(event?: string | symbol): this 
+  setMaxListeners(n: number): this 
+  getMaxListeners(): number 
+  listeners(event: string | symbol): Function[] 
+  rawListeners(event: string | symbol): Function[] 
+  emit(event: string | symbol, ...args: any[]): boolean 
+  eventNames(): (string | symbol)[] 
+  listenerCount(type: string | symbol): number 
+
   /** @internal */
   static instances: BlessedProgram[]
   /** @internal */
@@ -249,6 +277,7 @@ export declare class BlessedProgram extends EventEmitter {
   savedY: number
   cols: number
   rows: number
+  tput: Tput
   scrollTop: number
   scrollBottom: number
   isOSXTerm: boolean
@@ -262,6 +291,176 @@ export declare class BlessedProgram extends EventEmitter {
   mux: boolean
   tmuxVersion: number
   isAlt: boolean
+  tmux: boolean
+  _tputSetup: boolean
+  auto_left_margin: boolean
+  auto_right_margin: boolean
+  no_esc_ctlc: boolean
+  ceol_standout_glitch: boolean
+  eat_newline_glitch: boolean
+  erase_overstrike: boolean
+  generic_type: boolean
+  hard_copy: boolean
+  has_meta_key: boolean
+  has_status_line: boolean
+  insert_null_glitch: boolean
+  memory_above: boolean
+  memory_below: boolean
+  move_insert_mode: boolean
+  move_standout_mode: boolean
+  over_strike: boolean
+  status_line_esc_ok: boolean
+  dest_tabs_magic_smso: boolean
+  tilde_glitch: boolean
+  transparent_underline: boolean
+  xon_xoff: boolean
+  needs_xon_xoff: boolean
+  prtr_silent: boolean
+  hard_cursor: boolean
+  non_rev_rmcup: boolean
+  no_pad_char: boolean
+  non_dest_scroll_region: boolean
+  can_change: boolean
+  back_color_erase: boolean
+  hue_lightness_saturation: boolean
+  col_addr_glitch: boolean
+  cr_cancels_micro_mode: boolean
+  has_print_wheel: boolean
+  row_addr_glitch: boolean
+  semi_auto_right_margin: boolean
+  cpi_changes_res: boolean
+  lpi_changes_res: boolean
+  backspaces_with_bs: boolean
+  crt_no_scrolling: boolean
+  no_correctly_working_cr: boolean
+  gnu_has_meta_key: boolean
+  linefeed_is_newline: boolean
+  has_hardware_tabs: boolean
+  return_does_clr_eol: boolean
+  bw: boolean
+  am: boolean
+  xsb: boolean
+  beehive_glitch: boolean
+  xhp: boolean
+  xenl: boolean
+  eo: boolean
+  gn: boolean
+  hc: boolean
+  km: boolean
+  hs: boolean
+  in: boolean
+  db: boolean
+  mir: boolean
+  msgr: boolean
+  os: boolean
+  eslok: boolean
+  xt: boolean
+  teleray_glitch: boolean
+  hz: boolean
+  ul: boolean
+  xon: boolean
+  nxon: boolean
+  mc5i: boolean
+  chts: boolean
+  nrrmc: boolean
+  npc: boolean
+  ndscr: boolean
+  ccc: boolean
+  bce: boolean
+  hls: boolean
+  xhpa: boolean
+  crxm: boolean
+  daisy: boolean
+  xvpa: boolean
+  sam: boolean
+  cpix: boolean
+  lpix: boolean
+  unicode: boolean
+  brokenACS: boolean
+  PCRomSet: boolean
+  magicCookie: boolean
+  setbuf: boolean
+  _terminal: string
+  _buf: string
+  columns: number
+  init_tabs: number
+  lines: number
+  lines_of_memory: number
+  magic_cookie_glitch: number
+  padding_baud_rate: number
+  virtual_terminal: number
+  width_status_line: number
+  num_labels: number
+  label_height: number
+  label_width: number
+  max_attributes: number
+  maximum_windows: number
+  max_colors: number
+  max_pairs: number
+  kNXT6: number
+  kNXT7: number
+  no_color_video: number
+  buffer_capacity: number
+  dot_vert_spacing: number
+  dot_horz_spacing: number
+  max_micro_address: number
+  max_micro_jump: number
+  micro_col_size: number
+  micro_line_size: number
+  number_of_pins: number
+  output_res_char: number
+  output_res_line: number
+  output_res_horz_inch: number
+  output_res_vert_inch: number
+  print_rate: number
+  wide_char_size: number
+  buttons: number
+  bit_image_entwining: number
+  bit_image_type: number
+  magic_cookie_glitch_ul: number
+  carriage_return_delay: number
+  new_line_delay: number
+  backspace_delay: number
+  horizontal_tab_delay: number
+  number_of_function_keys: number
+
+
+  it: number
+  lm: number
+  xmc: number
+  pb: number
+  vt: number
+  wsl: number
+  nlab: number
+  lh: number
+  lw: number
+  ma: number
+  wnum: number
+  colors: number
+  pairs: number
+  ncv: number
+  bufsz: number
+  spinv: number
+  spinh: number
+  maddr: number
+  mjump: number
+  mcs: number
+  micro_char_size: number
+  mls: number
+  npins: number
+  orc: number
+  orl: number
+  orhi: number
+  orvi: number
+  cps: number
+  widcs: number
+  btns: number
+  bitwin: number
+  bitype: number
+
+
+
+  
   constructor(options?: IBlessedProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
@@ -284,47 +483,115 @@ export declare class BlessedProgram extends EventEmitter {
   unKey(key: string | string[], l: Widgets.KeyEventListener): void
   removeKey(key: string | string[], l: Widgets.KeyEventListener): void
   bindMouse(): void
+  /**
+   * Enable GPM mouse support.
+   */
   enableGpm(): void
+  /**
+   * Disable GPM mouse support.
+   */
   disableGpm(): void
   bindResponse(): void
   response(name: string, text: string, callback: Function, noBypass?: boolean): boolean
   response(name: string, callback?: Function): boolean
-  write(text: string): boolean
   /**
-   * Writes to this.output
-   * Example: `program.write('Hello world', 'blue fg')`
+   * Writes given string to [[output]] bypassing the buffer. 
    */
-  write(text: string, style: string): boolean
+  write(text: string): boolean
+  // /**
+  //  * Writes to [[output]] at current cursor location with given style. 
+  //  * Example: `program.write('Hello world', 'blue fg')`
+  //  */
+  // write(text: string, style: string): boolean
   /**
    * 	Flushes the buffer.
    */
   flush(): void
   /**
-   * Determines whether to include text attributes when writing.
+   * Writes given text to [[output]] at current cursor location and given attrs.
    */
-  print(text: string, attr?: boolean): boolean
-  echo(text: string, attr?: boolean): boolean
+  print(text: string, attr?: number): boolean
   /**
-   * sets cursor
+   * Alias for [[print]]
+   */
+  echo(text: string, attr?: boolean): boolean
+
+  /**
+   * Sets cursor absolute column.
    */
   setx(x: number): boolean
+
+  /**
+   * Sets cursor absolute row.
+   */
   sety(y: number): boolean
+
+  /**
+   * alias for [[cursorPos]].
+   */
   move(x: number, y: number): boolean
+
   omove(x: number, y: number): void
+  
+  /**
+   * Sets cursor column relative to current cursor position.
+   */
   rsetx(x: number): boolean
+  
+  /**
+   * Sets cursor relative row.
+   */
   rsety(y: number): boolean
+  /**
+   * Sets cursor relative position.
+   */
   rmove(x: number, y: number): void
+  
   cursorCharAbsolute(x: number): number
+
+  /**
+   * Inserts `ch` repeated `i` times with given optional attrs at current cursor position.
+   */
   simpleInsert(ch: string, i?: number, attr?: boolean): boolean
+
+  /**
+   * returns `ch` repeated `i` times. 
+   */
   repeat(ch: string, i?: number): string
+  /**
+   * 
+ Specific to iTerm2, but I think it's really cool.
+ Example:
+ ```
+  if (!screen.copyToClipboard(text)) {
+    execClipboardProgram(text);
+  }
+  ```
+   */
   copyToClipboard(text: string): boolean
+  /**
+   *  Only XTerm and iTerm2
+   */
   cursorShape(shape: 'block' | 'underline' | 'line', blink?: boolean): boolean
+
+  /** 
+   * set's cursor color.
+   */
   cursorColor(color: string): boolean
+
+  /**
+   * Reset all tput current modes. 
+   */
   cursorReset(): boolean
+
+  /**
+   * Resets all cursor current modes. 
+   */
   resetCursor(): boolean
+
   getTextParams(param: string, callback: Function): boolean
   /**
-   * Set's the cursor color. Example call:
+   * Get's the cursor color. Example call:
    *
 ```
 program.getCursor(function(err, data) {
@@ -335,8 +602,14 @@ program.getCursor(function(err, data) {
    */
   getCursorColor(callback: Function): boolean
   nul(): boolean
+
+  /**
+   * Ring bell (beep)
+   */
   bell(): boolean
+  /** alias for [[bell]] */
   bel(): boolean
+
   vtab(): boolean
   form(): boolean
   ff(): boolean
@@ -361,14 +634,25 @@ program.getCursor(function(err, data) {
   nextLine(): boolean
   reset(): boolean
   tabSet(): boolean
+  /**
+   * Saves current cursor state so it can be restored with [[restoreCursor]]
+   */
   saveCursor(key: string): boolean
+    /** alias for [[saveCursor]] */
   sc(key: string): boolean
+  /**
+   * restore previously saved cursor with [[saveCursor]]
+   */
   restoreCursor(key?: string, hide?: boolean): boolean
+  /** alias for [[restoreCursor]] */
   rc(key?: string, hide?: boolean): boolean
+
   lsaveCursor(key?: string): void
   lrestoreCursor(key?: string, hide?: boolean): void
   lineHeight(): boolean
-  charset(val?: string, level?: number): boolean
+  
+  charset(val?: 'scld'|'uk'|'us'|'dutch'|'finnish'|'french'|'frenchcanadian'|'german'|'italian'|'norwegiandanish'|'spanish'|'swedish'|'swiss', level?: 0|1|2|3): boolean
+
   enter_alt_charset_mode(): boolean
   as(): boolean
   smacs(): boolean
@@ -376,7 +660,12 @@ program.getCursor(function(err, data) {
   ae(): boolean
   rmacs(): boolean
   setG(val: number): boolean
+
+  /**
+   * Sets terminal window title.
+   */
   setTitle(title: string): boolean
+
   resetColors(param?: string): boolean
   /**
    * OSC Ps ; Pt ST
@@ -385,45 +674,51 @@ program.getCursor(function(err, data) {
    */
   dynamicColors(param?: string): boolean
   selData(a: string, b: string): boolean
-  cursorUp(param?: number): boolean
+
+  /**
+   * Cursor up `n` times, by default 1.
+   */
+  cursorUp(n?: number): boolean
+  /** alias for [[cursorUp]] */
   cuu(param?: number): boolean
+  /** alias for [[cursorUp]] */
   up(param?: number): boolean
+
   /**
    * Cursor Down `n` times, by default 1.
    */
   cursorDown(n?: number): boolean
-  /** @see [[cursorDown]] */
+  /** Alias for [[cursorDown]] */
   cud(n?: number): boolean
-  /** @see [[cursorDown]] */
+  /** Alias for [[cursorDown]] */
   down(n?: number): boolean
+
   cursorForward(n?: number): boolean
   cuf(n?: number): boolean
   right(n?: number): boolean
   forward(n?: number): boolean
+
   cursorBackward(n?: number): boolean
   cub(n?: number): boolean
   left(n?: number): boolean
   back(n?: number): boolean
+
   /**
    * CSI Ps ; Ps H
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
   cursorPos(row?: number, col?: number): boolean
-  /**
-   * CSI Ps ; Ps H
-   * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
-   */
+    /** Alias for [[cursorPos]] */
   cup(row?: number, col?: number): boolean
-  /**
-   * CSI Ps ; Ps H
-   * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
-   */
+  /** Alias for [[cursorPos]] */
   pos(row?: number, col?: number): boolean
+
   eraseInDisplay(param?: string): boolean
   ed(param?: string): boolean
   clear(): boolean
   eraseInLine(param?: string): boolean
   el(param?: string): boolean
+
   /**
 ```
  CSI Pm m  Character Attributes (SGR).
@@ -506,7 +801,7 @@ program.on('mouse', function (data) {
 ```
    */
   setForeground(color: string, val?: string): boolean
-  /** @see [[setForeground]]  */
+  /** Alias for [[setForeground]]  */
   fg(color: string, val?: boolean): string
   /**
    * set the background color and character for the following writings to the output buffer. Example:
@@ -521,8 +816,9 @@ program.on('mouse', function (data) {
 });
 ```
    */
+
   setBackground(color: string, val?: string): boolean
-  /** @see [[setBackground]]  */
+  /** Alias for [[setBackground]]  */
   bg(color: string, val?: string): boolean
   /**
 ```
@@ -550,8 +846,9 @@ CSI ? Ps n
 ```
    */
   deviceStatus(param?: string, callback?: ProgramResponseCallback, dec?: boolean, noBypass?: boolean): boolean
-  /**@see [[deviceStatus]] */
+  /** Alias for [[deviceStatus]] */
   dsr(param?: string, callback?: Function, dec?: boolean, noBypass?: boolean): boolean
+
   /**
   Example Call:
 ```
@@ -561,8 +858,10 @@ CSI ? Ps n
 ```
    */
   getCursor(callback: ProgramResponseCallback): boolean
+
   saveReportedCursor(callback: ProgramResponseCallback): void
   restoreReportedCursor: () => boolean
+
   /** CSI Ps @
   Insert Ps (Blank) Character(s) (default = 1) (ICH). */
   insertChars(param?: number): boolean
@@ -578,8 +877,10 @@ same as CSI Ps B ?
   cursorNextLine(param?: number): boolean
   /** @cursorNextLine */
   cnl(param?: number): boolean
+
   cursorPrecedingLine(param?: number): boolean
   cpl(param?: number): boolean
+
   cursorCharAbsolute(param?: number): boolean
   cha(param?: number): boolean
   insertLines(param?: number): boolean
@@ -699,7 +1000,9 @@ same as CSI Ps B ?
   setMode(args: string, callback: ProgramResponseCallback): boolean
   /** @see [[setMode]]  */
   sm(...args: string[]): boolean
+
   decset(...args: string[]): boolean
+
   /**
  * Uses [[setMode]] 2 5 to show the cursor:
   NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor
@@ -708,6 +1011,7 @@ same as CSI Ps B ?
   alternateBuffer(): boolean
   smcup(): boolean
   alternate(): boolean
+
   /**
 ```
 CSI Pm l  Reset Mode (RM).
@@ -803,8 +1107,10 @@ CSI ? Pm l
   dectcemh(): boolean
   normalBuffer(): boolean
   rmcup(): boolean
+
   enableMouse(): void
   disableMouse(): void
+
   setMouse(
     opt?: {
       normalMouse?: boolean
@@ -824,6 +1130,7 @@ CSI ? Pm l
     },
     enable?: boolean
   ): void
+
   /**
 ```
  CSI Ps ; Ps r
@@ -837,6 +1144,7 @@ CSI ? Pm l
   csr(top: number, bottom: number): boolean
   /** @see [[setScrollRegion]]*/
   decstbm(top: number, bottom: number): boolean
+
   /**
 ```
 CSI s
@@ -868,10 +1176,12 @@ CSI s
   scrollUp(param?: number): boolean
   /** @see [[scrollUp]]*/
   su(param?: number): boolean
+
   /**  CSI Ps T  Scroll down Ps lines (default = 1) (SD). */
   scrollDown(param?: number): boolean
   /** @see [[scrollDown]]*/
   sd(param?: number): boolean
+
   /**
 ```
    CSI Ps ; Ps ; Ps ; Ps ; Ps T
@@ -881,6 +1191,7 @@ CSI s
 ```
    */
   initMouseTracking(...args: string[]): boolean
+
   /**
 ```
    CSI > Ps; Ps T
@@ -897,15 +1208,20 @@ CSI s
 ```
    */
   resetTitleModes(...args: string[]): boolean
+  
   /**  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
   cursorBackwardTab(param?: number): boolean
   cbt(param?: number): boolean
+
   repeatPrecedingCharacter(param?: number): boolean
   rep(param?: number): boolean
+
   tabClear(param?: number): boolean
   tbc(param?: number): boolean
+
   mediaCopy(...args: string[]): boolean
   mc(...args: string[]): boolean
+  
   mc0(): boolean
   print_screen(): boolean
   ps(): boolean
