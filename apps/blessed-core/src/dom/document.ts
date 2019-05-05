@@ -5,11 +5,11 @@ import { TextNode } from './text'
 export class Document extends Node {
   constructor() {
     super(Node.DOCUMENT_TYPE_NODE)
-    this.head = new MHeadElement('head', this)
-    this.body = new MBodyElement('body', this)
+    this.head = new HeadElement('head', this)
+    this.body = new BodyElement('body', this)
   }
-  head: MHeadElement
-  body: MBodyElement
+  head: HeadElement
+  body: BodyElement
   createElement(t: string) {
     return new Element(t, this)
   }
@@ -18,13 +18,13 @@ export class Document extends Node {
   }
 }
 
-class MHeadElement extends Element {
+class HeadElement extends Element {
   // constructor(public readonly tagName: string) {
   //   super(tagName)
   // }
 }
 
-class MBodyElement extends Element {
+class BodyElement extends Element {
   // constructor(public readonly tagName: string) {
   //   super(tagName)
   // }

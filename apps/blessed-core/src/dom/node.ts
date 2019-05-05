@@ -1,5 +1,6 @@
 import { EventTarget } from './event'
 import { Document } from './document'
+import { nodeHtml } from './nodeHtml';
 
 export abstract class Node extends EventTarget {
 
@@ -8,9 +9,9 @@ export abstract class Node extends EventTarget {
   static ELEMENT_NODE: NodeType = 1
   static _WATERMARK = 'jsx-alone-dom-dom'
 
-  readonly attributes: NamedNodeMap<MAttr>
+  readonly attributes: NamedNodeMap<Attr>
   protected _attributes: {
-    [k: string]: MAttr;
+    [k: string]: Attr;
   } = {}
 
   protected _children: Node[] = []
@@ -41,19 +42,19 @@ export abstract class Node extends EventTarget {
     return this._parentNode
   }
 
-  // get innerHTML() {
-  //   return nodeHtml(this, false)
-  // }
-  // set innerHTML(id: string | null) {
-  //   throw new Error('not implemented')
-  // }
+  get innerHTML() {
+    return nodeHtml(this, false)
+  }
+  set innerHTML(id: string | null) {
+    throw new Error('not implemented')
+  }
 
-  // get outerHTML() {
-  //   return nodeHtml(this, true)
-  // }
-  // set outerHTML(id: string | null) {
-  //   throw new Error('not implemented')
-  // }
+  get outerHTML() {
+    return nodeHtml(this, true)
+  }
+  set outerHTML(id: string | null) {
+    throw new Error('not implemented')
+  }
 
   getAttribute(a: string) {
     return this._attributes[a] ? this._attributes[a].value : null
@@ -87,7 +88,7 @@ export abstract class Node extends EventTarget {
 
 }
 
-type NodeType = 10 | 3 | 1
+export type NodeType = 10 | 3 | 1
 
 class NodeList<T> {
   [index: number]: T;
@@ -106,13 +107,13 @@ class NodeList<T> {
   }
 }
 
-export interface MAttr {
+export interface Attr {
   name: string
   value: string | null
 }
 
 // TODO: performance - we focus on the map, and not in the array/iteration
-class NamedNodeMap<T extends MAttr> {
+class NamedNodeMap<T extends Attr> {
   [index: number]: T;
   constructor(protected map: { [n: string]: T }) {
 

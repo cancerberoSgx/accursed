@@ -8,12 +8,10 @@
     ],
     "moduleResolution": "node",
     "rootDir": ".",
-    // "declaration": true,
-    // "skipLibCheck": true,
-    "allowJs": true,
+    "declaration": true,
   },
   "include": [
-    "src", "test"
+    "src"
   ],
   "exclude": [
     "node_modules", "dist"
