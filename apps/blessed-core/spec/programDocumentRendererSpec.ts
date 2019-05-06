@@ -156,26 +156,5 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
-  it('layout', async done => {
-    await serial([
-      'top-down', 'left-right', 'diagonal', 'alt-diagonal', 'binary-tree',
-      'justified-layout'
-    ].map(l => async() => {
-      const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', border: { type: BorderStyle.double }, left: 20, top: 2, height: 26, width: 60, ch: ' ' },
-        array(12).map(i => createElement(doc, 'Div', undefined, { bg: color(), fg: color(), top: number(2, 12), left: number(2, 8), height: number(2, 4), width: number(6, 12), ch: '.' }, [
-          doc.createTextNode('N' + i + 'th')
-        ]))
-      )
-      renderer.renderElement(el)
-      // await sleep(100)
-      renderer.eraseElement(el)
-      layoutChildren({ el, layout: l as any })
-      renderer.renderElement(el)
-      const output = renderer.printBuffer(true)
-      array(7).map(i => 'N' + i + 'th').forEach(l => expect(output).toContain(l))
-      // await sleep(  3100)
-    }
-    ))
-    done()
-  })
+ 
 })

@@ -133,10 +133,10 @@ function handleJustifiedLayout(o: LayoutOptions & { el: ProgramElement }) {
   const data = children.map(c => ({
     top: c.props.top,
     left: c.props.left,
-    width: c.props.width,
-    height: c.props.height
+    width: c.props.width||1,
+    height: c.props.height||1
   }))
-  debug(data)
+  // debug(data)
   const def = {
     containerWidth: o.el.props.width,
     containerHeight: o.el.props.height,
@@ -155,9 +155,9 @@ function handleJustifiedLayout(o: LayoutOptions & { el: ProgramElement }) {
     containerHeight: o.el.props.height
   }
   const options = merge(true, true, {}, def, o.justifiedLayout || {}, mandatory)
-  debug({ options })
+  // debug({ options })
   const result = justifiedLayout(data, options) as JustifiedLayoutResult
-  debug(result.boxes)
+  // debug(result.boxes)
 
   if (result && result.boxes) {
     if (result.boxes.length !== children.length) {

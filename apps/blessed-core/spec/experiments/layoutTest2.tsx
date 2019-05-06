@@ -14,14 +14,34 @@ interface LG {
   ontainerHeight: number
   widowCount: number
 }
+try {
+
+  const { renderer, el } = createProgramRendererDocumentAndElement(undefined)
+
+  el.props.extend({ layout: { layout: Layout['justified-layout'], justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
+
+  function draw() {
+    renderer.eraseElement(el)
+    el.empty()
+    array(20).map(i => ({
+      top: number(0, 20), left: number(20), width: number(23, 40), height: number(12, 20), bg: color(), border: true
+   , children: [`El ${i}`] })).forEach(el.create.bind(el))
+    renderer.renderElement(el)
+  }
+  draw()
+  renderer.program.key(['a'], draw)
+
+} catch (error) {
+  console.log(error)
+  debug(error)
+
+}
+
+
+
 // const i = [{ width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }]
 // const i = [{ width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, ]
 
-try {
-
-  const { renderer, el } = createProgramRendererDocumentAndElement(undefined,  {layout: { layout: Layout['justified-layout'], justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } }, children: array(20).map(i => ({
-  top: number(0, 20), left: number(20), width: number(23, 40), height: number(12, 20), bg: color(), border: true
-}))})
 // debug(el.props.width, renderer.program.cols);
 
 // var layoutGeometry = require('justified-layout')(i, {
@@ -55,14 +75,7 @@ try {
 // const app =
 
 // const e = Flor.render(p)
-  el.layoutChildren()
-  renderer.renderElement(el)
-
-} catch (error) {
-  console.log(error)
-  debug(error)
-
-}
+  // el.layoutChildren()
 // animate({
 
 // console.log(layoutGeometry);
