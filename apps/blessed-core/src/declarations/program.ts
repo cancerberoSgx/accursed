@@ -2,9 +2,9 @@
 
 /// <reference types="node" />
 
-import { EventEmitter } from 'events'
-import { Readable, Writable } from 'stream'
-import { TPut } from './tput'
+import { EventEmitter } from 'events';
+import { Readable, Writable } from 'stream';
+import { TPut } from './tput';
 
 interface IMouseEventArg extends IAbstractEventArg {
   x: number

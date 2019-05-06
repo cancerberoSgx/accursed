@@ -1,8 +1,8 @@
-import { React } from '../src/jsx/createElement'
-import { ProgramDocument, Program, ProgramDocumentRenderer } from '../src'
-import { installExitKeys, createProgramRendererDocument } from '../src/util'
+import { ProgramDocument } from '../src'
 import { Component } from '../src/jsx/component'
-import { words } from './data'
+import { React } from '../src/jsx/createElement'
+import { createProgramRendererDocument } from '../src/util'
+import { isElement } from '../src/programDom/nodeUtil';
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
 
 describe('jsx', () => {
@@ -14,7 +14,7 @@ describe('jsx', () => {
   })
 
   it('render', async done => {
-    const p = <box width={10} height={7} bg="red" fg="black" top={4} left={12}ch="y">hello</box>
+    const p = <box width={10} height={7} bg="red" fg="black" top={4} left={12} ch="y">hello</box>
     const doc = new ProgramDocument()
     React.setDocument(doc)
     const e = React.render(p)
@@ -39,11 +39,11 @@ describe('jsx', () => {
 
   it('children and text', async done => {
     const p = <box width={40} height={17} bg="red" fg="black" top={4} left={12} ch="_">
-    hello world
+      hello world
     <box top={7} left={4} width={3} height={7} ch="2" bg="blue">K</box>
-    more text
-    <box  top={12} left={22} width={17} height={4} ch="3" bg="green">INNER TEXT</box>
-    and even more
+      more text
+    <box top={12} left={22} width={17} height={4} ch="3" bg="green">INNER TEXT</box>
+      and even more
     </box>
     const { renderer } = createProgramRendererDocument()
     renderer.renderElement(React.render(p))
@@ -76,23 +76,19 @@ describe('jsx', () => {
   describe('components', () => {
 
     it('should render components', async done => {
-    class C extends Component<{name: string, colors: string[]}> {
-      render() {
-        return <box top={7} left={4} width={43} height={17} ch="_" bg="blue">hello {this.props.name}
-        <text></text>
-        Your colors:
+      class C extends Component<{ name: string, colors: string[] }> {
+        render() {
+          return <box top={7} left={4} width={43} height={17} ch="_" bg="blue">hello {this.props.name}
+            <text></text>
+            Your colors:
         {this.props.colors.map((c, i) => <text width={c.length} ch="P" bg="yellow" height={1} left={1} top={i + 3}>{c}</text>)}
-        </box>
+          </box>
+        }
       }
-    }
-    const { renderer } = createProgramRendererDocument()
-    // console.log(JSON.stringify(<C name="seba" colors={['red', 'blue','green']}/>));
-
-    const e = React.render(<C name="seba" colors={['red', 'blue','green']}/>)
-    // console.log(e.outerHTML);
-
-    renderer.renderElement(e)
-    expect(renderer.printBuffer(true)).toContain(`
+      const { renderer } = createProgramRendererDocument()
+      const e = React.render(<C name="seba" colors={['red', 'blue', 'green']} />)
+      renderer.renderElement(e)
+      expect(renderer.printBuffer(true)).toContain(`
 
 
 
@@ -114,8 +110,40 @@ describe('jsx', () => {
     ___________________________________________
     ___________________________________________
 `)
-    renderer.destroy()
-    done()
-  })
+      renderer.destroy()
+      done()
+    })
+
+    fit('should call  elementCreated and elementReady', async done => {
+      let elementReady = false, elementCreated = false
+      class C extends Component<{ name: string, colors: string[] }> {
+        elementReady() {
+          elementReady = true
+          Array.from(this.element!.childNodes).filter(isElement).forEach((c, i) => {
+            c.props.top = i + 1
+          })
+        }
+        elementCreated() {
+          elementCreated = true
+        }
+        render() {
+          return <box><text>hello</text><text>my parent</text><text>will get me</text><text>an empty line</text></box>
+        }
+      }
+      const { renderer } = createProgramRendererDocument()
+      const e = React.render(<C name="seba" colors={['red', 'blue', 'green']} />)
+      expect(elementReady).toBe(true)
+      expect(elementCreated).toBe(true)
+      renderer.renderElement(e)
+      expect(renderer.printBuffer(true)).toContain(`
+hello
+my parent
+will get me
+an empty line
+`)
+      renderer.destroy()
+      done()
+    })
+
   })
 })

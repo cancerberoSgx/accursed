@@ -1,7 +1,6 @@
-import { Element, NamedNodeMap, Attr } from '../dom'
+import { Element } from '../dom'
+import { BorderStyle } from './boxes'
 import { ProgramDocument } from './programDocument'
-import { objectMap } from 'misc-utils-of-mine-generic'
-import { BorderStyle, BorderSide } from './boxes'
 
 export class ProgramElement extends Element {
   /**

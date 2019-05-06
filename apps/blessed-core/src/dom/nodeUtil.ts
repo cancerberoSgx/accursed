@@ -1,5 +1,4 @@
-import { Node, Attr } from '.'
-import { Element } from '.'
+import { Attr, Element, Node } from '.'
 
 export function nodeTypes(n: Node): number[] {
   const o: number[] = []
@@ -12,7 +11,7 @@ export function nodeTexts(n: Node): (string | null)[] {
 }
 
 export function isElement(n: Node): n is Element {
-  return n.nodeType === Node.ELEMENT_NODE
+  return n && n.nodeType === Node.ELEMENT_NODE
 }
 
 export function isText(n: Node): n is Element {

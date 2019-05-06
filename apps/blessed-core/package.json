@@ -32,7 +32,7 @@
     "jasmine": "^3.4.0",
     "terser": "^3.17.0",
     "ts-node": "^8.1.0",
-    "tslint": "^5.16.0",    
+    "tslint": "^5.16.0",
     "ts-refactor": "0.0.2",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.4.5"

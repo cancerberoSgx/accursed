@@ -1,4 +1,4 @@
-import { Document, ProgramDocument } from '../src'
+import { ProgramDocument } from '../src'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 describe('programDom', () => {

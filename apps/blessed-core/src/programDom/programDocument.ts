@@ -1,7 +1,5 @@
-import { Node, NodeType, Document } from '../dom'
-import { Program } from '../declarations/program'
+import { Document } from '../dom'
 import { ProgramElement } from './programElement'
-import { ProgramTextNode } from './programTextNode'
 
 export class ProgramDocument extends Document {
 

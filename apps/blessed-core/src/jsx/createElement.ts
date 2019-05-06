@@ -1,9 +1,9 @@
 // import { VirtualComponent } from '../blessed/virtualElement';
 // import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes';
+import { Node } from '../dom'
 import { ProgramDocument } from '../programDom'
 import { Component } from './component'
-import { BlessedJsx, BlessedJsxAttrs  } from './types'
-import { Node } from '../dom'
+import { BlessedJsx, BlessedJsxAttrs } from './types'
 
 interface RenderOptions {
   document?: ProgramDocument
@@ -18,6 +18,7 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
 }
 
 class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Array<JSX.BlessedJsxNode>}> implements JSX.Element<P> {
+  _component?: Component | undefined
   constructor(public type: string, attrs: BlessedJsxAttrs) {
     this.props = { ...attrs || {} } as any
   }
@@ -82,11 +83,15 @@ class BlessedJsxImpl implements BlessedJsx {
       throw new Error('unexpected undefined type ' + e)
     }
     const el = doc.createElement(e.type)
+    if (isJSXElementImpl(e) && e._component) {
+      e._component.element = el
+      e._component.elementCreated()
+    }
     el.props.extend({ ...e.props, children: undefined } as any)
     if (e.children) {
       if (Array.isArray(e.children)) {
         e.children.forEach(c => {
-          if (isElementLike(c)) {
+          if (isJSXElementImpl(c)) {
             let r: Node
             if (c.type === '__text') {
               r = doc.createTextNode((c.props as any).textContent + '')
@@ -101,6 +106,9 @@ class BlessedJsxImpl implements BlessedJsx {
       } else {
         throw new Error('Unrecognized children type ' + e.children)
       }
+    }
+    if (isJSXElementImpl(e) && e._component) {
+      e._component.elementReady()
     }
     return el
   }
@@ -137,8 +145,11 @@ class BlessedJsxImpl implements BlessedJsx {
         // }
         // TODO: beforeElementRenderListeners
       el = component.render()
+      if (isJSXElementImpl(el)) {
+        el._component = component
+      }
         // @ts-ignore
-      component.blessedElement = el
+      // component.blessedElement = el
         // TODO: associate otherwise ?  good idea?
       // }
     } else if (typeof tag === 'function') {
@@ -299,7 +310,7 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // CHILDREN
     children.forEach(c => {
-      if (isElementLike(c)) {
+      if (isJSXElementImpl(c)) {
         // if (!c.options || !c.options.parent) {
         this.appendChild(el, c)
         // }
@@ -313,7 +324,7 @@ class BlessedJsxImpl implements BlessedJsx {
 
   private _addChildrenArray(c: any[], el: JSXElementImpl) {
     c.forEach(c2 => {
-      if (isElementLike(c2)) {
+      if (isJSXElementImpl(c2)) {
         // if (!c2.options || !c2.options.parent) {
         this.appendChild(el, c2)
         // }
@@ -381,7 +392,7 @@ class BlessedJsxImpl implements BlessedJsx {
   // }
 }
 
-function isElementLike(e: any): e is JSXElementImpl {
+function isJSXElementImpl(e: any): e is JSXElementImpl {
   return e && e.props && e.children
 }
 

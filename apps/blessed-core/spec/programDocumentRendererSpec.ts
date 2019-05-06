@@ -1,9 +1,7 @@
-import { Document, ProgramDocument, Program, ProgramDocumentRenderer, ProgramElement } from '../src'
-import { tryTo, removeWhites } from 'misc-utils-of-mine-generic'
-import { ansi, Driver, InteractionSpecHelper } from 'cli-driver'
-import { createElement, trimRightLines } from '../src/util'
-
-import { renderBorderBox, BorderStyle, drawElementBorder } from '../src/programDom/boxes'
+import { tryTo } from 'misc-utils-of-mine-generic'
+import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
+import { BorderStyle, drawElementBorder } from '../src/programDom/boxes'
+import { createElement } from '../src/util'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 

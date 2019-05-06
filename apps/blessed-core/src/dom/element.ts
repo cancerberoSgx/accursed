@@ -1,5 +1,5 @@
-import { Node } from './node'
 import { Document } from './document'
+import { Node } from './node'
 
 export class Element  extends Node  {
 

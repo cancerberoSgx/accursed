@@ -1,8 +1,8 @@
-import { ProgramDocument, ProgramElement, ElementPropsImpl, ProgramDocumentRenderer } from './programDom'
-import { exec, execSync } from 'child_process'
+import { execSync } from 'child_process'
 import { Program } from './declarations/program'
 import { Node } from './dom'
 import { React } from './jsx/createElement'
+import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from './programDom'
 
 export function trimRightLines(s: string) {
   return s.split('\n').map(l => l.trimRight()).join('\n')

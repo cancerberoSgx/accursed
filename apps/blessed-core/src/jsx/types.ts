@@ -49,9 +49,8 @@
 //   TextboxOptions,
 //   TextOptions
 // } from '../blessedTypes'
+import { ElementProps, ProgramDocument, ProgramElement } from '../programDom'
 import { Component } from './component'
-import { ElementPropsImpl, ProgramElement, StylePropsImpl, StyleProps, ProgramDocument, ElementProps } from '../programDom'
-import { ProgramTextNode } from '../programDom/programTextNode'
 
 // export enum EventOptionNames {
 //   key = 'key',

@@ -1,12 +1,11 @@
-import { ProgramElement, StylePropsImpl, StyleProps } from './programElement'
-import { Program } from '../declarations/program'
 import { array } from 'misc-utils-of-mine-generic'
-import { TextNode } from '../dom/text'
 import { inspect } from 'util'
-import { trimRightLines, destroyProgram } from '../util'
-import { ProgramTextNode } from './programTextNode'
-import { getBoxStyleChar, BorderSide } from './boxes'
+import { Program } from '../declarations/program'
 import { isText } from '../dom/nodeUtil'
+import { TextNode } from '../dom/text'
+import { destroyProgram, trimRightLines } from '../util'
+import { BorderSide, getBoxStyleChar } from './boxes'
+import { ProgramElement, StyleProps, StylePropsImpl } from './programElement'
 
 export class ProgramDocumentRenderer {
   private debug: boolean

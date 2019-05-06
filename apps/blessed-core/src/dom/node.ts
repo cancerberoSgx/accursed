@@ -1,7 +1,7 @@
-import { EventTarget } from './event'
+import { notFalsy } from 'misc-utils-of-mine-typescript'
 import { Document } from './document'
+import { EventTarget } from './event'
 import { nodeHtml } from './nodeHtml'
-import { notUndefined, notFalsy } from 'misc-utils-of-mine-typescript'
 
 export abstract class Node extends EventTarget {
 
