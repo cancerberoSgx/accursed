@@ -1,8 +1,8 @@
 import { Element } from '../dom'
+import { createElement } from '../util/util'
 import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
-import { ElementProps, FullProps } from './types';
-import { createElement } from '../util/util';
+import { FullProps } from './types'
 
 export class ProgramElement extends Element {
 
@@ -67,10 +67,10 @@ export class ProgramElement extends Element {
   /**
    * creates a new element and appends it to this element.
    */
-  create(props : FullProps){
-    if(!this.ownerDocument){
+  create(props: FullProps) {
+    if (!this.ownerDocument) {
       throw new Error('Cannot invoke this method on an unattached element')
     }
-    return createElement(this.ownerDocument as ProgramDocument, {...props, parent: this} )
+    return createElement(this.ownerDocument as ProgramDocument, { ...props, parent: this })
   }
 }

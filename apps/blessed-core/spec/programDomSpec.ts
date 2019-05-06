@@ -1,5 +1,5 @@
-import { ProgramDocument, Program, ProgramDocumentRenderer, BorderStyle } from '../src'
-import { trimRightLines } from '../src/util/misc';
+import { BorderStyle, Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
+import { trimRightLines } from '../src/util/misc'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 describe('programDom', () => {
@@ -24,7 +24,7 @@ describe('programDom', () => {
 
   it('js api', async done => {
     const program = new Program()
-    program.key(['q', 'escape', 'C-c'], function () {
+    program.key(['q', 'escape', 'C-c'], function() {
       program.showCursor()
       program.disableMouse()
       program.normalBuffer()
@@ -42,7 +42,7 @@ describe('programDom', () => {
       children: [
         { top: 4, left: 10, width: 15, height: 3, border: { type: BorderStyle.round, fg: 'green' }, children: [' this is '] },
         { top: 4, left: 25, width: 15, height: 3, border: { type: BorderStyle.round, fg: 'green' }, children: [' low level'] },
-        { top: 4, left: 40, width: 15, height: 3, border: { type: BorderStyle.round, fg: 'green' }, children: [' WIP...'] },
+        { top: 4, left: 40, width: 15, height: 3, border: { type: BorderStyle.round, fg: 'green' }, children: [' WIP...'] }
       ]
     })
     renderer.renderElement(app)
@@ -54,7 +54,7 @@ describe('programDom', () => {
           │ this is     ││ low level   ││ WIP...      │
           ╰─────────────╯╰─────────────╯╰─────────────╯
 `))
-renderer.destroy()
+    renderer.destroy()
     done()
   })
 

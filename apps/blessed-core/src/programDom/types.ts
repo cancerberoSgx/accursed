@@ -1,6 +1,6 @@
 import { BorderStyle } from '../util/border'
+import { ProgramElement } from './programElement'
 import { Color } from './styleProps'
-import { ProgramElement } from './programElement';
 
 export abstract class AbstractPropsImpl implements AbstractProps {
   abstract getObject(): {
@@ -61,5 +61,5 @@ export interface ElementProps extends StyleProps {
 export interface FullProps extends ElementProps {
   tagName?: string
   parent?: ProgramElement
-  children?: (ElementProps|ProgramElement|string)[]
+  children?: (ElementProps | ProgramElement | string)[]
 }

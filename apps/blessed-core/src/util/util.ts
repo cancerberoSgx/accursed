@@ -23,7 +23,7 @@ export function destroyProgram(program: Program) {
 }
 
 export function installExitKeys(program: Program) {
-  program.key(['q', 'escape', 'C-c'], function () {
+  program.key(['q', 'escape', 'C-c'], function() {
     destroyProgramAndExit(program)
   })
 
@@ -47,11 +47,9 @@ export function createElement(doc: ProgramDocument, tagName: string | FullProps,
     children = (opts.children || []).map(c => {
       if (typeof c === 'string') {
         return doc.createTextNode(c)
-      }
-      else if (isElement(c)) {
+      } else if (isElement(c)) {
         return c
-      }
-      else {
+      } else {
         return createElement(doc, c)
       }
     })
@@ -69,4 +67,3 @@ export function createElement(doc: ProgramDocument, tagName: string | FullProps,
   }
   return el
 }
-

@@ -10,3 +10,5 @@ tsconfig.json
 .travis.yml
 /docs
 /guides
+/test
+test_output.txt
