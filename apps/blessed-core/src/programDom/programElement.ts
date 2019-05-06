@@ -2,6 +2,7 @@ import { Element } from '../dom'
 import { ProgramDocument } from './programDocument'
 
 export class ProgramElement extends Element {
+
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
   }
@@ -70,7 +71,7 @@ export class ProgramElement extends Element {
     this._y = value
   }
 
-  private _bottom: number
+  private _bottom: number = 0
   public get bottom(): number {
     return this._bottom
   }
@@ -78,7 +79,7 @@ export class ProgramElement extends Element {
     this._bottom = value
   }
 
-  private _right: number
+  private _right: number = 0
   public get right(): number {
     return this._right
   }
@@ -88,25 +89,25 @@ export class ProgramElement extends Element {
 
   private _bg: Color | undefined
 
-  public get bg(): Color {
+  public get bg(): Color | undefined {
     return this._bg
   }
 
-  public set bg(value: Color) {
+  public set bg(value: Color | undefined) {
     this._bg = value
   }
 
   private _fg: Color | undefined
 
-  public get fg(): Color {
+  public get fg(): Color | undefined {
     return this._fg
   }
 
-  public set fg(value: Color) {
+  public set fg(value: Color | undefined) {
     this._fg = value
   }
 
-  private _ch: string
+  private _ch: string = ' '
 
   public get ch(): string {
     return this._ch

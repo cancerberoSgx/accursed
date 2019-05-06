@@ -6,7 +6,7 @@
     "lib": [
       "esnext"
     ],
-    // "strict": true,
+    "strict": true,
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,

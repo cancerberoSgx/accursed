@@ -7,7 +7,7 @@ import { inspect } from 'util'
 export class ProgramDocumentRenderer {
   private debug: boolean
   private program: Program
-  private debugBuffer: string[][]
+  private debugBuffer: string[][] = []
   private ch: string
 
   constructor(options: Options) {
@@ -27,7 +27,7 @@ export class ProgramDocumentRenderer {
       // }
       // else
       if (c instanceof ProgramElement) {
-        this.renderElementWithoutChildren(c)
+        this.renderElement(c)
       } else {
         this.log('Element type invalid: ' + inspect(c))
       }

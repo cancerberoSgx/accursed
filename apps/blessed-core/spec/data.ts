@@ -29,7 +29,7 @@ export function randomHex() {
   return `#${(number(0, 255).toString(16), number(0, 255).toString(16), number(0, 255).toString(16))}`
 }
 
-export function invertColor(hex) {
+export function invertColor(hex: string) {
   function padZero(str: string, len?: number) {
     len = len || 2
     let zeros = new Array(len).join('0')

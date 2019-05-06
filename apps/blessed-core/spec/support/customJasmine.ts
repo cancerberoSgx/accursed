@@ -12,25 +12,25 @@ let j = new Jasmine()
 j.loadConfigFile('spec/support/jasmine.json')
 
 j.configureDefaultReporter({
-  print: function(...args) {
+  print: function(...args: any[]) {
     appendFileSync(
       'test_output.txt',
       'print: ' +
         args
           .map(a => {
             if (a instanceof Error) {
-              return `${a}\n${a.stack.split('\n').join('\n')}`
+              return `${a}\n${a && a.stack && a.stack.split('\n').join('\n')}`
             } else {
               return inspect(a)
             }
           })
           .join(', ')
     )
-    process.stdout.write(format.apply(this, arguments))
+    process.stdout.write(format.apply(this, arguments as any))
   }
 })
 
-j.onComplete(function(passed) {
+j.onComplete(function(passed: boolean) {
   console.log('RESULT FILE WAS WRITTEN TO test_output.txt')
   if (passed) {
     console.log('All specs have passed')
