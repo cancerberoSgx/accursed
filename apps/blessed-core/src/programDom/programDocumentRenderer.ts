@@ -1,4 +1,4 @@
-import { ProgramElement, StyleProps } from './programElement'
+import { ProgramElement, StylePropsImpl } from './programElement'
 import { Program } from '../declarations/program'
 import { array } from 'misc-utils-of-mine-generic'
 import { TextNode } from '../dom/text'
@@ -15,7 +15,7 @@ export class ProgramDocumentRenderer {
   }
   private debugBuffer: string[][] = []
   private ch: string
-  private defaultStyle : StyleProps = new StyleProps({
+  private defaultStyle : StylePropsImpl = new StylePropsImpl({
     bg: 'black', 
     fg: 'white'
   })
@@ -69,7 +69,7 @@ export class ProgramDocumentRenderer {
     }
   }
 
-  setStyle(props: StyleProps) {
+  setStyle(props: StylePropsImpl) {
     if (props.bg) {
       this._program.bg(props.bg);
     }
@@ -79,8 +79,6 @@ export class ProgramDocumentRenderer {
   }
 
   eraseElement(el: ProgramElement): any {
-      // this._program.bg(this.bg)
-      // this._program.fg(this.fg)
       this.setStyle(this.defaultStyle)
     const ay = el.absoluteTop , ax = el.absoluteLeft
     for (let i = 0; i < el.props.height; i++) {
@@ -104,7 +102,7 @@ export class ProgramDocumentRenderer {
      return 
    }
    this.setStyle(el.props.border)
-  const {xi, xl, yi, yl} = { xi: el.absoluteLeft - 1, xl: el.absoluteLeft + el.props.width + 1, yi: el.absoluteTop - 1, yl: el.absoluteTop + el.props.height + 1 } 
+  const {xi, xl, yi, yl} = { xi: el.absoluteLeft , xl: el.absoluteLeft + el.props.width , yi: el.absoluteTop , yl: el.absoluteTop + el.props.height  } 
   this.write(yi, xi, getBoxStyleChar(el.props.border.type, BorderSide.topLeft))
   this.write(yi, xl-1, getBoxStyleChar(el.props.border.type, BorderSide.topRight))
   this.write(yl-1, xi, getBoxStyleChar(el.props.border.type, BorderSide.bottomLeft))

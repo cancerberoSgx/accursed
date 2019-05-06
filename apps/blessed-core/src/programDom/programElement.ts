@@ -5,19 +5,12 @@ import { BorderStyle } from './boxes';
 
 export class ProgramElement extends Element {
   props: ElementProps;
-  // originalAttributes: NamedNodeMap<Attr>;
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
     this.props = new ElementProps()
-    // this.originalAttributes = this.attributes
   }
 
-  // get attributes() {
-  //   const props = this.props.getObject()
-  //   this._attributes = {...this._attributes, ...objectMap(props, name=>({name, value: props[name]+''}))}
-  //   return this.originalAttributes
-  // }
   
   get parentNode(): ProgramElement | ProgramDocument {
     return this._parentNode as any
@@ -27,7 +20,7 @@ export class ProgramElement extends Element {
     let x = this.props.left
     let n: ProgramElement | ProgramDocument  = this
     while (n.parentNode !== n.ownerDocument) {
-      x = x + (n.parentNode as ProgramElement).props.left
+      x = x + (n.parentNode as ProgramElement).props.left + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.left ||0)+ ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
     return x
@@ -37,31 +30,26 @@ export class ProgramElement extends Element {
     let y = this.props.top
     let n: ProgramElement | ProgramDocument  = this
     while (n.parentNode !== n.ownerDocument) {
-      y = y + (n.parentNode as ProgramElement).props.top
+      y = y + (n.parentNode as ProgramElement).props.top+ ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top ||0)+ ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
     return y
   }
 
-
-  // getChild(index: number): ProgramElement {
-  //   return this.children.item(index) as ProgramElement
-  // }
-  // getChildCount(): number {
-  //   return this.children.length
-  // }
-
 }
 
 interface Padding {
-  top: number, left: number, right: number, bottom: number
+  top: number, 
+  left: number, 
+  right: number,
+   bottom: number
 }
-// interface Border {
-//   style
-// }
-
-export class StyleProps {
-
+export interface StyleProps {
+bg?: Color
+fg?: Color
+ch?: string
+}
+export class StylePropsImpl implements StyleProps {
   constructor(p: {bg?: Color, fg?: Color, ch?: string} = {}) {
 this.bg = p.bg
 this.fg = p.fg
@@ -106,7 +94,7 @@ this.ch = p.ch
 type Color= string
 
 
-class BorderProps extends StyleProps {
+class BorderProps extends StylePropsImpl {
   private _type: BorderStyle | undefined;
   public get type(): BorderStyle | undefined {
     return this._type;
@@ -116,7 +104,7 @@ class BorderProps extends StyleProps {
   }
 }
 
-export class ElementProps extends StyleProps {
+export class ElementProps extends StylePropsImpl {
 
   getObject() {
     return {
@@ -127,7 +115,6 @@ export class ElementProps extends StyleProps {
       left: this._left,
       padding: this._padding,
       border: this._border
-// content: this._content
     }
   }
   private _border: BorderProps|undefined;
@@ -137,13 +124,6 @@ export class ElementProps extends StyleProps {
   public set border(value: BorderProps|undefined) {
     this._border = value;
   }
-  // private _content: string;
-  // public get content(): string {
-  //   return this._content;
-  // }
-  // public set content(value: string) {
-  //   this._content = value;
-  // }
 
   private _padding: Padding|undefined;
   public get padding(): Padding|undefined {
@@ -152,7 +132,6 @@ export class ElementProps extends StyleProps {
   public set padding(value: Padding|undefined) {
     this._padding = value;
   }
-
 
   private _width: number = 0
 
