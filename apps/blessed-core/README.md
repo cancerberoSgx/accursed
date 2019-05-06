@@ -1,4 +1,4 @@
-just tput.js and program.js from blessed
+Based on tput.js of blessed library
 
 Typed and with examples
 

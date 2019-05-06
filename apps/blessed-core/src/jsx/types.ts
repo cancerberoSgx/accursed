@@ -50,8 +50,8 @@
 //   TextOptions
 // } from '../blessedTypes'
 import { Component } from './component'
-import { ElementPropsImpl, ProgramElement, StylePropsImpl, StyleProps, ProgramDocument, ElementProps } from '../programDom';
-import { ProgramTextNode } from '../programDom/programTextNode';
+import { ElementPropsImpl, ProgramElement, StylePropsImpl, StyleProps, ProgramDocument, ElementProps } from '../programDom'
+import { ProgramTextNode } from '../programDom/programTextNode'
 
 // export enum EventOptionNames {
 //   key = 'key',
@@ -121,7 +121,7 @@ declare global {
     export interface IntrinsicElements {
       box: ElementProps
       text: ElementProps
-      
+
       // OptionsProps<ElementProps> & EventOptions<Box>
       // text: OptionsProps<TextOptions> & EventOptions<Text>
       // line: OptionsProps<LineOptions> & EventOptions<Line>
@@ -225,7 +225,7 @@ export interface BlessedJsx {
    */
   render(e: JSX.Element, options?: RenderOptions): ProgramElement
 
-  setDocument(doc: ProgramDocument):void
+  setDocument(doc: ProgramDocument): void
 
   // /** add listeners that will be notifies just after the Blessed Element instance is created. Attributes and
   //  * children have not yet been set, besides blessed options native ones.*/

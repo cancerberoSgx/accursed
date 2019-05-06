@@ -1,12 +1,12 @@
 // import { VirtualComponent } from '../blessed/virtualElement';
 // import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes';
-import { ProgramDocument } from '../programDom';
-import { Component } from './component';
-import { BlessedJsx, BlessedJsxAttrs  } from './types';
-import { Node } from '../dom';
+import { ProgramDocument } from '../programDom'
+import { Component } from './component'
+import { BlessedJsx, BlessedJsxAttrs  } from './types'
+import { Node } from '../dom'
 
 interface RenderOptions {
-document?: ProgramDocument
+  document?: ProgramDocument
 }
 
 interface ComponentConstructor<P = {}, S = {}> {
@@ -17,14 +17,13 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
-
-class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Array<JSX.BlessedJsxNode>}> implements JSX.Element<P>{
-  constructor (public type: string, attrs: BlessedJsxAttrs){
-this.props = {...attrs || {}} as any
+class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Array<JSX.BlessedJsxNode>}> implements JSX.Element<P> {
+  constructor(public type: string, attrs: BlessedJsxAttrs) {
+    this.props = { ...attrs || {} } as any
   }
   children: any[] = []
   // props: P = {children: []} as any
-  props:  P// = {} as any as P //{children: Array<JSX.BlessedJsxNode>}//  = {children: []}
+  props: P// = {} as any as P //{children: Array<JSX.BlessedJsxNode>}//  = {children: []}
   // children: JSX.BlessedJsxNode[] = []
 }
 
@@ -32,7 +31,7 @@ this.props = {...attrs || {}} as any
  * This implementation has a trivial createElement() and a heavier render(). This means that : "parsing" the jsx will be fast. render() will be slower. PRO: createElement doesn't create any Elements so we are able to modify the nodes and visit all of them bfore creating the ProgramElements. (implement Providers, etc.)
  */
 class BlessedJsxImpl implements BlessedJsx {
-  protected doc: ProgramDocument|undefined
+  protected doc: ProgramDocument | undefined
 
   // private _intrinsicElementFactory = { ...(blessed as any) }
   // protected intrinsicElementFactory<O extends ElementOptions, T extends Element<O>>(
@@ -56,13 +55,13 @@ class BlessedJsxImpl implements BlessedJsx {
   // private defaultPluginsInstalled = false
 
   render(e: JSX.Element, options: RenderOptions = {}) {
-    if(!this.doc && !options.document){
+    if (!this.doc && !options.document) {
       throw new Error('Need to provide a document with setDocument() before render')
     }
-    const doc = options.document ||this.doc!
+    const doc = options.document || this.doc!
     const el =  this._render(e, doc)
-     doc.body.appendChild(el)
-     return el 
+    doc.body.appendChild(el)
+    return el
     // if (!this.defaultPluginsInstalled) {
     //   this.defaultPluginsInstalled = true
     //   // installOptionsPropagationPlugin({ include: []})//['style.bg'] })
@@ -80,33 +79,30 @@ class BlessedJsxImpl implements BlessedJsx {
 
   private _render(e: JSX.Element<{}>, doc: ProgramDocument) {
     if (typeof e.type !== 'string') {
-      throw new Error('unexpected undefined type ' + e);
+      throw new Error('unexpected undefined type ' + e)
     }
-    const el = doc.createElement(e.type);
-    el.props.extend({ ...e.props, children: undefined } as any);
+    const el = doc.createElement(e.type)
+    el.props.extend({ ...e.props, children: undefined } as any)
     if (e.children) {
       if (Array.isArray(e.children)) {
         e.children.forEach(c => {
           if (isElementLike(c)) {
             let r: Node
-            if(c.type==='__text'){
-              r = doc.createTextNode((c.props as any).textContent+'')
+            if (c.type === '__text') {
+              r = doc.createTextNode((c.props as any).textContent + '')
+            } else {
+              r = this._render(c, doc)
             }
-            else {
-              r = this._render(c, doc);
-            }
-            el.appendChild(r);
+            el.appendChild(r)
+          } else {
+            throw new Error('Unrecognized child type ' + c)
           }
-          else {
-            throw new Error('Unrecognized child type ' + c);
-          }
-        });
-      }
-      else {
-        throw new Error('Unrecognized children type ' + e.children);
+        })
+      } else {
+        throw new Error('Unrecognized children type ' + e.children)
       }
     }
-    return el;
+    return el
   }
 
   setDocument(doc: ProgramDocument) {
@@ -134,16 +130,16 @@ class BlessedJsxImpl implements BlessedJsx {
       //   // then return a flagged object isVirtualElement so when the parent try to add it like child it
       //   // realizes it and can extract the information.
       //   el = VirtualComponent.createVirtualElement(component, tag.name)
-      // } 
+      // }
       // else {
         // if (component._saveJSXChildrenProps) {
         //   component._jsxChildrenProps = [...children] //.filter(VirtualComponent.isVirtualComponent)
         // }
         // TODO: beforeElementRenderListeners
-        el = component.render()
-        //@ts-ignore
-        component.blessedElement = el
-        //TODO: associate otherwise ?  good idea?
+      el = component.render()
+        // @ts-ignore
+      component.blessedElement = el
+        // TODO: associate otherwise ?  good idea?
       // }
     } else if (typeof tag === 'function') {
       el = tag({ ...attrs, children })
@@ -180,7 +176,7 @@ class BlessedJsxImpl implements BlessedJsx {
       // })
       // if (!listenerInstance) {
         // el = document({ ...attrs, children: undefined }) as Element
-        el = new JSXElementImpl(tag, attrs)
+      el = new JSXElementImpl(tag, attrs)
         // if(attrs){
         //   Object.assign(el.props, attrs)
         // }
@@ -199,7 +195,7 @@ class BlessedJsxImpl implements BlessedJsx {
   //   this.installRefs(el, component)
   //   // finished created the  blessed Element. Now we ugly cast the JSX.Element to a BlessedElement and
     // continue installing attributes and children only for intrinsic elements
-    if (typeof tag === 'string' 
+    if (typeof tag === 'string'
     // || VirtualComponent.isVirtualComponent(component)
     ) {
       this.installAttributesAndChildren(el! as any,
@@ -315,7 +311,7 @@ class BlessedJsxImpl implements BlessedJsx {
     })
   }
 
-  private _addChildrenArray(c: any[], el: JSXElementImpl ) {
+  private _addChildrenArray(c: any[], el: JSXElementImpl) {
     c.forEach(c2 => {
       if (isElementLike(c2)) {
         // if (!c2.options || !c2.options.parent) {
@@ -343,7 +339,7 @@ class BlessedJsxImpl implements BlessedJsx {
     //   child
     // }
     // let dontAppend = this.beforeAppendChildListeners.some(l => l(event))
-    if (el && el.props && el.children ){//&& !dontAppend) {
+    if (el && el.props && el.children) {// && !dontAppend) {
       el.children.push(child)
     }
   }
@@ -352,7 +348,7 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: JSXElementImpl) {
-    const t = {type: '__text', props: {textContent: c+'', children: []}, children: []}
+    const t = { type: '__text', props: { textContent: c + '', children: [] }, children: [] }
     this.appendChild(el, t)
     return t
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)

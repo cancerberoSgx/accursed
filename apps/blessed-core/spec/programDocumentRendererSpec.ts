@@ -1,11 +1,9 @@
 import { Document, ProgramDocument, Program, ProgramDocumentRenderer, ProgramElement } from '../src'
 import { tryTo, removeWhites } from 'misc-utils-of-mine-generic'
 import { ansi, Driver, InteractionSpecHelper } from 'cli-driver'
-import { createElement, trimRightLines } from '../src/util';
+import { createElement, trimRightLines } from '../src/util'
 
-import { renderBorderBox, BorderStyle, drawElementBorder} from '../src/programDom/boxes';
-
-
+import { renderBorderBox, BorderStyle, drawElementBorder } from '../src/programDom/boxes'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
@@ -103,7 +101,6 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
-
   it('textContent as unique children', async done => {
     const t = doc.createTextNode('hello world')
     const div1 = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 6, top: 2, height: 6, width: 16, ch: '_' }, [
@@ -122,14 +119,14 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
-  it('multiple text nodes and border', async done => {
+  it('multiple text nodes and drawElementBorder', async done => {
     const t = doc.createTextNode('hello world')
-    const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 9, top: 2, height: 6, width: 16, }, [
+    const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 9, top: 2, height: 6, width: 16 }, [
       doc.createTextNode('hello world'), doc.createTextNode('lorem ipsum')
     ])
-    
+
     renderer.renderElement(el)
-    drawElementBorder({renderer, el, borderStyle: BorderStyle.round});
+    drawElementBorder({ renderer, el, borderStyle: BorderStyle.round })
 
     expect(renderer.printBuffer(true)).toContain(`
         ╭────────────────╮
@@ -144,5 +141,4 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
-  
 })

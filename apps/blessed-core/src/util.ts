@@ -1,13 +1,13 @@
-import { ProgramDocument, ProgramElement, ElementPropsImpl } from './programDom';
-import { exec, execSync } from 'child_process';
-import { Program } from './declarations/program';
-import { Node } from './dom';
+import { ProgramDocument, ProgramElement, ElementPropsImpl } from './programDom'
+import { exec, execSync } from 'child_process'
+import { Program } from './declarations/program'
+import { Node } from './dom'
 
 export function trimRightLines(s: string) {
   return s.split('\n').map(l => l.trimRight()).join('\n')
 }
 
-export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementPropsImpl> = {}, children?:  Node[]) {
+export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementPropsImpl> = {}, children?: Node[]) {
   const el = doc.createElement(tagName)
   doc.appendChild(el)
   Object.assign(el.props, props)
@@ -27,10 +27,10 @@ export function nowHash() {
 }
 
 export function formatDate(d: Date) {
-  return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDay()+':'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()
+  return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() + ':' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
 }
 
-export function nowFormat(){
+export function nowFormat() {
   return formatDate(new Date())
 }
 
@@ -41,28 +41,26 @@ export function getCurrentCommit() {
 }
 
 export function getPerformanceFileName(label: string) {
-  return nowFormat().replace(/:/g, '_') + '_'+getCurrentCommit()+'_'+label+'.json'
+  return nowFormat().replace(/:/g, '_') + '_' + getCurrentCommit() + '_' + label + '.json'
 }
 
-
-export function destroyProgramAndExit(program: Program, status=0) {
+export function destroyProgramAndExit(program: Program, status= 0) {
   destroyProgram(program)
-  process.exit(status);
+  process.exit(status)
 }
 
 export function destroyProgram(program: Program) {
-  program.showCursor();
-  program.disableMouse();
-  program.normalBuffer();
-  program.reset();
-  program.destroy();
+  program.showCursor()
+  program.disableMouse()
+  program.normalBuffer()
+  program.reset()
+  program.destroy()
 }
 
-export function installExitKeys(program: Program ) {
+export function installExitKeys(program: Program) {
 
-program.key(['q', 'escape', 'C-c'], function () {
+  program.key(['q', 'escape', 'C-c'], function() {
   destroyProgramAndExit(program)
 })
-
 
 }

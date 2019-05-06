@@ -1,10 +1,10 @@
 import { Element, NamedNodeMap, Attr } from '../dom'
 import { ProgramDocument } from './programDocument'
-import { objectMap } from 'misc-utils-of-mine-generic';
-import { BorderStyle, BorderSide } from './boxes';
+import { objectMap } from 'misc-utils-of-mine-generic'
+import { BorderStyle, BorderSide } from './boxes'
 
 export class ProgramElement extends Element {
-  props: ElementPropsImpl;
+  props: ElementPropsImpl
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
@@ -19,7 +19,7 @@ export class ProgramElement extends Element {
     let x = this.props.left
     let n: ProgramElement | ProgramDocument  = this
     while (n.parentNode !== n.ownerDocument) {
-      x = x + (n.parentNode as ProgramElement).props.left + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.left ||0)+ ((n.parentNode as ProgramElement).props.border ? 1 : 0)
+      x = x + (n.parentNode as ProgramElement).props.left + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.left || 0) + ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
     return x
@@ -29,7 +29,7 @@ export class ProgramElement extends Element {
     let y = this.props.top
     let n: ProgramElement | ProgramDocument  = this
     while (n.parentNode !== n.ownerDocument) {
-      y = y + (n.parentNode as ProgramElement).props.top+ ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top ||0)+ ((n.parentNode as ProgramElement).props.border ? 1 : 0)
+      y = y + (n.parentNode as ProgramElement).props.top + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top || 0) + ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
     return y
@@ -38,40 +38,39 @@ export class ProgramElement extends Element {
 }
 
 interface Padding {
-  top: number, 
-  left: number, 
+  top: number,
+  left: number,
   right: number,
-   bottom: number
+  bottom: number
 }
 
-abstract class AbstractPropsImpl implements AbstractProps{
-abstract getObject(): {[a:string]:any}
-  extend <P extends AbstractProps=AbstractProps>(p : P):void {
+abstract class AbstractPropsImpl implements AbstractProps {
+  abstract getObject(): {[a: string]: any}
+  extend <P extends AbstractProps= AbstractProps>(p: P): void {
     Object.assign(this, p)
   }
- 
 
 }
 
 export interface AbstractProps {
   // getObject(): {[a:string]:any}
-  // extend <P extends AbstractProps=AbstractProps>(p : P):void 
+  // extend <P extends AbstractProps=AbstractProps>(p : P):void
   }
-export interface StyleProps extends AbstractProps{
-bg?: Color
-fg?: Color
-ch?: string
-bold?: boolean
-underline?: boolean
-standout?: boolean
-blink?: boolean
+export interface StyleProps extends AbstractProps {
+  bg?: Color
+  fg?: Color
+  ch?: string
+  bold?: boolean
+  underline?: boolean
+  standout?: boolean
+  blink?: boolean
 }
 export class StylePropsImpl extends AbstractPropsImpl implements StyleProps {
   constructor(p: {bg?: Color, fg?: Color, ch?: string} = {}) {
     super()
-this.bg = p.bg
-this.fg = p.fg
-this.ch = p.ch 
+    this.bg = p.bg
+    this.fg = p.fg
+    this.ch = p.ch
   }
   getObject() {
     return {
@@ -82,12 +81,12 @@ this.ch = p.ch
     }
   }
 
-  private _bold: boolean | undefined;
+  private _bold: boolean | undefined
   public get bold(): boolean | undefined {
-    return this._bold;
+    return this._bold
   }
   public set bold(value: boolean | undefined) {
-    this._bold = value;
+    this._bold = value
   }
   private _bg: Color | undefined
 
@@ -120,16 +119,16 @@ this.ch = p.ch
 }
 type Color= string
 
-export interface BorderProps extends StyleProps{
+export interface BorderProps extends StyleProps {
   type?: BorderStyle
 }
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {
-  private _type: BorderStyle | undefined;
+  private _type: BorderStyle | undefined
   public get type(): BorderStyle | undefined {
-    return this._type;
+    return this._type
   }
   public set type(value: BorderStyle | undefined) {
-    this._type = value;
+    this._type = value
   }
 }
 export interface ElementProps extends StyleProps {
@@ -140,7 +139,7 @@ export interface ElementProps extends StyleProps {
   padding?: Padding
   border?: BorderProps
 }
-export class ElementPropsImpl extends StylePropsImpl implements ElementProps{
+export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
 
   getObject() {
     return {
@@ -153,20 +152,20 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps{
       border: this._border
     }
   }
-  private _border: BorderPropsImpl|undefined;
-  public get border(): BorderPropsImpl|undefined {
-    return this._border;
+  private _border: BorderPropsImpl | undefined
+  public get border(): BorderPropsImpl | undefined {
+    return this._border
   }
-  public set border(value: BorderPropsImpl|undefined) {
-    this._border = value;
+  public set border(value: BorderPropsImpl | undefined) {
+    this._border = value
   }
 
-  private _padding: Padding|undefined;
-  public get padding(): Padding|undefined {
-    return this._padding;
+  private _padding: Padding | undefined
+  public get padding(): Padding | undefined {
+    return this._padding
   }
-  public set padding(value: Padding|undefined) {
-    this._padding = value;
+  public set padding(value: Padding | undefined) {
+    this._padding = value
   }
 
   private _width: number = 0

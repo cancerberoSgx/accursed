@@ -113,7 +113,7 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
 export function isComponent(c: any): c is Component {
   return (
     c &&
-    !!c.render 
+    !!c.render
     // &&
     // !!(c as Component).visitDescendants &&
     // typeof (c as Component)._saveJSXChildrenProps !== 'undefined'

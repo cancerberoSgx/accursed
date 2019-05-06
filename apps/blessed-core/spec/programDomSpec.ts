@@ -16,11 +16,10 @@ describe('programDom', () => {
     expect(d2.absoluteLeft).toBe(15)
     expect(d2.props.left).toBe(5)
 
-   expect(div1.outerHTML).toBe('<Div left="10"><Div left="5"></Div>hello world</Div>')
-    
+    expect(div1.outerHTML).toBe('<Div left="10"><Div left="5"></Div>hello world</Div>')
+
     done()
   })
-
 
   // it('border test', async done => {
   //   const d = new ProgramDocument()
@@ -36,7 +35,7 @@ describe('programDom', () => {
   //   expect(d2.props.left).toBe(5)
 
   //  expect(div1.outerHTML).toBe('<Div left="10"><Div left="5"></Div><text ></text></Div>')
-    
+
   //   done()
   // })
 

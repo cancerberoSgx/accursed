@@ -9,11 +9,11 @@ export abstract class Node extends EventTarget {
   static TEXT_NODE: NodeType = 3
   static ELEMENT_NODE: NodeType = 1
   static _WATERMARK = 'jsx-alone-dom-dom'
- public attributes: NamedNodeMap<Attr>  
+  public attributes: NamedNodeMap<Attr>
 
 //   get attributes(){
 // return this.__attributes
-//   } 
+//   }
   // NamedNodeMap<Attr>
   protected _attributes: {
     [k: string]: Attr;
