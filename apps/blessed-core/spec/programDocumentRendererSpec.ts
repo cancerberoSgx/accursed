@@ -122,7 +122,7 @@ describe('programDocumentRenderer', () => {
   it('multiple text nodes and drawElementBorder', async done => {
     const t = doc.createTextNode('hello world')
     const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 9, top: 2, height: 6, width: 16 }, [
-      doc.createTextNode('hello world'), doc.createTextNode('lorem ipsum')
+      doc.createTextNode('hello'), doc.createTextNode(' world')
     ])
 
     renderer.renderElement(el)
@@ -131,12 +131,30 @@ describe('programDocumentRenderer', () => {
     expect(renderer.printBuffer(true)).toContain(`
         ╭────────────────╮
         │hello world     │
-        │lorem ipsum     │
+        │                │
         │                │
         │                │
         │                │
         │                │
         ╰────────────────╯
+`)
+    done()
+  })
+
+  it('el.props.border', async done => {
+    const t = doc.createTextNode('hello world')
+    const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', border: { type:  BorderStyle.double },left: 10, top: 3, height: 6, width: 16 }, [
+      doc.createTextNode('hello'), doc.createTextNode(' world')
+    ])
+    renderer.renderElement(el)
+    expect(renderer.printBuffer(true)).toContain(`
+
+          ╔══════════════╗
+          ║hello world   ║
+          ║              ║
+          ║              ║
+          ║              ║
+          ╚══════════════╝
 `)
     done()
   })

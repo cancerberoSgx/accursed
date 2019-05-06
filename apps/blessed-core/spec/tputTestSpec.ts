@@ -20,12 +20,12 @@ describe('tputTest', () => {
     done()
   })
 
-  it('npm run build', async done => {
-    await client.enter('npm run build')
-    expect(await helper.waitForStrippedDataToInclude('build successful'))
-    await helper.expectLastExitCode(true)
-    done()
-  })
+  // it('npm run build', async done => {
+  //   await client.enter('npm run build')
+  //   expect(await helper.waitForStrippedDataToInclude('build successful'))
+  //   await helper.expectLastExitCode(true)
+  //   done()
+  // })
 
   it('node spec/assets/tputJsTest.js', async done => {
     await client.enter('node spec/assets/tputJsTest.js')

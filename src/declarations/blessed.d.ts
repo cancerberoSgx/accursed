@@ -3602,7 +3602,7 @@ export const colors: {
   convert(color: Widgets.Color): number
   mixColors(c1: number, c2: number, alpha: number): number
   RGBToHex(r: number, g: number, b: number): string
-  RGBToHex(hex: string): ColorRgb
+  hexToRGB(hex: string): ColorRgb
   blend(attr: number, attr2?: number, alpha?: number): number
   /**
  Seed all 256 colors. Assume xterm defaults.

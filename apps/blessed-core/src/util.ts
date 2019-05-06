@@ -1,7 +1,8 @@
-import { ProgramDocument, ProgramElement, ElementPropsImpl } from './programDom'
+import { ProgramDocument, ProgramElement, ElementPropsImpl, ProgramDocumentRenderer } from './programDom'
 import { exec, execSync } from 'child_process'
 import { Program } from './declarations/program'
 import { Node } from './dom'
+import { React } from './jsx/createElement'
 
 export function trimRightLines(s: string) {
   return s.split('\n').map(l => l.trimRight()).join('\n')
@@ -58,9 +59,17 @@ export function destroyProgram(program: Program) {
 }
 
 export function installExitKeys(program: Program) {
-
   program.key(['q', 'escape', 'C-c'], function() {
-  destroyProgramAndExit(program)
-})
+    destroyProgramAndExit(program)
+  })
 
+}
+export function createProgramRendererDocument() {
+  const document = new ProgramDocument()
+  React.setDocument(document)
+  const program = new Program({})
+  installExitKeys(program)
+  program.reset()
+  const  renderer = new ProgramDocumentRenderer({ program, debug: true })
+  return { renderer, document, program }
 }

@@ -117,10 +117,11 @@ import { ProgramTextNode } from '../programDom/programTextNode'
 // }
 
 declare global {
+
   export namespace JSX {
     export interface IntrinsicElements {
-      box: ElementProps
-      text: ElementProps
+      box: PropsChildren
+      text: PropsChildren
 
       // OptionsProps<ElementProps> & EventOptions<Box>
       // text: OptionsProps<TextOptions> & EventOptions<Text>
@@ -153,7 +154,7 @@ declare global {
 
     type PropsWithRef<P> = P & {
       // children?: BlessedJsxNode ,
-      ref?: P extends { ref?: infer R } ? R : undefined
+      // ref?: P extends { ref?: infer R } ? R : undefined
     }
 
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
@@ -177,15 +178,15 @@ declare global {
 
     type BlessedJsxText = string | number
 
-    type BlessedJsxChild = Element<{}> | BlessedJsxText
+    type BlessedJsxChild<P extends { children?: BlessedJsxNode } = {}>  = Element<P>  | BlessedJsxText
 
     export interface ReactNodeArray extends Array<BlessedJsxNode> {}
 
     export type BlessedJsxFragment = {} | ReactNodeArray
 
     // Heads up: we are forcing blessed node to be a JSX node !
-    export type BlessedJsxNode =
-      | BlessedJsxChild
+    export type BlessedJsxNode<P extends { children?: BlessedJsxNode } = {}>  =
+      | BlessedJsxChild<P>
       | BlessedJsxFragment
       | boolean
       | null
@@ -201,6 +202,10 @@ declare global {
     // export interface ElementChildrenAttribute {
     //   children: {}
     // }
+    interface PropsChildren extends ElementProps {
+      children?: BlessedJsxNode
+    }
+
   }
 }
 

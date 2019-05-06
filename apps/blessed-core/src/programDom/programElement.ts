@@ -4,6 +4,12 @@ import { objectMap } from 'misc-utils-of-mine-generic'
 import { BorderStyle, BorderSide } from './boxes'
 
 export class ProgramElement extends Element {
+  /**
+   * Called by the renderer just before rendering this element. It's children will follow. This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  beforeRender(): void {
+  }
+
   props: ElementPropsImpl
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
@@ -35,6 +41,18 @@ export class ProgramElement extends Element {
     return y
   }
 
+  get absoluteContentTop() {
+    return this.absoluteTop + (this.props.border ? 1 : 0)
+  }
+  get absoluteContentLeft() {
+    return this.absoluteLeft + (this.props.border ? 1 : 0)
+  }
+  get contentHeight() {
+    return this.props.height - (this.props.border ? 1 : 0)
+  }
+  get contentWidth() {
+    return this.props.width - (this.props.border ? 1 : 0)
+  }
 }
 
 interface Padding {
@@ -152,11 +170,11 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
       border: this._border
     }
   }
-  private _border: BorderPropsImpl | undefined
-  public get border(): BorderPropsImpl | undefined {
+  private _border: BorderProps | undefined
+  public get border(): BorderProps | undefined {
     return this._border
   }
-  public set border(value: BorderPropsImpl | undefined) {
+  public set border(value: BorderProps | undefined) {
     this._border = value
   }
 

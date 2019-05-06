@@ -301,7 +301,7 @@ class BlessedJsxImpl implements BlessedJsx {
     children.forEach(c => {
       if (isElementLike(c)) {
         // if (!c.options || !c.options.parent) {
-        //   this.appendChild(el, c)
+        this.appendChild(el, c)
         // }
       } else if (Array.isArray(c)) {
         this._addChildrenArray(c, el)
@@ -315,7 +315,7 @@ class BlessedJsxImpl implements BlessedJsx {
     c.forEach(c2 => {
       if (isElementLike(c2)) {
         // if (!c2.options || !c2.options.parent) {
-        //   this.appendChild(el, c2)
+        this.appendChild(el, c2)
         // }
       } else if (Array.isArray(c2)) {
         this._addChildrenArray(c2, el)

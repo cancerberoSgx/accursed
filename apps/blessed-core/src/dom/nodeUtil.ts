@@ -16,7 +16,7 @@ export function isElement(n: Node): n is Element {
 }
 
 export function isText(n: Node): n is Element {
-  return n.nodeType === Node.TEXT_NODE
+  return n && n.nodeType === Node.TEXT_NODE
 }
 
 export function nodeAttributes(n: Node): (Attr[] | null)[] {
