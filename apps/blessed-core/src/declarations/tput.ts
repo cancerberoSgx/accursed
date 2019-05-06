@@ -1,3 +1,4 @@
+
 interface TputHeader {
   dataSize: number
   headerSize: number
@@ -47,16 +48,16 @@ interface TputsOptions  {
   terminal?: string
   extended?: boolean
   debug?: boolean
-  termcap?: string|boolean
+  termcap?: string | boolean
   terminfoFile?: string
   terminfoPrefix?: string
   termcapFile?: string
-} 
+}
 
 /**
  * Low level implementation of tput protocol to dialogue with terminal implementations.
  */
-export declare class Tput implements   TputFeatures {
+export declare class TPut implements   TputFeatures {
 
   constructor(opts: TputsOptions)
 
@@ -156,14 +157,10 @@ export declare class Tput implements   TputFeatures {
   magicCookie: boolean
   setbuf: boolean
 
-
   terminal: string
 
-
-
-  acsc: { [c: string]: string; };
-  acscr: { [c: string]: string; };
-
+  acsc: { [c: string]: string; }
+  acscr: { [c: string]: string; }
 
   columns: number
   init_tabs: number
@@ -248,8 +245,6 @@ export declare class Tput implements   TputFeatures {
   strings: { [cap: string]: any }
   features: TputFeatures
 
-
-
   // debug: boolean
   padding: boolean
   printf: boolean
@@ -265,7 +260,6 @@ export declare class Tput implements   TputFeatures {
     data: any,
     file: string
   ): TputInfo
-
 
   back_tab(...args: any[]): any
   bell(...args: any[]): any
@@ -1073,10 +1067,6 @@ export declare class Tput implements   TputFeatures {
   sgr1(...args: any[]): any
   slength(...args: any[]): any
 
-
-
-
 }
-
 
 module.exports.TPut =  require('../blessed/tput')

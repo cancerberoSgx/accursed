@@ -1,16 +1,16 @@
-import { Document, ProgramDocument, Program, ProgramDocumentRenderer } from '../src'
-import {tryTo, removeWhites} from 'misc-utils-of-mine-generic'
+import { Document, ProgramDocument, Program, ProgramDocumentRenderer, ProgramElement } from '../src'
+import { tryTo, removeWhites } from 'misc-utils-of-mine-generic'
 import { ansi, Driver, InteractionSpecHelper } from 'cli-driver'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL=10000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 describe('programDocumentRenderer', () => {
-  let program: Program 
+  let program: Program
   let doc: ProgramDocument
-  beforeEach(()=>{
+  beforeEach(() => {
     program = new Program({
-    })    
-    program.key(['q', 'escape', 'C-c'], function () {
+    })
+    program.key(['q', 'escape', 'C-c'], function() {
       program.showCursor()
       program.disableMouse()
       program.normalBuffer()
@@ -20,8 +20,8 @@ describe('programDocumentRenderer', () => {
     })
     doc = new ProgramDocument()
   })
-  afterEach(()=>{
-    tryTo(()=>{
+  afterEach(() => {
+    tryTo(() => {
       program.showCursor()
       program.disableMouse()
       program.normalBuffer()
@@ -31,12 +31,12 @@ describe('programDocumentRenderer', () => {
   })
 
   it('renderElementWithoutChildren', async done => {
-   const div1  = doc.createElement('Div')
-   doc.appendChild(div1)
-   Object.assign(div1, {bg: 'red', fg: 'blue', x: 4, y: 2, height: 5, width: 6, ch: 'X'})
-   const r = new ProgramDocumentRenderer({program, debug: true })
-   program.reset()
-   r.renderElementWithoutChildren(div1)
+    const div1  = doc.createElement('Div')
+    doc.appendChild(div1)
+    Object.assign(div1, { bg: 'red', fg: 'blue', left: 4, top: 2, height: 5, width: 6, ch: 'X' })
+    const r = new ProgramDocumentRenderer({ program, debug: true })
+    program.reset()
+    r.renderElementWithoutChildren(div1)
     program.reset()
     const expected = `
 
@@ -46,26 +46,22 @@ describe('programDocumentRenderer', () => {
     XXXXXX
     XXXXXX
     `
-    expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(expected  )) 
+    expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(expected))
     done()
   })
-
-  function trimRightLines(s:string){
-    return s.split('\n').map(l=>l.trimRight()).join('\n')
-  }
 
   it('renderElement ', async done => {
     const div1  = doc.createElement('Div')
     doc.appendChild(div1)
-    Object.assign(div1, {bg: 'red', fg: 'blue', x: 3, y: 2, height: 9, width: 12, ch: 'X'})
+    Object.assign(div1, { bg: 'red', fg: 'blue', left: 3, top: 2, height: 9, width: 12, ch: 'X' })
     const d2 = doc.createElement('Span')
-    Object.assign(d2, {bg: 'green', fg: 'yellow', x: 4, y: 2, height: 3, width: 4, ch: 'O'})
+    Object.assign(d2, { bg: 'green', fg: 'yellow', left: 4, top: 2, height: 3, width: 4, ch: 'O' })
     div1.appendChild(d2)
-    const r = new ProgramDocumentRenderer({program, debug: true })
+    const r = new ProgramDocumentRenderer({ program, debug: true })
     program.reset()
     r.renderElement(div1)
-     program.reset()
-     expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(
+    program.reset()
+    expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(
        `
 
    XXXXXXXXXXXX
@@ -77,9 +73,45 @@ describe('programDocumentRenderer', () => {
    XXXXXXXXXXXX
    XXXXXXXXXXXX
    XXXXXXXXXXXX
-       ` )) 
-     done()
-   })
-  
+       `))
+    done()
+  })
+
+  it('textnode ', async done => {
+    const div1 = createElement(doc, 'Div', doc.body,{ bg: 'red', fg: 'blue', left: 3, top: 2, height: 9, width: 12, ch: 'X' })
+    const d2 = createElement(doc, 'Span', div1, { bg: 'green', fg: 'yellow', left: 4, top: 2, height: 3, width: 4, ch: 'O' })
+    const r = new ProgramDocumentRenderer({ program, debug: true })
+    program.reset()
+    r.renderElement(div1)
+    program.reset()
+    expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(
+       `
+
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXOOOOXXXX
+   XXXXOOOOXXXX
+   XXXXOOOOXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+       `))
+    done()
+  })
 
 })
+
+function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ProgramElement> = {}) {
+  const div1 = doc.createElement(tagName)
+  doc.appendChild(div1)
+  Object.assign(div1, props)
+  if (parent) {
+    parent.appendChild(div1)
+  }
+  return div1
+}
+
+function trimRightLines(s: string) {
+  return s.split('\n').map(l => l.trimRight()).join('\n')
+}

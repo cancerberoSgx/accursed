@@ -2,8 +2,7 @@
 
 import { EventEmitter } from 'events'
 import { Readable, Writable } from 'stream'
-import { Tput } from './tput';
-
+import { TPut } from './tput'
 
 interface IMouseEventArg extends IAbstractEventArg {
   x: number
@@ -41,20 +40,20 @@ type NodeMouseEventType =
 | 'click'
 
 /**
-'resize': Received on screen resize. 
+'resize': Received on screen resize.
 
-'prerender':  Received before render. 
+'prerender':  Received before render.
 
-'render': Received on render. 
+'render': Received on render.
 
 'destroy'    :  Received when the screen is destroyed (only useful when using multiple screens).
 
 'move':  Received when the element is moved. For example when [[rtop]] or [[position]] properties are
-  updated. 
+  updated.
 
-'show':  Received when element is shown. 
+'show':  Received when element is shown.
 
-'hide':  Received when element becomes hidden. 
+'hide':  Received when element becomes hidden.
 
 'set content':  Received when element [[content]] is updated.
 
@@ -174,7 +173,7 @@ export interface IProgramOptions {
   input?: Readable
 
   output?: Writable
-  
+
   /**
    * path to a file where to write when screen.log() or program.log are called
    */
@@ -188,20 +187,20 @@ export interface IProgramOptions {
   buffer?: boolean
   terminal?: string
   term?: string
-  tput?: Tput
+  tput?: TPut
   debug?: boolean
   resizeTimeout?: boolean
 }
 
 /**
- * The Program instance manages the low level interaction with the terminal and is used by [[Screen]] to read and write terminal, and access mouse, etc. Is responsible of reading / writing to the terminal using [[Tput]] and support mouse. 
- * 
+ * The Program instance manages the low level interaction with the terminal and is used by [[Screen]] to read and write terminal, and access mouse, etc. Is responsible of reading / writing to the terminal using [[Tput]] and support mouse.
+ *
  * It has associated an [[output]] writable stream attribute which usually is stdout but could
  * could be configured by the user using [[IProgramOptions]]. The same for an [[input]] Readable stream
  * from which the host terminal respond to the program requests.
  *
- * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream. It extends tput to add support for mouse and other devices. 
- * 
+ * The communication with the host system is mostly done writing  `tput` sequences to the [[output]] stream. It extends tput to add support for mouse and other devices.
+ *
  * The program is responsible of portability and supporting the same API through several terminal standards /
  * vendors
  *
@@ -310,8 +309,7 @@ program.getWindowSize(function(err:any, data:any) {
 });
 ```
 */
-export declare class Program extends Tput  implements  EventEmitter {
-  
+export declare class Program extends TPut  implements  EventEmitter {
 
   /** @internal */
   static instances: Program[]
@@ -332,7 +330,7 @@ export declare class Program extends Tput  implements  EventEmitter {
   savedY: number
   cols: number
   rows: number
-  tput: Tput
+  tput: TPut
   scrollTop: number
   scrollBottom: number
   isOSXTerm: boolean
@@ -479,7 +477,6 @@ export declare class Program extends Tput  implements  EventEmitter {
   horizontal_tab_delay: number
   number_of_function_keys: number
 
-
   it: number
   lm: number
   xmc: number
@@ -513,9 +510,6 @@ export declare class Program extends Tput  implements  EventEmitter {
   bitwin: number
   bitype: number
 
-
-
-  
   constructor(options?: IProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
@@ -549,20 +543,20 @@ export declare class Program extends Tput  implements  EventEmitter {
   bindResponse(): void
   response(name: string, text: string, callback: Function, noBypass?: boolean): boolean
   response(name: string, callback?: Function): boolean
-  
+
   /**
-   * Writes given string to [[output]] bypassing the buffer. 
+   * Writes given string to [[output]] bypassing the buffer.
    */
   write(text: string): boolean
 
    /**
-   * Writes given string to [[output]] to the buffer. 
+   * Writes given string to [[output]] to the buffer.
    */
   _write(text: string): boolean
-  
+
   /**
-   * Returns the string with given attr enabled or disabled, for example: 
-   * 
+   * Returns the string with given attr enabled or disabled, for example:
+   *
    ```
   program._write(program._attr('green fg', true) + 'GREEN' +
     program._attr('green fg', false) + ' NORMAL')
@@ -574,11 +568,10 @@ export declare class Program extends Tput  implements  EventEmitter {
   )
    ```
    */
-  _attr(attrs: string|string[], enable: boolean): string
-
+  _attr(attrs: string | string[], enable: boolean): string
 
   // /**
-  //  * Writes to [[output]] at current cursor location with given style. 
+  //  * Writes to [[output]] at current cursor location with given style.
   //  * Example: `program.write('Hello world', 'blue fg')`
   //  */
   // write(text: string, style: string): boolean
@@ -611,12 +604,12 @@ export declare class Program extends Tput  implements  EventEmitter {
   move(x: number, y: number): boolean
 
   omove(x: number, y: number): void
-  
+
   /**
    * Sets cursor column relative to current cursor position.
    */
   rsetx(x: number): boolean
-  
+
   /**
    * Sets cursor relative row.
    */
@@ -626,7 +619,7 @@ export declare class Program extends Tput  implements  EventEmitter {
    * Sets cursor relative position.
    */
   rmove(x: number, y: number): void
-  
+
   cursorCharAbsolute(x: number): number
 
   /**
@@ -635,11 +628,11 @@ export declare class Program extends Tput  implements  EventEmitter {
   simpleInsert(ch: string , i?: number, attr?: boolean): boolean
 
   /**
-   * returns `ch` repeated `i` times. 
+   * returns `ch` repeated `i` times.
    */
   repeat(ch: string, i?: number): string
   /**
-   * 
+   *
  Specific to iTerm2, but I think it's really cool.
  Example:
  ```
@@ -654,18 +647,18 @@ export declare class Program extends Tput  implements  EventEmitter {
    */
   cursorShape(shape: 'block' | 'underline' | 'line', blink?: boolean): boolean
 
-  /** 
+  /**
    * set's cursor color.
    */
   cursorColor(color: string): boolean
 
   /**
-   * Reset all tput current modes. 
+   * Reset all tput current modes.
    */
   cursorReset(): boolean
 
   /**
-   * Resets all cursor current modes. 
+   * Resets all cursor current modes.
    */
   resetCursor(): boolean
 
@@ -730,8 +723,8 @@ program.getCursor(function(err, data) {
   lsaveCursor(key?: string): void
   lrestoreCursor(key?: string, hide?: boolean): void
   lineHeight(): boolean
-  
-  charset(val?: 'scld'|'uk'|'us'|'dutch'|'finnish'|'french'|'frenchcanadian'|'german'|'italian'|'norwegiandanish'|'spanish'|'swedish'|'swiss', level?: 0|1|2|3): boolean
+
+  charset(val?: 'scld' | 'uk' | 'us' | 'dutch' | 'finnish' | 'french' | 'frenchcanadian' | 'german' | 'italian' | 'norwegiandanish' | 'spanish' | 'swedish' | 'swiss', level?: 0 | 1 | 2 | 3): boolean
 
   enter_alt_charset_mode(): boolean
   as(): boolean
@@ -831,7 +824,7 @@ program.getCursor(function(err, data) {
   Ps = 4 6  -> Set background color to Cyan.
   Ps = 4 7  -> Set background color to White.
   Ps = 4 9  -> Set background color to default (original).
- 
+
 If 16-color support is compiled, the following apply.  Assume
 that xterm's resources are set so that the ISO color codes are
 the first 8 of a set of 16.  Then the aixterm colors are the
@@ -852,12 +845,12 @@ bright versions of the ISO colors:
   Ps = 1 0 5  -> Set background color to Magenta.
   Ps = 1 0 6  -> Set background color to Cyan.
   Ps = 1 0 7  -> Set background color to White.
- 
+
 If xterm is compiled with the 16-color support disabled, it
 supports the following, from rxvt:
   Ps = 1 0 0  -> Set foreground and background color to
   default.
- 
+
 If 88- or 256-color support is compiled, the following apply.
   Ps = 3 8  ; 5  ; Ps -> Set foreground color to the second
   Ps.
@@ -1061,11 +1054,11 @@ same as CSI Ps B ?
  Modes:
    http://vt100.net/docs/vt220-rm/chapter4.html
 ```
- 
+
    Example: Show cursor:
 ```
   return this.setMode('?25', (error, data)=>{
- 
+
   });
 ```
    */
@@ -1231,7 +1224,7 @@ CSI s
  CSI u
    Restore cursor (ANSI.SYS).
 ```
- 
+
  */
   restoreCursorA(): boolean
   /**
@@ -1280,7 +1273,7 @@ CSI s
 ```
    */
   resetTitleModes(...args: string[]): boolean
-  
+
   /**  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
   cursorBackwardTab(param?: number): boolean
   cbt(param?: number): boolean
@@ -1293,7 +1286,7 @@ CSI s
 
   mediaCopy(...args: string[]): boolean
   mc(...args: string[]): boolean
-  
+
   mc0(): boolean
   print_screen(): boolean
   ps(): boolean
@@ -1319,7 +1312,7 @@ Valid values for the parameter:
   Ps = 1  -> hide if the mouse tracking mode is not enabled.
   Ps = 2  -> always hide the pointer.  If no parameter is
   given, xterm uses the default, which is 1 .
- 
+
 ```
   */
   setPointerMode(...args: string[]): boolean
@@ -1457,9 +1450,9 @@ NOTE: xterm doesn't enable this code by default.
 program.manipulateWindow(18, function(err:any, data:any) {
   program.log('manipulateWindow', data);
 });
- 
+
 ```
- 
+
    */
   manipulateWindow(data1: number, data2: number | undefined, c: ProgramResponseCallback): boolean
   manipulateWindow(data1: number, c: ProgramResponseCallback): boolean
@@ -1533,7 +1526,7 @@ CSI Ps x  Request Terminal Parameters (DECREQTPARM).
   decreqtparm(param: number): boolean
   /**
 ```
-   
+
     CSI Ps x  Select Attribute Change Extent (DECSACE).
       Ps = 0  -> from start to end position, wrapped.
       Ps = 1  -> from start to end position, wrapped.
@@ -1557,7 +1550,7 @@ NOTE: xterm doesn't enable this code by default.
   decfra(...args: string[]): boolean
   /**
 ```
- 
+
 CSI Ps ; Pu ' z
   Enable Locator Reporting (DECELR).
   Valid values for the first parameter:
@@ -1571,7 +1564,7 @@ CSI Ps ; Pu ' z
     Pu = 1  <- device physical pixels.
     Pu = 2  <- character cells.
 ```
- 
+
  */
   enableLocatorReporting(...args: string[]): boolean
   decelr(...args: string[]): boolean
@@ -1588,16 +1581,16 @@ CSI Ps ; Pu ' z
      Valid values for the parameter are:
        Ps = 0 , 1 or omitted -> transmit a single DECLRP locator
        report.
-  
+
      If Locator Reporting has been enabled by a DECELR, xterm will
      respond with a DECLRP Locator Report.  This report is also
      generated on button up and down events if they have been
      enabled with a DECSLE, or when the locator is detected outside
      of a filter rectangle, if filter rectangles have been enabled
      with a DECEFR.
-  
+
        -> CSI Pe ; Pb ; Pr ; Pc ; Pp &  w
-  
+
      Parameters are [event;button;row;column;page].
      Valid values for the event:
        Pe = 0  -> locator unavailable - no other parameters sent.
@@ -1624,7 +1617,7 @@ CSI Ps ; Pu ' z
      The``page'' parameter is not used by xterm, and will be omit-
      ted.
 ```
-  
+
    */
   requestLocatorPosition(param?: string, callback?: ProgramResponseCallback): boolean
   /** @see [[requestLocatorPosition]] */
@@ -1687,27 +1680,27 @@ CSI Ps ; Pu ' z
   on(event: 'warning', callback: (text: string) => void): this
   on(e: string, c: (e: any) => void): this
 
-  // event emiter interface 
+  // event emiter interface
 
-  addListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  once(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  off(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeAllListeners(event?: string | symbol): this 
-  setMaxListeners(n: number): this 
-  getMaxListeners(): number 
-  listeners(event: string | symbol): Function[] 
-  rawListeners(event: string | symbol): Function[] 
-  emit(event: string | symbol, ...args: any[]): boolean 
-  eventNames(): (string | symbol)[] 
-  listenerCount(type: string | symbol): number 
+  addListener(event: string | symbol, listener: (...args: any[]) => void): this
+  once(event: string | symbol, listener: (...args: any[]) => void): this
+  prependListener(event: string | symbol, listener: (...args: any[]) => void): this
+  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this
+  removeListener(event: string | symbol, listener: (...args: any[]) => void): this
+  off(event: string | symbol, listener: (...args: any[]) => void): this
+  removeAllListeners(event?: string | symbol): this
+  setMaxListeners(n: number): this
+  getMaxListeners(): number
+  listeners(event: string | symbol): Function[]
+  rawListeners(event: string | symbol): Function[]
+  emit(event: string | symbol, ...args: any[]): boolean
+  eventNames(): (string | symbol)[]
+  listenerCount(type: string | symbol): number
 }
 
 // declare class programClass = typeof Program
 // const p : typeof Program = require('../blessed/program')
 
-// export {p as Program2} 
+// export {p as Program2}
 
 module.exports.Program =  require('../blessed/program')

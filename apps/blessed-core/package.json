@@ -8,11 +8,12 @@
   "scripts": {
     "watch": "tsc --watch",
     "build": "tsc && rm -rf dist/src/blessed && cp -r src/blessed dist/src && echo 'build successful'",
-    "test": "npm run build && ts-node -T spec/support/customJasmine && echo $?",   
-     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
+    "test": "ts-node -T spec/support/customJasmine && echo $?",
+    "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
     "prepare": "npm run build",
     "clean": "rm -rf dist",
-    "all": "npm run clean && npm run build && npm test",
+    "all": "npm run clean && npm run tslint; npm run build && npm test",
+    "tslint": "npx tslint -p ./tsconfig.json --fix",
     "browserify": "rm -rf dist build && npm run build && mkdir -p build && npx browserify dist/test/programTest.js -o build/programTest.js && npx terser build/programTest.js -o build/programTest.js"
   },
   "author": "Sebastian Gurin",
@@ -27,7 +28,10 @@
     "misc-utils-of-mine-generic": "0.0.19",
     "terser": "^3.17.0",
     "ts-node": "^8.1.0",
-    "typescript": "^3.4.5"
+    "tslint": "^5.16.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.4.5",
+    "yoga-layout": "^1.9.3"
   },
   "keywords": [
     "Command line",

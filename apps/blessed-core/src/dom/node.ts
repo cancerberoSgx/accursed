@@ -1,6 +1,6 @@
 import { EventTarget } from './event'
 import { Document } from './document'
-import { nodeHtml } from './nodeHtml';
+import { nodeHtml } from './nodeHtml'
 
 export abstract class Node extends EventTarget {
 
@@ -80,9 +80,9 @@ export abstract class Node extends EventTarget {
    */
   replaceWith(...nodes: (Node | string)[]): void {
     // if (this._parentNode) {
-      const children = (this._parentNode as any)._children as Node[]
-      children.splice(children.indexOf(this), 1,
-        ...nodes.map(n => typeof n === 'string' ? this.ownerDocument!.createTextNode(n) : n))
+    const children = (this._parentNode as any)._children as Node[]
+    children.splice(children.indexOf(this), 1,
+        ...nodes.map(n => typeof n === 'string' ? this.ownerDocument.createTextNode(n) : n))
     // }
   }
 

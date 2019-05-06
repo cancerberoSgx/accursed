@@ -1,4 +1,4 @@
-import {TPut} from '../..'
+import { TPut } from '../../src'
 
 const tput = new TPut({
   terminal: process.env.TERM,
@@ -8,4 +8,4 @@ const tput = new TPut({
 
 console.log(`Normal text
 ${tput.enter_underline_mode()}Underline text${tput.exit_underline_mode()}
-Back to normal`);
+Back to normal`)

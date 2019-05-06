@@ -6,12 +6,13 @@
     "lib": [
       "esnext"
     ],
+    // "strict": true,
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,
   },
   "include": [
-    "src"
+    "src", "spec"
   ],
   "exclude": [
     "node_modules", "dist"
