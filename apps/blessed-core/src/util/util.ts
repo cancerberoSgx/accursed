@@ -1,8 +1,10 @@
 import { Program, ProgramOptions } from '../declarations/program'
 import { Node } from '../dom'
 import { React } from '../jsx/createElement'
-import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '..'
+import { ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '..'
 import { nowFormat, getCurrentCommit } from './misc';
+import { ElementPropsImpl } from '../programDom/elementProps';
+import { ElementProps } from '../programDom';
 
 export function getPerformanceFileName(label: string) {
   return nowFormat().replace(/:/g, '_') + '_' + getCurrentCommit() + '_' + label + '.json'
@@ -38,7 +40,7 @@ export function createProgramRendererDocument(programOptions: ProgramOptions = {
   return { renderer, document, program }
 }
 
-export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementPropsImpl> = {}, children?: Node[]) {
+export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementProps> = {}, children?: Node[]) {
   const el = doc.createElement(tagName)
   doc.appendChild(el)
   Object.assign(el.props, props)

@@ -1,2 +1,7 @@
 export * from './programDocument'
+export * from './elementProps'
 export * from './programElement'
+export * from './styleProps'
+export * from './types'
+export * from './programElement'
+export * from './nodeUtil'

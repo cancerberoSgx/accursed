@@ -6,7 +6,9 @@ import { TextNode } from '../dom/text'
 import { BorderSide, getBoxStyleChar, BorderStyle } from '../util/border'
 import { destroyProgram } from '../util/util'
 import { trimRightLines } from "../util/misc";
-import { ProgramElement, StyleProps, StylePropsImpl } from '../programDom/programElement'
+import { ProgramElement } from '../programDom/programElement'
+import { StyleProps } from "../programDom/types";
+import { StylePropsImpl } from "../programDom/styleProps";
 
 type Point = string
 
