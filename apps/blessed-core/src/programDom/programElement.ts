@@ -1,5 +1,5 @@
 import { Element } from '../dom'
-import { BorderStyle } from './boxes'
+import { BorderStyle } from '../util/border'
 import { ProgramDocument } from './programDocument'
 
 export class ProgramElement extends Element {

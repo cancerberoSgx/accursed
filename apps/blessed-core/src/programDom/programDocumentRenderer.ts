@@ -3,11 +3,12 @@ import { inspect } from 'util'
 import { Program } from '../declarations/program'
 import { isText } from '../dom/nodeUtil'
 import { TextNode } from '../dom/text'
-import { destroyProgram, trimRightLines } from '../util'
-import { BorderSide, getBoxStyleChar } from './boxes'
+import { destroyProgram, trimRightLines } from '../util/util'
+import { BorderSide, getBoxStyleChar } from '../util/border'
 import { ProgramElement, StyleProps, StylePropsImpl } from './programElement'
 
 export class ProgramDocumentRenderer {
+
   private debug: boolean
   private _program: Program
   public get program(): Program {

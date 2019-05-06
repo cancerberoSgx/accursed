@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
 import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
-import { createElement, destroyProgram, destroyProgramAndExit, getPerformanceFileName, nextTick } from '../src/util'
+import { createElement, destroyProgram, destroyProgramAndExit, getPerformanceFileName, nextTick } from '../src/util/util'
 import { number } from './data'
 
 async function main() {

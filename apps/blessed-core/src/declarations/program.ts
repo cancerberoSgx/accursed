@@ -170,7 +170,7 @@ interface GpmClient extends EventEmitter {
   on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
 }
 
-export interface IProgramOptions {
+export interface ProgramOptions {
 
   input?: Readable
 
@@ -318,7 +318,7 @@ export declare class Program extends TPut  implements  EventEmitter {
   /** @internal */
   gpm?: GpmClient
   type: string
-  options: IProgramOptions
+  options: ProgramOptions
   input: Readable
   output: Writable
   /**
@@ -512,7 +512,7 @@ export declare class Program extends TPut  implements  EventEmitter {
   bitwin: number
   bitype: number
 
-  constructor(options?: IProgramOptions)
+  constructor(options?: ProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
    */

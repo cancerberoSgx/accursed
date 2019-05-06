@@ -1,8 +1,8 @@
 import { ProgramDocument } from '../src'
 import { Component } from '../src/jsx/component'
 import { React } from '../src/jsx/createElement'
-import { createProgramRendererDocument } from '../src/util'
-import { isElement } from '../src/programDom/nodeUtil';
+import { isElement } from '../src/programDom/nodeUtil'
+import { createProgramRendererDocument } from '../src/util/util'
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
 
 describe('jsx', () => {
@@ -114,7 +114,7 @@ describe('jsx', () => {
       done()
     })
 
-    fit('should call  elementCreated and elementReady', async done => {
+    it('should call  elementCreated and elementReady', async done => {
       let elementReady = false, elementCreated = false
       class C extends Component<{ name: string, colors: string[] }> {
         elementReady() {

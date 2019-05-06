@@ -1,7 +1,7 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
 import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
-import { BorderStyle, drawElementBorder } from '../src/programDom/boxes'
-import { createElement } from '../src/util'
+import { createElement } from '../src/util/util'
+import { BorderStyle, drawElementBorder } from '../src/util/border'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 

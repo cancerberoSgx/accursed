@@ -1,6 +1,6 @@
 import { enumKeys } from 'misc-utils-of-mine-generic'
-import { ProgramDocumentRenderer } from './programDocumentRenderer'
-import { ProgramElement } from './programElement'
+import { ProgramDocumentRenderer } from '../programDom/programDocumentRenderer'
+import { ProgramElement } from '../programDom/programElement'
 
 export enum BorderStyle {
   light = 'light',

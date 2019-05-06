@@ -1,8 +1,8 @@
 import { execSync } from 'child_process'
-import { Program } from './declarations/program'
-import { Node } from './dom'
-import { React } from './jsx/createElement'
-import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from './programDom'
+import { Program, ProgramOptions } from '../declarations/program'
+import { Node } from '../dom'
+import { React } from '../jsx/createElement'
+import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '../programDom'
 
 export function trimRightLines(s: string) {
   return s.split('\n').map(l => l.trimRight()).join('\n')
@@ -64,12 +64,12 @@ export function installExitKeys(program: Program) {
   })
 
 }
-export function createProgramRendererDocument() {
+export function createProgramRendererDocument(programOptions: ProgramOptions = {buffer: true}) {
   const document = new ProgramDocument()
   React.setDocument(document)
-  const program = new Program({})
+  const program = new Program(programOptions)
   installExitKeys(program)
   program.reset()
-  const  renderer = new ProgramDocumentRenderer({ program, debug: true })
+  const renderer = new ProgramDocumentRenderer({ program, debug: true })
   return { renderer, document, program }
 }
