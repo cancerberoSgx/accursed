@@ -621,6 +621,7 @@ export declare class Program extends Tput  implements  EventEmitter {
    * Sets cursor relative row.
    */
   rsety(y: number): boolean
+
   /**
    * Sets cursor relative position.
    */
@@ -631,7 +632,7 @@ export declare class Program extends Tput  implements  EventEmitter {
   /**
    * Inserts `ch` repeated `i` times with given optional attrs at current cursor position.
    */
-  simpleInsert(ch: string, i?: number, attr?: boolean): boolean
+  simpleInsert(ch: string , i?: number, attr?: boolean): boolean
 
   /**
    * returns `ch` repeated `i` times. 
@@ -871,12 +872,8 @@ If 88- or 256-color support is compiled, the following apply.
 ```
 program.setBackground('green', 'O')
 program.setForeground('red', 'i')
-program.on('mouse', function (data) {
-  program.cup(data.y, data.x);
-  program.write(' ', 'blue bg');
-  program.write('as', 'red fg');
-  program.cup(0, 0);
-});
+program.cup(2, 3);
+program.write('X');
 ```
    */
   setForeground(color: string, val?: string): boolean
@@ -887,12 +884,8 @@ program.on('mouse', function (data) {
 ```
 program.setBackground('green', 'O')
 program.setForeground('red', 'i')
-program.on('mouse', function (data) {
-  program.cup(data.y, data.x);
-  program.write(' ', 'blue bg');
-  program.write('as', 'red fg');
-  program.cup(0, 0);
-});
+program.cup(2, 3);
+program.write('X');
 ```
    */
 

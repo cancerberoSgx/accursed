@@ -2,7 +2,7 @@ import { Node } from './node'
 import { Element } from './element'
 import { TextNode } from './text'
 
-export class Document extends Node {
+export class Document  extends Node {
   constructor() {
     super(Node.DOCUMENT_TYPE_NODE)
     this.head = new HeadElement('head', this)

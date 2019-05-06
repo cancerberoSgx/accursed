@@ -53,6 +53,7 @@ tput rc
 
 These are some useful getting started documents: 
 
+ * http://linuxcommand.org/lc3_adv_tput.php
  * https://www.thegeekstuff.com/2011/01/tput-command-examples/
  * https://www.gnu.org/software/termutils/manual/termutils-2.0/html_chapter/tput_1.html
 

@@ -1,7 +1,7 @@
 import { Node } from './node'
 import { Document } from './document'
 
-export class Element extends Node {
+export class Element  extends Node  {
 
   children: ElementList
 

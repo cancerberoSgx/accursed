@@ -8,7 +8,9 @@
   "scripts": {
     "watch": "tsc --watch",
     "build": "tsc && rm -rf dist/src/blessed && cp -r src/blessed dist/src && echo 'build successful'",
-    "test": "ts-node -T spec/support/customJasmine && echo $?",
+    "test": "ts-node -T spec/support/customJasmine && echo $?",   
+     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
+
     "prepare": "npm run build",
     "clean": "rm -rf dist",
     "all": "npm run clean && npm run build && npm test",
