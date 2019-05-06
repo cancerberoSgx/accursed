@@ -1,50 +1,14 @@
-import { execSync } from 'child_process'
 import { Program, ProgramOptions } from '../declarations/program'
 import { Node } from '../dom'
 import { React } from '../jsx/createElement'
-import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '../programDom'
-
-export function trimRightLines(s: string) {
-  return s.split('\n').map(l => l.trimRight()).join('\n')
-}
-
-export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementPropsImpl> = {}, children?: Node[]) {
-  const el = doc.createElement(tagName)
-  doc.appendChild(el)
-  Object.assign(el.props, props)
-  if (parent) {
-    parent.appendChild(el)
-  }
-  if (children) {
-    children.forEach(c => el.appendChild(c))
-  }
-  return el
-}
-
-export const nextTick = global.setImmediate || process.nextTick.bind(process)
-
-export function nowHash() {
-  return Date.now().toString(36)
-}
-
-export function formatDate(d: Date) {
-  return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() + ':' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
-}
-
-export function nowFormat() {
-  return formatDate(new Date())
-}
-
-export function getCurrentCommit() {
-  return execSync('git rev-parse --short HEAD')
-   .toString()
-    .trim()
-}
+import { ElementPropsImpl, ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '..'
+import { nowFormat, getCurrentCommit } from './misc';
 
 export function getPerformanceFileName(label: string) {
   return nowFormat().replace(/:/g, '_') + '_' + getCurrentCommit() + '_' + label + '.json'
 }
 
+let program
 export function destroyProgramAndExit(program: Program, status= 0) {
   destroyProgram(program)
   process.exit(status)
@@ -64,7 +28,7 @@ export function installExitKeys(program: Program) {
   })
 
 }
-export function createProgramRendererDocument(programOptions: ProgramOptions = {buffer: true}) {
+export function createProgramRendererDocument(programOptions: ProgramOptions = { buffer: true }) {
   const document = new ProgramDocument()
   React.setDocument(document)
   const program = new Program(programOptions)
@@ -72,4 +36,17 @@ export function createProgramRendererDocument(programOptions: ProgramOptions = {
   program.reset()
   const renderer = new ProgramDocumentRenderer({ program, debug: true })
   return { renderer, document, program }
+}
+
+export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementPropsImpl> = {}, children?: Node[]) {
+  const el = doc.createElement(tagName)
+  doc.appendChild(el)
+  Object.assign(el.props, props)
+  if (parent) {
+    parent.appendChild(el)
+  }
+  if (children) {
+    children.forEach(c => el.appendChild(c))
+  }
+  return el
 }

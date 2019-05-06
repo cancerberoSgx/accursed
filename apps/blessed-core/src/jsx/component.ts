@@ -1,9 +1,4 @@
-import { ProgramElement } from '../programDom'
-
-// import { getElementData, replaceChildren } from '../blessed' import {ElementPredicate, filterChildren,
-// filterDescendants, findChildren, findDescendant, findDescendantNamed, getContent, visitDescendants,
-// Visitor, VisitorOptions} from '../blessed/node' import { Element } from '../blessedTypes' import {
-// RefObject } from './types'
+import { ProgramElement } from '..'
 
 interface ExtraProps {
   // ref?: RefObject
@@ -16,11 +11,15 @@ interface ExtraProps {
  * Has a dummy state property that subclasses could implement some behavior for, right now it does nothing.
  */
 export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
+
+  constructor(protected props: P, protected state: S) {}
+
   /**
    * Called from JSX render() when [[element]] was just created. Take into account that its attributes and
    * children are not yet initialized. For that use [[elementReady]]
    */
   elementCreated() {}
+
   /**
    * Called from JSX render() when [[element]] was is ready, this is with its attributes and children
    * initialized and rendered. Take into account that perhaps the element is not yet attached to any document.
@@ -30,7 +29,6 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
 
   element: ProgramElement | undefined
 
-  constructor(protected props: P, protected state: S) {}
 
   abstract render(): JSX.BlessedJsxNode
 
@@ -113,8 +111,6 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
 export function isComponent(c: any): c is Component {
   return (
     c &&
-    !!c.render
-    // &&
-    // !!(c as Component).visitDescendants && typeof (c as Component)._saveJSXChildrenProps !== 'undefined'
+    !!c.render && !!c.elementCreated
   )
 }

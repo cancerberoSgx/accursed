@@ -101,7 +101,7 @@ export namespace easing {
         if (a < Math.abs(c)) {
           a = c
           let s = p / 4
-        } else{  s = (p / (2 * Math.PI)) * Math.asin(c / a)}
+        } else {  s = (p / (2 * Math.PI)) * Math.asin(c / a)}
         return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b
       }
     } as any)

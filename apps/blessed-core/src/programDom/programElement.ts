@@ -3,18 +3,21 @@ import { BorderStyle } from '../util/border'
 import { ProgramDocument } from './programDocument'
 
 export class ProgramElement extends Element {
-  /**
-   * Called by the renderer just before rendering this element. It's children will follow. This gives Element subclasses the chance to change some props, or it's children just before rendering.
-   */
-  beforeRender(): void {
-  }
 
+  private static counter = 1
+  
   props: ElementPropsImpl
+  
+  /** @internal */
+  _renderCounter: number = -1;
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
+    this.internalId = ProgramElement.counter++
     this.props = new ElementPropsImpl()
   }
+
+  readonly internalId: number
 
   get parentNode(): ProgramElement | ProgramDocument {
     return this._parentNode as any
@@ -139,6 +142,7 @@ type Color= string
 export interface BorderProps extends StyleProps {
   type?: BorderStyle
 }
+
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {
   private _type: BorderStyle | undefined
   public get type(): BorderStyle | undefined {
@@ -148,6 +152,7 @@ class BorderPropsImpl extends StylePropsImpl implements BorderProps {
     this._type = value
   }
 }
+
 export interface ElementProps extends StyleProps {
   width?: number
   height?: number
@@ -155,7 +160,30 @@ export interface ElementProps extends StyleProps {
   left?: number
   padding?: Padding
   border?: BorderProps
+
+
+  /**
+   * Called by the renderer just after rendering this element. It's children were not yet rendered and will be next. 
+   * 
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  afterRenderWithoutChildren?():void
+
+  /**
+   * Called by the rendered just after the element all all its children were rendered. 
+   * 
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  afterRender?():void
+
+  /**
+   * Called by the renderer just before rendering this element. It's children will follow. 
+   * 
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  beforeRender?():void
 }
+
 export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
 
   getObject() {
@@ -169,6 +197,23 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
       border: this._border
     }
   }
+
+  afterRenderWithoutChildren = ()=>{}
+
+  /**
+   * Called by the rendered just after the element all all its children were rendered. 
+   * 
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  afterRender = ()=>{}
+
+  /**
+   * Called by the renderer just before rendering this element. It's children will follow. 
+   * 
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  beforeRender = ()=>{}
+
   private _border: BorderProps | undefined
   public get border(): BorderProps | undefined {
     return this._border

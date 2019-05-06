@@ -1,159 +1,21 @@
-// import { BorderBox, BorderBoxOptions, BorderLayout, BorderLayoutOptions, TreeOptions, TreeView } from '../blessed'
-// import {
-//   BigText,
-//   BigTextOptions,
-//   Box,
-//   BoxOptions,
-//   Button,
-//   ButtonOptions,
-//   CheckboxOptions,
-//   Element as BlessedElement,
-//   Element,
-//   ElementOptions,
-//   FileManager,
-//   FileManagerOptions,
-//   Form,
-//   FormOptions,
-//   IKeyEventArg,
-//   IMouseEventArg,
-//   INodeGenericEventArg,
-//   Layout,
-//   LayoutOptions,
-//   Line,
-//   LineOptions,
-//   List,
-//   ListBar,
-//   ListbarOptions,
-//   ListOptions,
-//   ListTable,
-//   ListTableOptions,
-//   Log,
-//   LogOptions,
-//   NodeGenericEventType,
-//   NodeMouseEventType,
-//   NodeWithEvents,
-//   Prompt,
-//   PromptOptions,
-//   Question,
-//   QuestionOptions,
-//   RadioButton,
-//   RadioButtonOptions,
-//   RadioSet,
-//   RadioSetOptions,
-//   Terminal,
-//   TerminalOptions,
-//   Text,
-//   Textarea,
-//   TextareaOptions,
-//   Textbox,
-//   TextboxOptions,
-//   TextOptions
-// } from '../blessedTypes'
-import { ElementProps, ProgramDocument, ProgramElement } from '../programDom'
+import { ElementProps, ProgramDocument, ProgramElement } from '..'
 import { Component } from './component'
-
-// export enum EventOptionNames {
-//   key = 'key',
-//   onceKey = 'onceKey',
-//   on = 'on',
-//   once = 'once'
-// }
-
-// export enum ArtificialEventOptionNames {
-//   onClick = 'onClick',
-//   onKeyPress = 'onKeyPress',
-//   onRender = 'onRender',
-//   onChange = 'onChange',
-//   onSelect = 'onSelect',
-//   onPress = 'onPress',
-//   onceRender = 'onceRender'
-// }
-
-// /**
-//  * Represents event handlers directly supported by blessed element methods (exactly same signature)
-//  */
-// export interface BlessedEventOptions {
-//   [EventOptionNames.key]?: Parameters<NodeWithEvents['key']>
-//   [EventOptionNames.onceKey]?: Parameters<NodeWithEvents['onceKey']>
-//   [EventOptionNames.on]?: On<this>
-//   [EventOptionNames.once]?: On<this>
-// }
-
-// /**
-//  * Represents event handlers that doesn't exist on blessed - more high level and similar to html/react. This
-//  * imply some manual event registration and mapping to blessed supported ones.
-//  */
-// export interface ArtificialEventOptions<T extends Element> {
-//   [ArtificialEventOptionNames.onClick]?: OnClickHandler<T>
-//   [ArtificialEventOptionNames.onKeyPress]?: (
-//     this: T,
-//     e: {
-//       ch: string
-//       key: IKeyEventArg
-//     } & ArtificialEvent<T>
-//   ) => void
-//   [ArtificialEventOptionNames.onRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
-//   [ArtificialEventOptionNames.onceRender]?: (this: T, e: INodeGenericEventArg & ArtificialEvent<T>) => void
-//   [ArtificialEventOptionNames.onChange]?: (
-//     this: T,
-//     e: ArtificialEvent<T> & {
-//       value: any
-//     }
-//   ) => void
-//   [ArtificialEventOptionNames.onSelect]?: <V = any>(
-//     this: T,
-//     e: ArtificialEvent<T> & {
-//       index: number
-//       element: Box
-//     }
-//   ) => void
-//   [ArtificialEventOptionNames.onPress]?: <V = any>(
-//     this: T,
-//     e: ArtificialEvent<T> & {
-//       // index: number element: Box
-//     }
-//   ) => void
-// }
 
 declare global {
 
   export namespace JSX {
     export interface IntrinsicElements {
-      box: PropsChildren
-      text: PropsChildren
-
-      // OptionsProps<ElementProps> & EventOptions<Box>
-      // text: OptionsProps<TextOptions> & EventOptions<Text>
-      // line: OptionsProps<LineOptions> & EventOptions<Line>
-      // textarea: OptionsProps<TextareaOptions> & EventOptions<Textarea>
-      // layout: OptionsProps<LayoutOptions> & EventOptions<Layout>
-      // button: OptionsProps<ButtonOptions> & EventOptions<Button>
-      // checkbox: OptionsProps<CheckboxOptions> & EventOptions<Button>
-      // bigtext: OptionsProps<BigTextOptions> & EventOptions<BigText>
-      // list: OptionsProps<ListOptions> & EventOptions<List>
-      // filemanager: OptionsProps<FileManagerOptions> & EventOptions<FileManager>
-      // listtable: OptionsProps<ListTableOptions> & EventOptions<ListTable>
-      // listbar: OptionsProps<ListbarOptions> & EventOptions<ListBar>
-      // form: OptionsProps<FormOptions> & EventOptions<Form>
-      // log: OptionsProps<LogOptions> & EventOptions<Log>
-      // textbox: OptionsProps<TextboxOptions> & EventOptions<Textbox>
-      // radioset: OptionsProps<RadioSetOptions> & EventOptions<RadioSet>
-      // radiobutton: OptionsProps<RadioButtonOptions> & EventOptions<RadioButton>
-      // prompt: OptionsProps<PromptOptions> & EventOptions<Prompt>
-      // question: OptionsProps<QuestionOptions> & EventOptions<Question>
-      // terminal: OptionsProps<TerminalOptions> & EventOptions<Terminal>
-      // treeview: OptionsProps<TreeOptions> & EventOptions<TreeView>
-      // borderBox: OptionsProps<BorderBoxOptions> & EventOptions<BorderBox>
-      // borderLayout: OptionsProps<BorderLayoutOptions> & EventOptions<BorderLayout>
+      box: OptionsProps<ElementProps>
+      text: OptionsProps<ElementProps>
     }
 
     // /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
     //  * unify the rest in one place (onClick, etc) */
-    // type OptionsProps<T> = PropsWithRef<T>
+    type OptionsProps<T> = PropsWithRef<T>
 
     type PropsWithRef<P> = P & {
-      // children?: BlessedJsxNode ,
-      // ref?: P extends { ref?: infer R } ? R : undefined
+      children?: BlessedJsxNode ,
+      ref?: P extends { ref?: infer R } ? R : undefined
     }
 
     export interface Element<P extends { children?: BlessedJsxNode } = {}> {
@@ -201,9 +63,9 @@ declare global {
     // export interface ElementChildrenAttribute {
     //   children: {}
     // }
-    interface PropsChildren extends ElementProps {
-      children?: BlessedJsxNode
-    }
+    // interface PropsChildren extends ElementProps {
+    //   children?: BlessedJsxNode
+    // }
 
   }
 }

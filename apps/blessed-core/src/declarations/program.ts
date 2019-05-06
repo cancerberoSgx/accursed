@@ -6,15 +6,17 @@ import { EventEmitter } from 'events';
 import { Readable, Writable } from 'stream';
 import { TPut } from './tput';
 
-interface IMouseEventArg extends IAbstractEventArg {
+export interface MouseEvent extends IAbstractEventArg {
   x: number
   y: number
   action: TMouseAction
   button: 'left' | 'right' | 'middle' | 'unknown'
   name: 'mouse'
 }
+
 type TMouseAction = 'mousedown' | 'mouseup' | 'mousemove' | 'wheelup' | 'wheeldown'
-interface IKeyEventArg extends IAbstractEventArg {
+
+export interface KeyEvent extends IAbstractEventArg {
   full: string
   sequence: string
 }
@@ -72,7 +74,7 @@ type NodeGenericEventType =
 | 'set content'
 | 'parsed content'
 
-export type KeyEventListener = (ch: string, key: IKeyEventArg) => void
+export type KeyEventListener = (ch: string, key: KeyEvent) => void
 
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
@@ -132,39 +134,32 @@ interface ProgramResponseData {
 
 type ProgramResponseCallback = (this: Program, err: Error, data: ProgramResponseData) => any
 
-/**
- * program.output Writable implementation should implement this interface
- */
-interface ProgramOutput extends Writable {
-  isTTY?: boolean
-  column: number
-  rows: number
+// export interface MouseEvent extends IAbstractEventArg {
+//   x: number
+//   y: number
+//   action: TMouseAction
+//   button: 'left' | 'right' | 'middle' | 'unknown'
+//   name: 'mouse'
+//   shift: boolean
+//   meta: boolean
+//   ctrl: boolean
+// }
+
+// export interface KeyEvent extends IAbstractEventArg {
+//   full: string
+//   sequence: string
+// }
+
+interface IAbstractEventArg {
+  name: string
+  shift: boolean
+  ctrl: boolean
+  meta: boolean
+  type: string
+  raw: [number, number, number, string]
+  bug: Buffer
 }
 
-interface GpmEvent {
-  name: 'mouse' | ''
-  type: 'GPM'
-  action:
-    | TMouseAction
-    | 'mousedown'
-    | 'mouseup'
-    | 'connect'
-    | 'mousewheel'
-    | 'data'
-    | 'move'
-    | 'dragbtndown'
-    | 'dblclick'
-    | 'btnup'
-    | 'click'
-    | 'error'
-  button: 'left' | 'middle' | 'right'
-  raw: [number, number, number, number]
-  x: number
-  y: number
-  shift: boolean
-  meta: boolean
-  ctrl: boolean
-}
 
 interface GpmClient extends EventEmitter {
   on(e: 'move', c: (buttons: any, modifiers: any, x: any, y: any) => void): this
@@ -1657,7 +1652,7 @@ CSI Ps ; Pu ' z
   /**
    * Triggered when native events in the host terminal window .
    **/
-  on(e: 'mouse', c: (e: GpmEvent) => void): this
+  on(e: 'mouse', c: (e: MouseEvent) => void): this
   //  on(e: 'response', c: (e: any) => void): this
   /**
    * Triggered when the terminal window is resized.

@@ -1,7 +1,5 @@
-// import { VirtualComponent } from '../blessed/virtualElement';
-// import { Checkbox, Element, ElementOptions, isElement as isElementDontUseMe } from '../blessedTypes';
 import { Node } from '../dom'
-import { ProgramDocument } from '../programDom'
+import { ProgramDocument } from '..'
 import { Component } from './component'
 import { BlessedJsx, BlessedJsxAttrs } from './types'
 
@@ -23,9 +21,7 @@ class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Ar
     this.props = { ...attrs || {} } as any
   }
   children: any[] = []
-  // props: P = {children: []} as any
-  props: P// = {} as any as P //{children: Array<JSX.BlessedJsxNode>}//  = {children: []}
-  // children: JSX.BlessedJsxNode[] = []
+  props: P
 }
 
 /**

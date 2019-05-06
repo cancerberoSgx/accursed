@@ -13,9 +13,10 @@ program.key(['q', 'escape', 'C-c'], function () {
   program.reset()
   process.exit(0)
 })
-program.setBackground('green')
-program.setForeground('red')
+// program.setBackground('green')
+// program.setForeground('red')
 program.on('mouse', function (data) {
+  console.log(data)
   program.cup(data.y, data.x);
   program.write('X');
   // program.write('as', 'red fg');

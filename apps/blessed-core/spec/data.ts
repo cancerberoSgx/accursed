@@ -19,6 +19,6 @@ export const words = (
 export const number = (a = 10, b = a) => Math.floor(Math.random() * b) + (a === b ? 0 : a)
 
 export function color() {
-  const colors = ['red', 'blue', 'cyan', 'green', 'magenta', 'yellow', 'brown', 'gray']
+  const colors = ['red', 'blue', 'cyan', 'green', 'magenta', 'yellow']
   return colors[number(0, colors.length - 1)]
 }
