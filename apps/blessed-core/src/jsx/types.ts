@@ -9,8 +9,8 @@ declare global {
       text: OptionsProps<ElementProps>
     }
 
-    // /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
-    //  * unify the rest in one place (onClick, etc) */
+    /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
+     * unify the rest in one place (onClick, etc) */
     type OptionsProps<T> = PropsWithRef<T>
 
     type PropsWithRef<P> = P & {
@@ -76,7 +76,7 @@ declare global {
  * Note: it could have another name than React, but if so tsconfig needs to be configured (JSXFactory) so for
  * simplicity we name the instance `React`
  */
-export interface BlessedJsx {
+export interface FlorJsx {
   /**
    * JSX.Element to blessed node factory method. i.e. `<box>foo</box>` will be translated to
    * `React.createElement('box', {}, ['foo'])`.

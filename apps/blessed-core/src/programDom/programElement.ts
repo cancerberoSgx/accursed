@@ -3,9 +3,48 @@ import { createElement } from '../util/util'
 import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
 import { FullProps } from './types'
+import { layoutChildren, Layout } from '../util';
 
 export class ProgramElement extends Element {
+  /**
+   * Called by `Flor.render()` after all children `ProgramElement` are created and appended to this element. 
+   */
+  childrenReady() {
+    if(! this.props.childrenReady()){
+      if(this.props.layout){
+        layoutChildren({
+          el: this, ... this.props.layout
+        })
+      }
+    }
+  }
 
+  /**
+   * Called by the rendered just after the element all all its children were rendered to the screen
+   *
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  afterRender(): any {
+    this.props.afterRender()
+  }
+
+  /**
+   * Called by the renderer just after rendering this element. It's children were not yet rendered and will be next.
+   *
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  afterRenderWithoutChildren(): any {
+    this.props.afterRenderWithoutChildren()
+  }
+  /**
+   * Called by the renderer just before rendering this element. It's children will follow.
+   *
+   * This gives Element subclasses the chance to change some props, or it's children just before rendering.
+   */
+  beforeRender(): any {
+    this.props.beforeRender()
+  }
+ 
   private static counter = 1
 
   // get ownerDocument() {

@@ -1,8 +1,8 @@
 import { writeFileSync } from 'fs'
-import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
-import { nextTick } from '../src/util/misc'
-import { createElement, destroyProgram, destroyProgramAndExit, getPerformanceFileName } from '../src/util/util'
-import { number } from './data'
+import { Program, ProgramDocument, ProgramDocumentRenderer } from '../../src'
+import { nextTick } from '../../src/util/misc'
+import { createElement, destroyProgram, destroyProgramAndExit, getPerformanceFileName } from '../../src/util/util'
+import { number } from '../data'
 
 async function main() {
   let renderer: ProgramDocumentRenderer
@@ -38,7 +38,7 @@ async function main() {
 
   // const result = {label: testLabel, fps}
   const f = getPerformanceFileName('renderElement01')
-  writeFileSync('spec/performance-logs/' + f, JSON.stringify(data, null, 2))
+  writeFileSync('spec/performance/logs/' + f, JSON.stringify(data, null, 2))
 
   destroyProgramAndExit(renderer.program)
 }

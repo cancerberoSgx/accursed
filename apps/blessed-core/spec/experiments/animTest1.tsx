@@ -1,11 +1,11 @@
-import { React } from '../../src/jsx/createElement'
+import { Flor } from '../../src/jsx/createElement'
 import { animate, easing } from '../../src/util/anim'
 import { createProgramRendererDocument } from '../../src/util/util'
 
 const p = <box width={10} height={3} bg="red" fg="black" top={4} left={0} ch="_">
 </box>
 const { renderer } = createProgramRendererDocument()
-const e = React.render(p)
+const e = Flor.render(p)
 renderer.renderElement(e)
 
 animate({

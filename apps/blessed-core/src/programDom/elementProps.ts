@@ -1,6 +1,7 @@
 import { BorderStyle } from '../util/border'
 import { StylePropsImpl } from './styleProps'
 import { BorderProps, ElementProps, Padding } from './types'
+import { LayoutOptions } from '../util';
 
 export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
   getObject() {
@@ -14,9 +15,6 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
       border: this._border
     }
   }
-  afterRenderWithoutChildren = () => { }
-  afterRender = () => { }
-  beforeRender = () => { }
   private _border: BorderProps | undefined
   public get border(): BorderProps | undefined {
     return this._border
@@ -59,7 +57,19 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
   set top(value: number) {
     this._top = value
   }
+  private _layout: LayoutOptions | undefined;
+  public get layout(): LayoutOptions | undefined {
+    return this._layout;
+  }
+  public set layout(value: LayoutOptions | undefined) {
+    this._layout = value;
+  }
+  childrenReady(): boolean { return false }
+  afterRenderWithoutChildren = () => { }
+  afterRender = () => { }
+  beforeRender = () => { }
 }
+
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {
   private _type: BorderStyle | undefined
   constructor(p: BorderProps) {

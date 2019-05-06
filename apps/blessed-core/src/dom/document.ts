@@ -19,13 +19,7 @@ export class Document  extends Node {
 }
 
 class HeadElement extends Element {
-  // constructor(public readonly tagName: string) {
-  //   super(tagName)
-  // }
 }
 
 class BodyElement extends Element {
-  // constructor(public readonly tagName: string) {
-  //   super(tagName)
-  // }
 }

@@ -1,15 +1,52 @@
 import { ProgramElement } from '..'
 import { isElement } from '../programDom/elementUtil'
+const layout = require('layout')
 
-let layout = require('layout')
-
-interface Options {
-  el: ProgramElement
-  layout: 'top-down' | 'left-right'
+export interface LayoutOptions {
+  /**
+   * If non is provided 'binary-tree' will be used
+   */
+  layout?: Layout
+  /**
+   * lined-up layouts support sorting items from smaller to biggest one. 
+   */
+  sort?: boolean
 }
 
-export function layoutChildren(o: Options) {
-  let layer: any = layout(o.layout)
+export enum Layout {
+  /** 
+   * The top-down algorithm places items vertically.
+   * By default, it sorts from smallest (top-right) to largest (bottom-left). However, this can be disabled via sort: false.  
+   */
+  'top-down'= 'top-down', 
+  /**
+   * The left-right algorithm places items horizontally.
+   * 
+   * By default, it sorts from smallest (left) to largest (right). However, this can be disabled via sort: false.
+   */
+  'left-right'='left-right', 
+  /** 
+   * The diagonal algorithm places items diagonally (top-left to bottom-right).
+   * By default, it sorts from smallest (top-left) to largest (bottom-right). However, this can be disabled via sort: false. 
+   */
+  'diagonal' =  'diagonal', 
+  /** 
+   * The alt-diagonal algorithm places items diagonally (top-right to bottom-left). 
+   */
+  'alt-diagonal'= 'alt-diagonal', 
+  /**
+   * The binary-tree algorithm packs items via the binary tree algorithm.
+   * This is an efficient way to pack items into the smallest container possible.
+   */
+  'binary-tree'= 'binary-tree'
+}
+
+/**
+ * Will change top, left, width and height of element's children. Also it could change element's width and height. 
+ */
+export function layoutChildren(o: LayoutOptions&{
+  el: ProgramElement}) {
+  let layer: any = layout(o.layout, {sort: !!o.sort})
   for (let c of o.el.childNodes) {
     if (isElement(c)) {
       layer.addItem({ 'height': c.props.height, 'width': c.props.width, 'meta': c })

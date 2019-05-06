@@ -11,7 +11,7 @@
     "test": "ts-node -T spec/support/customJasmine && echo $?",
     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
     "prepare": "npm run build",
-    "test-performance": "ts-node -T spec/performance/animElementTest.ts",
+    "test-performance": "ts-node -T spec/animElementTest.ts",
     "clean": "rm -rf dist",
     "all": "npm run clean && npm run tslint; npm run build && npm test",
     "tslint": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx tslint -p ./tsconfig.json --fix",

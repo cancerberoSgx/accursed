@@ -25,7 +25,9 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
    * initialized and rendered. Take into account that perhaps the element is not yet attached to any document.
    *
    */
-  elementReady() {}
+  elementReady() {
+    this.element && this.element.childrenReady()
+  }
 
   element: ProgramElement | undefined
 

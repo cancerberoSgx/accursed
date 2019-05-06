@@ -1,6 +1,6 @@
 import { ProgramDocument } from '../src'
 import { Component } from '../src/jsx/component'
-import { React } from '../src/jsx/createElement'
+import { Flor } from '../src/jsx/createElement'
 import { isElement } from '../src/programDom/elementUtil'
 import { createProgramRendererDocument } from '../src/util/util'
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
@@ -16,8 +16,8 @@ describe('jsx', () => {
   it('render', async done => {
     const p = <box width={10} height={7} bg="red" fg="black" top={4} left={12} ch="y">hello</box>
     const doc = new ProgramDocument()
-    React.setDocument(doc)
-    const e = React.render(p)
+    Flor.setDocument(doc)
+    const e = Flor.render(p)
     expect(e.outerHTML).toBe('<box bg="red" fg="black" ch="y" width="10" height="7" top="4" left="12">hello</box>')
     const { renderer } = createProgramRendererDocument()
     renderer.renderElement(e)
@@ -46,7 +46,7 @@ describe('jsx', () => {
       and even more
     </box>
     const { renderer } = createProgramRendererDocument()
-    renderer.renderElement(React.render(p))
+    renderer.renderElement(Flor.render(p))
     expect(renderer.printBuffer(true)).toContain(`
 
 
@@ -86,7 +86,7 @@ describe('jsx', () => {
         }
       }
       const { renderer } = createProgramRendererDocument()
-      const e = React.render(<C name="seba" colors={['red', 'blue', 'green']} />)
+      const e = Flor.render(<C name="seba" colors={['red', 'blue', 'green']} />)
       renderer.renderElement(e)
       expect(renderer.printBuffer(true)).toContain(`
 
@@ -131,7 +131,7 @@ describe('jsx', () => {
         }
       }
       const { renderer } = createProgramRendererDocument()
-      const e = React.render(<C name="seba" colors={['red', 'blue', 'green']} />)
+      const e = Flor.render(<C name="seba" colors={['red', 'blue', 'green']} />)
       expect(elementReady).toBe(true)
       expect(elementCreated).toBe(true)
       renderer.renderElement(e)

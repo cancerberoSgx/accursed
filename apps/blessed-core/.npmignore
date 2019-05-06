@@ -12,3 +12,4 @@ tsconfig.json
 /guides
 /test
 test_output.txt
+tslint.json

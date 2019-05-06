@@ -10,7 +10,8 @@
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,
-    "jsx": "react"
+    "jsx": "react",
+    "jsxFactory": "Flor"
   },
   "include": [
     "src", "spec"

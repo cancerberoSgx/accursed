@@ -1,7 +1,7 @@
 import { ProgramDocument, ProgramDocumentRenderer, ProgramElement } from '..'
 import { Program, ProgramOptions } from '../declarations/program'
 import { Node } from '../dom'
-import { React } from '../jsx/createElement'
+import { Flor } from '../jsx/createElement'
 import { ElementProps, FullProps, isElement } from '../programDom'
 import { getCurrentCommit, nowFormat } from './misc'
 
@@ -30,7 +30,7 @@ export function installExitKeys(program: Program) {
 }
 export function createProgramRendererDocument(programOptions: ProgramOptions = { buffer: true }) {
   const document = new ProgramDocument()
-  React.setDocument(document)
+  Flor.setDocument(document)
   const program = new Program(programOptions)
   installExitKeys(program)
   program.reset()

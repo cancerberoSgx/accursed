@@ -44,9 +44,9 @@ export class ProgramDocumentRenderer {
 
   renderCounter = 0
   renderElement(el: ProgramElement) {
-    el.props.beforeRender()
+    el.beforeRender()
     this.renderElementWithoutChildren(el)
-    el.props.afterRenderWithoutChildren()
+    el.afterRenderWithoutChildren()
     let lastAbsLeft: number = el.absoluteContentLeft, lastAbsTop: number = el.absoluteContentTop
     Array.from(el.childNodes).forEach((c, i, a) => {
       if (c instanceof  TextNode) {
@@ -65,7 +65,7 @@ export class ProgramDocumentRenderer {
         this.log('Element type invalid: ' + inspect(c))
       }
     })
-    el.props.afterRender()
+    el.afterRender()
     el._renderCounter = this.renderCounter ++
   }
 

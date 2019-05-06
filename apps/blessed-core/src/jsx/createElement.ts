@@ -1,7 +1,7 @@
 import { ProgramDocument } from '..'
 import { Node } from '../dom'
 import { Component } from './component'
-import { BlessedJsx, BlessedJsxAttrs } from './types'
+import { FlorJsx, BlessedJsxAttrs } from './types'
 
 interface RenderOptions {
   document?: ProgramDocument
@@ -27,7 +27,7 @@ class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Ar
 /**
  * This implementation has a trivial createElement() and a heavier render(). This means that : "parsing" the jsx will be fast. render() will be slower. PRO: createElement doesn't create any Elements so we are able to modify the nodes and visit all of them bfore creating the ProgramElements. (implement Providers, etc.)
  */
-class BlessedJsxImpl implements BlessedJsx {
+class FlorJsxImpl implements FlorJsx {
   protected doc: ProgramDocument | undefined
 
   // private _intrinsicElementFactory = { ...(blessed as any) }
@@ -58,6 +58,7 @@ class BlessedJsxImpl implements BlessedJsx {
     const doc = options.document || this.doc!
     const el =  this._render(e, doc)
     doc.body.appendChild(el)
+    // el.emit('attached')
     return el
     // if (!this.defaultPluginsInstalled) {
     //   this.defaultPluginsInstalled = true
@@ -392,7 +393,7 @@ function isJSXElementImpl(e: any): e is JSXElementImpl {
   return e && e.props && e.children
 }
 
-export const React: BlessedJsx = new BlessedJsxImpl()
+export const Flor: FlorJsx = new FlorJsxImpl()
 
 // /**
 //  * Shortcut for `React.createRef`

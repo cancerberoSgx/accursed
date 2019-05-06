@@ -1670,6 +1670,11 @@ CSI Ps ; Pu ' z
    * outside the terminal application.
    */
   on(e: 'blur', c: (e: any) => void): this
+  /**
+   * Triggered on any key press. If you need to listen only for particular keys, use `'key'`. For example: 
+   * 
+   * ```program.on('key tab', (ch, key)=>{})```
+   */
   on(e: 'keypress', c: KeyEventListener): this
   /**
    * Received when blessed notices something untoward (output is not a tty, terminfo not found, etc).

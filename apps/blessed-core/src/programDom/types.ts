@@ -34,12 +34,28 @@ export interface BorderProps extends StyleProps {
 export interface ElementProps extends StyleProps {
   width?: number
   height?: number
+  /**
+   * top coordinate (row number), relative to the parent.
+   */
   top?: number
+  /**
+   * left coordinate (column number), relative to the parent.
+   */
   left?: number
+  
+  /**
+   * TODO not implemented yet
+   */
   padding?: Padding
+
+  /**
+   * if defined, a 1-sized outer wrapper will be added in all size calculations and a border will be drawn. 
+   * This means the inner (content) dimension is not affected.
+   */
   border?: BorderProps
   /**
-   * Called by the renderer just after rendering this element. It's children were not yet rendered and will be next.
+   * Called by the renderer just after rendering this element. It's children were not yet rendered and will be
+   * next.
    *
    * This gives Element subclasses the chance to change some props, or it's children just before rendering.
    */
@@ -56,6 +72,15 @@ export interface ElementProps extends StyleProps {
    * This gives Element subclasses the chance to change some props, or it's children just before rendering.
    */
   beforeRender?(): void
+  /**
+   * Called by  `Flor.render()` after all children ProgramElement instances are created and appended to this
+   * node.
+   *
+   * If truthy value is returned it will prevent the default implementation to execute. Currently the layout
+   * calculation for children is done here so it can be prevented by returning true. 
+   */
+  childrenReady(): boolean
+
 }
 
 export interface FullProps extends ElementProps {
