@@ -14,6 +14,7 @@ program.key(['q', 'escape', 'C-c'], function () {
 })
   ;
 
+// tslint:disable-next-line: no-floating-promises
 (async () => {
 
   for (var i = 0; i < program.cols; i++) {
@@ -33,16 +34,3 @@ program.key(['q', 'escape', 'C-c'], function () {
   )
 
 })()
-// program.setMouse({
-//   allMotion: true,
-// }, true);
-
-// program.write(program.columns +' -- '+ program.cols+ ' ----')
-
-
-// for (let j = 0; j < program.rows; j++) {
-//   program.write('X')    
-// }
-
-// program.alternateBuffer()
-// program.enableMouse()
