@@ -3,7 +3,6 @@ import { Component } from '../src/jsx/component'
 import { Flor } from '../src/jsx/createElement'
 import { isElement } from '../src/programDom/elementUtil'
 import { createProgramRendererDocument } from '../src/util/util'
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
 
 describe('jsx', () => {
 

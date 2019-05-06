@@ -1,7 +1,7 @@
 import { ProgramDocument } from '..'
 import { Node } from '../dom'
 import { Component } from './component'
-import { FlorJsx, BlessedJsxAttrs } from './types'
+import { BlessedJsxAttrs, FlorJsx } from './types'
 
 interface RenderOptions {
   document?: ProgramDocument

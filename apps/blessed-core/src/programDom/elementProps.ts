@@ -1,7 +1,7 @@
+import { LayoutOptions } from '../util'
 import { BorderStyle } from '../util/border'
 import { StylePropsImpl } from './styleProps'
 import { BorderProps, ElementProps, Padding } from './types'
-import { LayoutOptions } from '../util';
 
 export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
   getObject() {
@@ -57,17 +57,17 @@ export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
   set top(value: number) {
     this._top = value
   }
-  private _layout: LayoutOptions | undefined;
+  private _layout: LayoutOptions | undefined
   public get layout(): LayoutOptions | undefined {
-    return this._layout;
+    return this._layout
   }
   public set layout(value: LayoutOptions | undefined) {
-    this._layout = value;
+    this._layout = value
   }
-  childrenReady(): boolean { return false }
+  childrenReady: () => boolean = () => { return false }
   afterRenderWithoutChildren = () => { }
   afterRender = () => { }
-  beforeRender = () => { }
+  beforeRender = () => { return false }
 }
 
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {

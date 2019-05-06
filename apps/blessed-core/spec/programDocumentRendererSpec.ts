@@ -157,10 +157,12 @@ describe('programDocumentRenderer', () => {
   })
 
   it('layout', async done => {
-    await serial(['top-down', 'left-right', 'diagonal', 'alt-diagonal', 'binary-tree'
+    await serial([
+      'top-down', 'left-right', 'diagonal', 'alt-diagonal', 'binary-tree',
+      'justified-layout'
     ].map(l => async() => {
-      const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', border: { type: BorderStyle.double }, left: 20, top: 2, height: 29, width: 36, ch: '_' },
-        array(7).map(i => createElement(doc, 'Div', undefined, { bg: color(), fg: color(), top: number(2, 12), left: number(2, 8), height: number(2, 4), width: number(6, 12), ch: '.' }, [
+      const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', border: { type: BorderStyle.double }, left: 20, top: 2, height: 26, width: 60, ch: ' ' },
+        array(12).map(i => createElement(doc, 'Div', undefined, { bg: color(), fg: color(), top: number(2, 12), left: number(2, 8), height: number(2, 4), width: number(6, 12), ch: '.' }, [
           doc.createTextNode('N' + i + 'th')
         ]))
       )
@@ -171,7 +173,7 @@ describe('programDocumentRenderer', () => {
       renderer.renderElement(el)
       const output = renderer.printBuffer(true)
       array(7).map(i => 'N' + i + 'th').forEach(l => expect(output).toContain(l))
-      // await sleep(1100)
+      // await sleep(  3100)
     }
     ))
     done()

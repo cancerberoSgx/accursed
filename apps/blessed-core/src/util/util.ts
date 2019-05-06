@@ -38,6 +38,17 @@ export function createProgramRendererDocument(programOptions: ProgramOptions = {
   return { renderer, document, program }
 }
 
+export function createProgramRendererDocumentAndElement(programOptions: ProgramOptions = { buffer: true }, props?: FullProps) {
+  const document = new ProgramDocument()
+  Flor.setDocument(document)
+  const program = new Program(programOptions)
+  installExitKeys(program)
+  program.reset()
+  const renderer = new ProgramDocumentRenderer({ program, debug: true })
+  const el = document.create({ top: 0, left: 0, width: program.cols - 1, height: program.rows - 1, fg: 'black', bg: 'green', border: true,  ...props || {} })
+  return { renderer, document, program, el }
+}
+
 export function createElement(doc: ProgramDocument, tagName: string | FullProps, parent?: ProgramElement, props: Partial<ElementProps> = {}, children?: Node[]) {
   if (typeof tagName !== 'string') {
     let opts = tagName

@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "layout": "^2.2.0",
-    "misc-utils-of-mine-generic": "0.0.19"
+    "misc-utils-of-mine-generic": "0.2.0"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.12",
@@ -30,10 +30,11 @@
     "browserify": "^16.2.3",
     "cli-driver": "^0.2.1",
     "jasmine": "^3.4.0",
+    "justified-layout": "^2.1.1",
     "terser": "^3.17.0",
     "ts-node": "^8.1.0",
-    "tslint": "^5.16.0",
     "ts-refactor": "0.0.2",
+    "tslint": "^5.16.0",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.4.5"
   },

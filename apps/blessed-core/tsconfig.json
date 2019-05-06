@@ -11,7 +11,7 @@
     "rootDir": ".",
     "declaration": true,
     "jsx": "react",
-    "jsxFactory": "Flor"
+    "jsxFactory": "Flor.createElement"
   },
   "include": [
     "src", "spec"

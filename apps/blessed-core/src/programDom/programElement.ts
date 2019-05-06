@@ -1,21 +1,25 @@
 import { Element } from '../dom'
+import { layoutChildren } from '../util'
 import { createElement } from '../util/util'
 import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
 import { FullProps } from './types'
-import { layoutChildren, Layout } from '../util';
 
 export class ProgramElement extends Element {
   /**
-   * Called by `Flor.render()` after all children `ProgramElement` are created and appended to this element. 
+   * Called by `Flor.render()` after all children `ProgramElement` are created and appended to this element.
    */
   childrenReady() {
-    if(! this.props.childrenReady()){
-      if(this.props.layout){
-        layoutChildren({
-          el: this, ... this.props.layout
-        })
-      }
+    if (! this.props.childrenReady()) {
+      this.layoutChildren()
+    }
+  }
+
+  layoutChildren() {
+    if (this.props.layout) {
+      layoutChildren({
+        el: this, ...this.props.layout
+      })
     }
   }
 
@@ -42,9 +46,11 @@ export class ProgramElement extends Element {
    * This gives Element subclasses the chance to change some props, or it's children just before rendering.
    */
   beforeRender(): any {
-    this.props.beforeRender()
+    if (!this.props.beforeRender()) {
+      this.layoutChildren()
+    }
   }
- 
+
   private static counter = 1
 
   // get ownerDocument() {
