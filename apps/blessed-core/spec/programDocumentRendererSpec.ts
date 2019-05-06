@@ -3,6 +3,10 @@ import { tryTo, removeWhites } from 'misc-utils-of-mine-generic'
 import { ansi, Driver, InteractionSpecHelper } from 'cli-driver'
 import { createElement, trimRightLines } from '../src/util';
 
+import { renderBorderBox, BorderStyle, drawElementBorder} from '../src/programDom/boxes';
+
+
+
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 describe('programDocumentRenderer', () => {
@@ -25,7 +29,7 @@ describe('programDocumentRenderer', () => {
     doc = new ProgramDocument()
     renderer = new ProgramDocumentRenderer({ program, debug: true })
   })
-  
+
   afterEach(() => {
     tryTo(() => {
       program.showCursor()
@@ -39,7 +43,7 @@ describe('programDocumentRenderer', () => {
   it('renderElementWithoutChildren', async done => {
     const div1  = doc.createElement('Div')
     doc.appendChild(div1)
-    Object.assign(div1, { bg: 'red', fg: 'blue', left: 4, top: 2, height: 5, width: 6, ch: 'X' })
+    Object.assign(div1.props, { bg: 'red', fg: 'blue', left: 4, top: 2, height: 5, width: 6, ch: 'X' })
     renderer.renderElementWithoutChildren(div1)
     expect(renderer.printBuffer(true)).toContain(`
 
@@ -95,6 +99,47 @@ describe('programDocumentRenderer', () => {
     ____OOOOOOOOOOOOOOOOOOO_
     ________________________
     ________________________
+`)
+    done()
+  })
+
+
+  it('textContent as unique children', async done => {
+    const t = doc.createTextNode('hello world')
+    const div1 = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 6, top: 2, height: 6, width: 16, ch: '_' }, [
+      t
+    ])
+    renderer.renderElement(div1)
+    expect(renderer.printBuffer(true)).toContain(`
+
+      hello world_____
+      ________________
+      ________________
+      ________________
+      ________________
+      ________________
+`)
+    done()
+  })
+
+  fit('multiple text nodes and border', async done => {
+    const t = doc.createTextNode('hello world')
+    const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 9, top: 2, height: 6, width: 16, }, [
+      doc.createTextNode('hello world'), doc.createTextNode('lorem ipsum')
+    ])
+    
+    renderer.renderElement(el)
+    drawElementBorder({renderer, el, borderStyle: BorderStyle.round});
+
+    expect(renderer.printBuffer(true)).toContain(`
+        ╭────────────────╮
+        │                │
+        │hello world     │
+        │lorem ipsum     │
+        │                │
+        │                │
+        │                │
+        ╰────────────────╯
 `)
     done()
   })

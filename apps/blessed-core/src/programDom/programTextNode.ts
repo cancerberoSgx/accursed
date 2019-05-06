@@ -6,9 +6,18 @@ import { ProgramDocument } from './programDocument'
 
 export class ProgramTextNode extends ProgramElement {
   static TEXT_NODE_TAG = 'text'
-  constructor(text: string, ownerDocument: ProgramDocument) {
+  // private _content: string;
+  // public get content(): string {
+  //   return this._content;
+  // }
+  // public set content(value: string) {
+  //   this._content = value;
+  // }
+  constructor(content: string, ownerDocument: ProgramDocument) {
     super(ProgramTextNode.TEXT_NODE_TAG, ownerDocument)
-    this._text = text
+    // this._text = text
+    // this.innerHTML = content
+    this._text = content
   }
   private _text: string
   public get text(): string {

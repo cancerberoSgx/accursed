@@ -1,15 +1,16 @@
-import { ProgramDocument, ProgramElement } from './programDom';
+import { ProgramDocument, ProgramElement, ElementProps } from './programDom';
 import { exec, execSync } from 'child_process';
 import { Program } from './declarations/program';
+import { Node } from './dom';
 
 export function trimRightLines(s: string) {
   return s.split('\n').map(l => l.trimRight()).join('\n')
 }
 
-export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ProgramElement> = {}, children?: ProgramElement[]) {
+export function createElement(doc: ProgramDocument, tagName: string, parent?: ProgramElement, props: Partial<ElementProps> = {}, children?:  Node[]) {
   const el = doc.createElement(tagName)
   doc.appendChild(el)
-  Object.assign(el, props)
+  Object.assign(el.props, props)
   if (parent) {
     parent.appendChild(el)
   }

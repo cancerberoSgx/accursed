@@ -51,7 +51,7 @@ async function main() {
 
 function test(renderer: ProgramDocumentRenderer, testLabel: string) {
   return new Promise(resolve => {
-    const fps = [];
+    const fps: any[] = [];
 let finish = false
     const program = renderer.program
     setTimeout(() => {
@@ -73,10 +73,10 @@ finish = true
     let counter = 0;
     function draw() {
       renderer.eraseElement(el);
-      el.width = number(24, 44);
-      el.height = number(16, 30);
-      el.left = number(2, program.cols - el.width - 3);
-      el.top = number(2, program.rows - el.height - 3);
+      el.props.width = number(24, 44);
+      el.props.height = number(16, 30);
+      el.props.left = number(2, program.cols - el.props.width - 3);
+      el.props.top = number(2, program.rows - el.props.height - 3);
       !finish && nextTick(() => {
         renderer.renderElement(el);
         counter++;

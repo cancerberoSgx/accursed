@@ -4,6 +4,7 @@ import { array } from 'misc-utils-of-mine-generic'
 import { TextNode } from '../dom/text'
 import { inspect } from 'util'
 import { trimRightLines } from '../util';
+import { ProgramTextNode } from './programTextNode';
 
 export class ProgramDocumentRenderer {
   // renderString(y: number, x: number, s: string) {
@@ -31,10 +32,27 @@ export class ProgramDocumentRenderer {
   // renderText(0,0, counter+' fps')
   renderElement(el: ProgramElement) {
     this.renderElementWithoutChildren(el)
+    // let lastChild: ProgramElement
+    let lastAbsLeft: number = el.absoluteLeft, lastAbsTop: number = el.absoluteTop, lastWidth: number = 0, lastHeight: number = 0
     for (let c of  el.childNodes) {
-      if (c instanceof ProgramElement) {
+      if (c instanceof  TextNode) {
+        const y = lastAbsTop + 1
+        const x = lastAbsLeft// + lastWidth
+        const s =  c.textContent||''
+        this.write(y, x,s)
+        lastAbsLeft = x
+        lastAbsTop = y
+        // lastHeight = 1
+        // lastWidth = s.length +1
+      }
+      else if (c instanceof ProgramElement) {
         this.renderElement(c)
-      } else {
+        // lastAbsLeft = c.absoluteLeft
+        // lastAbsTop = c.absoluteTop
+        // lastHeight = c.props.height
+        // lastWidth = c.props.width
+      }
+       else {
         this.log('Element type invalid: ' + inspect(c))
       }
     }
@@ -54,15 +72,15 @@ export class ProgramDocumentRenderer {
   }
 
   renderElementWithoutChildren(el: ProgramElement) {
-    if (el.bg) {
-      this._program.bg(el.bg)
+    if (el.props.bg) {
+      this._program.bg(el.props.bg)
     }
-    if (el.fg) {
-      this._program.fg(el.fg)
+    if (el.props.fg) {
+      this._program.fg(el.props.fg)
     }
     const ay = el.absoluteTop , ax = el.absoluteLeft
-    for (let i = 0; i < el.height; i++) {
-      this.write(ay + i, ax, this._program.repeat(el.ch || this.ch, el.width))
+    for (let i = 0; i < el.props.height; i++) {
+      this.write(ay + i, ax, this._program.repeat(el.props.ch || this.ch, el.props.width))
     }
   }
 
@@ -72,8 +90,8 @@ export class ProgramDocumentRenderer {
       // this.program._attr(['default bg', 'default fg'], true) 
 // this.program.resetColors()
     const ay = el.absoluteTop , ax = el.absoluteLeft
-    for (let i = 0; i < el.height; i++) {
-      this.write(ay + i, ax, this._program.repeat(this.ch, el.width))
+    for (let i = 0; i < el.props.height; i++) {
+      this.write(ay + i, ax, this._program.repeat(this.ch, el.props.width))
     }
   }
 

@@ -20,8 +20,8 @@ export class ProgramDocument extends Document {
     return new ProgramElement(t, this)
   }
 
-  createTextNode(content: string) {
-    return new ProgramTextNode(content, this)
-  }
+  // createTextNode(content: string) {
+  //   return new ProgramTextNode(content, this)
+  // }
 
 }

@@ -9,8 +9,12 @@ export abstract class Node extends EventTarget {
   static TEXT_NODE: NodeType = 3
   static ELEMENT_NODE: NodeType = 1
   static _WATERMARK = 'jsx-alone-dom-dom'
+ public attributes: NamedNodeMap<Attr>  
 
-  readonly attributes: NamedNodeMap<Attr>
+//   get attributes(){
+// return this.__attributes
+//   } 
+  // NamedNodeMap<Attr>
   protected _attributes: {
     [k: string]: Attr;
   } = {}
@@ -91,7 +95,7 @@ export abstract class Node extends EventTarget {
 
 export type NodeType = 10 | 3 | 1
 
-class NodeList<T> {
+export class NodeList<T> {
   [index: number]: T;
 
   constructor(protected list: T[]) {
@@ -114,7 +118,7 @@ export interface Attr {
 }
 
 // TODO: performance - we focus on the map, and not in the array/iteration
-class NamedNodeMap<T extends Attr> {
+export class NamedNodeMap<T extends Attr> {
   [index: number]: T;
   constructor(protected map: { [n: string]: T }) {
 

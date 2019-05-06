@@ -1,4 +1,4 @@
-import { BorderSide, BorderStyle, getBoxStyle } from '../../../src/blessed/border'
+import { BorderSide, BorderStyle, getBoxStyle } from '../../../src/util/boxes'
 
 export function box({
   w,

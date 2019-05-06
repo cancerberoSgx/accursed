@@ -1,8 +1,8 @@
 import { isObject } from 'misc-utils-of-mine-generic'
 import { widget, Widgets } from '..'
-import { BorderSide, BorderStyle, getBoxStyleChar } from '../blessed'
 import { PositionCoords } from '../blessedTypes'
 import { React } from '../jsx'
+import { BorderStyle, getBoxStyleChar, BorderSide } from '../util/boxes';
 // import { BorderSide, BorderStyle, getBoxStyleChar } from './border'
 
 interface BorderBoxOptionsConcrete {
