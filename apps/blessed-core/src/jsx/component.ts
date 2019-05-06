@@ -29,7 +29,6 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
 
   element: ProgramElement | undefined
 
-
   abstract render(): JSX.BlessedJsxNode
 
   //  /**

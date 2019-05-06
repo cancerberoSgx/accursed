@@ -1,5 +1,7 @@
 import { Document } from '../dom'
 import { ProgramElement } from './programElement'
+import { FullProps } from './types';
+import { createElement } from '../util/util';
 
 export class ProgramDocument extends Document {
 
@@ -17,5 +19,12 @@ export class ProgramDocument extends Document {
   createElement(t: string) {
     return new ProgramElement(t, this)
   }
-
+  /**
+   * better syntax for creating an element, setting properties, children and optionally parent.
+   */
+  create(props : FullProps){
+    const el =  createElement(this , props)
+    this.body.appendChild(el)
+    return el
+  }
 }

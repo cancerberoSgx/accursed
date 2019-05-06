@@ -1,15 +1,23 @@
 import { Element } from '../dom'
+import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
-import { ElementPropsImpl } from './elementProps';
+import { ElementProps, FullProps } from './types';
+import { createElement } from '../util/util';
 
 export class ProgramElement extends Element {
 
   private static counter = 1
 
+  // get ownerDocument() {
+  //   return this._ownerDocument
+  // }
+
+  // _ownerDocument: ProgramDocument
+
   props: ElementPropsImpl
 
   /** @internal */
-  _renderCounter: number = -1;
+  _renderCounter: number = -1
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
@@ -36,7 +44,7 @@ export class ProgramElement extends Element {
   get absoluteTop() {
     let y = this.props.top
     let n: ProgramElement | ProgramDocument = this
-    while (n.parentNode !== n.ownerDocument) {
+    while (n.parentNode && n.parentNode !== n.ownerDocument) {
       y = y + (n.parentNode as ProgramElement).props.top + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top || 0) + ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
@@ -55,7 +63,14 @@ export class ProgramElement extends Element {
   get contentWidth() {
     return this.props.width - (this.props.border ? 1 : 0)
   }
+
+  /**
+   * creates a new element and appends it to this element.
+   */
+  create(props : FullProps){
+    if(!this.ownerDocument){
+      throw new Error('Cannot invoke this method on an unattached element')
+    }
+    return createElement(this.ownerDocument as ProgramDocument, {...props, parent: this} )
+  }
 }
-
-
-

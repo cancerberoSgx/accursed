@@ -3,12 +3,12 @@ import { inspect } from 'util'
 import { Program } from '../declarations/program'
 import { isText } from '../dom/nodeUtil'
 import { TextNode } from '../dom/text'
-import { BorderSide, getBoxStyleChar, BorderStyle } from '../util/border'
-import { destroyProgram } from '../util/util'
-import { trimRightLines } from "../util/misc";
 import { ProgramElement } from '../programDom/programElement'
-import { StyleProps } from "../programDom/types";
-import { StylePropsImpl } from "../programDom/styleProps";
+import { StylePropsImpl } from '../programDom/styleProps'
+import { StyleProps } from '../programDom/types'
+import { BorderSide, BorderStyle, getBoxStyleChar } from '../util/border'
+import { trimRightLines } from '../util/misc'
+import { destroyProgram } from '../util/util'
 
 type Point = string
 
@@ -66,7 +66,7 @@ export class ProgramDocumentRenderer {
       }
     })
     el.props.afterRender()
-    el._renderCounter = this.renderCounter ++ 
+    el._renderCounter = this.renderCounter ++
   }
 
   protected   log(s: string): any {

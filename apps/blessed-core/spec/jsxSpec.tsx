@@ -1,7 +1,7 @@
 import { ProgramDocument } from '../src'
 import { Component } from '../src/jsx/component'
 import { React } from '../src/jsx/createElement'
-import { isElement } from '../src/programDom/nodeUtil'
+import { isElement } from '../src/programDom/elementUtil'
 import { createProgramRendererDocument } from '../src/util/util'
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
 

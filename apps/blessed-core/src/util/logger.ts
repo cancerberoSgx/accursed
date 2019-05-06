@@ -1,6 +1,6 @@
 import { appendFileSync } from 'fs'
 import { inspect } from 'util'
-import { inBrowser } from './misc';
+import { inBrowser } from './misc'
 
 export function debug(...args: any[]) {
   if (inBrowser()) {

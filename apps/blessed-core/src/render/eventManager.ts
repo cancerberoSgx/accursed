@@ -1,5 +1,5 @@
-import { ProgramElement } from '../programDom';
-import { Program, MouseEvent, KeyEvent } from '../declarations/program';
+import { KeyEvent, MouseEvent, Program } from '../declarations/program'
+import { ProgramElement } from '../programDom'
 
 /**
  * auxiliary class that bind events with ProgramElements rendered by renderer
@@ -19,7 +19,7 @@ export class EventManager {
   }
 
   onKeyPress(ch: string, e: KeyEvent): any {
-    
+
   }
 
   onMouse(e: MouseEvent): any {

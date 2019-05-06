@@ -2,8 +2,8 @@ import { array, tryTo } from 'misc-utils-of-mine-generic'
 import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
 import { BorderStyle } from '../src/util/border'
 import { layoutChildren } from '../src/util/layout'
+import { serial } from '../src/util/misc'
 import { createElement } from '../src/util/util'
-import { serial } from "../src/util/misc";
 import { color, number } from './data'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
@@ -16,7 +16,7 @@ describe('programDocumentRenderer', () => {
   beforeEach(() => {
     program = new Program({
     })
-    program.key(['q', 'escape', 'C-c'], function () {
+    program.key(['q', 'escape', 'C-c'], function() {
       program.showCursor()
       program.disableMouse()
       program.normalBuffer()
@@ -121,7 +121,7 @@ describe('programDocumentRenderer', () => {
   })
 
   it('multiple text nodes and drawElementBorder', async done => {
-    const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', left: 10, top: 2, height: 6, width: 16, border: {type: BorderStyle.round} }, [
+    const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', left: 10, top: 2, height: 6, width: 16, border: { type: BorderStyle.round } }, [
       doc.createTextNode('hello'), doc.createTextNode(' world')
     ])
 
@@ -158,7 +158,7 @@ describe('programDocumentRenderer', () => {
 
   it('layout', async done => {
     await serial(['top-down', 'left-right', 'diagonal', 'alt-diagonal', 'binary-tree'
-    ].map(l => async () => {
+    ].map(l => async() => {
       const el = createElement(doc, 'Div', doc.body, { bg: 'yellow', fg: 'black', border: { type: BorderStyle.double }, left: 20, top: 2, height: 29, width: 36, ch: '_' },
         array(7).map(i => createElement(doc, 'Div', undefined, { bg: color(), fg: color(), top: number(2, 12), left: number(2, 8), height: number(2, 4), width: number(6, 12), ch: '.' }, [
           doc.createTextNode('N' + i + 'th')

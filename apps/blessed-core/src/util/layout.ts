@@ -1,5 +1,5 @@
 import { ProgramElement } from '..'
-import { isElement } from '../programDom/nodeUtil'
+import { isElement } from '../programDom/elementUtil'
 
 let layout = require('layout')
 

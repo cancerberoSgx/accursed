@@ -1,34 +1,34 @@
-import { execSync } from 'child_process';
-let misc;
+import { execSync } from 'child_process'
+
 export function trimRightLines(s: string) {
-  return s.split('\n').map(l => l.trimRight()).join('\n');
+  return s.split('\n').map(l => l.trimRight()).join('\n')
 }
 export function serial<T = any>(p: (() => Promise<T>)[]): Promise<T[]> {
   return new Promise(resolve => {
     p.reduce((promiseChain: any, currentTask: () => Promise<T>) => {
-      return promiseChain.then((chainResults: T[]) => currentTask().then(currentResult => [...chainResults, currentResult]));
+      return promiseChain.then((chainResults: T[]) => currentTask().then(currentResult => [...chainResults, currentResult]))
     }, Promise.resolve([])).then((arrayOfResults: T[]) => {
-      resolve(arrayOfResults);
-    });
-  });
+      resolve(arrayOfResults)
+    })
+  })
 }
-export const nextTick = global.setImmediate || process.nextTick.bind(process);
+export const nextTick = global.setImmediate || process.nextTick.bind(process)
 export function nowHash() {
-  return Date.now().toString(36);
+  return Date.now().toString(36)
 }
 export function formatDate(d: Date) {
-  return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() + ':' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+  return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay() + ':' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
 }
 export function nowFormat() {
-  return formatDate(new Date());
+  return formatDate(new Date())
 }
 export function getCurrentCommit() {
   return execSync('git rev-parse --short HEAD')
     .toString()
-    .trim();
+    .trim()
 }
 
 export function inBrowser() {
-  //@ts-ignore
+  // @ts-ignore
   return typeof window !== 'undefined' && typeof document !== 'undefined'
 }
