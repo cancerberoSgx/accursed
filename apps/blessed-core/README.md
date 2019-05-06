@@ -8,4 +8,5 @@ https://github.com/jonschlinkert/word-wrap
 
 ## TODO
 
+ * transparent boxes ? 
  * When getting out of a children, we need to restor parent's style.

@@ -9,6 +9,7 @@ import { trimRightLines } from "../util/misc";
 import { ProgramElement, StyleProps, StylePropsImpl } from '../programDom/programElement'
 
 type Point = string
+
 export class ProgramDocumentRenderer {
 
   private debug: boolean
