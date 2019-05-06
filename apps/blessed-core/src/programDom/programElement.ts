@@ -60,8 +60,13 @@ interface Padding {
 //   style
 // }
 
-class StyleProps {
+export class StyleProps {
 
+  constructor(p: {bg?: Color, fg?: Color, ch?: string} = {}) {
+this.bg = p.bg
+this.fg = p.fg
+this.ch = p.ch 
+  }
   getObject() {
     return {
       bg: this._bg,
@@ -89,12 +94,12 @@ class StyleProps {
     this._fg = value
   }
 
-  private _ch: string 
+  private _ch: string  | undefined
 
-  public get ch(): string {
+  public get ch(): string | undefined {
     return this._ch
   }
-  public set ch(value: string) {
+  public set ch(value: string | undefined) {
     this._ch = value
   }
 }
@@ -102,11 +107,11 @@ type Color= string
 
 
 class BorderProps extends StyleProps {
-  private _type: BorderStyle;
-  public get type(): BorderStyle {
+  private _type: BorderStyle | undefined;
+  public get type(): BorderStyle | undefined {
     return this._type;
   }
-  public set type(value: BorderStyle) {
+  public set type(value: BorderStyle | undefined) {
     this._type = value;
   }
 }
@@ -125,11 +130,11 @@ export class ElementProps extends StyleProps {
 // content: this._content
     }
   }
-  private _border: BorderProps;
-  public get border(): BorderProps {
+  private _border: BorderProps|undefined;
+  public get border(): BorderProps|undefined {
     return this._border;
   }
-  public set border(value: BorderProps) {
+  public set border(value: BorderProps|undefined) {
     this._border = value;
   }
   // private _content: string;
@@ -140,11 +145,11 @@ export class ElementProps extends StyleProps {
   //   this._content = value;
   // }
 
-  private _padding: Padding;
-  public get padding(): Padding {
+  private _padding: Padding|undefined;
+  public get padding(): Padding|undefined {
     return this._padding;
   }
-  public set padding(value: Padding) {
+  public set padding(value: Padding|undefined) {
     this._padding = value;
   }
 

@@ -122,7 +122,7 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
-  fit('multiple text nodes and border', async done => {
+  it('multiple text nodes and border', async done => {
     const t = doc.createTextNode('hello world')
     const el = createElement(doc, 'Div', doc.body,{ bg: 'yellow', fg: 'black', left: 9, top: 2, height: 6, width: 16, }, [
       doc.createTextNode('hello world'), doc.createTextNode('lorem ipsum')
@@ -133,9 +133,9 @@ describe('programDocumentRenderer', () => {
 
     expect(renderer.printBuffer(true)).toContain(`
         ╭────────────────╮
-        │                │
         │hello world     │
         │lorem ipsum     │
+        │                │
         │                │
         │                │
         │                │
