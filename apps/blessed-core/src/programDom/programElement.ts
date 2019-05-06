@@ -1,14 +1,10 @@
-import { Node, NodeType, Element } from '../dom';
-import { Program } from '../declarations/program';
+import { Element } from '../dom';
 import { ProgramDocument } from './programDocument';
 
 export class ProgramElement extends Element {
-  
-
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
   }
-
 
   get parentNode():  ProgramElement|ProgramDocument {
     return this._parentNode as any
@@ -95,6 +91,7 @@ export class ProgramElement extends Element {
   }
 
   private _ch: string;
+
   public get ch(): string {
     return this._ch;
   }

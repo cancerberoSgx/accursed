@@ -1,34 +1,33 @@
 import { ProgramElement } from './programElement';
 import { Program } from '../declarations/program';
 import {array} from 'misc-utils-of-mine-generic'
-interface Point {
-  ch: string
-  // mode: string
-}
+// interface Point {
+//   ch: string
+//   // mode: string
+// }
 
 export class ProgramDocumentRenderer {
   private debug: boolean
   private program: Program;
-  private buffer: Point[][];
+  private debugBuffer: string[][];
   private ch: string;
   constructor(options: Options){
     this.program = options.program
     this.debug = options.debug||false
     this.ch = options.defaultChar || ' '
     if(this.debug){
-      this.buffer = array(this.program.rows).map(c=>array(this.program.cols).map(c=>({ch: this.ch})))
+      this.debugBuffer = array(this.program.rows).map(c=>array(this.program.cols).map(c=>(this.ch)))
     }
   }
   renderElement(el: ProgramElement){
     this.renderElementWithoutChildren(el)
-    // for(let c of  el.childNodes) {
-    // this.renderElementWithoutChildren( el: c as any)
-
-    // }
+    for(let c of  el.childNodes) {
+    this.renderElementWithoutChildren(c as any)
+    }
   }
 
   printBuffer() {
-    return this.buffer.map(l=>l.map(c=>c.ch).join('')).join('\n')
+    return this.debugBuffer.map(l=>l.join('')).join('\n')
   }
   renderElementWithoutChildren(el: ProgramElement){
     if(el.bg){
@@ -48,7 +47,7 @@ export class ProgramDocumentRenderer {
     this.program._write(s);
     if(this.debug){
       for(let i = 0; i<s.length; i++){
-        this.buffer[y][x+i] = {ch:s[i]}
+        this.debugBuffer[y][x+i] = s[i]//{ch:s[i]}
       }    
     }
   }

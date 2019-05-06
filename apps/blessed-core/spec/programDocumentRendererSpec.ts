@@ -5,23 +5,8 @@ import { ansi, Driver, InteractionSpecHelper } from 'cli-driver'
 jasmine.DEFAULT_TIMEOUT_INTERVAL=10000
 
 describe('programDocumentRenderer', () => {
-  let program: Program
-  let client: Driver
-  let helper: InteractionSpecHelper
-  // beforeAll(async done => {
-  //   client = new Driver()
-  //   helper = new InteractionSpecHelper(client)
-  //   await client.start({
-  //     // notSilent: true
-  //   })
-  //   done()
-  // })
-  // afterAll(async done => {
-  //   await helper.clear()
-  //   await client.destroy().catch()
-  //   helper = null as any
-  //   done()
-  // })
+  let program: Program 
+  let doc: ProgramDocument
   beforeEach(()=>{
     program = new Program({
     })    
@@ -33,6 +18,7 @@ describe('programDocumentRenderer', () => {
       program.destroy()
       process.exit(0)
     })
+    doc = new ProgramDocument()
   })
   afterEach(()=>{
     tryTo(()=>{
@@ -43,26 +29,57 @@ describe('programDocumentRenderer', () => {
       program.destroy()
     })
   })
+
   it('renderElementWithoutChildren', async done => {
-   const d = new ProgramDocument()
-   const div1  = d.createElement('Div')
-   d.appendChild(div1)
+   const div1  = doc.createElement('Div')
+   doc.appendChild(div1)
    Object.assign(div1, {bg: 'red', fg: 'blue', x: 4, y: 2, height: 5, width: 6, ch: 'X'})
    const r = new ProgramDocumentRenderer({program, debug: true })
    program.reset()
    r.renderElementWithoutChildren(div1)
     program.reset()
-    expect(removeWhites(r.printBuffer())).toBe(removeWhites(
-      `
-      XXXXXX
-      XXXXXX
-      XXXXXX
-      XXXXXX
-      XXXXXX
-      ` )) 
+    const expected = `
+
+    XXXXXX
+    XXXXXX
+    XXXXXX
+    XXXXXX
+    XXXXXX
+    `
+    expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(expected  )) 
     done()
   })
 
+  function trimRightLines(s:string){
+    return s.split('\n').map(l=>l.trimRight()).join('\n')
+  }
+
+  it('renderElement ', async done => {
+    const div1  = doc.createElement('Div')
+    doc.appendChild(div1)
+    Object.assign(div1, {bg: 'red', fg: 'blue', x: 3, y: 2, height: 9, width: 12, ch: 'X'})
+    const d2 = doc.createElement('Span')
+    Object.assign(d2, {bg: 'green', fg: 'yellow', x: 4, y: 2, height: 3, width: 4, ch: 'O'})
+    div1.appendChild(d2)
+    const r = new ProgramDocumentRenderer({program, debug: true })
+    program.reset()
+    r.renderElement(div1)
+     program.reset()
+     expect(trimRightLines(r.printBuffer())).toContain(trimRightLines(
+       `
+
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXOOOOXXXX
+   XXXXOOOOXXXX
+   XXXXOOOOXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+   XXXXXXXXXXXX
+       ` )) 
+     done()
+   })
   
 
 })

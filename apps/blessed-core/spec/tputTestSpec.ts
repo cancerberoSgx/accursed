@@ -9,7 +9,6 @@ describe('tputTest', () => {
     client = new Driver()
     helper = new InteractionSpecHelper(client)
     await client.start({
-      // notSilent: true
     })
     done()
   })
@@ -18,13 +17,6 @@ describe('tputTest', () => {
     await helper.clear()
     await client.destroy().catch()
     helper = null as any
-    done()
-  })
-
-  it('npm run build', async done => {
-    await client.enter('npm run build')
-    expect(await helper.waitForStrippedDataToInclude('build successful'))
-    await helper.expectLastExitCode(true)
     done()
   })
 
