@@ -53,7 +53,7 @@ export class ProgramDocumentRenderer {
   }
 
   protected   log(s: string): any {
-    console.log(s)
+    // console.log(s)
   }
 
   printBuffer(linesTrimRight?: boolean) {

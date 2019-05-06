@@ -3,9 +3,10 @@
 import { ProgramDocument } from '../programDom';
 import { Component } from './component';
 import { BlessedJsx, BlessedJsxAttrs  } from './types';
+import { Node } from '../dom';
 
-interface Options {
-  dontInheritStyle?: boolean
+interface RenderOptions {
+document?: ProgramDocument
 }
 
 interface ComponentConstructor<P = {}, S = {}> {
@@ -16,20 +17,19 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
+
 class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Array<JSX.BlessedJsxNode>}> implements JSX.Element<P>{
   constructor (public type: string, attrs: BlessedJsxAttrs){
-this.props = {...attrs || {}, children: []} as any
+this.props = {...attrs || {}} as any
   }
-  // children: any[] = []
+  children: any[] = []
   // props: P = {children: []} as any
   props:  P// = {} as any as P //{children: Array<JSX.BlessedJsxNode>}//  = {children: []}
   // children: JSX.BlessedJsxNode[] = []
 }
 
 /**
- * In this implementation, all the work is dont by createElement, that returns ready to use blessed elements.
- * Attributes and children are only implemented for intrinsic elements and all blessed types in
- * JSX.IntrinsicElement should be supported. All event handlers in types are supported.
+ * This implementation has a trivial createElement() and a heavier render(). This means that : "parsing" the jsx will be fast. render() will be slower. PRO: createElement doesn't create any Elements so we are able to modify the nodes and visit all of them bfore creating the ProgramElements. (implement Providers, etc.)
  */
 class BlessedJsxImpl implements BlessedJsx {
   protected doc: ProgramDocument|undefined
@@ -55,7 +55,14 @@ class BlessedJsxImpl implements BlessedJsx {
 
   // private defaultPluginsInstalled = false
 
-  render(e: JSX.Element) {
+  render(e: JSX.Element, options: RenderOptions = {}) {
+    if(!this.doc && !options.document){
+      throw new Error('Need to provide a document with setDocument() before render')
+    }
+    const doc = options.document ||this.doc!
+    const el =  this._render(e, doc)
+     doc.body.appendChild(el)
+     return el 
     // if (!this.defaultPluginsInstalled) {
     //   this.defaultPluginsInstalled = true
     //   // installOptionsPropagationPlugin({ include: []})//['style.bg'] })
@@ -68,7 +75,38 @@ class BlessedJsxImpl implements BlessedJsx {
 
     // // const el = (e as any )()
 
-    return e as any
+    // return e as any
+  }
+
+  private _render(e: JSX.Element<{}>, doc: ProgramDocument) {
+    if (typeof e.type !== 'string') {
+      throw new Error('unexpected undefined type ' + e);
+    }
+    const el = doc.createElement(e.type);
+    el.props.extend({ ...e.props, children: undefined } as any);
+    if (e.children) {
+      if (Array.isArray(e.children)) {
+        e.children.forEach(c => {
+          if (isElementLike(c)) {
+            let r: Node
+            if(c.type==='__text'){
+              r = doc.createTextNode((c.props as any).textContent+'')
+            }
+            else {
+              r = this._render(c, doc);
+            }
+            el.appendChild(r);
+          }
+          else {
+            throw new Error('Unrecognized child type ' + c);
+          }
+        });
+      }
+      else {
+        throw new Error('Unrecognized children type ' + e.children);
+      }
+    }
+    return el;
   }
 
   setDocument(doc: ProgramDocument) {
@@ -305,8 +343,8 @@ class BlessedJsxImpl implements BlessedJsx {
     //   child
     // }
     // let dontAppend = this.beforeAppendChildListeners.some(l => l(event))
-    if (el && el.props && el.props.children ){//&& !dontAppend) {
-      el.props.children.push(child)
+    if (el && el.props && el.children ){//&& !dontAppend) {
+      el.children.push(child)
     }
   }
 
@@ -314,7 +352,7 @@ class BlessedJsxImpl implements BlessedJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: JSXElementImpl) {
-    const t = {type: '__text', props: {textContent: c+'', children: []}}
+    const t = {type: '__text', props: {textContent: c+'', children: []}, children: []}
     this.appendChild(el, t)
     return t
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)

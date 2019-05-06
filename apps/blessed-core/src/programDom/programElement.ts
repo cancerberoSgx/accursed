@@ -1,17 +1,16 @@
 import { Element, NamedNodeMap, Attr } from '../dom'
 import { ProgramDocument } from './programDocument'
 import { objectMap } from 'misc-utils-of-mine-generic';
-import { BorderStyle } from './boxes';
+import { BorderStyle, BorderSide } from './boxes';
 
 export class ProgramElement extends Element {
-  props: ElementProps;
+  props: ElementPropsImpl;
 
   constructor(public readonly tagName: string, ownerDocument: ProgramDocument) {
     super(tagName, ownerDocument)
-    this.props = new ElementProps()
+    this.props = new ElementPropsImpl()
   }
 
-  
   get parentNode(): ProgramElement | ProgramDocument {
     return this._parentNode as any
   }
@@ -44,13 +43,32 @@ interface Padding {
   right: number,
    bottom: number
 }
-export interface StyleProps {
+
+abstract class AbstractPropsImpl implements AbstractProps{
+abstract getObject(): {[a:string]:any}
+  extend <P extends AbstractProps=AbstractProps>(p : P):void {
+    Object.assign(this, p)
+  }
+ 
+
+}
+
+export interface AbstractProps {
+  // getObject(): {[a:string]:any}
+  // extend <P extends AbstractProps=AbstractProps>(p : P):void 
+  }
+export interface StyleProps extends AbstractProps{
 bg?: Color
 fg?: Color
 ch?: string
+bold?: boolean
+underline?: boolean
+standout?: boolean
+blink?: boolean
 }
-export class StylePropsImpl implements StyleProps {
+export class StylePropsImpl extends AbstractPropsImpl implements StyleProps {
   constructor(p: {bg?: Color, fg?: Color, ch?: string} = {}) {
+    super()
 this.bg = p.bg
 this.fg = p.fg
 this.ch = p.ch 
@@ -60,7 +78,16 @@ this.ch = p.ch
       bg: this._bg,
       fg: this._fg,
       ch: this._ch,
+      bold: this._bold
     }
+  }
+
+  private _bold: boolean | undefined;
+  public get bold(): boolean | undefined {
+    return this._bold;
+  }
+  public set bold(value: boolean | undefined) {
+    this._bold = value;
   }
   private _bg: Color | undefined
 
@@ -93,8 +120,10 @@ this.ch = p.ch
 }
 type Color= string
 
-
-class BorderProps extends StylePropsImpl {
+export interface BorderProps extends StyleProps{
+  type?: BorderStyle
+}
+class BorderPropsImpl extends StylePropsImpl implements BorderProps {
   private _type: BorderStyle | undefined;
   public get type(): BorderStyle | undefined {
     return this._type;
@@ -103,8 +132,15 @@ class BorderProps extends StylePropsImpl {
     this._type = value;
   }
 }
-
-export class ElementProps extends StylePropsImpl {
+export interface ElementProps extends StyleProps {
+  width?: number
+  height?: number
+  top?: number
+  left?: number
+  padding?: Padding
+  border?: BorderProps
+}
+export class ElementPropsImpl extends StylePropsImpl implements ElementProps{
 
   getObject() {
     return {
@@ -117,11 +153,11 @@ export class ElementProps extends StylePropsImpl {
       border: this._border
     }
   }
-  private _border: BorderProps|undefined;
-  public get border(): BorderProps|undefined {
+  private _border: BorderPropsImpl|undefined;
+  public get border(): BorderPropsImpl|undefined {
     return this._border;
   }
-  public set border(value: BorderProps|undefined) {
+  public set border(value: BorderPropsImpl|undefined) {
     this._border = value;
   }
 
