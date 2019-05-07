@@ -18,7 +18,7 @@ try {
 
   const { renderer, el } = createProgramRendererDocumentAndElement(undefined)
 
-  el.props.extend({ layout: { layout: Layout['justified-layout'], justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
+  el.assignProps({ layout: { layout: Layout['justified-layout'], justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
 
   function draw() {
     renderer.eraseElement(el)

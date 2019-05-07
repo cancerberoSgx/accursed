@@ -11,7 +11,7 @@ declare global {
 
     /** Adds extra props to Blessed options, like refs. TODO: we could add children here too ? and perhaps
      * unify the rest in one place (onClick, etc) */
-    type OptionsProps<T> = PropsWithRef<T>
+    type OptionsProps<T> = PropsWithRef<Partial<T>>
 
     type PropsWithRef<P> = P & {
       children?: BlessedJsxNode ,

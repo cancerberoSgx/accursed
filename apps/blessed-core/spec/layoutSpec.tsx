@@ -33,7 +33,7 @@ describe('layout', () => {
 
   it('justify-layout should make all text visible if there is enough space', async done => {
     const { renderer, el } = createProgramRendererDocumentAndElement()
-    el.props.extend({ layout: { layout: 'justified-layout', justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
+    el.assignProps({ layout: { layout: 'justified-layout', justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
     function draw() {
       renderer.eraseElement(el)
       el.empty()

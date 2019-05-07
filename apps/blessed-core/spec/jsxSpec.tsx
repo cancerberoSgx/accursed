@@ -6,13 +6,13 @@ import { createProgramRendererDocument } from '../src/util/util'
 
 describe('jsx', () => {
 
-  it('createElement', async done => {
+  xit('createElement', async done => {
     const p = <box>hello</box>
     expect(JSON.stringify(p)).toEqual(`{"type":"box","children":[{"type":"__text","props":{"textContent":"hello","children":[]},"children":[]}],"props":{}}`)
     done()
   })
 
-  it('render', async done => {
+  xit('render', async done => {
     const p = <box width={10} height={7} bg="red" fg="black" top={4} left={12} ch="y">hello</box>
     const doc = new ProgramDocument()
     Flor.setDocument(doc)

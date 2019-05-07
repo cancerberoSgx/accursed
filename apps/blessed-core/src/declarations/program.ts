@@ -547,7 +547,7 @@ export declare class Program extends TPut  implements  EventEmitter {
   write(text: string): boolean
 
    /**
-   * Writes given string to [[output]] to the buffer.
+   * Writes given string to [[output]] to the buffer. It doesn't parse given parameters
    */
   _write(text: string): boolean
 
@@ -564,6 +564,8 @@ export declare class Program extends TPut  implements  EventEmitter {
     program._attr('bold', false) + ' No bold '
   )
    ```
+
+   @param attrs could be a string like "blue bg" or negation like  "no bold"
    */
   _attr(attrs: string | string[], enable: boolean): string
 

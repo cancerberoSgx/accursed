@@ -4,14 +4,25 @@ import { Program } from '../declarations/program'
 import { isText } from '../dom/nodeUtil'
 import { TextNode } from '../dom/text'
 import { ProgramElement } from '../programDom/programElement'
-import { StylePropsImpl } from '../programDom/styleProps'
-import { StyleProps } from '../programDom/types'
+import { StylePropsImpl, AttrsImpl, PAttrs } from '../programDom/styleProps'
+import { StyleProps, Attrs } from '../programDom/types'
 import { BorderSide, BorderStyle, getBoxStyleChar } from '../util/border'
 import { trimRightLines } from '../util/misc'
 import { destroyProgram } from '../util/util'
 
-type Point = string
 
+const defaultAttrs: Attrs = {
+  // bg: 'black',
+  bg: '#1e1e1e',
+  fg: 'white', 
+  bold: false, 
+  invisible: false, 
+  underline: false, 
+  standout: false,
+  ch: ' ',
+  blink: false
+
+}
 export class ProgramDocumentRenderer {
 
   private debug: boolean
@@ -20,21 +31,24 @@ export class ProgramDocumentRenderer {
     return this._program
   }
 
-  private debugBuffer: Point[][] = []
+  private debugBuffer: PAttrs[][] = []
 
   private ch: string
 
-  private defaultStyle: StylePropsImpl = new StylePropsImpl({
-    bg: 'black',
-    fg: 'white'
-  })
+  private defaultStyle: PAttrs
+  private currentAttrs: PAttrs  
 
   constructor(options: Options) {
     this._program = options.program
     this.debug = options.debug || false
     this.ch = options.defaultChar || ' '
+    this.defaultStyle = new AttrsImpl(defaultAttrs)
+    this.currentAttrs = {
+      ch:  ' ',
+      ...this.defaultStyle
+    }
     if (this.debug) {
-      this.debugBuffer = array(this._program.rows).map(c => array(this._program.cols).map(c => (this.ch)))
+      this.debugBuffer = array(this._program.rows).map(c => array(this._program.cols).map(c =>({...this.currentAttrs})))
     }
   }
 
@@ -56,7 +70,7 @@ export class ProgramDocumentRenderer {
         const s =  c.textContent || ''
         this.write(y, x,s)
         // Heads up : if next child is also text, we keep writing on the same line, if not, on a new  line.
-        const nextChildIsText = isText(a[i + 1])// && !s.includes('\n') && !(a[i+1].textContent||'').includes('\n')
+        const nextChildIsText = isText(a[i + 1])
         lastAbsLeft = x +  (nextChildIsText ? s.length : 0)
         lastAbsTop = y +  (nextChildIsText ? 0 : 1)
       } else if (c instanceof ProgramElement) {
@@ -74,7 +88,7 @@ export class ProgramDocumentRenderer {
   }
 
   printBuffer(linesTrimRight?: boolean) {
-    const s =  this.debugBuffer.map(l => l.join('')).join('\n')
+    const s =  this.debugBuffer.map(l => l.map(l=>l.ch).join('')).join('\n')
     return linesTrimRight ? trimRightLines(s) : s
   }
 
@@ -87,12 +101,18 @@ export class ProgramDocumentRenderer {
     this.drawElementBorder(el)
   }
 
-  setStyle(props: StyleProps) {
+  setStyle(props: PAttrs) {    
     if (props.bg) {
       this._program.bg(props.bg)
+      if(this.debug){
+        this.currentAttrs.bg = props.bg
+      }
     }
     if (props.fg) {
       this._program.fg(props.fg)
+      if(this.debug){
+        this.currentAttrs.fg = props.fg
+      }
     }
   }
 
@@ -110,7 +130,7 @@ export class ProgramDocumentRenderer {
     if (this.debug) {
       for (let i = 0; i < s.length; i++) {
         if (this.debugBuffer[y]) {
-          this.debugBuffer[y][x + i] = s[i]
+          this.debugBuffer[y][x + i] = {ch: s[i]}
         }
       }
     }
@@ -121,7 +141,7 @@ export class ProgramDocumentRenderer {
       return
     }
     const type = el.props.border.type || BorderStyle.light
-    this.setStyle({ ...el.props.border, ...el.props })
+    this.setStyle({ ...el.props.border, ...el.props})//, getObject: undefined})// , ...el.props.getObject() })
     const { xi, xl, yi, yl } = { xi: el.absoluteLeft , xl: el.absoluteLeft + el.props.width , yi: el.absoluteTop , yl: el.absoluteTop + el.props.height  }
     this.write(yi, xi, getBoxStyleChar(type, BorderSide.topLeft))
     this.write(yi, xl - 1, getBoxStyleChar(type, BorderSide.topRight))

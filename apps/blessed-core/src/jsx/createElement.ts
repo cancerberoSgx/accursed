@@ -2,9 +2,11 @@ import { ProgramDocument } from '..'
 import { Node } from '../dom'
 import { Component } from './component'
 import { BlessedJsxAttrs, FlorJsx } from './types'
+import { debug } from '../util';
 
 interface RenderOptions {
   document?: ProgramDocument
+  wrapTextInElement?: boolean|string
 }
 
 interface ComponentConstructor<P = {}, S = {}> {
@@ -55,9 +57,10 @@ class FlorJsxImpl implements FlorJsx {
     if (!this.doc && !options.document) {
       throw new Error('Need to provide a document with setDocument() before render')
     }
-    const doc = options.document || this.doc!
-    const el =  this._render(e, doc)
-    doc.body.appendChild(el)
+    const wrapInElement = options.wrapTextInElement ? typeof options.wrapTextInElement ==='boolean' ? 'text' : options.wrapTextInElement : undefined
+    const document = options.document || this.doc!
+    const el =  this._render({e, document, wrapInElement})
+    document.body.appendChild(el)
     // el.emit('attached')
     return el
     // if (!this.defaultPluginsInstalled) {
@@ -75,25 +78,35 @@ class FlorJsxImpl implements FlorJsx {
     // return e as any
   }
 
-  private _render(e: JSX.Element<{}>, doc: ProgramDocument) {
+  private _render({e, document, wrapInElement}: {e: JSX.Element<{}>, document: ProgramDocument, wrapInElement?: string}) {
     if (typeof e.type !== 'string') {
       throw new Error('unexpected undefined type ' + e)
     }
-    const el = doc.createElement(e.type)
+    const el = document.createElement(e.type)
     if (isJSXElementImpl(e) && e._component) {
       e._component.element = el
       e._component.elementCreated()
     }
-    el.props.extend({ ...e.props, children: undefined } as any)
+    // debug('hola', e.props, e.props );
+    // Object.assign(el.props, {...e.props, children: undefined })
+    // el.props.extend({ ...e.props, children: undefined } as any)
+    el.assignProps({ ...e.props, children: undefined } as any)
+    
     if (e.children) {
       if (Array.isArray(e.children)) {
         e.children.forEach(c => {
           if (isJSXElementImpl(c)) {
             let r: Node
             if (c.type === '__text') {
-              r = doc.createTextNode((c.props as any).textContent + '')
+              const text  = document.createTextNode((c.props as any).textContent + '')
+              if(wrapInElement){
+                r = document.createElement(wrapInElement)
+                r.appendChild(text)
+              } else {
+                r = text
+              }
             } else {
-              r = this._render(c, doc)
+              r = this._render({e: c, document, wrapInElement})
             }
             el.appendChild(r)
           } else {

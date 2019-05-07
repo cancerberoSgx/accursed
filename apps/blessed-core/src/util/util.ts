@@ -49,7 +49,7 @@ export function createProgramRendererDocumentAndElement(programOptions: ProgramO
   return { renderer, document, program, el }
 }
 
-export function createElement(doc: ProgramDocument, tagName: string | FullProps, parent?: ProgramElement, props: Partial<ElementProps> = {}, children?: Node[]) {
+export function createElement(doc: ProgramDocument, tagName: string | Partial<FullProps>, parent?: ProgramElement, props: Partial<ElementProps> = {}, children?: Node[]) {
   if (typeof tagName !== 'string') {
     let opts = tagName
     tagName = opts.tagName || 'box'

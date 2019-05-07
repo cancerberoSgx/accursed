@@ -112,10 +112,24 @@ export class ProgramElement extends Element {
   /**
    * creates a new element and appends it to this element.
    */
-  create(props: FullProps) {
+  create(props: Partial<FullProps>) {
     if (!this.ownerDocument) {
       throw new Error('Cannot invoke this method on an unattached element')
     }
     return createElement(this.ownerDocument as ProgramDocument, { ...props, parent: this })
   }
+
+  assignProps(o: any) {
+    Object.assign(this.props, o)
+  }
+  
 }
+
+
+
+// export function getPropsPlainObject getObject(): {
+//   [a: string]: any;
+// }
+// extend<P extends AbstractProps = AbstractProps>(p: P): void {
+//   Object.assign(this, p)
+// }

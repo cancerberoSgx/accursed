@@ -22,7 +22,7 @@ export class ProgramDocument extends Document {
   /**
    * better syntax for creating an element, setting properties, children and optionally parent.
    */
-  create(props: FullProps) {
+  create(props: Partial<FullProps>) {
     const el =  createElement(this , props)
     this.body.appendChild(el)
     return el

@@ -3,24 +3,28 @@ import { BorderStyle } from '../util/border'
 import { StylePropsImpl } from './styleProps'
 import { BorderProps, ElementProps, Padding } from './types'
 
-export class ElementPropsImpl extends StylePropsImpl implements ElementProps {
-  getObject() {
-    return {
-      ...super.getObject(),
-      width: this._width,
-      height: this._height,
-      top: this._top,
-      left: this._left,
-      padding: this._padding,
-      border: this._border
-    }
+
+export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementProps> {
+  constructor() {
+    super()
   }
+  // getObject() {
+  //   return {
+  //     ...super.getObject(),
+  //     width: this._width,
+  //     height: this._height,
+  //     top: this._top,
+  //     left: this._left,
+  //     padding: this._padding,
+  //     border: this._border
+  //   }
+  // }
   private _border: BorderProps | undefined
   public get border(): BorderProps | undefined {
-    return this._border
+    return this._border as BorderProps | undefined 
   }
   public set border(value: BorderProps | undefined) {
-    this._border = value ? new BorderPropsImpl(value) : undefined
+    this._border = value ? (new BorderPropsImpl(value) as BorderProps ) : undefined
   }
   private _padding: Padding | undefined
   public get padding(): Padding | undefined {
