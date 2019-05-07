@@ -2,11 +2,15 @@ import { ProgramDocument } from '..'
 import { Node } from '../dom'
 import { Component } from './component'
 import { BlessedJsxAttrs, FlorJsx } from './types'
-import { debug } from '../util';
+import { ProgramElement } from '../programDom';
 
 interface RenderOptions {
   document?: ProgramDocument
-  wrapTextInElement?: boolean|string
+  wrapTextInElement?: boolean | string
+  /**
+   * parent element to attach the rendered elements. if not provided document.body
+   */
+  parent?: ProgramElement
 }
 
 interface ComponentConstructor<P = {}, S = {}> {
@@ -17,13 +21,14 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
   return typeof tag === 'function' && tag.prototype && tag.prototype.render
 }
 
-class JSXElementImpl<P extends { children?: JSX.BlessedJsxNode } = {children: Array<JSX.BlessedJsxNode>}> implements JSX.Element<P> {
+class JSXElementImpl<P extends { children?: JSX.FlorJsxNode } = {children: Array<JSX.FlorJsxNode>}> implements JSX.Element<P> {
   _component?: Component | undefined
   constructor(public type: string, attrs: BlessedJsxAttrs) {
     this.props = { ...attrs || {} } as any
   }
   children: any[] = []
   props: P
+  _type: 'string'|'function'|'class' |undefined
 }
 
 /**
@@ -57,10 +62,10 @@ class FlorJsxImpl implements FlorJsx {
     if (!this.doc && !options.document) {
       throw new Error('Need to provide a document with setDocument() before render')
     }
-    const wrapInElement = options.wrapTextInElement ? typeof options.wrapTextInElement ==='boolean' ? 'text' : options.wrapTextInElement : undefined
+    const wrapInElement = options.wrapTextInElement ? typeof options.wrapTextInElement === 'boolean' ? 'text' : options.wrapTextInElement : undefined
     const document = options.document || this.doc!
-    const el =  this._render({e, document, wrapInElement})
-    document.body.appendChild(el)
+    const el =  this._render({ e, document, wrapInElement })
+   ;(options.parent|| document.body).appendChild(el)
     // el.emit('attached')
     return el
     // if (!this.defaultPluginsInstalled) {
@@ -78,7 +83,7 @@ class FlorJsxImpl implements FlorJsx {
     // return e as any
   }
 
-  private _render({e, document, wrapInElement}: {e: JSX.Element<{}>, document: ProgramDocument, wrapInElement?: string}) {
+  private _render({ e, document, wrapInElement }: {e: JSX.Element<{}>, document: ProgramDocument, wrapInElement?: string}) {
     if (typeof e.type !== 'string') {
       throw new Error('unexpected undefined type ' + e)
     }
@@ -90,8 +95,35 @@ class FlorJsxImpl implements FlorJsx {
     // debug('hola', e.props, e.props );
     // Object.assign(el.props, {...e.props, children: undefined })
     // el.props.extend({ ...e.props, children: undefined } as any)
-    el.assignProps({ ...e.props, children: undefined } as any)
-    
+
+    if((e as any)._type==='string'){
+      el.assignProps({ ...e.props||{}, children: undefined } as any)
+    }
+    Object.keys(e.props||{}).forEach(attr=>{
+      const val = (e as any).props[attr]
+      if(typeof val==='function'){
+        el.addEventListener(attr, val)
+      }
+
+
+
+
+
+      //     if (el.type === 'checkbox') {
+      //       el.on('check', e => {
+      //         fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+      //       })
+      //       el.on('uncheck', e => {
+      //         fn!.bind(el)({ ...e, currentTarget: el, value: (el as Checkbox).value })
+      //       })
+      //     }
+      //     if (el.type === 'textbox' || el.type === 'textarea') {
+      //       el.on('submit', e => {
+      //         fn!.bind(el)({ currentTarget: el, value: e })
+      //       })
+      //     }
+    })
+
     if (e.children) {
       if (Array.isArray(e.children)) {
         e.children.forEach(c => {
@@ -99,14 +131,14 @@ class FlorJsxImpl implements FlorJsx {
             let r: Node
             if (c.type === '__text') {
               const text  = document.createTextNode((c.props as any).textContent + '')
-              if(wrapInElement){
+              if (wrapInElement) {
                 r = document.createElement(wrapInElement)
                 r.appendChild(text)
               } else {
                 r = text
               }
             } else {
-              r = this._render({e: c, document, wrapInElement})
+              r = this._render({ e: c, document, wrapInElement })
             }
             el.appendChild(r)
           } else {
@@ -126,13 +158,15 @@ class FlorJsxImpl implements FlorJsx {
   setDocument(doc: ProgramDocument) {
     this.doc = doc
   }
+
+
   createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]) {
 
     // return ()=>{
     // TODO: beforeElementCreateListeners (so I can manipulate tag, attrs and children before anything
     // happens)
 
-    let el: JSX.BlessedJsxNode
+    let el: JSX.FlorJsxNode
 
     // const eventOptionNames = enumKeys(EventOptionNames)
     // const artificialEventOptionNames = enumKeys(ArtificialEventOptionNames)
@@ -154,16 +188,19 @@ class FlorJsxImpl implements FlorJsx {
         //   component._jsxChildrenProps = [...children] //.filter(VirtualComponent.isVirtualComponent)
         // }
         // TODO: beforeElementRenderListeners
-      el = component.render()
+      el = component.render();
+      (el as any )._type = 'class'
+
       if (isJSXElementImpl(el)) {
-        el._component = component
+        el._component = component;
       }
         // @ts-ignore
       // component.blessedElement = el
         // TODO: associate otherwise ?  good idea?
       // }
     } else if (typeof tag === 'function') {
-      el = tag({ ...attrs, children })
+      el = tag({ ...attrs, children });
+      (el as any )._type = 'function'
       // TODO: add beforeElementRenderListeners
     } else if (typeof tag === 'string') {
       // // HEADS UP! we only implement attributes and children for intrinsic elements. ClassElement and
@@ -197,7 +234,9 @@ class FlorJsxImpl implements FlorJsx {
       // })
       // if (!listenerInstance) {
         // el = document({ ...attrs, children: undefined }) as Element
-      el = new JSXElementImpl(tag, attrs)
+      el = new JSXElementImpl(tag, attrs);
+      (el as any )._type = 'string'
+
         // if(attrs){
         //   Object.assign(el.props, attrs)
         // }
@@ -369,7 +408,7 @@ class FlorJsxImpl implements FlorJsx {
    * Default blessed Node factory for text like "foo" in <box>foo</box>
    */
   protected createTextNode(c: JSX.BlessedJsxText, el: JSXElementImpl) {
-    const t = { type: '__text', props: { textContent: c + '', children: [] }, children: [] }
+    const t = { type: '__text', props: { textContent: c + '', children: [] }, children: [], _type: "string" as any}
     this.appendChild(el, t)
     return t
     // TODO: onCreateTextNodeListeners (so I can transform JSXText literals)
@@ -402,9 +441,6 @@ class FlorJsxImpl implements FlorJsx {
   // }
 }
 
-function isJSXElementImpl(e: any): e is JSXElementImpl {
-  return e && e.props && e.children
-}
 
 export const Flor: FlorJsx = new FlorJsxImpl()
 
@@ -432,3 +468,10 @@ export const Flor: FlorJsx = new FlorJsxImpl()
 //     throw error
 //   }
 // }
+
+export function isJSXElementImpl(e: any): e is JSXElementImpl {
+  return e && e.props && e.children &&  ['string', 'function', 'class' , undefined].includes(e._type)
+}
+export function isJsxNode(el: any): el is JSX.FlorJsxNode {
+  return isJSXElementImpl(el) || typeof el === 'string' || typeof el === 'number';
+}

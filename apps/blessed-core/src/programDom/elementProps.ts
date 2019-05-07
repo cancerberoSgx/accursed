@@ -3,7 +3,6 @@ import { BorderStyle } from '../util/border'
 import { StylePropsImpl } from './styleProps'
 import { BorderProps, ElementProps, Padding } from './types'
 
-
 export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementProps> {
   constructor() {
     super()
@@ -19,17 +18,24 @@ export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementP
   //     border: this._border
   //   }
   // }
-  private _border: BorderProps | undefined
-  public get border(): BorderProps | undefined {
-    return this._border as BorderProps | undefined 
+
+  private _border: BorderProps |undefined
+  public get border(): BorderProps | boolean | BorderStyle | undefined {
+    return this._border
   }
-  public set border(value: BorderProps | undefined) {
-    this._border = value ? (new BorderPropsImpl(value) as BorderProps ) : undefined
+  getBorder() {
+    return this._border
   }
+  public set border(value: BorderProps | boolean | BorderStyle | undefined) {
+    this._border = value ? (new BorderPropsImpl(value) as BorderProps) : undefined
+  }
+
   private _padding: Padding | undefined
+
   public get padding(): Padding | undefined {
     return this._padding
   }
+
   public set padding(value: Padding | undefined) {
     this._padding = value
   }
@@ -70,15 +76,18 @@ export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementP
   }
   childrenReady: () => boolean = () => { return false }
   afterRenderWithoutChildren = () => { }
+  // Dont remove this implementation - will break isELementProps
   afterRender = () => { }
   beforeRender = () => { return false }
 }
 
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {
   private _type: BorderStyle | undefined
-  constructor(p: BorderProps) {
-    super(p)
-    this.type = p.type
+  // constructor(p: BorderProps | boolean | BorderStyle | undefined) {
+  constructor(p: BorderProps | boolean | BorderStyle | undefined) {
+
+    super()
+    this._type = typeof p === 'string'  ? p : typeof p === 'boolean' ? BorderStyle.light : typeof p === 'undefined' ? undefined : p.type
   }
   public get type(): BorderStyle | undefined {
     return this._type

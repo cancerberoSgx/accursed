@@ -34,7 +34,7 @@ describe('programDom', () => {
     })
     program.reset()
     const doc = new ProgramDocument()
-    const renderer = new ProgramDocumentRenderer({ program, debug: true })
+    const renderer = new ProgramDocumentRenderer({ program })
 
     const defaultStyle = { bg: 'blue', fg: 'white' }
     const app = doc.create({

@@ -5,43 +5,43 @@
 import { EventEmitter } from 'events';
 import { Readable, Writable } from 'stream';
 import { TPut } from './tput';
-
-export interface MouseEvent extends IAbstractEventArg {
+export interface ProgramMouseEvent extends UIEvent {
   x: number
   y: number
-  action: TMouseAction
+  action: MouseAction
   button: 'left' | 'right' | 'middle' | 'unknown'
   name: 'mouse'
 }
 
-type TMouseAction = 'mousedown' | 'mouseup' | 'mousemove' | 'wheelup' | 'wheeldown'
+// export type TMouseAction = 'mousedown' | 'mouseup' | 'mousemove' | 'wheelup' | 'wheeldown'
 
-export interface KeyEvent extends IAbstractEventArg {
+export interface ProgramKeyEvent extends UIEvent {
   full: string
   sequence: string
 }
 
-interface IAbstractEventArg {
-  name: string
-  shift: boolean
-  ctrl: boolean
-  meta: boolean
-  type: string
-  raw: [number, number, number, string]
-  bug: Buffer
-}
+// interface UIEvent {
+//   name: string
+//   shift: boolean
+//   ctrl: boolean
+//   meta: boolean
+//   type: string
+//   raw: [number, number, number, string]
+//   bug: Buffer
+// }
 
-type NodeMouseEventType =
-| 'mouse'
-| 'mouseout'
-| 'mouseover'
-| 'mousedown'
-| 'mouseup'
-| 'mousewheel'
-| 'wheeldown'
-| 'wheelup'
-| 'mousemove'
-| 'click'
+export enum MouseAction {
+'mouse' = 'mouse',
+'mouseout' = 'mouseout',
+'mouseover' = 'mouseover',
+'mousedown' = 'mousedown',
+'mouseup' = 'mouseup',
+'mousewheel' = 'mousewheel',
+'wheeldown' = 'wheeldown',
+'wheelup' = 'wheelup',
+'mousemove' = 'mousemove',
+'click' = 'click',
+}
 
 /**
 'resize': Received on screen resize.
@@ -74,7 +74,7 @@ type NodeGenericEventType =
 | 'set content'
 | 'parsed content'
 
-export type KeyEventListener = (ch: string, key: KeyEvent) => void
+export type KeyEventListener = (ch: string, key: ProgramKeyEvent) => void
 
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
@@ -150,7 +150,7 @@ type ProgramResponseCallback = (this: Program, err: Error, data: ProgramResponse
 //   sequence: string
 // }
 
-interface IAbstractEventArg {
+export interface UIEvent {
   name: string
   shift: boolean
   ctrl: boolean
@@ -329,6 +329,16 @@ export declare class Program extends TPut  implements  EventEmitter {
   rows: number
   tput: TPut
   scrollTop: number
+  /** 
+   * Examples usage: 
+   * 
+ ```
+if (this.program.scrollTop !== 0
+  || this.program.scrollBottom !== this.rows - 1) {
+this.program.csr(0, this.height - 1);
+}
+ ```
+   */
   scrollBottom: number
   isOSXTerm: boolean
   isiTerm2: boolean
@@ -529,6 +539,8 @@ export declare class Program extends TPut  implements  EventEmitter {
   unKey(key: string | string[], l: KeyEventListener): void
   removeKey(key: string | string[], l: KeyEventListener): void
   bindMouse(): void
+  cursorHidden: boolean
+  mouseEnabled: boolean
   /**
    * Enable GPM mouse support.
    */
@@ -1202,6 +1214,14 @@ CSI ? Pm l
    dow) (DECSTBM).
  CSI ? Pm r
 ```
+
+Example
+```
+if (this.program.scrollTop !== 0
+  || this.program.scrollBottom !== this.rows - 1) {
+this.program.csr(0, this.height - 1);
+}
+```
    */
   setScrollRegion(top: number, bottom: number): boolean
   /** @see [[setScrollRegion]]*/
@@ -1223,7 +1243,6 @@ CSI s
  CSI u
    Restore cursor (ANSI.SYS).
 ```
-
  */
   restoreCursorA(): boolean
   /**
@@ -1245,7 +1264,11 @@ CSI s
   scrollDown(param?: number): boolean
   /** @see [[scrollDown]]*/
   sd(param?: number): boolean
-
+  /**
+   * it contains all tput operations bind to [[input]] so automatically call [[_write]]  using the return value. Example: 
+   * `this.put.pad()` is the equivalent to `this._write(this.tput.pad())`.
+   */
+put: {[s: string]: (...args: any[])=> any}
   /**
 ```
    CSI Ps ; Ps ; Ps ; Ps ; Ps T
@@ -1654,7 +1677,7 @@ CSI Ps ; Pu ' z
   /**
    * Triggered when native events in the host terminal window .
    **/
-  on(e: 'mouse', c: (e: MouseEvent) => void): this
+  on(e: 'mouse', c: (e: ProgramMouseEvent) => void): this
   //  on(e: 'response', c: (e: any) => void): this
   /**
    * Triggered when the terminal window is resized.

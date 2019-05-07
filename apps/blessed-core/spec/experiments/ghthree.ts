@@ -2,12 +2,11 @@
 //   private _a: number = 1
 // }
 // const c = new C1()
-// console.log(c) 
+// console.log(c)
 // // C1 { _a: 1 }
 // Object.assign(c, {_a: 2})
-// console.log(c) 
+// console.log(c)
 // // C1 { _a: 1 }
-
 
 // console.log({...new C1()})
 // class C {
@@ -20,8 +19,6 @@
 //   private _a: number = 1
 // }
 // console.log(new C())
-
-
 
 // const c =  new C()
 // interface T{}
@@ -48,8 +45,6 @@
 
 // const d = { ...c, f: 0 }
 // console.log(d, Object.keys(c));
-
-
 
 // https://codepen.io/ghthree/pen/WWRBdd
 

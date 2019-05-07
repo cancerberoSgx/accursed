@@ -1,7 +1,7 @@
 import { Driver, InteractionSpecHelper } from 'cli-driver'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
-describe('tputTest', () => {
+xdescribe('tputTest', () => {
   let client: Driver
   let helper: InteractionSpecHelper
 

@@ -10,11 +10,11 @@ async function main() {
   let result: any
 
   // renderer =;
-  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: true }), debug: false }),'buffer_true-debug_false')
+  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: true })}),'buffer_true-debug_false')
   data.push({ label: 'buffer_true-debug_false', result })
 
   // renderer = new ProgramDocumentRenderer({ program: new Program({ buffer: false }), debug: false });
-  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: false }), debug: false }),'buffer_false-debug_false')
+  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: false })}),'buffer_false-debug_false')
   data.push({ label: 'buffer_false-debug_false', result })
 
 // var differ = require('ansi-diff-stream')
@@ -28,10 +28,10 @@ async function main() {
   // await test(renderer, 'buffer_false-debug_false');
   // renderer = new ProgramDocumentRenderer({ program: new Program({ buffer: true }), debug: true });
   // await test(renderer, 'buffer_true-debug_true');
-  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: true }), debug: true }),'buffer_true-debug_true')
+  result = await test(new ProgramDocumentRenderer({ program: new Program({ buffer: true })}),'buffer_true-debug_true')
   data.push({ label: 'buffer_true-debug_true', result })
 
-  renderer = new ProgramDocumentRenderer({ program: new Program({ buffer: false }), debug: true })
+  renderer = new ProgramDocumentRenderer({ program: new Program({ buffer: false })})
   // await test(renderer, 'buffer_false-debug_true');
   result = await test(renderer,'buffer_false-debug_true')
   data.push({ label: 'buffer_false-debug_true', result })

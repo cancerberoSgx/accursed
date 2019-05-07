@@ -2,7 +2,7 @@ import { ProgramElement } from '..'
 
 interface ExtraProps {
   // ref?: RefObject
-  children?: JSX.BlessedJsxNode
+  children?: JSX.FlorJsxNode
 }
 
 /**
@@ -31,7 +31,7 @@ export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
 
   element: ProgramElement | undefined
 
-  abstract render(): JSX.BlessedJsxNode
+  abstract render(): JSX.FlorJsxNode
 
   //  /**
   //  * If true then JSX children props will be save on property [[_jsxChildrenProps]]. Component subclasses

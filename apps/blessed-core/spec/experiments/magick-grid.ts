@@ -60,7 +60,7 @@
 //       let style = this.items[i].style;
 
 //       style.position = "absolute";
-  
+
 //       if (this.animate) {
 //         style.transition = `${this.useTransform ? "transform" : "top, left"} 0.2s ease`;
 //       }

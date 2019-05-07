@@ -32,9 +32,11 @@ export function inBrowser() {
   // @ts-ignore
   return typeof window !== 'undefined' && typeof document !== 'undefined'
 }
-export function nonEnumerableMember(o: any, name: string){
+export function nonEnumerableMember(o: any, name: string) {
   Object.defineProperty(o, name, {
     enumerable: false,
     writable: true
   })
 }
+
+export type RemoveProperties<O, K extends keyof O> = Pick<O, Exclude<keyof O, K>>

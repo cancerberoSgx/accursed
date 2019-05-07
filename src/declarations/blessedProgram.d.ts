@@ -1531,6 +1531,14 @@ CSI Ps ; Pu ' z
   decsle(...args: string[]): boolean
   selectiveEraseRectangle(...args: string[]): boolean
   decsera(...args: string[]): boolean
+
+  /**
+   * it contains all tput operations bind to [[input]] so automatically call [[_write]]  using the return value. Example: 
+   * `this.put.pad()` is the equivalent to `this._write(this.tput.pad())`.
+   */
+put: {[s: string]: (...args: any[])=> any}
+cursorHidden: boolean
+mouseEnabled: boolean
   /**
 ```
   CSI Ps ' |

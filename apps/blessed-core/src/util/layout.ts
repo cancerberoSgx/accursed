@@ -133,8 +133,8 @@ function handleJustifiedLayout(o: LayoutOptions & { el: ProgramElement }) {
   const data = children.map(c => ({
     top: c.props.top,
     left: c.props.left,
-    width: c.props.width||1,
-    height: c.props.height||1
+    width: c.props.width || 1,
+    height: c.props.height || 1
   }))
   // debug(data)
   const def = {

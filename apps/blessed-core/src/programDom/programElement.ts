@@ -1,9 +1,11 @@
 import { Element } from '../dom'
-import { layoutChildren } from '../util'
+import { layoutChildren, debug } from '../util'
 import { createElement } from '../util/util'
 import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
 import { FullProps } from './types'
+import { RegisteredEventListener } from '../render';
+import { EventListener } from '../dom/event';
 
 export class ProgramElement extends Element {
   /**
@@ -87,9 +89,12 @@ export class ProgramElement extends Element {
   }
 
   get absoluteTop() {
+    debug(this.props, this.tagName)
     let y = this.props.top
     let n: ProgramElement | ProgramDocument = this
     while (n.parentNode && n.parentNode !== n.ownerDocument) {
+      // debug((n.parentNode)//, (n.parentNode as ProgramElement).props.padding)
+      
       y = y + (n.parentNode as ProgramElement).props.top + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top || 0) + ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
@@ -122,10 +127,22 @@ export class ProgramElement extends Element {
   assignProps(o: any) {
     Object.assign(this.props, o)
   }
-  
+
+// /** @internal */
+//   _addEventHandler(arg0: { name: string; listener: any; }): any {
+    
+//   }
+//   private   _addEventHandlers: { name: string; listener: any; }[] = []
+
+  // {el: ProgramElement, type: string, listener: EventListener}
+
+  addEventListener(name: string, listener: EventListener ): void {
+    if(ProgramDocument.is(this.ownerDocument)){
+      this.ownerDocument.registerEventListener({el: this,  name, listener})
+    }
+  }
+
 }
-
-
 
 // export function getPropsPlainObject getObject(): {
 //   [a: string]: any;

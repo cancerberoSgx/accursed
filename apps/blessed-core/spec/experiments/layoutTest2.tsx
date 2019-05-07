@@ -37,8 +37,6 @@ try {
 
 }
 
-
-
 // const i = [{ width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }]
 // const i = [{ width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, { width: 14, height: 5 }, { width: 20, height: 10 }, { width: 30, height: 16 }, ]
 

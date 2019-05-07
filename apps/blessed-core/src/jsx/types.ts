@@ -14,39 +14,39 @@ declare global {
     type OptionsProps<T> = PropsWithRef<Partial<T>>
 
     type PropsWithRef<P> = P & {
-      children?: BlessedJsxNode ,
+      children?: FlorJsxNode ,
       ref?: P extends { ref?: infer R } ? R : undefined
     }
 
-    export interface Element<P extends { children?: BlessedJsxNode } = {}> {
+    export interface Element<P extends { children?: FlorJsxNode } = {}> {
       type: ElementType
       props: P
-      children?: BlessedJsxNode
+      children?: FlorJsxNode
     }
 
     // TODO: we are using class Component directly while we should use a interface here
-    export type ElementType<P extends { children?: BlessedJsxNode } = {}> =
+    export type ElementType<P extends { children?: FlorJsxNode } = {}> =
       | undefined
       | string
       | Component<PropsWithRef<P>, {}>
       | FunctionComponent<PropsWithRef<P>>
 
-    export interface FunctionComponent<P extends { children?: BlessedJsxNode } = {}> {
-      (props: P & { children?: BlessedJsxNode }, context?: any): Element<any> | null
+    export interface FunctionComponent<P extends { children?: FlorJsxNode } = {}> {
+      (props: P & { children?: FlorJsxNode }, context?: any): Element<any> | null
     }
 
     // and the following is basically for typings props.children
 
     type BlessedJsxText = string | number
 
-    type BlessedJsxChild<P extends { children?: BlessedJsxNode } = {}>  = Element<P>  | BlessedJsxText
+    type BlessedJsxChild<P extends { children?: FlorJsxNode } = {}>  = Element<P>  | BlessedJsxText
 
-    export interface ReactNodeArray extends Array<BlessedJsxNode> {}
+    export interface ReactNodeArray extends Array<FlorJsxNode> {}
 
     export type BlessedJsxFragment = {} | ReactNodeArray
 
     // Heads up: we are forcing blessed node to be a JSX node !
-    export type BlessedJsxNode<P extends { children?: BlessedJsxNode } = {}>  =
+    export type FlorJsxNode<P extends { children?: FlorJsxNode } = {}>  =
       | BlessedJsxChild<P>
       | BlessedJsxFragment
       | boolean
@@ -84,7 +84,7 @@ export interface FlorJsx {
    * This method should never be called directly by users, although is called internally when users call
    * [[React.createEkenebt]]
    */
-  createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]): JSX.BlessedJsxNode
+  createElement(tag: JSX.ElementType, attrs: BlessedJsxAttrs, ...children: any[]): JSX.FlorJsxNode
 
   /**
    * Creates a blessed.element from given JSX expression. Will create blessed nodes recursively, bottom-up.

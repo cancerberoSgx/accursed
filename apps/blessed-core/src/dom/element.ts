@@ -1,5 +1,6 @@
 import { Document } from './document'
 import { Node } from './node'
+import { EventListener } from './event';
 
 export class Element  extends Node  {
 

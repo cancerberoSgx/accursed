@@ -80,25 +80,25 @@ export abstract class Node extends EventTarget {
     return false // TODO
   }
 
-  remove(){
+  remove() {
     this.parentNode && this.parentNode.removeChild(this)
   }
-  removeChild(n: Node):  Node|undefined{
-    const i = this._children.findIndex(c=>c===n)
-    if(i!==-1){
-      return this._children.splice(i, 1)[0]||undefined
+  removeChild(n: Node): Node | undefined {
+    const i = this._children.findIndex(c => c === n)
+    if (i !== -1) {
+      return this._children.splice(i, 1)[0] || undefined
     }
   }
-  get firstChild(): Node|undefined {
-    return this._children.length ? this._children[0]:undefined
+  get firstChild(): Node | undefined {
+    return this._children.length ? this._children[0] : undefined
   }
   /**
    * Removes all children from this node
    */
   empty() {
     while (this.firstChild) {
-      this.removeChild(this.firstChild);
-  }
+      this.removeChild(this.firstChild)
+    }
   }
   /**
    * Replaces node with nodes, while replacing strings in nodes with equivalent Text nodes. Throws a "HierarchyRequestError" DOMException if the constraints of the node tree are violated.

@@ -1,10 +1,7 @@
-import { array, tryTo } from 'misc-utils-of-mine-generic'
+import { tryTo } from 'misc-utils-of-mine-generic'
 import { Program, ProgramDocument, ProgramDocumentRenderer } from '../src'
 import { BorderStyle } from '../src/util/border'
-import { layoutChildren } from '../src/util/layout'
-import { serial } from '../src/util/misc'
 import { createElement } from '../src/util/util'
-import { color, number } from './data'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
@@ -26,7 +23,7 @@ describe('programDocumentRenderer', () => {
     })
     program.reset()
     doc = new ProgramDocument()
-    renderer = new ProgramDocumentRenderer({ program, debug: true })
+    renderer = new ProgramDocumentRenderer({ program})
   })
 
   afterEach(() => {
@@ -156,5 +153,4 @@ describe('programDocumentRenderer', () => {
     done()
   })
 
- 
 })

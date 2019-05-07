@@ -8,7 +8,7 @@ export function debug(...args: any[]) {
   } else {
     appendFileSync(
       'log2.txt',
-      '\n' + args.map(a => inspect(a, { compact: true, breakLength: 200, maxArrayLength: 5 })).join(' |||||||||| ')
+      '\n' + args.map(a => typeof a === 'string' ? a : inspect(a, { compact: true, breakLength: 200, maxArrayLength: 5 })).join(' |||||||||| ')
     )
   }
 }
