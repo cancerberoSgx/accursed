@@ -1,6 +1,7 @@
 import { array } from 'misc-utils-of-mine-generic'
 import { inspect } from 'util'
 import { Program, ProgramOptions } from '../declarations/program'
+import { Node } from '../dom'
 import { isText } from '../dom/nodeUtil'
 import { TextNode } from '../dom/text'
 import { ProgramElement } from '../programDom/programElement'
@@ -8,9 +9,7 @@ import { AttrsImpl, PAttrs } from '../programDom/styleProps'
 import { Attrs } from '../programDom/types'
 import { BorderSide, BorderStyle, getBoxStyleChar } from '../util/border'
 import { trimRightLines } from '../util/misc'
-import { destroyProgram, createProgramRendererDocument, createProgram } from '../util/util'
-import { Node } from '../dom';
-import { debug } from '../util';
+import { createProgram, destroyProgram } from '../util/util'
 
 const defaultAttrs: Attrs = {
   bg: 'black',
@@ -41,7 +40,7 @@ export class ProgramDocumentRenderer {
   private currentAttrs: PAttrs
 
   constructor(options: RendererOptions) {
-    this._program = options.program||createProgram(options.programOptions)
+    this._program = options.program || createProgram(options.programOptions)
     this.useBuffer = !options.noBuffer || true
     this.ch = options.defaultChar || ' '
     this.defaultStyle = new AttrsImpl(defaultAttrs)
@@ -49,22 +48,22 @@ export class ProgramDocumentRenderer {
       ch:  ' ',
       ...this.defaultStyle
     }
-this.bypassingBuffer(()=>this.fillAll())
+    this.bypassingBuffer(() => this.fillAll())
     this.resetBuffer()
   }
 
   destroy() {
-    this.fillAll();
+    this.fillAll()
     this.resetStyle()
     this.resetBuffer()
     destroyProgram(this.program)
   }
 
-  fillAll(ch=' ') {
-    this.fillRectangle(0, 0, this.program.rows, this.program.cols, ch);
+  fillAll(ch= ' ') {
+    this.fillRectangle(0, 0, this.program.rows, this.program.cols, ch)
   }
 
-  bypassingBuffer(f: ()=>void) {
+  bypassingBuffer(f: () => void) {
     const current = this.useBuffer
     this.useBuffer = false
     f()
@@ -72,15 +71,15 @@ this.bypassingBuffer(()=>this.fillAll())
   }
   resetBuffer() {
     if (this.useBuffer) {
-    this.buffer .length=0
-delete    this.buffer 
-  this.buffer = array(this._program.rows).map(c => array(this._program.cols).map(c => ({ ...this.currentAttrs })))
-}
+      this.buffer .length = 0
+      delete    this.buffer
+      this.buffer = array(this._program.rows).map(c => array(this._program.cols).map(c => ({ ...this.currentAttrs })))
+    }
 
   }
 
   resetStyle() {
-   this.setStyle(this.defaultStyle)
+    this.setStyle(this.defaultStyle)
   }
 
   // private lastRenderedNode: Node|undefined;
@@ -91,13 +90,13 @@ delete    this.buffer
     el.beforeRender()
     this.renderElementWithoutChildren(el)
     el.afterRenderWithoutChildren()
-    this.lastAbsLeft= el.absoluteContentLeft, 
-    this.lastAbsTop= el.absoluteContentTop
+    this.lastAbsLeft = el.absoluteContentLeft,
+    this.lastAbsTop = el.absoluteContentTop
     // this.lastRenderedNode = undefined
     Array.from(el.childNodes).forEach((c, i, a) => {
       if (c instanceof  TextNode) {
         // TODO: word wrap, correct char width for unicode.
-        this.renderText(c, a[i+1])
+        this.renderText(c, a[i + 1])
         // this.lastRenderedNode = c
       } else if (c instanceof ProgramElement) {
         this.renderElement(c)
@@ -107,17 +106,18 @@ delete    this.buffer
     })
     el.afterRender()
     el._renderCounter = this.renderCounter ++
+    return el
   }
 
-  private renderText( c: TextNode, nextNode: Node) {
+  private renderText(c: TextNode, nextNode: Node) {
     // const y = lastAbsTop;
     // const x = lastAbsLeft;
-    const s = c.textContent || '';
-    this.write(this.lastAbsTop,this.lastAbsLeft, s);
+    const s = c.textContent || ''
+    this.write(this.lastAbsTop,this.lastAbsLeft, s)
     // Heads up : if next child is also text, we keep writing on the same line, if not, on a new  line.
-    const nextChildIsText = isText(nextNode);
-    this.lastAbsLeft =this.lastAbsLeft + (nextChildIsText ? s.length : 0);
-    this.lastAbsTop = this.lastAbsTop + (nextChildIsText ? 0 : 1);
+    const nextChildIsText = isText(nextNode)
+    this.lastAbsLeft = this.lastAbsLeft + (nextChildIsText ? s.length : 0)
+    this.lastAbsTop = this.lastAbsTop + (nextChildIsText ? 0 : 1)
     // return { lastAbsTop, lastAbsLeft };
   }
 
@@ -162,12 +162,12 @@ delete    this.buffer
   eraseElement(el: ProgramElement): any {
     this.setStyle(this.defaultStyle)
     const yi = el.absoluteTop , xi = el.absoluteLeft
-    this.fillRectangle(yi, xi, el.props.height, el.props.width);
+    this.fillRectangle(yi, xi, el.props.height, el.props.width)
   }
 
-  fillRectangle(top: number, left: number, height: number, width: number, ch=this.ch) {
+  fillRectangle(top: number, left: number, height: number, width: number, ch= this.ch) {
     for (let i = 0; i < height; i++) {
-      this.write(top + i, left, this._program.repeat(ch, width));
+      this.write(top + i, left, this._program.repeat(ch, width))
     }
   }
 
@@ -180,7 +180,7 @@ delete    this.buffer
     if (this.useBuffer) {
       for (let i = 0; i < s.length; i++) {
         if (this.buffer[y]) {
-          this.buffer[y][x + i] = { ch: s[i], bg: this.currentAttrs.bg||'', fg: this.currentAttrs.fg||'' }
+          this.buffer[y][x + i] = { ch: s[i], bg: this.currentAttrs.bg || '', fg: this.currentAttrs.fg || '' }
         }
       }
     }

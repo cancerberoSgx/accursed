@@ -23,7 +23,7 @@ describe('programDocumentRenderer', () => {
     })
     program.reset()
     doc = new ProgramDocument()
-    renderer = new ProgramDocumentRenderer({ program})
+    renderer = new ProgramDocumentRenderer({ program })
   })
 
   afterEach(() => {

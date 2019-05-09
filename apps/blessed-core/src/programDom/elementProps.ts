@@ -1,3 +1,4 @@
+import { MouseEvent } from '../render'
 import { LayoutOptions } from '../util'
 import { BorderStyle } from '../util/border'
 import { StylePropsImpl } from './styleProps'
@@ -19,7 +20,7 @@ export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementP
   //   }
   // }
 
-  private _border: BorderProps |undefined
+  private _border: BorderProps | undefined
   public get border(): BorderProps | boolean | BorderStyle | undefined {
     return this._border
   }
@@ -79,6 +80,7 @@ export class ElementPropsImpl extends StylePropsImpl implements Partial<ElementP
   // Dont remove this implementation - will break isELementProps
   afterRender = () => { }
   beforeRender = () => { return false }
+  onClick?(r: MouseEvent): void
 }
 
 class BorderPropsImpl extends StylePropsImpl implements BorderProps {

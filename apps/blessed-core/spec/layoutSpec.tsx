@@ -1,10 +1,10 @@
-import { array, serial, sleep } from 'misc-utils-of-mine-generic'
+import { array, serial } from 'misc-utils-of-mine-generic'
 import { BorderStyle, layoutChildren } from '../src'
 import { createElement, createProgramRendererDocumentAndElement } from '../src/util/util'
 import { color, number } from './data'
 
 describe('layout', () => {
-  xit('all layouts should make all text visible if there is enough space - invoking layoutChildren manually', async done => {
+  it('all layouts should make all text visible if there is enough space - invoking layoutChildren manually', async done => {
     const { renderer, el, document } = createProgramRendererDocumentAndElement()
     await serial([
       'top-down', 'left-right', 'diagonal', 'alt-diagonal', 'binary-tree',
@@ -28,7 +28,7 @@ describe('layout', () => {
     done()
   })
 
-  xit('justify-layout should make all text visible if there is enough space', async done => {
+  it('justify-layout should make all text visible if there is enough space', async done => {
     const { renderer, el } = createProgramRendererDocumentAndElement()
     el.assignProps({ layout: { layout: 'justified-layout', justifiedLayout: { targetRowHeight: 10, targetRowHeightTolerance: 0 } } })
     function draw() {

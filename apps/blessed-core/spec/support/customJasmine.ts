@@ -27,7 +27,7 @@ j.configureDefaultReporter({
           .join(', ')
     )
     process.stdout.write(format.apply(this, arguments as any))
-  }, 
+  }
 })
 
 j.onComplete(function(passed: boolean) {

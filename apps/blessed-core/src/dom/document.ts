@@ -1,9 +1,6 @@
 import { Element } from './element'
 import { Node } from './node'
 import { TextNode } from './text'
-import { EventListener } from './event';
-import { ProgramElement } from '../programDom';
-import { RegisteredEventListener } from '../render';
 
 export class Document  extends Node {
   constructor() {

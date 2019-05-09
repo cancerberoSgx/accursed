@@ -4,7 +4,7 @@ export function nodeHtml(node: Node, outer = true): string {
   if (!isElement(node)) {
     return node.textContent + ''
   }
-  const attrs = [...Array.from(node.attributes), ...    Object.keys((node as any).props || {})
+  const attrs = [...Array.from(node.attributes), ...   Object.keys((node as any).props || {})
     .filter(p => !p.startsWith('_'))
   .map(k => ({ name: k, value: (node as any).props[k] }))]
   // const attrs = Array.from(node.attributes)

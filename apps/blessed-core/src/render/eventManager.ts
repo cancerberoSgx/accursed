@@ -1,8 +1,7 @@
-import { ProgramKeyEvent ,ProgramMouseEvent, Program , MouseAction} from '../declarations/program';
-import { Event, EventListener, EventTarget } from '../dom/event';
-import { ProgramElement } from '../programDom';
-import { RemoveProperties } from '../util/misc';
-import { debug } from '../util';
+import { MouseAction, Program, ProgramKeyEvent, ProgramMouseEvent } from '../declarations/program'
+import { Event, EventListener, EventTarget } from '../dom/event'
+import { ProgramElement } from '../programDom'
+import { RemoveProperties } from '../util/misc'
 
 /**
  * auxiliary class that bind events with ProgramElements rendered by renderer
@@ -36,30 +35,25 @@ export class EventManager {
     })
   }
 
-  private beforeAllMouseListeners: MouseListener[] =[]
+  private beforeAllMouseListeners: MouseListener[] = []
 
-  addBeforeAllMouseListener(l: MouseListener){
-    if (!this.beforeAllMouseListeners.find(ll => l!==ll)) {
+  addBeforeAllMouseListener(l: MouseListener) {
+    if (!this.beforeAllMouseListeners.find(ll => l !== ll)) {
       this.beforeAllMouseListeners.push(l)
     }
   }
 
   onMouse(e: ProgramMouseEvent) {
-
-debug('onMouse,', e)
-    this.beforeAllMouseListeners.forEach(l=>{
+    this.beforeAllMouseListeners.forEach(l => {
       // const ev: MouseEvent = {  ...e, currentTarget: l.el, target: l.el,type: l.name}
-
-        // l.l(ev)
-      })
-
+    })
     // if (self.lockKeys) return;
-
     // if (self._needsClickableSort) {
     //   self.clickable = helpers.hsort(self.clickable);
     //   self._needsClickableSort = false;
     // }
     this.mouseListeners.forEach(({ el, name, listener }) => {
+
 // let stopPropagation = false
       // var i = 0
       //   , el
@@ -74,24 +68,20 @@ debug('onMouse,', e)
       // }
 
       //   // if (self.grabMouse && self.focused !== el                                       IGNORE FOCUSED
-      //   //     && !el.hasAncestor(self.focused)) continue;                                         
+      //   //     && !el.hasAncestor(self.focused)) continue;
 
       //   pos = el.lpos;
       //   if (!pos) continue;
 
       if (e.x >= el.absoluteLeft && e.x < el.absoluteLeft + el.props.width &&
         e.y >= el.absoluteTop && e.y < el.absoluteTop + el.props.height) {
-          const ev = {  ...e, currentTarget: el, target: el, type: name}
-
-          if(notifyListener(listener, ev)){
-            return 
+        const ev = {  ...e, currentTarget: el, target: el, type: name }
+        if (notifyListener(listener, ev)) {
+            return
           }
-         
-
-        // (ev)
         if (e.action === 'mouseup' && name === 'click') {
-          if(notifyListener(listener, { ...ev, type: 'click' })){
-            return 
+          if (notifyListener(listener, { ...ev, type: 'click' })) {
+            return
           }
         }
         //     el.emit('mouse', data);
@@ -128,15 +118,18 @@ debug('onMouse,', e)
       //   self.hover = null;
       // }
 
-
     })
   }
 
   private mouseListeners: RegisteredEventListener[] = []
   /** @internal */
   _registerEventListener(o: RegisteredEventListener): any {
+    // debug('_registerEventListener', o)
     if (o.name === 'keypress' || o.name.startsWith('key') && !this.keyListeners.find(l => l.el === o.el)) {
       this.keyListeners.push(o)
+    } else {
+      // TODO: verify is mouse event
+      this.mouseListeners.push(o)
     }
   }
   // private   _addEventHandlers: { name: string; listener: any; }[] = []
@@ -146,38 +139,34 @@ debug('onMouse,', e)
 
 export type RegisteredEventListener = { el: ProgramElement, name: string; listener: EventListener; }
 
-export type MouseListener = (ev: MouseEvent)=>boolean
+export type MouseListener = (ev: MouseEvent) => boolean
 
-export interface IKeyEvent extends Event {
-  full: string;
-  sequence: string;
-  name: string;
-  shift: boolean;
-  ctrl: boolean;
-  meta: boolean;
-  type: string;
-  raw: [number, number, number, string];
-  bug: Buffer;
-  ch: string;
+interface AbstractEvent<T extends ProgramElement= ProgramElement> extends Event<T> {
+  name: string
+  shift: boolean
+  ctrl: boolean
+  meta: boolean
+  type: string
+  raw: [number, number, number, string]
 }
 
-export interface MouseEvent extends Event {
-  x: number;
-  y: number;
+export interface IKeyEvent<T extends ProgramElement= ProgramElement> extends AbstractEvent<T> {
+  full: string
+  sequence: string
+  bug: Buffer
+  ch: string
+}
+
+export interface MouseEvent<T extends ProgramElement= ProgramElement> extends AbstractEvent<T> {
+  x: number
+  y: number
   action: MouseAction
-  button: "left" | "right" | "middle" | "unknown";
-  name: "mouse";
-  shift: boolean;
-  ctrl: boolean;
-  meta: boolean;
-  type: string;
-  raw: any[]
-  bug: Buffer;
+  button: 'left' | 'right' | 'middle' | 'unknown'
+  bug: Buffer
 }
 
 function notifyListener<T extends EventTarget= EventTarget, E extends Event<T> = Event<T>>(l: EventListener<T>, ev: RemoveProperties<E, 'stopPropagation'>) {
   let stop = false
-  l({...ev, stopPropagation(){stop=true}} as any)
-  return false
+  l({ ...ev, stopPropagation() {stop = true} } as any)
+  return stop
 }
-

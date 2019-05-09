@@ -1,11 +1,10 @@
 import { Element } from '../dom'
-import { layoutChildren, debug } from '../util'
+import { EventListener } from '../dom/event'
+import { debug, layoutChildren } from '../util'
 import { createElement } from '../util/util'
 import { ElementPropsImpl } from './elementProps'
 import { ProgramDocument } from './programDocument'
 import { FullProps } from './types'
-import { RegisteredEventListener } from '../render';
-import { EventListener } from '../dom/event';
 
 export class ProgramElement extends Element {
   /**
@@ -42,6 +41,7 @@ export class ProgramElement extends Element {
   afterRenderWithoutChildren(): any {
     this.props.afterRenderWithoutChildren()
   }
+
   /**
    * Called by the renderer just before rendering this element. It's children will follow.
    *
@@ -54,12 +54,6 @@ export class ProgramElement extends Element {
   }
 
   private static counter = 1
-
-  // get ownerDocument() {
-  //   return this._ownerDocument
-  // }
-
-  // _ownerDocument: ProgramDocument
 
   props: ElementPropsImpl
 
@@ -94,7 +88,7 @@ export class ProgramElement extends Element {
     let n: ProgramElement | ProgramDocument = this
     while (n.parentNode && n.parentNode !== n.ownerDocument) {
       // debug((n.parentNode)//, (n.parentNode as ProgramElement).props.padding)
-      
+
       y = y + (n.parentNode as ProgramElement).props.top + ((n.parentNode as ProgramElement).props.padding && (n.parentNode as ProgramElement).props.padding!.top || 0) + ((n.parentNode as ProgramElement).props.border ? 1 : 0)
       n = n.parentNode
     }
@@ -128,25 +122,11 @@ export class ProgramElement extends Element {
     Object.assign(this.props, o)
   }
 
-// /** @internal */
-//   _addEventHandler(arg0: { name: string; listener: any; }): any {
-    
-//   }
-//   private   _addEventHandlers: { name: string; listener: any; }[] = []
-
-  // {el: ProgramElement, type: string, listener: EventListener}
-
-  addEventListener(name: string, listener: EventListener ): void {
-    if(ProgramDocument.is(this.ownerDocument)){
-      this.ownerDocument.registerEventListener({el: this,  name, listener})
+  addEventListener(name: string, listener: EventListener): void {
+    debugger
+    if (ProgramDocument.is(this.ownerDocument)) {
+      this.ownerDocument.registerEventListener({ el: this,  name, listener })
     }
   }
 
 }
-
-// export function getPropsPlainObject getObject(): {
-//   [a: string]: any;
-// }
-// extend<P extends AbstractProps = AbstractProps>(p: P): void {
-//   Object.assign(this, p)
-// }
