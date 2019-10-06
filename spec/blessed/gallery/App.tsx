@@ -16,14 +16,14 @@ import { ButtonDemo } from './ButtonDemo'
 import { CollapsibleDemo } from './CollapsibleDemo'
 import { ColumnsAndRowsDemo } from './columnsAndRowsDemo'
 import { LayoutDemo } from './LayoutDemo'
-// import { getScreen } from './main'
-// import { RobotDemo } from './RobotDemo'
 import { commonOptions } from './util'
+import { rowColumnResize } from '../../rowColumnResize'
 
 enum Demo {
   button,
   layout,
   collapsible,
+  resize,
   // robot,
   colorPalette,
   colors5,
@@ -48,7 +48,10 @@ export class App extends Component<P, S> {
       }
       if (demo === Demo.button) {
         return React.render(<ButtonDemo />)
-      } else if (demo === Demo.layout) {
+      }      else if (demo === Demo.resize) {
+        return React.render(rowColumnResize(this.props.screen))
+      } 
+       else if (demo === Demo.layout) {
         return React.render(<LayoutDemo />)
       } else if (demo === Demo.colorPalette) {
         color4(this.blessedElement.screen)

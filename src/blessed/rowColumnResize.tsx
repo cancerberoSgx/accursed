@@ -1,6 +1,6 @@
 import { Element, findAscendant, isElement } from '..'
 import { screenLogger } from '../util'
-let rowColumnResize
+
 interface Options {
   e: Element
   increment?: boolean
@@ -10,6 +10,7 @@ interface Options {
    */
   width: boolean
 }
+
 /**
  * TODO:
  *  * maximum and minimum (so containers dont get invisible). Nice to have: per column/row

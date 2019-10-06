@@ -21,14 +21,18 @@ export function onFocused(screen: Screen, f: OnFocusedListener) {
   }
   onFocusedEmitter.add(f)
 }
+
 type OnFocusedListener = ({ focused, old }: { focused: Element; old?: Element }) => void
+
 /**
  * Removes an onFocused listener. See [[onFocused]]
  */
 export function offFocused(f: OnFocusedListener) {
   onFocusedEmitter.remove(f)
 }
+
 const onFocusedEmitter = new Emitter()
+
 let onFocused_focus: typeof blessed.widget.Screen.prototype._focus | undefined
 
 const focusStyle: Style = {
