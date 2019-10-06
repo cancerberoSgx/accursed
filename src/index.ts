@@ -10,4 +10,6 @@ export * from './jsx-components'
 export * from './jsx/types'
 export * from './util/'
 export { blessed }
+export { contrib }
 import * as blessed from 'blessed'
+import * as contrib from 'blessed-contrib'
