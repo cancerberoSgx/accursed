@@ -11,6 +11,7 @@ So I'm learning, documenting prototyping and researching. The following is a sum
 <!-- toc -->
 
 - [Demos](#demos)
+  * [Running demos](#running-demos)
 - [JSX](#jsx)
   * [Attributes](#attributes)
   * [IntrinsicElements](#intrinsicelements)
@@ -54,6 +55,14 @@ So I'm learning, documenting prototyping and researching. The following is a sum
 
  * Gallery: [![asciicast](https://asciinema.org/a/KcOrsgaP3vwhNPAic776MY9yi.svg)](https://asciinema.org/a/KcOrsgaP3vwhNPAic776MY9yi)
 
+## Running demos
+
+```
+npm run start-emojis-search
+npm run start-gallery
+npm run start-cli-fonts-gallery
+```
+
 # JSX
 
  * JSX/TSX support for all blessed components plus some of mine
@@ -64,7 +73,7 @@ Small but well-tested logic based on previous acquired knowledge in project http
  
 ## Attributes
 
-Tip for JSX new commers, JSX attributes are typed. If a blessed option accept a number or a boolean then the attribute must be also. Example: the following two expressions are equivalent:
+Tip for JSX newcomers, JSX attributes are typed. If a blessed option accept a number or a boolean then the attribute must be also. Example: the following two expressions are equivalent:
 
 ```jsx
 const el = blessed.listbar({

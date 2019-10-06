@@ -123,4 +123,4 @@ const setters: { [path: string]: (e: Element, v: any) => void } = {
   // 'draggable': (e, v)=>{
   // }
 }
-const deepExtend = require('deep-extend')
+// const deepExtend = require('deep-extend')

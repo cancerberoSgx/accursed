@@ -66,7 +66,7 @@ export class Maximize extends Component<MaximizeProps, {}> {
           onPress={e => {
             this.toggleMaximized(this.props.children[0].parent, e.currentTarget, this.props.title || '')
           }}
-          {...this.props.button || {}}
+          {...(this.props.button || {})}
           style={{ ...focusableOpts().style, ...((this.props.button && this.props.button.style) || {}) }}
         />
       </box>

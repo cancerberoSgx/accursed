@@ -20,7 +20,7 @@ describe('jsxCli', () => {
     done()
   })
 
-  it('should render box with content and no children', async done => {
+  xit('should render box with content and no children', async done => {
     await client.enter('npx ts-node -T spec/assets/jsxNoChildren.tsx')
     expect(await helper.waitForStrippedDataToInclude('hehehehehe'))
     await client.enter('q')

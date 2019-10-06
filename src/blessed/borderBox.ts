@@ -2,7 +2,7 @@ import { isObject } from 'misc-utils-of-mine-generic'
 import { widget, Widgets } from '..'
 import { PositionCoords } from '../blessedTypes'
 import { React } from '../jsx'
-import { BorderStyle, getBoxStyleChar, BorderSide } from '../util/boxes';
+import { BorderSide, BorderStyle, getBoxStyleChar } from '../util/boxes'
 // import { BorderSide, BorderStyle, getBoxStyleChar } from './border'
 
 interface BorderBoxOptionsConcrete {
@@ -44,6 +44,7 @@ export class BorderBox extends widget.Box {
     this.renderBorderBox(coords)
     return coords
   }
+
   renderBorderBox(coords: PositionCoords) {
     const attr = this.sattr((this.options.style.border as any) || { type: 'line' })
     const labelCoords = this._label ? this._label._getCoords() : undefined

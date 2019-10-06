@@ -22,22 +22,22 @@
   "license": "MIT",
   "dependencies": {
     "accursed": "file:../..",
-    "figlet": "^1.2.1",
-    "misc-utils-of-mine-generic": "0.0.18",
-    "p-queue": "^5.0.0",
-    "redux": "^4.0.1",
+    "figlet": "^1.2.4",
+    "misc-utils-of-mine-generic": "0.2.35",
+    "p-queue": "^6.1.1",
+    "redux": "^4.0.4",
     "shelljs": "^0.8.3"
   },
   "devDependencies": {
-    "@types/node": "^11.13.8",
+    "@types/node": "^12.7.11",
     "@types/shelljs": "^0.8.5",
-    "cli-driver": "^0.2.1",
-    "prettier": "^1.17.0",
-    "ts-node": "^8.1.0",
-    "ts-refactor": "0.0.2",
-    "tslint": "^5.16.0",
+    "cli-driver": "^0.2.4",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "ts-refactor": "0.0.10",
+    "tslint": "^5.20.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.6.3"
   },
   "keywords": [
     "Command line",

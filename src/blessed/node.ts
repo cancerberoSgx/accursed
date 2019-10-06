@@ -98,7 +98,7 @@ export function findDescendant<T extends Node = Node>(n: Node, p: ElementPredica
 }
 
 export function findChildren<T extends Node = Node>(n: Node, p: ElementPredicate) {
-  return n.children.find<T>(c => p(c))
+  return n.children.find<T>(p as any)
 }
 
 export function filterChildren<T extends Node = Node>(n: Node, p: ElementPredicate) {
@@ -199,9 +199,9 @@ export function findDescendantNamed<T extends Element>(
   name: string,
   o: VisitorOptions = {}
 ): T | undefined {
-  return asElements(el)
+  return asElements<T>(el)
     .map(c => findDescendant(c, d => (d as any).name === name, o))
-    .find(notFalsy)
+    .find(notFalsy) as T
 }
 
 export function filterDescendantByName<T extends Element>(
@@ -209,11 +209,11 @@ export function filterDescendantByName<T extends Element>(
   name: string,
   o: VisitorOptions = {}
 ): T[] {
-  return asElements(el)
+  return asElements<T>(el)
     .map(c => filterDescendants(c, d => (d as any).name === name, o))
-    .find(notFalsy)
+    .find(notFalsy) as T[]
 }
 
-export function asElements(el: Element | Screen) {
-  return isScreen(el) ? el.children.filter(isElement) : [el]
+export function asElements<T extends Element>(el: Element | Screen): T[] {
+  return isScreen(el) ? el.children.filter(isElement) : ([el] as any)
 }

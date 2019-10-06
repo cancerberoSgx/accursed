@@ -1,4 +1,5 @@
 import { box, BoxOptions, Br, Div, React, Screen, showInModal, text } from '../../../../src'
+import { invertColor } from '../../../../src/util/data'
 const palette = require('google-palette') as ((...args: any[]) => string[]) & { listSchemes: any }
 
 export function colors5Demo(screen: Screen) {

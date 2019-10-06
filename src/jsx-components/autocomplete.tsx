@@ -84,7 +84,7 @@ export class AutoComplete extends Component<P> {
     this.props.inputOptions = this.props.inputOptions || {}
     this.props.inputOptions!.value = this.props.inputOptions!.value || this.props.value || ''
     return (
-      <Div {...this.props as any}>
+      <Div {...(this.props as any)}>
         <textbox
           hoverText="arrows to autocomplete"
           width={12}
@@ -97,7 +97,7 @@ export class AutoComplete extends Component<P> {
           keys={true}
           mouse={true}
           keyable={true}
-          {...this.props.inputOptions || {}}
+          {...(this.props.inputOptions || {})}
           onChange={e => {
             this.props.onChange && this.props.onChange(e)
           }}
@@ -156,7 +156,7 @@ export class AutoComplete extends Component<P> {
           height={7}
           style={{ fg: 'white', bg: 'darkgray', item: { fg: 'white', bg: 'darkgray' }, selected: { bg: 'blue' } }}
           items={this.options}
-          {...this.props.listOptions || {}}
+          {...(this.props.listOptions || {})}
           ref={this.listRef}
         />
       </Div>

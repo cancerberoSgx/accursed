@@ -23,7 +23,7 @@
 
 // /**
 //  * An opinionated and flexible version of textbox, more similar to input HTML API. Not virtual elements or wrappers, just decorated with a Component. Provides:
-//  * * allow to use the arrow keys to move the cursor. 
+//  * * allow to use the arrow keys to move the cursor.
 //  *    * nice to have ctrl-arrow
 //  *  * by default, while inside, pressing tab will  escape, and blur to next element. pressing ESC eil blur but not focus.(so pressing enter aquires input again. )
 //  *  * onSubmit

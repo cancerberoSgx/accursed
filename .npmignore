@@ -5,7 +5,8 @@ tmp
 spec
 *.tgz
 apps
-log.txt
+log*.txt
+test_output.txt
 tsconfig.json
 .travis.yml
 /docs

@@ -89,7 +89,7 @@ export class TabPanel extends Component<TabPanelProps> {
       const active = tabData.attrs && !!tabData.attrs.active
       // debug(labelData.children.join(' '), active)
       const body = (
-        <Div {...bodyData.attrs || {}} hidden={!active} name={'tab_body_' + counter}>
+        <Div {...(bodyData.attrs || {})} hidden={!active} name={'tab_body_' + counter}>
           {...bodyData.children}
         </Div>
       )
@@ -98,8 +98,8 @@ export class TabPanel extends Component<TabPanelProps> {
           {...focusableOpts()}
           border="line"
           content={labelData.children.join(' ')}
-          {...(active ? this.props.activeTab : this.props.inactiveTab) || {}}
-          {...labelData.attrs || {}}
+          {...((active ? this.props.activeTab : this.props.inactiveTab) || {})}
+          {...(labelData.attrs || {})}
           style={{
             ...((labelData.attrs && labelData.attrs.style) || {}),
             ...((active

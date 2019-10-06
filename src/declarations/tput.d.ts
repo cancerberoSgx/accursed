@@ -1,4 +1,4 @@
-import {Widgets} from './blessed'
+import { Widgets } from './blessed'
 
 interface TputHeader {
   dataSize: number
@@ -53,13 +53,12 @@ interface TputsOptions extends Widgets.IOptions {
   terminfoFile?: string
   terminfoPrefix?: string
   termcapFile?: string
-} 
+}
 
 /**
  * Low level implementation of tput protocol to dialogue with terminal implementations.
  */
-export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFeatures {
-
+export declare class Tput implements Widgets.IHasOptions<TputsOptions>, TputFeatures {
   constructor(opts: TputsOptions)
 
   /**
@@ -123,7 +122,7 @@ export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFe
   gn: boolean
   hc: boolean
   km: boolean
-  hs: boolean
+  hs: boolean;
   in: boolean
   // da: boolean
   db: boolean
@@ -158,14 +157,10 @@ export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFe
   magicCookie: boolean
   setbuf: boolean
 
-
   terminal: string
 
-
-
-  acsc: { [c: string]: string; };
-  acscr: { [c: string]: string; };
-
+  acsc: { [c: string]: string }
+  acscr: { [c: string]: string }
 
   columns: number
   init_tabs: number
@@ -250,8 +245,6 @@ export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFe
   strings: { [cap: string]: any }
   features: TputFeatures
 
-
-
   // debug: boolean
   padding: boolean
   printf: boolean
@@ -263,11 +256,7 @@ export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFe
   setup(): void
   term(is: any): boolean
   readTerminfo(term: string): string
-  parseTerminfo(
-    data: any,
-    file: string
-  ): TputInfo
-
+  parseTerminfo(data: any, file: string): TputInfo
 
   back_tab(...args: any[]): any
   bell(...args: any[]): any
@@ -1074,10 +1063,4 @@ export declare class Tput implements  Widgets.IHasOptions<TputsOptions> , TputFe
   evhlm(...args: any[]): any
   sgr1(...args: any[]): any
   slength(...args: any[]): any
-
-
-
-
 }
-
-

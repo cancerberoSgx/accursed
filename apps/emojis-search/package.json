@@ -7,32 +7,30 @@
   "bin": ".bin/emojis-search.js",
   "scripts": {
     "watch": "tsc --watch",
-    "build": "tsc",
+    "build": "tsc && rm -rf dist/data && cp -r data dist/data",
     "prepare": "npm run build",
     "prettier": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" --dontAsk && npx prettier  --write --arrow-parens avoid --parser typescript --use-tabs false --no-semi true --single-quote true --tab-width 2 --trailing-comma none --end-of-line lf --prose-wrap preserve --print-width 120  --jsx-bracket-same-line true \"src/**/*.ts*\" \"spec/**/*.ts*\"",
     "clean": "rm -rf dist",
-    "browserify": "rm -rf dist build && npm run build && mkdir -p dist/src/data/generated build && cp -r src/data/generated/* dist/src/data/generated   && npx browserify   -x blessed  -x term.js -x blessed-contrib -x editor-widget  -x text-buffer dist/src/main.js -o build/emoji-search-nodeps.js --ignore-missing -t brfs --no-debug && cp src/browser/* build && npx terser build/emoji-search-nodeps.js -o build/emoji-search-nodeps.js && mkdir -p ../../docs/browser && cp build/* ../../docs/browser" ,
+    "browserify": "rm -rf dist build && npm run build && mkdir -p dist/src/data/generated build && cp -r src/data/generated/* dist/src/data/generated   && npx browserify   -x blessed  -x term.js -x blessed-contrib -x editor-widget  -x text-buffer dist/src/main.js -o build/emoji-search-nodeps.js --ignore-missing -t brfs --no-debug && cp src/browser/* build && npx terser build/emoji-search-nodeps.js -o build/emoji-search-nodeps.js && mkdir -p ../../docs/browser && cp build/* ../../docs/browser",
     "all": "npm run clean && npm run prettier && npm run build"
   },
-
-
   "author": "Sebastian Gurin",
   "license": "MIT",
   "dependencies": {
     "accursed": "file:../..",
-    "misc-utils-of-mine-generic": "0.0.15",
-    "yargs-parser": "^10.1.0"
+    "misc-utils-of-mine-generic": "0.2.35",
+    "yargs-parser": "^14.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.5.2",
+    "@types/node": "^12.7.11",
     "brfs": "^2.0.2",
-    "browserify": "^16.2.3",
+    "browserify": "^16.5.0",
     "json-ts": "^1.6.4",
-    "prettier": "^1.16.4",
-    "terser": "^3.17.0",
-    "ts-node": "^7.0.1",
-    "ts-refactor": "0.0.2",
-    "typescript": "^3.4.1",
+    "prettier": "^1.18.2",
+    "terser": "^4.3.8",
+    "ts-node": "^8.4.1",
+    "ts-refactor": "0.0.10",
+    "typescript": "^3.6.3",
     "xml-js": "^1.6.11"
   },
   "keywords": [

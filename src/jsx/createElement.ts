@@ -41,7 +41,7 @@ function isComponentConstructor(tag: any): tag is ComponentConstructor {
  */
 class BlessedJsxImpl implements BlessedJsx {
   private _intrinsicElementFactory = { ...(blessed as any) }
-  protected intrinsicElementFactory<O extends ElementOptions, T extends Element<O>>(
+  protected intrinsicElementFactory<O extends blessed.Widgets.ElementOptions, T extends Element<O>>(
     type: string
   ): blessedElementConstructor<O, T> | undefined {
     return this._intrinsicElementFactory[type]

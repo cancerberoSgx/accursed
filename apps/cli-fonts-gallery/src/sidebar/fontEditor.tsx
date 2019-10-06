@@ -15,9 +15,8 @@ import {
   Textarea
 } from 'accursed'
 import { writeFileSync } from 'fs'
-import { throttle } from 'misc-utils-of-mine-generic'
+import { throttle, inBrowser } from 'misc-utils-of-mine-generic'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
-import { inBrowser } from '../../../../dist/src/util/browser'
 import { Component } from '../component'
 import { FIGLET_FONTS } from '../figletFonts'
 import { ACTIONS } from '../store/fontsAction'

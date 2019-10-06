@@ -79,9 +79,11 @@ export namespace easing {
 
   let c = 1,
     b = 0
-  export const easeInQuad: () => Timing = () => ({ fn: (d: number) => (x: number, t: number) => c * (t /= d) * t + b } as any)
+  export const easeInQuad: () => Timing = () =>
+    ({ fn: (d: number) => (x: number, t: number) => c * (t /= d) * t + b } as any)
 
-  export const easeOutQuad: () => Timing = () => ({ fn: (d: number) => (x: number, t: number) => -c * (t /= d) * (t - 2) + b } as any)
+  export const easeOutQuad: () => Timing = () =>
+    ({ fn: (d: number) => (x: number, t: number) => -c * (t /= d) * (t - 2) + b } as any)
   export const easeInOutQuad: () => Timing = () =>
     ({
       fn: (d: number) => (x: number, t: number) => {
@@ -101,7 +103,9 @@ export namespace easing {
         if (a < Math.abs(c)) {
           a = c
           let s = p / 4
-        } else{  s = (p / (2 * Math.PI)) * Math.asin(c / a)}
+        } else {
+          s = (p / (2 * Math.PI)) * Math.asin(c / a)
+        }
         return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b
       }
     } as any)
@@ -205,7 +209,9 @@ export namespace easing {
         if (a < Math.abs(c)) {
           a = c
           let s = p / 4
-        } else { s = (p / (2 * Math.PI)) * Math.asin(c / a)}
+        } else {
+          s = (p / (2 * Math.PI)) * Math.asin(c / a)
+        }
         if (t < 1) return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b
         return a * Math.pow(2, -10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) * 0.5 + c + b
       }
@@ -223,7 +229,9 @@ export namespace easing {
         if (a < Math.abs(c)) {
           a = c
           let s = p / 4
-        } else {s = (p / (2 * Math.PI)) * Math.asin(c / a)}
+        } else {
+          s = (p / (2 * Math.PI)) * Math.asin(c / a)
+        }
         return a * Math.pow(2, -10 * t) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) + c + b
       }
     } as any)

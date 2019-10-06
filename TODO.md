@@ -73,3 +73,7 @@ It can be easily changed, but I'n not sure since that will change the structure.
 **TO DECIDE WHILE IM PLAYING WITH IT** *right now it behaves well with layouts.. perhaps content='' is better. or text?
 
  * styles could be adapted from blessed like its options and modeled with classhierarchies, but also try to create a new feature and see how it plays there. For example a new option in ComponentWithOptions called cursor (since all elements should support it and don't)
+
+
+https://github.com/dominictarr/quickansi  
+https://github.com/dominictarr/adiff

@@ -18,9 +18,9 @@
     "jsx": "react",
   },
   "include": [
-    "src", "spec"
+    "src", "spec",
   ],
   "exclude": [
-    "node_modules", "dist"
+    "node_modules", "dist", "./spec/blessed/experiments/"
   ]
 }

@@ -1,11 +1,13 @@
 import { question } from 'blessed'
-import { Point, Range } from 'text-buffer'
-import { debug, EditorBindingsOptions, EditorGutterStyle, EditorOptions, EditorPerf, EditorStyle, IEditor } from '..'
+// import { Point, Range } from 'text-buffer'
+// type Range = any
+// type Point = any
+import { EditorBindingsOptions, EditorGutterStyle, EditorOptions, EditorPerf, EditorStyle, IEditor } from '.'
 import { box } from '../'
 import { Element, Node, Screen } from '../blessedTypes'
 import { EventOptions, React, ref } from '../jsx'
 import { resolveRef } from '../jsx/createElement'
-import { isEditorWidget } from '../util'
+import { debug, isEditorWidget } from '../util'
 import { focusableOpts } from '../util/sharedOptions'
 
 /**
@@ -56,6 +58,7 @@ interface CreateEditorOptions extends EditorOptions {
  * @returns the editor's parent BoxElement
  */
 export function createEditor(options: CreateEditorOptions) {
+  const { Range, Point } = require('text-buffer')
   const parent = box({})
   let editor: IEditor
   try {

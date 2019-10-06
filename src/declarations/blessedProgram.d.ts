@@ -3,8 +3,7 @@
 import { EventEmitter } from 'events'
 import { Readable, Writable } from 'stream'
 import { Widgets } from './blessed'
-import { Tput } from './tput';
-import {RemoveProperties} from '../util/misc'
+import { Tput } from './tput'
 
 /**
  * A general representation of the data object received callbacks  of program's write operation  on the
@@ -16,7 +15,6 @@ import {RemoveProperties} from '../util/misc'
  *  the object itself'
  */
 interface ProgramResponseData {
-
   /**
    * The event type that was requested / write that caused this response. Example: 'window-manipulation',
    * 'device-attributes', 'device-status', etc.
@@ -103,11 +101,10 @@ interface GpmClient extends EventEmitter {
 }
 
 export interface IBlessedProgramOptions {
-
   input?: Readable
 
   output?: Writable
-  
+
   /**
    * path to a file where to write when screen.log() or program.log are called
    */
@@ -243,22 +240,21 @@ program.getWindowSize(function(err:any, data:any) {
 });
 ```
 */
-export declare class BlessedProgram extends Tput  implements  EventEmitter {
-  
-  addListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  once(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeListener(event: string | symbol, listener: (...args: any[]) => void): this 
-  off(event: string | symbol, listener: (...args: any[]) => void): this 
-  removeAllListeners(event?: string | symbol): this 
-  setMaxListeners(n: number): this 
-  getMaxListeners(): number 
-  listeners(event: string | symbol): Function[] 
-  rawListeners(event: string | symbol): Function[] 
-  emit(event: string | symbol, ...args: any[]): boolean 
-  eventNames(): (string | symbol)[] 
-  listenerCount(type: string | symbol): number 
+export declare class BlessedProgram extends Tput implements EventEmitter {
+  addListener(event: string | symbol, listener: (...args: any[]) => void): this
+  once(event: string | symbol, listener: (...args: any[]) => void): this
+  prependListener(event: string | symbol, listener: (...args: any[]) => void): this
+  prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): this
+  removeListener(event: string | symbol, listener: (...args: any[]) => void): this
+  off(event: string | symbol, listener: (...args: any[]) => void): this
+  removeAllListeners(event?: string | symbol): this
+  setMaxListeners(n: number): this
+  getMaxListeners(): number
+  listeners(event: string | symbol): Function[]
+  rawListeners(event: string | symbol): Function[]
+  emit(event: string | symbol, ...args: any[]): boolean
+  eventNames(): (string | symbol)[]
+  listenerCount(type: string | symbol): number
 
   /** @internal */
   static instances: BlessedProgram[]
@@ -349,7 +345,7 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   gn: boolean
   hc: boolean
   km: boolean
-  hs: boolean
+  hs: boolean;
   in: boolean
   db: boolean
   mir: boolean
@@ -426,7 +422,6 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   horizontal_tab_delay: number
   number_of_function_keys: number
 
-
   it: number
   lm: number
   xmc: number
@@ -460,9 +455,6 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   bitwin: number
   bitype: number
 
-
-
-  
   constructor(options?: IBlessedProgramOptions)
   /**
    * Writes arguments to [[log]] file passed in options.
@@ -497,11 +489,11 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   response(name: string, text: string, callback: Function, noBypass?: boolean): boolean
   response(name: string, callback?: Function): boolean
   /**
-   * Writes given string to [[output]] bypassing the buffer. 
+   * Writes given string to [[output]] bypassing the buffer.
    */
   write(text: string): boolean
   /**
-   * Writes given string to [[output]] to the buffer. 
+   * Writes given string to [[output]] to the buffer.
    */
   _write(text: string): boolean
   /**
@@ -518,10 +510,10 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   )
    ```
    */
-  _attr(attrs: string|string[], enable: boolean): string
+  _attr(attrs: string | string[], enable: boolean): string
 
   // /**
-  //  * Writes to [[output]] at current cursor location with given style. 
+  //  * Writes to [[output]] at current cursor location with given style.
   //  * Example: `program.write('Hello world', 'blue fg')`
   //  */
   // write(text: string, style: string): boolean
@@ -554,12 +546,12 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   move(x: number, y: number): boolean
 
   omove(x: number, y: number): void
-  
+
   /**
    * Sets cursor column relative to current cursor position.
    */
   rsetx(x: number): boolean
-  
+
   /**
    * Sets cursor relative row.
    */
@@ -568,7 +560,7 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
    * Sets cursor relative position.
    */
   rmove(x: number, y: number): void
-  
+
   cursorCharAbsolute(x: number): number
 
   /**
@@ -577,7 +569,7 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
   simpleInsert(ch: string, i?: number, attr?: boolean): boolean
 
   /**
-   * returns `ch` repeated `i` times. 
+   * returns `ch` repeated `i` times.
    */
   repeat(ch: string, i?: number): string
   /**
@@ -596,18 +588,18 @@ export declare class BlessedProgram extends Tput  implements  EventEmitter {
    */
   cursorShape(shape: 'block' | 'underline' | 'line', blink?: boolean): boolean
 
-  /** 
+  /**
    * set's cursor color.
    */
   cursorColor(color: string): boolean
 
   /**
-   * Reset all tput current modes. 
+   * Reset all tput current modes.
    */
   cursorReset(): boolean
 
   /**
-   * Resets all cursor current modes. 
+   * Resets all cursor current modes.
    */
   resetCursor(): boolean
 
@@ -660,7 +652,7 @@ program.getCursor(function(err, data) {
    * Saves current cursor state so it can be restored with [[restoreCursor]]
    */
   saveCursor(key: string): boolean
-    /** alias for [[saveCursor]] */
+  /** alias for [[saveCursor]] */
   sc(key: string): boolean
   /**
    * restore previously saved cursor with [[saveCursor]]
@@ -672,8 +664,24 @@ program.getCursor(function(err, data) {
   lsaveCursor(key?: string): void
   lrestoreCursor(key?: string, hide?: boolean): void
   lineHeight(): boolean
-  
-  charset(val?: 'scld'|'uk'|'us'|'dutch'|'finnish'|'french'|'frenchcanadian'|'german'|'italian'|'norwegiandanish'|'spanish'|'swedish'|'swiss', level?: 0|1|2|3): boolean
+
+  charset(
+    val?:
+      | 'scld'
+      | 'uk'
+      | 'us'
+      | 'dutch'
+      | 'finnish'
+      | 'french'
+      | 'frenchcanadian'
+      | 'german'
+      | 'italian'
+      | 'norwegiandanish'
+      | 'spanish'
+      | 'swedish'
+      | 'swiss',
+    level?: 0 | 1 | 2 | 3
+  ): boolean
 
   enter_alt_charset_mode(): boolean
   as(): boolean
@@ -730,7 +738,7 @@ program.getCursor(function(err, data) {
    * Cursor Position [ row;column ] (default = [ 1,1 ]) (CUP).
    */
   cursorPos(row?: number, col?: number): boolean
-    /** Alias for [[cursorPos]] */
+  /** Alias for [[cursorPos]] */
   cup(row?: number, col?: number): boolean
   /** Alias for [[cursorPos]] */
   pos(row?: number, col?: number): boolean
@@ -1030,6 +1038,8 @@ same as CSI Ps B ?
   NOTE: In xterm terminfo:  cnorm stops blinking cursor   cvvis starts blinking cursor
  */
   showCursor(): boolean
+  // /** alias for [[showCursor]] - legacy - @internal */
+  // showCursor_old(): boolean
   alternateBuffer(): boolean
   smcup(): boolean
   alternate(): boolean
@@ -1230,7 +1240,7 @@ CSI s
 ```
    */
   resetTitleModes(...args: string[]): boolean
-  
+
   /**  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
   cursorBackwardTab(param?: number): boolean
   cbt(param?: number): boolean
@@ -1243,7 +1253,7 @@ CSI s
 
   mediaCopy(...args: string[]): boolean
   mc(...args: string[]): boolean
-  
+
   mc0(): boolean
   print_screen(): boolean
   ps(): boolean
@@ -1533,12 +1543,12 @@ CSI Ps ; Pu ' z
   decsera(...args: string[]): boolean
 
   /**
-   * it contains all tput operations bind to [[input]] so automatically call [[_write]]  using the return value. Example: 
+   * it contains all tput operations bind to [[input]] so automatically call [[_write]]  using the return value. Example:
    * `this.put.pad()` is the equivalent to `this._write(this.tput.pad())`.
    */
-put: {[s: string]: (...args: any[])=> any}
-cursorHidden: boolean
-mouseEnabled: boolean
+  put: { [s: string]: (...args: any[]) => any }
+  cursorHidden: boolean
+  mouseEnabled: boolean
   /**
 ```
   CSI Ps ' |
@@ -1640,8 +1650,8 @@ mouseEnabled: boolean
   on(e: 'blur', c: (e: any) => void): this
 
   /**
-   * Triggered on any key press. If you need to listen only for particular keys, use `'key'`. For example: 
-   * 
+   * Triggered on any key press. If you need to listen only for particular keys, use `'key'`. For example:
+   *
    * ```program.on('key tab', (ch, key)=>{})```
    */
   on(e: 'keypress', c: Widgets.KeyEventListener): this

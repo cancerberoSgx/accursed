@@ -1,4 +1,3 @@
-export * from './border'
 export * from './borderBox'
 export * from './clicks'
 export * from './collapsible'

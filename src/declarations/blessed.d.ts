@@ -14,7 +14,7 @@ import { EventEmitter } from 'events'
 import * as stream from 'stream'
 import { RefObject } from '../jsx'
 import { BlessedProgram } from './blessedProgram'
-import { Tput } from './tput';
+import { Tput } from './tput'
 
 /**
  * These are the blessed library elements.
@@ -97,26 +97,27 @@ export namespace Widgets {
       cell?: any
     }
 
+    type CursorShape = 'block' | 'underline' | 'line'
     interface TCursor {
       /**
        * Have blessed draw a custom cursor and hide the terminal cursor (experimental).
        */
-      artificial: boolean
-
+      artificial?: boolean
       /**
        * Shape of the cursor. Can be: block, underline, or line.
        */
-      shape: 'block' | 'underline' | 'line'
-
+      shape?: CursorShape
       /**
        * Whether the cursor blinks.
        */
-      blink: boolean
-
+      blink?: boolean
       /**
        * Color of the color. Accepts any valid color value (null is default).
        */
-      color: string
+      color?: string
+      _set?: boolean
+      _state?: number
+      _hidden?: boolean
     }
 
     type TAlign = 'left' | 'center' | 'right'
@@ -251,12 +252,7 @@ export namespace Widgets {
    'detach' : Received when node is detached from the screen directly or somewhere in its ancestry. 
   ``` 
    */
-  type NodeEventType =
-    | 'adopt'
-    | 'remove'
-    | 'reparent'
-    | 'attach'
-    | 'detach'
+  type NodeEventType = 'adopt' | 'remove' | 'reparent' | 'attach' | 'detach'
 
   /**
    * The base node which everything inherits from.
@@ -403,13 +399,13 @@ export namespace Widgets {
      */
     on(event: 'attach', listener: (this: this, newParent: Node) => void): void
 
-    /** 
+    /**
      * Emitted by a node or an ancestor is being detached from the screen being previously a screen child
      */
     on(event: 'detach', listener: (this: this, newParent: Node) => void): void
 
-    /** 
-     * Triggered by a parent node when removing a child node 
+    /**
+     * Triggered by a parent node when removing a child node
      */
     on(event: 'remove', listener: (this: this, removedChild: Node) => void): void
 
@@ -486,7 +482,7 @@ export namespace Widgets {
   export type KeyEventListener = (ch: string, key: Events.IKeyEventArg) => void
 
   /**
-   * This is an artificial abstract class type, it doesn't really exist on blessed types. Was defined only to better organize the typings source code. 
+   * This is an artificial abstract class type, it doesn't really exist on blessed types. Was defined only to better organize the typings source code.
    */
   class NodeWithEvents extends Node {
     /**
@@ -508,7 +504,7 @@ export namespace Widgets {
      * Remove a keypress listener for a specific key.
      */
     removeKey(name: string, listener: KeyEventListener): void
-    
+
     /**
      * Registers event listener to be notified on mouse events.
      */
@@ -3592,6 +3588,7 @@ export function terminal(options?: Widgets.TerminalOptions): Widgets.TerminalEle
 export function layout(options?: Widgets.LayoutOptions): Widgets.LayoutElement
 export function escape(item: any): any
 
+type ColorName = 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white'
 type ColorRgb = [number, number, number]
 export const colors: {
   /**
@@ -3599,18 +3596,42 @@ export const colors: {
    * interpolatingg to a similar color.
    */
   match(r1: Widgets.Color | ColorRgb, g1?: number, b1?: number): number
+  /**
+   * Convert a string color name into a color number format.
+   */
   convert(color: Widgets.Color): number
+  /**
+   * Similar to blend which is based on this. Takes two attr numbers and returns a mixture of them prioritizing one or the other according to given `alpha` value between 0 and 1.
+   */
   mixColors(c1: number, c2: number, alpha: number): number
+  /**
+   * Convert given r, g, b color to a hex string compatible with blessed.
+   */
   RGBToHex(r: number, g: number, b: number): string
+  /**
+   * Convert gicen hex string into a rgb number array .
+   */
   hexToRGB(hex: string): ColorRgb
+  /**
+   * Takes two attr numbers and returns a mixture of them prioritizing one or the other according to given `alpha` value between 0 and 1.
+   */
   blend(attr: number, attr2?: number, alpha?: number): number
   /**
- Seed all 256 colors. Assume xterm defaults.
- Ported from the xterm color generation script. */
+   * Seed all 256 colors. Assume xterm defaults. Ported from the xterm color generation script.
+   */
   colors(): number[]
-  /**  Map higher colors to the first 8 colors.
- This allows translation of high colors to low colors on 8-color terminals. */
+  /**
+   * Map higher colors to the first 8 colors. This allows translation of high colors to low colors on
+   * 8-color terminals.
+   */
   ccolors(): number[]
+
+  /**
+   * This maps color names  'black','red','green','yellow','blue','magenta','cyan','white' to color numbers or
+   * color numbers offsets to fast Map higher colors to the first 8 colors allowing translation of high colors
+   * to low colors on 8-color terminals.
+   * */
+  ncolors: { [name in ColorName]: number | [number, number] }
 
   colorNames: {
     black: 0

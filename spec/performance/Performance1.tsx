@@ -3,8 +3,10 @@ import { fromNow } from 'hrtime-now'
 import { array, sleep, tryTo } from 'misc-utils-of-mine-generic'
 import { exec } from 'shelljs'
 import {
+  Button2,
   Column,
   Columns,
+  Component,
   createScreen,
   debug,
   Div,
@@ -12,20 +14,16 @@ import {
   installExitKeys,
   printElement,
   React,
+  ref,
   Row,
   Rows,
   Screen,
   screenLogger,
-  showInModal,
-  Box,
-  Component,
-  Button2,
-  ref
+  showInModal
 } from '../../src'
-import { waitFor } from '../../src/blessed/waitFor'
 import { randomHex, words } from '../../src/util/data'
-import { scrollableOpts, focusableBorderedOpts } from '../../src/util/sharedOptions'
-import { number } from '../blessed/gallery/util';
+import { scrollableOpts } from '../../src/util/sharedOptions'
+import { number } from '../blessed/gallery/util'
 
 interface Options {
   columns: number
@@ -65,99 +63,121 @@ function ColumnsWithRowsWithTextNoDepth(options: Options) {
   )
 }
 
-interface handlersDepthComponentsOptions{
-  depth: number,
+interface handlersDepthComponentsOptions {
+  depth: number
   componentCount?: number
-
 }
-
-
 
 // must render in hidden parent, is only to render the performance of createElement
 function handlersDepthComponents(options: handlersDepthComponentsOptions) {
-
-  function h(...args: []){
-    return number(1,2)
+  function h(...args: []) {
+    return number(1, 2)
   }
   class E extends Component {
-    render(){
-      return <box ref={ref(c=>{})}onKeyPress={h}>D
-        hello
-        <Button2 ref={ref(c=>{})} onClick={e=>showInModal(this.screen, words().join(' '))}>D</Button2>
-        {words(2, 2)}
-      </box>
+    render() {
+      return (
+        <box ref={ref(c => {})} onKeyPress={h}>
+          D hello
+          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+            D
+          </Button2>
+          {words(2, 2)}
+        </box>
+      )
     }
   }
   class D extends Component {
-    render(){
-      return <box onKeyPress={h} ref={ref(c=>{})} >D
-        hello
-        <Button2 ref={ref(c=>{})}  onClick={e=>showInModal(this.screen, words().join(' '))}>D</Button2>
-        {words(2, 2)}
-      </box>
+    render() {
+      return (
+        <box onKeyPress={h} ref={ref(c => {})}>
+          D hello
+          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+            D
+          </Button2>
+          {words(2, 2)}
+        </box>
+      )
     }
   }
   class C extends Component {
-    render(){
-      return <box  ref={ref(c=>{})} onChange={()=>{return number()}}>C
-        hello
-        <Button2  ref={ref(c=>{})}  onClick={e=>showInModal(this.screen, words().join(' '))}>world</Button2>
-        {words(2, 2)}
-      </box>
+    render() {
+      return (
+        <box
+          ref={ref(c => {})}
+          onChange={() => {
+            return number()
+          }}>
+          C hello
+          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+            world
+          </Button2>
+          {words(2, 2)}
+        </box>
+      )
     }
   }
-  function f(options:handlersDepthComponentsOptions, level=0) {
-    return <box  {...{style: {bg: 'ref'}}} ref={ref(c=>{})} >
-    width="100%" height="100%" border="line">
-    {array(options.depth).map(i=><box  width="100%"height="100%" >
-      {array(options.componentCount).map(j=><box  width="100%"height="100%" >
-     <box>
-       first <C/> hel <D/> aksjd <E/> sd
-       {f(options, level+1)}
-     </box>
-      </box>)}
-      </box>)}
-    </box>
-  };
+  function f(options: handlersDepthComponentsOptions, level = 0) {
+    return (
+      <box {...{ style: { bg: 'ref' } }} ref={ref(c => {})}>
+        width="100%" height="100%" border="line">
+        {array(options.depth).map(i => (
+          <box width="100%" height="100%">
+            {array(options.componentCount).map(j => (
+              <box width="100%" height="100%">
+                <box>
+                  first <C /> hel <D /> aksjd <E /> sd
+                  {f(options, level + 1)}
+                </box>
+              </box>
+            ))}
+          </box>
+        ))}
+      </box>
+    )
+  }
   return (
-    <box width="100%"height="100%">
-    {f(options)}
-    {/* {array(options.componentCount).map(i=>{ */}
+    <box width="100%" height="100%">
+      {f(options)}
+      {/* {array(options.componentCount).map(i=>{ */}
 
-    {/* })} */}
+      {/* })} */}
     </box>
   )
 }
-
 
 function nowHash() {
   return Date.now().toString(36)
 }
 
-(async()=>{
-  await metaMetaTest( {testName: 'columnsRowsNoDepth', data: { columns: 16, rows: 36, words: 1 }, testFunction: ColumnsWithRowsWithTextNoDepth})
+;(async () => {
+  await metaMetaTest({
+    testName: 'columnsRowsNoDepth',
+    data: { columns: 16, rows: 36, words: 1 },
+    testFunction: ColumnsWithRowsWithTextNoDepth
+  })
   // await metaMetaTest({testName: 'handlersDepthComponents', data: {
   //   depth:  3,
   //   componentCount: 4
   // } ,omitScreenRender: true, testFunction: handlersDepthComponents})
 })()
 
-
-
-
-
-async function metaMetaTest( options: {testName :string, data: any, omitScreenRender?:boolean, testFunction: (...args: any[])=>void}) {
+async function metaMetaTest(options: {
+  testName: string
+  data: any
+  omitScreenRender?: boolean
+  testFunction: (...args: any[]) => void
+}) {
   let screen: Screen
   try {
     const s = []
     const results = []
     screen = await resetScreen(screen)
 
-    const testAndVersion = getCurrentCommit() + '_' + nowHash() +options.testName
-    const {log} = screenLogger(screen)
-    
+    const testAndVersion = getCurrentCommit() + '_' + nowHash() + options.testName
+    const { log } = screenLogger(screen)
+
     fromNow(
-      () => ColumnsWithRowsWithTextNoDepth({ ...options.data, ...{ parent: screen } }),
+      async () => ColumnsWithRowsWithTextNoDepth({ ...options.data, ...{ parent: screen } }),
       (t, hint, ms) => {
         s.push(`createElement_ScreenParent: ${t}`)
         results.push({
@@ -170,7 +190,7 @@ async function metaMetaTest( options: {testName :string, data: any, omitScreenRe
     )
     await sleep(100)
     fromNow(
-      () => screen.render(),
+      async () => screen.render(),
       (t, hint, ms) => {
         s.push(`screenRender_ScreenParent: ${t}`)
         results.push({
@@ -186,22 +206,21 @@ async function metaMetaTest( options: {testName :string, data: any, omitScreenRe
 
     await sleep(100)
     log(s.join('\n'))
-    if(options.omitScreenRender){
+    if (options.omitScreenRender) {
       screen.render()
 
       const label = 'all settled'
       showInModal(screen, label)
       // debug(printElement(screen))
       await sleep(500)
-  
-      if(!printElement(screen).includes(label )){
-        debug('Aborting because cannot find label '+'all settled')
+
+      if (!printElement(screen).includes(label)) {
+        debug('Aborting because cannot find label ' + 'all settled')
         screen.destroy()
         process.exit(1)
       }
     }
 
-    
     // await waitFor(() => printElement(screen).includes(label )) //, {interval: 444})
 
     // debug('printElement(screen)1')
@@ -228,7 +247,7 @@ async function metaMetaTest( options: {testName :string, data: any, omitScreenRe
 //   results: any[],
 //   testName: string
 // ) {
- 
+
 // }
 
 async function resetScreen(screen: Screen) {

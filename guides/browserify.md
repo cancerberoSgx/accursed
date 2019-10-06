@@ -93,7 +93,7 @@ window.onload = function () {
 
 ## Accursed API
 
-this library provides with a `createScreenForBrowser()`` function that accepts a ScreenOptions object and returns a Screen object compatible with browsers or node.js dependending on the current environment detected: 
+this library provides with a `createScreenForBrowser()`` function that accepts a ScreenOptions object and returns a Screen object compatible with browsers or node.js depending on the current environment detected: 
 
 ```js
 import {createScreenForBrowser} from 'accursed'

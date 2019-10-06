@@ -89,48 +89,49 @@ tree.setData({
   }
 })
 
-var table = contrib.table({
-  keys: true,
-  fg: 'white',
-  draggable: true,
-  mouse: true,
-  selectedFg: 'white',
-  selectedBg: 'blue',
-  interactive: true,
-  label: 'Active Processes',
-  width: '30%',
-  clickable: true,
-  height: '30%',
-  border: { type: 'line', fg: 1 },
-  columnSpacing: 10, //in chars
-  columnWidth: [16, 12, 12] /*in chars*/
-})
+// var table = contrib.table({
+//   keys: true,
+//   fg: 'white',
+//   draggable: true,
+//   mouse: true,
+//   selectedFg: 'white',
+//   selectedBg: 'blue',
+//   interactive: true,
+//   label: 'Active Processes',
+//   width: '30%',
+//   clickable: true,
+//   height: '30%',
+//   border: { type: 'line', fg: 1 },
+//   columnSpacing: 10, //in chars
+//   columnWidth: [16, 12, 12] /*in chars*/
+// })
 
-//allow control the table with the keyboard
-table.focus()
+// //allow control the table with the keyboard
+// table.focus()
 
-table.setData({
-  headers: ['col1', 'col2', 'col3'],
-  data: [
-    [1, 2, 3],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6],
-    [4, 5, 6]
-  ]
-})
+// table.setData({
+//   headers: ['col1', 'col2', 'col3'],
+//   data: [
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6],
+//     [4, 5, 6]
+//   ]
+// })
 
-screen.append(table)
-table.focus()
+// screen.append(table)
+// table.focus()
+
+tree.focus()
+tree.render()
 screen.render()
-// tree.focus()
-// tree.render()
 // screen.render()
 
 // var markdown = contrib.markdown()

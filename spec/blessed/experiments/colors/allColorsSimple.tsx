@@ -1,4 +1,4 @@
-import * as blessed from 'blessed'
+// import * as blessed from 'blessed'
 import { box, Box, createScreen, installExitKeys } from '../../../../src'
 import { invertColor } from '../../../../src/util/data'
 

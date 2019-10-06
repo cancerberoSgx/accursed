@@ -1,5 +1,5 @@
-import { box, BoxOptions, Screen } from '../../../../src';
-import { invertColor } from '../../../../src/util/data';
+import { box, BoxOptions, Screen } from '../../../../src'
+import { invertColor } from '../../../../src/util/data'
 
 // showInModal(screen, React.render(
 //   <Div parent={screen} >
@@ -117,8 +117,8 @@ export function color4(screen: Screen) {
         box({ parent: screen, ...options })
       }
     }
-
-
+  }
+}
 
 function getPalettes() {
   return {

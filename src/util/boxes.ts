@@ -45,8 +45,13 @@ export function getBoxStyle(s: BorderStyle) {
 export function getBoxStyleChar(s: BorderStyle, si: BorderSide) {
   return getBoxStyles()[s][si]
 }
-type BoxStyles = { [s in BorderStyle]: { [side in BorderSide]: string } }
+
+type BoxStyles = {
+  [s in BorderStyle]: { [side in BorderSide]: string }
+}
+
 let boxStyles: BoxStyles | undefined
+
 const getBoxStyles: () => BoxStyles = () => {
   if (!boxStyles) {
     boxStyles = {
