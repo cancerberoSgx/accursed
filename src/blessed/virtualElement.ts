@@ -8,7 +8,7 @@ import { appendElementData } from './util'
  * simulates to be a lessed node until the next iteration of createElement so the parent can recognize it abd extract its info, and discard it.
  */
 export // abstract
-class VirtualComponent<P = {}, S = {}> extends Component<P, S> implements VirtualElement {
+  class VirtualComponent<P = {}, S = {}> extends Component<P, S> implements VirtualElement {
   // protected abstract getVirtualData(): P;
 
   render() {
@@ -42,7 +42,7 @@ class VirtualComponent<P = {}, S = {}> extends Component<P, S> implements Virtua
   }
 }
 /** suggested format for virtual data ojbect provided by EACH child in the parent's setElementData array */
-interface VirtualDataBase {}
+interface VirtualDataBase { }
 export type ParentVirtualData<T extends Partial<VirtualDataBase>> = T[]
 // export functoin loadVirtualEement()
 //  *TODO: probably we want to assign Node prototype to this one so calls does not fail - example: user add a clikhandler and createELnet try to add listener e.on(click... will fail)  ..
@@ -197,7 +197,7 @@ function process(p: JSXChildrenProps | undefined): (VirtualChildrenData | string
     if (!p.props || !p.__virtualTagName) {
       return [p] as any
     }
-    ;(p.props.children || []).forEach(c => {
+    ; (p.props.children || []).forEach(c => {
       if (Array.isArray(c)) {
         c.filter(notUndefined).forEach(cc => children.push(...process(cc)))
       } else if (typeof c !== 'object') {

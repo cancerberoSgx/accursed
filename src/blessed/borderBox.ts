@@ -10,7 +10,7 @@ interface BorderBoxOptionsConcrete {
   removeLabel?: boolean
   // style?: Style&{border?: Border}
 }
-export interface BorderBoxOptions extends Widgets.BoxOptions, BorderBoxOptionsConcrete {}
+export interface BorderBoxOptions extends Widgets.BoxOptions, BorderBoxOptionsConcrete { }
 
 /**
  * Its a [[box]] that support extra border styles. It will respect element's label by default but this can
@@ -99,7 +99,7 @@ React.addIntrinsicElementConstructors({
   }
 })
 
-export interface BorderLayoutOptions extends Widgets.LayoutOptions, BorderBoxOptionsConcrete {}
+export interface BorderLayoutOptions extends Widgets.LayoutOptions, BorderBoxOptionsConcrete { }
 
 export class BorderLayout extends widget.Layout {
   type = 'borderlayout'

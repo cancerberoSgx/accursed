@@ -9,7 +9,7 @@ interface ColumnsProps extends BoxOptions {
 interface ColumnProps extends BoxOptions {
   children: JSX.BlessedJsxNode
 }
-export class Column extends VirtualComponent<ColumnProps> {}
+export class Column extends VirtualComponent<ColumnProps> { }
 
 /**
 

@@ -35,11 +35,11 @@ describe('virtualElementsRendering', () => {
     interface TdProps {
       children: JSX.BlessedJsxText | JSX.BlessedJsxText[] | undefined
     }
-    class Thead extends VirtualComponent<TheadProps> {}
-    class Tr extends VirtualComponent<TrProps> {}
-    class TBody extends VirtualComponent<TBodyProps> {}
-    class Th extends VirtualComponent<ThProps> {}
-    class Td extends VirtualComponent<TdProps> {}
+    class Thead extends VirtualComponent<TheadProps> { }
+    class Tr extends VirtualComponent<TrProps> { }
+    class TBody extends VirtualComponent<TBodyProps> { }
+    class Th extends VirtualComponent<ThProps> { }
+    class Td extends VirtualComponent<TdProps> { }
 
     try {
       class ListTable extends Component<ListTableProps> {
@@ -101,7 +101,7 @@ describe('virtualElementsRendering', () => {
     }
   })
 
-  xit('should not render virtual elements or text inside them', () => {})
+  xit('should not render virtual elements or text inside them', () => { })
 
-  xit('what about on virtual elemetnrs inside girtual elemnts ?', () => {})
+  xit('what about on virtual elemetnrs inside girtual elemnts ?', () => { })
 })

@@ -28,8 +28,8 @@ export function showInModal(
       border: 'line',
       label: title
     })
-    //TODO: remove those childs ?
-    ;[modalInstance, ...modalInstance.children].forEach(c => c.on('click', data => modalInstance!.hide()))
+      //TODO: remove those childs ?
+      ;[modalInstance, ...modalInstance.children].forEach(c => c.on('click', data => modalInstance!.hide()))
   }
   if (typeof s === 'string') {
     modalInstance.setContent(s)

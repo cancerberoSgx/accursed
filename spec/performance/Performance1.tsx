@@ -2,25 +2,7 @@ import { writeFileSync } from 'fs'
 import { fromNow } from 'hrtime-now'
 import { array, sleep, tryTo } from 'misc-utils-of-mine-generic'
 import { exec } from 'shelljs'
-import {
-  Button2,
-  Column,
-  Columns,
-  Component,
-  createScreen,
-  debug,
-  Div,
-  Element,
-  installExitKeys,
-  printElement,
-  React,
-  ref,
-  Row,
-  Rows,
-  Screen,
-  screenLogger,
-  showInModal
-} from '../../src'
+import { Button2, Column, Columns, Component, createScreen, debug, Div, Element, installExitKeys, printElement, React, ref, Row, Rows, Screen, screenLogger, showInModal } from '../../src'
 import { randomHex, words } from '../../src/util/data'
 import { scrollableOpts } from '../../src/util/sharedOptions'
 import { number } from '../blessed/gallery/util'
@@ -76,9 +58,9 @@ function handlersDepthComponents(options: handlersDepthComponentsOptions) {
   class E extends Component {
     render() {
       return (
-        <box ref={ref(c => {})} onKeyPress={h}>
+        <box ref={ref(c => { })} onKeyPress={h}>
           D hello
-          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+          <Button2 ref={ref(c => { })} onClick={e => showInModal(this.screen, words().join(' '))}>
             D
           </Button2>
           {words(2, 2)}
@@ -89,9 +71,9 @@ function handlersDepthComponents(options: handlersDepthComponentsOptions) {
   class D extends Component {
     render() {
       return (
-        <box onKeyPress={h} ref={ref(c => {})}>
+        <box onKeyPress={h} ref={ref(c => { })}>
           D hello
-          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+          <Button2 ref={ref(c => { })} onClick={e => showInModal(this.screen, words().join(' '))}>
             D
           </Button2>
           {words(2, 2)}
@@ -103,12 +85,12 @@ function handlersDepthComponents(options: handlersDepthComponentsOptions) {
     render() {
       return (
         <box
-          ref={ref(c => {})}
+          ref={ref(c => { })}
           onChange={() => {
             return number()
           }}>
           C hello
-          <Button2 ref={ref(c => {})} onClick={e => showInModal(this.screen, words().join(' '))}>
+          <Button2 ref={ref(c => { })} onClick={e => showInModal(this.screen, words().join(' '))}>
             world
           </Button2>
           {words(2, 2)}
@@ -118,7 +100,7 @@ function handlersDepthComponents(options: handlersDepthComponentsOptions) {
   }
   function f(options: handlersDepthComponentsOptions, level = 0) {
     return (
-      <box {...{ style: { bg: 'ref' } }} ref={ref(c => {})}>
+      <box {...{ style: { bg: 'ref' } }} ref={ref(c => { })}>
         width="100%" height="100%" border="line">
         {array(options.depth).map(i => (
           <box width="100%" height="100%">
@@ -149,7 +131,7 @@ function nowHash() {
   return Date.now().toString(36)
 }
 
-;(async () => {
+; (async () => {
   await metaMetaTest({
     testName: 'columnsRowsNoDepth',
     data: { columns: 16, rows: 36, words: 1 },

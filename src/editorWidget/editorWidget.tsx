@@ -231,9 +231,9 @@ export function installFocusAndExitKeysForEditorWidget(screen: Screen) {
           screen.destroy()
           process.exit(0)
         } else {
-          ;((q as any) as Element).hide()
-          ;((q as any) as Element).detach()
-          ;((q as any) as Element).destroy()
+          ; ((q as any) as Element).hide()
+            ; ((q as any) as Element).detach()
+            ; ((q as any) as Element).destroy()
         }
       })
     }

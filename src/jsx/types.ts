@@ -1,54 +1,5 @@
 import { BorderBox, BorderBoxOptions, BorderLayout, BorderLayoutOptions, TreeOptions, TreeView } from '../blessed'
-import {
-  BigText,
-  BigTextOptions,
-  Box,
-  BoxOptions,
-  Button,
-  ButtonOptions,
-  CheckboxOptions,
-  Element as BlessedElement,
-  Element,
-  ElementOptions,
-  FileManager,
-  FileManagerOptions,
-  Form,
-  FormOptions,
-  IKeyEventArg,
-  IMouseEventArg,
-  INodeGenericEventArg,
-  Layout,
-  LayoutOptions,
-  Line,
-  LineOptions,
-  List,
-  ListBar,
-  ListbarOptions,
-  ListOptions,
-  ListTable,
-  ListTableOptions,
-  Log,
-  LogOptions,
-  NodeGenericEventType,
-  NodeMouseEventType,
-  NodeWithEvents,
-  Prompt,
-  PromptOptions,
-  Question,
-  QuestionOptions,
-  RadioButton,
-  RadioButtonOptions,
-  RadioSet,
-  RadioSetOptions,
-  Terminal,
-  TerminalOptions,
-  Text,
-  Textarea,
-  TextareaOptions,
-  Textbox,
-  TextboxOptions,
-  TextOptions
-} from '../blessedTypes'
+import { BigText, BigTextOptions, Box, BoxOptions, Button, ButtonOptions, CheckboxOptions, Element as BlessedElement, Element, ElementOptions, FileManager, FileManagerOptions, Form, FormOptions, IKeyEventArg, IMouseEventArg, INodeGenericEventArg, Layout, LayoutOptions, Line, LineOptions, List, ListBar, ListbarOptions, ListOptions, ListTable, ListTableOptions, Log, LogOptions, NodeGenericEventType, NodeMouseEventType, NodeWithEvents, Prompt, PromptOptions, Question, QuestionOptions, RadioButton, RadioButtonOptions, RadioSet, RadioSetOptions, Terminal, TerminalOptions, Text, Textarea, TextareaOptions, Textbox, TextboxOptions, TextOptions } from '../blessedTypes'
 import { Component } from './component'
 
 export enum EventOptionNames {
@@ -174,7 +125,7 @@ declare global {
 
     type BlessedJsxChild = Element<any> | BlessedJsxText
 
-    export interface ReactNodeArray extends Array<BlessedJsxNode> {}
+    export interface ReactNodeArray extends Array<BlessedJsxNode> { }
 
     export type BlessedJsxFragment = {} | ReactNodeArray
 
@@ -289,7 +240,7 @@ export interface AfterRenderEvent {
 /** @internal */
 export type AfterRenderListener = (event: AfterRenderEvent) => void
 
-interface RenderOptions {}
+interface RenderOptions { }
 
 /** @internal */
 export type BlessedJsxAttrs = { [a: string]: any } | undefined

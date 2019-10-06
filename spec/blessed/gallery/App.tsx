@@ -6,6 +6,7 @@ import { Br, Div, Strong } from '../../../src/jsx-components/jsxUtil'
 import { Component } from '../../../src/jsx/component'
 import { React } from '../../../src/jsx/createElement'
 import { enumValueFromString } from '../../../src/util/misc'
+import { rowColumnResize } from '../../rowColumnResize'
 import { anim2 } from '../experiments/anim2'
 import { animDemo } from '../experiments/animDemo'
 import { borderBoxDemo } from '../experiments/borderBoxDemo'
@@ -17,7 +18,6 @@ import { CollapsibleDemo } from './CollapsibleDemo'
 import { ColumnsAndRowsDemo } from './columnsAndRowsDemo'
 import { LayoutDemo } from './LayoutDemo'
 import { commonOptions } from './util'
-import { rowColumnResize } from '../../rowColumnResize'
 
 enum Demo {
   button,
@@ -48,10 +48,10 @@ export class App extends Component<P, S> {
       }
       if (demo === Demo.button) {
         return React.render(<ButtonDemo />)
-      }      else if (demo === Demo.resize) {
+      } else if (demo === Demo.resize) {
         return React.render(rowColumnResize(this.props.screen))
-      } 
-       else if (demo === Demo.layout) {
+      }
+      else if (demo === Demo.layout) {
         return React.render(<LayoutDemo />)
       } else if (demo === Demo.colorPalette) {
         color4(this.blessedElement.screen)

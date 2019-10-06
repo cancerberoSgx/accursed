@@ -29,7 +29,7 @@ describe('listbar', () => {
             onClick={e => {
               listBar.addCommand({
                 text: 'newCommad',
-                callback() {}
+                callback() { }
               })
             }}>
             add item
@@ -77,5 +77,5 @@ describe('listbar', () => {
       debug('ERROR', error)
     }
   })
-  xit('keys should work', () => {})
+  xit('keys should work', () => { })
 })

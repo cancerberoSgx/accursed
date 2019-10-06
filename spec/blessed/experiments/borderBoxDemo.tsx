@@ -21,7 +21,7 @@ border style: {style}
           width={26}
           height={14}>
           <text content={`border style: ${style}, ${words(number(5, 10)).join(', ')}`} />
-          <Button2 top="50%" onClick={e => {}}>
+          <Button2 top="50%" onClick={e => { }}>
             {style}
           </Button2>
           {}

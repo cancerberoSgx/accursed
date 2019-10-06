@@ -16,17 +16,17 @@ j.configureDefaultReporter({
     appendFileSync(
       'test_output.txt',
       'print: ' +
-        args
-          .map(a => {
-            if (a instanceof Error) {
-              return `${a}\n${a.stack.split('\n').join('\n')}`
-            } else if (typeof a === 'string') {
-              return a
-            } else {
-              return inspect(a)
-            }
-          })
-          .join(', ')
+      args
+        .map(a => {
+          if (a instanceof Error) {
+            return `${a}\n${a.stack.split('\n').join('\n')}`
+          } else if (typeof a === 'string') {
+            return a
+          } else {
+            return inspect(a)
+          }
+        })
+        .join(', ')
     )
     process.stdout.write(format.apply(this, arguments))
   }

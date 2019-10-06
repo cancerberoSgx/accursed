@@ -1,14 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  createScreen,
-  Div,
-  filterDescendants,
-  getContent,
-  installExitKeys,
-  installFocusHandler,
-  React,
-  Screen
-} from '../src'
+import { createScreen, Div, filterDescendants, getContent, installExitKeys, installFocusHandler, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, ShowIf } from '../src/jsx-components'
 import { string, words } from '../src/util/data'

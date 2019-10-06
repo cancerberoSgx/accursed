@@ -30,7 +30,7 @@ interface Command {
   callback(): void
 }
 
-export class ListBarCommand extends VirtualComponent<ListBarCommandProps> {}
+export class ListBarCommand extends VirtualComponent<ListBarCommandProps> { }
 
 /** 
    * Example:

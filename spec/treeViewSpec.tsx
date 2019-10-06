@@ -1,20 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  box,
-  Br,
-  button,
-  createScreen,
-  debug,
-  Div,
-  getContent,
-  installExitKeys,
-  printElement,
-  React,
-  Screen,
-  text,
-  Text,
-  TreeView
-} from '../src'
+import { box, Br, button, createScreen, debug, Div, getContent, installExitKeys, printElement, React, Screen, text, Text, TreeView } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 describe('treeView', () => {
@@ -90,7 +75,7 @@ describe('treeView', () => {
           onNodeSelect={node => {
             textRef.current!.content = `nodeSelect: ${node && !Array.isArray(node) && node.name}, focusedNode: ${
               treeRef.current!.getFocusedNode().name
-            }-------------`
+              }-------------`
             screen.render()
           }}
         />
@@ -195,7 +180,7 @@ describe('treeView', () => {
             onNodeSelect={node => {
               textRef.current!.content = `nodeSelect: ${node && !Array.isArray(node) && node.name}, focusedNode: ${
                 treeRef.current!.getFocusedNode().name
-              }-------------`
+                }-------------`
               screen.render()
             }}
           />

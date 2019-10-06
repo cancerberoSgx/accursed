@@ -75,18 +75,18 @@ interface GpmEvent {
   name: 'mouse' | ''
   type: 'GPM'
   action:
-    | Widgets.Types.TMouseAction
-    | 'mousedown'
-    | 'mouseup'
-    | 'connect'
-    | 'mousewheel'
-    | 'data'
-    | 'move'
-    | 'dragbtndown'
-    | 'dblclick'
-    | 'btnup'
-    | 'click'
-    | 'error'
+  | Widgets.Types.TMouseAction
+  | 'mousedown'
+  | 'mouseup'
+  | 'connect'
+  | 'mousewheel'
+  | 'data'
+  | 'move'
+  | 'dragbtndown'
+  | 'dblclick'
+  | 'btnup'
+  | 'click'
+  | 'error'
   button: 'left' | 'middle' | 'right'
   raw: [number, number, number, number]
   x: number

@@ -13,7 +13,7 @@ interface AccordionProps extends BoxOptions {
   onCollapseChange?: (e: ArtificialEvent<Element> & { collapsed: boolean; index: number; element: Element }) => void
   children: AccordionBlock | AccordionBlock[]
 }
-export class AccordionBlock extends VirtualComponent<AccordionBlockProps> {}
+export class AccordionBlock extends VirtualComponent<AccordionBlockProps> { }
 
 /**
 Accordion widget based on Collapsible. Examples:

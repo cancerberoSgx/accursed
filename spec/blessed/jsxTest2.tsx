@@ -34,7 +34,7 @@ function Comp1(props: { name: string; age: number }) {
 }
 
 abstract class Component<P = {}> {
-  constructor(public props: P) {}
+  constructor(public props: P) { }
   abstract render(): void
 }
 

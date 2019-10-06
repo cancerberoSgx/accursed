@@ -1,18 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  Br,
-  createScreen,
-  debug,
-  Div,
-  filterDescendants,
-  findDescendantNamed,
-  getContent,
-  installExitKeys,
-  installFocusHandler,
-  printElement,
-  React,
-  Screen
-} from '../src'
+import { Br, createScreen, debug, Div, filterDescendants, findDescendantNamed, getContent, installExitKeys, installFocusHandler, printElement, React, Screen } from '../src'
 import { getJSXChildrenProps } from '../src/blessed/virtualElement'
 import { waitFor } from '../src/blessed/waitFor'
 import { Column, Columns, Tab, TabBody, TabLabel, TabPanel } from '../src/jsx-components'
@@ -180,11 +167,11 @@ describe('tabPanelComponent', () => {
     }
   })
 
-  xit('should show body when label clicked and hide the other bodies', () => {})
+  xit('should show body when label clicked and hide the other bodies', () => { })
 
-  xit('should show body when calling selectTab() ', () => {})
+  xit('should show body when calling selectTab() ', () => { })
 
-  xit('should notify tab activation with props.onChange) ', () => {})
+  xit('should notify tab activation with props.onChange) ', () => { })
 
-  xit('should support keyboard', () => {})
+  xit('should support keyboard', () => { })
 })

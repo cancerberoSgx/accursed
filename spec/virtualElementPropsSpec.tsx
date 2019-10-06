@@ -15,10 +15,10 @@ xdescribe('virtualElements', () => {
     let screen: Screen = createScreen({ smartCSR: true, log: 'log.txt', fullUnicode: true })
     installExitKeys(screen)
     // component declarations (extend VirtualComponent then they wont be rendered (wont create any elememt only provide parent with data.))
-    class TabHeadings extends VirtualComponent<TabHeadingsProps> {}
-    class TabBlocks extends VirtualComponent<TabBlocksProps> {}
-    class TabBlock extends VirtualComponent<TabBlockProps> {}
-    class TabHeading extends VirtualComponent<TabHeadingProps> {}
+    class TabHeadings extends VirtualComponent<TabHeadingsProps> { }
+    class TabBlocks extends VirtualComponent<TabBlocksProps> { }
+    class TabBlock extends VirtualComponent<TabBlockProps> { }
+    class TabHeading extends VirtualComponent<TabHeadingProps> { }
 
     // component Props, . where the semantics / API is really defined (validated)
     interface TabPanelProps {

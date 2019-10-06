@@ -3,7 +3,7 @@ import { createScreen, installExitKeys, Node, printElement, Screen, TreeView } f
 import { waitFor } from '../src/blessed/waitFor'
 
 class KeyHelper {
-  constructor(protected node: Node) {}
+  constructor(protected node: Node) { }
   down() {
     this.node.emit('key down', undefined, { name: 'down' })
   }

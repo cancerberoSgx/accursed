@@ -28,7 +28,7 @@ interface SelectOptionProps {
   value?: any
   children: JSX.BlessedJsxText
 }
-export class SelectOption extends VirtualComponent<SelectOptionProps> {}
+export class SelectOption extends VirtualComponent<SelectOptionProps> { }
 
 /** 
 A select options widget similar to HTML's using blessed list widget.

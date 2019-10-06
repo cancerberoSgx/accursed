@@ -1,16 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  Br,
-  createScreen,
-  debug,
-  Div,
-  getContent,
-  GradientText,
-  GradientTextAnimation,
-  installExitKeys,
-  React,
-  Screen
-} from '../src'
+import { Br, createScreen, debug, Div, getContent, GradientText, GradientTextAnimation, installExitKeys, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 describe('gradient', () => {

@@ -1,16 +1,5 @@
 import { getElementData, replaceChildren } from '../blessed'
-import {
-  ElementPredicate,
-  filterChildren,
-  filterDescendants,
-  findChildren,
-  findDescendant,
-  findDescendantNamed,
-  getContent,
-  visitDescendants,
-  Visitor,
-  VisitorOptions
-} from '../blessed/node'
+import { ElementPredicate, filterChildren, filterDescendants, findChildren, findDescendant, findDescendantNamed, getContent, visitDescendants, Visitor, VisitorOptions } from '../blessed/node'
 import { Element } from '../blessedTypes'
 import { RefObject } from './types'
 
@@ -25,7 +14,7 @@ interface ExtraProps {
  * Has a dummy state property that subclasses could implement some behavior for, right now it does nothing.
  */
 export abstract class Component<UP = {}, S = {}, P = UP & ExtraProps> {
-  constructor(protected props: P, protected state: S) {}
+  constructor(protected props: P, protected state: S) { }
 
   /**
    * If true then JSX children props will be save on property [[_jsxChildrenProps]]. Component subclasses

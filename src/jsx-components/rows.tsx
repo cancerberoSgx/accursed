@@ -9,7 +9,7 @@ interface RowsProps extends BoxOptions {
 interface RowProps extends BoxOptions {
   children: JSX.BlessedJsxNode
 }
-export class Row extends VirtualComponent<RowProps> {}
+export class Row extends VirtualComponent<RowProps> { }
 
 /**
 

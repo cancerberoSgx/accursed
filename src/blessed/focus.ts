@@ -172,12 +172,12 @@ export function installFocusHandler(
         if (screen.focused) {
           const notFocused = elements.filter(e => e && e !== screen.focused)
             //TODO: better is to check on the other lastFocus[IDS] and unselect all!
-          ;[...notFocused, ...(styleChildren ? notFocused.map(e => e.children).flat() : [])]
-            .filter(e => screen.focused !== e)
-            .filter(isBlessedElement)
-            .forEach(c => {
-              c.style = { ...(c.style || {}), border: {} }
-            })
+            ;[...notFocused, ...(styleChildren ? notFocused.map(e => e.children).flat() : [])]
+              .filter(e => screen.focused !== e)
+              .filter(isBlessedElement)
+              .forEach(c => {
+                c.style = { ...(c.style || {}), border: {} }
+              })
         }
 
         // if they had uninstalled we don't do more
@@ -187,19 +187,19 @@ export function installFocusHandler(
               ? elements.length - 1
               : lastFocus[focusId] - 1
             : lastFocus[focusId] >= elements.length - 1
-            ? 0
-            : lastFocus[focusId] + 1
+              ? 0
+              : lastFocus[focusId] + 1
 
           // otherwise we assume that key press was for us.
           // TODO: are we certain ?
           // TODO: what if other keys have register with the same key ? we should check which is more close to the real focused
 
           elements[lastFocus[focusId]].focus()
-          ;[elements[lastFocus[focusId]], ...(styleChildren ? elements[lastFocus[focusId]].children : [])]
-            .filter(isBlessedElement)
-            .forEach(c => {
-              c.style = { ...(c.style || {}), ...focusStyle }
-            })
+            ;[elements[lastFocus[focusId]], ...(styleChildren ? elements[lastFocus[focusId]].children : [])]
+              .filter(isBlessedElement)
+              .forEach(c => {
+                c.style = { ...(c.style || {}), ...focusStyle }
+              })
           screen.render()
         }
       } catch (error) {
@@ -210,9 +210,9 @@ export function installFocusHandler(
 
     if (focusFirst) {
       elements[0].focus()
-      ;[elements[0], ...(styleChildren ? elements[0].children : [])].filter(isBlessedElement).forEach(c => {
-        c.style = { ...(c.style || {}), ...focusStyle }
-      })
+        ;[elements[0], ...(styleChildren ? elements[0].children : [])].filter(isBlessedElement).forEach(c => {
+          c.style = { ...(c.style || {}), ...focusStyle }
+        })
     }
   }
 }

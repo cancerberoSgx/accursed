@@ -103,9 +103,9 @@ describe('blessed', () => {
       screen1.render()
       const c = getContent(e)
         // s.log('first', getContent(e, {childrenLast: false}), 'last', getContent(e, {childrenLast: true}))
-      ;['before1', 'after2', 'test2', 'test4', 'test6', 'bye22', 'hello22'].forEach(s => {
-        expect(c).toContain(s)
-      })
+        ;['before1', 'after2', 'test2', 'test4', 'test6', 'bye22', 'hello22'].forEach(s => {
+          expect(c).toContain(s)
+        })
       expect(c).not.toContain('secret')
       done()
     })

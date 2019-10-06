@@ -46,7 +46,7 @@ export async function waitForRender(e: Element, options: WaitForPredicateOptions
     throw new Error(options.timeoutError || 'waitForRender timeout')
   }, options.timeout || 3000)
   await waitForAttached(e)
-  const listener = () => {}
+  const listener = () => { }
   e.on('render', (a, b) => {
     e.off('render', listener)
   })

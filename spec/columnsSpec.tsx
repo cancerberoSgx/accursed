@@ -1,14 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  createScreen,
-  debug,
-  findDescendantNamed,
-  getContent,
-  installExitKeys,
-  printElement,
-  React,
-  Screen
-} from '../src'
+import { createScreen, debug, findDescendantNamed, getContent, installExitKeys, printElement, React, Screen } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 import { Br, Button2, Collapsible, Column, Columns, Div, Row, Rows } from '../src/jsx-components'
 import { words } from '../src/util/data'

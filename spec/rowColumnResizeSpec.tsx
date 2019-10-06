@@ -1,23 +1,5 @@
 import { tryTo } from 'misc-utils-of-mine-generic'
-import {
-  Button2,
-  Column,
-  Columns,
-  createScreen,
-  debug,
-  Div,
-  Element,
-  findDescendantNamed,
-  installExitKeys,
-  installVisibleOnAncestorFocus,
-  isElement,
-  printElement,
-  React,
-  Row,
-  Rows,
-  Screen,
-  screenLogger
-} from '../src'
+import { Button2, Column, Columns, createScreen, debug, Div, Element, findDescendantNamed, installExitKeys, installVisibleOnAncestorFocus, isElement, printElement, React, Row, Rows, Screen, screenLogger } from '../src'
 import { rowColumnResizeHandler } from '../src/blessed/rowColumnResize'
 import { waitFor } from '../src/blessed/waitFor'
 import { focusableOpts } from '../src/util/sharedOptions'
@@ -53,7 +35,7 @@ describe('rowColumnResize', () => {
         <Div>
           <Columns>
             <Column name="column1" width="20%" _data={{ rowColumnResize: { width: 20 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div width={10} name="rowColumnResize" hidden={true}>
@@ -73,7 +55,7 @@ describe('rowColumnResize', () => {
             </Column>
 
             <Column name="column2" width="50%" bg="cyan" _data={{ rowColumnResize: { width: 50 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div width={10} name="rowColumnResize" bg="cyan" hidden={true}>
@@ -94,7 +76,7 @@ describe('rowColumnResize', () => {
               </Div>
             </Column>
             <Column name="column3" width="30%" bg="green" _data={{ rowColumnResize: { width: 30 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div width={10} name="rowColumnResize" bg="green" hidden={true}>
@@ -151,7 +133,7 @@ describe('rowColumnResize', () => {
         <Div>
           <Rows>
             <Row name="column1" height="20%" _data={{ rowColumnResize: { height: 20 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div height={10} name="rowColumnResize" hidden={true}>
@@ -171,7 +153,7 @@ describe('rowColumnResize', () => {
             </Row>
 
             <Row name="column2" height="50%" bg="cyan" _data={{ rowColumnResize: { height: 50 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div height={10} name="rowColumnResize" bg="cyan" hidden={true}>
@@ -192,7 +174,7 @@ describe('rowColumnResize', () => {
               </Div>
             </Row>
             <Row name="column3" height="30%" bg="green" _data={{ rowColumnResize: { height: 30 } }}>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
               <Div height={10} name="rowColumnResize" bg="green" hidden={true}>
@@ -238,10 +220,10 @@ describe('rowColumnResize', () => {
     }
   })
 
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
-  fit('should resize multiple rows and columns int he same container. Also if all uses the same names, installVisibleOnAncestorFocus can be called only once', async done => {
-    try{
-    const t1 = rowColumnResize(screen)
+  // jasmine.DEFAULT_TIMEOUT_INTERVAL = 99999
+  it('should resize multiple rows and columns int he same container. Also if all uses the same names, installVisibleOnAncestorFocus can be called only once', async done => {
+    try {
+      const t1 = rowColumnResize(screen)
       const el = React.render(t1)
       screen.append(el)
 
@@ -258,7 +240,7 @@ describe('rowColumnResize', () => {
 
       // // //TODO: test the handler...
 
-      // done()
+      done()
     } catch (error) {
       debug('ERROR', error)
     }
@@ -290,7 +272,7 @@ describe('rowColumnResize', () => {
                 40-20-40
               </Button2>
 
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
             </Column>
@@ -308,7 +290,7 @@ describe('rowColumnResize', () => {
                 }}>
                 10-70-20
               </Button2>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
             </Column>
@@ -325,7 +307,7 @@ describe('rowColumnResize', () => {
                 }}>
                 20-10-70
               </Button2>
-              <Button2 {...focusableOpts()} onClick={e => {}}>
+              <Button2 {...focusableOpts()} onClick={e => { }}>
                 >focusable
               </Button2>
             </Column>

@@ -7,9 +7,9 @@ import { focusableOpts } from '../util/sharedOptions'
 import { CollapsibleProps } from './collapsible'
 import { Div } from './jsxUtil'
 
-export class TabLabel extends VirtualComponent<TabLabelProps> {}
-export class Tab extends VirtualComponent<TabProps> {}
-export class TabBody extends VirtualComponent<TabBodyProps> {}
+export class TabLabel extends VirtualComponent<TabLabelProps> { }
+export class Tab extends VirtualComponent<TabProps> { }
+export class TabBody extends VirtualComponent<TabBodyProps> { }
 
 interface ChangeEvent {
   activeTab: number

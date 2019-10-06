@@ -274,8 +274,8 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
     const nodeSelectArg: Node & T | undefined = this.options.multipleSelection
       ? this.selectedNodes
       : this.selectedNodes.length
-      ? this.selectedNodes[0]
-      : (undefined as any)
+        ? this.selectedNodes[0]
+        : (undefined as any)
     this.emit('nodeSelect', nodeSelectArg)
     this.options.onNodeSelect && this.options.onNodeSelect(nodeSelectArg)
   }
@@ -485,7 +485,7 @@ export class TreeView<T extends TreeViewNode = TreeViewNode> extends widget.Elem
           node.expanded || !node.children.length
             ? node.expandedPrefix || this.options.expandedPrefix
             : node.collapsedPrefix || this.options.collapsedPrefix
-        } ${node.label || node.name}`
+          } ${node.label || node.name}`
         const i = line.indexOf('\n')
         lines.push({
           node,

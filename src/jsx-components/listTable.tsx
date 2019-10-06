@@ -20,10 +20,10 @@ interface ListTableBodyProps extends Style {
 interface ListTableCellProps {
   children: JSX.BlessedJsxText | JSX.BlessedJsxText[]
 }
-export class ListTableHead extends VirtualComponent<ListTableHeadProps> {}
-export class ListTableRow extends VirtualComponent<ListTableRowProps> {}
-export class ListTableBody extends VirtualComponent<ListTableBodyProps> {}
-export class ListTableCell extends VirtualComponent<ListTableCellProps> {}
+export class ListTableHead extends VirtualComponent<ListTableHeadProps> { }
+export class ListTableRow extends VirtualComponent<ListTableRowProps> { }
+export class ListTableBody extends VirtualComponent<ListTableBodyProps> { }
+export class ListTableCell extends VirtualComponent<ListTableCellProps> { }
 
 /** 
    * Example:

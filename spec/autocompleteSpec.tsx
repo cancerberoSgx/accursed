@@ -1,16 +1,5 @@
 import { sleep, tryTo } from 'misc-utils-of-mine-generic'
-import {
-  AutoComplete,
-  cleanNode,
-  createScreen,
-  Div,
-  Element,
-  installExitKeys,
-  printElement,
-  React,
-  Screen,
-  Textarea
-} from '../src'
+import { AutoComplete, cleanNode, createScreen, Div, Element, installExitKeys, printElement, React, Screen, Textarea } from '../src'
 import { waitFor } from '../src/blessed/waitFor'
 
 describe('autoComplete', () => {

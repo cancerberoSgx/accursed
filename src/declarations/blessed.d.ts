@@ -219,7 +219,7 @@ export namespace Widgets {
     destroy(): void
   }
 
-  export interface IOptions {}
+  export interface IOptions { }
 
   export interface IHasOptions<T extends IOptions> {
     options: T
@@ -2001,13 +2001,13 @@ export namespace Widgets {
      * Style of the scrollbar track if present (takes regular style options).
      */
     scrollbar?:
-      | {
-          style?: Widgets.Types.TStyle
-          track?: Widgets.Types.TStyle
-          ch?: string
-          ignoreBorder?: boolean
-        } & Widgets.Types.TStyle
-      | boolean
+    | {
+      style?: Widgets.Types.TStyle
+      track?: Widgets.Types.TStyle
+      ch?: string
+      ignoreBorder?: boolean
+    } & Widgets.Types.TStyle
+    | boolean
   }
 
   interface ScrollableTextOptions extends ScrollableBoxOptions {
@@ -2099,7 +2099,7 @@ export namespace Widgets {
    * A scrollable text box which can display and scroll text, as well as handle
    * pre-existing newlines and escape codes.
    */
-  class ScrollableTextElement extends ScrollableBoxElement {}
+  class ScrollableTextElement extends ScrollableBoxElement { }
 
   /**
    * A box element which draws a simple box containing content or other elements.
@@ -2887,7 +2887,7 @@ export namespace Widgets {
     censor: boolean
   }
 
-  interface ButtonOptions extends BoxOptions {}
+  interface ButtonOptions extends BoxOptions { }
 
   class ButtonElement extends InputElement implements IHasOptions<ButtonOptions> {
     constructor(opts: ButtonOptions)
@@ -2964,7 +2964,7 @@ export namespace Widgets {
     on(event: 'uncheck', callback: (this: CheckboxElement) => void): this
   }
 
-  interface RadioSetOptions extends BoxOptions {}
+  interface RadioSetOptions extends BoxOptions { }
 
   /**
    * An element wrapping RadioButtons. RadioButtons within this element will be mutually exclusive
@@ -2974,7 +2974,7 @@ export namespace Widgets {
     constructor(opts: RadioSetOptions)
   }
 
-  interface RadioButtonOptions extends CheckboxOptions {}
+  interface RadioButtonOptions extends CheckboxOptions { }
 
   /**
    * A radio button which can be used in a form element.
@@ -2983,7 +2983,7 @@ export namespace Widgets {
     constructor(opts: RadioButtonOptions)
   }
 
-  interface PromptOptions extends BoxOptions {}
+  interface PromptOptions extends BoxOptions { }
 
   /**
    * A prompt box containing a text input, okay, and cancel buttons (automatically hidden).
@@ -3001,7 +3001,7 @@ export namespace Widgets {
     readInput(text: string, value: string, callback: (err: any, value: string) => void): void
   }
 
-  interface QuestionOptions extends BoxOptions {}
+  interface QuestionOptions extends BoxOptions { }
 
   /**
    * A question box containing okay and cancel buttons (automatically hidden).
@@ -3017,7 +3017,7 @@ export namespace Widgets {
     ask(question: string, callback: (err: any, value: string) => void): void
   }
 
-  interface MessageOptions extends BoxOptions {}
+  interface MessageOptions extends BoxOptions { }
 
   /**
    * A box containing a message to be displayed (automatically hidden).
@@ -3043,7 +3043,7 @@ export namespace Widgets {
     error(text: string, callback: () => void): void
   }
 
-  interface LoadingOptions extends BoxOptions {}
+  interface LoadingOptions extends BoxOptions { }
 
   /**
    * A box with a spinning line to denote loading (automatically hidden).
@@ -3522,38 +3522,38 @@ export namespace Widgets {
 
 // publish classes on existin gpaths so users can reference the real values for extending
 export namespace widget {
-  class Node extends Widgets.Node {}
+  class Node extends Widgets.Node { }
   class Element<Options extends Widgets.ElementOptions = Widgets.ElementOptions> extends Widgets.BlessedElement<
     Options
-  > {}
-  class Box extends Widgets.BoxElement {}
-  class List extends Widgets.ListElement {}
+    > { }
+  class Box extends Widgets.BoxElement { }
+  class List extends Widgets.ListElement { }
   class Screen extends Widgets.Screen {
     static prototype: typeof Widgets.Screen.prototype
   }
-  class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> {}
-  class Line extends Widgets.LineElement {}
-  class BigText extends Widgets.BigTextElement {}
-  class FileManager extends Widgets.FileManagerElement {}
-  class ListTable extends Widgets.ListTableElement {}
-  class Listbar extends Widgets.ListbarElement {}
-  class Form extends Widgets.FormElement {}
-  class Input extends Widgets.InputElement {}
-  class Textarea extends Widgets.TextareaElement {}
-  class Textbox extends Widgets.TextboxElement {}
-  class Button extends Widgets.ButtonElement {}
-  class Checkbox extends Widgets.CheckboxElement {}
-  class RadioSet extends Widgets.RadioSetElement {}
-  class RadioButton extends Widgets.RadioButtonElement {}
-  class Table extends Widgets.TableElement {}
-  class Prompt extends Widgets.PromptElement {}
-  class Question extends Widgets.QuestionElement {}
-  class Message extends Widgets.MessageElement {}
-  class Loading extends Widgets.LoadingElement {}
-  class Log extends Widgets.Log {}
-  class ProgressBar extends Widgets.ProgressBarElement {}
-  class Terminal extends Widgets.TerminalElement {}
-  class Layout extends Widgets.LayoutElement {}
+  class Text<Options extends Widgets.TextOptions = Widgets.TextOptions> extends Widgets.TextElement<Options> { }
+  class Line extends Widgets.LineElement { }
+  class BigText extends Widgets.BigTextElement { }
+  class FileManager extends Widgets.FileManagerElement { }
+  class ListTable extends Widgets.ListTableElement { }
+  class Listbar extends Widgets.ListbarElement { }
+  class Form extends Widgets.FormElement { }
+  class Input extends Widgets.InputElement { }
+  class Textarea extends Widgets.TextareaElement { }
+  class Textbox extends Widgets.TextboxElement { }
+  class Button extends Widgets.ButtonElement { }
+  class Checkbox extends Widgets.CheckboxElement { }
+  class RadioSet extends Widgets.RadioSetElement { }
+  class RadioButton extends Widgets.RadioButtonElement { }
+  class Table extends Widgets.TableElement { }
+  class Prompt extends Widgets.PromptElement { }
+  class Question extends Widgets.QuestionElement { }
+  class Message extends Widgets.MessageElement { }
+  class Loading extends Widgets.LoadingElement { }
+  class Log extends Widgets.Log { }
+  class ProgressBar extends Widgets.ProgressBarElement { }
+  class Terminal extends Widgets.TerminalElement { }
+  class Layout extends Widgets.LayoutElement { }
 }
 
 /** @inheritdoc */
