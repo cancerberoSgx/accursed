@@ -1,6 +1,6 @@
 {
   "name": "accursed",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "blessed extensions, typings, elements, frameworks, documentation and apps",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
