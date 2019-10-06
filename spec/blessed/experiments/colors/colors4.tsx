@@ -50,6 +50,7 @@ export function color4(screen: Screen) {
 
   function demo() {
     const palettes = getPalettes()
+    //@ts-ignore
     const N = Object.keys(palettes[Object.keys(palettes)[0]]).length
     const M = Object.keys(palettes).length
     var dx = Math.trunc(screen.width / N)

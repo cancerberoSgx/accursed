@@ -151,8 +151,8 @@ async function metaMetaTest(options: {
 }) {
   let screen: Screen
   try {
-    const s = []
-    const results = []
+    const s: string[] = []
+    const results = [] as any[]
     screen = await resetScreen(screen)
 
     const testAndVersion = getCurrentCommit() + '_' + nowHash() + options.testName

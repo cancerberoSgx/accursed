@@ -2,12 +2,7 @@ import { isObject } from 'misc-utils-of-mine-generic'
 
 type Timing = (n: number, c?: number, d?: number, x?: number, y?: number) => number
 type TimingObject = { fn: (duration: number) => Timing }
-export function animate({
-  duration,
-  draw,
-  timing,
-  lapse
-}: {
+export function animate({ duration, draw, timing, lapse }: {
   duration: number
   draw: (n: number) => void
   timing: Timing | TimingObject

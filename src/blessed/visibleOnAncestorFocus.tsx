@@ -15,18 +15,18 @@ export function installVisibleOnAncestorFocus(options: Options) {
     // logger.log('focus')
     let oldColumn: Element, newColumn: Element, newControl: Element, oldControl: Element
     if (old) {
-      oldColumn = findAscendant<Element>(old, options.ancestorPredicate)
+      oldColumn = findAscendant<Element>(old, options.ancestorPredicate as any)
     }
     if (focused) {
-      newColumn = findAscendant<Element>(focused, options.ancestorPredicate)
+      newColumn = findAscendant<Element>(focused, options.ancestorPredicate as any)
     }
     if (oldColumn !== newColumn) {
       if (oldColumn) {
-        oldControl = findDescendant(oldColumn, options.targetPredicate) // findDescendantNamed(oldColumn, "visible-on-ancestor-focus-target")
+        oldControl = findDescendant(oldColumn, options.targetPredicate as any) // findDescendantNamed(oldColumn, "visible-on-ancestor-focus-target")
       }
       // screenLogger(screen).log('oldColumn', !!oldColumn)
       if (newColumn) {
-        newControl = findDescendant(newColumn, options.targetPredicate) //findDescendantNamed(newColumn, "visible-on-ancestor-focus-target")
+        newControl = findDescendant(newColumn, options.targetPredicate as any) //findDescendantNamed(newColumn, "visible-on-ancestor-focus-target")
       }
       if (newControl !== oldControl) {
         if (oldControl) {

@@ -32,7 +32,7 @@ export function clicks(options: Options) {
   let t0 = Date.now()
   let count = 0
   const interval = options.interval || 250
-  let timer
+  let timer: NodeJS.Timeout
   function handler(e: IMouseEventArg) {
     const t = Date.now()
     if (t - t0 > interval) {

@@ -34,7 +34,7 @@ export function colors5Demo(screen: Screen) {
     )
   }, 2000)
 
-  const palettes = getPalettes()
+  const palettes: any = getPalettes()
   const N = 8
   var dx = Math.trunc(screen.width / (N + 2))
   var dy = 2
@@ -72,8 +72,8 @@ export function colors5Demo(screen: Screen) {
       text({ parent, content: ` * ${paletteName}`, top: y, left: 0 })
       x += dx * 2
       palettes[title][paletteName]
-        .map(color => '#' + color)
-        .forEach(color => {
+        .map((color: any) => '#' + color)
+        .forEach((color: any) => {
           const options: BoxOptions = {
             left: x,
             content: color,

@@ -12,7 +12,7 @@ export // abstract
   // protected abstract getVirtualData(): P;
 
   render() {
-    return null
+    return ''
   }
   private static __isVirtualComponent = 123
   private __isVirtualComponent = VirtualComponent.__isVirtualComponent

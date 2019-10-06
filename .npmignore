@@ -1,7 +1,7 @@
 dist/spec
 src
 scripts
-tmp
+tmp*
 spec
 *.tgz
 apps
@@ -11,3 +11,6 @@ tsconfig.json
 .travis.yml
 /docs
 /guides
+typedoc.ts  
+tsconfigTypedoc.json    
+formatCodeSettings.json

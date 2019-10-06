@@ -142,6 +142,7 @@ export function resetFocusManager() {
   lastFocus = {}
   onFocusChangeListeners.length = 0
 }
+
 /**
  * @obsolete in favor of [[onFocused]].
  */
@@ -152,6 +153,7 @@ export function uninstallFocusHandler(focusId: string) {
   }
   lastFocus[focusId] = -Infinity
 }
+
 /**
  * @obsolete in favor of [[onFocused]].
  */

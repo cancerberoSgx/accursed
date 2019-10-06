@@ -57,7 +57,7 @@ export class ListBar2 extends Component<ListBarProps> {
   _saveJSXChildrenProps = true
   dontEmitAction: any
 
-  constructor(p, s) {
+  constructor(p: ListBarProps, s: any) {
     super(p, s)
     this.handleAction = this.handleAction.bind(this)
     this.handleSelectItem = this.handleSelectItem.bind(this)

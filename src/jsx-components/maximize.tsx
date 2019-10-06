@@ -24,7 +24,7 @@ interface MaximizeProps extends BoxOptions {
   /**
    * Notifies listeners when a maximize or restore event occurs
    */
-  onMaximize?(type: 'maximize' | 'restore', target: Element)
+  onMaximize?(type: 'maximize' | 'restore', target: Element): any
 }
 
 /**
@@ -64,6 +64,7 @@ export class Maximize extends Component<MaximizeProps, {}> {
           right={0}
           content={title}
           onPress={e => {
+            //@ts-ignore
             this.toggleMaximized(this.props.children[0].parent, e.currentTarget, this.props.title || '')
           }}
           {...(this.props.button || {})}

@@ -72,7 +72,7 @@ export class Select extends Component<SelectProps> {
         items={this.items}
         on={[
           'select item',
-          (item, index) => {
+          (item: any, index: number) => {
             this.props.onSelectItem &&
               this.props.onSelectItem({
                 currentTarget: this.list,

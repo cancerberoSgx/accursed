@@ -1,4 +1,4 @@
-import { enumKeys } from 'misc-utils-of-mine-generic'
+import { enumKeys, objectKeys } from 'misc-utils-of-mine-generic'
 import { Br, Column, Columns, debug, Div, Element, React, Screen, Select, SelectOption, text } from '../../../src'
 import { waitFor } from '../../../src/blessed/waitFor'
 import { animate, easing } from '../../../src/util/anim'
@@ -13,7 +13,7 @@ export async function anim2(screen: Screen) {
       style: { focus: { border: { fg: 'red' } }, bg: 'blue', item: { bg: '#118822' }, selected: { bg: 'red' } }
     })
     let duration = 1000
-    let easingName = Object.keys(easing)[0]
+    let easingName = objectKeys(easing)[0]
     enum Mode {
       left = 'left',
       top = 'top',
@@ -125,6 +125,7 @@ export async function anim2(screen: Screen) {
       try {
         animate({
           duration,
+          //@ts-ignore
           timing: easing[easingName](),
           draw: t => {
             transform(g, t)

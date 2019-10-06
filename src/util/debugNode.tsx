@@ -21,6 +21,7 @@ interface TreeNode {
   name: string
   label: string
   children: TreeNode[]
+  expanded?: boolean
   blessedElement?: Element
 }
 
@@ -28,7 +29,7 @@ export function getTreeNode(el: Element | Screen, o: Options = defaultOptions): 
   return buildTreeNode(el as any, o)
 }
 
-function buildTreeNode(el: Element, o: Options = defaultOptions) {
+function buildTreeNode(el: Element, o: Options = defaultOptions): TreeNode {
   if (!el) {
     return {
       label: 'undefined',

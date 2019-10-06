@@ -3203,6 +3203,7 @@ export namespace Widgets {
      * set rows in table. array of arrays of strings.
      */
     setData(rows: string[][]): void
+    setData(o: { headers: string[], data: string[][] }): void
 
     /**
      * set rows in table. array of arrays of strings.

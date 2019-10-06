@@ -37,8 +37,8 @@ interface GutterOptions extends BoxOptions {
 type Direction = -1 | 1
 
 interface BaseWidget extends Box {
-  walkDepthFirst(direction: Direction, after: Node, fn: (n: Node, i?: number, arr?: Node[]) => void)
-  focusFirst(direction: Direction, after: Node)
+  walkDepthFirst(direction: Direction, after: Node, fn: (n: Node, i?: number, arr?: Node[]) => void): any
+  focusFirst(direction: Direction, after: Node): any
   focusNext(): this
   focusPrev(): this
   isAttached(): boolean
@@ -108,7 +108,7 @@ export interface IEditor extends BaseWidget {
   /**
    * If range not provided it will delete current selection range
    */
-  delete(range?: TextBuffer.Range)
+  delete(range?: TextBuffer.Range): any
   /**
    * Gets the current visible position.
    */

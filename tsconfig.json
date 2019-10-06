@@ -9,7 +9,8 @@
     "moduleResolution": "node",
     "rootDir": ".",
     "declaration": true,
-    // "strict": true,
+    "strict": true,
+    "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
       "blessed-contrib": ["src/declarations/blessed-contrib"],      

@@ -94,8 +94,8 @@ export function borderBox(options?: BorderBoxOptions) {
 
 // install it so is available as JSX element
 React.addIntrinsicElementConstructors({
-  borderBox: function(options?: BorderBoxOptions) {
-    return new BorderBox(options)
+  borderBox<BorderBoxOptions>(options?: BorderBoxOptions) {
+    return new BorderBox(options as any)
   }
 })
 
@@ -121,7 +121,8 @@ export class BorderLayout extends widget.Layout {
 }
 
 React.addIntrinsicElementConstructors({
-  borderLayout: function(options?: BorderBoxOptions) {
+  //@ts-ignore
+  borderLayout(options?: BorderBoxOptions) {
     return new BorderBox(options)
   }
 })

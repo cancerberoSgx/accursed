@@ -1,6 +1,6 @@
 {
   "name": "accursed",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "blessed extensions, typings, elements, frameworks, documentation and apps",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -9,14 +9,12 @@
     "start-emojis-search": "npm run build && cd apps/emojis-search && npm i && npm run build && npx ts-node -T src/main.tsx",
     "start-cli-fonts-gallery": "npm run build && cd apps/cli-fonts-gallery && npm i && npm run build && node dist/src/cli",
     "watch": "tsc --watch",
-    "build": "tsc && npm run copy",
+    "build": "npm run clean && tsc && npm run copy",
     "test": "ts-node -T spec/support/customJasmine && echo $?",
     "test-debug": "node --inspect-brk node_modules/ts-node/dist/bin node_modules/jasmine/bin/jasmine.js",
     "prepare": "npm run build",
-    "format": "npx ts-refactor format \"src/**/*.ts*\" \"spec/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
-    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"spec/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
-    "lint": " npm run organizeImports && npm run format",
-    "clean": "rm -rf dist",
+    "lint": " npx ts-refactor format \"src/**/*.ts*\" \"spec/**/*.ts*\" ./formatCodeSettings.json --dontAsk",
+    "clean": "rm -rf dist tmp* log*",
     "copy": "cp src/declarations/*.d.ts dist/src/declarations",
     "docs": "rm -rf docs && npm run docs-readme-toc && npm run docs-accursed-md && npm run docs-accursed",
     "docs-readme-toc": "npx markdown-toc README.md -i",
@@ -31,17 +29,18 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.18",
+    "gradstop": "^2.2.3",
     "misc-utils-of-mine-generic": "0.2.35"
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.2",
     "@types/node": "^12.7.11",
+    "@types/shelljs": "^0.8.5",
     "@types/text-buffer": "^13.0.4",
     "ansi-diff-stream": "^1.2.1",
     "browserify": "^16.5.0",
     "cli-driver": "^0.2.4",
     "google-palette": "^1.1.0",
-    "gradstop": "^2.2.3",
     "hrtime-now": "^1.0.6",
     "jasmine": "^3.5.0",
     "markdown-toc": "^1.2.0",
@@ -62,5 +61,11 @@
     "CLI",
     "interactive"
   ],
-  "repository": "https://github.com/cancerberoSgx/accursed"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/accursed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/accursed"
+  }
 }

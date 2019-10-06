@@ -278,12 +278,12 @@ describe('treeView', () => {
       const txtOptions = {
         expandedPrefix: 'T',
         collapsedPrefix: 'T',
-        children: []
+        children: [] as any
       }
       const jsOptions = {
         expandedPrefix: 'J',
         collapsedPrefix: 'J',
-        children: []
+        children: [] as any
       }
       const tree = new TreeView({
         rootNodes: [
@@ -321,7 +321,7 @@ describe('treeView', () => {
 })
 
 const rootNodes = [
-  { name: 'n1', children: [{ expanded: true, name: 'n11', children: [] }] },
+  { name: 'n1', children: [{ expanded: true, name: 'n11', children: [] as any }] },
   {
     expanded: true,
     name: 'n2',
@@ -333,7 +333,7 @@ const rootNodes = [
           {
             expanded: true,
             name: 'n211',
-            children: [{ expanded: true, name: 'n2111', children: [{ expanded: true, name: 'n21111', children: [] }] }]
+            children: [{ expanded: true, name: 'n2111', children: [{ expanded: true, name: 'n21111', children: [] as any }] }]
           }
         ]
       },
