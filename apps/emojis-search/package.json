@@ -19,7 +19,7 @@
   "dependencies": {
     "accursed": "file:../..",
     "misc-utils-of-mine-generic": "0.2.35",
-    "yargs-parser": "^14.0.0"
+    "yargs-parser": "^15.0.1"
   },
   "devDependencies": {
     "@types/node": "^12.7.11",
