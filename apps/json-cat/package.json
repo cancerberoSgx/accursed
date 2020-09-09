@@ -22,7 +22,7 @@
     "misc-utils-of-mine-generic": "file:../../../misc-utils-of-mine/misc-utils-of-mine-generic",
     "misc-utils-of-mine-typescript": "0.0.12",
     "oboe": "^2.1.4",
-    "yargs-parser": "^10.1.0"
+    "yargs-parser": "^19.0.4"
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
