@@ -26,7 +26,7 @@
     "misc-utils-of-mine-generic": "0.2.35",
     "p-queue": "^6.1.1",
     "redux": "^4.0.4",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
     "@types/node": "^12.7.11",
